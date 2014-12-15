@@ -1,4 +1,5 @@
 package test;
+import domain.*;
 
 public class DomainConsole {
 
@@ -6,6 +7,12 @@ public class DomainConsole {
 		// TODO Auto-generated method stub
 		
 		System.out.println("prova");
+		RegistroAssenzeController regAssCtrl = new RegistroAssenzeController();
+		regAssCtrl.avviaAppello();
+//		if ( regAssCtrl.getAppelloOdierno()!= null){
+			System.out.println("la data è : "+ regAssCtrl.getAppelloOdierno().getData().toString());
+
+//		}
 
 	}
 

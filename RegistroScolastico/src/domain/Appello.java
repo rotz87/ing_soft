@@ -6,12 +6,24 @@ public class Appello {
 
 	private Date data;
 
-	public Date getData() {
-		return this.data;
+	public Appello(){
+		this.data = new Date();
+		
 	}
-
-	public void setData(Date data) {
+	
+	public Appello(Date data) {
+//		super();
 		this.data = data;
 	}
+
+	public Date getData() {
+		
+			return this.data;
+		
+	}
+
+//	public void setData(Date data) {
+//		this.data = data;
+//	}
 
 }
