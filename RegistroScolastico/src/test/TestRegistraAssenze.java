@@ -68,7 +68,7 @@ public class TestRegistraAssenze {
 		AppelliAssenzeMaccio.add(appello10_12_14);
 		AppelliAssenzeMaccio.add(appello11_12_14);
 		AppelliAssenzeMaccio.add(appello12_12_14);
-		
+		 
 //		AppelliAssenzePiero.add(appello14_12_14);
 //		AppelliAssenzePiero.add(appello15_12_14);
 		AppelliAssenzePiero.add(appello10_12_14);
