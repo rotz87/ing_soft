@@ -1,17 +1,19 @@
 package domain;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class Appello {
 
 	private Date data;
+	private Calendar dataCalendar;
 
 	public Appello(){
 //		this.data = new Date();
 		
-		GregorianCalendar g = new GregorianCalendar();
-		this.data = g.getTime();
+		dataCalendar = new GregorianCalendar();
+		this.data = dataCalendar.getTime();
 		
 	}
 	
@@ -24,6 +26,11 @@ public class Appello {
 		
 			return this.data;
 		
+	}
+	
+	public Calendar getDataCalendar(){
+		
+		return dataCalendar;
 	}
 
 //	public void setData(Date data) {

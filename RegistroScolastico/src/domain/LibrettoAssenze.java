@@ -39,7 +39,7 @@ public class LibrettoAssenze {
 
 	private Assenza getUltimaAssenzaNonGiustificata() {
 		//probabilmente è da cambiare
-		System.out.println("passo per getUltimaAssenzaNonGiustificata!!");
+//		System.out.println("passo per getUltimaAssenzaNonGiustificata!!");
 		return nonGiustificate.get(0);
 	}
 	

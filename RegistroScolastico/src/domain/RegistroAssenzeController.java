@@ -40,6 +40,7 @@ public class RegistroAssenzeController {
 		
 //		if(this.appelloOdierno != null){//sarebbe da mettere se l'ultimo appello è di ieri o prima creane uno nuono alreimenti non farlo creare
 			this.appelloOdierno = new Appello();
+
 			
 			
 //		}

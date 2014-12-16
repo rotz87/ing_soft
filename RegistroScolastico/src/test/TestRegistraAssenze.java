@@ -1,6 +1,7 @@
 package test;
 
 import java.awt.List;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -42,13 +43,33 @@ public class TestRegistraAssenze {
 		//RIEMPIMENTO DELLE LISTE DI ASSENZE NON GIUSTIFICATE
 		
 		//creazione date
-		Date data10_12_14 = new GregorianCalendar(10,12,2014).getTime();
-		Date data11_12_14 = new GregorianCalendar(11,12,2014).getTime();
-		Date data12_12_14 = new GregorianCalendar(12,12,2014).getTime();
-		Date data13_12_14 = new GregorianCalendar(13,12,2014).getTime();
-		Date data14_12_14 = new GregorianCalendar(14,12,2014).getTime();
-		Date data15_12_14 = new GregorianCalendar(15,12,2014).getTime();
-		Date data16_12_14 = new GregorianCalendar(16,12,2014).getTime();
+//		Calendar data10_12_14 = Calendar.getInstance();
+//		data10_12_14.set(Calendar.YEAR, 2014);
+//		data10_12_14.set(Calendar.MONTH, 11);
+//		data10_12_14.set(Calendar.DAY_OF_MONTH, 10);
+//		Calendar data11_12_14 = Calendar.getInstance();
+//		data11_12_14.set(Calendar.YEAR, 2014);
+//		data11_12_14.set(Calendar.MONTH, 11);
+//		data11_12_14.set(Calendar.DAY_OF_MONTH, 11);
+		
+		// N.B. i mesi vanno da 0 a 11!!!!
+		Date data10_12_14 = new GregorianCalendar(2014,11,10).getTime();
+		Date data11_12_14 = new GregorianCalendar(2014,11,11).getTime();
+		Date data12_12_14 = new GregorianCalendar(2014,11,12).getTime();
+		Date data13_12_14 = new GregorianCalendar(2014,11,13).getTime();
+		Date data14_12_14 = new GregorianCalendar(2014,11,14).getTime();
+		Date data15_12_14 = new GregorianCalendar(2014,11,15).getTime();
+		Date data16_12_14 = new GregorianCalendar(2014,11,16).getTime();
+		
+//		String dataStringa = new String ("data : "+ data10_12_14.get(Calendar.DAY_OF_MONTH) +"/"+  data10_12_14.get(Calendar.MONTH) +"/"+  data10_12_14.get(Calendar.YEAR));
+//		String dataStringa2 = new String ("data : "+ data11_12_14.get(Calendar.DAY_OF_MONTH) +"/"+  data11_12_14.get(Calendar.MONTH) +"/"+  data11_12_14.get(Calendar.YEAR));
+		System.out.println("------------------>>>Date:");
+		System.out.println(data10_12_14.getTime());
+//		System.out.println(dataStringa );
+		System.out.println(data11_12_14 );
+//		System.out.println(dataStringa2 + "\n __________________");
+		
+		System.out.println("data 12 12 2014 "+data12_12_14 );
 		
 		//creazione di lista di appelli 
 		LinkedList<Appello> AppelliAssenzeMaccio = new LinkedList<Appello>();
@@ -67,15 +88,17 @@ public class TestRegistraAssenze {
 		//assegnazione di appelli alle liste di appelli
 		AppelliAssenzeMaccio.add(appello10_12_14);
 		AppelliAssenzeMaccio.add(appello11_12_14);
-		AppelliAssenzeMaccio.add(appello12_12_14);
+//		AppelliAssenzeMaccio.add(appello12_12_14);
 		 
 //		AppelliAssenzePiero.add(appello14_12_14);
 //		AppelliAssenzePiero.add(appello15_12_14);
 		AppelliAssenzePiero.add(appello10_12_14);
 		AppelliAssenzePiero.add(appello11_12_14);
-		AppelliAssenzePiero.add(appello14_12_14);
+//		AppelliAssenzePiero.add(appello14_12_14);
 		
+		AppelliAssenzeIvo.add(appello13_12_14);
 		AppelliAssenzeIvo.add(appello14_12_14);
+		AppelliAssenzeIvo.add(appello15_12_14);
 		
 		//assegnazione delle liste di appelli alle assenze
 		Assenza assM1 = new Assenza(AppelliAssenzeMaccio);
