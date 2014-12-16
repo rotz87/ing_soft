@@ -20,9 +20,9 @@ public class RegistroAssenzeController {
 		for (String idStudente : idStudenti){
 
 			
-			LibrettoAssenze mioLibretto = librettiAssenze.get(idStudente);
-			System.out.println(librettiAssenze.get(idStudente));
-//			mioLibretto.segnaAssenza(this.getAppelloOdierno());
+//			LibrettoAssenze mioLibretto = librettiAssenze.get(idStudente);
+//			System.out.println(librettiAssenze.get(idStudente));
+			librettiAssenze.get(idStudente).segnaAssenza(this.getAppelloOdierno());
 		}
 		
 	}
