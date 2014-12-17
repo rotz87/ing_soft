@@ -1,15 +1,22 @@
 package domain;
 
+import java.awt.List;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.joda.time.LocalDate;
 import org.neo4j.cypher.internal.compiler.v2_1.planner.logical.steps.idSeekLeafPlanner;
 
 public class RegistroAssenzeController {
 
 	private Appello appelloOdierno;
+	private MapAppelli appelli;
 	private Map <String, LibrettoAssenze> librettiAssenze;
-
+	
+	public RegistroAssenzeController(){
+		appelli = new MapAppelli();
+	}
+	
 	/**
 	 * 
 	 * @param idStudenti
@@ -35,17 +42,45 @@ public class RegistroAssenzeController {
 		this.appelloOdierno = appelloOdierno;
 	}
 
+	
+	public MapAppelli getAppelli() {
+		return appelli;
+	}
+
+	public void setAppelli(MapAppelli appelli) {
+		this.appelli = appelli;
+	}
+
 	public void avviaAppello() {
 		// TODO - implement RegistroAssenzeController.avviaAppello
-		
+//		QUANDO SI AVVIA L'APPELLO BISOGN SPOSTARE QUELLO VECCHI SE ESITE NELLA MAPAPPELLI
 //		if(this.appelloOdierno != null){//sarebbe da mettere se l'ultimo appello è di ieri o prima creane uno nuono alreimenti non farlo creare
+		if(this.appelloOdierno != null){
+			LocalDate oggi = DataOggi.getInstance().getDataOdierna();
+			LocalDate dataAppello = appelloOdierno.getDataL();
+			if(oggi.isEqual(dataAppello)){
+//				System.out.println("LANCIO L'ECCEZIONE");
+				throw new IllegalStateException("ATTENZIONE L'APPELLO ODIERNO E' GIA' STATO AVVIATO");
+			}else{
+				this.appelloOdierno = new Appello();
+				appelli.put(appelloOdierno.getDataL(),appelloOdierno);
+//				System.out.println("appello odierno not null, sto nell'else");
+			}
+			
+		}else{
 			this.appelloOdierno = new Appello();
-
+			appelli.put(appelloOdierno.getDataL(),appelloOdierno);
+//			System.out.println("appello null, creazione dell'appello");
+		}
 			
 			
 //		}
 	}
-
+	
+	/**
+	 * @deprecated
+	 * @param librettiAssenze
+	 */
 	public void assengaLibretti (Map<String, LibrettoAssenze> librettiAssenze){
 		// Per le prove, forse è da togliere!!
 		this.librettiAssenze = librettiAssenze;
@@ -55,4 +90,5 @@ public class RegistroAssenzeController {
 		
 	}
 	
+	public class MapAppelli extends HashMap<LocalDate, Appello>{}
 }

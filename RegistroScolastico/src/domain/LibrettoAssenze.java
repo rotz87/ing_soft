@@ -8,6 +8,14 @@ public class LibrettoAssenze {
 	List<Assenza> nonGiustificate;
 	private Studente studente;
 
+	public Studente getStudente() {
+		return studente;
+	}
+
+	public void setStudente(Studente studente) {
+		this.studente = studente;
+	}
+
 	public LibrettoAssenze(Studente stud){
 		this.studente = stud;
 		
@@ -19,7 +27,7 @@ public class LibrettoAssenze {
 	 */
 	public void segnaAssenza(Appello appello) {
 		
-		System.out.println("sono in librettoAssenze.segnaAssenza di " + studente.getNome());
+//		System.out.println("sono in librettoAssenze.segnaAssenza di " + studente.getNome());
 		
 		Assenza ultimaAssenzaNonGiustificata = this.getUltimaAssenzaNonGiustificata();
 		boolean inseribile = ultimaAssenzaNonGiustificata.isInseribile(appello);
@@ -28,11 +36,13 @@ public class LibrettoAssenze {
 		if (inseribile){
 			
 			ultimaAssenzaNonGiustificata.inserisciAppelloAssenza(appello);
+//			System.out.println("accodo l'assenza " );
 		}else{
 			
 			Assenza nuovaAssenza = new Assenza();
 			nonGiustificate.add(nuovaAssenza);
 			nuovaAssenza.inserisciAppelloAssenza(appello);
+//			System.out.println("creo l'assenza " );
 		}
 		
 	}
@@ -46,6 +56,22 @@ public class LibrettoAssenze {
 	public void assengnaAssenzeNonGiustificate(List<Assenza> nonGistificate){
 		//per le prove, probablmente è da togliere
 		this.nonGiustificate = nonGistificate;
+	}
+
+	public Collection<Assenza> getGiustificate() {
+		return giustificate;
+	}
+
+	public void setGiustificate(Collection<Assenza> giustificate) {
+		this.giustificate = giustificate;
+	}
+
+	public List<Assenza> getNonGiustificate() {
+		return nonGiustificate;
+	}
+
+	public void setNonGiustificate(List<Assenza> nonGiustificate) {
+		this.nonGiustificate = nonGiustificate;
 	}
 
 }

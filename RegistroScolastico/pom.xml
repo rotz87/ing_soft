@@ -42,5 +42,9 @@
   		<groupId>org.springframework.hateoas</groupId>
   		<artifactId>spring-hateoas</artifactId>
   	</dependency>
+  	<dependency>
+  		<groupId>joda-time</groupId>
+  		<artifactId>joda-time</artifactId>
+  	</dependency>
   </dependencies>
 </project>
