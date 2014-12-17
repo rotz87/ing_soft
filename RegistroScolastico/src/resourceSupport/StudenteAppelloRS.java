@@ -1,20 +1,22 @@
-package viewModel;
+package resourceSupport;
+
 
 import domain.Studente;
 
-import java.util.Calendar;
-import java.util.Date;
+import org.springframework.hateoas.ResourceSupport;
 
-public class StudenteAppelloVM {
 
-	private long id;
+public class StudenteAppelloRS extends ResourceSupport{
+
+	private long idStudente;
 	private String nome;
 	private String cognome;
 	private boolean assente;
 
-	public StudenteAppelloVM(Studente studente, boolean assente) {
+	
+	public StudenteAppelloRS(Studente studente, boolean assente) {
 		
-		this.id = studente.getId();
+		this.idStudente = studente.getId();
 		this.nome = studente.getNome();
 		this.cognome = studente.getCognome();
 		
@@ -22,8 +24,8 @@ public class StudenteAppelloVM {
 		
 	}
 
-	public long getId() {
-		return id;
+	public long getIdStudente() {
+		return idStudente;
 	}
 
 	public String getNome() {
