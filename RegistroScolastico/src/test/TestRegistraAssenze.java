@@ -163,18 +163,18 @@ public class TestRegistraAssenze {
 		librettoHerbert.assengnaAssenzeNonGiustificate(listaAssenzeHerbert);
 		
 		//TEST DEL METODO
-		visualizzaAssStud();
+		visualizzaAssStud(regAssCtrl);
 		regAssCtrl.avviaAppello();
 		System.out.println("APPELLO AVVIATO, la data è : "+ regAssCtrl.getAppelloOdierno().getData().toString());
 		
 		regAssCtrl.registraAssenze(listaIdStud);
 		
-		visualizzaAssStud();
+		visualizzaAssStud(regAssCtrl);
 		
 		
 	}
 	
-	public static void visualizzaAssStud(){
+	public static void visualizzaAssStud(RegistroAssenzeController regAssCtrl){
 		System.out.println();
 		System.out.println("VISUALIZZAZIONE ASSENZE STUDENTI _________________________");
 		Iterator entries = librettiDaAssegnare.entrySet().iterator();

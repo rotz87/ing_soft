@@ -50,6 +50,15 @@ public class RegistroAssenzeController {
 	public void setAppelli(MapAppelli appelli) {
 		this.appelli = appelli;
 	}
+	
+	
+	public Map<String, LibrettoAssenze> getLibrettiAssenze() {
+		return librettiAssenze;
+	}
+
+	public void setLibrettiAssenze(Map<String, LibrettoAssenze> librettiAssenze) {
+		this.librettiAssenze = librettiAssenze;
+	}
 
 	public void avviaAppello() {
 		// TODO - implement RegistroAssenzeController.avviaAppello
