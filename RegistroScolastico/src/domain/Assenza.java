@@ -16,6 +16,7 @@ public class Assenza {
 	
 	public Assenza (LinkedList<Appello> appelli){
 		//per le prove, probabilmente è da togliere
+		
 		this.appelli = appelli;
 //		System.out.println("------------------- \n Sono nel costruttore di assenza | appelli: " + appelli + " | this.appelli : "+ this.appelli + "\n ---------------------");
 		

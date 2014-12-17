@@ -14,7 +14,7 @@ import org.joda.time.LocalDate;
 
 import domain.*;
 
-public class TestRegistraAssenze {
+public class InitRegistraAssenzeServer {
 	public static Map<String, LibrettoAssenze> librettiDaAssegnare;
 	
 	public static void main(String[] args) {
@@ -160,40 +160,11 @@ public class TestRegistraAssenze {
 		librettoMarino.assengnaAssenzeNonGiustificate(listaAssenzeMarino);
 		librettoHerbert.assengnaAssenzeNonGiustificate(listaAssenzeHerbert);
 		
-		//TEST DEL METODO
-		visualizzaAssStud(regAssCtrl);
-		regAssCtrl.avviaAppello();
-		System.out.println("APPELLO AVVIATO, la data è : "+ regAssCtrl.getAppelloOdierno().getData().toString());
-		
-		regAssCtrl.registraAssenze(listaIdStud);
-		
-		visualizzaAssStud(regAssCtrl);
+
 		
 		
 	}
 	
-	public static void visualizzaAssStud(RegistroAssenzeController regAssCtrl){
-		System.out.println();
-		System.out.println("VISUALIZZAZIONE ASSENZE STUDENTI _________________________");
-		Iterator entries = regAssCtrl.getLibrettiAssenze().entrySet().iterator();
-		while (entries.hasNext()) {
-		  Entry thisEntry = (Entry) entries.next();
-		  String idStud = (String)thisEntry.getKey();
-		  LibrettoAssenze libAss = (LibrettoAssenze)thisEntry.getValue();
-		  System.out.println("STUDENTE : "+libAss.getStudente().getNome() +" "+libAss.getStudente().getCognome());
-		  System.out.println("ASSENZE NON GIUSTIFICATE :");
-		  for (Assenza assNG : libAss.getNonGiustificate()) {
-			  System.out.println("---------Inizio Assenza--------");
-			  for (Appello app : assNG.getAppelli()){
-				  System.out.println("data dell'appello dell'assenza : "+app.getDataL().toString());
-			  }
-			  System.out.println("-------Fine Assenza--------");
-				
-			}
-		  System.out.println("-----------------");
-		}
-		System.out.println("________________________________________FINE");
-		System.out.println();
-	}
+	
 	
 }
