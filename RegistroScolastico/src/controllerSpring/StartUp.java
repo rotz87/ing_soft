@@ -1,6 +1,6 @@
 package controllerSpring;
 
-import test.TestAvviaAppello;
+import test.InitRegistraAssenzeServer;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
@@ -18,7 +18,7 @@ public class StartUp {
 	@PostConstruct
     public void start() {
 		
-		TestAvviaAppello.main(null);
+		InitRegistraAssenzeServer.main(null);
 		
     }
 
