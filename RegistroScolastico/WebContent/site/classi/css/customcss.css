@@ -1,0 +1,41 @@
+body
+{
+	font-family:@font-family-sans-serif;
+	background-color:@main_color;
+}
+
+.checkbox
+{
+	margin:0;
+	margin-left:0px;
+}
+.checkbox input[type="checkbox"]
+{
+	margin-left:0px;
+}
+.checkbox label
+{
+	margin-left:20px;
+}
+.myCheckbox
+{
+	text-align:center;
+}
+.myCheckbox input:hover
+{
+	cursor:pointer;
+}
+
+
+
+@main_color = #52AD47;
+
+
+@secondary_color: #687583;
+
+@third_color: #CDD8E1;
+{
+}
+@fourth_color: #93D87F;
+
+@fifth_color:#FFFFFF;

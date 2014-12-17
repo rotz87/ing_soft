@@ -1,0 +1,53 @@
+div
+{
+	
+}
+.intestazione
+{
+	position:relative;
+	height:50px;
+	width:100%;
+	float:left;
+	background-color:grey;
+}
+.sinistro
+{
+	position:relative;
+	height:580px;
+	width:100px;
+	float:left;
+	background-color: blue;
+}
+.contenitore
+{
+	position:relative;
+	float:left;
+	width:80%;
+}
+.tabella
+{
+	position:relative;
+	margin: 0 auto;
+	width:90%;
+	float:left;
+	background-color:purple;
+}
+.riga{
+	position:relative;
+	float:left;
+	width:100%;
+	
+}
+
+.tb_sx {
+	position:relative;
+	width:80%;
+	float:left;
+	background-color:green;
+}
+.tb_dx {
+	position:relative;
+	width:20%;
+	float:left;
+	background-color: yellow;
+}
