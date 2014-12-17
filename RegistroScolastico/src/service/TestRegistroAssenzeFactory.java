@@ -29,7 +29,9 @@ public class TestRegistroAssenzeFactory extends RegistroAssenzeFactory {
 	@Override
 	public RegistroAssenzeController createRegistroAssenze(Classe classe) {
 		
-		
+		if (this.registroAssenzeController == null){
+			this.registroAssenzeController = new RegistroAssenzeController();
+		}
 		
 		return this.registroAssenzeController;
 	}

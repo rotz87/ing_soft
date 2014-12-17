@@ -2,10 +2,10 @@ package test;
 
 import java.util.Iterator;
 import java.util.Map.Entry;
-
 import org.joda.time.LocalDate;
 
 import domain.*;
+import service.*;
 
 public class TestAvviaAppello {
 
@@ -15,7 +15,7 @@ public class TestAvviaAppello {
 		LocalDate dataTest = new LocalDate(2014,12,16);
 		Appello appelloPrecedente = new Appello(dataTest);
 		
-		RegistroAssenzeController regAssCtrl = new RegistroAssenzeController();
+		RegistroAssenzeController regAssCtrl = FactoryHandler.getInstance().getRegistroAssenzeFactory().createRegistroAssenze(null);
 		
 		regAssCtrl.setAppelloOdierno(appelloPrecedente);
 		regAssCtrl.getAppelli().put(dataTest, appelloPrecedente);
@@ -23,7 +23,7 @@ public class TestAvviaAppello {
 		try{
 			regAssCtrl.avviaAppello();
 		}catch(IllegalStateException ISE){
-			System.out.println(ISE.getMessage() );
+			System.out.println(ISE.getMessage()+"prima eccezione" );
 		}
 		
 //		if ( regAssCtrl.getAppelloOdierno()!= null){

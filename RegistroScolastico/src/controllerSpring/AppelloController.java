@@ -2,6 +2,7 @@ package controllerSpring;
 
 
 import domain.Appello;
+import domain.RegistroAssenzeController;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -28,6 +29,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import service.*;
 
 @RestController
 @RequestMapping("/classi/{idClasse}/appelli")
@@ -107,15 +110,26 @@ public class AppelloController {
 
   }
 	
-	
+  
 	@RequestMapping(method = RequestMethod.GET)
-	public Calendar getCalendar() {
+	public Appello getAppello() {
 		
-		Calendar aaa = Calendar.getInstance();
-				aaa.set(2005, 11, 5);
+		RegistroAssenzeController regAssCtrl;
 		
-		return aaa;
+		regAssCtrl = FactoryHandler.getInstance().getRegistroAssenzeFactory().createRegistroAssenze(null);
+		
+		return regAssCtrl.getAppelloOdierno();
 		
 	}
+	
+//	@RequestMapping(method = RequestMethod.GET)
+//	public Calendar getCalendar() {
+//		
+//		Calendar aaa = Calendar.getInstance();
+//				aaa.set(2005, 11, 5);
+//		
+//		return aaa;
+//		
+//	}
 	
 }
