@@ -116,12 +116,12 @@ public class TestRegistraAssenze {
 //		AppelliAssenzePiero.add(appello10_12_14);
 //		AppelliAssenzePiero.add(appello11_12_14);
 		AppelliAssenzePiero.add(appello14_12_14);
-		AppelliAssenzePiero.add(appello16_12_14);
+//		AppelliAssenzePiero.add(appello16_12_14);
 		
 		AppelliAssenzeIvo.add(appello13_12_14);
 		AppelliAssenzeIvo.add(appello14_12_14);
 		AppelliAssenzeIvo.add(appello15_12_14);
-//		AppelliAssenzeIvo.add(appello16_12_14);
+		AppelliAssenzeIvo.add(appello16_12_14);
 		
 		AppelliAssenzeMarino.add(appello16_12_14);
 		
@@ -177,7 +177,7 @@ public class TestRegistraAssenze {
 	public static void visualizzaAssStud(RegistroAssenzeController regAssCtrl){
 		System.out.println();
 		System.out.println("VISUALIZZAZIONE ASSENZE STUDENTI _________________________");
-		Iterator entries = librettiDaAssegnare.entrySet().iterator();
+		Iterator entries = regAssCtrl.getLibrettiAssenze().entrySet().iterator();
 		while (entries.hasNext()) {
 		  Entry thisEntry = (Entry) entries.next();
 		  String idStud = (String)thisEntry.getKey();
