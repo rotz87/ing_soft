@@ -10,7 +10,7 @@ appelloControllers.controller('avviaAppello',['$scope','Appello',function($scope
 			
 			Appello.myPost({idClasse:$scope.idClasse},null,function(data,header){
 				console.log(data);
-				console.log(header);
+				console.log(header());
 			});
 			
 		}
