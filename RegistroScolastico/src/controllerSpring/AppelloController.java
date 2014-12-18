@@ -3,6 +3,8 @@ package controllerSpring;
 
 import domain.Appello;
 import domain.RegistroAssenzeController;
+import service.*;
+
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -30,11 +32,42 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import service.*;
 
 @RestController
 @RequestMapping("/classi/{idClasse}/appelli")
 public class AppelloController {
+	
+	  @RequestMapping(method = RequestMethod.POST)
+	  ResponseEntity<?> creaAppello() {
+		  HttpHeaders httpHeaders;
+		  RegistroAssenzeController registro;
+	  	
+		  httpHeaders = new HttpHeaders();
+		  
+		  registro = FactoryHandler.getInstance().getRegistroAssenzeFactory().createRegistroAssenze(null);
+		  
+		  registro.avviaAppello();
+		  
+		  System.out.println("Appello odierno: "+registro.getAppelloOdierno().toString());
+
+//		  Link forOneBookmark = new BookmarkResource(bookmark).getLink("self");
+//		  httpHeaders.setLocation(URI.create(forOneBookmark.getHref()));
+
+		  return new ResponseEntity<>(null, httpHeaders, HttpStatus.CREATED);
+
+	  }
+		
+	  
+		@RequestMapping(method = RequestMethod.GET)
+		public Appello getAppello() {
+			
+			RegistroAssenzeController regAssCtrl;
+			
+			regAssCtrl = FactoryHandler.getInstance().getRegistroAssenzeFactory().createRegistroAssenze(null);
+			
+			return regAssCtrl.getAppelloOdierno();
+			
+		}
 	
 //    @RequestMapping(method = RequestMethod.POST)
 //    ResponseEntity<?> add(@PathVariable long idAppello, @RequestBody Bookmark input) {
@@ -94,33 +127,6 @@ public class AppelloController {
 //		
 //	}
 	
-  @RequestMapping(method = RequestMethod.POST)
-  ResponseEntity<?> creaAppello() {
-	  HttpHeaders httpHeaders;
-
-  	
-	  httpHeaders = new HttpHeaders();
-	  
-	  
-
-//	  Link forOneBookmark = new BookmarkResource(bookmark).getLink("self");
-//	  httpHeaders.setLocation(URI.create(forOneBookmark.getHref()));
-
-	  return new ResponseEntity<>(null, httpHeaders, HttpStatus.CREATED);
-
-  }
-	
-  
-	@RequestMapping(method = RequestMethod.GET)
-	public Appello getAppello() {
-		
-		RegistroAssenzeController regAssCtrl;
-		
-		regAssCtrl = FactoryHandler.getInstance().getRegistroAssenzeFactory().createRegistroAssenze(null);
-		
-		return regAssCtrl.getAppelloOdierno();
-		
-	}
 	
 //	@RequestMapping(method = RequestMethod.GET)
 //	public Calendar getCalendar() {
