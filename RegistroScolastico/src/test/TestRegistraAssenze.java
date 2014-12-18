@@ -163,7 +163,7 @@ public class TestRegistraAssenze {
 		//TEST DEL METODO
 		visualizzaAssStud(regAssCtrl);
 		regAssCtrl.avviaAppello();
-		System.out.println("APPELLO AVVIATO, la data è : "+ regAssCtrl.getAppelloOdierno().getData().toString());
+		System.out.println("APPELLO AVVIATO, la data è : "+ regAssCtrl.getAppelloOdierno().getDataL().toString());
 		
 		regAssCtrl.registraAssenze(listaIdStud);
 		

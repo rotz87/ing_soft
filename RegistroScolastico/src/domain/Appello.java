@@ -7,51 +7,62 @@ import org.joda.time.LocalDate;
 
 public class Appello {
 
-	private Date data;
-	private Calendar dataCalendar;
+	private long idAppello;
+
+	/**
+	 * @deprecated
+	 * detiene il conteggio delle isranze create per generare l'idAppello.
+	 */
+	private static long contaId = 0;
+	
 	private LocalDate dataL;
 
+	/**
+	 * Costruttore dell'appello senza parametri, imposta la data odierna.
+	 */
 	public Appello(){
-//		this.data = new Date();
-		
-		dataCalendar = new GregorianCalendar();
-		this.data = dataCalendar.getTime();
+
 		dataL = DataOggi.getInstance().getDataOdierna();
 		
 	}
 	
-//	public Appello(Date data) {
-//
-//		// costruttore inserito per le prove, probabilmente non serve!!		
-//		this.data = data;
-//		//da cambiare
-//		this.dataCalendar = new GregorianCalendar(data.getYear(), data.getMonth(), data.getDate());
-//	}
+	/**
+	 * Costruttore dell'appello che prende come parametro la data.
+	 * @param data
+	 */
 	
 	public Appello(LocalDate data) {
 
 		dataL = new LocalDate(data);
+		this.idAppello = Appello.generaId();
+		
 	}
 
-	public Date getData() {
-		
-			return this.data;
-		
-	}
-	
-	public Calendar getDataCalendar(){
-//		System.out.println("passo per getDataCalendar " + dataCalendar.getTime());
-		return dataCalendar;
-	}
 	
 	public LocalDate getDataL() {
 		
 		return this.dataL;
 	
-}
+	}
 
-//	public void setData(Date data) {
-//		this.data = data;
-//	}
+	public long getIdAppello() {
+		return idAppello;
+	}
+
+	public void setIdAppello(long idAppello) {
+		this.idAppello = idAppello;
+	}
+	
+	/**
+	 * @deprecated
+	 * Genera un idAppello progressivo, è stato inserito per le prove, 
+	 * valutare se è il caso di tenerlo
+	 * @return 
+	 */
+	private static long generaId(){
+		contaId ++;
+		return contaId;
+		
+	}
 
 }

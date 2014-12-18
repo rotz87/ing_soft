@@ -5,7 +5,6 @@ import domain.Appello;
 import domain.RegistroAssenzeController;
 import service.*;
 
-
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -45,10 +44,18 @@ public class AppelloController {
 		  httpHeaders = new HttpHeaders();
 		  
 		  registro = FactoryHandler.getInstance().getRegistroAssenzeFactory().createRegistroAssenze(null);
+		  String risposta;
 		  
-		  registro.avviaAppello();
+		  try{
+			  registro.avviaAppello();
+			  risposta ="OK"; 
+			}catch(IllegalStateException ISE){
+				System.out.println(ISE.getMessage() );
+				risposta = ISE.getMessage();
+			}
 		  
-		  System.out.println("Appello odierno: "+registro.getAppelloOdierno().toString());
+		  
+		  System.out.println("Appello odierno: "+registro.getAppelloOdierno().getIdAppello() + " | " + registro.getAppelloOdierno().getDataL());
 
 //		  Link forOneBookmark = new BookmarkResource(bookmark).getLink("self");
 //		  httpHeaders.setLocation(URI.create(forOneBookmark.getHref()));

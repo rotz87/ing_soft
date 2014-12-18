@@ -59,6 +59,14 @@ public class RegistroAssenzeController {
 	public void setLibrettiAssenze(Map<String, LibrettoAssenze> librettiAssenze) {
 		this.librettiAssenze = librettiAssenze;
 	}
+	/**
+	 * Metodo per restituire un appello specifico, avendo la data
+	 * serve per visualizzare un appello già fatto
+	 * bottone visualizza dell'interfaccia
+	 */
+	public Appello getAppelloByData(LocalDate data){
+		return appelli.get(data);
+	}
 
 	public void avviaAppello() {
 		// TODO - implement RegistroAssenzeController.avviaAppello
@@ -87,7 +95,8 @@ public class RegistroAssenzeController {
 	}
 	
 	/**
-	 * @deprecated
+	 * @deprecated 
+	 * Metodo inserito per le prove, forse è da togliere
 	 * @param librettiAssenze
 	 */
 	public void assengaLibretti (Map<String, LibrettoAssenze> librettiAssenze){
