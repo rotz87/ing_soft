@@ -4,7 +4,11 @@ import domain.Appello;
 
 import java.util.Date;
 import java.util.HashMap;
+
 import org.springframework.hateoas.ResourceSupport;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+
+import controllerSpring.AppelloController;
 
 /**
  * Da completare: come fa l'appello a prendere una lista di studenti?
@@ -19,10 +23,15 @@ public class AppelloRS extends ResourceSupport{
 	private MapStudenti studenti;
 	
 	
-	public AppelloRS(Appello appello) {
-		this.idAppello = 0L;
+	public AppelloRS(Appello appello, long idClasse) {
+		this.idAppello = appello.getIdAppello();
 		this.data = null;
 		this.studenti = new MapStudenti();
+		
+		this.add(ControllerLinkBuilder.linkTo(AppelloController.class, idClasse).withRel("appelli"));
+		this.add(ControllerLinkBuilder.linkTo(
+				ControllerLinkBuilder.methodOn(AppelloController.class, idClasse).
+					getAppello(idClasse, this.idAppello)).withSelfRel());
 	}
 	
 	

@@ -2,10 +2,14 @@ package domain;
 
 import java.awt.List;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+
+import javassist.tools.framedump;
 
 import org.joda.time.LocalDate;
 import org.neo4j.cypher.internal.compiler.v2_1.planner.logical.steps.idSeekLeafPlanner;
+import org.neo4j.cypher.internal.helpers.Converge.iterateUntilConverged;
 
 public class RegistroAssenzeController {
 
@@ -36,6 +40,23 @@ public class RegistroAssenzeController {
 
 	public Appello getAppelloOdierno() {
 		return this.appelloOdierno;
+	}
+	
+	public Appello getAppello(long id){
+		
+		Appello appello = null;
+		boolean trovato = false;
+		Iterator<Appello> i = this.appelli.values().iterator();
+		
+		while(!trovato && i.hasNext()){
+			appello = i.next();
+			if(appello.getIdAppello() == id){
+				trovato = true;
+			}
+		}
+	
+		return appello;
+	
 	}
 
 	public void setAppelloOdierno(Appello appelloOdierno) {

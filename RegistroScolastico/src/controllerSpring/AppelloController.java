@@ -1,8 +1,8 @@
 package controllerSpring;
 
 
-import domain.Appello;
 import domain.RegistroAssenzeController;
+import resourceSupport.AppelloRS;
 import service.*;
 
 import java.net.URI;
@@ -37,43 +37,40 @@ import org.springframework.web.bind.annotation.RestController;
 public class AppelloController {
 	
 	  @RequestMapping(method = RequestMethod.POST)
-	  ResponseEntity<?> creaAppello() {
+	  ResponseEntity<?> creaAppello(@PathVariable long idClasse) {
 		  HttpHeaders httpHeaders;
 		  RegistroAssenzeController registro;
 	  	
+		  Link forOneAppello;
 		  httpHeaders = new HttpHeaders();
 		  
 		  registro = FactoryHandler.getInstance().getRegistroAssenzeFactory().createRegistroAssenze(null);
-		  String risposta;
 		  
 		  try{
 			  registro.avviaAppello();
-			  risposta ="OK"; 
 			}catch(IllegalStateException ISE){
 				System.out.println(ISE.getMessage() );
-				risposta = ISE.getMessage();
 			}
 		  
 		  
 		  System.out.println("Appello odierno: "+registro.getAppelloOdierno().getIdAppello() + " | " + registro.getAppelloOdierno().getDataL());
 
-//		  Link forOneBookmark = new BookmarkResource(bookmark).getLink("self");
-//		  httpHeaders.setLocation(URI.create(forOneBookmark.getHref()));
+		  forOneAppello = new AppelloRS(registro.getAppelloOdierno(), idClasse).getLink("self");
+		  httpHeaders.setLocation(URI.create(forOneAppello.getHref()));
 
 		  return new ResponseEntity<>(null, httpHeaders, HttpStatus.CREATED);
 
 	  }
 		
 	  
-		@RequestMapping(method = RequestMethod.GET)
-		public Appello getAppello() {
+		@RequestMapping(value = "/{idAppello}", method = RequestMethod.GET)
+		public AppelloRS getAppello(@PathVariable long idClasse, @PathVariable long idAppello) {
 			
 			RegistroAssenzeController regAssCtrl;
 			
 			regAssCtrl = FactoryHandler.getInstance().getRegistroAssenzeFactory().createRegistroAssenze(null);
 			
-			return regAssCtrl.getAppelloOdierno();
-			
+			return new AppelloRS(regAssCtrl.getAppello(idAppello), idClasse);
 		}
 	
 //    @RequestMapping(method = RequestMethod.POST)
