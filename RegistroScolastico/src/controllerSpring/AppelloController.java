@@ -64,7 +64,10 @@ public class AppelloController {
 		
 	  
 		@RequestMapping(value = "/{idAppello}", method = RequestMethod.GET)
-		public AppelloRS getAppello(@PathVariable long idClasse, @PathVariable long idAppello) {
+		public AppelloRS getAppello(@PathVariable long idAppello, @PathVariable long idClasse) {
+			
+			System.out.println("idAppello="+Long.toString(idAppello));
+			System.out.println("idClasse="+Long.toString(idClasse));
 			
 			RegistroAssenzeController regAssCtrl;
 			

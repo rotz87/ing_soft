@@ -31,7 +31,7 @@ public class AppelloRS extends ResourceSupport{
 		this.add(ControllerLinkBuilder.linkTo(AppelloController.class, idClasse).withRel("appelli"));
 		this.add(ControllerLinkBuilder.linkTo(
 				ControllerLinkBuilder.methodOn(AppelloController.class, idClasse).
-					getAppello(idClasse, this.idAppello)).withSelfRel());
+					getAppello(this.idAppello, idClasse)).withSelfRel());
 	}
 	
 	
