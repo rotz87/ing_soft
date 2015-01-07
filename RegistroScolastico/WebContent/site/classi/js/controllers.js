@@ -15,8 +15,8 @@ appelloControllers.controller('avviaAppello',['$scope','Appello','$location',fun
 				
 			});
 			var myuri = "appelli";
-			
-			$location.path("appelli/");
+			$location.path("0/appelli/");
+			$location.replace();
 			console.log($location.protocol());
 			console.log($location.href);
 			console.log($location.host());
@@ -43,7 +43,7 @@ appelloControllers.controller('riempiAppelli', ['$scope', function($scope) {
     templateUrl: 'partials/appelli.html'
   };
 });
-appelloControllers.controller('riempiElencoAppelli', ['$scope', function($scope) {
+appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$location', function($scope, Appello, $location) {
 	  $scope.appello1 = { data: 'Naomi', azione: 'visualizza' };
 	  $scope.appello2 = { data: 'Igor', azione: 'Avvia' };
 	  $scope.mioController = "avviaAppello";
@@ -72,6 +72,7 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope', function($scope)
 		  	}
 		  }
 	  /*
+	   * codice per la prova dei dati json
 	   * {
             'id': '0',
             'data': '1288323623006',
@@ -93,7 +94,32 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope', function($scope)
                 }
             ]
         }
-	   * */
+	   *
+	   */
+	  $scope.idClasse = 0;
+	  var nuovoUri=[];
+		$scope.creaAppello = function(miaClasse){
+			if (miaClasse)
+			{
+				$scope.idClasse = miaClasse;
+			}
+			
+			Appello.myPost({idClasse:$scope.idClasse},function(data,header){
+				console.log(data);
+				console.log(header());
+				$scope.appelloUri = header("location");
+				nuovoUri = $scope.appelloUri.split("/");
+				console.log(nuovoUri.length);
+				$location.path("0/appelli/"+nuovoUri[nuovoUri.length-1]);
+			});
+			var myuri = "appelli";
+			
+			
+			//$location.replace();
+			
+			$window.location.href
+		}
+		
 	}])
 	.directive('elencoAppello', function() {
 	  return {
