@@ -4,6 +4,7 @@ import java.awt.List;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javassist.tools.framedump;
 
@@ -13,7 +14,11 @@ import org.neo4j.cypher.internal.helpers.Converge.iterateUntilConverged;
 
 public class RegistroAssenzeController {
 
+	/**
+	 * @deprecated
+	 */
 	private Appello appelloOdierno;
+	
 	private MapAppelli appelli;
 	private Map <String, LibrettoAssenze> librettiAssenze;
 	
@@ -30,7 +35,6 @@ public class RegistroAssenzeController {
 		
 		for (String idStudente : idStudenti){
 
-			
 //			LibrettoAssenze mioLibretto = librettiAssenze.get(idStudente);
 //			System.out.println(librettiAssenze.get(idStudente));
 			librettiAssenze.get(idStudente).segnaAssenza(this.getAppelloOdierno());
@@ -90,8 +94,8 @@ public class RegistroAssenzeController {
 	}
 
 	public void avviaAppello() {
-		// TODO - implement RegistroAssenzeController.avviaAppello
-//		QUANDO SI AVVIA L'APPELLO BISOGN SPOSTARE QUELLO VECCHI SE ESITE NELLA MAPAPPELLI
+//		 TODO - implement RegistroAssenzeController.avviaAppello
+//		QUANDO SI AVVIA L'APPELLO BISOGNA SPOSTARE QUELLO VECCHIO SE ESITE NELLA MAPAPPELLI
 //		if(this.appelloOdierno != null){//sarebbe da mettere se l'ultimo appello è di ieri o prima creane uno nuono alreimenti non farlo creare
 		if(this.appelloOdierno != null){
 			LocalDate oggi = DataOggi.getInstance().getDataOdierna();
@@ -110,7 +114,8 @@ public class RegistroAssenzeController {
 			appelli.put(appelloOdierno.getDataL(),appelloOdierno);
 //			System.out.println("appello null, creazione dell'appello");
 		}
-			
+//		System.out.println("sono in avvia appello");
+//		
 			
 //		}
 	}
@@ -129,5 +134,5 @@ public class RegistroAssenzeController {
 		
 	}
 	
-	public class MapAppelli extends HashMap<LocalDate, Appello>{}
+	public class MapAppelli extends TreeMap<LocalDate, Appello>{}
 }

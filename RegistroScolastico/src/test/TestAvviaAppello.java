@@ -18,8 +18,8 @@ public class TestAvviaAppello {
 		RegistroAssenzeController regAssCtrl = FactoryHandler.getInstance().getRegistroAssenzeFactory().createRegistroAssenze(null);
 		
 		regAssCtrl.setAppelloOdierno(appelloPrecedente);
-		regAssCtrl.getAppelli().put(dataTest, appelloPrecedente);
-		
+		regAssCtrl.getAppelli().put(appelloPrecedente.getDataL(), appelloPrecedente);
+
 		try{
 			regAssCtrl.avviaAppello();
 		}catch(IllegalStateException ISE){
@@ -47,9 +47,10 @@ public class TestAvviaAppello {
 			while (entries.hasNext()) {
 				  Entry thisEntry = (Entry) entries.next();
 				  LocalDate data = (LocalDate)thisEntry.getKey();
+//				  Long idAppello = (Long)thisEntry.getKey();
 				  Appello appello = (Appello)thisEntry.getValue();
 				  
-				  System.out.println("data : " + data );
+				  System.out.println("data : " + appello.getDataL() );
 				  System.out.println("Appello : " + appello );
 				  System.out.println("--------------------: " );
 			}
