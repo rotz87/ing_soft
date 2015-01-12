@@ -7,7 +7,9 @@ import org.joda.time.LocalDate;
 
 public class Assenza {
 
-	LinkedList<Appello> appelli;
+	private LinkedList<Appello> appelli;
+	Collection<Appello> appello;
+	private Giustificazione giustificazione;
 	
 	/**
 	 * 

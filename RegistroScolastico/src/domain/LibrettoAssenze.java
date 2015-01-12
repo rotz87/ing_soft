@@ -4,9 +4,11 @@ import java.util.*;
 
 public class LibrettoAssenze {
 
-	Collection<Assenza> giustificate;
-	List<Assenza> nonGiustificate;
+	private Collection<Assenza> giustificate;
+	private List<Assenza> nonGiustificate;
 	private Studente studente;
+	private Collection<Ritardo> ritardi;
+	private Collection<UscitaAnticipata> uscite;
 
 	public Studente getStudente() {
 		return studente;

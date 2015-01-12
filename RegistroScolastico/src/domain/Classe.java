@@ -11,6 +11,7 @@ public class Classe {
 	private long idClasse;
 	private static long contaId = 0;
 	private RegistroAssenzeController registroAssenzeController;
+	private RegistroAssenze registroAssenze;
 	
 	public Classe(String nome){
 		this.nome = nome;

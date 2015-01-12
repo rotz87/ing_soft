@@ -16,6 +16,7 @@ public class Appello {
 	private static long contaId = 0;
 	
 	private LocalDate dataL;
+	private Date data;
 
 	/**
 	 * Costruttore dell'appello senza parametri, imposta la data odierna.
