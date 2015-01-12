@@ -21,7 +21,7 @@ public class TestAvviaAppello {
 		regAssCtrl.getAppelli().put(appelloPrecedente.getDataL(), appelloPrecedente);
 
 		try{
-			regAssCtrl.avviaAppello();
+			regAssCtrl.avviaAppello();//cambiare, usare il nuovo controller
 		}catch(IllegalStateException ISE){
 			System.out.println(ISE.getMessage()+"prima eccezione" );
 		}

@@ -22,7 +22,10 @@ public class RegistroAssenzeController {
 	private MapAppelli appelli;
 	private Map <String, LibrettoAssenze> librettiAssenze;
 	
-	public RegistroAssenzeController(){
+	/**
+	 * Costrurrore senza parametri.
+	 */
+	public RegistroAssenzeController(){//sincronizzato
 		appelli = new MapAppelli();
 	}
 	
@@ -30,9 +33,7 @@ public class RegistroAssenzeController {
 	 * 
 	 * @param idStudenti
 	 */
-	public void registraAssenze(String[] idStudenti) {
-		// TODO - implement RegistroAssenzeController.registraAssenze
-		
+	public void registraAssenze(String[] idStudenti) {		
 		for (String idStudente : idStudenti){
 
 //			LibrettoAssenze mioLibretto = librettiAssenze.get(idStudente);
@@ -94,7 +95,6 @@ public class RegistroAssenzeController {
 	}
 
 	public void avviaAppello() {
-//		 TODO - implement RegistroAssenzeController.avviaAppello
 //		QUANDO SI AVVIA L'APPELLO BISOGNA SPOSTARE QUELLO VECCHIO SE ESITE NELLA MAPAPPELLI
 //		if(this.appelloOdierno != null){//sarebbe da mettere se l'ultimo appello è di ieri o prima creane uno nuono alreimenti non farlo creare
 		if(this.appelloOdierno != null){

@@ -35,6 +35,10 @@ public class Classe {
 	public void setIdClasse(long idClasse) {
 		this.idClasse = idClasse;
 	} 
+	
+	public RegistroAssenze getRegistroAssenze(){
+		return this.registroAssenze;
+	}
 
 	private static long generaId(){
 		contaId ++;

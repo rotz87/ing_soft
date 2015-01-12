@@ -162,7 +162,7 @@ public class TestRegistraAssenze {
 		
 		//TEST DEL METODO
 		visualizzaAssStud(regAssCtrl);
-		regAssCtrl.avviaAppello();
+		regAssCtrl.avviaAppello();//cambiare, usare il nuovo controller
 		System.out.println("APPELLO AVVIATO, la data è : "+ regAssCtrl.getAppelloOdierno().getDataL().toString());
 		
 		regAssCtrl.registraAssenze(listaIdStud);
