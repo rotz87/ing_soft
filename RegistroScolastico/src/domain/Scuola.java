@@ -1,37 +1,33 @@
 package domain;
 
 import java.util.*;
-
+/**
+ * @deprecated
+ * @author Fabio
+ *
+ */
 public class Scuola {
 
-	private Map<Long, Classe> classi;
-	private Map<Long, Docente> docenti;
+	private List<Classe> classi;
+	private List<Docente> docenti;
 	
 	public Scuola() {
-		classi = new TreeMap<Long, Classe>();
-		docenti = new TreeMap<Long, Docente>();
+
 	}
 	
 	/**Per le prove
 	 * 
 	 */
-	public void setClassi( Map<Long, Classe> classi){
+	public void setClassi( List<Classe> classi){
 		this.classi = classi;
 	}
 	
 	/**Per le prove
 	 * 
 	 */
-	public void setDocenti( Map<Long, Docente> docenti){
+	public void setDocenti(List<Docente> docenti){
 		this.docenti = docenti;
 	}
 	
-	public Classe getCalsseById(Long idClasse){
-		return classi.get(idClasse);
-	}
-	
-	public Docente getDocenteById(Long idDocente){
-		return docenti.get(idDocente);
-	}
 
 }

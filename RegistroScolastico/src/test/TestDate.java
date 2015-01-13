@@ -38,7 +38,7 @@ public class TestDate {
 		 calendarioFestivi.add(new LocalDate(2014,12,26));
 		 calendarioFestivi.add(new LocalDate(2014,12,27));
 		 
-		 LocalDate ultimaData = new LocalDate(2014,12,9);//<<-- ULTIMA DATA DELL'ASSENZA
+		 LocalDate ultimaData = new LocalDate(2014,12,9);//<<-- ULTIMA DATA DELL'ASSENZA a regime bisogna prenderla dalla list di date dellassenza
 		 
 		 LocalDate oggi = new LocalDate(2014,12,15); //<<-- data di riferimento
 

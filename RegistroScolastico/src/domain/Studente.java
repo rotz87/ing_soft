@@ -3,12 +3,14 @@ package domain;
 public class Studente {
 	
 	private long id;
+	private static long contaId = 0;
 	private String nome;
 	private String cognome;
 	private Indirizzo indrizzo;
 	private String codiceFiscale;
 	
 	public Studente(String nome, String cognome){
+		this.id = Studente.generaId();
 		this.nome = nome;
 		this.cognome = cognome;
 	}
@@ -16,6 +18,7 @@ public class Studente {
 	
 	
 	public Studente(long id, String nome, String cognome, Indirizzo indrizzo, String codiceFiscale) {
+		this.id = Studente.generaId();
 		setId(id);
 		setNome(nome);
 		setCognome(cognome);
@@ -63,6 +66,12 @@ public class Studente {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	private static long generaId(){
+		contaId ++;
+		return contaId;
+		
 	}
 	
 }

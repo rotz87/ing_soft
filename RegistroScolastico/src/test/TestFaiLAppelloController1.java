@@ -1,69 +1,108 @@
 package test;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 import java.util.Map.Entry;
 
 import org.joda.time.LocalDate;
 
+import service.DBFake;
 import domain.*;
 
-public class TestRegistraAssenze {
-	public static Map<String, LibrettoAssenze> librettiDaAssegnare;
-	
-	public static void main(String[] args) {
-		RegistroAssenzeController regAssCtrl = new RegistroAssenzeController();
+public class TestFaiLAppelloController1 {
+	public static void main(String[] args){
+		//creazione dal controller FaiAppelloConreoller
+		FaiAppelloController controlloreAppello = new FaiAppelloController();
+		
+		//creazione delle classi
+		Classe primaA = new Classe("1A");
+		Classe secondaA = new Classe("2A");
+		
+		Map<Long, Classe> mapClassi = new TreeMap <Long, Classe>();
+		mapClassi.put(primaA.getIdClasse(), primaA);
+		mapClassi.put(secondaA.getIdClasse(), secondaA);
+		
+		DBFake.getInstance().setClassi(mapClassi);
+		
+		//Crrazione dei docenti
+		Docente marioRossi = new Docente("Mario", "Rossi");
+		Docente mirkoBianchi = new Docente("Mirko", "Bianchi");
+		
+		Map<Long, Docente> mapDocenti = new TreeMap <Long, Docente>();
+		mapDocenti.put(marioRossi.getIdDocente(), marioRossi);
+		mapDocenti.put(mirkoBianchi.getIdDocente(), mirkoBianchi);
+		
+		DBFake.getInstance().setDocenti(mapDocenti);
+		
+		//assegnazione delle classi ai docenti
+		
+		Collection<Classe> classiDiRossi = new LinkedList<Classe>();
+		classiDiRossi.add(primaA);
+		classiDiRossi.add(secondaA);
+		marioRossi.setClassi(classiDiRossi);
+		
+		Collection<Classe> classiDiBianchi = new LinkedList<Classe>();
+		classiDiBianchi.add(primaA);
+		mirkoBianchi.setClassi(classiDiBianchi);
 		
 		
-		librettiDaAssegnare = new HashMap<String, LibrettoAssenze>();
+		//Creazione degli studenti
+		Studente pieroPeluria = new Studente("Piero", "Peluria");
+		Studente marinoPeluria = new Studente("Marino", "Peluria");
+		Studente maccioCapatonda = new Studente("Maccio", "Capatonda");
+		Studente herbertBallerina = new Studente("Herbert", "Ballerina");
+		Studente ivoAvido = new Studente("Ivo", "Avido");
+		
+		Map<Long, Studente> mapStudenti = new TreeMap <Long, Studente>();
+		mapStudenti.put(pieroPeluria.getId(), pieroPeluria);
+		mapStudenti.put(marinoPeluria.getId(), marinoPeluria);
+		mapStudenti.put(maccioCapatonda.getId(), maccioCapatonda);
+		mapStudenti.put(herbertBallerina.getId(), herbertBallerina);
+		mapStudenti.put(ivoAvido.getId(), ivoAvido);
+		
+		DBFake.getInstance().setStudenti(mapStudenti);
+		
+		//assegnazione degli studenti alle classi
+		Set<Studente> listaStudentiPrimaA = new HashSet<Studente>(mapStudenti.values());
+		primaA.setStudenti(listaStudentiPrimaA);
 		
 		//creazione Libretti
-		LibrettoAssenze librettoMaccio = new LibrettoAssenze(new Studente("Maccio", "Capatonda"));
-		LibrettoAssenze librettoHerbert =  new LibrettoAssenze(new Studente("Herbert", "Ballerina"));
-		LibrettoAssenze librettoIvo = new LibrettoAssenze(new Studente("Ivo", "Avido"));
-		LibrettoAssenze librettoPiero = new LibrettoAssenze(new Studente("Piero", "Peluria"));
-		LibrettoAssenze librettoMarino =  new LibrettoAssenze(new Studente("Marino", "Peluria"));
+		 Map<Studente, LibrettoAssenze> librettiDaAssegnare = new HashMap<Studente, LibrettoAssenze>(); 
+		 
+		LibrettoAssenze librettoMaccio = new LibrettoAssenze(maccioCapatonda);
+		LibrettoAssenze librettoHerbert =  new LibrettoAssenze(herbertBallerina);
+		LibrettoAssenze librettoIvo = new LibrettoAssenze(ivoAvido);
+		LibrettoAssenze librettoPiero = new LibrettoAssenze(pieroPeluria);
+		LibrettoAssenze librettoMarino =  new LibrettoAssenze(marinoPeluria);
 		
-		//composizione di una map di lbretti da assegnare al registo
-		librettiDaAssegnare.put("Maccio", librettoMaccio);
-		librettiDaAssegnare.put("Herbert",librettoHerbert);
-		librettiDaAssegnare.put("Ivo", librettoIvo);
-		librettiDaAssegnare.put("Piero", librettoPiero);
-		librettiDaAssegnare.put("Marino",librettoMarino);
+		librettiDaAssegnare.put(maccioCapatonda, librettoMaccio);
+		librettiDaAssegnare.put(herbertBallerina,librettoHerbert);
+		librettiDaAssegnare.put(ivoAvido, librettoIvo);
+		librettiDaAssegnare.put(pieroPeluria, librettoPiero);
+		librettiDaAssegnare.put(marinoPeluria,librettoMarino);
 		
-		//assegnazione dei libretti al registo
-		regAssCtrl.assengaLibretti(librettiDaAssegnare);
+		//creazione del registro
+		RegistroAssenze regAssPrimaA = new RegistroAssenze();
 		
-		//inizializzazione vettore di id studenti assenti
-		String[] listaIdStud = {"Maccio", "Piero","Ivo"};
+		//assegnazione del regitro alla classe primaA
+		primaA.setRegistroAssenze(regAssPrimaA);
+		
+		//Assegnazione dei libretti al registro delle classe primaA
+		regAssPrimaA.assengaLibretti(librettiDaAssegnare);
+		
+		//Creazione di un vettore di studenti per cui segnare l'assenza
+		Long[] listaIdStudAssenti = {maccioCapatonda.getId(), pieroPeluria.getId(),ivoAvido.getId()};
 		
 		//recupero dell'appello odierno dal registro
-		Appello appelloOdierno = regAssCtrl.getAppelloOdierno();
+		Appello appelloOdierno = regAssPrimaA.getAppelloOdierno();
 		
-		//RIEMPIMENTO DELLE LISTE DI ASSENZE NON GIUSTIFICATE
-		
-		//creazione date
-//		Calendar data10_12_14 = Calendar.getInstance();
-//		data10_12_14.set(Calendar.YEAR, 2014);
-//		data10_12_14.set(Calendar.MONTH, 11);
-//		data10_12_14.set(Calendar.DAY_OF_MONTH, 10);
-//		Calendar data11_12_14 = Calendar.getInstance();
-//		data11_12_14.set(Calendar.YEAR, 2014);
-//		data11_12_14.set(Calendar.MONTH, 11);
-//		data11_12_14.set(Calendar.DAY_OF_MONTH, 11);
-		
-		// N.B. i mesi vanno da 0 a 11!!!!
-//		Date data10_12_14 = new GregorianCalendar(2014,11,10).getTime();
-//		Date data11_12_14 = new GregorianCalendar(2014,11,11).getTime();
-//		Date data12_12_14 = new GregorianCalendar(2014,11,12).getTime();
-//		Date data13_12_14 = new GregorianCalendar(2014,11,13).getTime();
-//		Date data14_12_14 = new GregorianCalendar(2014,11,14).getTime();
-//		Date data15_12_14 = new GregorianCalendar(2014,11,15).getTime();
-//		Date data16_12_14 = new GregorianCalendar(2014,11,16).getTime();
-//		Date data17_12_14 = new GregorianCalendar(2014,11,17).getTime();
-		
+		// creazione delle date
 		LocalDate data10_12_14 = new LocalDate(2014,12,10);
 		LocalDate data11_12_14 = new LocalDate(2014,12,11);
 		LocalDate data12_12_14 = new LocalDate(2014,12,12);
@@ -72,17 +111,6 @@ public class TestRegistraAssenze {
 		LocalDate data15_12_14 = new LocalDate(2014,12,15);
 		LocalDate data16_12_14 = new LocalDate(2014,12,16);
 		LocalDate data17_12_14 = new LocalDate(2014,12,17);
-		LocalDate dataTestFineMese = new LocalDate(2014,12,31);
-		
-//		String dataStringa = new String ("data : "+ data10_12_14.get(Calendar.DAY_OF_MONTH) +"/"+  data10_12_14.get(Calendar.MONTH) +"/"+  data10_12_14.get(Calendar.YEAR));
-//		String dataStringa2 = new String ("data : "+ data11_12_14.get(Calendar.DAY_OF_MONTH) +"/"+  data11_12_14.get(Calendar.MONTH) +"/"+  data11_12_14.get(Calendar.YEAR));
-//		System.out.println("------------------>>>Date:");
-//		System.out.println(data10_12_14);
-//		System.out.println(dataStringa );
-//		System.out.println(data11_12_14 );
-//		System.out.println(dataStringa2 + "\n __________________");
-		
-//		System.out.println("data 12 12 2014 "+data12_12_14 );
 		
 		//creazione di lista di appelli 
 		LinkedList<Appello> AppelliAssenzeMaccio = new LinkedList<Appello>();
@@ -100,17 +128,16 @@ public class TestRegistraAssenze {
 		Appello appello14_12_14 = new Appello(data14_12_14);
 		Appello appello15_12_14 = new Appello(data15_12_14);
 		Appello appello16_12_14 = new Appello(data16_12_14);
-		Appello appelloTestFineMese = new Appello(dataTestFineMese);
 		
 		//assegnazione di appelli alle liste di appelli
 		AppelliAssenzeMaccio.add(appello10_12_14);
 		AppelliAssenzeMaccio.add(appello11_12_14);
-//		AppelliAssenzeMaccio.add(appello12_12_14);
+//				AppelliAssenzeMaccio.add(appello12_12_14);
 		 
 		AppelliAssenzePiero.add(appello10_12_14);
 		AppelliAssenzePiero.add(appello11_12_14);
 		AppelliAssenzePiero.add(appello12_12_14);
-//		AppelliAssenzePiero.add(appello16_12_14);
+//				AppelliAssenzePiero.add(appello16_12_14);
 		
 		AppelliAssenzeIvo.add(appello13_12_14);
 		AppelliAssenzeIvo.add(appello14_12_14);
@@ -121,9 +148,6 @@ public class TestRegistraAssenze {
 		
 		AppelliAssenzeHerbert.add(appello14_12_14);
 		
-		AppelliAssenzeTestFineMese.add(appelloTestFineMese);
-		
-		
 		
 		//assegnazione delle liste di appelli alle assenze
 		Assenza assM1 = new Assenza(AppelliAssenzeMaccio);
@@ -131,7 +155,6 @@ public class TestRegistraAssenze {
 		Assenza assI1 = new Assenza(AppelliAssenzeIvo);
 		Assenza assH1 = new Assenza(AppelliAssenzeHerbert);
 		Assenza assMa1 = new Assenza(AppelliAssenzeMarino);
-		Assenza assenzaFineMese = new Assenza(AppelliAssenzeTestFineMese);
 		
 		//creazione delle liste di assenze da assegnare ai libretti
 		LinkedList<Assenza> listaAssenzeMaccio = new  LinkedList<Assenza>();
@@ -145,8 +168,6 @@ public class TestRegistraAssenze {
 		LinkedList<Assenza> listaAssenzeMarino = new  LinkedList<Assenza>();
 		listaAssenzeMarino.add(assMa1);
 		
-		LinkedList<Assenza> listaAssenzeTsetFineMese = new  LinkedList<Assenza>();
-		listaAssenzeTsetFineMese.add(assenzaFineMese);
 		
 		//assegnazione delle liste ai libretti
 		librettoMaccio.assengnaAssenzeNonGiustificate(listaAssenzeMaccio);
@@ -157,21 +178,25 @@ public class TestRegistraAssenze {
 		librettoHerbert.assengnaAssenzeNonGiustificate(listaAssenzeHerbert);
 		
 		//TEST DEL METODO
-		visualizzaAssStud(regAssCtrl);
-		regAssCtrl.avviaAppello();//cambiare, usare il nuovo controller
-		System.out.println("APPELLO AVVIATO, la data è : "+ regAssCtrl.getAppelloOdierno().getDataL().toString());
+//		System.out.println("studenti della 1A : " + primaA.getStudenti() );
 		
-		regAssCtrl.registraAssenze(listaIdStud);
+		stampaLibretti(regAssPrimaA);
 		
-		visualizzaAssStud(regAssCtrl);
+		controlloreAppello.avviaAppello(primaA.getIdClasse(), marioRossi.getIdDocente());
+		
+		controlloreAppello.registraAssenze(listaIdStudAssenti,primaA.getIdClasse(), marioRossi.getIdDocente() );
+		
+		//Stampa dei libretti
+		stampaLibretti(regAssPrimaA);
+		
 		
 		
 	}
 	
-	public static void visualizzaAssStud(RegistroAssenzeController regAssCtrl){
+	private static void stampaLibretti(RegistroAssenze regAss){
 		System.out.println();
 		System.out.println("VISUALIZZAZIONE ASSENZE STUDENTI _________________________");
-		Iterator entries = regAssCtrl.getLibrettiAssenze().entrySet().iterator();
+		Iterator entries = regAss.getLibrettiAssenze().entrySet().iterator();
 		while (entries.hasNext()) {
 		  Entry thisEntry = (Entry) entries.next();
 		  Studente Stud = (Studente)thisEntry.getKey();
@@ -190,6 +215,6 @@ public class TestRegistraAssenze {
 		}
 		System.out.println("________________________________________FINE");
 		System.out.println();
+		
 	}
-	
 }

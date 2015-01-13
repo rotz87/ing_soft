@@ -8,7 +8,6 @@ import org.joda.time.LocalDate;
 public class Assenza {
 
 	private LinkedList<Appello> appelli;
-	Collection<Appello> appello;
 	private Giustificazione giustificazione;
 	
 	/**
@@ -56,6 +55,7 @@ public class Assenza {
 		
 		LocalDate ultimaDataPlus = appelli.getLast().getDataL().plusDays(1);
 		LocalDate oggi = DataOggi.getInstance().getDataOdierna();
+//		LocalDate oggi = appello.getDataL();
 		
 		if(ultimaDataPlus.isEqual(oggi)){
 			inseribile = true;

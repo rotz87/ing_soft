@@ -8,10 +8,6 @@ import domain.RegistroAssenzeController.MapAppelli;
 
 public class RegistroAssenze {
 
-	/**
-	 * @deprecated
-	 */
-	private Appello appelloOdierno;
 	private MapAppelli appelli;
 	private Map <Studente, LibrettoAssenze> librettiAssenze;
 	
@@ -32,18 +28,36 @@ public class RegistroAssenze {
 
 //			LibrettoAssenze mioLibretto = librettiAssenze.get(idStudente);
 //			System.out.println(librettiAssenze.get(idStudente));
-			librettiAssenze.get(studente).segnaAssenza(this.getAppelloOdierno());
+			
+			LocalDate dataDiRiferimento = DataOggi.getInstance().getDataOdierna();
+			
+			if(this.esisteAppelloData(dataDiRiferimento)){
+			
+				librettiAssenze.get(studente).segnaAssenza(this.appelli.get(dataDiRiferimento));
+			}else{
+				
+			}
+			
+//			librettiAssenze.get(studente).segnaAssenza(this.getAppelloOdierno());
 		}
 	}
 
 	public Appello getAppelloOdierno() {
-		return this.appelloOdierno;
+		
+		Appello appelloOdierno = null;
+		LocalDate dataDiRiferimento = DataOggi.getInstance().getDataOdierna();
+		if(this.esisteAppelloData(dataDiRiferimento)){
+			appelloOdierno = appelli.get(dataDiRiferimento);
+		}else{
+			appelloOdierno = null;
+		}
+		return appelloOdierno;
 	}
 	
 
-	public void setAppelloOdierno(Appello appelloOdierno) {
-		this.appelloOdierno = appelloOdierno;
-	}
+//	public void setAppelloOdierno(Appello appelloOdierno) {
+//		this.appelloOdierno = appelloOdierno;
+//	}
 	
 	/**Serve questo metodo????
 	 * 
@@ -67,28 +81,14 @@ public class RegistroAssenze {
 
 
 	public void avviaAppello() {
-//		QUANDO SI AVVIA L'APPELLO BISOGNA SPOSTARE QUELLO VECCHIO SE ESITE NELLA MAPAPPELLI
-//		if(this.appelloOdierno != null){//sarebbe da mettere se l'ultimo appello è di ieri o prima creane uno nuono alreimenti non farlo creare
-		if(this.appelloOdierno != null){
-			LocalDate oggi = DataOggi.getInstance().getDataOdierna();
-			LocalDate dataAppello = appelloOdierno.getDataL();
-			if(oggi.isEqual(dataAppello)){
-//				System.out.println("LANCIO L'ECCEZIONE");
-				throw new IllegalStateException("ATTENZIONE L'APPELLO ODIERNO E' GIA' STATO AVVIATO");
-			}else{
-				this.appelloOdierno = new Appello();
-				appelli.put(appelloOdierno.getDataL(),appelloOdierno);
-//				System.out.println("appello odierno not null, sto nell'else");
-			}
-			
+		LocalDate dataRif = DataOggi.getInstance().getDataOdierna();
+		if(!(this.esisteAppelloData(dataRif))){
+			appelli.put(dataRif, new Appello(dataRif));
 		}else{
-			this.appelloOdierno = new Appello();
-			appelli.put(appelloOdierno.getDataL(),appelloOdierno);
-//			System.out.println("appello null, creazione dell'appello");
+			throw new IllegalStateException(" -- ATTENZIONE L'APPELLO ODIERNO E' GIA' STATO AVVIATO -- ");
 		}
+		
 	}
-
-
 
 
 	/**
@@ -128,8 +128,19 @@ public class RegistroAssenze {
 		this.librettiAssenze = librettiAssenze;
 	}
 
+	private boolean esisteAppelloData(LocalDate dataDiRiferimento){
+		boolean rit = false;
 
-	public class MapAppelli extends HashMap<LocalDate, Appello> {
+		if(appelli.containsKey(dataDiRiferimento)){
+			rit = true;
+		}else{
+			rit = false;
+		}
+		return rit;
+	
+	}
+
+	public class MapAppelli extends TreeMap<LocalDate, Appello> {
 	}
 
 }
