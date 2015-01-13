@@ -7,7 +7,7 @@ import org.joda.time.LocalDate;
 
 public class DataOggi {
 
-	private static DataOggi instance;
+	private static DataOggi instance; 
 	private LocalDate dataOdierna;
 	private  TreeSet<LocalDate> giorniFestivi;
 	private LinkedList<Integer> giorniSettimanaliFestivi;
