@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="appelloApp" ng-controller="templateTitolo">
   <head>
   	<base href="/RegistroScolastico/site/classi/">
-    <title>Bootstrap 101 Template</title>
+    <title> {{testTitle}} </title>
 	
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
@@ -20,7 +20,7 @@
 
 
   </head>
-  <body ng-app="appelloApp" >
+  <body >
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12 page-header"><p>intestazione</p></div>
@@ -37,16 +37,17 @@
 					<div ng-view></div>
 
 					<nav>
-					<div class="col-md-6 col-md-offset-3">
-					  <ul class="pagination pagination-sm">
-						<li><a href="#"><span aria-hidden="true">&laquo;</span><span class="sr-only">Previous</span></a></li>
-						<li><a href="#">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">5</a></li>
-						<li><a href="#"><span aria-hidden="true">&raquo;</span><span class="sr-only">Next</span></a></li>
-					  </ul>
+					  <div class="col-md-6 col-md-offset-3">
+						  <ul class="pagination pagination-sm">
+							<li><a href="#"><span aria-hidden="true">&laquo;</span><span class="sr-only">Previous</span></a></li>
+							<li><a href="#">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">4</a></li>
+							<li><a href="#">5</a></li>
+							<li><a href="#"><span aria-hidden="true">&raquo;</span><span class="sr-only">Next</span></a></li>
+						  </ul>
+					  </div>
 					</nav>
 				</div>
 			</div>

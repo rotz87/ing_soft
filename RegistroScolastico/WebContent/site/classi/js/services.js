@@ -6,6 +6,7 @@ appelloServices.factory('Appello',['$resource',
 							{
 								'myQuery': {method:'GET', params:{idClasse:'@idClasse',idAppello:'@idAppello'}, isArray:true},
 								'myPost': {method:'POST', params:{idClasse:'@idClasse'}},
-								'myUpdate': {method:'PUT', params:{idClasse:'@idClasse', idAppello:'@idAppello'}}
+								'myUpdate': {method:'PUT', params:{idClasse:'@idClasse', idAppello:'@idAppello'}},
+								'myQuery2': {method:'GET', params:{idClasse:'@idClasse',idAppello:'@idAppello'}, isArray:false},
 							});
 				}]);
