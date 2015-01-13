@@ -189,6 +189,16 @@ public class TestFaiLAppelloController1 {
 		//Stampa dei libretti
 		stampaLibretti(regAssPrimaA);
 		
+//		System.out.println(" _________________________");
+//		LinkedList<LocalDate> listaDate = new LinkedList<LocalDate>();
+//		LocalDate data1 = new LocalDate(2015,01,12);
+//		LocalDate data2 = new LocalDate(2015,01,12);
+//		listaDate.add(data1);
+//		
+//		System.out.println("equals: " + data1.equals(data2));
+//		System.out.println("contain: " +listaDate.contains(data2));
+//		
+//		System.out.println(" _________________________");
 		
 		
 	}

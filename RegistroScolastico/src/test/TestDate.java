@@ -81,6 +81,16 @@ public class TestDate {
 			System.out.println("ultimaDataPlus: "+ ultimaDataPlus);
 			System.out.println("oggi: "+ oggi);
 			System.out.println("inseribile: "+ inseribile);
+			
+			
+//			System.out.println("_____________________________________");
+//			LinkedList<Integer> pippo = new LinkedList<Integer>();
+//			pippo.add(new Integer(1));
+//			pippo.add(new Integer(2));
+//			LocalDate localDate = new LocalDate(2015,01,12);
+//			System.out.println("day of week: " + localDate.getDayOfWeek());
+//			System.out.println("contain: " + pippo.contains(localDate.getDayOfWeek()));
+			
 	}
 
 }
