@@ -12,9 +12,7 @@ public class DataOggi {
 	private  TreeSet<LocalDate> giorniFestivi;
 	private LinkedList<Integer> giorniSettimanaliFestivi;
 	
-	/**
-	 * Per la prove lasciamo la date 17/12/2014 a regime bisogna fargli prendere la data odierna
-	 */
+	
 	private DataOggi(){
 		dataOdierna = this.calcolaDataOdierna();
 		giorniFestivi = new TreeSet<LocalDate>();
@@ -37,8 +35,11 @@ public class DataOggi {
 		return dataOdierna;	
 	}
 	
+	/**
+	 * Per la prove lasciamo la date 17/12/2014 a regime bisogna fargli prendere la data odierna
+	 */
 	private LocalDate calcolaDataOdierna(){
-		return new LocalDate(2014,12,17);
+		return new LocalDate(2014,12,17);//a regime deve prendere la data odierna affettiva per ora per i test prende la data de 17 12 2014
 	}
 	
 	public boolean isFestivo(LocalDate data){

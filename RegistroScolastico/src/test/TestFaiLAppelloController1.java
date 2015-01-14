@@ -97,12 +97,13 @@ public class TestFaiLAppelloController1 {
 		regAssPrimaA.assengaLibretti(librettiDaAssegnare);
 		
 		//Creazione di un vettore di studenti per cui segnare l'assenza
-		Long[] listaIdStudAssenti = {maccioCapatonda.getId(), pieroPeluria.getId(),ivoAvido.getId()};
+		Long[] listaIdStudAssenti = {maccioCapatonda.getId(), pieroPeluria.getId(),ivoAvido.getId(), marinoPeluria.getId()};
 		
 		//recupero dell'appello odierno dal registro
 		Appello appelloOdierno = regAssPrimaA.getAppelloOdierno();
 		
 		// creazione delle date
+		LocalDate data8_12_14 = new LocalDate(2014,12,8);
 		LocalDate data10_12_14 = new LocalDate(2014,12,10);
 		LocalDate data11_12_14 = new LocalDate(2014,12,11);
 		LocalDate data12_12_14 = new LocalDate(2014,12,12);
@@ -119,8 +120,11 @@ public class TestFaiLAppelloController1 {
 		LinkedList<Appello> AppelliAssenzeMarino = new LinkedList<Appello>();
 		LinkedList<Appello> AppelliAssenzeHerbert = new LinkedList<Appello>();
 		LinkedList<Appello> AppelliAssenzeTestFineMese = new LinkedList<Appello>();
+		LinkedList<Appello> AppelliAssenzeIvo2 = new LinkedList<Appello>();
+		LinkedList<Appello> AppelliAssenzeIvo3 = new LinkedList<Appello>();
 		
 		//creazione di appelli
+		Appello appello8_12_14 = new Appello(data8_12_14);
 		Appello appello10_12_14 = new Appello(data10_12_14);
 		Appello appello11_12_14 = new Appello(data11_12_14);
 		Appello appello12_12_14 = new Appello(data12_12_14);
@@ -139,6 +143,10 @@ public class TestFaiLAppelloController1 {
 		AppelliAssenzePiero.add(appello12_12_14);
 //				AppelliAssenzePiero.add(appello16_12_14);
 		
+		AppelliAssenzeIvo2.add(appello10_12_14);
+		
+		AppelliAssenzeIvo3.add(appello8_12_14);
+		
 		AppelliAssenzeIvo.add(appello13_12_14);
 		AppelliAssenzeIvo.add(appello14_12_14);
 		AppelliAssenzeIvo.add(appello15_12_14);
@@ -153,6 +161,8 @@ public class TestFaiLAppelloController1 {
 		Assenza assM1 = new Assenza(AppelliAssenzeMaccio);
 		Assenza assP1 = new Assenza(AppelliAssenzePiero);
 		Assenza assI1 = new Assenza(AppelliAssenzeIvo);
+		Assenza assI2 = new Assenza(AppelliAssenzeIvo2);
+		Assenza assI3 = new Assenza(AppelliAssenzeIvo3);
 		Assenza assH1 = new Assenza(AppelliAssenzeHerbert);
 		Assenza assMa1 = new Assenza(AppelliAssenzeMarino);
 		
@@ -162,6 +172,8 @@ public class TestFaiLAppelloController1 {
 		LinkedList<Assenza> listaAssenzePiero = new  LinkedList<Assenza>();
 		listaAssenzePiero.add(assP1);
 		LinkedList<Assenza> listaAssenzeIvo = new  LinkedList<Assenza>();
+		listaAssenzeIvo.add(assI3);
+		listaAssenzeIvo.add(assI2);
 		listaAssenzeIvo.add(assI1);
 		LinkedList<Assenza> listaAssenzeHerbert = new  LinkedList<Assenza>();
 		listaAssenzeHerbert.add(assH1);
@@ -174,7 +186,7 @@ public class TestFaiLAppelloController1 {
 		librettoPiero.assengnaAssenzeNonGiustificate(listaAssenzePiero);
 //		librettoPiero.assengnaAssenzeNonGiustificate(listaAssenzeTsetFineMese);
 		librettoIvo.assengnaAssenzeNonGiustificate(listaAssenzeIvo);
-		librettoMarino.assengnaAssenzeNonGiustificate(listaAssenzeMarino);
+//		librettoMarino.assengnaAssenzeNonGiustificate(listaAssenzeMarino);
 		librettoHerbert.assengnaAssenzeNonGiustificate(listaAssenzeHerbert);
 		
 		//TEST DEL METODO
@@ -205,23 +217,28 @@ public class TestFaiLAppelloController1 {
 	
 	private static void stampaLibretti(RegistroAssenze regAss){
 		System.out.println();
-		System.out.println("VISUALIZZAZIONE ASSENZE STUDENTI _________________________");
+		System.out.println("VISUALIZZAZIONE ASSENZE NON GIUSTIFICATE DEGLI STUDENTI _________________________ \n \n");
 		Iterator entries = regAss.getLibrettiAssenze().entrySet().iterator();
 		while (entries.hasNext()) {
 		  Entry thisEntry = (Entry) entries.next();
 		  Studente Stud = (Studente)thisEntry.getKey();
 		  LibrettoAssenze libAss = (LibrettoAssenze)thisEntry.getValue();
 		  System.out.println("STUDENTE : "+libAss.getStudente().getNome() +" "+libAss.getStudente().getCognome());
-		  System.out.println("ASSENZE NON GIUSTIFICATE :");
-		  for (Assenza assNG : libAss.getNonGiustificate()) {
-			  System.out.println("---------Inizio Assenza--------");
-			  for (Appello app : assNG.getAppelli()){
-				  System.out.println("data dell'appello dell'assenza : "+app.getDataL().toString());
-			  }
-			  System.out.println("-------Fine Assenza--------");
-				
-			}
-		  System.out.println("-----------------");
+		  System.out.println("ASSENZE NON GIUSTIFICATE : \n");
+		  if (/*libAss.getNonGiustificate() != null && */ (!(libAss.getNonGiustificate().isEmpty()))){
+			  for (Assenza assNG : libAss.getNonGiustificate()) {
+				  System.out.println("---------Inizio Assenza-------- ");
+				  for (Appello app : assNG.getAppelli()){
+					  System.out.println("data dell'appello dell'assenza : "+app.getDataL().toString());
+				  }
+				  if(assNG.isCertificatoMedicoRichiesto()){
+					  System.out.println(" \n E' richiesto il certificato medico !! \n");  
+				  }
+				  System.out.println("-------Fine Assenza--------\n");
+					
+				}
+			  System.out.println("-------fine studente---------- \n \n");
+			}else{ System.out.println("\n non ci sono assenze non giustificate \n");}
 		}
 		System.out.println("________________________________________FINE");
 		System.out.println();

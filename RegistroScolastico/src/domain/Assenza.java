@@ -52,17 +52,21 @@ public class Assenza {
 	 */
 	public boolean isInseribile(Appello appello) {
 		boolean inseribile = false;
-		
+//		System.out.println("\n >>>>>>>>>> passo per isInseribile ");
 		LocalDate ultimaDataPlus = appelli.getLast().getDataL().plusDays(1);
-		LocalDate oggi = DataOggi.getInstance().getDataOdierna();
+		LocalDate oggi = DataOggi.getInstance().getDataOdierna();//per le prove, a regime usare la riga di sotto
 //		LocalDate oggi = appello.getDataL();
+//		System.out.println("appelli.getLast().getDataL(): "+appelli.getLast().getDataL());
+//		System.out.println("ultimaDataPlus: "+ultimaDataPlus);
+//		System.out.println("oggi: "+oggi);
 		
 		if(ultimaDataPlus.isEqual(oggi)){
 			inseribile = true;
 		}else{
 			inseribile = false;
 		}
-		
+//		System.out.println("inseribile: "+inseribile);
+//		System.out.println(" >>>>>>>>>> esco da isInseribile \n");
 		return inseribile;
 	}
 
@@ -72,6 +76,17 @@ public class Assenza {
 
 	public void setAppelli(LinkedList<Appello> appelli) {
 		this.appelli = appelli;
+	}
+	
+	public boolean isCertificatoMedicoRichiesto(){
+		boolean rit = false;
+		
+		if((appelli.getLast().getDataL().getDayOfYear() - appelli.getFirst().getDataL().getDayOfYear())+1 >= 5){
+			rit = true;
+		}
+		int x = (appelli.getLast().getDataL().getDayOfYear() - appelli.getFirst().getDataL().getDayOfYear())+1;
+		System.out.println("\n differenza tra i giorni:"+ x +"\n ");
+		return rit;
 	}
 
 	

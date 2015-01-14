@@ -10,6 +10,17 @@ public class LibrettoAssenze {
 	private Collection<Ritardo> ritardi;
 	private Collection<UscitaAnticipata> uscite;
 
+	public LibrettoAssenze(){
+		this.nonGiustificate = new LinkedList<Assenza>();
+		this.giustificate = new LinkedList<Assenza>();
+	}
+	
+	public LibrettoAssenze(Studente stud){
+		this();
+		this.studente = stud;
+		
+	}
+	
 	public Studente getStudente() {
 		return studente;
 	}
@@ -18,11 +29,6 @@ public class LibrettoAssenze {
 		this.studente = studente;
 	}
 
-	public LibrettoAssenze(Studente stud){
-		this.studente = stud;
-		
-	}
-	
 	/**
 	 * 
 	 * @param appello
@@ -30,10 +36,17 @@ public class LibrettoAssenze {
 	public void segnaAssenza(Appello appello) {
 		
 //		System.out.println("sono in librettoAssenze.segnaAssenza di " + studente.getNome());
+		boolean inseribile = false;
+		Assenza ultimaAssenzaNonGiustificata = null;
 		
-		Assenza ultimaAssenzaNonGiustificata = this.getUltimaAssenzaNonGiustificata();
-		boolean inseribile = ultimaAssenzaNonGiustificata.isInseribile(appello);
+		if(!(nonGiustificate.isEmpty())){
+			ultimaAssenzaNonGiustificata = this.getUltimaAssenzaNonGiustificata();
+//			System.out.println("\n libretto di:  "+ this.getStudente().getNome() +" "+ this.getStudente().getCognome());
+//			System.out.println("ultimo appello dell'ultima assenza non giustificata "+ this.getUltimaAssenzaNonGiustificata().getUltimoAppelloAssenza().getDataL()+"\n");
+			inseribile = ultimaAssenzaNonGiustificata.isInseribile(appello);	
+		}
 		
+
 		// dall'alt del SD
 		if (inseribile){
 			
@@ -51,8 +64,9 @@ public class LibrettoAssenze {
 
 	private Assenza getUltimaAssenzaNonGiustificata() {
 		//probabilmente è da cambiare
-//		System.out.println("passo per getUltimaAssenzaNonGiustificata!!");
-		return nonGiustificate.get(0);
+//		System.out.println("nonGiustificate.get(0): "+nonGiustificate.get(nonGiustificate.size()-1).getUltimoAppelloAssenza().getDataL());
+
+		return nonGiustificate.get(nonGiustificate.size()-1);
 	}
 	
 	public void assengnaAssenzeNonGiustificate(List<Assenza> nonGistificate){
