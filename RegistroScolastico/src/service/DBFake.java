@@ -96,7 +96,7 @@ public class DBFake {
 		marioRossi.setClassi(classiDiRossi);
 		
 		Collection<Classe> classiDiBianchi = new LinkedList<Classe>();
-		classiDiBianchi.add(primaA);
+//		classiDiBianchi.add(primaA);
 		mirkoBianchi.setClassi(classiDiBianchi);
 		
 		

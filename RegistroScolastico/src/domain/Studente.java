@@ -13,13 +13,14 @@ public class Studente {
 		this.id = Studente.generaId();
 		this.nome = nome;
 		this.cognome = cognome;
+//		System.out.println("<><><><> costruisco lo studente: " + this.nome +", "+this.cognome+ " con id: "+this.id);
 	}
 	
 	
 	
 	public Studente(long id, String nome, String cognome, Indirizzo indrizzo, String codiceFiscale) {
 		this.id = Studente.generaId();
-		setId(id);
+//		setId(id);
 		setNome(nome);
 		setCognome(cognome);
 		setIndrizzo(indrizzo);
