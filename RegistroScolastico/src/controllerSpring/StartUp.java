@@ -12,6 +12,9 @@ import org.springframework.stereotype.Component;
  * @author marco
  *
  */
+
+
+
 @Singleton 
 @Component
 public class StartUp {

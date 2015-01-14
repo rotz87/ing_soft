@@ -55,7 +55,7 @@ public class DBFake {
 		this.tuttiGliStudenti = studenti;
 	}
 	
-	public Classe getCalsseById(Long idClasse){
+	public Classe getClasseById(Long idClasse){
 		return classi.get(idClasse);
 	}
 	
@@ -67,6 +67,7 @@ public class DBFake {
 	}
 	
 	private void initDB(){
+		
 		//creazione delle classi
 		Classe primaA = new Classe("1A");
 		Classe secondaA = new Classe("2A");
@@ -75,7 +76,7 @@ public class DBFake {
 		mapClassi.put(primaA.getIdClasse(), primaA);
 		mapClassi.put(secondaA.getIdClasse(), secondaA);
 		
-		DBFake.getInstance().setClassi(mapClassi);
+		setClassi(mapClassi);
 		
 		//Crrazione dei docenti
 		Docente marioRossi = new Docente("Mario", "Rossi");
@@ -85,7 +86,7 @@ public class DBFake {
 		mapDocenti.put(marioRossi.getIdDocente(), marioRossi);
 		mapDocenti.put(mirkoBianchi.getIdDocente(), mirkoBianchi);
 		
-		DBFake.getInstance().setDocenti(mapDocenti);
+		setDocenti(mapDocenti);
 		
 		//assegnazione delle classi ai docenti
 		
@@ -113,7 +114,7 @@ public class DBFake {
 		mapStudenti.put(herbertBallerina.getId(), herbertBallerina);
 		mapStudenti.put(ivoAvido.getId(), ivoAvido);
 		
-		DBFake.getInstance().setStudenti(mapStudenti);
+		setStudenti(mapStudenti);
 		
 		//assegnazione degli studenti alle classi
 		Set<Studente> listaStudentiPrimaA = new HashSet<Studente>(mapStudenti.values());
@@ -179,6 +180,17 @@ public class DBFake {
 		Appello appello14_12_14 = new Appello(data14_12_14);
 		Appello appello15_12_14 = new Appello(data15_12_14);
 		Appello appello16_12_14 = new Appello(data16_12_14);
+		
+		
+		regAssPrimaA.getAppelli().put(appello8_12_14.getDataL(), appello8_12_14);
+		regAssPrimaA.getAppelli().put(appello10_12_14.getDataL(), appello10_12_14);
+		regAssPrimaA.getAppelli().put(appello11_12_14.getDataL(), appello11_12_14);
+		regAssPrimaA.getAppelli().put(appello12_12_14.getDataL(), appello12_12_14);
+		regAssPrimaA.getAppelli().put(appello13_12_14.getDataL(), appello13_12_14);
+		regAssPrimaA.getAppelli().put(appello14_12_14.getDataL(), appello14_12_14);
+		regAssPrimaA.getAppelli().put(appello15_12_14.getDataL(), appello15_12_14);
+		regAssPrimaA.getAppelli().put(appello16_12_14.getDataL(), appello16_12_14);
+
 		
 		//assegnazione di appelli alle liste di appelli
 		AppelliAssenzeMaccio.add(appello10_12_14);

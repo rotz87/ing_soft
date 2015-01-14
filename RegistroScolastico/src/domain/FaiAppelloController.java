@@ -13,7 +13,7 @@ public class FaiAppelloController {
 	
 	
 	public void avviaAppello(Long idClasse, Long idDocente) {
-		Classe classeCorrente = DBFake.getInstance().getCalsseById(idClasse);
+		Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
 		Docente docenteCorrente = DBFake.getInstance().getDocenteById(idDocente);
 		
 //		System.out.println("docente corrente: " + docenteCorrente.getCognome());
@@ -30,7 +30,7 @@ public class FaiAppelloController {
 	}
 	
 	public void registraAssenze(Long[] idStudenti, Long idClasse, Long idDocente) {
-		Classe classeCorrente = DBFake.getInstance().getCalsseById(idClasse);
+		Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
 		Docente docenteCorrente = DBFake.getInstance().getDocenteById(idDocente);
 		
 		if(docenteCorrente.isInsegnante(classeCorrente)){
@@ -51,19 +51,19 @@ public class FaiAppelloController {
 	
 	public Appello getAppelloOdierno(Long idClasse){
 		
-		return DBFake.getInstance().getCalsseById(idClasse).getRegistroAssenze().getAppelloOdierno();
+		return DBFake.getInstance().getClasseById(idClasse).getRegistroAssenze().getAppelloOdierno();
 		
 	}
 	
 	public Appello getAppello(Long idClasse, LocalDate data){
 		
-		return DBFake.getInstance().getCalsseById(idClasse).getRegistroAssenze().getAppelloByData(data);
+		return DBFake.getInstance().getClasseById(idClasse).getRegistroAssenze().getAppelloByData(data);
 		
 	}
 	
 	public Appello getAppello(Long idClasse, long idAppello){
 		
-		return DBFake.getInstance().getCalsseById(idClasse).getRegistroAssenze().getAppelloById(idAppello);
+		return DBFake.getInstance().getClasseById(idClasse).getRegistroAssenze().getAppelloById(idAppello);
 		
 	}
 

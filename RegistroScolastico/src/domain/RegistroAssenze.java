@@ -112,11 +112,6 @@ public class RegistroAssenze {
 	public MapAppelli getAppelli() {
 		return appelli;
 	}
-
-	public void setAppelli(MapAppelli appelli) {
-		this.appelli = appelli;
-	}
-	
 	
 	public Map<Studente, LibrettoAssenze> getLibrettiAssenze() {
 		return librettiAssenze;

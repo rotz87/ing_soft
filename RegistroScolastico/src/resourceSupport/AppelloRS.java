@@ -25,7 +25,7 @@ public class AppelloRS extends ResourceSupport{
 	
 	public AppelloRS(Appello appello, long idClasse) {
 		this.idAppello = appello.getIdAppello();
-		this.data = null;
+		this.data = appello.getDataL().toDate();
 		this.studenti = new MapStudenti();
 		
 		this.add(ControllerLinkBuilder.linkTo(AppelloController.class, idClasse).withRel("appelli"));
