@@ -2,7 +2,6 @@ package controllerSpring;
 
 
 import domain.FaiAppelloController;
-import domain.RegistroAssenzeController;
 import resourceSupport.AppelloRS;
 import service.*;
 
@@ -37,30 +36,31 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/classi/{idClasse}/appelli")
 public class AppelloController {
 	
+	  private long idDocenteProva = 1;
+	
 	  @RequestMapping(method = RequestMethod.POST)
 	  ResponseEntity<?> creaAppello(@PathVariable long idClasse) {
 		  HttpHeaders httpHeaders;
 
-		  FaiAppelloController fpController;
+		  FaiAppelloController fAController;
 	  	
-		  Link forOneAppello;
+		  Link linkAppello;
 		  httpHeaders = new HttpHeaders();
+		  HttpStatus httpStatus = HttpStatus.CREATED;
 		  
-		  fpController = FactoryHandler.getInstance().getRegistroAssenzeFactory().createRegistroAssenze(null);
+		  fAController = new FaiAppelloController();
 		  
 		  try{
-			  fpController.avviaAppello();
-			}catch(IllegalStateException ISE){
-				System.out.println(ISE.getMessage() );
-			}
-		  
-		  
-		  System.out.println("Appello odierno: "+fpController.getAppelloOdierno().getIdAppello() + " | " + fpController.getAppelloOdierno().getDataL());
+				  fAController.avviaAppello(idClasse, this.idDocenteProva);
+				  System.out.println("Appello odierno: "+fAController.getAppelloOdierno(idClasse).getIdAppello() + " | " + fAController.getAppelloOdierno(idClasse).getDataL());
+			
+				  linkAppello = new AppelloRS(fAController.getAppelloOdierno(idClasse), idClasse).getLink("self");
+				  httpHeaders.setLocation(URI.create(linkAppello.getHref()));
+		  }catch(IllegalStateException ISE){
+				  httpStatus = HttpStatus.FORBIDDEN;
+		  }
 
-		  forOneAppello = new AppelloRS(fpController.getAppelloOdierno(), idClasse).getLink("self");
-		  httpHeaders.setLocation(URI.create(forOneAppello.getHref()));
-
-		  return new ResponseEntity<>(null, httpHeaders, HttpStatus.CREATED);
+		  return new ResponseEntity<>(null, httpHeaders, httpStatus);
 
 	  }
 		
@@ -71,11 +71,11 @@ public class AppelloController {
 			System.out.println("idAppello="+Long.toString(idAppello));
 			System.out.println("idClasse="+Long.toString(idClasse));
 			
-			FaiAppelloController fpController;
+			FaiAppelloController fAController;
 			
-			fpController = FactoryHandler.getInstance().getRegistroAssenzeFactory().createRegistroAssenze(null);
+			fAController = new FaiAppelloController();
 			
-			return new AppelloRS(fpController.getAppello(idAppello), idClasse);
+			return new AppelloRS(fAController.getAppello(idClasse, idAppello), idClasse);
 		}
 	
 //    @RequestMapping(method = RequestMethod.POST)

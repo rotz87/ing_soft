@@ -1,5 +1,7 @@
 package domain;
 
+import org.joda.time.LocalDate;
+
 import service.DBFake;
 
 public class FaiAppelloController {
@@ -44,6 +46,24 @@ public class FaiAppelloController {
 		}else{
 			throw new IllegalStateException("ATTENZIONE IL DOCENTE NON E' ABILITATO A METTERE LE ASSENZE PER QUESTA CLASSE");
 		}
+		
+	}
+	
+	public Appello getAppelloOdierno(Long idClasse){
+		
+		return DBFake.getInstance().getCalsseById(idClasse).getRegistroAssenze().getAppelloOdierno();
+		
+	}
+	
+	public Appello getAppello(Long idClasse, LocalDate data){
+		
+		return DBFake.getInstance().getCalsseById(idClasse).getRegistroAssenze().getAppelloByData(data);
+		
+	}
+	
+	public Appello getAppello(Long idClasse, long idAppello){
+		
+		return DBFake.getInstance().getCalsseById(idClasse).getRegistroAssenze().getAppelloById(idAppello);
 		
 	}
 

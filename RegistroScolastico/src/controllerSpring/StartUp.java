@@ -1,9 +1,10 @@
 package controllerSpring;
 
-import test.InitRegistraAssenzeServer;
+import service.DBFake;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,7 +19,7 @@ public class StartUp {
 	@PostConstruct
     public void start() {
 		
-		InitRegistraAssenzeServer.main(null);
+		DBFake.getInstance();
 		
     }
 
