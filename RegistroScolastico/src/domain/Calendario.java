@@ -5,23 +5,23 @@ import java.util.TreeSet;
 
 import org.joda.time.LocalDate;
 
-public class DataOggi {
+public class Calendario {
 
-	private static DataOggi instance; 
+	private static Calendario instance; 
 	private LocalDate dataOdierna;
 	private  TreeSet<LocalDate> giorniFestivi;
 	private LinkedList<Integer> giorniSettimanaliFestivi;
 	
 	
-	private DataOggi(){
+	private Calendario(){
 		dataOdierna = this.calcolaDataOdierna();
 		giorniFestivi = new TreeSet<LocalDate>();
 
 	}
 	
-	public static synchronized DataOggi getInstance(){
+	public static synchronized Calendario getInstance(){
 		if (instance == null){
-			instance = new DataOggi();
+			instance = new Calendario();
 		}
 		return instance;
 	}

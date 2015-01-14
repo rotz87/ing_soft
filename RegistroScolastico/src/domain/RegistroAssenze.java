@@ -1,10 +1,8 @@
 package domain;
 
 import java.util.*;
-
 import org.joda.time.*;
 
-import domain.RegistroAssenzeController.MapAppelli;
 
 public class RegistroAssenze {
 
@@ -29,7 +27,7 @@ public class RegistroAssenze {
 //			LibrettoAssenze mioLibretto = librettiAssenze.get(idStudente);
 //			System.out.println(librettiAssenze.get(idStudente));
 			
-			LocalDate dataDiRiferimento = DataOggi.getInstance().getDataOdierna();
+			LocalDate dataDiRiferimento = Calendario.getInstance().getDataOdierna();
 			
 			if(this.esisteAppelloData(dataDiRiferimento)){
 			
@@ -45,7 +43,7 @@ public class RegistroAssenze {
 	public Appello getAppelloOdierno() {
 		
 		Appello appelloOdierno = null;
-		LocalDate dataDiRiferimento = DataOggi.getInstance().getDataOdierna();
+		LocalDate dataDiRiferimento = Calendario.getInstance().getDataOdierna();
 		if(this.esisteAppelloData(dataDiRiferimento)){
 			appelloOdierno = appelli.get(dataDiRiferimento);
 		}else{
@@ -81,7 +79,7 @@ public class RegistroAssenze {
 
 
 	public void avviaAppello() {
-		LocalDate dataRif = DataOggi.getInstance().getDataOdierna();
+		LocalDate dataRif = Calendario.getInstance().getDataOdierna();
 		if(!(this.esisteAppelloData(dataRif))){
 			appelli.put(dataRif, new Appello(dataRif));
 		}else{

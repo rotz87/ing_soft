@@ -12,7 +12,6 @@ public class Classe {
 	private String nome;
 	private long idClasse;
 	private static long contaId = 0;
-	private RegistroAssenzeController registroAssenzeController;
 	private RegistroAssenze registroAssenze;
 	private Collection<Studente> studenti;
 	

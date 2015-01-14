@@ -1,6 +1,7 @@
 package controllerSpring;
 
 
+import domain.FaiAppelloController;
 import domain.RegistroAssenzeController;
 import resourceSupport.AppelloRS;
 import service.*;
@@ -39,23 +40,24 @@ public class AppelloController {
 	  @RequestMapping(method = RequestMethod.POST)
 	  ResponseEntity<?> creaAppello(@PathVariable long idClasse) {
 		  HttpHeaders httpHeaders;
-		  RegistroAssenzeController registro;
+
+		  FaiAppelloController fpController;
 	  	
 		  Link forOneAppello;
 		  httpHeaders = new HttpHeaders();
 		  
-		  registro = FactoryHandler.getInstance().getRegistroAssenzeFactory().createRegistroAssenze(null);
+		  fpController = FactoryHandler.getInstance().getRegistroAssenzeFactory().createRegistroAssenze(null);
 		  
 		  try{
-			  registro.avviaAppello();
+			  fpController.avviaAppello();
 			}catch(IllegalStateException ISE){
 				System.out.println(ISE.getMessage() );
 			}
 		  
 		  
-		  System.out.println("Appello odierno: "+registro.getAppelloOdierno().getIdAppello() + " | " + registro.getAppelloOdierno().getDataL());
+		  System.out.println("Appello odierno: "+fpController.getAppelloOdierno().getIdAppello() + " | " + fpController.getAppelloOdierno().getDataL());
 
-		  forOneAppello = new AppelloRS(registro.getAppelloOdierno(), idClasse).getLink("self");
+		  forOneAppello = new AppelloRS(fpController.getAppelloOdierno(), idClasse).getLink("self");
 		  httpHeaders.setLocation(URI.create(forOneAppello.getHref()));
 
 		  return new ResponseEntity<>(null, httpHeaders, HttpStatus.CREATED);
@@ -69,11 +71,11 @@ public class AppelloController {
 			System.out.println("idAppello="+Long.toString(idAppello));
 			System.out.println("idClasse="+Long.toString(idClasse));
 			
-			RegistroAssenzeController regAssCtrl;
+			FaiAppelloController fpController;
 			
-			regAssCtrl = FactoryHandler.getInstance().getRegistroAssenzeFactory().createRegistroAssenze(null);
+			fpController = FactoryHandler.getInstance().getRegistroAssenzeFactory().createRegistroAssenze(null);
 			
-			return new AppelloRS(regAssCtrl.getAppello(idAppello), idClasse);
+			return new AppelloRS(fpController.getAppello(idAppello), idClasse);
 		}
 	
 //    @RequestMapping(method = RequestMethod.POST)

@@ -23,7 +23,7 @@ public class Appello {
 	 */
 	public Appello(){
 
-		dataL = DataOggi.getInstance().getDataOdierna();
+		dataL = Calendario.getInstance().getDataOdierna();
 		
 	}
 	

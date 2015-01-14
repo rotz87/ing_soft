@@ -54,7 +54,7 @@ public class Assenza {
 		boolean inseribile = false;
 //		System.out.println("\n >>>>>>>>>> passo per isInseribile ");
 		LocalDate ultimaDataPlus = appelli.getLast().getDataL().plusDays(1);
-		LocalDate oggi = DataOggi.getInstance().getDataOdierna();//per le prove, a regime usare la riga di sotto
+		LocalDate oggi = Calendario.getInstance().getDataOdierna();//per le prove, a regime usare la riga di sotto
 //		LocalDate oggi = appello.getDataL();
 //		System.out.println("appelli.getLast().getDataL(): "+appelli.getLast().getDataL());
 //		System.out.println("ultimaDataPlus: "+ultimaDataPlus);
