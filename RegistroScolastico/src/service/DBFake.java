@@ -27,6 +27,7 @@ public class DBFake {
 		  classi = new TreeMap<Long, Classe>();
 		  docenti = new TreeMap<Long, Docente>();
 		  tuttiGliStudenti = new TreeMap<Long, Studente>();
+		  tuttiGliAppelli = new TreeMap<Long, Appello>();
 		  
 		  initDB();
 	}
@@ -186,6 +187,16 @@ public class DBFake {
 		Appello appello14_12_14 = new Appello(data14_12_14);
 		Appello appello15_12_14 = new Appello(data15_12_14);
 		Appello appello16_12_14 = new Appello(data16_12_14);
+		
+		tuttiGliAppelli.put(appello8_12_14.getIdAppello(), appello8_12_14);
+		tuttiGliAppelli.put(appello10_12_14.getIdAppello(), appello10_12_14);
+		tuttiGliAppelli.put(appello11_12_14.getIdAppello(), appello11_12_14);
+		tuttiGliAppelli.put(appello12_12_14.getIdAppello(), appello12_12_14);
+		tuttiGliAppelli.put(appello13_12_14.getIdAppello(), appello13_12_14);
+		tuttiGliAppelli.put(appello14_12_14.getIdAppello(), appello14_12_14);
+		tuttiGliAppelli.put(appello15_12_14.getIdAppello(), appello15_12_14);
+		tuttiGliAppelli.put(appello16_12_14.getIdAppello(), appello16_12_14);
+		
 		
 		
 		regAssPrimaA.getAppelli().put(appello8_12_14.getDataL(), appello8_12_14);
