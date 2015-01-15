@@ -203,14 +203,14 @@ public class DBFake {
 		
 		
 		
-		regAssPrimaA.getAppelli().put(appello8_12_14.getDataL(), appello8_12_14);
-		regAssPrimaA.getAppelli().put(appello10_12_14.getDataL(), appello10_12_14);
-		regAssPrimaA.getAppelli().put(appello11_12_14.getDataL(), appello11_12_14);
-		regAssPrimaA.getAppelli().put(appello12_12_14.getDataL(), appello12_12_14);
-		regAssPrimaA.getAppelli().put(appello13_12_14.getDataL(), appello13_12_14);
-		regAssPrimaA.getAppelli().put(appello14_12_14.getDataL(), appello14_12_14);
-		regAssPrimaA.getAppelli().put(appello15_12_14.getDataL(), appello15_12_14);
-		regAssPrimaA.getAppelli().put(appello16_12_14.getDataL(), appello16_12_14);
+		regAssPrimaA.getAppelli().put(appello8_12_14.getData(), appello8_12_14);
+		regAssPrimaA.getAppelli().put(appello10_12_14.getData(), appello10_12_14);
+		regAssPrimaA.getAppelli().put(appello11_12_14.getData(), appello11_12_14);
+		regAssPrimaA.getAppelli().put(appello12_12_14.getData(), appello12_12_14);
+		regAssPrimaA.getAppelli().put(appello13_12_14.getData(), appello13_12_14);
+		regAssPrimaA.getAppelli().put(appello14_12_14.getData(), appello14_12_14);
+		regAssPrimaA.getAppelli().put(appello15_12_14.getData(), appello15_12_14);
+		regAssPrimaA.getAppelli().put(appello16_12_14.getData(), appello16_12_14);
 
 		
 		//assegnazione di appelli alle liste di appelli

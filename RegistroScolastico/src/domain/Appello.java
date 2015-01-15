@@ -15,17 +15,7 @@ public class Appello {
 	 */
 	private static long contaId = 0;
 	
-	private LocalDate dataL;
-	private Date data;
-
-	/**
-	 * Costruttore dell'appello senza parametri, imposta la data odierna.
-	 */
-	public Appello(){
-
-		dataL = Calendario.getInstance().getDataOdierna();
-		
-	}
+	private LocalDate data;
 	
 	/**
 	 * Costruttore dell'appello che prende come parametro la data.
@@ -34,15 +24,15 @@ public class Appello {
 	
 	public Appello(LocalDate data) {
 
-		dataL = new LocalDate(data);
+		this.data = new LocalDate(data);
 		this.idAppello = Appello.generaId();
 		
 	}
 
 	
-	public LocalDate getDataL() {
+	public LocalDate getData() {
 		
-		return this.dataL;
+		return this.data;
 	
 	}
 
