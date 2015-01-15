@@ -62,9 +62,15 @@ public class FaiAppelloController {
 	}
 	
 	public Appello getAppello(Long idClasse, long idAppello){
+		Appello appelloCorrente = DBFake.getInstance().getAppelloById(idAppello);
+		Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
 		
-		return DBFake.getInstance().getClasseById(idClasse).getRegistroAssenze().getAppelloById(idAppello);
+		if ( classeCorrente.getRegistroAssenze().esisteAppello(appelloCorrente)){
 		
+			return DBFake.getInstance().getAppelloById(idAppello);
+		}else{
+			throw new IllegalStateException("L'appello selezionato non appartiene alla classe selezionata");
+		}
 	}
 
 }

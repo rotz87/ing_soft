@@ -51,32 +51,6 @@ public class RegistroAssenze {
 		}
 		return appelloOdierno;
 	}
-	
-
-//	public void setAppelloOdierno(Appello appelloOdierno) {
-//		this.appelloOdierno = appelloOdierno;
-//	}
-	
-	/**Serve questo metodo????
-	 * 
-	 * @param id
-	 */
-	public Appello getAppelloById(long id) {
-		Appello appello = null;
-		boolean trovato = false;
-		Iterator<Appello> i = this.appelli.values().iterator();
-		
-		while(!trovato && i.hasNext()){
-			appello = i.next();
-			if(appello.getIdAppello() == id){
-				trovato = true;
-			}
-		}
-	
-		return appello;
-	}
-
-
 
 	public void avviaAppello() {
 		LocalDate dataRif = Calendario.getInstance().getDataOdierna();
@@ -121,10 +95,22 @@ public class RegistroAssenze {
 		this.librettiAssenze = librettiAssenze;
 	}
 
-	private boolean esisteAppelloData(LocalDate dataDiRiferimento){
+	public boolean esisteAppelloData(LocalDate dataDiRiferimento){
 		boolean rit = false;
 
 		if(appelli.containsKey(dataDiRiferimento)){
+			rit = true;
+		}else{
+			rit = false;
+		}
+		return rit;
+	
+	}
+	
+	public boolean esisteAppello(Appello appello){
+		boolean rit = false;
+
+		if(appelli.containsValue(appello)){
 			rit = true;
 		}else{
 			rit = false;

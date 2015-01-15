@@ -21,6 +21,7 @@ public class DBFake {
 	private Map<Long, Classe> classi;
 	private Map<Long, Docente> docenti;
 	private Map<Long, Studente> tuttiGliStudenti;
+	private Map<Long, Appello> tuttiGliAppelli;
 	  // Private constructor prevents instantiation from other classes
 	private DBFake() {
 		  classi = new TreeMap<Long, Classe>();
@@ -65,6 +66,11 @@ public class DBFake {
 	public Studente getStudenteById(Long idStudente){
 		return tuttiGliStudenti.get(idStudente);
 	}
+	
+	public Appello getAppelloById(Long idAppello){
+		return tuttiGliAppelli.get(idAppello);
+	}
+	
 	
 	private void initDB(){
 		
