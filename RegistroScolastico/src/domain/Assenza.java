@@ -88,6 +88,10 @@ public class Assenza {
 		System.out.println("\n differenza tra i giorni:"+ x +"\n ");
 		return rit;
 	}
+	
+	public boolean esisteAppello(Appello appello){
+		return appelli.contains(appello);
+	}
 
 	
 }

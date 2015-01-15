@@ -1,13 +1,11 @@
 package domain;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import org.joda.time.LocalDate;
 
 public class Appello {
 
 	private long idAppello;
+	private boolean assenzePrese;
 
 	/**
 	 * @deprecated
@@ -25,6 +23,7 @@ public class Appello {
 	public Appello(LocalDate data) {
 
 		this.data = new LocalDate(data);
+		this.assenzePrese = false;
 		this.idAppello = Appello.generaId();
 		
 	}
@@ -55,5 +54,17 @@ public class Appello {
 		return contaId;
 		
 	}
+
+
+	public boolean isAssenzePrese() {
+		return assenzePrese;
+	}
+
+
+	public void setAssenzePrese(boolean assenzePrese) {
+		this.assenzePrese = assenzePrese;
+	}
+	
+	
 
 }

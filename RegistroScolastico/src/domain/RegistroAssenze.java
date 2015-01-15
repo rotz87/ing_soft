@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.*;
+
 import org.joda.time.*;
 
 
@@ -22,21 +23,16 @@ public class RegistroAssenze {
 	 * @param idStudenti
 	 */
 	public void registraAssenze(Studente[] Studenti) {
-		for (Studente studente : Studenti){
-
-//			LibrettoAssenze mioLibretto = librettiAssenze.get(idStudente);
-//			System.out.println(librettiAssenze.get(idStudente));
-			
-			LocalDate dataDiRiferimento = Calendario.getInstance().getDataOdierna();
-			
-			if(this.esisteAppelloData(dataDiRiferimento)){
-			
-				librettiAssenze.get(studente).segnaAssenza(this.appelli.get(dataDiRiferimento));
-			}else{
+		Appello appelloCorrente = getAppelloOdierno();
+		if (!(appelloCorrente.isAssenzePrese())){
+			for (Studente studente : Studenti){
 				
+					librettiAssenze.get(studente).segnaAssenza(appelloCorrente);
+	
 			}
-			
-//			librettiAssenze.get(studente).segnaAssenza(this.getAppelloOdierno());
+			appelloCorrente.setAssenzePrese(true);
+		}else{
+			throw new IllegalStateException("ASSENZE GIA' PRESE!");
 		}
 	}
 
@@ -44,17 +40,17 @@ public class RegistroAssenze {
 		
 		Appello appelloOdierno = null;
 		LocalDate dataDiRiferimento = Calendario.getInstance().getDataOdierna();
-		if(this.esisteAppelloData(dataDiRiferimento)){
+		if(this.esisteAppello(dataDiRiferimento)){
 			appelloOdierno = appelli.get(dataDiRiferimento);
 		}else{
-			appelloOdierno = null;
+			throw new IllegalStateException("APPELLO ODIERNO INESISTENTE!");
 		}
 		return appelloOdierno;
 	}
 
 	public void avviaAppello() {
 		LocalDate dataRif = Calendario.getInstance().getDataOdierna();
-		if(!(this.esisteAppelloData(dataRif))){
+		if(!(this.esisteAppello(dataRif))){
 			appelli.put(dataRif, new Appello(dataRif));
 		}else{
 			throw new IllegalStateException(" -- ATTENZIONE L'APPELLO ODIERNO E' GIA' STATO AVVIATO -- ");
@@ -82,7 +78,7 @@ public class RegistroAssenze {
 		// Per le prove, forse è da togliere!!
 				this.librettiAssenze = librettiAssenze;
 	}
-	
+
 	public MapAppelli getAppelli() {
 		return appelli;
 	}
@@ -95,31 +91,36 @@ public class RegistroAssenze {
 		this.librettiAssenze = librettiAssenze;
 	}
 
-	public boolean esisteAppelloData(LocalDate dataDiRiferimento){
-		boolean rit = false;
-
-		if(appelli.containsKey(dataDiRiferimento)){
-			rit = true;
-		}else{
-			rit = false;
-		}
-		return rit;
+	public boolean esisteAppello(LocalDate dataDiRiferimento){
+//		boolean rit = false;
+//
+//		if(appelli.containsKey(dataDiRiferimento)){
+//			rit = true;
+//		}else{
+//			rit = false;
+//		}
+		return appelli.containsKey(dataDiRiferimento);
 	
 	}
 	
 	public boolean esisteAppello(Appello appello){
-		boolean rit = false;
-
-		if(appelli.containsValue(appello)){
-			rit = true;
-		}else{
-			rit = false;
-		}
-		return rit;
+//		boolean rit = false;
+//
+//		if(appelli.containsValue(appello)){
+//			rit = true;
+//		}else{
+//			rit = false;
+//		}
+		return appelli.containsValue(appello);
 	
+	}
+	
+	public LibrettoAssenze getLibretto(Studente studente){
+		return this.librettiAssenze.get(studente);
 	}
 
 	public class MapAppelli extends TreeMap<LocalDate, Appello> {
+		
 	}
 
 }

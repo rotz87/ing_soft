@@ -69,6 +69,46 @@ public class LibrettoAssenze {
 		return nonGiustificate.get(nonGiustificate.size()-1);
 	}
 	
+	public boolean esisteAssenza(Appello appello){
+		boolean rit = false;
+		 ListIterator<Assenza> listIteratorNG = nonGiustificate.listIterator();
+	        while (listIteratorNG.hasNext() && rit == false) {
+	        	Assenza assenza = listIteratorNG.next();
+	            if(assenza.esisteAppello(appello)){
+	            	rit = true;
+	            }
+	        }
+	        ListIterator<Assenza> listIteratorG = nonGiustificate.listIterator();
+	        while (listIteratorG.hasNext() && rit == false) {
+	        	Assenza assenza = listIteratorG.next();
+	            if(assenza.esisteAppello(appello)){
+	            	rit = true;
+	            }
+	        }
+	        return rit;
+	}
+	
+	public Assenza getAssenza(Appello appello){
+		Assenza rit = null;
+		
+		ListIterator<Assenza> listIteratorNG = nonGiustificate.listIterator();
+        while (listIteratorNG.hasNext()) {
+        	Assenza assenza = listIteratorNG.next();
+            if(assenza.esisteAppello(appello)){
+            	rit = assenza;
+            }
+        }
+        ListIterator<Assenza> listIteratorG = nonGiustificate.listIterator();
+        while (listIteratorG.hasNext()) {
+        	Assenza assenza = listIteratorG.next();
+            if(assenza.esisteAppello(appello)){
+            	rit = assenza;
+            }
+        }
+		
+		return rit;
+	}
+	
 	public void assengnaAssenzeNonGiustificate(List<Assenza> nonGistificate){
 		//per le prove, probablmente è da togliere
 		this.nonGiustificate = nonGistificate;
