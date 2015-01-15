@@ -12,10 +12,11 @@ import domain.*;
 public class TestGetAssenze {
 	public static void main(String[] args){
 		DBFake.getInstance();
-		Long idAppello = new Long(3);
+		Long idAppello = new Long(3);//<-----------------------------------------------
 		FaiAppelloController controlloreAppello = new FaiAppelloController();
 		
 		controlloreAppello.avviaAppello(new Long(1), new Long(1));
+		
 		Long[] listaIdStudAssenti = {new Long(3), new Long(1), new Long(5), new Long(2)};
 		
 		HashSet<Studente> studenti = (HashSet<Studente>) controlloreAppello.getStudenti(1L);
