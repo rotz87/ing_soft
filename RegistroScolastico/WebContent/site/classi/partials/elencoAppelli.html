@@ -9,7 +9,7 @@
 		<tr ng-repeat="appello in elencoAppelli">
 			<td> {{appello.data}}</td>
 			<td> 
-				<button type="button" class="btn btn-default btn-lg btn-block" ng-if=" appello.click == 'creaAppello(0)'" ng-click="creaAppello(0)"> {{appello.azione}}</button>
+				<button type="button" class="btn btn-default btn-lg btn-block" ng-if=" appello.click == 'creaAppello(1)'" ng-click="creaAppello(1)"> {{appello.azione}}</button>
 				<button type="button" class="btn btn-default btn-lg btn-block" ng-if=" appello.click == '' && appello.esiste == 'false'" disabled="disabled"> {{appello.azione}}</button>
 				<button type="button" class="btn btn-default btn-lg btn-block" ng-if=" appello.click == '' && appello.esiste == 'true'" ng-click=""> {{appello.azione}}</button>
 				

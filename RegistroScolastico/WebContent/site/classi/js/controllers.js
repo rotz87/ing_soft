@@ -55,7 +55,7 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$locat
 	                          {data:'pic',azione:'Avvia',esiste:"false"},
 	                          {data:'tiz',azione:'Avvia',esiste:"false"}
 	                          ];
-	  $scope.mioController = {nome:"ng-controller",azione:"creaAppello(0)"};
+	  $scope.mioController = {nome:"ng-controller",azione:"creaAppello(1)"};
 	  var creaAppello = false;
 	  for(var i=0;i<$scope.elencoAppelli.length;i++)
 		  {
@@ -65,7 +65,7 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$locat
 		  	else if ($scope.elencoAppelli[i].esiste == "false" && creaAppello == false)
 		  	{
 		  		creaAppello = true;
-		  		$scope.elencoAppelli[i].click = "creaAppello(0)";
+		  		$scope.elencoAppelli[i].click = "creaAppello(1)";
 		  		
 		  	}
 		  	else
@@ -100,6 +100,9 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$locat
 	   */
 	  $scope.testTitle = "Selezionami"
 	  $scope.idClasse = 0;
+	  nuovoAppello = {}
+	  nuovoAppello = $location.path().split("/")
+	  $scope.idClasse = nuovoAppello[1];
 	  var nuovoUri=[];
 	  $scope.appelloCreato = {};
 		$scope.creaAppello = function(miaClasse){
@@ -150,9 +153,17 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$locat
 
 appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$http','$rootScope', function($scope, Appello, $location, $http, $rootScope){
 		$scope.appelloSelezionato = {};
+		
 		if ($rootScope.mioDato)
 		{
-			$scope.appelloSelezionato = $rootScope.mioDato.data;
+			$scope.appelloSelezionato = $rootScope.mioDato;
+			resourceUrl = $scope.appelloSelezionato.data.links[1].href
+			nuovoAppello = {}
+			nuovoAppello = resourceUrl.split("/")
+			$scope.idClasse = nuovoAppello[1];
+			$scope.idAppello = nuovoAppello[3];
+			$scope.mioAppello = retrieveObjectFromUrl($http, resourceUrl)
+			path = resourceUrl
 		}
 		else
 		{
@@ -160,6 +171,7 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 			nuovoAppello = $location.path().split("/")
 			$scope.idClasse = nuovoAppello[1];
 			$scope.idAppello = nuovoAppello[3];
+			path = "/RegistroScolastico/api/classi/"+$scope.idClasse+"/appelli/"+$scope.idAppello
 			Appello.myQuery2({idClasse : $scope.idClasse, idAppello : $scope.idAppello}, function(response,header){
 				$scope.appelloSelezionato = response;
 			})
@@ -181,21 +193,27 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 	                {
 	                    'idStudente': '00000002',
 	                    'nome': 'Giorgio',
-	                    'cognome': 'Verdi',
+	                    'cognome': 'Ughi',
 	                    'assenza' : 'false'
 	                },
 	                {
 	                    'idStudente': '00000003',
 	                    'nome': 'Aldo',
-	                    'cognome': 'Ughi',
+	                    'cognome': 'Verdi',
 	                    'assenza' : 'true'
 	                }
 	            ]
 	        }
 		$scope.appello = $scope.appelloTemp;
 		$scope.studenti = $scope.appelloTemp.studenti;
-		//$scope.appelloTmp = JSON.parse($scope.appelloTemp);
-		
+		//$scope.appelloTest = {}
+		$scope.appelloTest = retrieveObjectFromUrl($http, path);
+		//$scope.appelloProva = {};
+		Appello.myQuery2({idClasse:$scope.idClasse, idAppello:$scope.idAppello},function(response){
+			$scope.appello.data = response.data;
+			$scope.appelloTest = response;
+		});
+		//$scope.appello.studenti = $scope.studenti;
 		$scope.segnaAssenza = function (idStudente){
 			var trovato = false;
 			
@@ -208,17 +226,25 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 					trovato = true;
 				}
 			}
-			console.log($scope.appelloTemp)
+			
 		}
 }]);
 
 function PostsCtrlAjax($scope, $http, myUri, destinazione, $location) {
     var risorsa = {}
-    $http({method: 'GET', url: myUri }).success(function(data) {
+    $http({method: 'GET', url: myUri }).success(function(data,header) {
         destinazione.data = data;
         destinazione.url = $scope.idClasse+"/appelli/"+data.idAppello
         risorsa = destinazione
         $location.path(destinazione.url);
     });
     return risorsa;
+}
+function retrieveObjectFromUrl($http, resourceUrl, destinazione){
+	var remoteObject = {};
+	$http({method:'GET', url: resourceUrl}).success(function(data){
+		remoteObject = data;
+		destinazione = data;
+	});
+	return remoteObject;
 }
