@@ -23,6 +23,8 @@ public class FaiAppelloController {
 		if(docenteCorrente.isInsegnante(classeCorrente)){
 			RegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();
 			registroAssenzeCorrente.avviaAppello();
+			DBFake.getInstance().storeAppello(registroAssenzeCorrente.getAppelloOdierno());
+			
 		}else{
 			throw new IllegalStateException("ATTENZIONE IL DOCENTE NON E' ABILITATO AD ESEGUIRE L'APPELLO SULLA CLASSE SELEZIONATA");
 		}

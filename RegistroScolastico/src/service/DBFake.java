@@ -72,6 +72,10 @@ public class DBFake {
 		return tuttiGliAppelli.get(idAppello);
 	}
 	
+	public void storeAppello(Appello appello){
+		tuttiGliAppelli.put(appello.getIdAppello(), appello);
+	}
+	
 	
 	private void initDB(){
 		
