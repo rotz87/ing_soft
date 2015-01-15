@@ -52,7 +52,7 @@ public class AppelloController {
 		  
 		  try{
 				  fAController.avviaAppello(idClasse, this.idDocenteProva);
-				  System.out.println("Appello odierno: "+fAController.getAppelloOdierno(idClasse).getIdAppello() + " | " + fAController.getAppelloOdierno(idClasse).getDataL());
+				  System.out.println("Appello odierno: "+fAController.getAppelloOdierno(idClasse).getIdAppello() + " | " + fAController.getAppelloOdierno(idClasse).getData());
 			
 				  linkAppello = new AppelloRS(fAController.getAppelloOdierno(idClasse), idClasse).getLink("self");
 				  httpHeaders.setLocation(URI.create(linkAppello.getHref()));

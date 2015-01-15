@@ -63,7 +63,7 @@ public class TestFaiLAppelloController1 {
 			  for (Assenza assNG : libAss.getNonGiustificate()) {
 				  System.out.println("---------Inizio Assenza-------- ");
 				  for (Appello app : assNG.getAppelli()){
-					  System.out.println("data dell'appello dell'assenza : "+app.getDataL().toString());
+					  System.out.println("data dell'appello dell'assenza : "+app.getData().toString());
 				  }
 				  if(assNG.isCertificatoMedicoRichiesto()){
 					  System.out.println(" \n E' richiesto il certificato medico !! \n");  

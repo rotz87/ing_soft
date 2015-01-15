@@ -53,7 +53,7 @@ public class Assenza {
 	public boolean isInseribile(Appello appello) {
 		boolean inseribile = false;
 //		System.out.println("\n >>>>>>>>>> passo per isInseribile ");
-		LocalDate ultimaDataPlus = appelli.getLast().getDataL().plusDays(1);
+		LocalDate ultimaDataPlus = appelli.getLast().getData().plusDays(1);
 		LocalDate oggi = Calendario.getInstance().getDataOdierna();//per le prove, a regime usare la riga di sotto
 //		LocalDate oggi = appello.getDataL();
 //		System.out.println("appelli.getLast().getDataL(): "+appelli.getLast().getDataL());
@@ -81,10 +81,10 @@ public class Assenza {
 	public boolean isCertificatoMedicoRichiesto(){
 		boolean rit = false;
 		
-		if((appelli.getLast().getDataL().getDayOfYear() - appelli.getFirst().getDataL().getDayOfYear())+1 >= 5){
+		if((appelli.getLast().getData().getDayOfYear() - appelli.getFirst().getData().getDayOfYear())+1 >= 5){
 			rit = true;
 		}
-		int x = (appelli.getLast().getDataL().getDayOfYear() - appelli.getFirst().getDataL().getDayOfYear())+1;
+		int x = (appelli.getLast().getData().getDayOfYear() - appelli.getFirst().getData().getDayOfYear())+1;
 		System.out.println("\n differenza tra i giorni:"+ x +"\n ");
 		return rit;
 	}
