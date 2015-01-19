@@ -85,6 +85,7 @@ public class FaiAppelloController {
 	public HashMap<Studente, Boolean>  getBoolAssenze(Long idClasse, Long idAppello){
 		Appello appelloCorrente = DBFake.getInstance().getAppelloById(idAppello);
 		HashMap<Studente, Boolean> rit;
+
 		if(appelloCorrente.isAssenzePrese()){
 
 			rit = new HashMap<Studente, Boolean>();
