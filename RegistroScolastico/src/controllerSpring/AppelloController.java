@@ -62,7 +62,7 @@ public class AppelloController {
 				  httpHeaders.setLocation(URI.create(linkAppello.getHref()));
 		  }catch(IllegalStateException ISE){
 				  httpStatus = HttpStatus.FORBIDDEN;
-				  System.out.println("AppelloController:"+ISE.getMessage());
+//				  System.out.println("AppelloController:"+ISE.getMessage());
 		  }
 
 		  return new ResponseEntity<>(null, httpHeaders, httpStatus);
@@ -91,6 +91,34 @@ public class AppelloController {
 			return new AppelloRS(appello, idClasse, fAController.getStudenti(idClasse), assenze);
 		}
 	
+		@RequestMapping(value = "/{idAppello}/assenti", method = RequestMethod.POST)
+		public ResponseEntity<?> inserisciAssenze(@PathVariable long idAppello, @PathVariable long idClasse, @RequestBody long[] assenti){
+			FaiAppelloController fAController;
+			Appello appello;
+			Long[] idAssenti;
+			
+			fAController = new FaiAppelloController();
+			appello = fAController.getAppello(idClasse, idAppello);
+			
+			HttpHeaders httpHeaders;
+			httpHeaders = new HttpHeaders();
+			HttpStatus httpStatus = HttpStatus.CREATED;
+			
+			idAssenti = new Long[assenti.length];
+			for(int i=0; i<assenti.length; i++){
+				idAssenti[i] = assenti[i];
+			}
+			
+			try{
+				fAController.registraAssenze(idAssenti, idClasse, this.idDocenteProva);
+				
+			}catch(IllegalStateException ISE){
+				httpStatus = HttpStatus.FORBIDDEN;
+			}
+			
+			return new ResponseEntity<>(null, httpHeaders, httpStatus);
+		}
+		
 //    @RequestMapping(method = RequestMethod.POST)
 //    ResponseEntity<?> add(@PathVariable long idAppello, @RequestBody Bookmark input) {
 //

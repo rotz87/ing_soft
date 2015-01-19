@@ -82,81 +82,248 @@ public class DBFake {
 		//creazione delle classi
 		Classe primaA = new Classe("1A");
 		Classe secondaA = new Classe("2A");
+		Classe primaB = new Classe("1B");
+		Classe secondaB = new Classe("2B");
 		
 		Map<Long, Classe> mapClassi = new TreeMap <Long, Classe>();
 		mapClassi.put(primaA.getIdClasse(), primaA);
 		mapClassi.put(secondaA.getIdClasse(), secondaA);
+		mapClassi.put(primaB.getIdClasse(), primaB);
+		mapClassi.put(secondaB.getIdClasse(), secondaB);
 		
 		setClassi(mapClassi);
 		
 		//Crrazione dei docenti
 		Docente marioRossi = new Docente("Mario", "Rossi");
 		Docente mirkoBianchi = new Docente("Mirko", "Bianchi");
+		Docente giulioVerdi = new Docente("Giulio", "Verdi");
+		Docente vincenzoNeri = new Docente("Vincenzo", "Neri");
+		Docente giuseppeGialli = new Docente("Giuseppe", "Gialli");
 		
 		Map<Long, Docente> mapDocenti = new TreeMap <Long, Docente>();
 		mapDocenti.put(marioRossi.getIdDocente(), marioRossi);
 		mapDocenti.put(mirkoBianchi.getIdDocente(), mirkoBianchi);
+		mapDocenti.put(giulioVerdi.getIdDocente(), giulioVerdi);
+		mapDocenti.put(vincenzoNeri.getIdDocente(), vincenzoNeri);
+		mapDocenti.put(giuseppeGialli.getIdDocente(), giuseppeGialli);
+		
 		
 		setDocenti(mapDocenti);
 		
 		//assegnazione delle classi ai docenti
 		
+		//assegnazione delle classi a Rossi
 		Collection<Classe> classiDiRossi = new LinkedList<Classe>();
 		classiDiRossi.add(primaA);
 		classiDiRossi.add(secondaA);
+		classiDiRossi.add(primaB);
+		classiDiRossi.add(secondaB);
 		marioRossi.setClassi(classiDiRossi);
 		
+		//assegnazione delle classi a Rossi
 		Collection<Classe> classiDiBianchi = new LinkedList<Classe>();
-//		classiDiBianchi.add(primaA);
+		classiDiBianchi.add(primaA);
+		classiDiBianchi.add(primaB);
 		mirkoBianchi.setClassi(classiDiBianchi);
 		
 		
 		//Creazione degli studenti
-		Studente pieroPeluria = new Studente("Piero", "Peluria");
-		Studente marinoPeluria = new Studente("Marino", "Peluria");
-		Studente maccioCapatonda = new Studente("Maccio", "Capatonda");
-		Studente herbertBallerina = new Studente("Herbert", "Ballerina");
-		Studente ivoAvido = new Studente("Ivo", "Avido");
+//		Studente  = new Studente("", "");
+		Studente pieroRusso = new Studente("Piero", "Russo");
+		Studente marinoEsposito = new Studente("Marino", "Esposito");
+		Studente marioRomano = new Studente("Mario", "Romano");
+		Studente davideDiSalvo = new Studente("Davide", "Di Salvo");
+		Studente ivoMarino = new Studente("Ivo", "Marini");
+		Studente leonardoRicci = new Studente("Leonardo", "Ricci");
+		Studente valentinoFarina = new Studente("Valentino", "Farina");
+		Studente roccoBenedetti = new Studente("Rocco", "Benedetti");
+		Studente antonioGuerra = new Studente("Antonio", "Guerra");
+		Studente cristinaAngeli = new Studente("Cristina", "Angeli");
+		
+		Studente mariannaDonati = new Studente("Marianna", "Donati");
+		Studente elenaSarti = new Studente("Elena", "Sarti");
+		Studente mariaPiaAlfredi = new Studente("MariaPia", "Alfredi");
+		Studente giorgioGatti = new Studente("Giorgio", "Gatti");
+		Studente lorenzoNegri = new Studente("Lorenzo", "Negri");
+		Studente mattiaVitali = new Studente("Mattia", "Vitali");
+		Studente emanueleDelMonte = new Studente("Emanuele", "Del Monte");
+		Studente luigiBernardi = new Studente("Luigi", "Bernardi");
+		Studente vittorioPellegrini = new Studente("Vittorio", "Pellegrini");
+		Studente alexVilla = new Studente("Alex", "Villa");
+		
+		Studente marcoBattaglia = new Studente("Marco", "Battaglia");
+		Studente alfredoMorelli = new Studente("Alfredo", "Morelli");
+		Studente pieraDellaValle = new Studente("Piera", "Della Valle");
+		Studente ignazioBoschi = new Studente("Ignazio", "Boschi");
+		Studente jacopoValli = new Studente("Jacopo", "Valli");
+		
+		Studente gianniConte = new Studente("Gianni", "Conte");
+		Studente lucaBarone = new Studente("Luca", "Barone");
+		Studente giacomoSiciliano = new Studente("Giacomo", "Siciliano");
+		Studente fabrizioToscani = new Studente("Fabrizio", "Toscani");
+		Studente arturoAncona = new Studente("Arturo", "Ancona");
 		
 		Map<Long, Studente> mapStudenti = new TreeMap <Long, Studente>();
-		mapStudenti.put(pieroPeluria.getId(), pieroPeluria);
-		mapStudenti.put(marinoPeluria.getId(), marinoPeluria);
-		mapStudenti.put(maccioCapatonda.getId(), maccioCapatonda);
-		mapStudenti.put(herbertBallerina.getId(), herbertBallerina);
-		mapStudenti.put(ivoAvido.getId(), ivoAvido);
+//		mapStudenti.put(.getId(), );
+		mapStudenti.put(pieroRusso.getId(), pieroRusso);
+		mapStudenti.put(marinoEsposito.getId(), marinoEsposito);
+		mapStudenti.put(marioRomano.getId(), marioRomano);
+		mapStudenti.put(davideDiSalvo.getId(), davideDiSalvo);
+		mapStudenti.put(ivoMarino.getId(), ivoMarino);
+		mapStudenti.put(leonardoRicci.getId(),leonardoRicci );
+		mapStudenti.put(valentinoFarina.getId(), valentinoFarina);
+		mapStudenti.put(roccoBenedetti.getId(), roccoBenedetti);
+		mapStudenti.put(antonioGuerra.getId(), antonioGuerra);
+		mapStudenti.put(cristinaAngeli.getId(),cristinaAngeli );
+		
+		mapStudenti.put(mariannaDonati.getId(), mariannaDonati);
+		mapStudenti.put(elenaSarti.getId(), elenaSarti);
+		mapStudenti.put(mariaPiaAlfredi.getId(), mariaPiaAlfredi);
+		mapStudenti.put(giorgioGatti.getId(),giorgioGatti );
+		mapStudenti.put(lorenzoNegri.getId(),lorenzoNegri );
+		mapStudenti.put(mattiaVitali.getId(), mattiaVitali);
+		mapStudenti.put(emanueleDelMonte.getId(), emanueleDelMonte);
+		mapStudenti.put(luigiBernardi.getId(), luigiBernardi);
+		mapStudenti.put(vittorioPellegrini.getId(),vittorioPellegrini );
+		mapStudenti.put(alexVilla.getId(), alexVilla);
+		
+		mapStudenti.put(marcoBattaglia.getId(), marcoBattaglia);
+		mapStudenti.put(alfredoMorelli.getId(),alfredoMorelli );
+		mapStudenti.put(pieraDellaValle.getId(),pieraDellaValle );
+		mapStudenti.put(ignazioBoschi.getId(), ignazioBoschi);
+		mapStudenti.put( jacopoValli.getId(), jacopoValli );
+		
+		mapStudenti.put(gianniConte.getId(), gianniConte);
+		mapStudenti.put(lucaBarone.getId(), lucaBarone);
+		mapStudenti.put(giacomoSiciliano.getId(), giacomoSiciliano);
+		mapStudenti.put(fabrizioToscani.getId(), fabrizioToscani);
+		mapStudenti.put(arturoAncona.getId(), arturoAncona);
 		
 		setStudenti(mapStudenti);
 		
 		//assegnazione degli studenti alle classi
-		Set<Studente> listaStudentiPrimaA = new HashSet<Studente>(mapStudenti.values());
+
+		Set<Studente> listaStudentiPrimaA = new HashSet<Studente>();
+		Set<Studente> listaStudentiSecondaA = new HashSet<Studente>();
+		Set<Studente> listaStudentiPrimaB = new HashSet<Studente>();
+		Set<Studente> listaStudentiSecondaB = new HashSet<Studente>();
+		
+		long i = new Long(1);
+		
+		for(i = 1; i<11; i++){
+			listaStudentiPrimaA.add(mapStudenti.get(i));
+		}
+		for(i = 11; i<21; i++){
+			listaStudentiSecondaA.add(mapStudenti.get(i));
+		}
+		for(i = 21; i<26; i++){
+			listaStudentiPrimaB.add(mapStudenti.get(i));
+		}
+		for(i = 26; i<=mapStudenti.size(); i++){
+			listaStudentiSecondaB.add(mapStudenti.get(i));
+		}
 		primaA.setStudenti(listaStudentiPrimaA);
+		secondaA.setStudenti(listaStudentiSecondaA);
+		primaB.setStudenti(listaStudentiPrimaB);
+		secondaB.setStudenti(listaStudentiSecondaB);
 		
 		//creazione Libretti
-		 Map<Studente, LibrettoAssenze> librettiDaAssegnare = new HashMap<Studente, LibrettoAssenze>(); 
+		 Map<Studente, LibrettoAssenze> librettiPrimaA = new HashMap<Studente, LibrettoAssenze>(); 
+		 Map<Studente, LibrettoAssenze> librettiSecondaA = new HashMap<Studente, LibrettoAssenze>();
+		 Map<Studente, LibrettoAssenze> librettiPrimaB = new HashMap<Studente, LibrettoAssenze>();
+		 Map<Studente, LibrettoAssenze> librettiSecondaB = new HashMap<Studente, LibrettoAssenze>();
 		 
-		LibrettoAssenze librettoMaccio = new LibrettoAssenze(maccioCapatonda);
-		LibrettoAssenze librettoHerbert =  new LibrettoAssenze(herbertBallerina);
-		LibrettoAssenze librettoIvo = new LibrettoAssenze(ivoAvido);
-		LibrettoAssenze librettoPiero = new LibrettoAssenze(pieroPeluria);
-		LibrettoAssenze librettoMarino =  new LibrettoAssenze(marinoPeluria);
+//			LibrettoAssenze libretto =  new LibrettoAssenze();
+		LibrettoAssenze librettoMarioRomano = new LibrettoAssenze(marioRomano);
+		LibrettoAssenze librettoDavideDiSalvo =  new LibrettoAssenze(davideDiSalvo);
+		LibrettoAssenze librettoIvoMarino = new LibrettoAssenze(ivoMarino);
+		LibrettoAssenze librettoPieroRusso = new LibrettoAssenze(pieroRusso);
+		LibrettoAssenze librettoMarinoEsposito =  new LibrettoAssenze(marinoEsposito);
+		LibrettoAssenze librettoLeonardoRicci =  new LibrettoAssenze(leonardoRicci);
+		LibrettoAssenze librettoValentinoFarina =  new LibrettoAssenze(valentinoFarina);
+		LibrettoAssenze librettoRoccoBenedetti =  new LibrettoAssenze(roccoBenedetti);
+		LibrettoAssenze librettoAntonioGuerra =  new LibrettoAssenze(antonioGuerra);
+		LibrettoAssenze librettoCristinaAngeli =  new LibrettoAssenze(cristinaAngeli);
 		
-		librettiDaAssegnare.put(maccioCapatonda, librettoMaccio);
-		librettiDaAssegnare.put(herbertBallerina,librettoHerbert);
-		librettiDaAssegnare.put(ivoAvido, librettoIvo);
-		librettiDaAssegnare.put(pieroPeluria, librettoPiero);
-		librettiDaAssegnare.put(marinoPeluria,librettoMarino);
+		LibrettoAssenze librettoMariannaDonati =  new LibrettoAssenze(mariannaDonati);
+		LibrettoAssenze librettoElenaSarti =  new LibrettoAssenze(elenaSarti);
+		LibrettoAssenze librettoMariaPiaAlfredi =  new LibrettoAssenze(mariaPiaAlfredi);
+		LibrettoAssenze librettoGiorgioGatti =  new LibrettoAssenze(giorgioGatti);
+		LibrettoAssenze librettoLorenzoNegri =  new LibrettoAssenze(lorenzoNegri);
+		LibrettoAssenze librettoMattiaVitali =  new LibrettoAssenze(mattiaVitali);
+		LibrettoAssenze librettoEmanueleDelMonte =  new LibrettoAssenze(emanueleDelMonte);
+		LibrettoAssenze librettoLuigiBernardi =  new LibrettoAssenze(luigiBernardi);
+		LibrettoAssenze librettoVittorioPellegrini =  new LibrettoAssenze(vittorioPellegrini);
+		LibrettoAssenze librettoAlexVilla =  new LibrettoAssenze(alexVilla);
+		
+		LibrettoAssenze librettoMarcoBattaglia =  new LibrettoAssenze(marcoBattaglia);
+		LibrettoAssenze librettoAlfredoMorelli =  new LibrettoAssenze(alfredoMorelli);
+		LibrettoAssenze librettoPieraDellaValle =  new LibrettoAssenze(pieraDellaValle);
+		LibrettoAssenze librettoIgnazioBoschi =  new LibrettoAssenze(ignazioBoschi);
+		LibrettoAssenze librettoJacopoValli =  new LibrettoAssenze(jacopoValli);
+		
+		LibrettoAssenze librettoGianniConte =  new LibrettoAssenze(gianniConte);
+		LibrettoAssenze librettoLucaBarone =  new LibrettoAssenze(lucaBarone);
+		LibrettoAssenze librettoGiacomoSiciliano =  new LibrettoAssenze(giacomoSiciliano);
+		LibrettoAssenze librettoFabrizioToscani =  new LibrettoAssenze(fabrizioToscani);
+		LibrettoAssenze librettoArturoAncona =  new LibrettoAssenze(arturoAncona);
+		
+		librettiPrimaA.put(marioRomano, librettoMarioRomano);
+		librettiPrimaA.put(davideDiSalvo,librettoDavideDiSalvo);
+		librettiPrimaA.put(ivoMarino, librettoIvoMarino);
+		librettiPrimaA.put(pieroRusso, librettoPieroRusso);
+		librettiPrimaA.put(marinoEsposito,librettoMarinoEsposito);
+		librettiPrimaA.put(leonardoRicci,librettoLeonardoRicci);
+		librettiPrimaA.put(valentinoFarina,librettoValentinoFarina);
+		librettiPrimaA.put(roccoBenedetti,librettoRoccoBenedetti);
+		librettiPrimaA.put(antonioGuerra,librettoAntonioGuerra);
+		librettiPrimaA.put(cristinaAngeli,librettoCristinaAngeli);
+		
+		librettiSecondaA.put(mariannaDonati,librettoMariannaDonati);
+		librettiSecondaA.put(elenaSarti,librettoElenaSarti);
+		librettiSecondaA.put(mariaPiaAlfredi,librettoMariaPiaAlfredi);
+		librettiSecondaA.put(giorgioGatti,librettoGiorgioGatti);
+		librettiSecondaA.put(lorenzoNegri,librettoLorenzoNegri);
+		librettiSecondaA.put(mattiaVitali,librettoMattiaVitali);
+		librettiSecondaA.put(emanueleDelMonte,librettoEmanueleDelMonte);
+		librettiSecondaA.put(luigiBernardi,librettoLuigiBernardi);
+		librettiSecondaA.put(vittorioPellegrini,librettoVittorioPellegrini);
+		librettiSecondaA.put(alexVilla,librettoAlexVilla);
+		
+		librettiPrimaB.put(marcoBattaglia,librettoMarcoBattaglia);
+		librettiPrimaB.put(alfredoMorelli,librettoAlfredoMorelli);
+		librettiPrimaB.put(pieraDellaValle,librettoPieraDellaValle);
+		librettiPrimaB.put(ignazioBoschi,librettoIgnazioBoschi);
+		librettiPrimaB.put(jacopoValli,librettoJacopoValli);
+		
+		librettiSecondaB.put(gianniConte,librettoGianniConte);
+		librettiSecondaB.put(lucaBarone ,librettoLucaBarone );
+		librettiSecondaB.put(giacomoSiciliano,librettoGiacomoSiciliano);
+		librettiSecondaB.put(fabrizioToscani,librettoFabrizioToscani);
+		librettiSecondaB.put(arturoAncona,librettoArturoAncona);
+
 		
 		//creazione del registro
 		RegistroAssenze regAssPrimaA = new RegistroAssenze();
+		RegistroAssenze regAssSecondaA = new RegistroAssenze();
+		RegistroAssenze regAssPrimaB = new RegistroAssenze();
+		RegistroAssenze regAssSecondaB = new RegistroAssenze();
 		
 		//assegnazione del regitro alla classe primaA
 		primaA.setRegistroAssenze(regAssPrimaA);
+		secondaA.setRegistroAssenze(regAssSecondaA);
+		primaB.setRegistroAssenze(regAssPrimaB);
+		secondaB.setRegistroAssenze(regAssSecondaB);
 		
 		//Assegnazione dei libretti al registro delle classe primaA
-		regAssPrimaA.assengaLibretti(librettiDaAssegnare);
+		regAssPrimaA.assengaLibretti(librettiPrimaA);
+		regAssSecondaA.assengaLibretti(librettiSecondaA);
+		regAssPrimaB.assengaLibretti(librettiPrimaB);
+		regAssSecondaB.assengaLibretti(librettiSecondaB);
+		
 		
 		//Creazione di un vettore di studenti per cui segnare l'assenza
-		Long[] listaIdStudAssenti = {maccioCapatonda.getId(), pieroPeluria.getId(),ivoAvido.getId(), marinoPeluria.getId()};
+		Long[] listaIdStudAssenti = {marioRomano.getId(), pieroRusso.getId(),ivoMarino.getId(), marinoEsposito.getId()};
 		
 		//recupero dell'appello odierno dal registro
 //		Appello appelloOdierno = regAssPrimaA.getAppelloOdierno();
@@ -262,12 +429,12 @@ public class DBFake {
 		
 		
 		//assegnazione delle liste ai libretti
-		librettoMaccio.assengnaAssenzeNonGiustificate(listaAssenzeMaccio);
-		librettoPiero.assengnaAssenzeNonGiustificate(listaAssenzePiero);
+		librettoMarioRomano.assengnaAssenzeNonGiustificate(listaAssenzeMaccio);
+		librettoPieroRusso.assengnaAssenzeNonGiustificate(listaAssenzePiero);
 //		librettoPiero.assengnaAssenzeNonGiustificate(listaAssenzeTsetFineMese);
-		librettoIvo.assengnaAssenzeNonGiustificate(listaAssenzeIvo);
+		librettoIvoMarino.assengnaAssenzeNonGiustificate(listaAssenzeIvo);
 //		librettoMarino.assengnaAssenzeNonGiustificate(listaAssenzeMarino);
-		librettoHerbert.assengnaAssenzeNonGiustificate(listaAssenzeHerbert);
+		librettoDavideDiSalvo.assengnaAssenzeNonGiustificate(listaAssenzeHerbert);
 		
 		appello8_12_14.setAssenzePrese(true);
 		appello10_12_14.setAssenzePrese(true);
