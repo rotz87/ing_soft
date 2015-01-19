@@ -1,5 +1,3 @@
 /controllerSpring/
-/domain/
-/service/
-/test/
 /resourceSupport/
+/domain/

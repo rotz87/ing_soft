@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.joda.time.chrono.AssembledChronology;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.Resources;
@@ -58,7 +59,7 @@ public class AppelloController {
 				  System.out.println("Appello odierno: "+fAController.getAppelloOdierno(idClasse).getIdAppello() + " | " + fAController.getAppelloOdierno(idClasse).getData());
 
 				  //serve solo il link: si potrebbero passare meno parametri
-				  linkAppello = new AppelloRS(fAController.getAppelloOdierno(idClasse), idClasse, fAController.getStudenti(idClasse), null).getLink("self");
+				  linkAppello = new AppelloRS(fAController.getAppelloOdierno(idClasse), idClasse, fAController.getStudenti(idClasse)).getLink("self");
 				  httpHeaders.setLocation(URI.create(linkAppello.getHref()));
 		  }catch(IllegalStateException ISE){
 				  httpStatus = HttpStatus.FORBIDDEN;
@@ -73,32 +74,21 @@ public class AppelloController {
 		@RequestMapping(value = "/{idAppello}", method = RequestMethod.GET)
 		public AppelloRS getAppello(@PathVariable long idAppello, @PathVariable long idClasse) {
 			
-			System.out.println("idAppello="+Long.toString(idAppello));
-			System.out.println("idClasse="+Long.toString(idClasse));
-			
 			FaiAppelloController fAController;
 			Appello appello;
-			HashMap<Long, Assenza> assenze;
 			
 			fAController = new FaiAppelloController();
 			appello = fAController.getAppello(idClasse, idAppello);
-			assenze = null;
 			
-			if(appello.isAssenzePrese()){
-				assenze = fAController.getAssenze(idClasse, appello.getIdAppello());
-			}
-			
-			return new AppelloRS(appello, idClasse, fAController.getStudenti(idClasse), assenze);
+			return new AppelloRS(appello, idClasse, fAController.getStudenti(idClasse));
 		}
 	
 		@RequestMapping(value = "/{idAppello}/assenti", method = RequestMethod.POST)
 		public ResponseEntity<?> inserisciAssenze(@PathVariable long idAppello, @PathVariable long idClasse, @RequestBody long[] assenti){
 			FaiAppelloController fAController;
-			Appello appello;
 			Long[] idAssenti;
 			
 			fAController = new FaiAppelloController();
-			appello = fAController.getAppello(idClasse, idAppello);
 			
 			HttpHeaders httpHeaders;
 			httpHeaders = new HttpHeaders();
@@ -117,6 +107,37 @@ public class AppelloController {
 			}
 			
 			return new ResponseEntity<>(null, httpHeaders, httpStatus);
+		}
+		
+		/**
+		 * Restituisce gli id degli studenti assenti
+		 * 
+		 * @param idAppello
+		 * @param idClasse
+		 * @return Collection<idStudentiAssenti>
+		 */
+		@RequestMapping(value = "/{idAppello}/assenti", method = RequestMethod.GET)
+		public Collection<Long> getAssenti(@PathVariable long idAppello, @PathVariable long idClasse) {
+			
+			FaiAppelloController fAController;
+			Appello appello;
+			LinkedList<Long> assenti;
+			HashMap<Long, Assenza> assenze;
+			
+			fAController = new FaiAppelloController();
+			appello = fAController.getAppello(idClasse, idAppello);
+			assenti = new LinkedList<Long>();
+			
+			if(fAController.getAppello(idClasse, idAppello).isAssenzePrese()){
+				assenze = fAController.getAssenze(idClasse, appello.getIdAppello());
+				for (Long idS : assenze.keySet()) {
+					if(assenze.get(idS)!=null){
+						assenti.add(idS);
+					}
+				}
+			}
+			
+			return assenti;
 		}
 		
 //    @RequestMapping(method = RequestMethod.POST)
