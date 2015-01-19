@@ -225,12 +225,13 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 //			}
 			
 			//$scope.appello.assenze = $scope.appello.assenzeSemplici
-			$scope.appello.assenzeSemplici = $filter('assente')($scope.appello.assenze,$scope.appello.studenti);
+			//$scope.appello.assenzeSemplici = $filter('assente')($scope.appello.assenze,$scope.appello.studenti);
+			Appello.recuperaAppelli({idClasse:$scope.idClasse,idAppello:$scope.idAppello},function(response,header){
+				$scope.appello.assenze = response;
+				$scope.appello.assenzeSemplici = $filter('assente')($scope.appello.assenze,$scope.appello.studenti);
+			})
 		});
-		Appello.recuperaAppelli({idClasse:$scope.idClasse,idAppello:$scope.idAppello},function(response,header){
-			$scope.appello.assenze = response.assenti;
-			$scope.appello.assenzeSemplici = $filter('assente')($scope.appello.assenze,$scope.appello.studenti);
-		})
+
 		//$scope.appello.studenti = $scope.studenti;
 		$scope.segnaAssenza = function (idStudente){
 			if ($scope.appello.assenzeSemplici[idStudente].idStudente == null)

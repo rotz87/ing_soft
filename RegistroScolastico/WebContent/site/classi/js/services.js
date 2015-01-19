@@ -9,7 +9,7 @@ appelloServices.factory('Appello',['$resource',
 								'myUpdate': {method:'PUT', params:{idClasse:'@idClasse', idAppello:'@idAppello'}},
 								'myQuery2': {method:'GET', params:{idClasse:'@idClasse',idAppello:'@idAppello'}, isArray:false},
 								'recuperaAppelli':{
-									url: 'api/classi/:idClasse/appelli/:idAppello/assenti', 
+									url: '/RegistroScolastico/api/classi/:idClasse/appelli/:idAppello/assenti', 
 									method: 'GET', 
 									params: { idClasse: '@idClasse', idAppello:'@idAppello'},isArray:true}
 							});
