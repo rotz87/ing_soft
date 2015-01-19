@@ -92,14 +92,16 @@ public class AppelloRS extends ResourceSupport{
 		Assenza assenza;
 		
 		this.assenze.clear();
-		for (StudenteAppelloRS studente : this.studenti) {
-			assenza = assenze.get(studente.getIdStudente());
-			if (assenza != null){
-				this.assenze.add(new AssenzaAppelloRS(assenza));
-			}else{
-				this.assenze.add(null);
+		if (assenze != null){
+			for (StudenteAppelloRS studente : this.studenti) {
+				assenza = assenze.get(studente.getIdStudente());
+				if (assenza != null){
+					this.assenze.add(new AssenzaAppelloRS(assenza));
+				}else{
+					this.assenze.add(null);
+				}
+				
 			}
-			
 		}
 	}
 

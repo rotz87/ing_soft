@@ -1,6 +1,8 @@
 package controllerSpring;
 
 
+import domain.Appello;
+import domain.Assenza;
 import domain.FaiAppelloController;
 import resourceSupport.AppelloRS;
 import service.*;
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -55,10 +58,11 @@ public class AppelloController {
 				  System.out.println("Appello odierno: "+fAController.getAppelloOdierno(idClasse).getIdAppello() + " | " + fAController.getAppelloOdierno(idClasse).getData());
 
 				  //serve solo il link: si potrebbero passare meno parametri
-				  linkAppello = new AppelloRS(fAController.getAppelloOdierno(idClasse), idClasse, fAController.getStudenti(idClasse), fAController.getAssenze(idClasse, fAController.getAppelloOdierno(idClasse).getIdAppello())).getLink("self");
+				  linkAppello = new AppelloRS(fAController.getAppelloOdierno(idClasse), idClasse, fAController.getStudenti(idClasse), null).getLink("self");
 				  httpHeaders.setLocation(URI.create(linkAppello.getHref()));
 		  }catch(IllegalStateException ISE){
 				  httpStatus = HttpStatus.FORBIDDEN;
+				  System.out.println("AppelloController:"+ISE.getMessage());
 		  }
 
 		  return new ResponseEntity<>(null, httpHeaders, httpStatus);
@@ -73,10 +77,18 @@ public class AppelloController {
 			System.out.println("idClasse="+Long.toString(idClasse));
 			
 			FaiAppelloController fAController;
+			Appello appello;
+			HashMap<Long, Assenza> assenze;
 			
 			fAController = new FaiAppelloController();
+			appello = fAController.getAppello(idClasse, idAppello);
+			assenze = null;
 			
-			return new AppelloRS(fAController.getAppello(idClasse, idAppello), idClasse, fAController.getStudenti(idClasse), fAController.getAssenze(idClasse, fAController.getAppello(idClasse, idAppello).getIdAppello()));
+			if(appello.isAssenzePrese()){
+				assenze = fAController.getAssenze(idClasse, appello.getIdAppello());
+			}
+			
+			return new AppelloRS(appello, idClasse, fAController.getStudenti(idClasse), assenze);
 		}
 	
 //    @RequestMapping(method = RequestMethod.POST)
