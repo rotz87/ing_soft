@@ -159,7 +159,7 @@ public class DBFake {
 		Long[] listaIdStudAssenti = {maccioCapatonda.getId(), pieroPeluria.getId(),ivoAvido.getId(), marinoPeluria.getId()};
 		
 		//recupero dell'appello odierno dal registro
-		Appello appelloOdierno = regAssPrimaA.getAppelloOdierno();
+//		Appello appelloOdierno = regAssPrimaA.getAppelloOdierno();
 		
 		// creazione delle date
 		LocalDate data8_12_14 = new LocalDate(2014,12,8);
@@ -268,6 +268,16 @@ public class DBFake {
 		librettoIvo.assengnaAssenzeNonGiustificate(listaAssenzeIvo);
 //		librettoMarino.assengnaAssenzeNonGiustificate(listaAssenzeMarino);
 		librettoHerbert.assengnaAssenzeNonGiustificate(listaAssenzeHerbert);
+		
+		appello8_12_14.setAssenzePrese(true);
+		appello10_12_14.setAssenzePrese(true);
+		appello11_12_14.setAssenzePrese(true);
+		appello12_12_14.setAssenzePrese(true);
+		appello13_12_14.setAssenzePrese(true);
+		appello14_12_14.setAssenzePrese(true);
+		appello15_12_14.setAssenzePrese(true);
+		appello16_12_14.setAssenzePrese(true);
+
 	}
 	
 }

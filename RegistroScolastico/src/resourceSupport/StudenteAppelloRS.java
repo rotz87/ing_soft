@@ -11,16 +11,13 @@ public class StudenteAppelloRS extends ResourceSupport{
 	private long idStudente;
 	private String nome;
 	private String cognome;
-	private boolean assente;
-
-	
-	public StudenteAppelloRS(Studente studente, boolean assente) {
+	public StudenteAppelloRS(Studente studente) {
 		
 		this.idStudente = studente.getId();
 		this.nome = studente.getNome();
 		this.cognome = studente.getCognome();
 		
-		this.assente = assente;
+		//inserire links
 		
 	}
 
@@ -34,10 +31,6 @@ public class StudenteAppelloRS extends ResourceSupport{
 
 	public String getCognome() {
 		return cognome;
-	}
-
-	public boolean isAssente() {
-		return assente;
 	}
 	
 }

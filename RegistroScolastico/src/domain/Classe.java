@@ -24,7 +24,7 @@ public class Classe {
 	public Classe(String nome, RegistroAssenze registroAssenze){
 		this.nome = nome;
 		this.idClasse = Classe.generaId();
-		this.studenti = new TreeSet<Studente>();
+		this.studenti = new HashSet<Studente>();
 		this.registroAssenze = registroAssenze;
 	}
 

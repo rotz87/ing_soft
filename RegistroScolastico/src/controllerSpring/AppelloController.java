@@ -53,8 +53,9 @@ public class AppelloController {
 		  try{
 				  fAController.avviaAppello(idClasse, this.idDocenteProva);
 				  System.out.println("Appello odierno: "+fAController.getAppelloOdierno(idClasse).getIdAppello() + " | " + fAController.getAppelloOdierno(idClasse).getData());
-			
-				  linkAppello = new AppelloRS(fAController.getAppelloOdierno(idClasse), idClasse).getLink("self");
+
+				  //serve solo il link: si potrebbero passare meno parametri
+				  linkAppello = new AppelloRS(fAController.getAppelloOdierno(idClasse), idClasse, fAController.getStudenti(idClasse), fAController.getAssenze(idClasse, fAController.getAppelloOdierno(idClasse).getIdAppello())).getLink("self");
 				  httpHeaders.setLocation(URI.create(linkAppello.getHref()));
 		  }catch(IllegalStateException ISE){
 				  httpStatus = HttpStatus.FORBIDDEN;
@@ -75,7 +76,7 @@ public class AppelloController {
 			
 			fAController = new FaiAppelloController();
 			
-			return new AppelloRS(fAController.getAppello(idClasse, idAppello), idClasse);
+			return new AppelloRS(fAController.getAppello(idClasse, idAppello), idClasse, fAController.getStudenti(idClasse), fAController.getAssenze(idClasse, fAController.getAppello(idClasse, idAppello).getIdAppello()));
 		}
 	
 //    @RequestMapping(method = RequestMethod.POST)
