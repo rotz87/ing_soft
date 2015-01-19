@@ -15,7 +15,7 @@ public class Studente {
 		this.cognome = cognome;
 //		System.out.println("<><><><> costruisco lo studente: " + this.nome +", "+this.cognome+ " con id: "+this.id);
 	}
-	 
+	
 	
 	
 	public Studente(long id, String nome, String cognome, Indirizzo indrizzo, String codiceFiscale) {
