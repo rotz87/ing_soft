@@ -60,9 +60,5 @@
   		<artifactId>neo4j-cypher-commons</artifactId>
   		<version>2.1.2</version>
   	</dependency>
-  	<dependency>
-  		<groupId>org.apache.activemq</groupId>
-  		<artifactId>activemq-client</artifactId>
-  	</dependency>
   </dependencies>
 </project>

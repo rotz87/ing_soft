@@ -7,31 +7,35 @@
 				<div class="panel-heading text-center">Appello di
 					{{appello.data | date:"EEEE dd MMMM yyyy"}} </div>
 				<div class="panel-body">
-					<form class="" role="form" method="post" OnSubmit="return myForm()"
+					<form class="" role="form" method="post" OnSubmit="return false"
 						id="formAppello">
 						<table class="table table-responsive table-hover table-striped">
 							<thead>
 								<tr>
 									<th>#</th>
-									<th class="">Cognome</th>
-									<th class="">Nome</th>
-									<th class="text-center">Assente</th>
+									<th class=""><a href="" ng-click="predicate = 'cognome'; reverse=!reverse">Cognome</a>
+												
+											</th>
+									<th class=""><a href="" ng-click="predicate = 'nome'; reverse=!reverse">Nome</a></th>
+									<th class="text-center"><a href="" ng-click="predicate = 'assenza'; reverse=false">Assente</a></th>
 									<th class="text-center">Ritardo</th>
 									<th class="text-center">Uscita Anticipata</th>
 									<th class="text-center">Giustificazione</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="studente in appello.studenti" class="">
-									<td>{{studente.idStudente}}</td>
+								<tr ng-repeat="studente in appello.studenti | orderBy:predicate" class="">
+									<td>{{$index+1}}</td>
 									<td>{{studente.cognome}}</td>
 									<td>{{studente.nome}}</td>
 									<td>
 										<div class="myCheckbox col-md-12 text-center">
-											<input name="Assenza" type="checkbox" 
-												ng-model="studente.assenza"
+											<input name="Assenza" type="checkbox"
+												ng-model="appello.assenzeSemplici[studente.idStudente].assenza"
 												ng-click="segnaAssenza(studente.idStudente)" 
-												ng-true-value="'true'" ng-false-value="'false'">
+												ng-true-value="true" 
+												ng-false-value="false"
+												ng-disabled = "appello.assenzePrese">
 										</div>
 									</td>
 									<td>
@@ -49,10 +53,12 @@
 								</tr>
 							</tbody>
 						</table>
+						<button ng-click="abilitaDisabilita()" > TESTTT</button>
 						<div class="col-md-6 col-md-offset-3">
 							<button type="submit" class="btn btn-default btn-md btn-block">
 								Registra Appello <span class="glyphicon glyphicon-save"
-									aria-hidden="true"></span> <span
+									aria-hidden="true">
+									<span
 									class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
 							</button>
 						</div>
@@ -61,5 +67,6 @@
 			</div>
 		</div>
 	</div>
-	Qui va l'appello {{appelloTest}}
+	Qui va l'appello {{appello}}
+	<br>
 </div>
