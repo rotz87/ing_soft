@@ -103,6 +103,13 @@ public class FaiAppelloController {
 		}
 	}
 	
+	
+	/**
+	 * 
+	 * @param idClasse
+	 * @param idAppello
+	 * @return Map<idStudente, Assenza>
+	 */
 	public HashMap<Long, Assenza>  getAssenze(Long idClasse, Long idAppello){
 		Appello appelloCorrente = DBFake.getInstance().getAppelloById(idAppello);
 		HashMap<Long, Assenza> rit;

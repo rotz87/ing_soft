@@ -232,7 +232,7 @@ public class DBFake {
 		 Map<Studente, LibrettoAssenze> librettiSecondaA = new HashMap<Studente, LibrettoAssenze>();
 		 Map<Studente, LibrettoAssenze> librettiPrimaB = new HashMap<Studente, LibrettoAssenze>();
 		 Map<Studente, LibrettoAssenze> librettiSecondaB = new HashMap<Studente, LibrettoAssenze>();
-		  
+
 //			LibrettoAssenze libretto =  new LibrettoAssenze();
 		LibrettoAssenze librettoMarioRomano = new LibrettoAssenze(marioRomano);
 		LibrettoAssenze librettoDavideDiSalvo =  new LibrettoAssenze(davideDiSalvo);

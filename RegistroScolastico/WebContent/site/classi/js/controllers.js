@@ -45,6 +45,10 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$locat
 	  var newUri;
 	  var nuovoUri=[];
 	  $scope.appelloUri={}
+	  $scope.idClasse = 0;
+	  nuovoAppello = {}
+	  nuovoAppello = $location.path().split("/")
+	  $scope.idClasse = nuovoAppello[1];
 	  
 	  $scope.appello1 = { data: 'Naomi', azione: 'visualizza' };
 	  $scope.appello2 = { data: 'Igor', azione: 'Avvia' };
@@ -55,7 +59,8 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$locat
 	                          {data:'pic',azione:'Avvia',esiste:"false"},
 	                          {data:'tiz',azione:'Avvia',esiste:"false"}
 	                          ];
-	  $scope.mioController = {nome:"ng-controller",azione:"creaAppello(1)"};
+	  $scope.mioController = {nome:"ng-controller", azione:"creaAppello("+$scope.idClasse+")"};
+	  
 	  var creaAppello = false;
 	  for(var i=0;i<$scope.elencoAppelli.length;i++)
 		  {
@@ -65,8 +70,7 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$locat
 		  	else if ($scope.elencoAppelli[i].esiste == "false" && creaAppello == false)
 		  	{
 		  		creaAppello = true;
-		  		$scope.elencoAppelli[i].click = "creaAppello(1)";
-		  		
+		  		$scope.elencoAppelli[i].click = "creaAppello";
 		  	}
 		  	else
 		  	{
@@ -98,11 +102,8 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$locat
         }
 	   *
 	   */
-	  $scope.testTitle = "Selezionami"
-	  $scope.idClasse = 0;
-	  nuovoAppello = {}
-	  nuovoAppello = $location.path().split("/")
-	  $scope.idClasse = nuovoAppello[1];
+	  
+	  
 	  var nuovoUri=[];
 	  $scope.appelloCreato = {};
 		$scope.creaAppello = function(miaClasse){
@@ -117,11 +118,8 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$locat
 				//console.log(header("location"));
 				$scope.appelloUri = header("location");
 				nuovoUri = $scope.appelloUri.split("/");
-
 				
-				$scope.counter++;
 				newUri = $scope.appelloUri;
-
 				$scope.myUrl=newUri;
 				$rootScope.mioDato = {};
 				$rootScope.nuovoAppello = {};
@@ -151,30 +149,28 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$locat
 
 	});
 
-appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$http','$rootScope', function($scope, Appello, $location, $http, $rootScope){
+appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$http','$rootScope','$filter', function($scope, Appello, $location, $http, $rootScope, $filter){
 		$scope.appelloSelezionato = {};
-		
+		var nuovoAppello;
 		if ($rootScope.mioDato)
 		{
 			$scope.appelloSelezionato = $rootScope.mioDato;
 			resourceUrl = $scope.appelloSelezionato.data.links[1].href
-			nuovoAppello = {}
 			nuovoAppello = resourceUrl.split("/")
-			$scope.idClasse = nuovoAppello[1];
-			$scope.idAppello = nuovoAppello[3];
-			$scope.mioAppello = retrieveObjectFromUrl($http, resourceUrl)
+			$scope.idClasse = nuovoAppello[nuovoAppello.length-3];
+			$scope.idAppello = nuovoAppello[nuovoAppello.length-1];
+			$scope.mioAppello = retrieveObjectFromUrl($http, resourceUrl);
 			path = resourceUrl
 		}
 		else
 		{
-			nuovoAppello = {}
 			nuovoAppello = $location.path().split("/")
 			$scope.idClasse = nuovoAppello[1];
 			$scope.idAppello = nuovoAppello[3];
 			path = "/RegistroScolastico/api/classi/"+$scope.idClasse+"/appelli/"+$scope.idAppello
-			Appello.myQuery2({idClasse : $scope.idClasse, idAppello : $scope.idAppello}, function(response,header){
-				$scope.appelloSelezionato = response;
-			})
+//			Appello.myQuery2({idClasse : $scope.idClasse, idAppello : $scope.idAppello}, function(response,header){
+//				$scope.appelloSelezionato = response;
+//			})
 		}
 		/*
 		 * codice di esempio di un appello:
@@ -183,6 +179,7 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 		$scope.appelloTemp = {
 	            'id': '0',
 	            'data': '1288323623006',
+	            'assenzePrese' : 'false',
 	            'studenti': [
 	                {
 	                    'idStudente': '00000001',
@@ -202,32 +199,77 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 	                    'cognome': 'Verdi',
 	                    'assenza' : 'true'
 	                }
-	            ]
+	            ],
+				'assenzeSemplici' : [
+					1,
+					4,
+					2
+				]
 	        }
+		$scope.predicate = 'cognome'
 		$scope.appello = $scope.appelloTemp;
 		$scope.studenti = $scope.appelloTemp.studenti;
-		//$scope.appelloTest = {}
-		$scope.appelloTest = retrieveObjectFromUrl($http, path);
-		//$scope.appelloProva = {};
-		Appello.myQuery2({idClasse:$scope.idClasse, idAppello:$scope.idAppello},function(response){
+
+		Appello.myQuery2({idClasse:$scope.idClasse, idAppello:$scope.idAppello},function(response,header){
 			$scope.appello.data = response.data;
 			$scope.appelloTest = response;
+			$scope.appello.studenti = response.studenti;
+			$scope.appello.assenze = response.assenze;
+			
+			$scope.appello.assenzePrese = response.assenzePrese;
+//			var arrayStudenti = [];
+//			for (var j = 0; j < $scope.appello.studenti.length;j++)
+//			{
+//				//arrayStudenti[j] = $scope.appello.studenti[j].idStudente
+//				arrayStudenti[j] = {idStudente : $scope.appello.studenti[j].idStudente}
+//			}
+			
+			//$scope.appello.assenze = $scope.appello.assenzeSemplici
+			//$scope.appello.assenzeSemplici = $filter('assente')($scope.appello.assenze,$scope.appello.studenti);
+			Appello.recuperaAppelli({idClasse:$scope.idClasse,idAppello:$scope.idAppello},function(response,header){
+				$scope.appello.assenze = response;
+				$scope.appello.assenzeSemplici = $filter('assente')($scope.appello.assenze,$scope.appello.studenti);
+			})
 		});
+
 		//$scope.appello.studenti = $scope.studenti;
 		$scope.segnaAssenza = function (idStudente){
-			var trovato = false;
-			
-			var i;
-			for (i = 0 ; trovato == false && i < $scope.studenti.length ;i++)
+			if ($scope.appello.assenzeSemplici[idStudente].idStudente == null)
 			{
-				var studente = $scope.appello.studenti[i]
-				if (studente.idStudente == idStudente)
+				$scope.appello.assenzeSemplici[idStudente].idStudente = idStudente
+				for( var myId in $scope.appello.assenze)
 				{
-					trovato = true;
+					myId = idStudente;
 				}
+				$scope.appello.assenze.push(idStudente)
+				
+			}
+			else
+			{
+				delete $scope.appello.assenzeSemplici[idStudente];
+				for (var assenzaCurr in $scope.appello.assenze)
+				{
+					console.log($scope.appello.assenze[assenzaCurr]);
+					if ($scope.appello.assenze[assenzaCurr] == idStudente)
+					{
+						$scope.appello.assenze.splice(assenzaCurr,1);
+					}
+					
+				}
+				
 			}
 			
-		}
+		};
+		
+		$scope.registraAppello = function (){
+			$scope.appello.assenzePrese = "true";
+			Appello.myUpdate({idClasse : $scope.idClasse, idAppello : $scope.idClasse, Appello : $scope.appello}, function(response,header){
+				console.log(response);
+				console.log(header());
+			});
+		};
+		$scope.appello.assenzePrese = Boolean($scope.appello.assenzePrese.valueOf())
+
 }]);
 
 function PostsCtrlAjax($scope, $http, myUri, destinazione, $location) {

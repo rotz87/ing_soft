@@ -28,10 +28,9 @@ public class AppelloRS extends ResourceSupport{
 	private Date data;
 	private boolean assenzePrese;
 	private LinkedList<StudenteAppelloRS> studenti;
-	private LinkedList<AssenzaAppelloRS> assenze;
 
 
-	public AppelloRS(Appello appello, long idClasse, Collection<Studente> studenti, Map<Long, Assenza> assenze) {
+	public AppelloRS(Appello appello, long idClasse, Collection<Studente> studenti) {
 		
 		this.idAppello = appello.getIdAppello();
 		this.data = appello.getData().toDate();
@@ -39,9 +38,6 @@ public class AppelloRS extends ResourceSupport{
 		
 		this.studenti = new LinkedList<StudenteAppelloRS>();
 		setStudenti(studenti);
-		
-		this.assenze = new LinkedList<AssenzaAppelloRS>();
-		setAssenze(assenze);
 		
 		this.add(ControllerLinkBuilder.linkTo(AppelloController.class, idClasse).withRel("appelli"));
 		this.add(ControllerLinkBuilder.linkTo(
@@ -80,29 +76,6 @@ public class AppelloRS extends ResourceSupport{
 			this.studenti.add(new StudenteAppelloRS(studente));
 		}
 		
-	}
-
-
-	public LinkedList<AssenzaAppelloRS> getAssenze() {
-		return assenze;
-	}
-
-
-	public void setAssenze(Map<Long, Assenza> assenze) {
-		Assenza assenza;
-		
-		this.assenze.clear();
-		if (assenze != null){
-			for (StudenteAppelloRS studente : this.studenti) {
-				assenza = assenze.get(studente.getIdStudente());
-				if (assenza != null){
-					this.assenze.add(new AssenzaAppelloRS(assenza));
-				}else{
-					this.assenze.add(null);
-				}
-				
-			}
-		}
 	}
 
 

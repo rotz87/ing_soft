@@ -1,6 +1,7 @@
 var appelloApp = angular.module('appelloApp',[
                                               'appelloControllers',
                                               'appelloServices',
+                                              'appelloFilters',
                                               'ngRoute'
                                               ]);
 appelloApp.value('$sniffer', { history: false });
