@@ -85,8 +85,13 @@ public class FaiAppelloController {
 	public Collection<Appello> getAppelli(Long idClasse){
 		Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
 		RegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();
-		return registroAssenzeCorrente.getAppelli().values();
-		
+		return registroAssenzeCorrente.getAppelli().values();		
+	}
+	
+	public boolean isAppelloOdiernoAvviabile(long idClasse){
+		Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
+		RegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();
+		return registroAssenzeCorrente.isAppelloOdiernoAvviabile();
 	}
 	
 	public HashMap<Studente, Boolean>  getBoolAssenze(Long idClasse, Long idAppello){
@@ -137,7 +142,14 @@ public class FaiAppelloController {
 		}
 	}
 	
-	public Collection getStudenti(Long idClasse){
+	/**
+	 * @deprecated 
+	 * Deprecated perché potrebbe essere una funzionalità di un altro controllore;
+	 * ma in fin dei conti si tratta di una visualizzazione e potrebbe essere anche duplicata in diverdìsi controllori
+	 * @param idClasse
+	 * @return
+	 */
+	public Collection<Studente> getStudenti(Long idClasse){
 		Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
 		return classeCorrente.getStudenti();
 	}

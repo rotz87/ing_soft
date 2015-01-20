@@ -56,7 +56,11 @@ public class RegistroAssenze {
 //			appelli.put(dataRif, nuovoAppello);
 //			System.out.println("-------------------------------------------------------------------------------------->id appello : "+nuovoAppello.getIdAppello());
 //			//fine debug
-			appelli.put(dataRif, new Appello(dataRif));
+			if(! isAppelloOdiernoAvviabile()){
+				appelli.put(dataRif, new Appello(dataRif));
+			}else{
+				throw new IllegalStateException(" APPELLO NON AVVIABILE PER OGGI ");
+			}
 		}else{
 			throw new IllegalStateException(" -- ATTENZIONE L'APPELLO ODIERNO E' GIA' STATO AVVIATO -- ");
 		}
@@ -118,6 +122,16 @@ public class RegistroAssenze {
 //		}
 		return appelli.containsValue(appello);
 	
+	}
+//	
+//	public boolean isAppelloAvviabile(LocalDate data){
+//
+//		return Calendario.getInstance().isFestivo(data);
+//	}
+	
+	public boolean isAppelloOdiernoAvviabile(){
+
+		return Calendario.getInstance().isFestivo(Calendario.getInstance().getDataOdierna());
 	}
 	
 	public LibrettoAssenze getLibretto(Studente studente){
