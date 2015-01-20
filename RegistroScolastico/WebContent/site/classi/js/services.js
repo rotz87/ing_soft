@@ -11,6 +11,12 @@ appelloServices.factory('Appello',['$resource',
 								'recuperaAppelli':{
 									url: '/RegistroScolastico/api/classi/:idClasse/appelli/:idAppello/assenti', 
 									method: 'GET', 
-									params: { idClasse: '@idClasse', idAppello:'@idAppello'},isArray:true}
+									params: { idClasse: '@idClasse', idAppello:'@idAppello'}, 
+									isArray:false},
+								'registraAssenti':{
+									url: '/RegistroScolastico/api/classi/:idClasse/appelli/:idAppello/assenti', 
+									method: 'POST', 
+									params: { idClasse: '@idClasse', idAppello:'@idAppello'}
+									}
 							});
 				}]);

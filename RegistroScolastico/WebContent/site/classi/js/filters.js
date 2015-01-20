@@ -2,34 +2,29 @@ var appelloFilters =  angular.module('appelloFilters',[]);
 appelloFilters.filter('assente', function() {
 	return function(input,arrayIdStudenti) {
 		var output = {};
-
 		for (var j = 0; j < arrayIdStudenti;j++)
 		{
 			//arrayStudenti[j] = $scope.appello.studenti[j].idStudente
 			
 			arrayIdStudenti[$scope.appello.studenti[j].idStudente] = {idStudente : $scope.appello.studenti[j].idStudente}
 		}
-
 		if (input) {
 			for (var j = 0; j < input.length; j++)
 			{
 				var trovato = false
 				var indiceStud = 0;
 				for (var i = 0; i < arrayIdStudenti.length && trovato == false; i++) {
-					console.log(arrayIdStudenti[i].idStudente)
-					console.log(input[j])
 					if (arrayIdStudenti[i].idStudente == input[j]) {
 						trovato = true 
 						indiceStud = arrayIdStudenti[i].idStudente;
 						output[indiceStud] = {idStudente: indiceStud, assenza : true};
-						// ed esco dal ciclo
-					} else {
+					} 
+					else {
 						//trovato = false
 					}
 				}
 			}
 		}
-		console.log(output)
 		return output;
 	};
 });

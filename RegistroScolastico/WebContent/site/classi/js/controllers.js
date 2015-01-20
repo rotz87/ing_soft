@@ -207,16 +207,16 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 				]
 	        }
 		$scope.predicate = 'cognome'
-		$scope.appello = $scope.appelloTemp;
-		$scope.studenti = $scope.appelloTemp.studenti;
+
 
 		Appello.myQuery2({idClasse:$scope.idClasse, idAppello:$scope.idAppello},function(response,header){
-			$scope.appello.data = response.data;
-			$scope.appelloTest = response;
-			$scope.appello.studenti = response.studenti;
-			$scope.appello.assenze = response.assenze;
-			
-			$scope.appello.assenzePrese = response.assenzePrese;
+			$scope.appello = response;
+//			$scope.appello.data = response.data;
+//			$scope.appelloTest = response;
+//			$scope.appello.studenti = response.studenti;
+//			$scope.appello.assenze = response.assenze;
+//			
+//			$scope.appello.assenzePrese = response.assenzePrese;
 //			var arrayStudenti = [];
 //			for (var j = 0; j < $scope.appello.studenti.length;j++)
 //			{
@@ -227,7 +227,7 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 			//$scope.appello.assenze = $scope.appello.assenzeSemplici
 			//$scope.appello.assenzeSemplici = $filter('assente')($scope.appello.assenze,$scope.appello.studenti);
 			Appello.recuperaAppelli({idClasse:$scope.idClasse,idAppello:$scope.idAppello},function(response,header){
-				$scope.appello.assenze = response;
+				$scope.appello.assenze = response.assenti;
 				$scope.appello.assenzeSemplici = $filter('assente')($scope.appello.assenze,$scope.appello.studenti);
 			})
 		});
@@ -262,13 +262,22 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 		};
 		
 		$scope.registraAppello = function (){
-			$scope.appello.assenzePrese = "true";
-			Appello.myUpdate({idClasse : $scope.idClasse, idAppello : $scope.idClasse, Appello : $scope.appello}, function(response,header){
-				console.log(response);
-				console.log(header());
-			});
+
+			var assenti = new Appello();
+			assenti.assenti = $scope.appello.assenze;
+			angular.toJson(assenti, true)
+			for(key in assenti)
+				{
+					if (key == "assenti")
+					{
+						console.log(assenti[key])
+					}
+				}
+			assenti.$registraAssenti({idAppello: $scope.idAppello, idClasse: $scope.idClasse},function(response,header){
+//				console.log(headers());
+//				$scope.appello = response;
+			})
 		};
-		$scope.appello.assenzePrese = Boolean($scope.appello.assenzePrese.valueOf())
 
 }]);
 

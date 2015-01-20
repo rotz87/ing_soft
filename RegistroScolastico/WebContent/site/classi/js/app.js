@@ -5,8 +5,8 @@ var appelloApp = angular.module('appelloApp',[
                                               'ngRoute'
                                               ]);
 appelloApp.value('$sniffer', { history: false });
-appelloApp.config(["$locationProvider","$routeProvider",function($locationProvider,$routeProvider) {
-
+appelloApp.config(["$locationProvider","$routeProvider",function($locationProvider,$routeProvider) 
+{
   $routeProvider.when('/:idClasse/appelli/:idAppello',{
 	  templateUrl: 'partials/appelloParziale.html',
 	  controller: 'faiAppello',
@@ -22,5 +22,4 @@ appelloApp.config(["$locationProvider","$routeProvider",function($locationProvid
 	  title:'altra pagina'
   });
 	  $locationProvider.html5Mode(true);
-
 }]);
