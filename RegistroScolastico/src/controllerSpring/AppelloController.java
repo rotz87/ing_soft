@@ -71,19 +71,21 @@ public class AppelloController {
 		}
 	
 		@RequestMapping(value = "/{idAppello}/assenti", method = RequestMethod.POST)
-		public ResponseEntity<?> inserisciAssenze(@PathVariable long idAppello, @PathVariable long idClasse, @RequestBody long[] assenti){
+		public ResponseEntity<?> inserisciAssenze(@PathVariable long idAppello, @PathVariable long idClasse, @RequestBody AssentiContainer assenti){
 			FaiAppelloController fAController;
 			Long[] idAssenti;
+			int i;
 			
 			fAController = new FaiAppelloController();
-			
 			HttpHeaders httpHeaders;
 			httpHeaders = new HttpHeaders();
 			HttpStatus httpStatus = HttpStatus.CREATED;
 			
-			idAssenti = new Long[assenti.length];
-			for(int i=0; i<assenti.length; i++){
-				idAssenti[i] = assenti[i];
+			idAssenti = new Long[assenti.assenti.size()];
+			i=0;
+			for(Long idAssente: assenti.assenti){
+				idAssenti[i] = idAssente;
+				i++;
 			}
 			
 			try{
@@ -91,37 +93,6 @@ public class AppelloController {
 				
 			}catch(IllegalStateException ISE){
 				httpStatus = HttpStatus.FORBIDDEN;
-			}
-			
-			return new ResponseEntity<>(null, httpHeaders, httpStatus);
-		}
-		
-//		@RequestMapping(value = "/{idAppello}/prova", method = RequestMethod.POST)
-//		public ResponseEntity<?> prova(@PathVariable long idAppello, @PathVariable long idClasse, @RequestBody HashMap<String, Collection<Long>> prova_assenti){
-//			
-//			HttpHeaders httpHeaders;
-//			httpHeaders = new HttpHeaders();
-//			HttpStatus httpStatus = HttpStatus.CREATED;
-//			
-//			System.out.println("AppelloController; Interi:");
-//			for (Long i : prova_assenti.get("assenti")) {
-//				System.out.println(i);
-//			}
-//			
-//			return new ResponseEntity<>(null, httpHeaders, httpStatus);
-//		}
-		
-		
-		@RequestMapping(value = "/{idAppello}/prova", method = RequestMethod.POST)
-		public ResponseEntity<?> prova(@PathVariable long idAppello, @PathVariable long idClasse, @RequestBody AssentiContainer prova_assenti){
-			
-			HttpHeaders httpHeaders;
-			httpHeaders = new HttpHeaders();
-			HttpStatus httpStatus = HttpStatus.CREATED;
-			
-			System.out.println("AppelloController; Interi:");
-			for (Long i : prova_assenti.assenti) {
-				System.out.println(i);
 			}
 			
 			return new ResponseEntity<>(null, httpHeaders, httpStatus);
@@ -136,22 +107,22 @@ public class AppelloController {
 		 * @return Collection<idStudentiAssenti>
 		 */
 		@RequestMapping(value = "/{idAppello}/assenti", method = RequestMethod.GET)
-		public Collection<Long> getAssenti(@PathVariable long idAppello, @PathVariable long idClasse) {
+		public AssentiContainer getAssenti(@PathVariable long idAppello, @PathVariable long idClasse) {
 			
 			FaiAppelloController fAController;
 			Appello appello;
-			LinkedList<Long> assenti;
+			AssentiContainer assenti;
 			HashMap<Long, Assenza> assenze;
 			
 			fAController = new FaiAppelloController();
 			appello = fAController.getAppello(idClasse, idAppello);
-			assenti = new LinkedList<Long>();
+			assenti = new AssentiContainer();
 			
 			if(fAController.getAppello(idClasse, idAppello).isAssenzePrese()){
 				assenze = fAController.getAssenze(idClasse, appello.getIdAppello());
 				for (Long idS : assenze.keySet()) {
 					if(assenze.get(idS)!=null){
-						assenti.add(idS);
+						assenti.assenti.add(idS);
 					}
 				}
 			}
