@@ -223,7 +223,34 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 //				//arrayStudenti[j] = $scope.appello.studenti[j].idStudente
 //				arrayStudenti[j] = {idStudente : $scope.appello.studenti[j].idStudente}
 //			}
-			
+			var listaStudenti = new Appello()
+			var tmpLink
+			var myAppello = {
+				"links":[{"rel":"studenti","href":"http://blabla"
+				},{"rel":'appello',"href":'http://sshhh'}]
+			}
+			console.log(myAppello)
+			for(var key in myAppello.links)
+			{
+				console.log(myAppello.links[key])
+				if (myAppello.links[key].rel == "studenti")
+					tmpLink = myAppello.links[key].href;
+			}
+			console.log(tmpLink)
+			listaStudenti.idClasse = $scope.idClasse
+			listaStudenti.$listaStudenti({}, function(response, header){
+				//successo
+				$scope.studenti = response
+				console.log("recupero riuscito, leggi il response");
+				console.log(response);
+			},
+			function(response,header){
+				//fallimento
+				console.log("recupero fallito all'url selezionato");
+				console.log(response)
+				console.log(response.status)
+				console.log(response.statusText)
+			})
 			//$scope.appello.assenze = $scope.appello.assenzeSemplici
 			//$scope.appello.assenzeSemplici = $filter('assente')($scope.appello.assenze,$scope.appello.studenti);
 			Appello.recuperaAppelli({idClasse:$scope.idClasse,idAppello:$scope.idAppello},function(response,header){
@@ -242,14 +269,12 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 					myId = idStudente;
 				}
 				$scope.appello.assenze.push(idStudente)
-				
 			}
 			else
 			{
 				delete $scope.appello.assenzeSemplici[idStudente];
 				for (var assenzaCurr in $scope.appello.assenze)
 				{
-					console.log($scope.appello.assenze[assenzaCurr]);
 					if ($scope.appello.assenze[assenzaCurr] == idStudente)
 					{
 						$scope.appello.assenze.splice(assenzaCurr,1);
@@ -265,17 +290,15 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 
 			var assenti = new Appello();
 			assenti.assenti = $scope.appello.assenze;
-			angular.toJson(assenti, true)
-			for(key in assenti)
-				{
-					if (key == "assenti")
-					{
-						console.log(assenti[key])
-					}
-				}
-			assenti.$registraAssenti({idAppello: $scope.idAppello, idClasse: $scope.idClasse},function(response,header){
-//				console.log(headers());
+			assenti.$registraAssenti({idAppello: $scope.idAppello, idClasse: $scope.idClasse},
+			function(data,header){
+				console.log($scope.results)
+				$scope.appello.assenzePrese = true;
 //				$scope.appello = response;
+			},function(data){
+				console.log(data)
+				console.log(data.headers())
+				console.log(data.config)
 			})
 		};
 

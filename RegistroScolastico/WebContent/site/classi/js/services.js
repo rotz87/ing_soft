@@ -1,7 +1,7 @@
 var appelloServices = angular.module ('appelloServices',["ngResource"]);
 
-appelloServices.factory('Appello',['$resource',
-				function($resource){
+appelloServices.factory('Appello',['$resource','$http','$log',
+				function($resource,$http,$log){
 					return $resource('/RegistroScolastico/api/classi/:idClasse/appelli/:idAppello', null,
 							{
 								'myQuery': {method:'GET', params:{idClasse:'@idClasse',idAppello:'@idAppello'}, isArray:true},
@@ -17,6 +17,11 @@ appelloServices.factory('Appello',['$resource',
 									url: '/RegistroScolastico/api/classi/:idClasse/appelli/:idAppello/assenti', 
 									method: 'POST', 
 									params: { idClasse: '@idClasse', idAppello:'@idAppello'}
+									},
+								'listaStudenti':{
+									url: '/RegistroScolastico/api/classi/:idClasse/studenti',
+									method: 'GET',
+									params: {idClasse:'@idClasse'}, isArray:false
 									}
 							});
 				}]);
