@@ -17,7 +17,7 @@ public class Calendario {
 		dataOdierna = this.calcolaDataOdierna();
 		giorniFestivi = new TreeSet<LocalDate>();
 		giorniSettimanaliFestivi = new LinkedList<Integer>();
-		giorniSettimanaliFestivi.add(6);
+//		giorniSettimanaliFestivi.add(6);
 		giorniSettimanaliFestivi.add(7);
 
 	}
