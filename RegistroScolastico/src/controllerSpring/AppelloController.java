@@ -5,26 +5,12 @@ import domain.Appello;
 import domain.Assenza;
 import domain.FaiAppelloController;
 import resourceSupport.AppelloRS;
-import service.*;
-
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
-import org.joda.time.chrono.AssembledChronology;
 import org.springframework.hateoas.Link;
-import org.springframework.hateoas.ResourceSupport;
-import org.springframework.hateoas.Resources;
-import org.springframework.hateoas.config.EnableHypermediaSupport;
-import org.springframework.hateoas.config.EnableHypermediaSupport.HypermediaType;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -139,37 +124,6 @@ public class AppelloController {
 			
 			return assenti;
 		}
-<<<<<<< HEAD
-	
-		@RequestMapping(value = "/{idAppello}/assenti", method = RequestMethod.POST)
-		public ResponseEntity<?> inserisciAssenze(@PathVariable long idAppello, @PathVariable long idClasse, @RequestBody long[] assenti){
-			FaiAppelloController fAController;
-			Appello appello;
-			Long[] idAssenti;
-			
-			fAController = new FaiAppelloController();
-			appello = fAController.getAppello(idClasse, idAppello);
-			
-			HttpHeaders httpHeaders;
-			httpHeaders = new HttpHeaders();
-			HttpStatus httpStatus = HttpStatus.CREATED;
-			
-			idAssenti = new Long[assenti.length];
-			for(int i=0; i<assenti.length; i++){
-				idAssenti[i] = assenti[i];
-			}
-			
-			try{
-				fAController.registraAssenze(idAssenti, idClasse, this.idDocenteProva);
-				
-			}catch(IllegalStateException ISE){
-				httpStatus = HttpStatus.FORBIDDEN;
-			}
-			
-			return new ResponseEntity<>(null, httpHeaders, httpStatus);
-		}
-=======
->>>>>>> branch 'master' of https://github.com/rotz87/ing_soft.git
 		
 //    @RequestMapping(method = RequestMethod.POST)
 //    ResponseEntity<?> add(@PathVariable long idAppello, @RequestBody Bookmark input) {
