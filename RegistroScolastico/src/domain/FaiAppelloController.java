@@ -82,6 +82,13 @@ public class FaiAppelloController {
 		}
 	}
 	
+	public Collection<Appello> getAppelli(Long idClasse){
+		Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
+		RegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();
+		return registroAssenzeCorrente.getAppelli().values();
+		
+	}
+	
 	public HashMap<Studente, Boolean>  getBoolAssenze(Long idClasse, Long idAppello){
 		Appello appelloCorrente = DBFake.getInstance().getAppelloById(idAppello);
 		HashMap<Studente, Boolean> rit;

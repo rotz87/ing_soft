@@ -51,6 +51,11 @@ public class RegistroAssenze {
 	public void avviaAppello() {
 		LocalDate dataRif = Calendario.getInstance().getDataOdierna();
 		if(!(this.esisteAppello(dataRif))){
+//			//debug
+//			Appello nuovoAppello = new Appello(dataRif);
+//			appelli.put(dataRif, nuovoAppello);
+//			System.out.println("-------------------------------------------------------------------------------------->id appello : "+nuovoAppello.getIdAppello());
+//			//fine debug
 			appelli.put(dataRif, new Appello(dataRif));
 		}else{
 			throw new IllegalStateException(" -- ATTENZIONE L'APPELLO ODIERNO E' GIA' STATO AVVIATO -- ");
