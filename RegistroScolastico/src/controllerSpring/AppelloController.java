@@ -5,6 +5,8 @@ import domain.Appello;
 import domain.Assenza;
 import domain.FaiAppelloController;
 import resourceSupport.AppelloRS;
+import resourceSupport.AssentiContainer;
+
 import java.net.URI;
 import java.util.Collection;
 import java.util.HashMap;
@@ -93,6 +95,38 @@ public class AppelloController {
 			
 			return new ResponseEntity<>(null, httpHeaders, httpStatus);
 		}
+		
+//		@RequestMapping(value = "/{idAppello}/prova", method = RequestMethod.POST)
+//		public ResponseEntity<?> prova(@PathVariable long idAppello, @PathVariable long idClasse, @RequestBody HashMap<String, Collection<Long>> prova_assenti){
+//			
+//			HttpHeaders httpHeaders;
+//			httpHeaders = new HttpHeaders();
+//			HttpStatus httpStatus = HttpStatus.CREATED;
+//			
+//			System.out.println("AppelloController; Interi:");
+//			for (Long i : prova_assenti.get("assenti")) {
+//				System.out.println(i);
+//			}
+//			
+//			return new ResponseEntity<>(null, httpHeaders, httpStatus);
+//		}
+		
+		
+		@RequestMapping(value = "/{idAppello}/prova", method = RequestMethod.POST)
+		public ResponseEntity<?> prova(@PathVariable long idAppello, @PathVariable long idClasse, @RequestBody AssentiContainer prova_assenti){
+			
+			HttpHeaders httpHeaders;
+			httpHeaders = new HttpHeaders();
+			HttpStatus httpStatus = HttpStatus.CREATED;
+			
+			System.out.println("AppelloController; Interi:");
+			for (Long i : prova_assenti.assenti) {
+				System.out.println(i);
+			}
+			
+			return new ResponseEntity<>(null, httpHeaders, httpStatus);
+		}
+		
 		
 		/**
 		 * Restituisce gli id degli studenti assenti
@@ -193,5 +227,5 @@ public class AppelloController {
 //		return aaa;
 //		
 //	}
-	
+		
 }
