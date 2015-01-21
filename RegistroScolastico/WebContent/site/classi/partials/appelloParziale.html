@@ -1,3 +1,7 @@
+<meta charset="UTF-8">
+	<div ng-if="erroreSistema.appello">
+	Attenzione... {{erroreSistema}}
+	</div>
 <div class="col-xs-12">
 	<div class="">{{aaa}}
 		<div class="">
@@ -23,7 +27,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="studente in studenti | orderBy:predicate" class="">
+								<tr ng-repeat="studente in studenti | orderBy:predicate:reverse" class="">
 									<td>{{$index+1}}</td>
 									<td>{{studente.cognome}}</td>
 									<td>{{studente.nome}}</td>
