@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 import org.springframework.hateoas.Link;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AppelloController {
 	
 	  private long idDocenteProva = 1;
+	  
 	
 	  @RequestMapping(method = RequestMethod.POST)
 	  ResponseEntity<?> creaAppello(@PathVariable long idClasse) {

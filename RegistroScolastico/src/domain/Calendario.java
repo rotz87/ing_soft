@@ -55,4 +55,8 @@ public class Calendario {
 		
 		return festivo;
 	}
+	
+	public boolean isOggiFestivo(){
+		return this.isFestivo(this.getDataOdierna());
+	}
 }
