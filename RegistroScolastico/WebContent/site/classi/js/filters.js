@@ -2,13 +2,14 @@ var appelloFilters =  angular.module('appelloFilters',[]);
 appelloFilters.filter('assente', function() {
 	return function(input,arrayIdStudenti) {
 		var output = {};
+		if (input) {
 		for (var j = 0; j < arrayIdStudenti;j++)
 		{
 			//arrayStudenti[j] = $scope.appello.studenti[j].idStudente
 			
 			arrayIdStudenti[$scope.appello.studenti[j].idStudente] = {idStudente : $scope.appello.studenti[j].idStudente}
 		}
-		if (input) {
+
 			for (var j = 0; j < input.length; j++)
 			{
 				var trovato = false

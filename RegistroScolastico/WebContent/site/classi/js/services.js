@@ -8,7 +8,7 @@ appelloServices.factory('Appello',['$resource','$http','$log',
 								'myPost': {method:'POST', params:{idClasse:'@idClasse'}},
 								'myUpdate': {method:'PUT', params:{idClasse:'@idClasse', idAppello:'@idAppello'}},
 								'myQuery2': {method:'GET', params:{idClasse:'@idClasse',idAppello:'@idAppello'}, isArray:false},
-								'recuperaAppelli':{
+								'recuperaAssenti':{
 									url: '/RegistroScolastico/api/classi/:idClasse/appelli/:idAppello/assenti', 
 									method: 'GET', 
 									params: { idClasse: '@idClasse', idAppello:'@idAppello'}, 
@@ -21,7 +21,9 @@ appelloServices.factory('Appello',['$resource','$http','$log',
 								'listaStudenti':{
 									url: '/RegistroScolastico/api/classi/:idClasse/studenti',
 									method: 'GET',
-									params: {idClasse:'@idClasse'}, isArray:false
+									params: {idClasse:'@idClasse'},
+									isArray:true
 									}
+								
 							});
 				}]);
