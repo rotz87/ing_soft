@@ -3,12 +3,17 @@ package controllerSpring;
 
 import domain.Appello;
 import domain.Assenza;
+import domain.Calendario;
 import domain.FaiAppelloController;
+import domain.Studente;
+import resourceSupport.AppelliContainerRS;
 import resourceSupport.AppelloRS;
-import resourceSupport.AssentiContainer;
+import resourceSupport.AssentiContainerRS;
+import resourceSupport.StudenteAppelloRS;
 
 import java.net.URI;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -32,7 +37,7 @@ public class AppelloController {
 	  @RequestMapping(method = RequestMethod.POST)
 	  ResponseEntity<?> creaAppello(@PathVariable long idClasse) {
 		  HttpHeaders httpHeaders;
-
+	
 		  FaiAppelloController fAController;
 	  	
 		  Link linkAppello;
@@ -44,17 +49,17 @@ public class AppelloController {
 		  try{
 				  fAController.avviaAppello(idClasse, this.idDocenteProva);
 				  System.out.println("Appello odierno: "+fAController.getAppelloOdierno(idClasse).getIdAppello() + " | " + fAController.getAppelloOdierno(idClasse).getData());
-
-				  //serve solo il link: si potrebbero passare meno parametri
-				  linkAppello = new AppelloRS(fAController.getAppelloOdierno(idClasse), idClasse, fAController.getStudenti(idClasse)).getLink("self");
-				  httpHeaders.setLocation(URI.create(linkAppello.getHref()));
+	
+			  //serve solo il link: si potrebbero passare meno parametri
+			  linkAppello = new AppelloRS(fAController.getAppelloOdierno(idClasse), idClasse).getLink("self");
+			  httpHeaders.setLocation(URI.create(linkAppello.getHref()));
 		  }catch(IllegalStateException ISE){
-				  httpStatus = HttpStatus.FORBIDDEN;
-//				  System.out.println("AppelloController:"+ISE.getMessage());
+			  httpStatus = HttpStatus.FORBIDDEN;
+	//				  System.out.println("AppelloController:"+ISE.getMessage());
 		  }
-
+	
 		  return new ResponseEntity<>(null, httpHeaders, httpStatus);
-
+	
 	  }
 		
 	  
@@ -67,11 +72,37 @@ public class AppelloController {
 			fAController = new FaiAppelloController();
 			appello = fAController.getAppello(idClasse, idAppello);
 			
-			return new AppelloRS(appello, idClasse, fAController.getStudenti(idClasse));
+			return new AppelloRS(appello, idClasse);
 		}
+		
+		
+		@RequestMapping(method = RequestMethod.GET)
+		public AppelliContainerRS getAppelli(@PathVariable long idClasse) {
+			
+			FaiAppelloController fAController;
+			Collection<Appello> appelli;
+			Collection<AppelloRS> appelliRS;
+			Boolean appelloAvviabile;
+			Date dataAppelloOdierno;
+			
+			fAController = new FaiAppelloController();
+			appelli = fAController.getAppelli(idClasse);
+			appelliRS = new LinkedList<AppelloRS>();
+			
+			
+			for (Appello appello : appelli) {
+				appelliRS.add(new AppelloRS(appello, idClasse));
+			}
+			
+			appelloAvviabile = fAController.isAppelloOdiernoAvviabile(idClasse);
+			dataAppelloOdierno = Calendario.getInstance().getDataOdierna().toDate();
+			
+			return new AppelliContainerRS(appelloAvviabile, dataAppelloOdierno, appelliRS);
+		}
+		
 	
 		@RequestMapping(value = "/{idAppello}/assenti", method = RequestMethod.POST)
-		public ResponseEntity<?> inserisciAssenze(@PathVariable long idAppello, @PathVariable long idClasse, @RequestBody AssentiContainer assenti){
+		public ResponseEntity<?> inserisciAssenze(@PathVariable long idAppello, @PathVariable long idClasse, @RequestBody AssentiContainerRS assenti){
 			FaiAppelloController fAController;
 			Long[] idAssenti;
 			int i;
@@ -107,16 +138,16 @@ public class AppelloController {
 		 * @return Collection<idStudentiAssenti>
 		 */
 		@RequestMapping(value = "/{idAppello}/assenti", method = RequestMethod.GET)
-		public AssentiContainer getAssenti(@PathVariable long idAppello, @PathVariable long idClasse) {
+		public AssentiContainerRS getAssenti(@PathVariable long idAppello, @PathVariable long idClasse) {
 			
 			FaiAppelloController fAController;
 			Appello appello;
-			AssentiContainer assenti;
+			AssentiContainerRS assenti;
 			HashMap<Long, Assenza> assenze;
 			
 			fAController = new FaiAppelloController();
 			appello = fAController.getAppello(idClasse, idAppello);
-			assenti = new AssentiContainer();
+			assenti = new AssentiContainerRS();
 			
 			if(fAController.getAppello(idClasse, idAppello).isAssenzePrese()){
 				assenze = fAController.getAssenze(idClasse, appello.getIdAppello());
@@ -130,73 +161,31 @@ public class AppelloController {
 			return assenti;
 		}
 		
-//    @RequestMapping(method = RequestMethod.POST)
-//    ResponseEntity<?> add(@PathVariable long idAppello, @RequestBody Bookmark input) {
-//
-//        //this.validateUser(userId);
-//    	
-//    	Bookmark bookmark = new Bookmark(input.getUri(), input.getDescription());
-//    	
-//    	DBSingleton.getIstance().addBookmark(bookmark);
-//    	
-//    	DBSingleton.getIstance().getAccounts().get(username).addBookmark(bookmark);
-//
-//        HttpHeaders httpHeaders = new HttpHeaders();
-//
-//        Link forOneBookmark = new BookmarkResource(bookmark).getLink("self");
-//        httpHeaders.setLocation(URI.create(forOneBookmark.getHref()));
-//
-//        return new ResponseEntity<>(null, httpHeaders, HttpStatus.CREATED);
-//
-//    }
-//	
-//    @RequestMapping(method = RequestMethod.GET)
-//    public Collection<BookmarkResource> readBookmarks(@PathVariable String username) {
-//
-//        //this.validateUser(username);
-//
-//    	List<BookmarkResource> bookmarkResourceList = new LinkedList<BookmarkResource>();
-//    	
-//    	Map<Long, Bookmark> bookmarks = DBSingleton.getIstance().getAccounts().get(username).getBookmarks();
-//    	for (Long id : bookmarks.keySet()) {  		
-//    		bookmarkResourceList.add(new BookmarkResource(bookmarks.get(id)));
-//		}
-// 
-//    	return (Collection<BookmarkResource>)bookmarkResourceList;
-//        //return new Resources<BookmarkResource>(bookmarkResourceList);
-//
-//    }
-//	
-//	@RequestMapping(value = "/{bookmarkId}", method = RequestMethod.GET)
-//	public BookmarkResource readBookmark(@PathVariable String username, @PathVariable Long bookmarkId) {
-//		
-//		DBSingleton db;
-//		Account account;
-//		Bookmark bookmark;
-//		
-//		account = null;
-//		bookmark = null;
-//		
-//		db = DBSingleton.getIstance();
-//		account = db.getAccounts().get(username);
-//		if (account != null){
-//			bookmark = account.getBookmarks().get(bookmarkId);
+		
+//		@RequestMapping(value = "/provap", method = RequestMethod.POST)
+//		public ResponseEntity<?> provap(@PathVariable long idClasse, @RequestBody Collection<MyCont> appello) {
+//			
+//			HttpHeaders httpHeaders = new HttpHeaders();
+//			HttpStatus httpStatus = HttpStatus.CREATED;
+//			
+//			
+//			
+//			return new ResponseEntity<>(null, httpHeaders, httpStatus);
 //		}
 //		
-//		//return null;
-//		return new BookmarkResource(bookmark);
-//		
-//	}
-	
-	
-//	@RequestMapping(method = RequestMethod.GET)
-//	public Calendar getCalendar() {
-//		
-//		Calendar aaa = Calendar.getInstance();
-//				aaa.set(2005, 11, 5);
-//		
-//		return aaa;
-//		
-//	}
+//		@RequestMapping(value = "/provag", method = RequestMethod.GET)
+//		public Collection<Object> provag() {
+//			
+//			LinkedList<Object> lista;
+//			
+//			lista = new LinkedList<Object>();
+//			
+//			lista.add(new MyCont(1, "aaa"));
+//			lista.add(new MyCont(2, "bbb"));
+//			
+//			lista.add(new MyCont1(true, null));
+//			
+//			return lista;
+//		}
 		
 }

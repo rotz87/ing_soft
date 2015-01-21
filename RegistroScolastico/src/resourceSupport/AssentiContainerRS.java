@@ -3,11 +3,11 @@ package resourceSupport;
 import java.util.Collection;
 import java.util.LinkedList;
 
-public class AssentiContainer {
+public class AssentiContainerRS {
 	
 	public Collection<Long> assenti;
 	
-	public AssentiContainer() {
+	public AssentiContainerRS() {
 		this.assenti = new LinkedList<Long>();
 	}
 	

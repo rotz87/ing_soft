@@ -11,10 +11,12 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 
 import controllerSpring.AppelloController;
+import controllerSpring.ClasseController;
 
 /**
  * Da completare: come fa l'appello a prendere una lista di studenti?
@@ -27,19 +29,21 @@ public class AppelloRS extends ResourceSupport{
 	private long idAppello;
 	private Date data;
 	private boolean assenzePrese;
-	private LinkedList<StudenteAppelloRS> studenti;
 
 
-	public AppelloRS(Appello appello, long idClasse, Collection<Studente> studenti) {
+	public AppelloRS(Appello appello, long idClasse) {
 		
 		this.idAppello = appello.getIdAppello();
 		this.data = appello.getData().toDate();
 		this.assenzePrese = appello.isAssenzePrese();
-		
-		this.studenti = new LinkedList<StudenteAppelloRS>();
-		setStudenti(studenti);
-		
-		this.add(ControllerLinkBuilder.linkTo(AppelloController.class, idClasse).withRel("appelli"));
+//da togliere
+//		this.add(ControllerLinkBuilder.linkTo(
+//				ControllerLinkBuilder.methodOn(AppelloController.class, idClasse).
+//					getStudenti(idClasse, idAppello)).withRel("studenti"));
+		this.add(ControllerLinkBuilder.linkTo(
+		ControllerLinkBuilder.methodOn(ClasseController.class, idClasse).
+			getStudenti(idClasse)).withRel("studenti"));
+		this.add(ControllerLinkBuilder.linkTo(AppelloController.class, idClasse).withRel(Link.REL_PREVIOUS));
 		this.add(ControllerLinkBuilder.linkTo(
 				ControllerLinkBuilder.methodOn(AppelloController.class, idClasse).
 					getAppello(this.idAppello, idClasse)).withSelfRel());
@@ -59,23 +63,6 @@ public class AppelloRS extends ResourceSupport{
 	
 	public void setData(Date data) {
 		this.data = data;
-	}
-
-	
-	public Collection<StudenteAppelloRS> getStudenti() {
-		
-		return this.studenti;
-		
-	}
-
-
-	public void setStudenti(Collection<Studente> studenti) {
-		
-		this.studenti.clear();
-		for (Studente studente : studenti) {
-			this.studenti.add(new StudenteAppelloRS(studente));
-		}
-		
 	}
 
 
