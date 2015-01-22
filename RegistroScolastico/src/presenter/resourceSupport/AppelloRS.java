@@ -1,8 +1,4 @@
-package resourceSupport;
-
-import domain.Appello;
-import domain.Assenza;
-import domain.Studente;
+package presenter.resourceSupport;
 
 import java.util.Collection;
 import java.util.Date;
@@ -15,8 +11,11 @@ import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 
-import controllerSpring.AppelloController;
-import controllerSpring.ClasseController;
+import domain.model.Appello;
+import domain.model.Assenza;
+import domain.model.Studente;
+import presenter.controllerSpring.AppelloController;
+import presenter.controllerSpring.ClasseController;
 
 /**
  * Da completare: come fa l'appello a prendere una lista di studenti?

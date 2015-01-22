@@ -1,14 +1,5 @@
-package controllerSpring;
+package presenter.controllerSpring;
 
-
-import domain.Appello;
-import domain.Assenza;
-import domain.Calendario;
-import domain.Studente;
-import resourceSupport.AppelliContainerRS;
-import resourceSupport.AppelloRS;
-import resourceSupport.AssentiContainerRS;
-import resourceSupport.StudenteAppelloRS;
 
 import java.net.URI;
 import java.util.Collection;
@@ -27,7 +18,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import controllerDomain.FaiAppelloController;
+import presenter.resourceSupport.AppelliContainerRS;
+import presenter.resourceSupport.AppelloRS;
+import presenter.resourceSupport.AssentiContainerRS;
+import presenter.resourceSupport.StudenteAppelloRS;
+import domain.controller.FaiAppelloController;
+import domain.model.Appello;
+import domain.model.Assenza;
+import domain.model.Calendario;
+import domain.model.Studente;
 
 
 @RestController
@@ -35,7 +34,6 @@ import controllerDomain.FaiAppelloController;
 public class AppelloController {
 	
 	  private long idDocenteProva = 1;
-	  private FaiAppelloController fAC;
 	  
 	
 	  @RequestMapping(method = RequestMethod.POST)

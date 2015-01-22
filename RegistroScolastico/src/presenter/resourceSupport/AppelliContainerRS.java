@@ -1,4 +1,4 @@
-package resourceSupport;
+package presenter.resourceSupport;
 
 import java.util.Collection;
 import java.util.Date;

@@ -1,9 +1,9 @@
-package resourceSupport;
+package presenter.resourceSupport;
 
-
-import domain.Studente;
 
 import org.springframework.hateoas.ResourceSupport;
+
+import domain.model.Studente;
 
 
 public class StudenteAppelloRS extends ResourceSupport{

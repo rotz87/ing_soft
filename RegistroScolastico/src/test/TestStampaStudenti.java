@@ -2,8 +2,8 @@ package test;
 
 import java.util.Collection;
 
+import domain.model.*;
 import service.DBFake;
-import domain.*;
 
 public class TestStampaStudenti {
 

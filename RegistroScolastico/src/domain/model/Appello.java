@@ -1,4 +1,4 @@
-package domain;
+package domain.model;
 
 import org.joda.time.LocalDate;
 

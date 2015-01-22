@@ -6,9 +6,9 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import controllerDomain.FaiAppelloController;
+import domain.controller.FaiAppelloController;
+import domain.model.*;
 import service.DBFake;
-import domain.*;
 
 public class TestGetAssenze {
 	public static void main(String[] args) throws IOException{

@@ -1,8 +1,8 @@
-package resourceSupport;
+package presenter.resourceSupport;
 
 import org.springframework.hateoas.ResourceSupport;
 
-import domain.Assenza;
+import domain.model.Assenza;
 
 public class AssenzaAppelloRS extends ResourceSupport {
 	

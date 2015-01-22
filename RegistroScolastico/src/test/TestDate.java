@@ -7,7 +7,7 @@ import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
-import domain.Calendario;
+import domain.model.Calendario;
 
 public class TestDate {
 	public static void main(String[] args){

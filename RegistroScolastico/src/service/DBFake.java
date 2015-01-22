@@ -10,7 +10,7 @@ import java.util.TreeMap;
 
 import org.joda.time.LocalDate;
 
-import domain.*;
+import domain.model.*;
 
 
 
