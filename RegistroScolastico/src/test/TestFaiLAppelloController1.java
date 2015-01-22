@@ -17,24 +17,32 @@ import domain.*;
 
 public class TestFaiLAppelloController1 {
 	public static void main(String[] args){
+		Long idClasseProva = new Long(1);
+		Long idDocenteProva = new Long(1);
 		//creazione dal controller FaiAppelloConreoller
 		FaiAppelloController controlloreAppello = new FaiAppelloController();
 		
 		//TEST DEL METODO
 //		System.out.println("studenti della 1A : " + primaA.getStudenti() );
 		
-		stampaLibretti(DBFake.getInstance().getClasseById(new Long(1)).getRegistroAssenze());
+		stampaLibretti(DBFake.getInstance().getClasseById(idClasseProva).getRegistroAssenze());
 		
 		try{
 
-			controlloreAppello.avviaAppello(new Long(1), new Long(1));
+			controlloreAppello.avviaAppello(idClasseProva, idDocenteProva);
 //			controlloreAppello.avviaAppello(new Long(1), new Long(2));
 		}catch(IllegalStateException ISE){
 			System.out.println("Messaggio dell'eccezione: "+ISE.getMessage());
 		}
-		Long[] listaIdStudAssenti = {new Long(3), new Long(1), new Long(5), new Long(2)};
+		
+		Long[] listaIdStudAssenti = {new Long(3), new Long(1), new Long(5), new Long(2)};//lista per classe con id 1
+//		Long[] listaIdStudAssenti = {new Long(13), new Long(11), new Long(15), new Long(12)};//lista per classe con id 2
+//		Long[] listaIdStudAssenti = {new Long(23), new Long(24)};//lista per classe con id 3
+//		Long[] listaIdStudAssenti = {new Long(26), new Long(28)};//lista per classe con id 4
+		
+		
 		try{
-			controlloreAppello.registraAssenze(listaIdStudAssenti,new Long(1), new Long(1) );
+			controlloreAppello.registraAssenze(listaIdStudAssenti,idClasseProva, idDocenteProva );
 		}catch(IllegalStateException ISE){
 			System.out.println("Messaggio dell'eccezione: "+ISE.getMessage());
 		}
@@ -44,7 +52,7 @@ public class TestFaiLAppelloController1 {
 		
 		
 		//Stampa dei libretti
-		stampaLibretti(DBFake.getInstance().getClasseById(new Long(1)).getRegistroAssenze());
+		stampaLibretti(DBFake.getInstance().getClasseById(idClasseProva).getRegistroAssenze());
 		
 
 	}

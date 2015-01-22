@@ -323,7 +323,7 @@ public class DBFake {
 		
 		
 		//Creazione di un vettore di studenti per cui segnare l'assenza
-		Long[] listaIdStudAssenti = {marioRomano.getId(), pieroRusso.getId(),ivoMarino.getId(), marinoEsposito.getId()};
+//		Long[] listaIdStudAssenti = {marioRomano.getId(), pieroRusso.getId(),ivoMarino.getId(), marinoEsposito.getId()};
 		
 		//recupero dell'appello odierno dal registro
 //		Appello appelloOdierno = regAssPrimaA.getAppelloOdierno();
@@ -339,111 +339,146 @@ public class DBFake {
 		LocalDate data16_12_14 = new LocalDate(2014,12,16);
 		LocalDate data17_12_14 = new LocalDate(2014,12,17);
 		
-		//creazione di lista di appelli 
-		LinkedList<Appello> AppelliAssenzeMaccio = new LinkedList<Appello>();
-		LinkedList<Appello> AppelliAssenzePiero = new LinkedList<Appello>();
-		LinkedList<Appello> AppelliAssenzeIvo = new LinkedList<Appello>();
-		LinkedList<Appello> AppelliAssenzeMarino = new LinkedList<Appello>();
-		LinkedList<Appello> AppelliAssenzeHerbert = new LinkedList<Appello>();
+		//creazione di lista di appelli da assegnare all'assenza
+		LinkedList<Appello> appelliAssenzeMarioRomano = new LinkedList<Appello>();
+		LinkedList<Appello> appelliAssenzePieroRusso = new LinkedList<Appello>();
+		LinkedList<Appello> appelliAssenzeIvoMarini = new LinkedList<Appello>();
+		LinkedList<Appello> appelliAssenzeMarinoEsposito = new LinkedList<Appello>();
+		LinkedList<Appello> appelliAssenzeDavideDiSalvo = new LinkedList<Appello>();
 		LinkedList<Appello> AppelliAssenzeTestFineMese = new LinkedList<Appello>();
-		LinkedList<Appello> AppelliAssenzeIvo2 = new LinkedList<Appello>();
-		LinkedList<Appello> AppelliAssenzeIvo3 = new LinkedList<Appello>();
+		LinkedList<Appello> appelliAssenzeIvoMarini2 = new LinkedList<Appello>();
+		LinkedList<Appello> appelliAssenzeIvoMarini3 = new LinkedList<Appello>();
+		LinkedList<Appello> appelliAssenzeMariannaDonati = new LinkedList<Appello>();
+		LinkedList<Appello> appelliAssenzeLorenzoNegri = new LinkedList<Appello>();
+		
 		
 		//creazione di appelli
-		Appello appello8_12_14 = new Appello(data8_12_14);
-		Appello appello10_12_14 = new Appello(data10_12_14);
-		Appello appello11_12_14 = new Appello(data11_12_14);
-		Appello appello12_12_14 = new Appello(data12_12_14);
-		Appello appello13_12_14 = new Appello(data13_12_14);
-		Appello appello14_12_14 = new Appello(data14_12_14);
-		Appello appello15_12_14 = new Appello(data15_12_14);
-		Appello appello16_12_14 = new Appello(data16_12_14);
+//		Appello appello8_12_14 = new Appello(data8_12_14);
+		Appello appello_1A_10_12_14 = new Appello(data10_12_14);
+		Appello appello_1A_11_12_14 = new Appello(data11_12_14);
+		Appello appello_1A_12_12_14 = new Appello(data12_12_14);
+		Appello appello_1A_13_12_14 = new Appello(data13_12_14);
+//		Appello appello14_12_14 = new Appello(data14_12_14);
+		Appello appello_1A_15_12_14 = new Appello(data15_12_14);
+		Appello appello_1A_16_12_14 = new Appello(data16_12_14);
 		
-		tuttiGliAppelli.put(appello8_12_14.getIdAppello(), appello8_12_14);
-		tuttiGliAppelli.put(appello10_12_14.getIdAppello(), appello10_12_14);
-		tuttiGliAppelli.put(appello11_12_14.getIdAppello(), appello11_12_14);
-		tuttiGliAppelli.put(appello12_12_14.getIdAppello(), appello12_12_14);
-		tuttiGliAppelli.put(appello13_12_14.getIdAppello(), appello13_12_14);
-		tuttiGliAppelli.put(appello14_12_14.getIdAppello(), appello14_12_14);
-		tuttiGliAppelli.put(appello15_12_14.getIdAppello(), appello15_12_14);
-		tuttiGliAppelli.put(appello16_12_14.getIdAppello(), appello16_12_14);
+		Appello appello_2A_16_12_14 = new Appello(data16_12_14);
+		Appello appello_1B_16_12_14 = new Appello(data16_12_14);
+		Appello appello_2B_16_12_14 = new Appello(data16_12_14);
+		
+//		tuttiGliAppelli.put(appello8_12_14.getIdAppello(), appello8_12_14);
+		tuttiGliAppelli.put(appello_1A_10_12_14.getIdAppello(), appello_1A_10_12_14);
+		tuttiGliAppelli.put(appello_1A_11_12_14.getIdAppello(), appello_1A_11_12_14);
+		tuttiGliAppelli.put(appello_1A_12_12_14.getIdAppello(), appello_1A_12_12_14);
+		tuttiGliAppelli.put(appello_1A_13_12_14.getIdAppello(), appello_1A_13_12_14);
+//		tuttiGliAppelli.put(appello14_12_14.getIdAppello(), appello14_12_14);
+		tuttiGliAppelli.put(appello_1A_15_12_14.getIdAppello(), appello_1A_15_12_14);
+		tuttiGliAppelli.put(appello_1A_16_12_14.getIdAppello(), appello_1A_16_12_14);
+		
+		tuttiGliAppelli.put(appello_2A_16_12_14.getIdAppello(), appello_2A_16_12_14);
+		tuttiGliAppelli.put(appello_1B_16_12_14.getIdAppello(), appello_1B_16_12_14);
+		tuttiGliAppelli.put(appello_2B_16_12_14.getIdAppello(), appello_2B_16_12_14);
 		
 		
 		
-		regAssPrimaA.getAppelli().put(appello8_12_14.getData(), appello8_12_14);
-		regAssPrimaA.getAppelli().put(appello10_12_14.getData(), appello10_12_14);
-		regAssPrimaA.getAppelli().put(appello11_12_14.getData(), appello11_12_14);
-		regAssPrimaA.getAppelli().put(appello12_12_14.getData(), appello12_12_14);
-		regAssPrimaA.getAppelli().put(appello13_12_14.getData(), appello13_12_14);
-		regAssPrimaA.getAppelli().put(appello14_12_14.getData(), appello14_12_14);
-		regAssPrimaA.getAppelli().put(appello15_12_14.getData(), appello15_12_14);
-		regAssPrimaA.getAppelli().put(appello16_12_14.getData(), appello16_12_14);
+		
+//		regAssPrimaA.getAppelli().put(appello8_12_14.getData(), appello8_12_14);
+		regAssPrimaA.getAppelli().put(appello_1A_10_12_14.getData(), appello_1A_10_12_14);
+		regAssPrimaA.getAppelli().put(appello_1A_11_12_14.getData(), appello_1A_11_12_14);
+		regAssPrimaA.getAppelli().put(appello_1A_12_12_14.getData(), appello_1A_12_12_14);
+		regAssPrimaA.getAppelli().put(appello_1A_13_12_14.getData(), appello_1A_13_12_14);
+//		regAssPrimaA.getAppelli().put(appello14_12_14.getData(), appello14_12_14);
+		regAssPrimaA.getAppelli().put(appello_1A_15_12_14.getData(), appello_1A_15_12_14);
+		regAssPrimaA.getAppelli().put(appello_1A_16_12_14.getData(), appello_1A_16_12_14);
+		
+		regAssSecondaA.getAppelli().put(appello_2A_16_12_14.getData(), appello_2A_16_12_14);
+		regAssPrimaB.getAppelli().put(appello_1B_16_12_14.getData(), appello_1B_16_12_14);
+		regAssSecondaB.getAppelli().put(appello_2B_16_12_14.getData(), appello_2B_16_12_14);
+		
 
 		
 		//assegnazione di appelli alle liste di appelli
-		AppelliAssenzeMaccio.add(appello10_12_14);
-		AppelliAssenzeMaccio.add(appello11_12_14);
+		appelliAssenzeMarioRomano.add(appello_1A_10_12_14);
+		appelliAssenzeMarioRomano.add(appello_1A_11_12_14);
 //				AppelliAssenzeMaccio.add(appello12_12_14);
 		 
-		AppelliAssenzePiero.add(appello10_12_14);
-		AppelliAssenzePiero.add(appello11_12_14);
-		AppelliAssenzePiero.add(appello12_12_14);
+		appelliAssenzePieroRusso.add(appello_1A_10_12_14);
+		appelliAssenzePieroRusso.add(appello_1A_11_12_14);
+		appelliAssenzePieroRusso.add(appello_1A_12_12_14);
 //				AppelliAssenzePiero.add(appello16_12_14);
 		
-		AppelliAssenzeIvo2.add(appello10_12_14);
+		appelliAssenzeIvoMarini2.add(appello_1A_10_12_14);
+		appelliAssenzeIvoMarini2.add(appello_1A_11_12_14);
 		
-		AppelliAssenzeIvo3.add(appello8_12_14);
+//		appelliAssenzeIvoMarini3.add(appello8_12_14);
 		
-		AppelliAssenzeIvo.add(appello13_12_14);
-		AppelliAssenzeIvo.add(appello14_12_14);
-		AppelliAssenzeIvo.add(appello15_12_14);
-		AppelliAssenzeIvo.add(appello16_12_14);
+
+//		appelliAssenzeIvoMarini.add(appello14_12_14);
+		appelliAssenzeIvoMarini.add(appello_1A_15_12_14);
+		appelliAssenzeIvoMarini.add(appello_1A_16_12_14);
 		
-		AppelliAssenzeMarino.add(appello16_12_14);
+		appelliAssenzeMarinoEsposito.add(appello_1A_16_12_14);
 		
-		AppelliAssenzeHerbert.add(appello14_12_14);
+		appelliAssenzeDavideDiSalvo.add(appello_1A_16_12_14);
+		
+		appelliAssenzeMariannaDonati.add(appello_2A_16_12_14);
+		appelliAssenzeLorenzoNegri.add(appello_2A_16_12_14);
 		
 		
 		//assegnazione delle liste di appelli alle assenze
-		Assenza assM1 = new Assenza(AppelliAssenzeMaccio);
-		Assenza assP1 = new Assenza(AppelliAssenzePiero);
-		Assenza assI1 = new Assenza(AppelliAssenzeIvo);
-		Assenza assI2 = new Assenza(AppelliAssenzeIvo2);
-		Assenza assI3 = new Assenza(AppelliAssenzeIvo3);
-		Assenza assH1 = new Assenza(AppelliAssenzeHerbert);
-		Assenza assMa1 = new Assenza(AppelliAssenzeMarino);
+		Assenza assM1 = new Assenza(appelliAssenzeMarioRomano);
+		Assenza assP1 = new Assenza(appelliAssenzePieroRusso);
+		Assenza assI1 = new Assenza(appelliAssenzeIvoMarini);
+		Assenza assI2 = new Assenza(appelliAssenzeIvoMarini2);
+		Assenza assI3 = new Assenza(appelliAssenzeIvoMarini3);
+		Assenza assD1 = new Assenza(appelliAssenzeDavideDiSalvo);
+		Assenza assMa1 = new Assenza(appelliAssenzeMarinoEsposito);
+		
+		Assenza assMariannaDonati1 =  new Assenza(appelliAssenzeMariannaDonati);
+		Assenza assLorenzoNegri1 =  new Assenza(appelliAssenzeLorenzoNegri);
 		
 		//creazione delle liste di assenze da assegnare ai libretti
-		LinkedList<Assenza> listaAssenzeMaccio = new  LinkedList<Assenza>();
-		listaAssenzeMaccio.add(assM1);
-		LinkedList<Assenza> listaAssenzePiero = new  LinkedList<Assenza>();
-		listaAssenzePiero.add(assP1);
-		LinkedList<Assenza> listaAssenzeIvo = new  LinkedList<Assenza>();
-		listaAssenzeIvo.add(assI3);
-		listaAssenzeIvo.add(assI2);
-		listaAssenzeIvo.add(assI1);
-		LinkedList<Assenza> listaAssenzeHerbert = new  LinkedList<Assenza>();
-		listaAssenzeHerbert.add(assH1);
-		LinkedList<Assenza> listaAssenzeMarino = new  LinkedList<Assenza>();
-		listaAssenzeMarino.add(assMa1);
+		LinkedList<Assenza> listaAssenzeMarioRomano = new  LinkedList<Assenza>();
+		listaAssenzeMarioRomano.add(assM1);
+		LinkedList<Assenza> listaAssenzePieroRusso = new  LinkedList<Assenza>();
+		listaAssenzePieroRusso.add(assP1);
+		LinkedList<Assenza> listaAssenzeIvoMarini = new  LinkedList<Assenza>();
+//		listaAssenzeIvoMarini.add(assI3);
+		listaAssenzeIvoMarini.add(assI2);
+		listaAssenzeIvoMarini.add(assI1);
+		LinkedList<Assenza> listaAssenzeDavideDiSalvo = new  LinkedList<Assenza>();
+		listaAssenzeDavideDiSalvo.add(assD1);
+		LinkedList<Assenza> listaAssenzeMarinoEsposito = new  LinkedList<Assenza>();
+		listaAssenzeMarinoEsposito.add(assMa1);
 		
+		LinkedList<Assenza> listaAssenzeMariannaDonati = new  LinkedList<Assenza>();
+		listaAssenzeMariannaDonati.add(assMariannaDonati1);
+		LinkedList<Assenza> listaAssenzeLorenzoNegri = new  LinkedList<Assenza>();
+		listaAssenzeLorenzoNegri.add(assLorenzoNegri1);
 		
 		//assegnazione delle liste ai libretti
-		librettoMarioRomano.assengnaAssenzeNonGiustificate(listaAssenzeMaccio);
-		librettoPieroRusso.assengnaAssenzeNonGiustificate(listaAssenzePiero);
+		librettoMarioRomano.assengnaAssenzeNonGiustificate(listaAssenzeMarioRomano);
+		librettoPieroRusso.assengnaAssenzeNonGiustificate(listaAssenzePieroRusso);
 //		librettoPiero.assengnaAssenzeNonGiustificate(listaAssenzeTsetFineMese);
-		librettoIvoMarino.assengnaAssenzeNonGiustificate(listaAssenzeIvo);
+		librettoIvoMarino.assengnaAssenzeNonGiustificate(listaAssenzeIvoMarini);
 //		librettoMarino.assengnaAssenzeNonGiustificate(listaAssenzeMarino);
-		librettoDavideDiSalvo.assengnaAssenzeNonGiustificate(listaAssenzeHerbert);
+		librettoDavideDiSalvo.assengnaAssenzeNonGiustificate(listaAssenzeDavideDiSalvo);
 		
-		appello8_12_14.setAssenzePrese(true);
-		appello10_12_14.setAssenzePrese(true);
-		appello11_12_14.setAssenzePrese(true);
-		appello12_12_14.setAssenzePrese(true);
-		appello13_12_14.setAssenzePrese(true);
-		appello14_12_14.setAssenzePrese(true);
-		appello15_12_14.setAssenzePrese(true);
-		appello16_12_14.setAssenzePrese(true);
+		librettoMariannaDonati.assengnaAssenzeNonGiustificate(listaAssenzeMariannaDonati);
+		librettoLorenzoNegri.assengnaAssenzeNonGiustificate(listaAssenzeLorenzoNegri);
+		
+//		appello8_12_14.setAssenzePrese(true);
+		appello_1A_10_12_14.setAssenzePrese(true);
+		appello_1A_11_12_14.setAssenzePrese(true);
+		appello_1A_12_12_14.setAssenzePrese(true);
+		appello_1A_13_12_14.setAssenzePrese(true);
+//		appello14_12_14.setAssenzePrese(true);
+		appello_1A_15_12_14.setAssenzePrese(true);
+		appello_1A_16_12_14.setAssenzePrese(true);
+		
+		appello_2A_16_12_14.setAssenzePrese(true);
+		appello_1B_16_12_14.setAssenzePrese(true);
+//		appello_2B_16_12_14.setAssenzePrese(true);
 
 	}
 	
