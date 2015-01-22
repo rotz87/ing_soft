@@ -19,6 +19,10 @@ public class Calendario {
 		giorniSettimanaliFestivi = new LinkedList<Integer>();
 //		giorniSettimanaliFestivi.add(6);
 		giorniSettimanaliFestivi.add(7);
+		
+		giorniFestivi.add(new LocalDate(2014,12,8));
+		giorniFestivi.add(new LocalDate(2014,12,25));
+		giorniFestivi.add(new LocalDate(2014,12,26));
 
 	}
 	

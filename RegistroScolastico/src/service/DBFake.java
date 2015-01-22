@@ -484,7 +484,7 @@ public class DBFake {
 		
 		appello_2A_16_12_14.setAssenzePrese(true);
 		appello_1B_16_12_14.setAssenzePrese(true);
-//		appello_2B_16_12_14.setAssenzePrese(true);
+		appello_2B_16_12_14.setAssenzePrese(true);
 
 	}
 	
