@@ -1,20 +1,15 @@
 package test;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
 import java.util.Map.Entry;
 
-import org.joda.time.LocalDate;
-
-import domain.controller.FaiAppelloController;
-import domain.model.*;
 import service.DBFake;
+import domain.controller.FaiAppelloController;
+import domain.model.Appello;
+import domain.model.Assenza;
+import domain.model.LibrettoAssenze;
+import domain.model.RegistroAssenze;
+import domain.model.Studente;
 
 public class TestFaiLAppelloController1 {
 	public static void main(String[] args){

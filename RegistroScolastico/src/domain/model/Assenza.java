@@ -1,7 +1,7 @@
 package domain.model;
 
 
-import java.util.*;
+import java.util.LinkedList;
 
 import org.joda.time.LocalDate;
 

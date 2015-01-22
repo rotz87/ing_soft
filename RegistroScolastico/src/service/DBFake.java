@@ -10,7 +10,13 @@ import java.util.TreeMap;
 
 import org.joda.time.LocalDate;
 
-import domain.model.*;
+import domain.model.Appello;
+import domain.model.Assenza;
+import domain.model.Classe;
+import domain.model.Docente;
+import domain.model.LibrettoAssenze;
+import domain.model.RegistroAssenze;
+import domain.model.Studente;
 
 
 

@@ -1,6 +1,7 @@
 package domain.model;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
 
 /**
  * Conterrà il registro delle assenze.

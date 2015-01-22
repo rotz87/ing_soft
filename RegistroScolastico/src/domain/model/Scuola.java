@@ -1,6 +1,6 @@
 package domain.model;
 
-import java.util.*;
+import java.util.List;
 /**
  * @deprecated
  * @author Fabio

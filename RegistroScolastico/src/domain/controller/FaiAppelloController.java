@@ -2,18 +2,16 @@ package domain.controller;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 
 import org.joda.time.LocalDate;
 
+import service.DBFake;
 import domain.model.Appello;
 import domain.model.Assenza;
 import domain.model.Classe;
 import domain.model.Docente;
 import domain.model.RegistroAssenze;
 import domain.model.Studente;
-import scala.collection.Map;
-import service.DBFake;
 
 public class FaiAppelloController {
 //	private Scuola scuola;

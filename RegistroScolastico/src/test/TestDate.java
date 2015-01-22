@@ -1,13 +1,12 @@
 package test;
 
-import java.awt.*;
-import java.util.*;
+import java.util.GregorianCalendar;
+import java.util.Iterator;
+import java.util.TreeSet;
 
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
-
-import domain.model.Calendario;
 
 public class TestDate {
 	public static void main(String[] args){

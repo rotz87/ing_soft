@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 import org.springframework.hateoas.Link;
-import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,12 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 import presenter.resourceSupport.AppelliContainerRS;
 import presenter.resourceSupport.AppelloRS;
 import presenter.resourceSupport.AssentiContainerRS;
-import presenter.resourceSupport.StudenteAppelloRS;
 import domain.controller.FaiAppelloController;
 import domain.model.Appello;
 import domain.model.Assenza;
 import domain.model.Calendario;
-import domain.model.Studente;
 
 
 @RestController

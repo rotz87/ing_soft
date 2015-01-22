@@ -6,9 +6,10 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import domain.controller.FaiAppelloController;
-import domain.model.*;
 import service.DBFake;
+import domain.controller.FaiAppelloController;
+import domain.model.Assenza;
+import domain.model.Studente;
 
 public class TestGetAssenze {
 	public static void main(String[] args) throws IOException{

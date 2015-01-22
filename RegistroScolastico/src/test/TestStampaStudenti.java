@@ -2,8 +2,9 @@ package test;
 
 import java.util.Collection;
 
-import domain.model.*;
 import service.DBFake;
+import domain.model.Classe;
+import domain.model.Studente;
 
 public class TestStampaStudenti {
 

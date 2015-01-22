@@ -1,18 +1,14 @@
 package presenter.controllerSpring;
 
-import service.DBFake;
-
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.hateoas.Link;
-import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.WebApplicationContext;
+
+import service.DBFake;
 
 /**
  * Inizializza gli oggetti dopo l'avvio del server
