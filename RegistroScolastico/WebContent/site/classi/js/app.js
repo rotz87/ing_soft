@@ -20,6 +20,9 @@ appelloApp.config(["$locationProvider","$routeProvider",function($locationProvid
 	  redirectTo:function(routeParams){
 		  return "/"+routeParams.idClasse+'/';
 	  }
+  }).when('/',
+  {
+	  redirectTo:'/1'
   })
   $locationProvider.html5Mode(true);
 }]);

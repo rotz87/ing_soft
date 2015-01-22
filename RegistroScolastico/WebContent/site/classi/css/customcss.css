@@ -1,41 +1,45 @@
-body
-{
-	font-family:@font-family-sans-serif;
-	background-color:@main_color;
+
+.modal-header-success {
+  background-color:#5cb85c;
+  border-color: inherit;
+  border-top-left-radius:inherit;
+  border-top-right-radius:inherit;
+  border-bottom-radius:0px;
 }
-
-.checkbox
-{
-	margin:0;
-	margin-left:0px;
+.modal-header-danger {
+  background-color:#d9534f;
+  border-color: inherit;
+  border-top-left-radius:inherit;
+  border-top-right-radius:inherit;
+  border-bottom-radius:0px;
 }
-.checkbox input[type="checkbox"]
-{
-	margin-left:0px;
+.modal-header-warning {
+  background-color:#f0ad4e;
+  border-color: inherit;
+  border-top-left-radius:inherit;
+  border-top-right-radius:inherit;
+  border-bottom-radius:0px;
 }
-.checkbox label
-{
-	margin-left:20px;
+.modal-header-info {
+  background-color:#5bc0de;
+  border-color: inherit;
+  border-top-left-radius:inherit;
+  border-top-right-radius:inherit;
+  border-bottom-radius:0px;
 }
-.myCheckbox
-{
-	text-align:center;
+.modal-header-primary {
+  background-color:#337ab7;
+  border-color: inherit;
+  border-top-left-radius:inherit;
+  border-top-right-radius:inherit;
+  border-bottom-radius:0px;
 }
-.myCheckbox input:hover
+#myModal
 {
-	cursor:pointer;
+	top:5%;
 }
-
-
-
-@main_color = #52AD47;
-
-
-@secondary_color: #687583;
-
-@third_color: #CDD8E1;
-{
-}
-@fourth_color: #93D87F;
-
-@fifth_color:#FFFFFF;
+@brand-primary: darken(#428bca, 6.5%); // #337ab7
+@brand-success: #5cb85c;
+@brand-info:    #5bc0de;
+@brand-warning: #f0ad4e;
+@brand-danger:  #d9534f;

@@ -9,7 +9,7 @@
 		<tr ng-repeat="appello in elencoAppelli | orderBy:predicate:reverse" >
 			<td> {{appello.data | date:"EEEE dd MMMM yyyy" }}</td>
 			<td> 
-				<button type="button" class="btn btn-default btn-lg btn-block col-xs-12 col-md-12" ng-if="appello.appelloAvviabile == true" ng-click="creaAppello(idClasse)"> Fai L'appello</button>
+				<button type="button" class="btn btn-default btn-lg btn-block col-xs-12 col-md-12 btn-info" ng-if="appello.appelloAvviabile == true" ng-click="creaAppello(idClasse)"> Fai L'appello</button>
 				<button type="button" class="btn btn-default btn-lg btn-block col-xs-12 col-md-12" ng-if="appello.appelloAvviabile == false" ng-disabled="appello.appelloAvviabile == false" disabled="disabled"> festa </button>
 				<button type="button" class="btn btn-default btn-lg btn-block col-xs-12 col-md-12" ng-if="appello.idAppello!=null" ng-click="mostraAppello(appello.idAppello)"> Mostra Appello</button>
 			</td>
