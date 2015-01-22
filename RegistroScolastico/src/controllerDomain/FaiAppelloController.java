@@ -1,4 +1,4 @@
-package domain;
+package controllerDomain;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -6,6 +6,12 @@ import java.util.HashSet;
 
 import org.joda.time.LocalDate;
 
+import domain.Appello;
+import domain.Assenza;
+import domain.Classe;
+import domain.Docente;
+import domain.RegistroAssenze;
+import domain.Studente;
 import scala.collection.Map;
 import service.DBFake;
 

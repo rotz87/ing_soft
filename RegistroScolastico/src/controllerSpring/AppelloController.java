@@ -4,7 +4,6 @@ package controllerSpring;
 import domain.Appello;
 import domain.Assenza;
 import domain.Calendario;
-import domain.FaiAppelloController;
 import domain.Studente;
 import resourceSupport.AppelliContainerRS;
 import resourceSupport.AppelloRS;
@@ -28,12 +27,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import controllerDomain.FaiAppelloController;
+
 
 @RestController
 @RequestMapping("/classi/{idClasse}/appelli")
 public class AppelloController {
 	
 	  private long idDocenteProva = 1;
+	  private FaiAppelloController fAC;
 	  
 	
 	  @RequestMapping(method = RequestMethod.POST)
