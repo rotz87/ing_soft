@@ -1,12 +1,12 @@
-
+<meta charset="UTF-8">
 <table class="table table-responsive table-hover table-striped col-xs-6">
 	<thead>
 		<tr>
-			<th class="col-xs-6"> data appello </th>
+			<th class="col-xs-6"> <a href="" ng-click="predicate='data' ; reverse=!reverse"> data appello </a></th>
 			<th class="col-xs-2"> Azione </th>
 	</thead>
 	<tbody>
-		<tr ng-repeat="appello in elencoAppelli">
+		<tr ng-repeat="appello in elencoAppelli | orderBy:predicate:reverse" >
 			<td> {{appello.data | date:"EEEE dd MMMM yyyy" }}</td>
 			<td> 
 				<button type="button" class="btn btn-default btn-lg btn-block col-xs-12 col-md-12" ng-if="appello.appelloAvviabile == true" ng-click="creaAppello(idClasse)"> Fai L'appello</button>
@@ -14,7 +14,8 @@
 				<button type="button" class="btn btn-default btn-lg btn-block col-xs-12 col-md-12" ng-if="appello.idAppello!=null" ng-click="mostraAppello(appello.idAppello)"> Mostra Appello</button>
 			</td>
 		</tr>
-		
 	</tbody>
-	qui c'è l'id dell'appello: {{appelloCreato.idAppello}}
+	<div ng-if="erroreSistema">
+	Attenzione... {{erroreSistema}}
+	</div>
 </table>

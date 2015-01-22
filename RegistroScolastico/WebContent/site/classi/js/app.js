@@ -16,10 +16,10 @@ appelloApp.config(["$locationProvider","$routeProvider",function($locationProvid
 	  templateUrl: 'partials/elencoAppelli.html',
 	  controller: 'riempiElencoAppelli',
 	  title:'seleziona l\'appello'
-  }).otherwise({
-	  templateUrl: 'partials/elencoAppelli.html',
-	  controller: 'riempiElencoAppelli',
-	  title:'altra pagina'
-  });
-	  $locationProvider.html5Mode(true);
+  }).when('/:idClasse/appelli',{
+	  redirectTo:function(routeParams){
+		  return "/"+routeParams.idClasse+'/';
+	  }
+  })
+  $locationProvider.html5Mode(true);
 }]);

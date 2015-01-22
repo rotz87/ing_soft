@@ -43,55 +43,50 @@ appelloControllers.controller('templateTitolo', ['$scope','$location','$rootScop
 
 appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$location','$http','$rootScope','$q', function($scope, Appello, $location, $http, $rootScope, $q) {
 	  var newUri;
-	  var nuovoUri=[];
-	  $scope.appelloUri={}
 	  $scope.idClasse = 0;
-	  nuovoAppello = {}
+	  var nuovoAppello = {}
 	  nuovoAppello = $location.path().split("/")
 	  $scope.idClasse = nuovoAppello[1];
 	  
-	  $scope.appello1 = { data: 'Naomi', azione: 'visualizza' };
-	  $scope.appello2 = { data: 'Igor', azione: 'Avvia' };
 	  $scope.mioController = "avviaAppello";
 	  
-	  var testAppelloJSON = {"isAvviabile":true,"dataAppelloAvviabile":1421547000000, "appelli" : [{},{},{}]}
-	  $scope.elencoAppelli = [{idAppello:"1", data:'naomi'},
-	                          {idAppello:"2", data:'peppe'},
-	                          {idAppello:"3", data:'giu'},
-	                          {idAppello:"4", data:'pic'},
-	                          {idAppello:null, data:'tiz', appelloAvviabile:true},
-	                          {idAppello:null, data:'tiz', appelloAvviabile:false}
-	                          ];
+//	  $scope.elencoAppelli = [{idAppello:"1", data:'naomi'},
+//	                          {idAppello:"2", data:'peppe'},
+//	                          {idAppello:"3", data:'giu'},
+//	                          {idAppello:"4", data:'pic'},
+//	                          {idAppello:null, data:'tiz', appelloAvviabile:true},
+//	                          {idAppello:null, data:'tiz', appelloAvviabile:false}
+//	                          ];
+	  $scope.predicate="data";
+	  $scope.elencoAppelli={}
 	  $scope.elencoAppelli2 = Appello.myQuery2({idClasse:$scope.idClasse},function(response,header){
 		  //successo
-		  console.log("aa")
 	  },function(response,header){
 		  //fallimento
 	  })
 	  $q.when($scope.elencoAppelli2.$promise).then(function(result){
-		  console.log(result.appelli);
 		  var aggiungiAppello = false;
 		  var trovato = false;
 		  $scope.elencoAppelli = result.appelli;
 		  for (key in result.appelli)
 		  {
-			  console.log(result.appelli[key].data)
-			  console.log(result.dataAppelloAvviabile)
 			  if (result.appelli[key].data == result.dataAppelloAvviabile)
-			{
+			  {
 				  trovato = true;
-			}
+			  }
 		  }
 		  if(trovato == false)
-			  {
+		  {
 			  var newAppello = {};
 			  newAppello.data = result.dataAppelloAvviabile;
 			  newAppello.idAppello = null;
 			  newAppello.appelloAvviabile = result.appelloAvviabile;
 			  $scope.elencoAppelli.push(newAppello)
-			  console.log("appello Aggiunto")
-			  }
+		  }
 
+	  },function(result){
+		  console.log("errore")
+		  $scope.erroreSistema = 'è avvenuto un errore, probabilmente la classe selezionata non esiste'
 	  })
 	  
 //	  var creaAppello = false;
@@ -256,6 +251,7 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 				},
 				function(response,header){
 					console.log("non sono riuscito a caricare gli studenti")
+					$scope.erroreSistema.studenti = "errore nel recupero degli studenti!!!!"
 				});
 
 		var appelloCorrente = new Appello();
@@ -270,6 +266,7 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 				function(response, header)
 				{
 					console.log("idClasse o idAppello errati!")
+					$scope.erroreSistema.appello = "errore nel recupero dell'appello!!!!"
 				})
 
 		
@@ -287,6 +284,7 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 					console.log(response)
 					console.log(response.status)
 					console.log(response.statusText)
+					$scope.erroreSistema.assenti = "errore nel recupero assenti!!!!"
 				})
 		
 //		Appello.myQuery2({idClasse:$scope.idClasse, idAppello:$scope.idAppello},function(response,header){
@@ -363,6 +361,7 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 				$scope.appello.assenzePrese = true;
 			},function(data){
 				//fallimento
+				$scope.erroreSistema.registrazione = "errore in fase di registrazione!!!!"
 			})
 		};
 
@@ -371,6 +370,7 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 		.then(function(results){
 			results.appello.assenzeSemplici = $filter('assente')(results.assenti.assenti,results.studenti);
 		})
+		$scope.erroreSistema = {}
 }]);
 
 function PostsCtrlAjax($scope, $http, myUri, destinazione, $location) {

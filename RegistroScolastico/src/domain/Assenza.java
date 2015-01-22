@@ -80,7 +80,7 @@ public class Assenza {
 	
 	public boolean isCertificatoMedicoRichiesto(){
 		boolean rit = false;
-		
+				
 		if((appelli.getLast().getData().getDayOfYear() - appelli.getFirst().getData().getDayOfYear())+1 >= 5){
 			rit = true;
 		}
