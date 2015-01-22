@@ -12,9 +12,9 @@ import java.util.Map.Entry;
 
 import org.joda.time.LocalDate;
 
-import controllerDomain.FaiAppelloController;
+import domain.controller.FaiAppelloController;
+import domain.model.*;
 import service.DBFake;
-import domain.*;
 
 public class TestFaiLAppelloController1 {
 	public static void main(String[] args){
