@@ -43,15 +43,16 @@
 									</td>
 									<td>
 										<button type="button" ng-click="gestisciRitardo()" class="btn btn-default btn-xs btn-block" data-toggle="modal" data-target="#myModal"
-											disabled="disabled" ng-disabled = "disabilitaRitardo">inserisci ritardo</button>
+											disabled="disabled" ng-disabled = "studente.disabilitaRitardo">inserisci ritardo</button>
 									</td>
 									<td>
 										<button type="button" ng-click="gestisciUscita()" class="btn btn-default btn-xs btn-block" data-toggle="modal" data-target="#myModal"
-											ng-disabled="disabilitaUscita">inserisci uscita</button>
+											ng-disabled="studente.disabilitaUscita">inserisci uscita</button>
 									</td>
 									<td>
 										<button type="button" ng-click="gestisciGiustificazione()" class="btn btn-default btn-xs btn-block" data-toggle="modal" data-target="#myModal"
-											ng-disabled="disabilitaGiustificazione">giustificazione</button>
+											ng-disabled="studente.disabilitaGiustificazione">giustificazione 
+											</button>
 									</td>
 								</tr>
 							</tbody>
@@ -76,7 +77,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog ">
+  <div class="modal-dialog .myDialog">
     <div class="modal-content">
 	
 	<div class="modal-header ng-class: modalColor;">

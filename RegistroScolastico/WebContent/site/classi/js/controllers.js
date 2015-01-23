@@ -85,7 +85,6 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$locat
 		  }
 
 	  },function(result){
-		  console.log("errore")
 		  $scope.erroreSistema = 'è avvenuto un errore, probabilmente la classe selezionata non esiste'
 	  })
 	  
@@ -157,7 +156,6 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$locat
 			});
 		}
 		$scope.mostraAppello = function(idAppello){
-			console.log(idAppello)
 			$scope.idAppello = idAppello
 			$location.path($location.path()+"appelli/"+idAppello)
 		}
@@ -177,12 +175,7 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 		if ($rootScope.mioDato)
 		{
 			var resourceUrl;
-			console.log("ciaoo")
-			console.log($rootScope.mioDato)
-			console.log($location.path())
-			console.log("ciaoo")
 			$scope.appelloSelezionato = $rootScope.mioDato;
-			console.log($scope.appelloSelezionato.data.links)
 			for (var key in $scope.appelloSelezionato.data.links)
 			{
 				if($scope.appelloSelezionato.data.links[key].rel == "self"){
@@ -191,8 +184,6 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 					nuovoAppello = $location.path().split("/")
 				}
 			}
-			console.log("ho interrogato il rootscope")
-			console.log($location.path().split("/")[3])
 			$scope.idClasse = nuovoAppello[1];
 			$scope.idAppello = nuovoAppello[3];
 			$scope.mioAppello = retrieveObjectFromUrl($http, resourceUrl);
@@ -269,7 +260,6 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 				},
 				function(response, header)
 				{
-					console.log("idClasse o idAppello errati!")
 					$scope.erroreSistema.appello = "errore nel recupero dell'appello!!!!"
 				})
 
@@ -368,6 +358,7 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 				$scope.modalColor = "modal-header-success"
 				$scope.modalBtn = "btn-success"
 				$scope.bottoneDesc="aggiorna appello"
+				$scope.controllaAppello();
 			},function(data){
 				//fallimento
 				$scope.erroreSistema.registrazione = "errore in fase di registrazione!!!!";
@@ -396,19 +387,20 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 		var deferred = $q.defer();
 		$q.all({ studenti: $scope.studenti.$promise, appello: $scope.appello.$promise, assenti: $scope.assenti.$promise})
 		.then(function(results){
-			results.appello.assenzeSemplici = $filter('assente')(results.assenti.assenti,results.studenti);
-			console.log()
+			results.appello.assenzeSemplici = 
+				$filter('assente')(results.assenti.assenti,results.studenti);
 			if (results.appello.assenzePrese)
 			{
-				$scope.bottoneDesc = "aggiorna appello"
+				$scope.bottoneDesc = "aggiorna appello";
 			}
 			else
 			{
 				$scope.bottoneDesc = "Registra appello";
 			}
+			$scope.controllaAppello()
 		})
 		
-		$scope.erroreSistema = {}
+		$scope.erroreSistema = {};
 		
 		$scope.conferma = function(){
 			
@@ -417,37 +409,47 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 			  })
 		}
 		$scope.gestisciRitardo = function (){
-			$scope.nonSupportato()
+			$scope.nonSupportato();
 		}
 		$scope.gestisciUscita = function (){
-			$scope.nonSupportato()
+			$scope.nonSupportato();
 		}
 		$scope.gestisciGiustificazione = function (){
-			$scope.nonSupportato()
+			$scope.nonSupportato();
 		}
 		
 		$scope.nonSupportato = function(){
-			$scope.modalTitle = "Funzione non supportata"
-			$scope.myInput.messaggio = "Attualmente questa azione non è supportata"
-			$scope.modalColor = "modal-header-info"
-			$scope.modalBtn = "btn-info"
-			$scope.bottoneDesc="aggiorna appello"
+			$scope.modalTitle = "Funzione non supportata";
+			$scope.myInput.messaggio = "Attualmente questa azione non è supportata";
+			$scope.modalColor = "modal-header-info";
+			$scope.modalBtn = "btn-info";
+			$scope.bottoneDesc="aggiorna appello";
 		}
 		$scope.disabilitaRitardo = true; 
 		$scope.disabilitaUscita = true;
 		$scope.disabilitaGiustificazione = true;
-		$scope.controllaAppello = function(){
-			if($scope.appello.assenzePrese)
+		
+		$scope.controllaAppello = function()
+		{
+
+			for (var key in $scope.studenti)
 			{
-				$scope.disabilitaRitardo = true; 
-				$scope.disabilitaUscita = false;
-				$scope.disabilitaGiustificazione = false;
-				
+				var assente = ($scope.appello.assenzePrese == false);
+				if($scope.appello.assenzePrese == true)
+				{
+					if ($scope.appello.assenzeSemplici[$scope.studenti[key].idStudente])
+					{
+						if($scope.appello.assenzeSemplici[$scope.studenti[key].idStudente].assenza == true)
+						{
+							assente = true;
+						}
+					}
+				}
+				$scope.studenti[key].disabilitaGiustificazione = assente;
+				$scope.studenti[key].disabilitaUscita = assente;
+				$scope.studenti[key].disabilitaRitardo = !assente || $scope.appello.assenzePrese == false;
 			}
-			console.log("controllo")
 		}
-		setTimeout(
-		$scope.controllaAppello(),500)
 		//$scope.controllaAppello()
 }]);
 
@@ -455,11 +457,7 @@ function PostsCtrlAjax($scope, $http, myUri, destinazione, $location) {
     var risorsa = {}
     $http({method: 'GET', url: myUri }).success(function(data,header) {
         destinazione.data = data;
-        console.log(data)
-        console.log($scope.idClasse)
-        console.log($location.path())
         destinazione.url = $scope.idClasse+"/appelli/"+data.idAppello
-        console.log(destinazione.url)
         risorsa = destinazione
         $location.path(destinazione.url);
     });
