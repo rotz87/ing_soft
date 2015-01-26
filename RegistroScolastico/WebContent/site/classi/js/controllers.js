@@ -159,6 +159,10 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$locat
 			$scope.idAppello = idAppello
 			$location.path($location.path()+"appelli/"+idAppello)
 		}
+//		console.log("idAppello: ")
+//		console.log($scope.idAppello)
+		$rootScope.idClasse = $scope.idClasse;
+		$rootScope.idAppello = null;
 	}])
 	.directive('elencoAppello', function() {
 	  return {
@@ -180,7 +184,7 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 			{
 				if($scope.appelloSelezionato.data.links[key].rel == "self"){
 					resourceUrl = $scope.appelloSelezionato.data.links[key].href;
-					console.log(resourceUrl)
+//					console.log(resourceUrl)
 					nuovoAppello = $location.path().split("/")
 				}
 			}
@@ -242,7 +246,7 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 				function(response, header){
 //					console.log("recupero riuscito mystudenti, leggi la risposta");
 //					console.log(response);
-					console.log($scope.idClasse)
+//					console.log($scope.idClasse)
 				},
 				function(response,header){
 					console.log("non sono riuscito a caricare gli studenti")
@@ -397,13 +401,15 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 			{
 				$scope.bottoneDesc = "Registra appello";
 			}
-			$scope.controllaAppello()
+			$scope.controllaAppello();
+			$rootScope.idClasse = $scope.idClasse;
+			$rootScope.idAppello = $scope.idAppello;
 		})
 		
 		$scope.erroreSistema = {};
 		
-		$scope.conferma = function(){
-			
+		$scope.conferma = function()
+		{
 			$('#myModal').on('shown.bs.modal', function () {
 			    $('#myInput').focus()
 			  })
@@ -472,3 +478,71 @@ function retrieveObjectFromUrl($http, resourceUrl, destinazione){
 	return remoteObject;
 }
 
+appelloControllers.controller('popolamentoNavigazione', ['$scope','Appello','$q','$rootScope','$filter', function($scope, Appello, $q, $rootScope,$filter){
+
+	$scope.$watch("idClasse",function(newValue,oldValue){
+		
+		if(newValue != null)
+			{
+			$scope.elencoClassi = Appello.elencoClassi({},function(response,header)
+					{
+						//successo
+						for(classe in response)
+							{
+								if (response[classe].idClasse == $scope.selezioneAttuale.idClasse)
+									{
+										$scope.selezioneAttuale.classe = response[classe]
+									}
+								}
+							},
+					function(response,header){
+						//fallimento
+					})
+			}
+		else if (newValue != oldValue)
+		{
+
+			$scope.elencoClassi = Appello.elencoClassi({},function(response,header)
+					{
+						//successo
+					
+					},
+					function(response,header){
+						//fallimento
+					})
+			$scope.elencoAppelli = Appello.myQuery2({idClasse:newValue},function(response,header){
+				  //successo
+			  },function(response,header){
+				  //fallimento
+			  })
+		}
+		else{
+		}
+		
+		$scope.selezioneAttuale = {}
+		$scope.selezioneAttuale.idClasse = $scope.idClasse;
+		$scope.selezioneAttuale.idAppello = $scope.idAppello;
+		
+		$scope.$watch("idAppello",function(newAppello,oldAppello){
+			if(newAppello != null)
+			{
+			$scope.selezioneAttuale.idAppello = newAppello
+			$scope.elencoAppelli = Appello.myQuery2({idClasse:$scope.idClasse},
+					function(response,header)
+					{
+					  //successo
+					for(appello in response.appelli)
+					{
+						if (response.appelli[appello].idAppello == $scope.selezioneAttuale.idAppello)
+							{
+								$scope.selezioneAttuale.appello = response.appelli[appello]
+							}
+						}
+				  },function(response,header){
+					  //fallimento
+				  })
+			}
+		})
+	})
+
+}]);

@@ -23,7 +23,11 @@ appelloServices.factory('Appello',['$resource','$http','$log',
 									method: 'GET',
 									params: {idClasse:'@idClasse'},
 									isArray:true
-									}
-								
+									},
+								'elencoClassi':{
+									url:'/RegistroScolastico/api/classi/',
+									method:'GET',
+									isArray:true
+								}
 							});
 				}]);
