@@ -3,6 +3,7 @@ package test;
 import java.util.Collection;
 
 import service.DBFake;
+import service.Stampa;
 import domain.model.Classe;
 import domain.model.Studente;
 
@@ -12,21 +13,21 @@ public class TestStampaStudenti {
 		DBFake.getInstance();
 		Classe classe;
 		Collection<Studente> collStud;
-		System.out.println("STAMPA STUDENTI PER CLASSE ");
+		Stampa.stampaln("STAMPA STUDENTI PER CLASSE ");
 		for(Long i = 1L; i<5; i++){
 			classe = DBFake.getInstance().getClasseById(i);
 			collStud = classe.getStudenti();
-			System.out.println();
-			System.out.println("----- inizio classe ---------");
-			System.out.println("i = " +i);
-			System.out.print("idClasse = " +classe.getIdClasse());
-			System.out.println(" " +classe.getNome());
-			System.out.println();
+			Stampa.stampaln();
+			Stampa.stampaln("----- inizio classe ---------");
+			Stampa.stampaln("i = " +i);
+			Stampa.stampa("idClasse = " +classe.getIdClasse());
+			Stampa.stampaln(" " +classe.getNome());
+			Stampa.stampaln();
 			for(Studente stud : collStud){
-				System.out.println("id = " +stud.getId() + " | " + stud.getNome() + " " + stud.getCognome());
+				Stampa.stampaln("id = " +stud.getId() + " | " + stud.getNome() + " " + stud.getCognome());
 			}
 			
-			System.out.println("----- fine classe ---------");
+			Stampa.stampaln("----- fine classe ---------");
 		}
 		
 		

@@ -29,7 +29,7 @@ public class StartUp implements ApplicationListener{
 	@Override
 	public void onApplicationEvent(ApplicationEvent event) {
 		if (event instanceof ContextRefreshedEvent) {
-			//System.out.println("EVENTO");
+			//Stempa.stampaln("EVENTO");
         }
 		
 	}

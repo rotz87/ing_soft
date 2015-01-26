@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import service.Stampa;
+
 @RestController
 @RequestMapping("/help")
 public class HelpController{
@@ -32,13 +34,13 @@ public class HelpController{
 			this.linksCreated = true;
 		}
 		
-		System.out.println("URLs "+AppelloController.class.getName()+":");
+		Stampa.stampaln("URLs "+AppelloController.class.getName()+":");
 		
 		for (String link : this.links) {
-			System.out.println(link);
+			Stampa.stampaln(link);
 		}
 		
-		System.out.println("Fine URLs "+AppelloController.class.getName()+".");
+		Stampa.stampaln("Fine URLs "+AppelloController.class.getName()+".");
 		
 		return this.links;
 	}

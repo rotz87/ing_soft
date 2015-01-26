@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import presenter.resourceSupport.AppelliContainerRS;
 import presenter.resourceSupport.AppelloRS;
 import presenter.resourceSupport.AssentiContainerRS;
+import service.Stampa;
 import domain.controller.FaiAppelloController;
 import domain.model.Appello;
 import domain.model.Assenza;
@@ -47,14 +48,14 @@ public class AppelloController {
 		  
 		  try{
 				  fAController.avviaAppello(idClasse, this.idDocenteProva);
-				  System.out.println("Appello odierno: "+fAController.getAppelloOdierno(idClasse).getIdAppello() + " | " + fAController.getAppelloOdierno(idClasse).getData());
+				  Stampa.stampaln("Appello odierno: "+fAController.getAppelloOdierno(idClasse).getIdAppello() + " | " + fAController.getAppelloOdierno(idClasse).getData());
 	
 			  //serve solo il link: si potrebbero passare meno parametri
 			  linkAppello = new AppelloRS(fAController.getAppelloOdierno(idClasse), idClasse).getLink("self");
 			  httpHeaders.setLocation(URI.create(linkAppello.getHref()));
 		  }catch(IllegalStateException ISE){
 			  httpStatus = HttpStatus.FORBIDDEN;
-	//				  System.out.println("AppelloController:"+ISE.getMessage());
+	//				  Stempa.stampaln("AppelloController:"+ISE.getMessage());
 		  }
 	
 		  return new ResponseEntity<>(null, httpHeaders, httpStatus);

@@ -55,7 +55,7 @@ public class RegistroAssenze {
 //			//debug
 //			Appello nuovoAppello = new Appello(dataRif);
 //			appelli.put(dataRif, nuovoAppello);
-//			System.out.println("-------------------------------------------------------------------------------------->id appello : "+nuovoAppello.getIdAppello());
+//			Stempa.stampaln("-------------------------------------------------------------------------------------->id appello : "+nuovoAppello.getIdAppello());
 //			//fine debug
 			if(!Calendario.getInstance().isOggiFestivo()){
 				appelli.put(dataRif, new Appello(dataRif));

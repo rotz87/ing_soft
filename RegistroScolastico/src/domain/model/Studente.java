@@ -13,7 +13,7 @@ public class Studente {
 		this.id = Studente.generaId();
 		this.nome = nome;
 		this.cognome = cognome;
-//		System.out.println("<><><><> costruisco lo studente: " + this.nome +", "+this.cognome+ " con id: "+this.id);
+//		Stempa.stampaln("<><><><> costruisco lo studente: " + this.nome +", "+this.cognome+ " con id: "+this.id);
 	}
 	
 	

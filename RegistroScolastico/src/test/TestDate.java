@@ -8,22 +8,24 @@ import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
+import service.Stampa;
+
 public class TestDate {
 	public static void main(String[] args){
 		
 		GregorianCalendar g = new GregorianCalendar(2014,1,5);
-		System.out.println(g.getTime());
+		Stampa.stampaln(g.getTime());
 		
 		 DateTime dt = new DateTime();
-		 System.out.println(dt);
+		 Stampa.stampaln(dt);
 		 
 		 LocalTime lt = new LocalTime();
-		 System.out.println(lt);
+		 Stampa.stampaln(lt);
 		 
 		 LocalDate ld = new LocalDate();
-		 System.out.println(ld);
+		 Stampa.stampaln(ld);
 		 LocalDate ldplus = ld.plusDays(1);
-		 System.out.println("ldPlus " +ldplus);
+		 Stampa.stampaln("ldPlus " +ldplus);
 		 
 // --- STRATEGIA FESTIVI + DOMENICA NO SCUOLA
 // il sabato in questa strategia è considerato giorno scolastico
@@ -57,12 +59,12 @@ public class TestDate {
 		if(ultimaDataPlus.getDayOfWeek() == 7 && !((calendarioFestivi.contains(ultimaDataPlus)))){
 			ultimaDataPlus = ultimaDataPlus.plusDays(1);
 		}else if(calendarioFestivi.contains(ultimaDataPlus)) {
-//			System.out.println("passo per l'else if: " );
+//			Stempa.stampaln("passo per l'else if: " );
 		// entro nel ciclo se il giorno dopo l'ultimo giorno di assenza è festivo
 			 while(calendarioFestivi.contains(ultimaDataPlus) && true/*iterator.hasNext()*/){
 	//			 iterator.next();
 				 ultimaDataPlus = ultimaDataPlus.plusDays(1);
-//				 System.out.println("passo per il while: " );
+//				 Stempa.stampaln("passo per il while: " );
 			 }//end while
 		}
 		 if(ultimaDataPlus.getDayOfWeek()==7){
@@ -76,19 +78,19 @@ public class TestDate {
 			}
 // --- FINE STRATEGIA FESTIVI + DOMENICA NO SCUOLA
 			
-			System.out.println("ultimaData: "+ ultimaData);
-			System.out.println("ultimaDataPlus: "+ ultimaDataPlus);
-			System.out.println("oggi: "+ oggi);
-			System.out.println("inseribile: "+ inseribile);
+			Stampa.stampaln("ultimaData: "+ ultimaData);
+			Stampa.stampaln("ultimaDataPlus: "+ ultimaDataPlus);
+			Stampa.stampaln("oggi: "+ oggi);
+			Stampa.stampaln("inseribile: "+ inseribile);
 			
 			
-//			System.out.println("_____________________________________");
+//			Stempa.stampaln("_____________________________________");
 //			LinkedList<Integer> pippo = new LinkedList<Integer>();
 //			pippo.add(new Integer(1));
 //			pippo.add(new Integer(2));
 //			LocalDate localDate = new LocalDate(2015,01,12);
-//			System.out.println("day of week: " + localDate.getDayOfWeek());
-//			System.out.println("contain: " + pippo.contains(localDate.getDayOfWeek()));
+//			Stempa.stampaln("day of week: " + localDate.getDayOfWeek());
+//			Stempa.stampaln("contain: " + pippo.contains(localDate.getDayOfWeek()));
 			
 	}
 
