@@ -26,9 +26,9 @@ public class FaiAppelloController {
 		Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
 		Docente docenteCorrente = DBFake.getInstance().getDocenteById(idDocente);
 		
-//		System.out.println("docente corrente: " + docenteCorrente.getCognome());
-//		System.out.println("classe corrente: " + classeCorrente.getNome());
-//		System.out.println("lista classi: " + docenteCorrente.getClassi().toString());
+//		Stempa.stampaln("docente corrente: " + docenteCorrente.getCognome());
+//		Stempa.stampaln("classe corrente: " + classeCorrente.getNome());
+//		Stempa.stampaln("lista classi: " + docenteCorrente.getClassi().toString());
 		
 		if(docenteCorrente.isInsegnante(classeCorrente)){
 			RegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();

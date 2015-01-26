@@ -5,6 +5,8 @@ import java.util.LinkedList;
 
 import org.joda.time.LocalDate;
 
+import service.Stampa;
+
 public class Assenza {
 
 	private LinkedList<Appello> appelli;
@@ -37,11 +39,11 @@ public class Assenza {
 		try{
 			appelli.add(appello);
 		}catch (NullPointerException NPE){
-			System.out.println("----------------------------------------- ");
-			System.out.println("sono nel catch !! ");
-			System.out.println("appelli: "+ appelli);
-			System.out.println("appello: "+ appello);
-			System.out.println("-----------------------------------------. ");
+			Stampa.stampaln("----------------------------------------- ");
+			Stampa.stampaln("sono nel catch !! ");
+			Stampa.stampaln("appelli: "+ appelli);
+			Stampa.stampaln("appello: "+ appello);
+			Stampa.stampaln("-----------------------------------------. ");
 		}
 	}
 
@@ -52,21 +54,21 @@ public class Assenza {
 	 */
 	public boolean isInseribile(Appello appello) {
 		boolean inseribile = false;
-//		System.out.println("\n >>>>>>>>>> passo per isInseribile ");
+//		Stampa.stampaln("\n >>>>>>>>>> passo per isInseribile ");
 		LocalDate ultimaDataPlus = appelli.getLast().getData().plusDays(1);
 		LocalDate oggi = Calendario.getInstance().getDataOdierna();//per le prove, a regime usare la riga di sotto
 //		LocalDate oggi = appello.getDataL();
-//		System.out.println("appelli.getLast().getDataL(): "+appelli.getLast().getDataL());
-//		System.out.println("ultimaDataPlus: "+ultimaDataPlus);
-//		System.out.println("oggi: "+oggi);
+//		Stampa.stampaln("appelli.getLast().getDataL(): "+appelli.getLast().getDataL());
+//		Stampa.stampaln("ultimaDataPlus: "+ultimaDataPlus);
+//		Stampa.stampaln("oggi: "+oggi);
 		
 		if(ultimaDataPlus.isEqual(oggi)){
 			inseribile = true;
 		}else{
 			inseribile = false;
 		}
-//		System.out.println("inseribile: "+inseribile);
-//		System.out.println(" >>>>>>>>>> esco da isInseribile \n");
+//		Stampa.stampaln("inseribile: "+inseribile);
+//		Stampa.stampaln(" >>>>>>>>>> esco da isInseribile \n");
 		return inseribile;
 	}
 
@@ -85,7 +87,7 @@ public class Assenza {
 			rit = true;
 		}
 		int x = (appelli.getLast().getData().getDayOfYear() - appelli.getFirst().getData().getDayOfYear())+1;
-		System.out.println("\n differenza tra i giorni:"+ x +"\n ");
+		Stampa.stampaln("\n differenza tra i giorni:"+ x +"\n ");
 		return rit;
 	}
 	

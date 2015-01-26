@@ -38,14 +38,14 @@ public class LibrettoAssenze {
 	 */
 	public void segnaAssenza(Appello appello) {
 		
-//		System.out.println("sono in librettoAssenze.segnaAssenza di " + studente.getNome());
+//		Stempa.stampaln("sono in librettoAssenze.segnaAssenza di " + studente.getNome());
 		boolean inseribile = false;
 		Assenza ultimaAssenzaNonGiustificata = null;
 		
 		if(!(nonGiustificate.isEmpty())){
 			ultimaAssenzaNonGiustificata = this.getUltimaAssenzaNonGiustificata();
-//			System.out.println("\n libretto di:  "+ this.getStudente().getNome() +" "+ this.getStudente().getCognome());
-//			System.out.println("ultimo appello dell'ultima assenza non giustificata "+ this.getUltimaAssenzaNonGiustificata().getUltimoAppelloAssenza().getDataL()+"\n");
+//			Stempa.stampaln("\n libretto di:  "+ this.getStudente().getNome() +" "+ this.getStudente().getCognome());
+//			Stempa.stampaln("ultimo appello dell'ultima assenza non giustificata "+ this.getUltimaAssenzaNonGiustificata().getUltimoAppelloAssenza().getDataL()+"\n");
 			inseribile = ultimaAssenzaNonGiustificata.isInseribile(appello);	
 		}
 		
@@ -54,20 +54,20 @@ public class LibrettoAssenze {
 		if (inseribile){
 			
 			ultimaAssenzaNonGiustificata.inserisciAppelloAssenza(appello);
-//			System.out.println("accodo l'assenza " );
+//			Stempa.stampaln("accodo l'assenza " );
 		}else{
 			
 			Assenza nuovaAssenza = new Assenza();
 			nonGiustificate.add(nuovaAssenza);
 			nuovaAssenza.inserisciAppelloAssenza(appello);
-//			System.out.println("creo l'assenza " );
+//			Stempa.stampaln("creo l'assenza " );
 		}
 		
 	}
 
 	private Assenza getUltimaAssenzaNonGiustificata() {
 		//probabilmente è da cambiare
-//		System.out.println("nonGiustificate.get(0): "+nonGiustificate.get(nonGiustificate.size()-1).getUltimoAppelloAssenza().getDataL());
+//		Stempa.stampaln("nonGiustificate.get(0): "+nonGiustificate.get(nonGiustificate.size()-1).getUltimoAppelloAssenza().getDataL());
 
 		return nonGiustificate.get(nonGiustificate.size()-1);
 	}

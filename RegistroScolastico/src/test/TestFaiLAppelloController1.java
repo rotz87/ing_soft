@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 import service.DBFake;
+import service.Stampa;
 import domain.controller.FaiAppelloController;
 import domain.model.Appello;
 import domain.model.Assenza;
@@ -19,7 +20,7 @@ public class TestFaiLAppelloController1 {
 		FaiAppelloController controlloreAppello = new FaiAppelloController();
 		
 		//TEST DEL METODO
-//		System.out.println("studenti della 1A : " + primaA.getStudenti() );
+//		Stampa.stampaln("studenti della 1A : " + primaA.getStudenti() );
 		
 		stampaLibretti(DBFake.getInstance().getClasseById(idClasseProva).getRegistroAssenze());
 		
@@ -28,7 +29,7 @@ public class TestFaiLAppelloController1 {
 			controlloreAppello.avviaAppello(idClasseProva, idDocenteProva);
 //			controlloreAppello.avviaAppello(new Long(1), new Long(2));
 		}catch(IllegalStateException ISE){
-			System.out.println("Messaggio dell'eccezione: "+ISE.getMessage());
+			Stampa.stampaln("Messaggio dell'eccezione: "+ISE.getMessage());
 		}
 		
 		Long[] listaIdStudAssenti = {new Long(3), new Long(1), new Long(5), new Long(2)};//lista per classe con id 1
@@ -40,10 +41,10 @@ public class TestFaiLAppelloController1 {
 		try{
 			controlloreAppello.registraAssenze(listaIdStudAssenti,idClasseProva, idDocenteProva );
 		}catch(IllegalStateException ISE){
-			System.out.println("Messaggio dell'eccezione: "+ISE.getMessage());
+			Stampa.stampaln("Messaggio dell'eccezione: "+ISE.getMessage());
 		}
 		catch(NullPointerException NPE){
-			System.out.println("NULL POITER EXCEPTION: "+NPE.getMessage());
+			Stampa.stampaln("NULL POITER EXCEPTION: "+NPE.getMessage());
 		}
 		
 		
@@ -54,32 +55,32 @@ public class TestFaiLAppelloController1 {
 	}
 	
 	private static void stampaLibretti(RegistroAssenze regAss){
-		System.out.println();
-		System.out.println("VISUALIZZAZIONE ASSENZE NON GIUSTIFICATE DEGLI STUDENTI _________________________ \n \n");
+		Stampa.stampaln();
+		Stampa.stampaln("VISUALIZZAZIONE ASSENZE NON GIUSTIFICATE DEGLI STUDENTI _________________________ \n \n");
 		Iterator entries = regAss.getLibrettiAssenze().entrySet().iterator();
 		while (entries.hasNext()) {
 		  Entry thisEntry = (Entry) entries.next();
 		  Studente Stud = (Studente)thisEntry.getKey();
 		  LibrettoAssenze libAss = (LibrettoAssenze)thisEntry.getValue();
-		  System.out.println("STUDENTE : "+libAss.getStudente().getNome() +" "+libAss.getStudente().getCognome());
-		  System.out.println("ASSENZE NON GIUSTIFICATE : \n");
+		  Stampa.stampaln("STUDENTE : "+libAss.getStudente().getNome() +" "+libAss.getStudente().getCognome());
+		  Stampa.stampaln("ASSENZE NON GIUSTIFICATE : \n");
 		  if (/*libAss.getNonGiustificate() != null && */ (!(libAss.getNonGiustificate().isEmpty()))){
 			  for (Assenza assNG : libAss.getNonGiustificate()) {
-				  System.out.println("---------Inizio Assenza-------- ");
+				  Stampa.stampaln("---------Inizio Assenza-------- ");
 				  for (Appello app : assNG.getAppelli()){
-					  System.out.println("data dell'appello dell'assenza : "+app.getData().toString());
+					  Stampa.stampaln("data dell'appello dell'assenza : "+app.getData().toString());
 				  }
 				  if(assNG.isCertificatoMedicoRichiesto()){
-					  System.out.println(" \n E' richiesto il certificato medico !! \n");  
+					  Stampa.stampaln(" \n E' richiesto il certificato medico !! \n");  
 				  }
-				  System.out.println("-------Fine Assenza--------\n");
+				  Stampa.stampaln("-------Fine Assenza--------\n");
 					
 				}
-			  System.out.println("-------fine studente---------- \n \n");
-			}else{ System.out.println("\n non ci sono assenze non giustificate \n");}
+			  Stampa.stampaln("-------fine studente---------- \n \n");
+			}else{ Stampa.stampaln("\n non ci sono assenze non giustificate \n");}
 		}
-		System.out.println("________________________________________FINE");
-		System.out.println();
+		Stampa.stampaln("________________________________________FINE");
+		Stampa.stampaln();
 		
 	}
 }
