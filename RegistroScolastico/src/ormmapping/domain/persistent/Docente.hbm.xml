@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: Universita degli Studi dell'Aquila
+License Type: Academic
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="domain.persistent.Docente" table="Docente" schema="" lazy="false">
+		<id name="idDocente" column="IdDocente" type="long" unsaved-value="0">
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="nome" column="Nome" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="cognome" column="Cognome" type="string" length="255" not-null="false" lazy="false"/>
+		<set name="classi" lazy="extra" cascade="save-update,lock" inverse="false">
+			<key column="DocenteIdDocente" not-null="true"/>
+			<one-to-many class="domain.persistent.Classe"/>
+		</set>
+	</class>
+</hibernate-mapping>

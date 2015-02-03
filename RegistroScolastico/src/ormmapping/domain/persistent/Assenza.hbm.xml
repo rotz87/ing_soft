@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: Universita degli Studi dell'Aquila
+License Type: Academic
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="domain.persistent.Assenza" table="Assenza" schema="" lazy="false">
+		<id name="ID" column="ID" type="integer" unsaved-value="0">
+			<generator class="native">
+			</generator>
+		</id>
+		<many-to-one name="giustificazione" column="GiustificazioneID" class="domain.persistent.Giustificazione" cascade="save-update,lock" unique="true" not-null="false" lazy="proxy">
+		</many-to-one>
+		<set name="appello" lazy="extra" cascade="save-update,lock" inverse="false">
+			<key column="AssenzaID" not-null="true"/>
+			<one-to-many class="domain.persistent.Appello"/>
+		</set>
+		<set name="appelliAssenza" lazy="extra" cascade="save-update,lock" inverse="false">
+			<key column="AssenzaID2" not-null="true"/>
+			<one-to-many class="domain.persistent.Appello"/>
+		</set>
+		<set name="appelli" lazy="extra" cascade="save-update,lock" inverse="false">
+			<key column="AssenzaID4" not-null="true"/>
+			<one-to-many class="domain.persistent.Appello"/>
+		</set>
+	</class>
+</hibernate-mapping>
