@@ -2,30 +2,32 @@ package domain.model;
 
 import org.joda.time.LocalDate;
 
-public class Appello {
+import domain.persistent.Appello;
 
-	private long idAppello;
-	private boolean assenzePrese;
+public class MAppello extends AModel<Appello>{
 
-	/**
-	 * @deprecated
-	 * detiene il conteggio delle isranze create per generare l'idAppello.
-	 */
-	private static long contaId = 0;
-	
-	private LocalDate data;
+//	private long idAppello;
+//	private boolean assenzePrese;
+//
+//	/**
+//	 * @deprecated
+//	 * detiene il conteggio delle isranze create per generare l'idAppello.
+//	 */
+//	private static long contaId = 0;
+//	
+//	private LocalDate data;
 	
 	/**
 	 * Costruttore dell'appello che prende come parametro la data.
 	 * @param data
 	 */
-	
-	public Appello(LocalDate data) {
 
+	public MAppello(LocalDate data) {
+//		super();
 		this.data = new LocalDate(data);
 		this.assenzePrese = false;
-		this.idAppello = Appello.generaId();
-		
+		this.idAppello = MAppello.generaId();
+
 	}
 
 	

@@ -16,11 +16,11 @@ import presenter.resourceSupport.ClasseMenuRS;
 import presenter.resourceSupport.StudenteAppelloRS;
 import service.DBFake;
 import domain.controller.FaiAppelloController;
-import domain.model.Appello;
-import domain.model.Calendario;
-import domain.model.Classe;
-import domain.model.Docente;
-import domain.model.Studente;
+import domain.model.MAppello;
+import domain.model.MCalendario;
+import domain.model.MClasse;
+import domain.model.MDocente;
+import domain.model.MStudente;
 
 
 @RestController
@@ -36,15 +36,15 @@ public class ClasseController {
 	@RequestMapping(method = RequestMethod.GET)
 	public Collection<ClasseMenuRS> getClassi() {
 		
-		Collection<Classe> classi;
+		Collection<MClasse> classi;
 		Collection<ClasseMenuRS> classiMenu;
-		Docente docente;
+		MDocente docente;
 		
 		docente = DBFake.getInstance().getDocenteById(this.idDocenteProva);
 		classi = docente.getClassi();
 		classiMenu = new LinkedList<ClasseMenuRS>();
 		
-		for (Classe classe : classi) {
+		for (MClasse classe : classi) {
 			classiMenu.add(new ClasseMenuRS(classe));
 		}
 		
@@ -57,14 +57,14 @@ public class ClasseController {
 	public Collection<StudenteAppelloRS> getStudenti(@PathVariable long idClasse) {
 		
 		FaiAppelloController fAController;
-		Collection<Studente> studenti;
+		Collection<MStudente> studenti;
 		Collection<StudenteAppelloRS> studentiRS;
 		
 		fAController = new FaiAppelloController();
 		studentiRS = new LinkedList<StudenteAppelloRS>();
 		
 		studenti = fAController.getStudenti(idClasse);
-		for (Studente studente : studenti) {
+		for (MStudente studente : studenti) {
 			studentiRS.add(new StudenteAppelloRS(studente));
 		}
 		

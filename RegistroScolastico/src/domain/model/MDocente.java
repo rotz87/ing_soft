@@ -3,22 +3,24 @@ package domain.model;
 import java.util.Collection;
 import java.util.LinkedList;
 
-public class Docente {
+import domain.persistent.Docente;
 
-	private String nome;
-	private String cognome;
-	private long idDocente;
-	private static long contaId = 0;
-	private Collection<Classe> classi;
+public class MDocente  extends AModel<Docente>{
+
+//	private String nome;
+//	private String cognome;
+//	private long idDocente;
+//	private static long contaId = 0;
+//	private Collection<MClasse> classi;
 	
 	
 	
-	public Docente() {
-		this.idDocente = Docente.generaId();
-		classi = new LinkedList<Classe>();
+	public MDocente() {
+		this.idDocente = MDocente.generaId();
+		classi = new LinkedList<MClasse>();
 	}
 	
-	public Docente(String nome, String cognome) {
+	public MDocente(String nome, String cognome) {
 		this();
 		this.nome = nome;
 		this.cognome = cognome;
@@ -26,7 +28,7 @@ public class Docente {
 
 
 
-	public boolean isInsegnante(Classe classe){
+	public boolean isInsegnante(MClasse classe){
 		boolean rit;
 		if (classi.contains(classe)){
 			rit = true;
@@ -59,7 +61,7 @@ public class Docente {
 	}
 	
 
-	public void setClassi(Collection<Classe> classi) {
+	public void setClassi(Collection<MClasse> classi) {
 		this.classi = classi;
 	}
 	
@@ -67,7 +69,7 @@ public class Docente {
 	 * @deprecated
 	 * @return
 	 */
-	public Collection<Classe> getClassi() {
+	public Collection<MClasse> getClassi() {
 		return this.classi;
 	}
 

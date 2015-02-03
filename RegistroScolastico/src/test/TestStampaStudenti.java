@@ -4,15 +4,15 @@ import java.util.Collection;
 
 import service.DBFake;
 import service.Stampa;
-import domain.model.Classe;
-import domain.model.Studente;
+import domain.model.MClasse;
+import domain.model.MStudente;
 
 public class TestStampaStudenti {
 
 	public static void main(String[] args){
 		DBFake.getInstance();
-		Classe classe;
-		Collection<Studente> collStud;
+		MClasse classe;
+		Collection<MStudente> collStud;
 		Stampa.stampaln("STAMPA STUDENTI PER CLASSE ");
 		for(Long i = 1L; i<5; i++){
 			classe = DBFake.getInstance().getClasseById(i);
@@ -23,7 +23,7 @@ public class TestStampaStudenti {
 			Stampa.stampa("idClasse = " +classe.getIdClasse());
 			Stampa.stampaln(" " +classe.getNome());
 			Stampa.stampaln();
-			for(Studente stud : collStud){
+			for(MStudente stud : collStud){
 				Stampa.stampaln("id = " +stud.getId() + " | " + stud.getNome() + " " + stud.getCognome());
 			}
 			

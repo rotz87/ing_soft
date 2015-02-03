@@ -5,15 +5,17 @@ import java.util.TreeSet;
 
 import org.joda.time.LocalDate;
 
-public class Calendario {
+import domain.persistent.Calendario;
 
-	private static Calendario instance; 
-	private LocalDate dataOdierna;
-	private  TreeSet<LocalDate> giorniFestivi;
-	private LinkedList<Integer> giorniSettimanaliFestivi;
+public class MCalendario  extends AModel<Calendario>{
+
+//	private static MCalendario instance; 
+//	private LocalDate dataOdierna;
+//	private  TreeSet<LocalDate> giorniFestivi;
+//	private LinkedList<Integer> giorniSettimanaliFestivi;
 	
 	
-	private Calendario(){
+	private MCalendario(){
 		dataOdierna = this.calcolaDataOdierna();
 		giorniFestivi = new TreeSet<LocalDate>();
 		giorniSettimanaliFestivi = new LinkedList<Integer>();
@@ -26,9 +28,9 @@ public class Calendario {
 
 	}
 	
-	public static synchronized Calendario getInstance(){
+	public static synchronized MCalendario getInstance(){
 		if (instance == null){
-			instance = new Calendario();
+			instance = new MCalendario();
 		}
 		return instance;
 	}

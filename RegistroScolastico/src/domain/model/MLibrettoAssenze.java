@@ -5,30 +5,32 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
-public class LibrettoAssenze {
+import domain.persistent.LibrettoAssenze;
 
-	private Collection<Assenza> giustificate;
-	private List<Assenza> nonGiustificate;
-	private Studente studente;
-	private Collection<Ritardo> ritardi;
-	private Collection<UscitaAnticipata> uscite;
+public class MLibrettoAssenze  extends AModel<LibrettoAssenze>{
 
-	public LibrettoAssenze(){
-		this.nonGiustificate = new LinkedList<Assenza>();
-		this.giustificate = new LinkedList<Assenza>();
+//	private Collection<MAssenza> giustificate;
+//	private List<MAssenza> nonGiustificate;
+//	private MStudente studente;
+//	private Collection<MRitardo> ritardi;
+//	private Collection<MUscitaAnticipata> uscite;
+
+	public MLibrettoAssenze(){
+		this.nonGiustificate = new LinkedList<MAssenza>();
+		this.giustificate = new LinkedList<MAssenza>();
 	}
 	
-	public LibrettoAssenze(Studente stud){
+	public MLibrettoAssenze(MStudente stud){
 		this();
 		this.studente = stud;
 		
 	}
 	
-	public Studente getStudente() {
+	public MStudente getStudente() {
 		return studente;
 	}
 
-	public void setStudente(Studente studente) {
+	public void setStudente(MStudente studente) {
 		this.studente = studente;
 	}
 
@@ -36,11 +38,11 @@ public class LibrettoAssenze {
 	 * 
 	 * @param appello
 	 */
-	public void segnaAssenza(Appello appello) {
+	public void segnaAssenza(MAppello appello) {
 		
 //		Stempa.stampaln("sono in librettoAssenze.segnaAssenza di " + studente.getNome());
 		boolean inseribile = false;
-		Assenza ultimaAssenzaNonGiustificata = null;
+		MAssenza ultimaAssenzaNonGiustificata = null;
 		
 		if(!(nonGiustificate.isEmpty())){
 			ultimaAssenzaNonGiustificata = this.getUltimaAssenzaNonGiustificata();
@@ -57,7 +59,7 @@ public class LibrettoAssenze {
 //			Stempa.stampaln("accodo l'assenza " );
 		}else{
 			
-			Assenza nuovaAssenza = new Assenza();
+			MAssenza nuovaAssenza = new MAssenza();
 			nonGiustificate.add(nuovaAssenza);
 			nuovaAssenza.inserisciAppelloAssenza(appello);
 //			Stempa.stampaln("creo l'assenza " );
@@ -65,25 +67,25 @@ public class LibrettoAssenze {
 		
 	}
 
-	private Assenza getUltimaAssenzaNonGiustificata() {
+	private MAssenza getUltimaAssenzaNonGiustificata() {
 		//probabilmente è da cambiare
 //		Stempa.stampaln("nonGiustificate.get(0): "+nonGiustificate.get(nonGiustificate.size()-1).getUltimoAppelloAssenza().getDataL());
 
 		return nonGiustificate.get(nonGiustificate.size()-1);
 	}
 	
-	public boolean esisteAssenza(Appello appello){
+	public boolean esisteAssenza(MAppello appello){
 		boolean rit = false;
-		 ListIterator<Assenza> listIteratorNG = nonGiustificate.listIterator();
+		 ListIterator<MAssenza> listIteratorNG = nonGiustificate.listIterator();
 	        while (listIteratorNG.hasNext() && rit == false) {
-	        	Assenza assenza = listIteratorNG.next();
+	        	MAssenza assenza = listIteratorNG.next();
 	            if(assenza.esisteAppello(appello)){
 	            	rit = true;
 	            }
 	        }
-	        ListIterator<Assenza> listIteratorG = nonGiustificate.listIterator();
+	        ListIterator<MAssenza> listIteratorG = nonGiustificate.listIterator();
 	        while (listIteratorG.hasNext() && rit == false) {
-	        	Assenza assenza = listIteratorG.next();
+	        	MAssenza assenza = listIteratorG.next();
 	            if(assenza.esisteAppello(appello)){
 	            	rit = true;
 	            }
@@ -91,19 +93,19 @@ public class LibrettoAssenze {
 	        return rit;
 	}
 	
-	public Assenza getAssenza(Appello appello){
-		Assenza rit = null;
+	public MAssenza getAssenza(MAppello appello){
+		MAssenza rit = null;
 		
-		ListIterator<Assenza> listIteratorNG = nonGiustificate.listIterator();
+		ListIterator<MAssenza> listIteratorNG = nonGiustificate.listIterator();
         while (listIteratorNG.hasNext()) {
-        	Assenza assenza = listIteratorNG.next();
+        	MAssenza assenza = listIteratorNG.next();
             if(assenza.esisteAppello(appello)){
             	rit = assenza;
             }
         }
-        ListIterator<Assenza> listIteratorG = nonGiustificate.listIterator();
+        ListIterator<MAssenza> listIteratorG = nonGiustificate.listIterator();
         while (listIteratorG.hasNext()) {
-        	Assenza assenza = listIteratorG.next();
+        	MAssenza assenza = listIteratorG.next();
             if(assenza.esisteAppello(appello)){
             	rit = assenza;
             }
@@ -112,24 +114,24 @@ public class LibrettoAssenze {
 		return rit;
 	}
 	
-	public void assengnaAssenzeNonGiustificate(List<Assenza> nonGistificate){
+	public void assengnaAssenzeNonGiustificate(List<MAssenza> nonGistificate){
 		//per le prove, probablmente è da togliere
 		this.nonGiustificate = nonGistificate;
 	}
 
-	public Collection<Assenza> getGiustificate() {
+	public Collection<MAssenza> getGiustificate() {
 		return giustificate;
 	}
 
-	public void setGiustificate(Collection<Assenza> giustificate) {
+	public void setGiustificate(Collection<MAssenza> giustificate) {
 		this.giustificate = giustificate;
 	}
 
-	public List<Assenza> getNonGiustificate() {
+	public List<MAssenza> getNonGiustificate() {
 		return nonGiustificate;
 	}
 
-	public void setNonGiustificate(List<Assenza> nonGiustificate) {
+	public void setNonGiustificate(List<MAssenza> nonGiustificate) {
 		this.nonGiustificate = nonGiustificate;
 	}
 

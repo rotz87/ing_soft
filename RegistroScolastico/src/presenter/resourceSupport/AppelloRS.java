@@ -8,7 +8,7 @@ import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 
 import presenter.controllerSpring.AppelloController;
 import presenter.controllerSpring.ClasseController;
-import domain.model.Appello;
+import domain.model.MAppello;
 
 /**
  * Da completare: come fa l'appello a prendere una lista di studenti?
@@ -23,7 +23,7 @@ public class AppelloRS extends ResourceSupport{
 	private boolean assenzePrese;
 
 
-	public AppelloRS(Appello appello, long idClasse) {
+	public AppelloRS(MAppello appello, long idClasse) {
 		
 		this.idAppello = appello.getIdAppello();
 		this.data = appello.getData().toDate();

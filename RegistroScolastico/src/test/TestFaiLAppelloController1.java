@@ -6,11 +6,11 @@ import java.util.Map.Entry;
 import service.DBFake;
 import service.Stampa;
 import domain.controller.FaiAppelloController;
-import domain.model.Appello;
-import domain.model.Assenza;
-import domain.model.LibrettoAssenze;
-import domain.model.RegistroAssenze;
-import domain.model.Studente;
+import domain.model.MAppello;
+import domain.model.MAssenza;
+import domain.model.MLibrettoAssenze;
+import domain.model.MRegistroAssenze;
+import domain.model.MStudente;
 
 public class TestFaiLAppelloController1 {
 	public static void main(String[] args){
@@ -54,20 +54,20 @@ public class TestFaiLAppelloController1 {
 
 	}
 	
-	private static void stampaLibretti(RegistroAssenze regAss){
+	private static void stampaLibretti(MRegistroAssenze regAss){
 		Stampa.stampaln();
 		Stampa.stampaln("VISUALIZZAZIONE ASSENZE NON GIUSTIFICATE DEGLI STUDENTI _________________________ \n \n");
 		Iterator entries = regAss.getLibrettiAssenze().entrySet().iterator();
 		while (entries.hasNext()) {
 		  Entry thisEntry = (Entry) entries.next();
-		  Studente Stud = (Studente)thisEntry.getKey();
-		  LibrettoAssenze libAss = (LibrettoAssenze)thisEntry.getValue();
+		  MStudente Stud = (MStudente)thisEntry.getKey();
+		  MLibrettoAssenze libAss = (MLibrettoAssenze)thisEntry.getValue();
 		  Stampa.stampaln("STUDENTE : "+libAss.getStudente().getNome() +" "+libAss.getStudente().getCognome());
 		  Stampa.stampaln("ASSENZE NON GIUSTIFICATE : \n");
 		  if (/*libAss.getNonGiustificate() != null && */ (!(libAss.getNonGiustificate().isEmpty()))){
-			  for (Assenza assNG : libAss.getNonGiustificate()) {
+			  for (MAssenza assNG : libAss.getNonGiustificate()) {
 				  Stampa.stampaln("---------Inizio Assenza-------- ");
-				  for (Appello app : assNG.getAppelli()){
+				  for (MAppello app : assNG.getAppelli()){
 					  Stampa.stampaln("data dell'appello dell'assenza : "+app.getData().toString());
 				  }
 				  if(assNG.isCertificatoMedicoRichiesto()){

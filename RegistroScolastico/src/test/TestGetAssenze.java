@@ -9,8 +9,8 @@ import java.util.Map.Entry;
 import service.DBFake;
 import service.Stampa;
 import domain.controller.FaiAppelloController;
-import domain.model.Assenza;
-import domain.model.Studente;
+import domain.model.MAssenza;
+import domain.model.MStudente;
 
 public class TestGetAssenze {
 	public static void main(String[] args) throws IOException{
@@ -41,18 +41,18 @@ public class TestGetAssenze {
 			
 			Long[] listaIdStudAssenti = {new Long(3), new Long(1), new Long(5), new Long(2)};
 			
-			HashSet<Studente> studenti = (HashSet<Studente>) controlloreAppello.getStudenti(1L);
+			HashSet<MStudente> studenti = (HashSet<MStudente>) controlloreAppello.getStudenti(1L);
 	
 			controlloreAppello.registraAssenze(listaIdStudAssenti,new Long(1), new Long(1) );
 	
 		while(number != 0){
 			Long idAppello = number;
 			
-			HashMap<Studente, Boolean>  mapStudBool = controlloreAppello.getBoolAssenze(new Long(1), idAppello);
+			HashMap<MStudente, Boolean>  mapStudBool = controlloreAppello.getBoolAssenze(new Long(1), idAppello);
 			
 			
 			Stampa.stampaln("VISUALIZZAZIONE STUDENTI  _________________________ \n \n");
-			for(Studente studente : studenti){
+			for(MStudente studente : studenti){
 				Stampa.stampaln("STUDENTE : "+studente.getNome() +" "+studente.getCognome());
 			}
 			Stampa.stampaln("________________________________________FINE");
@@ -63,7 +63,7 @@ public class TestGetAssenze {
 			Iterator entries = mapStudBool.entrySet().iterator();
 			while (entries.hasNext()) {
 			  Entry thisEntry = (Entry) entries.next();
-			  Studente stud = (Studente)thisEntry.getKey();
+			  MStudente stud = (MStudente)thisEntry.getKey();
 			  Boolean isAssente = (Boolean)thisEntry.getValue();
 			  Stampa.stampa("STUDENTE : "+stud.getNome() +" "+stud.getCognome()+" (id = "+stud.getId()+") :");
 			  Stampa.stampaln("ASSENTE :"+ isAssente);
@@ -72,7 +72,7 @@ public class TestGetAssenze {
 			Stampa.stampaln("________________________________________FINE");
 			Stampa.stampaln();
 			
-			HashMap<Long, Assenza>  mapIdStudAss = controlloreAppello.getAssenze(new Long(1), idAppello);
+			HashMap<Long, MAssenza>  mapIdStudAss = controlloreAppello.getAssenze(new Long(1), idAppello);
 			
 		
 			Stampa.stampaln();
@@ -81,7 +81,7 @@ public class TestGetAssenze {
 			while (entries2.hasNext()) {
 			  Entry thisEntry = (Entry) entries2.next();
 			  Long idStud = (Long)thisEntry.getKey();
-			  Assenza assenza = (Assenza)thisEntry.getValue();
+			  MAssenza assenza = (MAssenza)thisEntry.getValue();
 			  Stampa.stampa("ID_STUDENTE : " + idStud+" :");
 			  Stampa.stampaln("ASSENZA :"+ assenza);
 			  

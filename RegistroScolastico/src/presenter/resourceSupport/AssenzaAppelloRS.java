@@ -2,13 +2,13 @@ package presenter.resourceSupport;
 
 import org.springframework.hateoas.ResourceSupport;
 
-import domain.model.Assenza;
+import domain.model.MAssenza;
 
 public class AssenzaAppelloRS extends ResourceSupport {
 	
 	private long idAssenza;
 
-	public AssenzaAppelloRS(Assenza assenza) {
+	public AssenzaAppelloRS(MAssenza assenza) {
 		setIdAssenza(/*assenza.getId()*/0L);
 	}
 

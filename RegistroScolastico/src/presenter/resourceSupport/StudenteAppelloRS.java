@@ -3,7 +3,7 @@ package presenter.resourceSupport;
 
 import org.springframework.hateoas.ResourceSupport;
 
-import domain.model.Studente;
+import domain.model.MStudente;
 
 
 public class StudenteAppelloRS extends ResourceSupport{
@@ -11,7 +11,7 @@ public class StudenteAppelloRS extends ResourceSupport{
 	private long idStudente;
 	private String nome;
 	private String cognome;
-	public StudenteAppelloRS(Studente studente) {
+	public StudenteAppelloRS(MStudente studente) {
 		
 		this.idStudente = studente.getId();
 		this.nome = studente.getNome();

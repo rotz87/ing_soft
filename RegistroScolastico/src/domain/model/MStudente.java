@@ -1,16 +1,18 @@
 package domain.model;
 
-public class Studente {
+import domain.persistent.Studente;
+
+public class MStudente extends AModel<Studente> {
 	
-	private long id;
-	private static long contaId = 0;
-	private String nome;
-	private String cognome;
-	private Indirizzo indrizzo;
-	private String codiceFiscale;
+//	private long id;
+//	private static long contaId = 0;
+//	private String nome;
+//	private String cognome;
+//	private MIndirizzo indrizzo;
+//	private String codiceFiscale;
 	
-	public Studente(String nome, String cognome){
-		this.id = Studente.generaId();
+	public MStudente(String nome, String cognome){
+		this.id = MStudente.generaId();
 		this.nome = nome;
 		this.cognome = cognome;
 //		Stempa.stampaln("<><><><> costruisco lo studente: " + this.nome +", "+this.cognome+ " con id: "+this.id);
@@ -18,8 +20,8 @@ public class Studente {
 	
 	
 	
-	public Studente(long id, String nome, String cognome, Indirizzo indrizzo, String codiceFiscale) {
-		this.id = Studente.generaId();
+	public MStudente(long id, String nome, String cognome, MIndirizzo indrizzo, String codiceFiscale) {
+		this.id = MStudente.generaId();
 //		setId(id);
 		setNome(nome);
 		setCognome(cognome);
@@ -49,11 +51,11 @@ public class Studente {
 		this.cognome = cognome;
 	}
 
-	public Indirizzo getIndrizzo() {
+	public MIndirizzo getIndrizzo() {
 		return indrizzo;
 	}
 
-	public void setIndrizzo(Indirizzo indrizzo) {
+	public void setIndrizzo(MIndirizzo indrizzo) {
 		this.indrizzo = indrizzo;
 	}
 

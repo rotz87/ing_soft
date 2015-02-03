@@ -3,29 +3,31 @@ package domain.model;
 import java.util.Collection;
 import java.util.HashSet;
 
+import domain.persistent.Classe;
+
 /**
  * Conterrà il registro delle assenze.
  * Per il momento non verrà implementata in questo UC.
  * @author marco
  *
  */
-public class Classe {
-	private String nome;
-	private long idClasse;
-	private static long contaId = 0;
-	private RegistroAssenze registroAssenze;
-	private Collection<Studente> studenti;
+public class MClasse  extends AModel<Classe>{
+//	private String nome;
+//	private long idClasse;
+//	private static long contaId = 0;
+//	private MRegistroAssenze registroAssenze;
+//	private Collection<MStudente> studenti;
 	
-	public Classe(String nome){
+	public MClasse(String nome){
 		this.nome = nome;
-		this.idClasse = Classe.generaId();
-		this.studenti = new HashSet<Studente>();
+		this.idClasse = MClasse.generaId();
+		this.studenti = new HashSet<MStudente>();
 	}
 	
-	public Classe(String nome, RegistroAssenze registroAssenze){
+	public MClasse(String nome, MRegistroAssenze registroAssenze){
 		this.nome = nome;
-		this.idClasse = Classe.generaId();
-		this.studenti = new HashSet<Studente>();
+		this.idClasse = MClasse.generaId();
+		this.studenti = new HashSet<MStudente>();
 		this.registroAssenze = registroAssenze;
 	}
 
@@ -47,19 +49,19 @@ public class Classe {
 		this.idClasse = idClasse;
 	} 
 	
-	public RegistroAssenze getRegistroAssenze(){
+	public MRegistroAssenze getRegistroAssenze(){
 		return this.registroAssenze;
 	}
 	
-	public void setRegistroAssenze(RegistroAssenze registroAssenze){
+	public void setRegistroAssenze(MRegistroAssenze registroAssenze){
 		this.registroAssenze = registroAssenze;
 	}
 	
-	public void setStudenti( Collection<Studente> studenti){
+	public void setStudenti( Collection<MStudente> studenti){
 		this.studenti = studenti;
 	}
 	
-	public Collection<Studente> getStudenti( ){
+	public Collection<MStudente> getStudenti( ){
 		return this.studenti;
 	}
 

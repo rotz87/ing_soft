@@ -5,16 +5,18 @@ import java.util.TreeMap;
 
 import org.joda.time.LocalDate;
 
+import domain.persistent.RegistroAssenze;
 
-public class RegistroAssenze {
 
-	private MapAppelli appelli;
-	private Map <Studente, LibrettoAssenze> librettiAssenze;
-	
+public class MRegistroAssenze  extends AModel<RegistroAssenze>{
+
+//	private MapAppelli appelli;
+//	private Map <MStudente, MLibrettoAssenze> librettiAssenze;
+//	
 	/**
 	 * Costrurrore senza parametri.
 	 */
-	public RegistroAssenze() {
+	public MRegistroAssenze() {
 		appelli = new MapAppelli();
 	}
 	
@@ -23,10 +25,10 @@ public class RegistroAssenze {
 	 * 
 	 * @param idStudenti
 	 */
-	public void registraAssenze(Studente[] Studenti) {
-		Appello appelloCorrente = getAppelloOdierno();
+	public void registraAssenze(MStudente[] Studenti) {
+		MAppello appelloCorrente = getAppelloOdierno();
 		if (!(appelloCorrente.isAssenzePrese())){
-			for (Studente studente : Studenti){
+			for (MStudente studente : Studenti){
 				
 					librettiAssenze.get(studente).segnaAssenza(appelloCorrente);
 	
@@ -37,10 +39,10 @@ public class RegistroAssenze {
 		}
 	}
 
-	public Appello getAppelloOdierno() {
+	public MAppello getAppelloOdierno() {
 		
-		Appello appelloOdierno = null;
-		LocalDate dataDiRiferimento = Calendario.getInstance().getDataOdierna();
+		MAppello appelloOdierno = null;
+		LocalDate dataDiRiferimento = MCalendario.getInstance().getDataOdierna();
 		if(this.esisteAppello(dataDiRiferimento)){
 			appelloOdierno = appelli.get(dataDiRiferimento);
 		}else{
@@ -50,15 +52,15 @@ public class RegistroAssenze {
 	}
 
 	public void avviaAppello() {
-		LocalDate dataRif = Calendario.getInstance().getDataOdierna();
+		LocalDate dataRif = MCalendario.getInstance().getDataOdierna();
 		if(!(this.esisteAppello(dataRif))){
 //			//debug
 //			Appello nuovoAppello = new Appello(dataRif);
 //			appelli.put(dataRif, nuovoAppello);
 //			Stempa.stampaln("-------------------------------------------------------------------------------------->id appello : "+nuovoAppello.getIdAppello());
 //			//fine debug
-			if(!Calendario.getInstance().isOggiFestivo()){
-				appelli.put(dataRif, new Appello(dataRif));
+			if(!MCalendario.getInstance().isOggiFestivo()){
+				appelli.put(dataRif, new MAppello(dataRif));
 			}else{
 				throw new IllegalStateException(" APPELLO NON AVVIABILE PER OGGI ");
 			}
@@ -75,7 +77,7 @@ public class RegistroAssenze {
 	 * bottone visualizza dell'interfaccia
 	 * @param data
 	 */
-	public Appello getAppelloByData(org.joda.time.LocalDate data) {
+	public MAppello getAppelloByData(org.joda.time.LocalDate data) {
 		return appelli.get(data);
 	}
 
@@ -84,7 +86,7 @@ public class RegistroAssenze {
 	 * Metodo inserito per le prove, forse è da togliere
 	 * @param librettiAssenze
 	 */
-	public void assengaLibretti(java.util.Map<Studente, LibrettoAssenze> librettiAssenze) {
+	public void assengaLibretti(java.util.Map<MStudente, MLibrettoAssenze> librettiAssenze) {
 		// Per le prove, forse è da togliere!!
 				this.librettiAssenze = librettiAssenze;
 	}
@@ -93,11 +95,11 @@ public class RegistroAssenze {
 		return appelli;
 	}
 	
-	public Map<Studente, LibrettoAssenze> getLibrettiAssenze() {
+	public Map<MStudente, MLibrettoAssenze> getLibrettiAssenze() {
 		return librettiAssenze;
 	}
 
-	public void setLibrettiAssenze(Map<Studente, LibrettoAssenze> librettiAssenze) {
+	public void setLibrettiAssenze(Map<MStudente, MLibrettoAssenze> librettiAssenze) {
 		this.librettiAssenze = librettiAssenze;
 	}
 
@@ -113,7 +115,7 @@ public class RegistroAssenze {
 	
 	}
 	
-	public boolean esisteAppello(Appello appello){
+	public boolean esisteAppello(MAppello appello){
 //		boolean rit = false;
 //
 //		if(appelli.containsValue(appello)){
@@ -134,9 +136,9 @@ public class RegistroAssenze {
 		Boolean festivo, esiste, avviabile;
 		
 		avviabile = false;
-		festivo = Calendario.getInstance().isOggiFestivo();
+		festivo = MCalendario.getInstance().isOggiFestivo();
 		if(!festivo){
-			esiste = this.esisteAppello(Calendario.getInstance().getDataOdierna());
+			esiste = this.esisteAppello(MCalendario.getInstance().getDataOdierna());
 			if(!esiste){
 				avviabile = true;
 			}
@@ -145,11 +147,11 @@ public class RegistroAssenze {
 		return avviabile;
 	}
 	
-	public LibrettoAssenze getLibretto(Studente studente){
+	public MLibrettoAssenze getLibretto(MStudente studente){
 		return this.librettiAssenze.get(studente);
 	}
 
-	public class MapAppelli extends TreeMap<LocalDate, Appello> {
+	public class MapAppelli extends TreeMap<LocalDate, MAppello> {
 		
 	}
 
