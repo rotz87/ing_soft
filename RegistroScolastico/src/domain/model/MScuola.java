@@ -20,15 +20,15 @@ public class MScuola  extends AModel<Scuola>{
 	/**Per le prove
 	 * 
 	 */
-	public void setClassi( List<MClasse> classi){
-		this.classi = classi;
-	}
+//	public void setClassi( List<MClasse> classi){
+//		this.classi = classi;
+//	}
 	
 	/**Per le prove
 	 * 
 	 */
-	public void setDocenti(List<MDocente> docenti){
-		this.docenti = docenti;
+//	public void setDocenti(List<MDocente> docenti){
+//		this.docenti = docenti;
 	}
 	
 

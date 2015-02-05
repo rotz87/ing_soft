@@ -16,21 +16,23 @@ public class MDocente  extends AModel<Docente>{
 	
 	
 	public MDocente() {
-		this.idDocente = MDocente.generaId();
-		classi = new LinkedList<MClasse>();
+//		this.idDocente = MDocente.generaId();
+//		classi = new LinkedList<MClasse>();
 	}
 	
 	public MDocente(String nome, String cognome) {
 		this();
-		this.nome = nome;
-		this.cognome = cognome;
+//		this.nome = nome;
+//		this.cognome = cognome;
+		getPersistentModel().setNome(nome);
+		getPersistentModel().setCognome(cognome);
 	}
 
 
 
 	public boolean isInsegnante(MClasse classe){
 		boolean rit;
-		if (classi.contains(classe)){
+		if (getPersistentModel().getClassi().contains(classe.getPersistentModel())){
 			rit = true;
 		}else{
 			rit = false;
@@ -40,42 +42,42 @@ public class MDocente  extends AModel<Docente>{
 	
 	
 	
-	public String getNome() {
-		return nome;
-	}
+//	public String getNome() {
+//		return nome;
+//	}
+//
+//	public void setNome(String nome) {
+//		this.nome = nome;
+//	}
+//
+//	public String getCognome() {
+//		return cognome;
+//	}
+//
+//	public void setCognome(String cognome) {
+//		this.cognome = cognome;
+//	}
+//
+//	public long getIdDocente() {
+//		return idDocente;
+//	}
+//	
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getCognome() {
-		return cognome;
-	}
-
-	public void setCognome(String cognome) {
-		this.cognome = cognome;
-	}
-
-	public long getIdDocente() {
-		return idDocente;
-	}
-	
-
-	public void setClassi(Collection<MClasse> classi) {
-		this.classi = classi;
-	}
-	
-	/**
-	 * @deprecated
-	 * @return
-	 */
-	public Collection<MClasse> getClassi() {
-		return this.classi;
-	}
-
-	private static long generaId(){
-		contaId ++;
-		return contaId;
-		
-	}
+//	public void setClassi(Collection<MClasse> classi) {
+//		this.classi = classi;
+//	}
+//	
+//	/**
+//	 * @deprecated
+//	 * @return
+//	 */
+//	public Collection<MClasse> getClassi() {
+//		return this.classi;
+//	}
+//
+//	private static long generaId(){
+//		contaId ++;
+//		return contaId;
+//		
+//	}
 }

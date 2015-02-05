@@ -3,10 +3,16 @@ package domain.model;
 
 import java.util.LinkedList;
 
-import org.joda.time.LocalDate;
+import java.util.Set;
 
+import org.joda.time.LocalDate;
+import org.orm.PersistentManager;
+
+import domain.persistent.Appello;
 import domain.persistent.Assenza;
 import service.Stampa;
+
+
 
 public class MAssenza  extends AModel<Assenza> {
 
@@ -17,19 +23,19 @@ public class MAssenza  extends AModel<Assenza> {
 	 * 
 	 */
 	public MAssenza(){
-		appelli = new LinkedList<MAppello>();
+		getPersistentModel().getAppelli() = new LinkedList<MAppello>();
 	}
 	
 	/**
 	 * Costruttore dell'Assenza, prende come parametro una LinkedList di appelli.
 	 * @param appelli
 	 */
-	public MAssenza (LinkedList<MAppello> appelli){		
-		this.appelli = appelli;
+	public MAssenza (LinkedList<Appello> appelli){		
+		getPersistentModel().setAppelli(appelli); 
 	}
 
 	public MAppello getUltimoAppelloAssenza() {
-		return appelli.getLast();
+		return getPersistentModel().getAppelli().getLast();
 	}
 
 	/**
@@ -38,11 +44,11 @@ public class MAssenza  extends AModel<Assenza> {
 	 */
 	public void inserisciAppelloAssenza(MAppello appello) {
 		try{
-			appelli.add(appello);
+			getPersistentModel().getAppelli().add(appello.getPersistentModel());
 		}catch (NullPointerException NPE){
 			Stampa.stampaln("----------------------------------------- ");
 			Stampa.stampaln("sono nel catch !! ");
-			Stampa.stampaln("appelli: "+ appelli);
+//			Stampa.stampaln("appelli: "+ appelli);
 			Stampa.stampaln("appello: "+ appello);
 			Stampa.stampaln("-----------------------------------------. ");
 		}
@@ -56,7 +62,7 @@ public class MAssenza  extends AModel<Assenza> {
 	public boolean isInseribile(MAppello appello) {
 		boolean inseribile = false;
 //		Stampa.stampaln("\n >>>>>>>>>> passo per isInseribile ");
-		LocalDate ultimaDataPlus = appelli.getLast().getData().plusDays(1);
+		LocalDate ultimaDataPlus = getPersistentModel().getAppelli().getLast().getData().plusDays(1);
 		LocalDate oggi = MCalendario.getInstance().getDataOdierna();//per le prove, a regime usare la riga di sotto
 //		LocalDate oggi = appello.getDataL();
 //		Stampa.stampaln("appelli.getLast().getDataL(): "+appelli.getLast().getDataL());
@@ -73,27 +79,28 @@ public class MAssenza  extends AModel<Assenza> {
 		return inseribile;
 	}
 
-	public LinkedList<MAppello> getAppelli() {
-		return appelli;
-	}
-
-	public void setAppelli(LinkedList<MAppello> appelli) {
-		this.appelli = appelli;
-	}
+//	public LinkedList<Appello> getAppelli() {
+////		return appelli;
+//		return this.getPersistentModel().getAppelli();
+//	}
 	
+//	public void setAppelli(LinkedList<MAppello> appelli) {
+//		this.appelli = appelli;
+//	}
+//	
 	public boolean isCertificatoMedicoRichiesto(){
 		boolean rit = false;
 				
-		if((appelli.getLast().getData().getDayOfYear() - appelli.getFirst().getData().getDayOfYear())+1 >= 5){
+		if((getPersistentModel().getAppelli().getLast().getData().getDayOfYear() - getPersistentModel().getAppelli().getFirst().getData().getDayOfYear())+1 >= 5){
 			rit = true;
 		}
-		int x = (appelli.getLast().getData().getDayOfYear() - appelli.getFirst().getData().getDayOfYear())+1;
+		int x = (getPersistentModel().getAppelli().getLast().getData().getDayOfYear() - getPersistentModel().getAppelli().getFirst().getData().getDayOfYear())+1;
 		Stampa.stampaln("\n differenza tra i giorni:"+ x +"\n ");
 		return rit;
 	}
 	
 	public boolean esisteAppello(MAppello appello){
-		return appelli.contains(appello);
+		return getPersistentModel().getAppelli().contains(appello.getPersistentModel());
 	}
 
 	

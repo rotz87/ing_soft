@@ -9,22 +9,26 @@ import domain.persistent.Calendario;
 
 public class MCalendario  extends AModel<Calendario>{
 
-//	private static MCalendario instance; 
+	private static MCalendario instance; 
 //	private LocalDate dataOdierna;
 //	private  TreeSet<LocalDate> giorniFestivi;
 //	private LinkedList<Integer> giorniSettimanaliFestivi;
 	
 	
 	private MCalendario(){
-		dataOdierna = this.calcolaDataOdierna();
-		giorniFestivi = new TreeSet<LocalDate>();
-		giorniSettimanaliFestivi = new LinkedList<Integer>();
+//		dataOdierna = this.calcolaDataOdierna();
+		getPersistentModel().setDataOdierna( this.calcolaDataOdierna());
+//		giorniFestivi = new TreeSet<LocalDate>();
+		getPersistentModel().getGiorniFestivi() =  new TreeSet<LocalDate>();
+//		giorniSettimanaliFestivi = new LinkedList<Integer>();
+		getPersistentModel().getGiorniSettimanaliFestivi()  = new LinkedList<Integer>();
 //		giorniSettimanaliFestivi.add(6);
-		giorniSettimanaliFestivi.add(7);
+//		giorniSettimanaliFestivi.add(7);
+		getPersistentModel().getGiorniSettimanaliFestivi().add(7);
 		
-		giorniFestivi.add(new LocalDate(2014,12,8));
-		giorniFestivi.add(new LocalDate(2014,12,25));
-		giorniFestivi.add(new LocalDate(2014,12,26));
+		getPersistentModel().getGiorniFestivi().add(new LocalDate(2014,12,8));
+		getPersistentModel().getGiorniFestivi().add(new LocalDate(2014,12,25));
+		getPersistentModel().getGiorniFestivi().add(new LocalDate(2014,12,26));
 
 	}
 	
@@ -38,10 +42,11 @@ public class MCalendario  extends AModel<Calendario>{
 	public LocalDate getDataOdierna(){
 
 		LocalDate data =  this.calcolaDataOdierna();
-		if(!(dataOdierna.isEqual(data))){
-			this.dataOdierna = data;
+		if(!(new LocalDate(getPersistentModel().getDataOdierna()).isEqual(data))){
+//			this.dataOdierna = data;
+			getPersistentModel().setDataOdierna(data.toDate());
 		}
-		return dataOdierna;	
+		return new LocalDate(getPersistentModel().getDataOdierna());	
 	}
 	
 	/**
@@ -54,9 +59,9 @@ public class MCalendario  extends AModel<Calendario>{
 	public boolean isFestivo(LocalDate data){
 		boolean festivo = false;
 		
-		festivo = giorniSettimanaliFestivi.contains(new Integer(data.dayOfWeek().get()));
+		festivo = getPersistentModel().getGiorniSettimanaliFestivi().contains(new Integer(data.dayOfWeek().get()));
 		if (!festivo){
-			festivo = giorniFestivi.contains(data);
+			festivo =  getPersistentModel().getGiorniSettimanaliFestivi().contains(data);
 		}
 		
 		return festivo;

@@ -7,7 +7,6 @@ import org.joda.time.LocalDate;
 
 import domain.persistent.RegistroAssenze;
 
-
 public class MRegistroAssenze  extends AModel<RegistroAssenze>{
 
 //	private MapAppelli appelli;
@@ -17,7 +16,7 @@ public class MRegistroAssenze  extends AModel<RegistroAssenze>{
 	 * Costrurrore senza parametri.
 	 */
 	public MRegistroAssenze() {
-		appelli = new MapAppelli();
+//		appelli = new MapAppelli();
 	}
 	
 
@@ -27,13 +26,13 @@ public class MRegistroAssenze  extends AModel<RegistroAssenze>{
 	 */
 	public void registraAssenze(MStudente[] Studenti) {
 		MAppello appelloCorrente = getAppelloOdierno();
-		if (!(appelloCorrente.isAssenzePrese())){
+		if (!(appelloCorrente.getPersistentModel().getAssenzePrese())){
 			for (MStudente studente : Studenti){
 				
-					librettiAssenze.get(studente).segnaAssenza(appelloCorrente);
+					getPersistentModel().getLibrettiAssenze().get(studente).segnaAssenza(appelloCorrente);
 	
 			}
-			appelloCorrente.setAssenzePrese(true);
+			appelloCorrente.getPersistentModel().setAssenzePrese(true);
 		}else{
 			throw new IllegalStateException("ASSENZE GIA' PRESE!");
 		}
@@ -44,7 +43,7 @@ public class MRegistroAssenze  extends AModel<RegistroAssenze>{
 		MAppello appelloOdierno = null;
 		LocalDate dataDiRiferimento = MCalendario.getInstance().getDataOdierna();
 		if(this.esisteAppello(dataDiRiferimento)){
-			appelloOdierno = appelli.get(dataDiRiferimento);
+			appelloOdierno = getPersistentModel().getAppelli().get(dataDiRiferimento);
 		}else{
 			throw new IllegalStateException("APPELLO ODIERNO INESISTENTE!");
 		}
@@ -60,7 +59,7 @@ public class MRegistroAssenze  extends AModel<RegistroAssenze>{
 //			Stempa.stampaln("-------------------------------------------------------------------------------------->id appello : "+nuovoAppello.getIdAppello());
 //			//fine debug
 			if(!MCalendario.getInstance().isOggiFestivo()){
-				appelli.put(dataRif, new MAppello(dataRif));
+				getPersistentModel().getAppelli().put(dataRif, new MAppello(dataRif));
 			}else{
 				throw new IllegalStateException(" APPELLO NON AVVIABILE PER OGGI ");
 			}
@@ -78,7 +77,7 @@ public class MRegistroAssenze  extends AModel<RegistroAssenze>{
 	 * @param data
 	 */
 	public MAppello getAppelloByData(org.joda.time.LocalDate data) {
-		return appelli.get(data);
+		return getPersistentModel().getAppelli().get(data);
 	}
 
 	/**
@@ -91,17 +90,17 @@ public class MRegistroAssenze  extends AModel<RegistroAssenze>{
 				this.librettiAssenze = librettiAssenze;
 	}
 
-	public MapAppelli getAppelli() {
-		return appelli;
-	}
+//	public MapAppelli getAppelli() {
+//		return appelli;
+//	}
 	
-	public Map<MStudente, MLibrettoAssenze> getLibrettiAssenze() {
-		return librettiAssenze;
-	}
+//	public Map<MStudente, MLibrettoAssenze> getLibrettiAssenze() {
+//		return librettiAssenze;
+//	}
 
-	public void setLibrettiAssenze(Map<MStudente, MLibrettoAssenze> librettiAssenze) {
-		this.librettiAssenze = librettiAssenze;
-	}
+//	public void setLibrettiAssenze(Map<MStudente, MLibrettoAssenze> librettiAssenze) {
+//		this.librettiAssenze = librettiAssenze;
+//	}
 
 	public boolean esisteAppello(LocalDate dataDiRiferimento){
 //		boolean rit = false;
@@ -111,7 +110,7 @@ public class MRegistroAssenze  extends AModel<RegistroAssenze>{
 //		}else{
 //			rit = false;
 //		}
-		return appelli.containsKey(dataDiRiferimento);
+		return getPersistentModel().getAppelli().containsKey(dataDiRiferimento);
 	
 	}
 	
@@ -123,7 +122,7 @@ public class MRegistroAssenze  extends AModel<RegistroAssenze>{
 //		}else{
 //			rit = false;
 //		}
-		return appelli.containsValue(appello);
+		return getPersistentModel().getAppelli().containsValue(appello);
 	
 	}
 //	
@@ -147,9 +146,9 @@ public class MRegistroAssenze  extends AModel<RegistroAssenze>{
 		return avviabile;
 	}
 	
-	public MLibrettoAssenze getLibretto(MStudente studente){
-		return this.librettiAssenze.get(studente);
-	}
+//	public MLibrettoAssenze getLibretto(MStudente studente){
+//		return this.librettiAssenze.get(studente);
+//	}
 
 	public class MapAppelli extends TreeMap<LocalDate, MAppello> {
 		

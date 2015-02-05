@@ -1,7 +1,9 @@
 package test;
 
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.TreeSet;
 
 import org.joda.time.DateTime;
@@ -10,9 +12,15 @@ import org.joda.time.LocalTime;
 
 import service.Stampa;
 
+import org.orm.util.ORMMap;
+
+import domain.persistent.RegistroScolasticoPersistentManager;
+
+
+
 public class TestDate {
 	public static void main(String[] args){
-		
+
 		GregorianCalendar g = new GregorianCalendar(2014,1,5);
 		Stampa.stampaln(g.getTime());
 		
@@ -84,13 +92,13 @@ public class TestDate {
 			Stampa.stampaln("inseribile: "+ inseribile);
 			
 			
-//			Stempa.stampaln("_____________________________________");
+//			Stampa.stampaln("_____________________________________");
 //			LinkedList<Integer> pippo = new LinkedList<Integer>();
 //			pippo.add(new Integer(1));
 //			pippo.add(new Integer(2));
 //			LocalDate localDate = new LocalDate(2015,01,12);
-//			Stempa.stampaln("day of week: " + localDate.getDayOfWeek());
-//			Stempa.stampaln("contain: " + pippo.contains(localDate.getDayOfWeek()));
+//			Stampa.stampaln("day of week: " + localDate.getDayOfWeek());
+//			Stampa.stampaln("contain: " + pippo.contains(localDate.getDayOfWeek()));
 			
 	}
 
