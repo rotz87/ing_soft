@@ -2,7 +2,7 @@ package presenter.resourceSupport;
 
 import org.springframework.hateoas.ResourceSupport;
 
-import domain.model.MClasse;
+import domain.model.Classe;
 
 public class ClasseMenuRS extends ResourceSupport {
 	
@@ -10,7 +10,7 @@ public class ClasseMenuRS extends ResourceSupport {
 	private String nome;
 	
 	
-	public ClasseMenuRS(MClasse classe){
+	public ClasseMenuRS(Classe classe){
 		setIdClasse(classe.getIdClasse());
 		setNome(classe.getNome());
 	}

@@ -6,12 +6,12 @@ import java.util.HashMap;
 import org.joda.time.LocalDate;
 
 import service.DBFake;
-import domain.model.MAppello;
-import domain.model.MAssenza;
-import domain.model.MClasse;
-import domain.model.MDocente;
-import domain.model.MRegistroAssenze;
-import domain.model.MStudente;
+import domain.model.Appello;
+import domain.model.Assenza;
+import domain.model.Classe;
+import domain.model.Docente;
+import domain.model.RegistroAssenze;
+import domain.model.Studente;
 
 public class FaiAppelloController {
 //	private Scuola scuola;
@@ -23,15 +23,15 @@ public class FaiAppelloController {
 	
 	public void avviaAppello(Long idClasse, Long idDocente) {
 
-		MClasse classeCorrente = DBFake.getInstance().getClasseById(idClasse);
-		MDocente docenteCorrente = DBFake.getInstance().getDocenteById(idDocente);
+		Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
+		Docente docenteCorrente = DBFake.getInstance().getDocenteById(idDocente);
 		
 //		Stempa.stampaln("docente corrente: " + docenteCorrente.getCognome());
 //		Stempa.stampaln("classe corrente: " + classeCorrente.getNome());
 //		Stempa.stampaln("lista classi: " + docenteCorrente.getClassi().toString());
 		
 		if(docenteCorrente.isInsegnante(classeCorrente)){
-			MRegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();
+			RegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();
 			registroAssenzeCorrente.avviaAppello();
 			DBFake.getInstance().storeAppello(registroAssenzeCorrente.getAppelloOdierno());
 			
@@ -42,12 +42,12 @@ public class FaiAppelloController {
 	}
 	
 	public void registraAssenze(Long[] idStudenti, Long idClasse, Long idDocente) {
-		MClasse classeCorrente = DBFake.getInstance().getClasseById(idClasse);
-		MDocente docenteCorrente = DBFake.getInstance().getDocenteById(idDocente);
+		Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
+		Docente docenteCorrente = DBFake.getInstance().getDocenteById(idDocente);
 		
 		if(docenteCorrente.isInsegnante(classeCorrente)){
-			MRegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();
-			MStudente[] studenti = new MStudente[idStudenti.length];
+			RegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();
+			Studente[] studenti = new Studente[idStudenti.length];
 			int i = 0;
 			for (Long idStudente : idStudenti){
 				studenti[i] = DBFake.getInstance().getStudenteById(idStudente);
@@ -62,21 +62,21 @@ public class FaiAppelloController {
 		//manca il slavataggio delle nuove assenze sun DB!!!!!
 	}
 	
-	public MAppello getAppelloOdierno(Long idClasse){
+	public Appello getAppelloOdierno(Long idClasse){
 		
 		return DBFake.getInstance().getClasseById(idClasse).getRegistroAssenze().getAppelloOdierno();
 		
 	}
 	
-	public MAppello getAppello(Long idClasse, LocalDate data){
+	public Appello getAppello(Long idClasse, LocalDate data){
 		
 		return DBFake.getInstance().getClasseById(idClasse).getRegistroAssenze().getAppelloByData(data);
 		
 	}
 	
-	public MAppello getAppello(Long idClasse, Long idAppello){
-		MAppello appelloCorrente = DBFake.getInstance().getAppelloById(idAppello);
-		MClasse classeCorrente = DBFake.getInstance().getClasseById(idClasse);
+	public Appello getAppello(Long idClasse, Long idAppello){
+		Appello appelloCorrente = DBFake.getInstance().getAppelloById(idAppello);
+		Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
 		
 		if ( classeCorrente.getRegistroAssenze().esisteAppello(appelloCorrente)){
 		
@@ -86,29 +86,29 @@ public class FaiAppelloController {
 		}
 	}
 	
-	public Collection<MAppello> getAppelli(Long idClasse){
-		MClasse classeCorrente = DBFake.getInstance().getClasseById(idClasse);
-		MRegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();
+	public Collection<Appello> getAppelli(Long idClasse){
+		Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
+		RegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();
 		return registroAssenzeCorrente.getAppelli().values();		
 	}
 	
 	public boolean isAppelloOdiernoAvviabile(long idClasse){
-		MClasse classeCorrente = DBFake.getInstance().getClasseById(idClasse);
-		MRegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();
+		Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
+		RegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();
 		return registroAssenzeCorrente.isAppelloOdiernoAvviabile();
 	}
 	
-	public HashMap<MStudente, Boolean>  getBoolAssenze(Long idClasse, Long idAppello){
-		MAppello appelloCorrente = DBFake.getInstance().getAppelloById(idAppello);
-		HashMap<MStudente, Boolean> rit;
+	public HashMap<Studente, Boolean>  getBoolAssenze(Long idClasse, Long idAppello){
+		Appello appelloCorrente = DBFake.getInstance().getAppelloById(idAppello);
+		HashMap<Studente, Boolean> rit;
 
 		if(appelloCorrente.isAssenzePrese()){
 
-			rit = new HashMap<MStudente, Boolean>();
-			MClasse classeCorrente = DBFake.getInstance().getClasseById(idClasse);
-			MRegistroAssenze registroCorrente = classeCorrente.getRegistroAssenze();
+			rit = new HashMap<Studente, Boolean>();
+			Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
+			RegistroAssenze registroCorrente = classeCorrente.getRegistroAssenze();
 	
-			for(MStudente studente : classeCorrente.getStudenti()){
+			for(Studente studente : classeCorrente.getStudenti()){
 				rit.put(studente, registroCorrente.getLibretto(studente).esisteAssenza(appelloCorrente));
 				
 			}
@@ -126,16 +126,16 @@ public class FaiAppelloController {
 	 * @param idAppello
 	 * @return Map<idStudente, Assenza>
 	 */
-	public HashMap<Long, MAssenza>  getAssenze(Long idClasse, Long idAppello){
-		MAppello appelloCorrente = DBFake.getInstance().getAppelloById(idAppello);
-		HashMap<Long, MAssenza> rit;
+	public HashMap<Long, Assenza>  getAssenze(Long idClasse, Long idAppello){
+		Appello appelloCorrente = DBFake.getInstance().getAppelloById(idAppello);
+		HashMap<Long, Assenza> rit;
 		if(appelloCorrente.isAssenzePrese()){
 
-			rit = new HashMap<Long, MAssenza>();
-			MClasse classeCorrente = DBFake.getInstance().getClasseById(idClasse);
-			MRegistroAssenze registroCorrente = classeCorrente.getRegistroAssenze();
+			rit = new HashMap<Long, Assenza>();
+			Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
+			RegistroAssenze registroCorrente = classeCorrente.getRegistroAssenze();
 	
-			for(MStudente studente : classeCorrente.getStudenti()){
+			for(Studente studente : classeCorrente.getStudenti()){
 				rit.put(studente.getId(), registroCorrente.getLibretto(studente).getAssenza(appelloCorrente));
 				
 			}
@@ -153,8 +153,8 @@ public class FaiAppelloController {
 	 * @param idClasse
 	 * @return
 	 */
-	public Collection<MStudente> getStudenti(Long idClasse){
-		MClasse classeCorrente = DBFake.getInstance().getClasseById(idClasse);
+	public Collection<Studente> getStudenti(Long idClasse){
+		Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
 		return classeCorrente.getStudenti();
 	}
 

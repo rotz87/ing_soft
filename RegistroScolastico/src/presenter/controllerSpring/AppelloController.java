@@ -22,9 +22,9 @@ import presenter.resourceSupport.AppelloRS;
 import presenter.resourceSupport.AssentiContainerRS;
 import service.Stampa;
 import domain.controller.FaiAppelloController;
-import domain.model.MAppello;
-import domain.model.MAssenza;
-import domain.model.MCalendario;
+import domain.model.Appello;
+import domain.model.Assenza;
+import domain.model.Calendario;
 
 
 @RestController
@@ -67,7 +67,7 @@ public class AppelloController {
 		public AppelloRS getAppello(@PathVariable long idAppello, @PathVariable long idClasse) {
 			
 			FaiAppelloController fAController;
-			MAppello appello;
+			Appello appello;
 			
 			fAController = new FaiAppelloController();
 			appello = fAController.getAppello(idClasse, idAppello);
@@ -80,7 +80,7 @@ public class AppelloController {
 		public AppelliContainerRS getAppelli(@PathVariable long idClasse) {
 			
 			FaiAppelloController fAController;
-			Collection<MAppello> appelli;
+			Collection<Appello> appelli;
 			Collection<AppelloRS> appelliRS;
 			Boolean appelloAvviabile;
 			Date dataAppelloOdierno;
@@ -90,12 +90,12 @@ public class AppelloController {
 			appelliRS = new LinkedList<AppelloRS>();
 			
 			
-			for (MAppello appello : appelli) {
+			for (Appello appello : appelli) {
 				appelliRS.add(new AppelloRS(appello, idClasse));
 			}
 			
 			appelloAvviabile = fAController.isAppelloOdiernoAvviabile(idClasse);
-			dataAppelloOdierno = MCalendario.getInstance().getDataOdierna().toDate();
+			dataAppelloOdierno = Calendario.getInstance().getDataOdierna().toDate();
 			
 			return new AppelliContainerRS(appelloAvviabile, dataAppelloOdierno, appelliRS);
 		}
@@ -141,9 +141,9 @@ public class AppelloController {
 		public AssentiContainerRS getAssenti(@PathVariable long idAppello, @PathVariable long idClasse) {
 			
 			FaiAppelloController fAController;
-			MAppello appello;
+			Appello appello;
 			AssentiContainerRS assenti;
-			HashMap<Long, MAssenza> assenze;
+			HashMap<Long, Assenza> assenze;
 			
 			fAController = new FaiAppelloController();
 			appello = fAController.getAppello(idClasse, idAppello);
