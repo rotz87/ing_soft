@@ -5,17 +5,27 @@ import java.util.TreeMap;
 
 import org.joda.time.LocalDate;
 
+import domain.model.Appello;
+import domain.model.Calendario;
+import domain.model.LibrettoAssenze;
+import domain.model.RegistroAssenze;
+import domain.model.Studente;
+
 
 public class RegistroAssenzeImp {
 
-	private MapAppelli appelli;
-	private Map <StudenteImp, LibrettoAssenzeImp> librettiAssenze;
+//	private MapAppelli appelli;
+//	private Map <StudenteImp, LibrettoAssenzeImp> librettiAssenze;
 	
 	/**
 	 * Costrurrore senza parametri.
 	 */
 	public RegistroAssenzeImp() {
-		appelli = new MapAppelli();
+
+	}
+	
+	public void inizialize(RegistroAssenze registroAsenze){
+		registroAsenze.setAppelli(new TreeMap<LocalDate, Appello>());
 	}
 	
 
@@ -23,12 +33,12 @@ public class RegistroAssenzeImp {
 	 * 
 	 * @param idStudenti
 	 */
-	public void registraAssenze(StudenteImp[] Studenti) {
-		AppelloImp appelloCorrente = getAppelloOdierno();
+	public void registraAssenze(RegistroAssenze registroAssenze, Studente[] Studenti) {
+		Appello appelloCorrente = getAppelloOdierno(registroAssenze);
 		if (!(appelloCorrente.isAssenzePrese())){
-			for (StudenteImp studente : Studenti){
+			for (Studente studente : Studenti){
 				
-					librettiAssenze.get(studente).segnaAssenza(appelloCorrente);
+					registroAssenze.getLibrettiAssenze().get(studente).segnaAssenza(appelloCorrente);
 	
 			}
 			appelloCorrente.setAssenzePrese(true);
@@ -37,28 +47,28 @@ public class RegistroAssenzeImp {
 		}
 	}
 
-	public AppelloImp getAppelloOdierno() {
+	public Appello getAppelloOdierno(RegistroAssenze registroAssenze) {
 		
-		AppelloImp appelloOdierno = null;
-		LocalDate dataDiRiferimento = CalendarioImp.getInstance().getDataOdierna();
-		if(this.esisteAppello(dataDiRiferimento)){
-			appelloOdierno = appelli.get(dataDiRiferimento);
+		Appello appelloOdierno = null;
+		LocalDate dataDiRiferimento = Calendario.getInstance().getDataOdierna();
+		if(this.esisteAppello(registroAssenze, dataDiRiferimento)){
+			appelloOdierno = registroAssenze.getAppelli().get(dataDiRiferimento);
 		}else{
 			throw new IllegalStateException("APPELLO ODIERNO INESISTENTE!");
 		}
 		return appelloOdierno;
 	}
 
-	public void avviaAppello() {
-		LocalDate dataRif = CalendarioImp.getInstance().getDataOdierna();
-		if(!(this.esisteAppello(dataRif))){
+	public void avviaAppello(RegistroAssenze registroAssenze) {
+		LocalDate dataRif = Calendario.getInstance().getDataOdierna();
+		if(!(this.esisteAppello(registroAssenze, dataRif))){
 //			//debug
 //			Appello nuovoAppello = new Appello(dataRif);
 //			appelli.put(dataRif, nuovoAppello);
 //			Stempa.stampaln("-------------------------------------------------------------------------------------->id appello : "+nuovoAppello.getIdAppello());
 //			//fine debug
-			if(!CalendarioImp.getInstance().isOggiFestivo()){
-				appelli.put(dataRif, new AppelloImp(dataRif));
+			if(!Calendario.getInstance().isOggiFestivo()){
+				registroAssenze.getAppelli().put(dataRif, new Appello(dataRif));
 			}else{
 				throw new IllegalStateException(" APPELLO NON AVVIABILE PER OGGI ");
 			}
@@ -75,68 +85,30 @@ public class RegistroAssenzeImp {
 	 * bottone visualizza dell'interfaccia
 	 * @param data
 	 */
-	public AppelloImp getAppelloByData(org.joda.time.LocalDate data) {
-		return appelli.get(data);
+	public Appello getAppelloByData(RegistroAssenze registroAssenze, org.joda.time.LocalDate data) {
+		return registroAssenze.getAppelli().get(data);
 	}
 
-	/**
-	 * @deprecated 
-	 * Metodo inserito per le prove, forse è da togliere
-	 * @param librettiAssenze
-	 */
-	public void assengaLibretti(java.util.Map<StudenteImp, LibrettoAssenzeImp> librettiAssenze) {
-		// Per le prove, forse è da togliere!!
-				this.librettiAssenze = librettiAssenze;
-	}
 
-	public MapAppelli getAppelli() {
-		return appelli;
-	}
-	
-	public Map<StudenteImp, LibrettoAssenzeImp> getLibrettiAssenze() {
-		return librettiAssenze;
-	}
+	public boolean esisteAppello(RegistroAssenze registroAssenze, LocalDate dataDiRiferimento){
 
-	public void setLibrettiAssenze(Map<StudenteImp, LibrettoAssenzeImp> librettiAssenze) {
-		this.librettiAssenze = librettiAssenze;
+		return registroAssenze.getAppelli().containsKey(dataDiRiferimento);
+	
 	}
+	
+	public boolean esisteAppello(RegistroAssenze registroAssenze, Appello appello){
 
-	public boolean esisteAppello(LocalDate dataDiRiferimento){
-//		boolean rit = false;
-//
-//		if(appelli.containsKey(dataDiRiferimento)){
-//			rit = true;
-//		}else{
-//			rit = false;
-//		}
-		return appelli.containsKey(dataDiRiferimento);
+		return registroAssenze.getAppelli().containsValue(appello);
 	
 	}
 	
-	public boolean esisteAppello(AppelloImp appello){
-//		boolean rit = false;
-//
-//		if(appelli.containsValue(appello)){
-//			rit = true;
-//		}else{
-//			rit = false;
-//		}
-		return appelli.containsValue(appello);
-	
-	}
-//	
-//	public boolean isAppelloAvviabile(LocalDate data){
-//
-//		return Calendario.getInstance().isFestivo(data);
-//	}
-	
-	public boolean isAppelloOdiernoAvviabile(){
+	public boolean isAppelloOdiernoAvviabile(RegistroAssenze registroAssenze){
 		Boolean festivo, esiste, avviabile;
 		
 		avviabile = false;
-		festivo = CalendarioImp.getInstance().isOggiFestivo();
+		festivo = Calendario.getInstance().isOggiFestivo();
 		if(!festivo){
-			esiste = this.esisteAppello(CalendarioImp.getInstance().getDataOdierna());
+			esiste = registroAssenze.esisteAppello(Calendario.getInstance().getDataOdierna());
 			if(!esiste){
 				avviabile = true;
 			}
@@ -145,12 +117,8 @@ public class RegistroAssenzeImp {
 		return avviabile;
 	}
 	
-	public LibrettoAssenzeImp getLibretto(StudenteImp studente){
-		return this.librettiAssenze.get(studente);
-	}
-
-	public class MapAppelli extends TreeMap<LocalDate, AppelloImp> {
-		
+	public LibrettoAssenze getLibretto(RegistroAssenze registroAssenze, Studente studente){
+		return registroAssenze.getLibrettiAssenze().get(studente);
 	}
 
 }

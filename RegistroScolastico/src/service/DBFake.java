@@ -322,10 +322,10 @@ public class DBFake {
 		secondaB.setRegistroAssenze(regAssSecondaB);
 		
 		//Assegnazione dei libretti al registro delle classe primaA
-		regAssPrimaA.assengaLibretti(librettiPrimaA);
-		regAssSecondaA.assengaLibretti(librettiSecondaA);
-		regAssPrimaB.assengaLibretti(librettiPrimaB);
-		regAssSecondaB.assengaLibretti(librettiSecondaB);
+		regAssPrimaA.setLibrettiAssenze(librettiPrimaA);
+		regAssSecondaA.setLibrettiAssenze(librettiSecondaA);
+		regAssPrimaB.setLibrettiAssenze(librettiPrimaB);
+		regAssSecondaB.setLibrettiAssenze(librettiSecondaB);
 		
 		
 		//Creazione di un vettore di studenti per cui segnare l'assenza
@@ -386,20 +386,20 @@ public class DBFake {
 		tuttiGliAppelli.put(appello_2B_16_12_14.getIdAppello(), appello_2B_16_12_14);
 		
 		
-		
+
 		
 //		regAssPrimaA.getAppelli().put(appello8_12_14.getData(), appello8_12_14);
-		regAssPrimaA.getAppelli().put(appello_1A_10_12_14.getData(), appello_1A_10_12_14);
-		regAssPrimaA.getAppelli().put(appello_1A_11_12_14.getData(), appello_1A_11_12_14);
-		regAssPrimaA.getAppelli().put(appello_1A_12_12_14.getData(), appello_1A_12_12_14);
-		regAssPrimaA.getAppelli().put(appello_1A_13_12_14.getData(), appello_1A_13_12_14);
+		regAssPrimaA.getAppelli().put(new LocalDate(appello_1A_10_12_14.getData()), appello_1A_10_12_14);
+		regAssPrimaA.getAppelli().put(new LocalDate(appello_1A_11_12_14.getData()), appello_1A_11_12_14);
+		regAssPrimaA.getAppelli().put(new LocalDate(appello_1A_12_12_14.getData()), appello_1A_12_12_14);
+		regAssPrimaA.getAppelli().put(new LocalDate(appello_1A_13_12_14.getData()), appello_1A_13_12_14);
 //		regAssPrimaA.getAppelli().put(appello14_12_14.getData(), appello14_12_14);
-		regAssPrimaA.getAppelli().put(appello_1A_15_12_14.getData(), appello_1A_15_12_14);
-		regAssPrimaA.getAppelli().put(appello_1A_16_12_14.getData(), appello_1A_16_12_14);
+		regAssPrimaA.getAppelli().put(new LocalDate(appello_1A_15_12_14.getData()), appello_1A_15_12_14);
+		regAssPrimaA.getAppelli().put(new LocalDate(appello_1A_16_12_14.getData()), appello_1A_16_12_14);
 		
-		regAssSecondaA.getAppelli().put(appello_2A_16_12_14.getData(), appello_2A_16_12_14);
-		regAssPrimaB.getAppelli().put(appello_1B_16_12_14.getData(), appello_1B_16_12_14);
-		regAssSecondaB.getAppelli().put(appello_2B_16_12_14.getData(), appello_2B_16_12_14);
+		regAssSecondaA.getAppelli().put(new LocalDate(appello_2A_16_12_14.getData()), appello_2A_16_12_14);
+		regAssPrimaB.getAppelli().put(new LocalDate(appello_1B_16_12_14.getData()), appello_1B_16_12_14);
+		regAssSecondaB.getAppelli().put(new LocalDate(appello_2B_16_12_14.getData()), appello_2B_16_12_14);
 		
 
 		
@@ -463,15 +463,15 @@ public class DBFake {
 		listaAssenzeLorenzoNegri.add(assLorenzoNegri1);
 		
 		//assegnazione delle liste ai libretti
-		librettoMarioRomano.assengnaAssenzeNonGiustificate(listaAssenzeMarioRomano);
-		librettoPieroRusso.assengnaAssenzeNonGiustificate(listaAssenzePieroRusso);
+		librettoMarioRomano.setNonGiustificate(listaAssenzeMarioRomano);
+		librettoPieroRusso.setNonGiustificate(listaAssenzePieroRusso);
 //		librettoPiero.assengnaAssenzeNonGiustificate(listaAssenzeTsetFineMese);
-		librettoIvoMarino.assengnaAssenzeNonGiustificate(listaAssenzeIvoMarini);
+		librettoIvoMarino.setNonGiustificate(listaAssenzeIvoMarini);
 //		librettoMarino.assengnaAssenzeNonGiustificate(listaAssenzeMarino);
-		librettoDavideDiSalvo.assengnaAssenzeNonGiustificate(listaAssenzeDavideDiSalvo);
+		librettoDavideDiSalvo.setNonGiustificate(listaAssenzeDavideDiSalvo);
 		
-		librettoMariannaDonati.assengnaAssenzeNonGiustificate(listaAssenzeMariannaDonati);
-		librettoLorenzoNegri.assengnaAssenzeNonGiustificate(listaAssenzeLorenzoNegri);
+		librettoMariannaDonati.setNonGiustificate(listaAssenzeMariannaDonati);
+		librettoLorenzoNegri.setNonGiustificate(listaAssenzeLorenzoNegri);
 		
 //		appello8_12_14.setAssenzePrese(true);
 		appello_1A_10_12_14.setAssenzePrese(true);

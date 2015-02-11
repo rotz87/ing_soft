@@ -1,34 +1,28 @@
 package domain.model;
 
+import domain.implementor.StudenteImp;
+
 public class Studente {
 	
 	private long id;
-	private static long contaId = 0;
 	private String nome;
 	private String cognome;
 	private Indirizzo indrizzo;
 	private String codiceFiscale;
+	private StudenteImp implementor;
 	
 	public Studente(String nome, String cognome){
-		this.id = Studente.generaId();
-		this.nome = nome;
-		this.cognome = cognome;
-//		Stempa.stampaln("<><><><> costruisco lo studente: " + this.nome +", "+this.cognome+ " con id: "+this.id);
+		this.implementor = new StudenteImp();
+		implementor.inizialize(this, nome, cognome);
 	}
 	
 	
 	
 	public Studente(long id, String nome, String cognome, Indirizzo indrizzo, String codiceFiscale) {
-		this.id = Studente.generaId();
-//		setId(id);
-		setNome(nome);
-		setCognome(cognome);
-		setIndrizzo(indrizzo);
-		setCodiceFiscale(codiceFiscale);
+		this.implementor = new StudenteImp();
+		implementor.inizialize(this, nome, cognome, indrizzo, codiceFiscale);
 	}
-
-
-
+	
 	public long getId() {
 		return id;
 	}
@@ -68,13 +62,5 @@ public class Studente {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	private static long generaId(){
-		contaId ++;
-		return contaId;
-		
-	}
 
-
-	
 }

@@ -26,7 +26,7 @@ public class Assenza {
 	 * Costruttore dell'Assenza, prende come parametro una LinkedList di appelli.
 	 * @param appelli
 	 */
-	public Assenza (Assenza assenza , LinkedList<Appello> appelli){
+	public Assenza (LinkedList<Appello> appelli){
 		implementor = new AssenzaImp();
 		implementor.inizialize(this, appelli);
 	}

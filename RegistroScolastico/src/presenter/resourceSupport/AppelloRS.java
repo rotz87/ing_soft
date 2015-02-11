@@ -26,7 +26,7 @@ public class AppelloRS extends ResourceSupport{
 	public AppelloRS(Appello appello, long idClasse) {
 		
 		this.idAppello = appello.getIdAppello();
-		this.data = appello.getData().toDate();
+		this.data = appello.getData();
 		this.assenzePrese = appello.isAssenzePrese();
 //da togliere
 //		this.add(ControllerLinkBuilder.linkTo(

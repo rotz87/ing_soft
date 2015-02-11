@@ -95,7 +95,7 @@ public class AppelloController {
 			}
 			
 			appelloAvviabile = fAController.isAppelloOdiernoAvviabile(idClasse);
-			dataAppelloOdierno = Calendario.getInstance().prendiDataOdierna().toDate();
+			dataAppelloOdierno = Calendario.getInstance().getDataOdierna().toDate();
 			
 			return new AppelliContainerRS(appelloAvviabile, dataAppelloOdierno, appelliRS);
 		}

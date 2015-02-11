@@ -1,9 +1,8 @@
 package domain.model;
 
 import java.util.List;
+
 /**
- * @deprecated
- * @author Fabio
  *
  */
 public class Scuola {
@@ -15,16 +14,21 @@ public class Scuola {
 
 	}
 	
-	/**Per le prove
-	 * 
-	 */
+
+	public List<Classe> getClassi() {
+		return classi;
+	}
+
+
+	public List<Docente> getDocenti() {
+		return docenti;
+	}
+
+
 	public void setClassi( List<Classe> classi){
 		this.classi = classi;
 	}
 	
-	/**Per le prove
-	 * 
-	 */
 	public void setDocenti(List<Docente> docenti){
 		this.docenti = docenti;
 	}
