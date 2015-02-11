@@ -1,28 +1,26 @@
 package domain.model;
 
+import java.util.Date;
 import java.util.LinkedList;
-import java.util.TreeSet;
+//import java.util.TreeSet;
 
 import org.joda.time.LocalDate;
+
+import domain.implementor.CalendarioImp;
 
 public class Calendario {
 
 	private static Calendario instance; 
-	private LocalDate dataOdierna;
-	private  TreeSet<LocalDate> giorniFestivi;
+//	private LocalDate dataOdierna;
+	private MyTreeSetDate giorniFestivi;
 	private LinkedList<Integer> giorniSettimanaliFestivi;
+	private CalendarioImp implementor;
 	
 	
 	private Calendario(){
-		dataOdierna = this.calcolaDataOdierna();
-		giorniFestivi = new TreeSet<LocalDate>();
-		giorniSettimanaliFestivi = new LinkedList<Integer>();
-//		giorniSettimanaliFestivi.add(6);
-		giorniSettimanaliFestivi.add(7);
-		
-		giorniFestivi.add(new LocalDate(2014,12,8));
-		giorniFestivi.add(new LocalDate(2014,12,25));
-		giorniFestivi.add(new LocalDate(2014,12,26));
+		implementor = new CalendarioImp();
+		implementor.inizialize(this);
+
 
 	}
 	
@@ -33,34 +31,39 @@ public class Calendario {
 		return instance;
 	}
 	
-	public LocalDate getDataOdierna(){
+	
+	public LocalDate getDataOdierna() {
+		return implementor.getDataOdierna();
+	}
 
-		LocalDate data =  this.calcolaDataOdierna();
-		if(!(dataOdierna.isEqual(data))){
-			this.dataOdierna = data;
-		}
-		return dataOdierna;	
+
+	public MyTreeSetDate getGiorniFestivi() {
+		return giorniFestivi;
 	}
-	
-	/**
-	 * Per la prove lasciamo la date 17/12/2014 a regime bisogna fargli prendere la data odierna
-	 */
-	private LocalDate calcolaDataOdierna(){
-		return new LocalDate(2014,12,17);//a regime deve prendere la data odierna affettiva per ora per i test prende la data de 17 12 2014
+
+	public void setGiorniFestivi(MyTreeSetDate giorniFestivi) {
+		this.giorniFestivi = giorniFestivi;
 	}
+
+	public LinkedList<Integer> getGiorniSettimanaliFestivi() {
+		return giorniSettimanaliFestivi;
+	}
+
+	public void setGiorniSettimanaliFestivi(LinkedList<Integer> giorniSettimanaliFestivi) {
+		this.giorniSettimanaliFestivi = giorniSettimanaliFestivi;
+	}
+
+//	public LocalDate prendiDataOdierna(){
+//
+//		return implementor.prendiDataOdierna(this);
+//	}
 	
+
 	public boolean isFestivo(LocalDate data){
-		boolean festivo = false;
-		
-		festivo = giorniSettimanaliFestivi.contains(new Integer(data.dayOfWeek().get()));
-		if (!festivo){
-			festivo = giorniFestivi.contains(data);
-		}
-		
-		return festivo;
+		return implementor.isFestivo(this, data);
 	}
 	
 	public boolean isOggiFestivo(){
-		return this.isFestivo(this.getDataOdierna());
+		return implementor.isOggiFestivo(this);
 	}
 }

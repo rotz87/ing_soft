@@ -3,6 +3,8 @@ package domain.model;
 import java.util.Collection;
 import java.util.HashSet;
 
+import domain.implementor.ClasseImp;
+
 /**
  * Conterrà il registro delle assenze.
  * Per il momento non verrà implementata in questo UC.
@@ -12,21 +14,18 @@ import java.util.HashSet;
 public class Classe {
 	private String nome;
 	private long idClasse;
-	private static long contaId = 0;
 	private RegistroAssenze registroAssenze;
 	private Collection<Studente> studenti;
+	private ClasseImp implementor;
 	
 	public Classe(String nome){
-		this.nome = nome;
-		this.idClasse = Classe.generaId();
-		this.studenti = new HashSet<Studente>();
+		implementor = new ClasseImp();
+		implementor.inizialize(this, nome);
 	}
 	
 	public Classe(String nome, RegistroAssenze registroAssenze){
-		this.nome = nome;
-		this.idClasse = Classe.generaId();
-		this.studenti = new HashSet<Studente>();
-		this.registroAssenze = registroAssenze;
+		implementor = new ClasseImp();
+		implementor.inizialize(this, nome, registroAssenze);
 	}
 
 	public String getNome() {
@@ -61,12 +60,6 @@ public class Classe {
 	
 	public Collection<Studente> getStudenti( ){
 		return this.studenti;
-	}
-
-	private static long generaId(){
-		contaId ++;
-		return contaId;
-		
 	}
 	
 }

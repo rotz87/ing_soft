@@ -1,39 +1,43 @@
 package domain.model;
 
+import java.util.Date;
+
 import org.joda.time.LocalDate;
+
+import service.Stampa;
+import domain.implementor.AppelloImp;
 
 public class Appello {
 
 	private long idAppello;
 	private boolean assenzePrese;
+	private Date data;
+	private AppelloImp implementor;
 
-	/**
-	 * @deprecated
-	 * detiene il conteggio delle isranze create per generare l'idAppello.
-	 */
-	private static long contaId = 0;
-	
-	private LocalDate data;
-	
+
 	/**
 	 * Costruttore dell'appello che prende come parametro la data.
 	 * @param data
 	 */
 	
 	public Appello(LocalDate data) {
+		implementor = new AppelloImp();
+		implementor.inizialize(this, data);
 
-		this.data = new LocalDate(data);
-		this.assenzePrese = false;
-		this.idAppello = Appello.generaId();
-		
+
 	}
 
 	
-	public LocalDate getData() {
+	public Date getData() {
 		
 		return this.data;
 	
 	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
 
 	public long getIdAppello() {
 		return idAppello;
@@ -43,18 +47,6 @@ public class Appello {
 		this.idAppello = idAppello;
 	}
 	
-	/**
-	 * @deprecated
-	 * Genera un idAppello progressivo, è stato inserito per le prove, 
-	 * valutare se è il caso di tenerlo
-	 * @return 
-	 */
-	private static long generaId(){
-		contaId ++;
-		return contaId;
-		
-	}
-
 
 	public boolean isAssenzePrese() {
 		return assenzePrese;
@@ -65,6 +57,4 @@ public class Appello {
 		this.assenzePrese = assenzePrese;
 	}
 	
-	
-
 }

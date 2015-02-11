@@ -1,5 +1,6 @@
 package test;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -11,6 +12,7 @@ import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
+import domain.model.Appello;
 import service.Stampa;
 
 //import org.orm.util.ORMMap;
@@ -101,6 +103,27 @@ public class TestDate {
 //			Stampa.stampaln("day of week: " + localDate.getDayOfWeek());
 //			Stampa.stampaln("contain: " + pippo.contains(localDate.getDayOfWeek()));
 
+			
+			Stampa.stampaln("_________________________________________________ ");
+			
+			LocalDate data = new LocalDate(2015,01,25);
+			//data.get
+			java.util.Date d = data.toDate();
+			DateTime dtime = new DateTime(d);
+			Object o = new Object();
+			LocalDate dd = new LocalDate(d);
+			
+//			LocalDate dd2 = new LocalDate();
+//			java.util.Date utilDate = dd2.toDate();
+			
+//			LocalDate aa = new LocalDate(d, d.toInstant());
+//			Stampa.stampaln("aa: " +aa);
+
+			Stampa.stampaln("dtime: " + dtime);
+			Stampa.stampaln("localDate: " + data);
+			Stampa.stampaln("Date: " + d + " getMonth " + d.getMonth());
+			Stampa.stampaln("data convertita da Date a LocalDate: " + dd);
+			
 	}
 
 }
