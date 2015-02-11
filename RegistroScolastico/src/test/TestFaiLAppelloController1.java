@@ -54,7 +54,7 @@ public class TestFaiLAppelloController1 {
 
 	}
 	
-	private static void stampaLibretti(RegistroAssenze regAss){
+	public static void stampaLibretti(RegistroAssenze regAss){
 		Stampa.stampaln();
 		Stampa.stampaln("VISUALIZZAZIONE ASSENZE NON GIUSTIFICATE DEGLI STUDENTI _________________________ \n \n");
 		Iterator entries = regAss.getLibrettiAssenze().entrySet().iterator();
