@@ -1,5 +1,6 @@
 package test;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -12,9 +13,9 @@ import org.joda.time.LocalTime;
 
 import service.Stampa;
 
-import org.orm.util.ORMMap;
-
-import domain.persistent.RegistroScolasticoPersistentManager;
+//import org.orm.util.ORMMap;
+//
+//import domain.persistent.RegistroScolasticoPersistentManager;
 
 
 
@@ -99,7 +100,7 @@ public class TestDate {
 //			LocalDate localDate = new LocalDate(2015,01,12);
 //			Stampa.stampaln("day of week: " + localDate.getDayOfWeek());
 //			Stampa.stampaln("contain: " + pippo.contains(localDate.getDayOfWeek()));
-			
+
 	}
 
 }
