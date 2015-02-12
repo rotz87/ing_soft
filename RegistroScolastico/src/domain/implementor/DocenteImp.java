@@ -10,7 +10,7 @@ public class DocenteImp {
 	
 	
 	public void inizialize(Docente docente) {
-		docente.setClassi((Collection)new LinkedList<ClasseImp>());
+
 	}
 	
 	public void inizialize(Docente docente, String nome, String cognome) {

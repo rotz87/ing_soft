@@ -63,18 +63,18 @@ public class DBFake {
 		this.tuttiGliStudenti = studenti;
 	}
 	
-	public Classe getClasseById(Long idClasse){
+	public Classe getClasseById(int idClasse){
 		return classi.get(idClasse);
 	}
 	
-	public Docente getDocenteById(Long idDocente){
+	public Docente getDocenteById(int idDocente){
 		return docenti.get(idDocente);
 	}
-	public Studente getStudenteById(Long idStudente){
+	public Studente getStudenteById(Integer idStudente){
 		return tuttiGliStudenti.get(idStudente);
 	}
 	
-	public Appello getAppelloById(Long idAppello){
+	public Appello getAppelloById(int idAppello){
 		return tuttiGliAppelli.get(idAppello);
 	}
 	
@@ -389,17 +389,17 @@ public class DBFake {
 
 		
 //		regAssPrimaA.getAppelli().put(appello8_12_14.getData(), appello8_12_14);
-		regAssPrimaA.getAppelli().put(new LocalDate(appello_1A_10_12_14.getData()), appello_1A_10_12_14);
-		regAssPrimaA.getAppelli().put(new LocalDate(appello_1A_11_12_14.getData()), appello_1A_11_12_14);
-		regAssPrimaA.getAppelli().put(new LocalDate(appello_1A_12_12_14.getData()), appello_1A_12_12_14);
-		regAssPrimaA.getAppelli().put(new LocalDate(appello_1A_13_12_14.getData()), appello_1A_13_12_14);
+		regAssPrimaA.getAppelliRegistro().put(new LocalDate(appello_1A_10_12_14.getData()), appello_1A_10_12_14);
+		regAssPrimaA.getAppelliRegistro().put(new LocalDate(appello_1A_11_12_14.getData()), appello_1A_11_12_14);
+		regAssPrimaA.getAppelliRegistro().put(new LocalDate(appello_1A_12_12_14.getData()), appello_1A_12_12_14);
+		regAssPrimaA.getAppelliRegistro().put(new LocalDate(appello_1A_13_12_14.getData()), appello_1A_13_12_14);
 //		regAssPrimaA.getAppelli().put(appello14_12_14.getData(), appello14_12_14);
-		regAssPrimaA.getAppelli().put(new LocalDate(appello_1A_15_12_14.getData()), appello_1A_15_12_14);
-		regAssPrimaA.getAppelli().put(new LocalDate(appello_1A_16_12_14.getData()), appello_1A_16_12_14);
+		regAssPrimaA.getAppelliRegistro().put(new LocalDate(appello_1A_15_12_14.getData()), appello_1A_15_12_14);
+		regAssPrimaA.getAppelliRegistro().put(new LocalDate(appello_1A_16_12_14.getData()), appello_1A_16_12_14);
 		
-		regAssSecondaA.getAppelli().put(new LocalDate(appello_2A_16_12_14.getData()), appello_2A_16_12_14);
-		regAssPrimaB.getAppelli().put(new LocalDate(appello_1B_16_12_14.getData()), appello_1B_16_12_14);
-		regAssSecondaB.getAppelli().put(new LocalDate(appello_2B_16_12_14.getData()), appello_2B_16_12_14);
+		regAssSecondaA.getAppelliRegistro().put(new LocalDate(appello_2A_16_12_14.getData()), appello_2A_16_12_14);
+		regAssPrimaB.getAppelliRegistro().put(new LocalDate(appello_1B_16_12_14.getData()), appello_1B_16_12_14);
+		regAssSecondaB.getAppelliRegistro().put(new LocalDate(appello_2B_16_12_14.getData()), appello_2B_16_12_14);
 		
 
 		

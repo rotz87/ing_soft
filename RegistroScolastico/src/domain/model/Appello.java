@@ -1,60 +1,86 @@
+/**
+ * "Visual Paradigm: DO NOT MODIFY THIS FILE!"
+ * 
+ * This is an automatic generated file. It will be regenerated every time 
+ * you generate persistence class.
+ * 
+ * Modifying its content may cause the program not work, or your work may lost.
+ */
+
+/**
+ * Licensee: Universita degli Studi dell'Aquila
+ * License Type: Academic
+ */
 package domain.model;
 
-import java.util.Date;
-
-import org.joda.time.LocalDate;
-
-import service.Stampa;
-import domain.implementor.AppelloImp;
-
 public class Appello {
-
-	private long idAppello;
+	public Appello() {
+	}
+	
+	private int idAppello;
+	
+	private java.util.Date data;
+	
 	private boolean assenzePrese;
-	private Date data;
-	private AppelloImp implementor;
-
-
-	/**
-	 * Costruttore dell'appello che prende come parametro la data.
-	 * @param data
-	 */
 	
-	public Appello(LocalDate data) {
-		implementor = new AppelloImp();
-		implementor.inizialize(this, data);
-
-
-	}
-
+	private Integer registroAssenzeIndex;
 	
-	public Date getData() {
-		
-		return this.data;
+	public void setData(java.util.Date value) {
+		this.data = value;
+	}
 	
+	public java.util.Date getData() {
+		return data;
 	}
-
-	public void setData(Date data) {
-		this.data = data;
+	
+	private void setIdAppello(int value) {
+		this.idAppello = value;
 	}
-
-
-	public long getIdAppello() {
+	
+	public int getIdAppello() {
 		return idAppello;
 	}
-
-	public void setIdAppello(long idAppello) {
-		this.idAppello = idAppello;
+	
+	public int getORMID() {
+		return getIdAppello();
 	}
 	
-
-	public boolean isAssenzePrese() {
+	public void setAssenzePrese(boolean value) {
+		this.assenzePrese = value;
+	}
+	
+	public boolean getAssenzePrese() {
 		return assenzePrese;
 	}
-
-
-	public void setAssenzePrese(boolean assenzePrese) {
-		this.assenzePrese = assenzePrese;
+	
+	public void setRegistroAssenzeIndex(int value) {
+		setRegistroAssenzeIndex(new Integer(value));
+	}
+	
+	public void setRegistroAssenzeIndex(Integer value) {
+		this.registroAssenzeIndex = value;
+	}
+	
+	public Integer getRegistroAssenzeIndex() {
+		return registroAssenzeIndex;
+	}
+	
+	private domain.implementor.AppelloImp implementor = new domain.implementor.AppelloImp();
+	
+	/**
+	 * Costruttore dell'appello che prende come parametro la data.
+	 */
+	public Appello(org.joda.time.LocalDate data) {
+		this.implementor.inizialize(this, data);
+	}
+	
+	public void setIdAppello(long idAppello) {
+		//TODO: Implement Method
+		throw new UnsupportedOperationException();
+	}
+	
+	public String toString() {
+		return String.valueOf(getIdAppello());
 	}
 	
 }

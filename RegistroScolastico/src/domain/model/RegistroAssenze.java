@@ -1,110 +1,108 @@
+/**
+ * "Visual Paradigm: DO NOT MODIFY THIS FILE!"
+ * 
+ * This is an automatic generated file. It will be regenerated every time 
+ * you generate persistence class.
+ * 
+ * Modifying its content may cause the program not work, or your work may lost.
+ */
+
+/**
+ * Licensee: Universita degli Studi dell'Aquila
+ * License Type: Academic
+ */
 package domain.model;
 
-import java.util.Map;
-import java.util.TreeMap;
-
-import org.joda.time.LocalDate;
-
-import domain.implementor.RegistroAssenzeImp;
-
-
 public class RegistroAssenze {
-
-	private TreeMap<LocalDate, Appello> appelli;
-	private Map <Studente, LibrettoAssenze> librettiAssenze;
-	private RegistroAssenzeImp implementor;
-	
-	/**
-	 * Costrurrore senza parametri.
-	 */
 	public RegistroAssenze() {
-		this.implementor = new RegistroAssenzeImp();
-		this.implementor.inizialize(this);
 	}
 	
-
-	public TreeMap<LocalDate, Appello> getAppelli() {
-		return appelli;
+	private int ID;
+	
+	private domain.model.Appello appelloOdierno;
+	
+	private java.util.Map<Integer, domain.model.LibrettoAssenze> librettiAssenze = new java.util.HashMap<Integer, domain.model.LibrettoAssenze>();
+	
+	private java.util.Map<Integer, domain.model.Appello> appelliRegistro = new java.util.HashMap<Integer, domain.model.Appello>();
+	
+	private void setID(int value) {
+		this.ID = value;
 	}
-
-	public void setAppelli(TreeMap<LocalDate, Appello> appelli) {
-		this.appelli = appelli;
+	
+	public int getID() {
+		return ID;
 	}
-
-	public Map<Studente, LibrettoAssenze> getLibrettiAssenze() {
+	
+	public int getORMID() {
+		return getID();
+	}
+	
+	public void setAppelloOdierno(domain.model.Appello value) {
+		this.appelloOdierno = value;
+	}
+	
+	public domain.model.Appello getAppelloOdierno() {
+		return appelloOdierno;
+	}
+	
+	public void setLibrettiAssenze(java.util.Map<Integer, domain.model.LibrettoAssenze> value) {
+		this.librettiAssenze = value;
+	}
+	
+	public java.util.Map<Integer, domain.model.LibrettoAssenze> getLibrettiAssenze() {
 		return librettiAssenze;
 	}
-
-	public void setLibrettiAssenze(Map<Studente, LibrettoAssenze> librettiAssenze) {
-		this.librettiAssenze = librettiAssenze;
-	}
-
 	
-	/**Riceve un vettore di studenti per cui segnare le assenze
-	 * 
-	 * @param idStudenti
-	 */
-	public void registraAssenze(Studente[] studenti) {
-		
-		implementor.registraAssenze(this, studenti);
-
+	
+	public void setAppelliRegistro(java.util.Map<Integer, domain.model.Appello> value) {
+		this.appelliRegistro = value;
 	}
-
-	public Appello getAppelloOdierno() {
-		
-		return implementor.getAppelloOdierno(this);
-
+	
+	public java.util.Map<Integer, domain.model.Appello> getAppelliRegistro() {
+		return appelliRegistro;
 	}
-
+	
+	
+	private domain.implementor.RegistroAssenzeImp implementor = new domain.implementor.RegistroAssenzeImp();
+	
 	public void avviaAppello() {
-		
-		implementor.avviaAppello(this);
-		
+		this.implementor.avviaAppello(this);
 	}
-
-
+	
 	/**
 	 * Metodo per restituire un appello specifico, avendo la data
-	 * serve per visualizzare un appello già fatto
+	 * serve per visualizzare un appello giÃ  fatto
 	 * bottone visualizza dell'interfaccia
-	 * @param data
 	 */
-	public Appello getAppelloByData(LocalDate data) {
-		return implementor.getAppelloByData(this, data);
-	}
-
-
-	public boolean esisteAppello(LocalDate dataDiRiferimento){
-
-		return implementor.esisteAppello(this, dataDiRiferimento);
-	
+	public domain.model.Appello getAppelloByData(org.joda.time.LocalDate data) {
+		return this.implementor.getAppelloByData(this, data);
 	}
 	
-	public boolean esisteAppello(Appello appello){
-		
-		return implementor.esisteAppello(this, appello);
-	
+	/**
+	 * Riceve un vettore di studenti per cui segnare le assenze
+	 */
+	public void registraAssenze(domain.model.Studente[] studenti) {
+		this.implementor.registraAssenze(this, studenti);
 	}
 	
-	public boolean isAppelloOdiernoAvviabile(){
-		return implementor.isAppelloOdiernoAvviabile(this);
-//		Boolean festivo, esiste, avviabile;
-//		
-//		avviabile = false;
-//		festivo = Calendario.getInstance().isOggiFestivo();
-//		if(!festivo){
-//			esiste = this.esisteAppello(Calendario.getInstance().prendiDataOdierna());
-//			if(!esiste){
-//				avviabile = true;
-//			}
-//		}
-//		
-//		return avviabile;
+	public boolean esisteAppello(domain.model.Appello appello) {
+		return this.implementor.esisteAppello(this, appello);
 	}
 	
-	public LibrettoAssenze getLibretto(Studente studente){
-		return implementor.getLibretto(this, studente);
+	public boolean esisteAppello(org.joda.time.LocalDate dataDiRiferimento) {
+		return this.implementor.esisteAppello(this, dataDiRiferimento);
 	}
-
-
+	
+	public boolean isAppelloOdiernoAvviabile() {
+		return this.implementor.isAppelloOdiernoAvviabile(this);
+	}
+	
+	public domain.model.LibrettoAssenze getLibretto(domain.model.Studente studente) {
+		return this.implementor.getLibretto(this, studente);
+	}
+	
+	public String toString() {
+		return String.valueOf(getID());
+	}
+	
 }

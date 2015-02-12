@@ -1,65 +1,89 @@
-package domain.model;
-
-import java.util.Collection;
-import java.util.HashSet;
-
-import domain.implementor.ClasseImp;
+/**
+ * "Visual Paradigm: DO NOT MODIFY THIS FILE!"
+ * 
+ * This is an automatic generated file. It will be regenerated every time 
+ * you generate persistence class.
+ * 
+ * Modifying its content may cause the program not work, or your work may lost.
+ */
 
 /**
- * Conterrà il registro delle assenze.
- * Per il momento non verrà implementata in questo UC.
+ * Licensee: Universita degli Studi dell'Aquila
+ * License Type: Academic
+ */
+package domain.model;
+
+/**
+ * ConterrÃ  il registro delle assenze.
+ * Per il momento non verrÃ  implementata in questo UC.
  * @author marco
- *
  */
 public class Classe {
+	public Classe() {
+	}
+	
+	private int idClasse;
+	
+	private domain.model.RegistroAssenze registroAssenze;
+	
 	private String nome;
-	private long idClasse;
-	private RegistroAssenze registroAssenze;
-	private Collection<Studente> studenti;
-	private ClasseImp implementor;
 	
-	public Classe(String nome){
-		implementor = new ClasseImp();
-		implementor.inizialize(this, nome);
+	private java.util.Set<domain.model.Studente> studenti = new java.util.HashSet<domain.model.Studente>();
+	
+	public void setNome(String value) {
+		this.nome = value;
 	}
 	
-	public Classe(String nome, RegistroAssenze registroAssenze){
-		implementor = new ClasseImp();
-		implementor.inizialize(this, nome, registroAssenze);
-	}
-
 	public String getNome() {
 		return nome;
 	}
-
-
-	public void setNome(String nome) {
-		this.nome = nome;
+	
+	private void setIdClasse(int value) {
+		this.idClasse = value;
 	}
-
-
-	public long getIdClasse() {
+	
+	public int getIdClasse() {
 		return idClasse;
 	}
-
+	
+	public int getORMID() {
+		return getIdClasse();
+	}
+	
+	public void setRegistroAssenze(domain.model.RegistroAssenze value) {
+		this.registroAssenze = value;
+	}
+	
+	public domain.model.RegistroAssenze getRegistroAssenze() {
+		return registroAssenze;
+	}
+	
+	public void setStudenti(java.util.Set<domain.model.Studente> value) {
+		this.studenti = value;
+	}
+	
+	public java.util.Set<domain.model.Studente> getStudenti() {
+		return studenti;
+	}
+	
+	
+	private domain.implementor.ClasseImp implementor = new domain.implementor.ClasseImp();
+	
+	public Classe(String nome) {
+		this.implementor.inizialize(this, nome);
+	}
+	
+	public Classe(String nome, domain.model.RegistroAssenze registroAssenze) {
+		this.implementor.inizialize(this, nome, registroAssenze);
+	}
+	
 	public void setIdClasse(long idClasse) {
-		this.idClasse = idClasse;
-	} 
-	
-	public RegistroAssenze getRegistroAssenze(){
-		return this.registroAssenze;
+		//TODO: Implement Method
+		throw new UnsupportedOperationException();
 	}
 	
-	public void setRegistroAssenze(RegistroAssenze registroAssenze){
-		this.registroAssenze = registroAssenze;
-	}
-	
-	public void setStudenti( Collection<Studente> studenti){
-		this.studenti = studenti;
-	}
-	
-	public Collection<Studente> getStudenti( ){
-		return this.studenti;
+	public String toString() {
+		return String.valueOf(getIdClasse());
 	}
 	
 }

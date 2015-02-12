@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: Universita degli Studi dell'Aquila
+License Type: Academic
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="domain.model.Classe" table="Classe" lazy="false">
+		<meta attribute="class-description">
+			Conterr&#195;&#160; il registro delle assenze.
+			Per il momento non verr&#195;&#160; implementata in questo UC.
+			@author marco
+		</meta>
+		<id name="idClasse" column="IdClasse" type="integer" unsaved-value="0">
+			<generator class="native">
+			</generator>
+		</id>
+		<many-to-one name="registroAssenze" column="RegistroAssenzeID" class="domain.model.RegistroAssenze" cascade="save-update,lock" unique="true" not-null="true" lazy="no-proxy">
+		</many-to-one>
+		<property name="nome" column="Nome" type="string" length="255" not-null="false" lazy="false"/>
+		<set name="studenti" lazy="true" cascade="save-update,lock" inverse="false">
+			<key column="ClasseIdClasse" not-null="true"/>
+			<one-to-many class="domain.model.Studente"/>
+		</set>
+	</class>
+</hibernate-mapping>

@@ -1,66 +1,102 @@
+/**
+ * "Visual Paradigm: DO NOT MODIFY THIS FILE!"
+ * 
+ * This is an automatic generated file. It will be regenerated every time 
+ * you generate persistence class.
+ * 
+ * Modifying its content may cause the program not work, or your work may lost.
+ */
+
+/**
+ * Licensee: Universita degli Studi dell'Aquila
+ * License Type: Academic
+ */
 package domain.model;
 
-import domain.implementor.StudenteImp;
-
 public class Studente {
+	public Studente() {
+	}
 	
-	private long id;
+	private int id;
+	
 	private String nome;
+	
 	private String cognome;
-	private Indirizzo indrizzo;
+	
 	private String codiceFiscale;
-	private StudenteImp implementor;
 	
-	public Studente(String nome, String cognome){
-		this.implementor = new StudenteImp();
-		implementor.inizialize(this, nome, cognome);
+	private Integer indrizzo;
+	
+	private void setId(int value) {
+		this.id = value;
 	}
 	
-	
-	
-	public Studente(long id, String nome, String cognome, Indirizzo indrizzo, String codiceFiscale) {
-		this.implementor = new StudenteImp();
-		implementor.inizialize(this, nome, cognome, indrizzo, codiceFiscale);
-	}
-	
-	public long getId() {
+	public int getId() {
 		return id;
 	}
-
-	public void setId(long id) {
-		this.id = id;
+	
+	public int getORMID() {
+		return getId();
 	}
 	
-	public String getNome(){
-		return this.nome;
+	public void setNome(String value) {
+		this.nome = value;
 	}
-
+	
+	public String getNome() {
+		return nome;
+	}
+	
+	public void setCognome(String value) {
+		this.cognome = value;
+	}
+	
 	public String getCognome() {
 		return cognome;
 	}
-
-	public void setCognome(String cognome) {
-		this.cognome = cognome;
+	
+	public void setCodiceFiscale(String value) {
+		this.codiceFiscale = value;
 	}
-
-	public Indirizzo getIndrizzo() {
-		return indrizzo;
-	}
-
-	public void setIndrizzo(Indirizzo indrizzo) {
-		this.indrizzo = indrizzo;
-	}
-
+	
 	public String getCodiceFiscale() {
 		return codiceFiscale;
 	}
-
-	public void setCodiceFiscale(String codiceFiscale) {
-		this.codiceFiscale = codiceFiscale;
+	
+	public void setIndrizzo(int value) {
+		setIndrizzo(new Integer(value));
 	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
+	
+	public void setIndrizzo(Integer value) {
+		this.indrizzo = value;
 	}
-
+	
+	public Integer getIndrizzo() {
+		return indrizzo;
+	}
+	
+	private domain.implementor.StudenteImp implementor = new domain.implementor.StudenteImp();
+	
+	public Studente(String nome, String cognome) {
+		this.implementor.inizialize(this, nome, cognome);
+	}
+	
+	public Studente(long id, String nome, String cognome, domain.model.Indirizzo indrizzo, String codiceFiscale) {
+		this.implementor.inizialize(this, nome, cognome, indrizzo, codiceFiscale);
+	}
+	
+	public void setId(long id) {
+		//TODO: Implement Method
+		throw new UnsupportedOperationException();
+	}
+	
+	public void setIndrizzo(domain.model.Indirizzo indrizzo) {
+		//TODO: Implement Method
+		throw new UnsupportedOperationException();
+	}
+	
+	public String toString() {
+		return String.valueOf(getId());
+	}
+	
 }

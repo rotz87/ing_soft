@@ -5,10 +5,10 @@ import java.util.LinkedList;
 
 public class AssentiContainerRS {
 	
-	public Collection<Long> assenti;
+	public Collection<Integer> assenti;
 	
 	public AssentiContainerRS() {
-		this.assenti = new LinkedList<Long>();
+		this.assenti = new LinkedList<Integer>();
 	}
 	
 }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: Universita degli Studi dell'Aquila
+License Type: Academic
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="domain.model.Appello" table="Appello" lazy="false">
+		<id name="idAppello" column="IdAppello" type="integer" unsaved-value="0">
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="data" column="Data" type="date" not-null="false" lazy="false"/>
+		<property name="assenzePrese" column="AssenzePrese" type="boolean" length="1" not-null="true" lazy="false"/>
+		<property name="registroAssenzeIndex" column="RegistroAssenzeIndex" type="integer" length="11" not-null="false" lazy="false"/>
+	</class>
+</hibernate-mapping>

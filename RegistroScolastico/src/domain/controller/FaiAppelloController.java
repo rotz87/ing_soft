@@ -21,7 +21,7 @@ public class FaiAppelloController {
 	}
 	
 	
-	public void avviaAppello(Long idClasse, Long idDocente) {
+	public void avviaAppello(int idClasse, int idDocente) {
 
 		Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
 		Docente docenteCorrente = DBFake.getInstance().getDocenteById(idDocente);
@@ -41,7 +41,7 @@ public class FaiAppelloController {
 		
 	}
 	
-	public void registraAssenze(Long[] idStudenti, Long idClasse, Long idDocente) {
+	public void registraAssenze(Integer[] idStudenti, int idClasse, int idDocente) {
 		Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
 		Docente docenteCorrente = DBFake.getInstance().getDocenteById(idDocente);
 		
@@ -49,7 +49,7 @@ public class FaiAppelloController {
 			RegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();
 			Studente[] studenti = new Studente[idStudenti.length];
 			int i = 0;
-			for (Long idStudente : idStudenti){
+			for (Integer idStudente : idStudenti){
 				studenti[i] = DBFake.getInstance().getStudenteById(idStudente);
 				i++;
 				
@@ -62,19 +62,19 @@ public class FaiAppelloController {
 		//manca il slavataggio delle nuove assenze sun DB!!!!!
 	}
 	
-	public Appello getAppelloOdierno(Long idClasse){
+	public Appello getAppelloOdierno(int idClasse){
 		
 		return DBFake.getInstance().getClasseById(idClasse).getRegistroAssenze().getAppelloOdierno();
 		
 	}
 	
-	public Appello getAppello(Long idClasse, LocalDate data){
+	public Appello getAppello(int idClasse, LocalDate data){
 		
 		return DBFake.getInstance().getClasseById(idClasse).getRegistroAssenze().getAppelloByData(data);
 		
 	}
 	
-	public Appello getAppello(Long idClasse, Long idAppello){
+	public Appello getAppello(int idClasse, int idAppello){
 		Appello appelloCorrente = DBFake.getInstance().getAppelloById(idAppello);
 		Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
 		
@@ -86,23 +86,23 @@ public class FaiAppelloController {
 		}
 	}
 	
-	public Collection<Appello> getAppelli(Long idClasse){
+	public Collection<Appello> getAppelli(int idClasse){
 		Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
 		RegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();
-		return registroAssenzeCorrente.getAppelli().values();		
+		return registroAssenzeCorrente.getAppelliRegistro().values();		
 	}
 	
-	public boolean isAppelloOdiernoAvviabile(long idClasse){
+	public boolean isAppelloOdiernoAvviabile(int idClasse){
 		Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
 		RegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();
 		return registroAssenzeCorrente.isAppelloOdiernoAvviabile();
 	}
 	
-	public HashMap<Studente, Boolean>  getBoolAssenze(Long idClasse, Long idAppello){
+	public HashMap<Studente, Boolean>  getBoolAssenze(int idClasse, int idAppello){
 		Appello appelloCorrente = DBFake.getInstance().getAppelloById(idAppello);
 		HashMap<Studente, Boolean> rit;
 
-		if(appelloCorrente.isAssenzePrese()){
+		if(appelloCorrente.getAssenzePrese()){
 
 			rit = new HashMap<Studente, Boolean>();
 			Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
@@ -126,12 +126,12 @@ public class FaiAppelloController {
 	 * @param idAppello
 	 * @return Map<idStudente, Assenza>
 	 */
-	public HashMap<Long, Assenza>  getAssenze(Long idClasse, Long idAppello){
+	public HashMap<Integer, Assenza>  getAssenze(int idClasse, int idAppello){
 		Appello appelloCorrente = DBFake.getInstance().getAppelloById(idAppello);
-		HashMap<Long, Assenza> rit;
-		if(appelloCorrente.isAssenzePrese()){
+		HashMap<Integer, Assenza> rit;
+		if(appelloCorrente.getAssenzePrese()){
 
-			rit = new HashMap<Long, Assenza>();
+			rit = new HashMap<Integer, Assenza>();
 			Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
 			RegistroAssenze registroCorrente = classeCorrente.getRegistroAssenze();
 	
@@ -153,7 +153,7 @@ public class FaiAppelloController {
 	 * @param idClasse
 	 * @return
 	 */
-	public Collection<Studente> getStudenti(Long idClasse){
+	public Collection<Studente> getStudenti(int idClasse){
 		Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
 		return classeCorrente.getStudenti();
 	}

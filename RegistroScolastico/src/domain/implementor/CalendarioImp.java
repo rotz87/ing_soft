@@ -13,13 +13,11 @@ public class CalendarioImp {
 	private LocalDate dataOdierna;
 	
 	public CalendarioImp(){
-
+		this.dataOdierna = calcolaDataOdierna();
 	}
 	
 	public void inizialize(Calendario calendario){
 		this.dataOdierna = calcolaDataOdierna();
-		calendario.setGiorniFestivi(new MyTreeSetDate()); 
-		calendario.setGiorniSettimanaliFestivi(new LinkedList<Integer>());
 
 	}
 	

@@ -1,78 +1,114 @@
+/**
+ * "Visual Paradigm: DO NOT MODIFY THIS FILE!"
+ * 
+ * This is an automatic generated file. It will be regenerated every time 
+ * you generate persistence class.
+ * 
+ * Modifying its content may cause the program not work, or your work may lost.
+ */
+
+/**
+ * Licensee: Universita degli Studi dell'Aquila
+ * License Type: Academic
+ */
 package domain.model;
 
-import java.util.Collection;
-import java.util.List;
-
-import domain.implementor.LibrettoAssenzeImp;
-
 public class LibrettoAssenze {
-
-	private List<Assenza> giustificate;
-	private List<Assenza> nonGiustificate;
-	private Studente studente;
-	private Collection<Ritardo> ritardi;
-	private Collection<UscitaAnticipata> uscite;
-	private LibrettoAssenzeImp implementor;
-
-	public LibrettoAssenze(){
-		this.implementor = new LibrettoAssenzeImp();
-		this.implementor.inizialize(this);
+	public LibrettoAssenze() {
 	}
 	
-	public LibrettoAssenze(Studente stud){
-		this.implementor = new LibrettoAssenzeImp();
-		this.implementor.inizialize(this, stud);
-		
+	private int ID;
+	
+	private domain.model.Studente studente;
+	
+	private java.util.List<domain.model.Assenza> giustificate = new java.util.LinkedList<domain.model.Assenza>();
+	
+	private java.util.List<domain.model.Assenza> nonGiustificate = new java.util.LinkedList<domain.model.Assenza>();
+	
+	private java.util.List<domain.model.Ritardo> ritardi = new java.util.LinkedList<domain.model.Ritardo>();
+	
+	private java.util.List<domain.model.UscitaAnticipata> uscite = new java.util.LinkedList<domain.model.UscitaAnticipata>();
+	
+	private void setID(int value) {
+		this.ID = value;
 	}
 	
-	public Studente getStudente() {
-		return studente;
+	public int getID() {
+		return ID;
 	}
-
-	public void setStudente(Studente studente) {
-		this.studente = studente;
+	
+	public int getORMID() {
+		return getID();
 	}
-
-	public List<Assenza> getGiustificate() {
+	
+	public void setGiustificate(java.util.List<domain.model.Assenza> value) {
+		this.giustificate = value;
+	}
+	
+	public java.util.List<domain.model.Assenza> getGiustificate() {
 		return giustificate;
 	}
-
-	public void setGiustificate(List<Assenza> giustificate) {
-		this.giustificate = giustificate;
+	
+	
+	public void setNonGiustificate(java.util.List<domain.model.Assenza> value) {
+		this.nonGiustificate = value;
 	}
-
-	public List<Assenza> getNonGiustificate() {
+	
+	public java.util.List<domain.model.Assenza> getNonGiustificate() {
 		return nonGiustificate;
 	}
-
-	public void setNonGiustificate(List<Assenza> nonGiustificate) {
-		this.nonGiustificate = nonGiustificate;
+	
+	
+	public void setStudente(domain.model.Studente value) {
+		this.studente = value;
 	}
 	
-	/**
-	 * 
-	 * @param appello
-	 */
-	public void segnaAssenza(Appello appello) {
+	public domain.model.Studente getStudente() {
+		return studente;
+	}
+	
+	public void setRitardi(java.util.List<domain.model.Ritardo> value) {
+		this.ritardi = value;
+	}
+	
+	public java.util.List<domain.model.Ritardo> getRitardi() {
+		return ritardi;
+	}
+	
+	
+	public void setUscite(java.util.List<domain.model.UscitaAnticipata> value) {
+		this.uscite = value;
+	}
+	
+	public java.util.List<domain.model.UscitaAnticipata> getUscite() {
+		return uscite;
+	}
+	
+	
+	private domain.implementor.LibrettoAssenzeImp implementor = new domain.implementor.LibrettoAssenzeImp();
+	
+	public void segnaAssenza(domain.model.Appello appello) {
 		this.implementor.segnaAssenza(this, appello);
 	}
-
-	public Assenza getUltimaAssenzaNonGiustificata() {
-		//probabilmente è da cambiare
-//		Stampa.stampaln("nonGiustificate.get(0): "+nonGiustificate.get(nonGiustificate.size()-1).getUltimoAppelloAssenza().getDataL());
-		return implementor.getUltimaAssenzaNonGiustificata(this);
-
+	
+	public domain.model.Assenza getUltimaAssenzaNonGiustificata() {
+		return this.implementor.getUltimaAssenzaNonGiustificata(this);
 	}
 	
-	public boolean esisteAssenza(Appello appello){
-		return implementor.esisteAssenza(this, appello);
+	public LibrettoAssenze(domain.model.Studente stud) {
+		this.implementor.inizialize(this, stud);
 	}
 	
-	public Assenza getAssenza(Appello appello){
+	public boolean esisteAssenza(domain.model.Appello appello) {
+		return this.implementor.esisteAssenza(this, appello);
+	}
+	
+	public domain.model.Assenza getAssenza(domain.model.Appello appello) {
 		return this.implementor.getAssenza(this, appello);
-
 	}
 	
-
-
+	public String toString() {
+		return String.valueOf(getID());
+	}
+	
 }

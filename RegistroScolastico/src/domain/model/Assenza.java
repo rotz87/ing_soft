@@ -1,84 +1,95 @@
+/**
+ * "Visual Paradigm: DO NOT MODIFY THIS FILE!"
+ * 
+ * This is an automatic generated file. It will be regenerated every time 
+ * you generate persistence class.
+ * 
+ * Modifying its content may cause the program not work, or your work may lost.
+ */
+
+/**
+ * Licensee: Universita degli Studi dell'Aquila
+ * License Type: Academic
+ */
 package domain.model;
 
-
-import java.util.LinkedList;
-
-import org.joda.time.LocalDate;
-
-import domain.implementor.AssenzaImp;
-import service.Stampa;
-
 public class Assenza {
-
-	private LinkedList<Appello> appelli;
-	private Giustificazione giustificazione;
-	private AssenzaImp implementor;
+	public Assenza() {
+	}
+	
+	private int ID;
+	
+	private domain.model.Giustificazione giustificazione;
+	
+	private java.util.List<domain.model.Appello> appelliAssenza = new java.util.LinkedList<domain.model.Appello>();
+	
+	private void setID(int value) {
+		this.ID = value;
+	}
+	
+	public int getID() {
+		return ID;
+	}
+	
+	public int getORMID() {
+		return getID();
+	}
+	
+	public void setGiustificazione(domain.model.Giustificazione value) {
+		this.giustificazione = value;
+	}
+	
+	public domain.model.Giustificazione getGiustificazione() {
+		return giustificazione;
+	}
+	
+	public void setAppelliAssenza(java.util.List<domain.model.Appello> value) {
+		this.appelliAssenza = value;
+	}
+	
+	public java.util.List<domain.model.Appello> getAppelliAssenza() {
+		return appelliAssenza;
+	}
+	
+	
+	private domain.implementor.AssenzaImp implementor = new domain.implementor.AssenzaImp();
+	
+	public domain.model.Appello getUltimoAppelloAssenza() {
+		return this.implementor.getUltimoAppelloAssenza(this);
+	}
 	
 	/**
-	 * 
+	 * Aggiunge una nuova data(Appello) alla lista di date(appelli) dell'assenza.
 	 */
-	public Assenza(){
-		implementor = new AssenzaImp();
-		implementor.inizialize(this);
+	public void inserisciAppelloAssenza(domain.model.Appello appello) {
+		this.implementor.inserisciAppelloAssenza(this, appello);
+	}
+	
+	/**
+	 * Controlla se la data dell'appello passato Ã¨ inseribile nell'assenza,
+	 * ossia se la data dell'appello passato Ã¨ contigua all'ultima data dell'assenza
+	 */
+	public boolean isInseribile(domain.model.Appello appello) {
+		return this.implementor.isInseribile(this, appello);
 	}
 	
 	/**
 	 * Costruttore dell'Assenza, prende come parametro una LinkedList di appelli.
-	 * @param appelli
 	 */
-	public Assenza (LinkedList<Appello> appelli){
-		implementor = new AssenzaImp();
-		implementor.inizialize(this, appelli);
-	}
-
-	public LinkedList<Appello> getAppelli() {
-		return appelli;
-	}
-
-	public void setAppelli(LinkedList<Appello> appelli) {
-		this.appelli = appelli;
+	public Assenza(java.util.LinkedList<Appello> appelli) {
+		this.implementor.inizialize(this, appelli);
 	}
 	
-	
-	public Giustificazione getGiustificazione() {
-		return giustificazione;
-	}
-
-	public void setGiustificazione(Giustificazione giustificazione) {
-		this.giustificazione = giustificazione;
-	}
-
-	public Appello getUltimoAppelloAssenza() {
-		return implementor.getUltimoAppelloAssenza(this);
-	}
-
-	/**
-	 * Aggiunge una nuova data(Appello) alla lista di date(appelli) dell'assenza.
-	 * @param appello
-	 */
-	public void inserisciAppelloAssenza(Appello appello) {
-		implementor.inserisciAppelloAssenza(this, appello);
-		
-	}
-
-	/**
-	 * Controlla se la data dell'appello passato è inseribile nell'assenza,
-	 * ossia se la data dell'appello passato è contigua all'ultima data dell'assenza
-	 * @param appello
-	 */
-	public boolean isInseribile(Appello appello) {
-		return implementor.isInseribile(this, appello);
-	}
-
-
-	public boolean isCertificatoMedicoRichiesto(){
-		return implementor.isCertificatoMedicoRichiesto(this);
+	public boolean isCertificatoMedicoRichiesto() {
+		return this.implementor.isCertificatoMedicoRichiesto(this);
 	}
 	
-	public boolean esisteAppello(Appello appello){
-		return implementor.esisteAppello(this, appello);
-
+	public boolean esisteAppello(domain.model.Appello appello) {
+		return this.implementor.esisteAppello(this, appello);
 	}
-
+	
+	public String toString() {
+		return String.valueOf(getID());
+	}
 	
 }

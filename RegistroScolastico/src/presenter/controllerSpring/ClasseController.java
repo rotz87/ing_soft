@@ -27,7 +27,7 @@ import domain.model.Studente;
 @RequestMapping("/classi")
 public class ClasseController {
 	
-	private long idDocenteProva = 1;
+	private int idDocenteProva = 1;
 	
 	/**
 	 * Non utilizza un controller del dominio, accede direttamente al DB per prendere il docente.
@@ -54,7 +54,7 @@ public class ClasseController {
 	
 	
 	@RequestMapping(value = "/{idClasse}/studenti", method = RequestMethod.GET)
-	public Collection<StudenteAppelloRS> getStudenti(@PathVariable long idClasse) {
+	public Collection<StudenteAppelloRS> getStudenti(@PathVariable int idClasse) {
 		
 		FaiAppelloController fAController;
 		Collection<Studente> studenti;

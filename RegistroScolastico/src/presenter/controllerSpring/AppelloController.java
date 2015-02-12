@@ -31,11 +31,11 @@ import domain.model.Calendario;
 @RequestMapping("/classi/{idClasse}/appelli")
 public class AppelloController {
 	
-	  private long idDocenteProva = 1;
+	  private int idDocenteProva = 1;
 	  
 	
 	  @RequestMapping(method = RequestMethod.POST)
-	  ResponseEntity<?> creaAppello(@PathVariable long idClasse) {
+	  ResponseEntity<?> creaAppello(@PathVariable int idClasse) {
 		  HttpHeaders httpHeaders;
 	
 		  FaiAppelloController fAController;
@@ -64,7 +64,7 @@ public class AppelloController {
 		
 	  
 		@RequestMapping(value = "/{idAppello}", method = RequestMethod.GET)
-		public AppelloRS getAppello(@PathVariable long idAppello, @PathVariable long idClasse) {
+		public AppelloRS getAppello(@PathVariable int idAppello, @PathVariable int idClasse) {
 			
 			FaiAppelloController fAController;
 			Appello appello;
@@ -77,7 +77,7 @@ public class AppelloController {
 		
 		
 		@RequestMapping(method = RequestMethod.GET)
-		public AppelliContainerRS getAppelli(@PathVariable long idClasse) {
+		public AppelliContainerRS getAppelli(@PathVariable int idClasse) {
 			
 			FaiAppelloController fAController;
 			Collection<Appello> appelli;
@@ -102,9 +102,9 @@ public class AppelloController {
 		
 	
 		@RequestMapping(value = "/{idAppello}/assenti", method = RequestMethod.POST)
-		public ResponseEntity<?> inserisciAssenze(@PathVariable long idAppello, @PathVariable long idClasse, @RequestBody AssentiContainerRS assenti){
+		public ResponseEntity<?> inserisciAssenze(@PathVariable long idAppello, @PathVariable int idClasse, @RequestBody AssentiContainerRS assenti){
 			FaiAppelloController fAController;
-			Long[] idAssenti;
+			Integer[] idAssenti;
 			int i;
 			
 			fAController = new FaiAppelloController();
@@ -112,9 +112,9 @@ public class AppelloController {
 			httpHeaders = new HttpHeaders();
 			HttpStatus httpStatus = HttpStatus.CREATED;
 			
-			idAssenti = new Long[assenti.assenti.size()];
+			idAssenti = new Integer[assenti.assenti.size()];
 			i=0;
-			for(Long idAssente: assenti.assenti){
+			for(Integer idAssente: assenti.assenti){
 				idAssenti[i] = idAssente;
 				i++;
 			}
@@ -138,20 +138,20 @@ public class AppelloController {
 		 * @return Collection<idStudentiAssenti>
 		 */
 		@RequestMapping(value = "/{idAppello}/assenti", method = RequestMethod.GET)
-		public AssentiContainerRS getAssenti(@PathVariable long idAppello, @PathVariable long idClasse) {
+		public AssentiContainerRS getAssenti(@PathVariable int idAppello, @PathVariable int idClasse) {
 			
 			FaiAppelloController fAController;
 			Appello appello;
 			AssentiContainerRS assenti;
-			HashMap<Long, Assenza> assenze;
+			HashMap<Integer, Assenza> assenze;
 			
 			fAController = new FaiAppelloController();
 			appello = fAController.getAppello(idClasse, idAppello);
 			assenti = new AssentiContainerRS();
 			
-			if(fAController.getAppello(idClasse, idAppello).isAssenzePrese()){
+			if(fAController.getAppello(idClasse, idAppello).getAssenzePrese()){
 				assenze = fAController.getAssenze(idClasse, appello.getIdAppello());
-				for (Long idS : assenze.keySet()) {
+				for (Integer idS : assenze.keySet()) {
 					if(assenze.get(idS)!=null){
 						assenti.assenti.add(idS);
 					}

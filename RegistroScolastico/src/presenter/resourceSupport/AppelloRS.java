@@ -18,16 +18,16 @@ import domain.model.Appello;
  */
 public class AppelloRS extends ResourceSupport{
 	
-	private long idAppello;
+	private int idAppello;
 	private Date data;
 	private boolean assenzePrese;
 
 
-	public AppelloRS(Appello appello, long idClasse) {
+	public AppelloRS(Appello appello, int idClasse) {
 		
 		this.idAppello = appello.getIdAppello();
 		this.data = appello.getData();
-		this.assenzePrese = appello.isAssenzePrese();
+		this.assenzePrese = appello.getAssenzePrese();
 //da togliere
 //		this.add(ControllerLinkBuilder.linkTo(
 //				ControllerLinkBuilder.methodOn(AppelloController.class, idClasse).

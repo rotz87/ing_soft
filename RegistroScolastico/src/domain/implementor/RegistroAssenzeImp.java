@@ -25,7 +25,7 @@ public class RegistroAssenzeImp {
 	}
 	
 	public void inizialize(RegistroAssenze registroAsenze){
-		registroAsenze.setAppelli(new TreeMap<LocalDate, Appello>());
+
 	}
 	
 
@@ -35,7 +35,7 @@ public class RegistroAssenzeImp {
 	 */
 	public void registraAssenze(RegistroAssenze registroAssenze, Studente[] Studenti) {
 		Appello appelloCorrente = getAppelloOdierno(registroAssenze);
-		if (!(appelloCorrente.isAssenzePrese())){
+		if (!(appelloCorrente.getAssenzePrese())){
 			for (Studente studente : Studenti){
 				
 					registroAssenze.getLibrettiAssenze().get(studente).segnaAssenza(appelloCorrente);
@@ -52,7 +52,7 @@ public class RegistroAssenzeImp {
 		Appello appelloOdierno = null;
 		LocalDate dataDiRiferimento = Calendario.getInstance().getDataOdierna();
 		if(this.esisteAppello(registroAssenze, dataDiRiferimento)){
-			appelloOdierno = registroAssenze.getAppelli().get(dataDiRiferimento);
+			appelloOdierno = registroAssenze.getAppelliRegistro().get(dataDiRiferimento);
 		}else{
 			throw new IllegalStateException("APPELLO ODIERNO INESISTENTE!");
 		}
@@ -68,7 +68,9 @@ public class RegistroAssenzeImp {
 //			Stempa.stampaln("-------------------------------------------------------------------------------------->id appello : "+nuovoAppello.getIdAppello());
 //			//fine debug
 			if(!Calendario.getInstance().isOggiFestivo()){
-				registroAssenze.getAppelli().put(dataRif, new Appello(dataRif));
+				//DA RIVEDERE E CAMBIARE
+				//TODO 
+				registroAssenze.getAppelliRegistro().put(dataRif.toDate().hashCode(), new Appello(dataRif));
 			}else{
 				throw new IllegalStateException(" APPELLO NON AVVIABILE PER OGGI ");
 			}
@@ -86,19 +88,19 @@ public class RegistroAssenzeImp {
 	 * @param data
 	 */
 	public Appello getAppelloByData(RegistroAssenze registroAssenze, org.joda.time.LocalDate data) {
-		return registroAssenze.getAppelli().get(data);
+		return registroAssenze.getAppelliRegistro().get(data);
 	}
 
 
 	public boolean esisteAppello(RegistroAssenze registroAssenze, LocalDate dataDiRiferimento){
 
-		return registroAssenze.getAppelli().containsKey(dataDiRiferimento);
+		return registroAssenze.getAppelliRegistro().containsKey(dataDiRiferimento);
 	
 	}
 	
 	public boolean esisteAppello(RegistroAssenze registroAssenze, Appello appello){
 
-		return registroAssenze.getAppelli().containsValue(appello);
+		return registroAssenze.getAppelliRegistro().containsValue(appello);
 	
 	}
 	

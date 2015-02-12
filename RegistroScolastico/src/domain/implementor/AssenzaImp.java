@@ -19,18 +19,21 @@ public class AssenzaImp {
 	public AssenzaImp(){
 //		appelli = new LinkedList<AppelloImp>();
 	}
+	public AssenzaImp(Assenza assenza){
+//		appelli = new LinkedList<AppelloImp>();
+	}
 	
 	public void inizialize(Assenza assenza){
-		assenza.setAppelli(new LinkedList<Appello>());
+		assenza.setAppelliAssenza(new LinkedList<Appello>());
 	}
 	
 	public void inizialize(Assenza assenza, LinkedList<Appello> appelli){
-		assenza.setAppelli(appelli);
+		assenza.setAppelliAssenza(appelli);
 	}
 	
 
 	public Appello getUltimoAppelloAssenza(Assenza assenza) {
-		return assenza.getAppelli().getLast();
+		return (( java.util.LinkedList<domain.model.Appello>)(assenza.getAppelliAssenza())).getLast();
 	}
 
 	/**
@@ -39,11 +42,11 @@ public class AssenzaImp {
 	 */
 	public void inserisciAppelloAssenza(Assenza assenza, Appello appello) {
 		try{
-			assenza.getAppelli().add(appello);
+			assenza.getAppelliAssenza().add(appello);
 		}catch (NullPointerException NPE){
 			Stampa.stampaln("----------------------------------------- ");
 			Stampa.stampaln("sono nel catch !! ");
-			Stampa.stampaln("appelli: "+ assenza.getAppelli());
+			Stampa.stampaln("appelli: "+ assenza.getAppelliAssenza());
 			Stampa.stampaln("appello: "+ appello);
 			Stampa.stampaln("-----------------------------------------. ");
 		}
@@ -58,7 +61,7 @@ public class AssenzaImp {
 		boolean inseribile = false;
 //		Stampa.stampaln("\n >>>>>>>>>> passo per isInseribile ");
 		
-		LocalDate ultimaDataPlus = new LocalDate(assenza.getAppelli().getLast().getData()).plusDays(1);
+		LocalDate ultimaDataPlus = new LocalDate(((java.util.LinkedList<Appello>)assenza.getAppelliAssenza()).getLast().getData()).plusDays(1);
 		LocalDate oggi = Calendario.getInstance().getDataOdierna();//per le prove, a regime usare la riga di sotto
 //		LocalDate oggi = appello.getDataL();
 //		Stampa.stampaln("appelli.getLast().getDataL(): "+appelli.getLast().getDataL());
@@ -78,16 +81,16 @@ public class AssenzaImp {
 	public boolean isCertificatoMedicoRichiesto(Assenza assenza){
 		boolean rit = false;
 				
-		if((new LocalDate(assenza.getAppelli().getLast().getData()).getDayOfYear() - new LocalDate(assenza.getAppelli().getFirst().getData()).getDayOfYear())+1 >= 5){
+		if((new LocalDate(((java.util.LinkedList<Appello>)assenza.getAppelliAssenza()).getLast().getData()).getDayOfYear() - new LocalDate(((java.util.LinkedList<Appello>)assenza.getAppelliAssenza()).getFirst().getData()).getDayOfYear())+1 >= 5){
 			rit = true;
 		}
-		int x = (new LocalDate(assenza.getAppelli().getLast().getData()).getDayOfYear() - new LocalDate(assenza.getAppelli().getFirst().getData()).getDayOfYear())+1;
+		int x = (new LocalDate(((java.util.LinkedList<Appello>)assenza.getAppelliAssenza()).getLast().getData()).getDayOfYear() - new LocalDate(((java.util.LinkedList<Appello>)assenza.getAppelliAssenza()).getFirst().getData()).getDayOfYear())+1;
 		Stampa.stampaln("\n differenza tra i giorni:"+ x +"\n ");
 		return rit;
 	}
 	
 	public boolean esisteAppello(Assenza assenza, Appello appello){
-		return assenza.getAppelli().contains(appello);
+		return assenza.getAppelliAssenza().contains(appello);
 	}
 
 	

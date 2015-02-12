@@ -26,11 +26,11 @@ public class HelpController{
 			
 			this.links.add(ControllerLinkBuilder.linkTo(
 					ControllerLinkBuilder.methodOn(ClasseController.class, 0L).
-						getStudenti(0L)).toUri().toString());
+						getStudenti(0)).toUri().toString());
 			this.links.add(ControllerLinkBuilder.linkTo(AppelloController.class, 0L).toUri().toString());
 			this.links.add(ControllerLinkBuilder.linkTo(
 					ControllerLinkBuilder.methodOn(AppelloController.class, 0L).
-						getAppello(0L, 0L)).toUri().toString());
+						getAppello(0, 0)).toUri().toString());
 			this.linksCreated = true;
 		}
 		

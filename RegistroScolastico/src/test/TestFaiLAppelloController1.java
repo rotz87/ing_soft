@@ -67,7 +67,7 @@ public class TestFaiLAppelloController1 {
 		  if (/*libAss.getNonGiustificate() != null && */ (!(libAss.getNonGiustificate().isEmpty()))){
 			  for (Assenza assNG : libAss.getNonGiustificate()) {
 				  Stampa.stampaln("---------Inizio Assenza-------- ");
-				  for (Appello app : assNG.getAppelli()){
+				  for (Appello app : assNG.getAppelliAssenza()){
 					  Stampa.stampaln("data dell'appello dell'assenza : "+app.getData().toString());
 				  }
 				  if(assNG.isCertificatoMedicoRichiesto()){

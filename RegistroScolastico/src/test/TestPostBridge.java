@@ -22,7 +22,7 @@ public class TestPostBridge {
 		
 		
 		Classe classeCorrente = new Classe("1A");
-		Collection<Classe> classi = new LinkedList<Classe>();
+		LinkedList<Classe> classi = new LinkedList<Classe>();
 		classi.add(classeCorrente);
 		
 		Docente docenteCorrente = new Docente("mario","rossi");
@@ -39,10 +39,10 @@ public class TestPostBridge {
 		LibrettoAssenze librettoPieroRusso = new LibrettoAssenze(pieroRusso);
 		LibrettoAssenze librettoMarinoEsposito =  new LibrettoAssenze(marinoEsposito);
 		
-		Map<Studente, LibrettoAssenze> librettiPrimaA = new HashMap<Studente, LibrettoAssenze>(); 
-		librettiPrimaA.put(marioRomano, librettoMarioRomano);
-		librettiPrimaA.put(pieroRusso, librettoPieroRusso);
-		librettiPrimaA.put(marinoEsposito, librettoMarinoEsposito);
+		Map<Integer, LibrettoAssenze> librettiPrimaA = new HashMap<Integer, LibrettoAssenze>(); 
+		librettiPrimaA.put(marioRomano.getId(), librettoMarioRomano);
+		librettiPrimaA.put(pieroRusso.getId(), librettoPieroRusso);
+		librettiPrimaA.put(marinoEsposito.getId(), librettoMarinoEsposito);
 		
 		regAss.setLibrettiAssenze(librettiPrimaA);
 		
