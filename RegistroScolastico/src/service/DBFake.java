@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -24,16 +25,16 @@ public class DBFake {
 	
 	private static DBFake instance;
 	
-	private Map<Long, Classe> classi;
-	private Map<Long, Docente> docenti;
-	private Map<Long, Studente> tuttiGliStudenti;
-	private Map<Long, Appello> tuttiGliAppelli;
+	private Map<Integer, Classe> classi;
+	private Map<Integer, Docente> docenti;
+	private Map<Integer, Studente> tuttiGliStudenti;
+	private Map<Integer, Appello> tuttiGliAppelli;
 	  // Private constructor prevents instantiation from other classes
 	private DBFake() {
-		  classi = new TreeMap<Long, Classe>();
-		  docenti = new TreeMap<Long, Docente>();
-		  tuttiGliStudenti = new TreeMap<Long, Studente>();
-		  tuttiGliAppelli = new TreeMap<Long, Appello>();
+		  classi = new TreeMap<Integer, Classe>();
+		  docenti = new TreeMap<Integer, Docente>();
+		  tuttiGliStudenti = new TreeMap<Integer, Studente>();
+		  tuttiGliAppelli = new TreeMap<Integer, Appello>();
 		  
 		  initDB();
 	}
@@ -51,15 +52,15 @@ public class DBFake {
 	    return DBFake.instance;
 	}
 	
-	public void setClassi( Map<Long, Classe> classi){
+	public void setClassi( Map<Integer, Classe> classi){
 		this.classi = classi;
 	}
 
-	public void setDocenti( Map<Long, Docente> docenti){
+	public void setDocenti( Map<Integer, Docente> docenti){
 		this.docenti = docenti;
 	}
 	
-	public void setStudenti(Map<Long, Studente> studenti){
+	public void setStudenti(Map<Integer, Studente> studenti){
 		this.tuttiGliStudenti = studenti;
 	}
 	
@@ -91,7 +92,7 @@ public class DBFake {
 		Classe primaB = new Classe("1B");
 		Classe secondaB = new Classe("2B");
 		
-		Map<Long, Classe> mapClassi = new TreeMap <Long, Classe>();
+		Map<Integer, Classe> mapClassi = new TreeMap <Integer, Classe>();
 		mapClassi.put(primaA.getIdClasse(), primaA);
 		mapClassi.put(secondaA.getIdClasse(), secondaA);
 		mapClassi.put(primaB.getIdClasse(), primaB);
@@ -106,7 +107,7 @@ public class DBFake {
 		Docente vincenzoNeri = new Docente("Vincenzo", "Neri");
 		Docente giuseppeGialli = new Docente("Giuseppe", "Gialli");
 		
-		Map<Long, Docente> mapDocenti = new TreeMap <Long, Docente>();
+		Map<Integer, Docente> mapDocenti = new TreeMap <Integer, Docente>();
 		mapDocenti.put(marioRossi.getIdDocente(), marioRossi);
 		mapDocenti.put(mirkoBianchi.getIdDocente(), mirkoBianchi);
 		mapDocenti.put(giulioVerdi.getIdDocente(), giulioVerdi);
@@ -119,7 +120,7 @@ public class DBFake {
 		//assegnazione delle classi ai docenti
 		
 		//assegnazione delle classi a Rossi
-		Collection<Classe> classiDiRossi = new LinkedList<Classe>();
+		List<Classe> classiDiRossi = new LinkedList<Classe>();
 		classiDiRossi.add(primaA);
 		classiDiRossi.add(secondaA);
 		classiDiRossi.add(primaB);
@@ -127,7 +128,7 @@ public class DBFake {
 		marioRossi.setClassi(classiDiRossi);
 		
 		//assegnazione delle classi a Rossi
-		Collection<Classe> classiDiBianchi = new LinkedList<Classe>();
+		List<Classe> classiDiBianchi = new LinkedList<Classe>();
 		classiDiBianchi.add(primaA);
 		classiDiBianchi.add(primaB);
 		mirkoBianchi.setClassi(classiDiBianchi);
@@ -169,7 +170,7 @@ public class DBFake {
 		Studente fabrizioToscani = new Studente("Fabrizio", "Toscani");
 		Studente arturoAncona = new Studente("Arturo", "Ancona");
 		
-		Map<Long, Studente> mapStudenti = new TreeMap <Long, Studente>();
+		Map<Integer, Studente> mapStudenti = new TreeMap <Integer, Studente>();
 //		mapStudenti.put(.getId(), );
 		mapStudenti.put(pieroRusso.getId(), pieroRusso);
 		mapStudenti.put(marinoEsposito.getId(), marinoEsposito);
@@ -214,7 +215,7 @@ public class DBFake {
 		Set<Studente> listaStudentiPrimaB = new HashSet<Studente>();
 		Set<Studente> listaStudentiSecondaB = new HashSet<Studente>();
 		
-		long i = new Long(1);
+		int i = new Integer(1);
 		
 		for(i = 1; i<11; i++){
 			listaStudentiPrimaA.add(mapStudenti.get(i));
@@ -234,10 +235,10 @@ public class DBFake {
 		secondaB.setStudenti(listaStudentiSecondaB);
 		
 		//creazione Libretti
-		 Map<Studente, LibrettoAssenze> librettiPrimaA = new HashMap<Studente, LibrettoAssenze>(); 
-		 Map<Studente, LibrettoAssenze> librettiSecondaA = new HashMap<Studente, LibrettoAssenze>();
-		 Map<Studente, LibrettoAssenze> librettiPrimaB = new HashMap<Studente, LibrettoAssenze>();
-		 Map<Studente, LibrettoAssenze> librettiSecondaB = new HashMap<Studente, LibrettoAssenze>();
+		 Map<Integer, LibrettoAssenze> librettiPrimaA = new HashMap<Integer, LibrettoAssenze>(); 
+		 Map<Integer, LibrettoAssenze> librettiSecondaA = new HashMap<Integer, LibrettoAssenze>();
+		 Map<Integer, LibrettoAssenze> librettiPrimaB = new HashMap<Integer, LibrettoAssenze>();
+		 Map<Integer, LibrettoAssenze> librettiSecondaB = new HashMap<Integer, LibrettoAssenze>();
 
 //			LibrettoAssenze libretto =  new LibrettoAssenze();
 		LibrettoAssenze librettoMarioRomano = new LibrettoAssenze(marioRomano);
@@ -274,39 +275,39 @@ public class DBFake {
 		LibrettoAssenze librettoFabrizioToscani =  new LibrettoAssenze(fabrizioToscani);
 		LibrettoAssenze librettoArturoAncona =  new LibrettoAssenze(arturoAncona);
 		
-		librettiPrimaA.put(marioRomano, librettoMarioRomano);
-		librettiPrimaA.put(davideDiSalvo,librettoDavideDiSalvo);
-		librettiPrimaA.put(ivoMarino, librettoIvoMarino);
-		librettiPrimaA.put(pieroRusso, librettoPieroRusso);
-		librettiPrimaA.put(marinoEsposito,librettoMarinoEsposito);
-		librettiPrimaA.put(leonardoRicci,librettoLeonardoRicci);
-		librettiPrimaA.put(valentinoFarina,librettoValentinoFarina);
-		librettiPrimaA.put(roccoBenedetti,librettoRoccoBenedetti);
-		librettiPrimaA.put(antonioGuerra,librettoAntonioGuerra);
-		librettiPrimaA.put(cristinaAngeli,librettoCristinaAngeli);
+		librettiPrimaA.put(marioRomano.getId(), librettoMarioRomano);
+		librettiPrimaA.put(davideDiSalvo.getId(),librettoDavideDiSalvo);
+		librettiPrimaA.put(ivoMarino.getId(), librettoIvoMarino);
+		librettiPrimaA.put(pieroRusso.getId(), librettoPieroRusso);
+		librettiPrimaA.put(marinoEsposito.getId(),librettoMarinoEsposito);
+		librettiPrimaA.put(leonardoRicci.getId(),librettoLeonardoRicci);
+		librettiPrimaA.put(valentinoFarina.getId(),librettoValentinoFarina);
+		librettiPrimaA.put(roccoBenedetti.getId(),librettoRoccoBenedetti);
+		librettiPrimaA.put(antonioGuerra.getId(),librettoAntonioGuerra);
+		librettiPrimaA.put(cristinaAngeli.getId(),librettoCristinaAngeli);
 		
-		librettiSecondaA.put(mariannaDonati,librettoMariannaDonati);
-		librettiSecondaA.put(elenaSarti,librettoElenaSarti);
-		librettiSecondaA.put(mariaPiaAlfredi,librettoMariaPiaAlfredi);
-		librettiSecondaA.put(giorgioGatti,librettoGiorgioGatti);
-		librettiSecondaA.put(lorenzoNegri,librettoLorenzoNegri);
-		librettiSecondaA.put(mattiaVitali,librettoMattiaVitali);
-		librettiSecondaA.put(emanueleDelMonte,librettoEmanueleDelMonte);
-		librettiSecondaA.put(luigiBernardi,librettoLuigiBernardi);
-		librettiSecondaA.put(vittorioPellegrini,librettoVittorioPellegrini);
-		librettiSecondaA.put(alexVilla,librettoAlexVilla);
+		librettiSecondaA.put(mariannaDonati.getId(),librettoMariannaDonati);
+		librettiSecondaA.put(elenaSarti.getId(),librettoElenaSarti);
+		librettiSecondaA.put(mariaPiaAlfredi.getId(),librettoMariaPiaAlfredi);
+		librettiSecondaA.put(giorgioGatti.getId(),librettoGiorgioGatti);
+		librettiSecondaA.put(lorenzoNegri.getId(),librettoLorenzoNegri);
+		librettiSecondaA.put(mattiaVitali.getId(),librettoMattiaVitali);
+		librettiSecondaA.put(emanueleDelMonte.getId(),librettoEmanueleDelMonte);
+		librettiSecondaA.put(luigiBernardi.getId(),librettoLuigiBernardi);
+		librettiSecondaA.put(vittorioPellegrini.getId(),librettoVittorioPellegrini);
+		librettiSecondaA.put(alexVilla.getId(),librettoAlexVilla);
 		
-		librettiPrimaB.put(marcoBattaglia,librettoMarcoBattaglia);
-		librettiPrimaB.put(alfredoMorelli,librettoAlfredoMorelli);
-		librettiPrimaB.put(pieraDellaValle,librettoPieraDellaValle);
-		librettiPrimaB.put(ignazioBoschi,librettoIgnazioBoschi);
-		librettiPrimaB.put(jacopoValli,librettoJacopoValli);
+		librettiPrimaB.put(marcoBattaglia.getId(),librettoMarcoBattaglia);
+		librettiPrimaB.put(alfredoMorelli.getId(),librettoAlfredoMorelli);
+		librettiPrimaB.put(pieraDellaValle.getId(),librettoPieraDellaValle);
+		librettiPrimaB.put(ignazioBoschi.getId(),librettoIgnazioBoschi);
+		librettiPrimaB.put(jacopoValli.getId(),librettoJacopoValli);
 		
-		librettiSecondaB.put(gianniConte,librettoGianniConte);
-		librettiSecondaB.put(lucaBarone ,librettoLucaBarone );
-		librettiSecondaB.put(giacomoSiciliano,librettoGiacomoSiciliano);
-		librettiSecondaB.put(fabrizioToscani,librettoFabrizioToscani);
-		librettiSecondaB.put(arturoAncona,librettoArturoAncona);
+		librettiSecondaB.put(gianniConte.getId(),librettoGianniConte);
+		librettiSecondaB.put(lucaBarone.getId() ,librettoLucaBarone );
+		librettiSecondaB.put(giacomoSiciliano.getId(),librettoGiacomoSiciliano);
+		librettiSecondaB.put(fabrizioToscani.getId(),librettoFabrizioToscani);
+		librettiSecondaB.put(arturoAncona.getId(),librettoArturoAncona);
 
 		
 		//creazione del registro
@@ -389,17 +390,17 @@ public class DBFake {
 
 		
 //		regAssPrimaA.getAppelli().put(appello8_12_14.getData(), appello8_12_14);
-		regAssPrimaA.getAppelliRegistro().put(new LocalDate(appello_1A_10_12_14.getData()), appello_1A_10_12_14);
-		regAssPrimaA.getAppelliRegistro().put(new LocalDate(appello_1A_11_12_14.getData()), appello_1A_11_12_14);
-		regAssPrimaA.getAppelliRegistro().put(new LocalDate(appello_1A_12_12_14.getData()), appello_1A_12_12_14);
-		regAssPrimaA.getAppelliRegistro().put(new LocalDate(appello_1A_13_12_14.getData()), appello_1A_13_12_14);
+		regAssPrimaA.getAppelliRegistro().put((new LocalDate(appello_1A_10_12_14.getData()).toDate().hashCode()), appello_1A_10_12_14);
+		regAssPrimaA.getAppelliRegistro().put((new LocalDate(appello_1A_11_12_14.getData()).toDate().hashCode()), appello_1A_11_12_14);
+		regAssPrimaA.getAppelliRegistro().put((new LocalDate(appello_1A_12_12_14.getData())).toDate().hashCode(), appello_1A_12_12_14);
+		regAssPrimaA.getAppelliRegistro().put((new LocalDate(appello_1A_13_12_14.getData())).toDate().hashCode(), appello_1A_13_12_14);
 //		regAssPrimaA.getAppelli().put(appello14_12_14.getData(), appello14_12_14);
-		regAssPrimaA.getAppelliRegistro().put(new LocalDate(appello_1A_15_12_14.getData()), appello_1A_15_12_14);
-		regAssPrimaA.getAppelliRegistro().put(new LocalDate(appello_1A_16_12_14.getData()), appello_1A_16_12_14);
+		regAssPrimaA.getAppelliRegistro().put((new LocalDate(appello_1A_15_12_14.getData())).toDate().hashCode(), appello_1A_15_12_14);
+		regAssPrimaA.getAppelliRegistro().put((new LocalDate(appello_1A_16_12_14.getData())).toDate().hashCode(), appello_1A_16_12_14);
 		
-		regAssSecondaA.getAppelliRegistro().put(new LocalDate(appello_2A_16_12_14.getData()), appello_2A_16_12_14);
-		regAssPrimaB.getAppelliRegistro().put(new LocalDate(appello_1B_16_12_14.getData()), appello_1B_16_12_14);
-		regAssSecondaB.getAppelliRegistro().put(new LocalDate(appello_2B_16_12_14.getData()), appello_2B_16_12_14);
+		regAssSecondaA.getAppelliRegistro().put((new LocalDate(appello_2A_16_12_14.getData())).toDate().hashCode(), appello_2A_16_12_14);
+		regAssPrimaB.getAppelliRegistro().put((new LocalDate(appello_1B_16_12_14.getData())).toDate().hashCode(), appello_1B_16_12_14);
+		regAssSecondaB.getAppelliRegistro().put((new LocalDate(appello_2B_16_12_14.getData())).toDate().hashCode(), appello_2B_16_12_14);
 		
 
 		
