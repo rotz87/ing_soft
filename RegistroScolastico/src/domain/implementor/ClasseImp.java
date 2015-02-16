@@ -21,7 +21,6 @@ public class ClasseImp {
 	
 	public void inizialize(Classe classe, String nome){
 		classe.setNome(nome);
-		classe.setStudenti(new HashSet<Studente>());
 	}
 	
 	public void inizialize(Classe classe, String nome, RegistroAssenze registroAssenze){

@@ -22,14 +22,12 @@ public class AppelloDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression idAppello;
 	public final DateExpression data;
 	public final BooleanExpression assenzePrese;
-	public final IntegerExpression registroAssenzeIndex;
 	
 	public AppelloDetachedCriteria() {
 		super(domain.model.Appello.class, domain.model.AppelloCriteria.class);
 		idAppello = new IntegerExpression("idAppello", this.getDetachedCriteria());
 		data = new DateExpression("data", this.getDetachedCriteria());
 		assenzePrese = new BooleanExpression("assenzePrese", this.getDetachedCriteria());
-		registroAssenzeIndex = new IntegerExpression("registroAssenzeIndex", this.getDetachedCriteria());
 	}
 	
 	public AppelloDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -37,7 +35,6 @@ public class AppelloDetachedCriteria extends AbstractORMDetachedCriteria {
 		idAppello = new IntegerExpression("idAppello", this.getDetachedCriteria());
 		data = new DateExpression("data", this.getDetachedCriteria());
 		assenzePrese = new BooleanExpression("assenzePrese", this.getDetachedCriteria());
-		registroAssenzeIndex = new IntegerExpression("registroAssenzeIndex", this.getDetachedCriteria());
 	}
 	
 	public Appello uniqueAppello(PersistentSession session) {

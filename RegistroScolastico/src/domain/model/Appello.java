@@ -23,8 +23,6 @@ public class Appello {
 	
 	private boolean assenzePrese;
 	
-	private Integer registroAssenzeIndex;
-	
 	public void setData(java.util.Date value) {
 		this.data = value;
 	}
@@ -51,18 +49,6 @@ public class Appello {
 	
 	public boolean getAssenzePrese() {
 		return assenzePrese;
-	}
-	
-	public void setRegistroAssenzeIndex(int value) {
-		setRegistroAssenzeIndex(new Integer(value));
-	}
-	
-	public void setRegistroAssenzeIndex(Integer value) {
-		this.registroAssenzeIndex = value;
-	}
-	
-	public Integer getRegistroAssenzeIndex() {
-		return registroAssenzeIndex;
 	}
 	
 	private domain.implementor.AppelloImp implementor = new domain.implementor.AppelloImp();

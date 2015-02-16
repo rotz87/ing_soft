@@ -12,6 +12,5 @@ License Type: Academic
 		</id>
 		<property name="data" column="Data" type="date" not-null="false" lazy="false"/>
 		<property name="assenzePrese" column="AssenzePrese" type="boolean" length="1" not-null="true" lazy="false"/>
-		<property name="registroAssenzeIndex" column="RegistroAssenzeIndex" type="integer" length="11" not-null="false" lazy="false"/>
 	</class>
 </hibernate-mapping>

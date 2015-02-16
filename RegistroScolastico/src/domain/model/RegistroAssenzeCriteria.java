@@ -20,16 +20,12 @@ import org.orm.criteria.*;
 
 public class RegistroAssenzeCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
-	public final IntegerExpression appelloOdiernoId;
-	public final AssociationExpression appelloOdierno;
 	public final CollectionExpression librettiAssenze;
 	public final CollectionExpression appelliRegistro;
 	
 	public RegistroAssenzeCriteria(Criteria criteria) {
 		super(criteria);
 		ID = new IntegerExpression("ID", this);
-		appelloOdiernoId = new IntegerExpression("appelloOdierno.idAppello", this);
-		appelloOdierno = new AssociationExpression("appelloOdierno", this);
 		librettiAssenze = new CollectionExpression("librettiAssenze", this);
 		appelliRegistro = new CollectionExpression("appelliRegistro", this);
 	}
@@ -40,10 +36,6 @@ public class RegistroAssenzeCriteria extends AbstractORMCriteria {
 	
 	public RegistroAssenzeCriteria() throws PersistentException {
 		this(domain.model.RegistroScolasticoPersistentManager.instance().getSession());
-	}
-	
-	public AppelloCriteria createAppelloOdiernoCriteria() {
-		return new AppelloCriteria(createCriteria("appelloOdierno"));
 	}
 	
 	public LibrettoAssenzeCriteria createLibrettiAssenzeCriteria() {

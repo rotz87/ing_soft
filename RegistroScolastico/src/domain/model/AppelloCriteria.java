@@ -22,14 +22,12 @@ public class AppelloCriteria extends AbstractORMCriteria {
 	public final IntegerExpression idAppello;
 	public final DateExpression data;
 	public final BooleanExpression assenzePrese;
-	public final IntegerExpression registroAssenzeIndex;
 	
 	public AppelloCriteria(Criteria criteria) {
 		super(criteria);
 		idAppello = new IntegerExpression("idAppello", this);
 		data = new DateExpression("data", this);
 		assenzePrese = new BooleanExpression("assenzePrese", this);
-		registroAssenzeIndex = new IntegerExpression("registroAssenzeIndex", this);
 	}
 	
 	public AppelloCriteria(PersistentSession session) {

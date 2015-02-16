@@ -19,8 +19,6 @@ public class RegistroAssenze {
 	
 	private int ID;
 	
-	private domain.model.Appello appelloOdierno;
-	
 	private java.util.Map<Integer, domain.model.LibrettoAssenze> librettiAssenze = new java.util.HashMap<Integer, domain.model.LibrettoAssenze>();
 	
 	private java.util.Map<Integer, domain.model.Appello> appelliRegistro = new java.util.HashMap<Integer, domain.model.Appello>();
@@ -35,14 +33,6 @@ public class RegistroAssenze {
 	
 	public int getORMID() {
 		return getID();
-	}
-	
-	public void setAppelloOdierno(domain.model.Appello value) {
-		this.appelloOdierno = value;
-	}
-	
-	public domain.model.Appello getAppelloOdierno() {
-		return appelloOdierno;
 	}
 	
 	public void setLibrettiAssenze(java.util.Map<Integer, domain.model.LibrettoAssenze> value) {
@@ -83,6 +73,10 @@ public class RegistroAssenze {
 	 */
 	public void registraAssenze(domain.model.Studente[] studenti) {
 		this.implementor.registraAssenze(this, studenti);
+	}
+	
+	public domain.model.Appello getAppelloOdierno() {
+		return this.implementor.getAppelloOdierno(this);
 	}
 	
 	public boolean esisteAppello(domain.model.Appello appello) {

@@ -13,7 +13,7 @@ License Type: Academic
 		<property name="nome" column="Nome" type="string" length="255" not-null="false" lazy="false"/>
 		<property name="cognome" column="Cognome" type="string" length="255" not-null="false" lazy="false"/>
 		<list name="classi" lazy="true" cascade="save-update,lock" inverse="false">
-			<key column="DocenteIdDocente" not-null="true"/>
+			<key column="DocenteId" not-null="true"/>
 			<index column="DocenteIndex" type="integer"/>
 			<one-to-many class="domain.model.Classe"/>
 		</list>

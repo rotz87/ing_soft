@@ -14,7 +14,7 @@ public class TestStampaStudenti {
 		Classe classe;
 		Collection<Studente> collStud;
 		Stampa.stampaln("STAMPA STUDENTI PER CLASSE ");
-		for(Long i = 1L; i<5; i++){
+		for(int i = 1; i<5; i++){
 			classe = DBFake.getInstance().getClasseById(i);
 			collStud = classe.getStudenti();
 			Stampa.stampaln();

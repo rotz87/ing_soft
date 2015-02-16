@@ -7,7 +7,7 @@ License Type: Academic
 <hibernate-mapping>
 	<class name="domain.model.Scuola" table="Scuola" lazy="false">
 		<id name="ID" column="ID" type="integer" unsaved-value="0">
-			<generator class="native">
+			<generator class="increment">
 			</generator>
 		</id>
 		<list name="classi" lazy="true" cascade="save-update,lock" inverse="false">

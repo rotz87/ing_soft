@@ -15,8 +15,7 @@ public class LibrettoAssenzeImp {
 	}
 	
 	public void inizialize(LibrettoAssenze librettoAssenze){
-		librettoAssenze.setNonGiustificate(new LinkedList<Assenza>());
-		librettoAssenze.setGiustificate(new LinkedList<Assenza>());
+
 	}
 	
 	public void inizialize(LibrettoAssenze librettoAssenze, Studente studente){

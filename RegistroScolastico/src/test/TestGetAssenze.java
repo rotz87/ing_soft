@@ -21,13 +21,13 @@ public class TestGetAssenze {
 		Stampa.stampaln("Inserire codice appello (0 per uscire) ->");
 		java.io.BufferedReader buffer;
 		String string;
-		long number;
+		int number;
 		
 		
 		buffer = new java.io.BufferedReader (new java.io.InputStreamReader (System.in));
 		
 		string=buffer.readLine();
-		number = Long.parseLong(string);
+		number = Integer.parseInt(string);
 //fine lettura
 
 		int input = 5;//<-----------------------------------------------
@@ -37,18 +37,18 @@ public class TestGetAssenze {
 
 			FaiAppelloController controlloreAppello = new FaiAppelloController();
 			
-			controlloreAppello.avviaAppello(new Long(1), new Long(1));
+			controlloreAppello.avviaAppello(1, 1);
 			
-			Long[] listaIdStudAssenti = {new Long(3), new Long(1), new Long(5), new Long(2)};
+			Integer[] listaIdStudAssenti = {3, 1, 5, 2};
 			
-			HashSet<Studente> studenti = (HashSet<Studente>) controlloreAppello.getStudenti(1L);
+			HashSet<Studente> studenti = (HashSet<Studente>) controlloreAppello.getStudenti(1);
 	
-			controlloreAppello.registraAssenze(listaIdStudAssenti,new Long(1), new Long(1) );
+			controlloreAppello.registraAssenze(listaIdStudAssenti,1, 1 );
 	
 		while(number != 0){
-			Long idAppello = number;
+			int idAppello = number;
 			
-			HashMap<Studente, Boolean>  mapStudBool = controlloreAppello.getBoolAssenze(new Long(1), idAppello);
+			HashMap<Studente, Boolean>  mapStudBool = controlloreAppello.getBoolAssenze(1, idAppello);
 			
 			
 			Stampa.stampaln("VISUALIZZAZIONE STUDENTI  _________________________ \n \n");
@@ -72,7 +72,7 @@ public class TestGetAssenze {
 			Stampa.stampaln("________________________________________FINE");
 			Stampa.stampaln();
 			
-			HashMap<Long, Assenza>  mapIdStudAss = controlloreAppello.getAssenze(new Long(1), idAppello);
+			HashMap<Integer, Assenza>  mapIdStudAss = controlloreAppello.getAssenze(1, idAppello);
 			
 		
 			Stampa.stampaln();
@@ -95,7 +95,7 @@ public class TestGetAssenze {
 			buffer = new java.io.BufferedReader (new java.io.InputStreamReader (System.in));
 			
 			string=buffer.readLine();
-			number = Long.parseLong(string);
+			number = Integer.parseInt(string);
 //fine lettura
 		}	
 	}

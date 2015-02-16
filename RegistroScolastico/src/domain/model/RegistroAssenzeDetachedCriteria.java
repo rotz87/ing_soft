@@ -20,16 +20,12 @@ import org.orm.criteria.*;
 
 public class RegistroAssenzeDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression ID;
-	public final IntegerExpression appelloOdiernoId;
-	public final AssociationExpression appelloOdierno;
 	public final CollectionExpression librettiAssenze;
 	public final CollectionExpression appelliRegistro;
 	
 	public RegistroAssenzeDetachedCriteria() {
 		super(domain.model.RegistroAssenze.class, domain.model.RegistroAssenzeCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		appelloOdiernoId = new IntegerExpression("appelloOdierno.idAppello", this.getDetachedCriteria());
-		appelloOdierno = new AssociationExpression("appelloOdierno", this.getDetachedCriteria());
 		librettiAssenze = new CollectionExpression("librettiAssenze", this.getDetachedCriteria());
 		appelliRegistro = new CollectionExpression("appelliRegistro", this.getDetachedCriteria());
 	}
@@ -37,14 +33,8 @@ public class RegistroAssenzeDetachedCriteria extends AbstractORMDetachedCriteria
 	public RegistroAssenzeDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, domain.model.RegistroAssenzeCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		appelloOdiernoId = new IntegerExpression("appelloOdierno.idAppello", this.getDetachedCriteria());
-		appelloOdierno = new AssociationExpression("appelloOdierno", this.getDetachedCriteria());
 		librettiAssenze = new CollectionExpression("librettiAssenze", this.getDetachedCriteria());
 		appelliRegistro = new CollectionExpression("appelliRegistro", this.getDetachedCriteria());
-	}
-	
-	public AppelloDetachedCriteria createAppelloOdiernoCriteria() {
-		return new AppelloDetachedCriteria(createCriteria("appelloOdierno"));
 	}
 	
 	public LibrettoAssenzeDetachedCriteria createLibrettiAssenzeCriteria() {

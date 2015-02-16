@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Model quotesql="1" tablecharset="UTF8" mysql_version="504" mssql_version="2005" derby_version="106" ingres_version="9">
+<Model quotesql="1" tablecharset="UTF8" mysql_version="505" mssql_version="2005" derby_version="106" ingres_version="9">
   <Entity name="Studente">
     <Column name="Id">
       <PrimaryKey>true</PrimaryKey>
@@ -13,7 +13,7 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
-    <Column name="ClasseIdClasse">
+    <Column name="ClasseId">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
       <ReferencedColumn>Classe.IdClasse</ReferencedColumn>
@@ -331,7 +331,7 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
-    <Column name="AppelloIdAppello">
+    <Column name="AppelloId">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
       <ReferencedColumn>Appello.IdAppello</ReferencedColumn>
@@ -452,18 +452,6 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
-    <Column name="AppelloIdAppello">
-      <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>Appello.IdAppello</ReferencedColumn>
-      <Type>9</Type>
-      <Length>11</Length>
-      <Nullable>false</Nullable>
-      <IDGenerator>native</IDGenerator>
-      <Unique>false</Unique>
-      <Index>false</Index>
-      <UserTypes/>
-    </Column>
   </Entity>
   <Entity name="Scuola">
     <Column name="ID">
@@ -472,7 +460,7 @@
       <Type>9</Type>
       <Length>11</Length>
       <Nullable>false</Nullable>
-      <IDGenerator>native</IDGenerator>
+      <IDGenerator>increment</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
       <UserTypes/>
@@ -490,7 +478,7 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
-    <Column name="DocenteIdDocente">
+    <Column name="DocenteId">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
       <ReferencedColumn>Docente.IdDocente</ReferencedColumn>
@@ -774,16 +762,6 @@
       <Column>ID</Column>
     </RefColumns>
   </ForeignKey>
-  <ForeignKey name="FKRegistroAs504564">
-    <ReferenceTable>RegistroAssenze</ReferenceTable>
-    <ReferencedTable>Appello</ReferencedTable>
-    <Columns>
-      <Column>AppelloIdAppello</Column>
-    </Columns>
-    <RefColumns>
-      <Column>IdAppello</Column>
-    </RefColumns>
-  </ForeignKey>
   <ForeignKey name="FKLibrettoAs636953">
     <ReferenceTable>LibrettoAssenze</ReferenceTable>
     <ReferencedTable>RegistroAssenze</ReferencedTable>
@@ -854,21 +832,21 @@
       <Column>ID</Column>
     </RefColumns>
   </ForeignKey>
-  <ForeignKey name="FKClasse191604">
+  <ForeignKey name="FKClasse835340">
     <ReferenceTable>Classe</ReferenceTable>
     <ReferencedTable>Docente</ReferencedTable>
     <Columns>
-      <Column>DocenteIdDocente</Column>
+      <Column>DocenteId</Column>
     </Columns>
     <RefColumns>
       <Column>IdDocente</Column>
     </RefColumns>
   </ForeignKey>
-  <ForeignKey name="FKUscitaAnti619558">
+  <ForeignKey name="FKUscitaAnti987958">
     <ReferenceTable>UscitaAnticipata</ReferenceTable>
     <ReferencedTable>Appello</ReferencedTable>
     <Columns>
-      <Column>AppelloIdAppello</Column>
+      <Column>AppelloId</Column>
     </Columns>
     <RefColumns>
       <Column>IdAppello</Column>
@@ -884,11 +862,11 @@
       <Column>ID</Column>
     </RefColumns>
   </ForeignKey>
-  <ForeignKey name="FKStudente915335">
+  <ForeignKey name="FKStudente237032">
     <ReferenceTable>Studente</ReferenceTable>
     <ReferencedTable>Classe</ReferencedTable>
     <Columns>
-      <Column>ClasseIdClasse</Column>
+      <Column>ClasseId</Column>
     </Columns>
     <RefColumns>
       <Column>IdClasse</Column>
