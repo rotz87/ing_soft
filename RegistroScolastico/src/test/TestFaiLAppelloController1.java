@@ -14,8 +14,8 @@ import domain.model.Studente;
 
 public class TestFaiLAppelloController1 {
 	public static void main(String[] args){
-		Long idClasseProva = new Long(1);
-		Long idDocenteProva = new Long(1);
+		Integer idClasseProva = new Integer(1);
+		Integer idDocenteProva = new Integer(1);
 		//creazione dal controller FaiAppelloConreoller
 		FaiAppelloController controlloreAppello = new FaiAppelloController();
 		
@@ -32,7 +32,7 @@ public class TestFaiLAppelloController1 {
 			Stampa.stampaln("Messaggio dell'eccezione: "+ISE.getMessage());
 		}
 		
-		Long[] listaIdStudAssenti = {new Long(3), new Long(1), new Long(5), new Long(2)};//lista per classe con id 1
+		Integer[] listaIdStudAssenti = {new Integer(3), new Integer(1), new Integer(5), new Integer(2)};//lista per classe con id 1
 //		Long[] listaIdStudAssenti = {new Long(13), new Long(11), new Long(15), new Long(12)};//lista per classe con id 2
 //		Long[] listaIdStudAssenti = {new Long(23), new Long(24)};//lista per classe con id 3
 //		Long[] listaIdStudAssenti = {new Long(26), new Long(28)};//lista per classe con id 4

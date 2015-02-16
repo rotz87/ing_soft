@@ -65,7 +65,7 @@ public class TestPostBridge {
 			registroAssenzeCorrente.registraAssenze(studenti);
 //			DBFake.getInstance().storeAppello(registroAssenzeCorrente.getAppelloOdierno());
 			Stampa.stampa("sono dopo avvia appello!!");
-			TestFaiLAppelloController1.stampaLibretti(registroAssenzeCorrente);
+			//TestFaiLAppelloController1.stampaLibretti(registroAssenzeCorrente);
 		}else{
 			throw new IllegalStateException("ATTENZIONE IL DOCENTE NON E' ABILITATO AD ESEGUIRE L'APPELLO SULLA CLASSE SELEZIONATA");
 		}

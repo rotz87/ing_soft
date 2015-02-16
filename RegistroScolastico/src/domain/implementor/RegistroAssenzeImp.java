@@ -5,6 +5,7 @@ import java.util.TreeMap;
 
 import org.joda.time.LocalDate;
 
+import service.Stampa;
 import domain.model.Appello;
 import domain.model.Calendario;
 import domain.model.LibrettoAssenze;
@@ -38,8 +39,7 @@ public class RegistroAssenzeImp {
 		if (!(appelloCorrente.getAssenzePrese())){
 			for (Studente studente : Studenti){
 				
-					registroAssenze.getLibrettiAssenze().get(studente).segnaAssenza(appelloCorrente);
-	
+					registroAssenze.getLibrettiAssenze().get(studente.getId()).segnaAssenza(appelloCorrente);
 			}
 			appelloCorrente.setAssenzePrese(true);
 		}else{
@@ -52,7 +52,7 @@ public class RegistroAssenzeImp {
 		Appello appelloOdierno = null;
 		LocalDate dataDiRiferimento = Calendario.getInstance().getDataOdierna();
 		if(this.esisteAppello(registroAssenze, dataDiRiferimento)){
-			appelloOdierno = registroAssenze.getAppelliRegistro().get(dataDiRiferimento);
+			appelloOdierno = registroAssenze.getAppelliRegistro().get(dataDiRiferimento.toDate().hashCode());
 		}else{
 			throw new IllegalStateException("APPELLO ODIERNO INESISTENTE!");
 		}
@@ -94,7 +94,7 @@ public class RegistroAssenzeImp {
 
 	public boolean esisteAppello(RegistroAssenze registroAssenze, LocalDate dataDiRiferimento){
 
-		return registroAssenze.getAppelliRegistro().containsKey(dataDiRiferimento);
+		return registroAssenze.getAppelliRegistro().containsKey(dataDiRiferimento.toDate().hashCode());
 	
 	}
 	
