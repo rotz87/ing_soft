@@ -13,18 +13,6 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
-    <Column name="ClasseId">
-      <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>Classe.IdClasse</ReferencedColumn>
-      <Type>9</Type>
-      <Length>11</Length>
-      <Nullable>false</Nullable>
-      <IDGenerator>native</IDGenerator>
-      <Unique>false</Unique>
-      <Index>false</Index>
-      <UserTypes/>
-    </Column>
     <Column name="Nome">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>false</ForeignKey>
@@ -88,7 +76,7 @@
       <ReferencedColumn>Assenza.ID</ReferencedColumn>
       <Type>9</Type>
       <Length>11</Length>
-      <Nullable>false</Nullable>
+      <Nullable>true</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
@@ -282,14 +270,14 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
-    <Column name="AppelloIdAppello">
+    <Column name="AppelloId">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
       <ReferencedColumn>Appello.IdAppello</ReferencedColumn>
       <Type>9</Type>
       <Length>11</Length>
       <Nullable>false</Nullable>
-      <IDGenerator>native</IDGenerator>
+      <IDGenerator>assigned</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
       <UserTypes/>
@@ -460,7 +448,18 @@
       <Type>9</Type>
       <Length>11</Length>
       <Nullable>false</Nullable>
-      <IDGenerator>increment</IDGenerator>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="Nome">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>27</Type>
+      <Length>255</Length>
+      <Nullable>true</Nullable>
+      <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
       <UserTypes/>
@@ -470,18 +469,6 @@
     <Column name="IdClasse">
       <PrimaryKey>true</PrimaryKey>
       <ForeignKey>false</ForeignKey>
-      <Type>9</Type>
-      <Length>11</Length>
-      <Nullable>false</Nullable>
-      <IDGenerator>native</IDGenerator>
-      <Unique>false</Unique>
-      <Index>false</Index>
-      <UserTypes/>
-    </Column>
-    <Column name="DocenteId">
-      <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>Docente.IdDocente</ReferencedColumn>
       <Type>9</Type>
       <Length>11</Length>
       <Nullable>false</Nullable>
@@ -526,17 +513,6 @@
       <UserTypes/>
     </Column>
     <Column name="ScuolaIndex">
-      <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
-      <Type>9</Type>
-      <Length>11</Length>
-      <Nullable>true</Nullable>
-      <IDGenerator>native</IDGenerator>
-      <Unique>false</Unique>
-      <Index>false</Index>
-      <UserTypes/>
-    </Column>
-    <Column name="DocenteIndex">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>false</ForeignKey>
       <Type>9</Type>
@@ -702,6 +678,32 @@
       <UserTypes/>
     </Column>
   </Entity>
+  <Entity name="Docente_Classe">
+    <Column name="DocenteIdDocente">
+      <PrimaryKey>true</PrimaryKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>Docente.IdDocente</ReferencedColumn>
+      <Type>9</Type>
+      <Length>11</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>assigned</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="ClasseIdClasse">
+      <PrimaryKey>true</PrimaryKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>Classe.IdClasse</ReferencedColumn>
+      <Type>9</Type>
+      <Length>11</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>assigned</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+  </Entity>
   <ForeignKey name="FKAssenza670203">
     <ReferenceTable>Assenza</ReferenceTable>
     <ReferencedTable>LibrettoAssenze</ReferencedTable>
@@ -712,11 +714,11 @@
       <Column>ID</Column>
     </RefColumns>
   </ForeignKey>
-  <ForeignKey name="FKRitardo913275">
+  <ForeignKey name="FKRitardo694241">
     <ReferenceTable>Ritardo</ReferenceTable>
     <ReferencedTable>Appello</ReferencedTable>
     <Columns>
-      <Column>AppelloIdAppello</Column>
+      <Column>AppelloId</Column>
     </Columns>
     <RefColumns>
       <Column>IdAppello</Column>
@@ -832,16 +834,6 @@
       <Column>ID</Column>
     </RefColumns>
   </ForeignKey>
-  <ForeignKey name="FKClasse835340">
-    <ReferenceTable>Classe</ReferenceTable>
-    <ReferencedTable>Docente</ReferencedTable>
-    <Columns>
-      <Column>DocenteId</Column>
-    </Columns>
-    <RefColumns>
-      <Column>IdDocente</Column>
-    </RefColumns>
-  </ForeignKey>
   <ForeignKey name="FKUscitaAnti987958">
     <ReferenceTable>UscitaAnticipata</ReferenceTable>
     <ReferencedTable>Appello</ReferencedTable>
@@ -860,16 +852,6 @@
     </Columns>
     <RefColumns>
       <Column>ID</Column>
-    </RefColumns>
-  </ForeignKey>
-  <ForeignKey name="FKStudente237032">
-    <ReferenceTable>Studente</ReferenceTable>
-    <ReferencedTable>Classe</ReferencedTable>
-    <Columns>
-      <Column>ClasseId</Column>
-    </Columns>
-    <RefColumns>
-      <Column>IdClasse</Column>
     </RefColumns>
   </ForeignKey>
   <ForeignKey name="FKGiorno540780">
@@ -900,6 +882,26 @@
     </Columns>
     <RefColumns>
       <Column>ID</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKDocente_Cl506715">
+    <ReferenceTable>Docente_Classe</ReferenceTable>
+    <ReferencedTable>Docente</ReferencedTable>
+    <Columns>
+      <Column>DocenteIdDocente</Column>
+    </Columns>
+    <RefColumns>
+      <Column>IdDocente</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKDocente_Cl451691">
+    <ReferenceTable>Docente_Classe</ReferenceTable>
+    <ReferencedTable>Classe</ReferencedTable>
+    <Columns>
+      <Column>ClasseIdClasse</Column>
+    </Columns>
+    <RefColumns>
+      <Column>IdClasse</Column>
     </RefColumns>
   </ForeignKey>
 </Model>

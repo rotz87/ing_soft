@@ -20,12 +20,14 @@ import org.orm.criteria.*;
 
 public class ScuolaCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
+	public final StringExpression nome;
 	public final CollectionExpression classi;
 	public final CollectionExpression docenti;
 	
 	public ScuolaCriteria(Criteria criteria) {
 		super(criteria);
 		ID = new IntegerExpression("ID", this);
+		nome = new StringExpression("nome", this);
 		classi = new CollectionExpression("classi", this);
 		docenti = new CollectionExpression("docenti", this);
 	}

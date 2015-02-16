@@ -28,8 +28,6 @@ public class Classe {
 	
 	private String nome;
 	
-	private java.util.Set<domain.model.Studente> studenti = new java.util.HashSet<domain.model.Studente>();
-	
 	public void setNome(String value) {
 		this.nome = value;
 	}
@@ -58,15 +56,6 @@ public class Classe {
 		return registroAssenze;
 	}
 	
-	public void setStudenti(java.util.Set<domain.model.Studente> value) {
-		this.studenti = value;
-	}
-	
-	public java.util.Set<domain.model.Studente> getStudenti() {
-		return studenti;
-	}
-	
-	
 	private domain.implementor.ClasseImp implementor = new domain.implementor.ClasseImp();
 	
 	public Classe(String nome) {
@@ -80,6 +69,10 @@ public class Classe {
 	public void setIdClasse(long idClasse) {
 		//TODO: Implement Method
 		throw new UnsupportedOperationException();
+	}
+	
+	public java.util.Set<Studente> getStudenti() {
+		return this.implementor.getStudenti(this);
 	}
 	
 	public String toString() {

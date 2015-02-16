@@ -23,7 +23,6 @@ public class ClasseDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression registroAssenzeId;
 	public final AssociationExpression registroAssenze;
 	public final StringExpression nome;
-	public final CollectionExpression studenti;
 	
 	public ClasseDetachedCriteria() {
 		super(domain.model.Classe.class, domain.model.ClasseCriteria.class);
@@ -31,7 +30,6 @@ public class ClasseDetachedCriteria extends AbstractORMDetachedCriteria {
 		registroAssenzeId = new IntegerExpression("registroAssenze.ID", this.getDetachedCriteria());
 		registroAssenze = new AssociationExpression("registroAssenze", this.getDetachedCriteria());
 		nome = new StringExpression("nome", this.getDetachedCriteria());
-		studenti = new CollectionExpression("studenti", this.getDetachedCriteria());
 	}
 	
 	public ClasseDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -40,15 +38,10 @@ public class ClasseDetachedCriteria extends AbstractORMDetachedCriteria {
 		registroAssenzeId = new IntegerExpression("registroAssenze.ID", this.getDetachedCriteria());
 		registroAssenze = new AssociationExpression("registroAssenze", this.getDetachedCriteria());
 		nome = new StringExpression("nome", this.getDetachedCriteria());
-		studenti = new CollectionExpression("studenti", this.getDetachedCriteria());
 	}
 	
 	public RegistroAssenzeDetachedCriteria createRegistroAssenzeCriteria() {
 		return new RegistroAssenzeDetachedCriteria(createCriteria("registroAssenze"));
-	}
-	
-	public StudenteDetachedCriteria createStudentiCriteria() {
-		return new StudenteDetachedCriteria(createCriteria("studenti"));
 	}
 	
 	public Classe uniqueClasse(PersistentSession session) {

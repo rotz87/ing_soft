@@ -105,40 +105,74 @@ public class BDService {
 			Studente fabrizioToscani = new Studente("Fabrizio", "Toscani");
 			Studente arturoAncona = new Studente("Arturo", "Ancona");
 			
+			RegistroScolasticoPersistentManager.instance().getSession().save(pieroRusso);
+			RegistroScolasticoPersistentManager.instance().getSession().save(marinoEsposito);
+			RegistroScolasticoPersistentManager.instance().getSession().save(marioRomano);
+			RegistroScolasticoPersistentManager.instance().getSession().save(davideDiSalvo);
+			RegistroScolasticoPersistentManager.instance().getSession().save(ivoMarino);
+			RegistroScolasticoPersistentManager.instance().getSession().save(leonardoRicci);
+			RegistroScolasticoPersistentManager.instance().getSession().save(valentinoFarina);
+			RegistroScolasticoPersistentManager.instance().getSession().save(roccoBenedetti);
+			RegistroScolasticoPersistentManager.instance().getSession().save(antonioGuerra);
+			RegistroScolasticoPersistentManager.instance().getSession().save(cristinaAngeli);
+			
+			RegistroScolasticoPersistentManager.instance().getSession().save(mariannaDonati);
+			RegistroScolasticoPersistentManager.instance().getSession().save(elenaSarti);
+			RegistroScolasticoPersistentManager.instance().getSession().save(mariaPiaAlfredi);
+			RegistroScolasticoPersistentManager.instance().getSession().save(giorgioGatti);
+			RegistroScolasticoPersistentManager.instance().getSession().save(lorenzoNegri);
+			RegistroScolasticoPersistentManager.instance().getSession().save(mattiaVitali);
+			RegistroScolasticoPersistentManager.instance().getSession().save(emanueleDelMonte);
+			RegistroScolasticoPersistentManager.instance().getSession().save(luigiBernardi);
+			RegistroScolasticoPersistentManager.instance().getSession().save(vittorioPellegrini);
+			RegistroScolasticoPersistentManager.instance().getSession().save(alexVilla);
+			
+			RegistroScolasticoPersistentManager.instance().getSession().save(marcoBattaglia);
+			RegistroScolasticoPersistentManager.instance().getSession().save(alfredoMorelli);
+			RegistroScolasticoPersistentManager.instance().getSession().save(pieraDellaValle);
+			RegistroScolasticoPersistentManager.instance().getSession().save(ignazioBoschi);
+			RegistroScolasticoPersistentManager.instance().getSession().save(jacopoValli);
+			
+			RegistroScolasticoPersistentManager.instance().getSession().save(gianniConte);
+			RegistroScolasticoPersistentManager.instance().getSession().save(lucaBarone);
+			RegistroScolasticoPersistentManager.instance().getSession().save(giacomoSiciliano);
+			RegistroScolasticoPersistentManager.instance().getSession().save(fabrizioToscani);
+			RegistroScolasticoPersistentManager.instance().getSession().save(arturoAncona);
+			
 //			mapStudenti.put(.getId(), );
-			primaA.getStudenti().add(pieroRusso);
-			primaA.getStudenti().add( marinoEsposito);
-			primaA.getStudenti().add( marioRomano);
-			primaA.getStudenti().add( davideDiSalvo);
-			primaA.getStudenti().add( ivoMarino);
-			primaA.getStudenti().add(leonardoRicci );
-			primaA.getStudenti().add( valentinoFarina);
-			primaA.getStudenti().add( roccoBenedetti);
-			primaA.getStudenti().add( antonioGuerra);
-			primaA.getStudenti().add(cristinaAngeli );
-			
-			secondaA.getStudenti().add( mariannaDonati);
-			secondaA.getStudenti().add( elenaSarti);
-			secondaA.getStudenti().add( mariaPiaAlfredi);
-			secondaA.getStudenti().add(giorgioGatti );
-			secondaA.getStudenti().add(lorenzoNegri );
-			secondaA.getStudenti().add( mattiaVitali);
-			secondaA.getStudenti().add( emanueleDelMonte);
-			secondaA.getStudenti().add(luigiBernardi);
-			secondaA.getStudenti().add(vittorioPellegrini );
-			secondaA.getStudenti().add( alexVilla);
-			
-			primaB.getStudenti().add( marcoBattaglia);
-			primaB.getStudenti().add(alfredoMorelli );
-			primaB.getStudenti().add(pieraDellaValle );
-			primaB.getStudenti().add( ignazioBoschi);
-			primaB.getStudenti().add( jacopoValli );
-			
-			secondaB.getStudenti().add( gianniConte);
-			secondaB.getStudenti().add( lucaBarone);
-			secondaB.getStudenti().add( giacomoSiciliano);
-			secondaB.getStudenti().add(fabrizioToscani);
-			secondaB.getStudenti().add( arturoAncona);
+//			primaA.getStudenti().add(pieroRusso);
+//			primaA.getStudenti().add( marinoEsposito);
+//			primaA.getStudenti().add( marioRomano);
+//			primaA.getStudenti().add( davideDiSalvo);
+//			primaA.getStudenti().add( ivoMarino);
+//			primaA.getStudenti().add(leonardoRicci );
+//			primaA.getStudenti().add( valentinoFarina);
+//			primaA.getStudenti().add( roccoBenedetti);
+//			primaA.getStudenti().add( antonioGuerra);
+//			primaA.getStudenti().add(cristinaAngeli );
+//			
+//			secondaA.getStudenti().add( mariannaDonati);
+//			secondaA.getStudenti().add( elenaSarti);
+//			secondaA.getStudenti().add( mariaPiaAlfredi);
+//			secondaA.getStudenti().add(giorgioGatti );
+//			secondaA.getStudenti().add(lorenzoNegri );
+//			secondaA.getStudenti().add( mattiaVitali);
+//			secondaA.getStudenti().add( emanueleDelMonte);
+//			secondaA.getStudenti().add(luigiBernardi);
+//			secondaA.getStudenti().add(vittorioPellegrini );
+//			secondaA.getStudenti().add( alexVilla);
+//			
+//			primaB.getStudenti().add( marcoBattaglia);
+//			primaB.getStudenti().add(alfredoMorelli );
+//			primaB.getStudenti().add(pieraDellaValle );
+//			primaB.getStudenti().add( ignazioBoschi);
+//			primaB.getStudenti().add( jacopoValli );
+//			
+//			secondaB.getStudenti().add( gianniConte);
+//			secondaB.getStudenti().add( lucaBarone);
+//			secondaB.getStudenti().add( giacomoSiciliano);
+//			secondaB.getStudenti().add(fabrizioToscani);
+//			secondaB.getStudenti().add( arturoAncona);
 			
 
 //				LibrettoAssenze libretto =  new LibrettoAssenze();

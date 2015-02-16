@@ -19,6 +19,8 @@ public class Scuola {
 	
 	private int ID;
 	
+	private String nome;
+	
 	private java.util.List<domain.model.Classe> classi = new java.util.LinkedList<domain.model.Classe>();
 	
 	private java.util.List<domain.model.Docente> docenti = new java.util.LinkedList<domain.model.Docente>();
@@ -33,6 +35,14 @@ public class Scuola {
 	
 	public int getORMID() {
 		return getID();
+	}
+	
+	public void setNome(String value) {
+		this.nome = value;
+	}
+	
+	public String getNome() {
+		return nome;
 	}
 	
 	public void setClassi(java.util.List<domain.model.Classe> value) {

@@ -120,7 +120,7 @@ public class DBFake {
 		//assegnazione delle classi ai docenti
 		
 		//assegnazione delle classi a Rossi
-		List<Classe> classiDiRossi = new LinkedList<Classe>();
+		Set<Classe> classiDiRossi = new HashSet<Classe>();
 		classiDiRossi.add(primaA);
 		classiDiRossi.add(secondaA);
 		classiDiRossi.add(primaB);
@@ -128,7 +128,7 @@ public class DBFake {
 		marioRossi.setClassi(classiDiRossi);
 		
 		//assegnazione delle classi a Rossi
-		List<Classe> classiDiBianchi = new LinkedList<Classe>();
+		Set<Classe> classiDiBianchi = new HashSet<Classe>();
 		classiDiBianchi.add(primaA);
 		classiDiBianchi.add(primaB);
 		mirkoBianchi.setClassi(classiDiBianchi);

@@ -23,7 +23,7 @@ public class Docente {
 	
 	private String cognome;
 	
-	private java.util.List<domain.model.Classe> classi = new java.util.LinkedList<domain.model.Classe>();
+	private java.util.Set<domain.model.Classe> classi = new java.util.HashSet<domain.model.Classe>();
 	
 	public void setNome(String value) {
 		this.nome = value;
@@ -53,11 +53,11 @@ public class Docente {
 		return getIdDocente();
 	}
 	
-	public void setClassi(java.util.List<domain.model.Classe> value) {
+	public void setClassi(java.util.Set<domain.model.Classe> value) {
 		this.classi = value;
 	}
 	
-	public java.util.List<domain.model.Classe> getClassi() {
+	public java.util.Set<domain.model.Classe> getClassi() {
 		return classi;
 	}
 	

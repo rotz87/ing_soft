@@ -15,7 +15,7 @@ public class CreateRegistroScolasticoData {
 			domain.model.Appello ldomainmodelAppello = new domain.model.Appello();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : assenzePrese
 			domain.model.RegistroScolasticoPersistentManager.instance().getSession().save(ldomainmodelAppello);
 			
-			domain.model.Assenza ldomainmodelAssenza = new domain.model.Assenza();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : appelliAssenza
+			domain.model.Assenza ldomainmodelAssenza = new domain.model.Assenza();			// Initialize the properties of the persistent object here
 			domain.model.RegistroScolasticoPersistentManager.instance().getSession().save(ldomainmodelAssenza);
 			
 			domain.model.Giustificazione ldomainmodelGiustificazione = new domain.model.Giustificazione();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : confermata
@@ -42,7 +42,7 @@ public class CreateRegistroScolasticoData {
 			domain.model.Scuola ldomainmodelScuola = new domain.model.Scuola();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : docenti, classi
 			domain.model.RegistroScolasticoPersistentManager.instance().getSession().save(ldomainmodelScuola);
 			
-			domain.model.Classe ldomainmodelClasse = new domain.model.Classe();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : studenti, registroAssenze
+			domain.model.Classe ldomainmodelClasse = new domain.model.Classe();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : registroAssenze
 			domain.model.RegistroScolasticoPersistentManager.instance().getSession().save(ldomainmodelClasse);
 			
 			domain.model.Docente ldomainmodelDocente = new domain.model.Docente();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : classi

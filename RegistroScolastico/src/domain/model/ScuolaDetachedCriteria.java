@@ -20,12 +20,14 @@ import org.orm.criteria.*;
 
 public class ScuolaDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression ID;
+	public final StringExpression nome;
 	public final CollectionExpression classi;
 	public final CollectionExpression docenti;
 	
 	public ScuolaDetachedCriteria() {
 		super(domain.model.Scuola.class, domain.model.ScuolaCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
+		nome = new StringExpression("nome", this.getDetachedCriteria());
 		classi = new CollectionExpression("classi", this.getDetachedCriteria());
 		docenti = new CollectionExpression("docenti", this.getDetachedCriteria());
 	}
@@ -33,6 +35,7 @@ public class ScuolaDetachedCriteria extends AbstractORMDetachedCriteria {
 	public ScuolaDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, domain.model.ScuolaCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
+		nome = new StringExpression("nome", this.getDetachedCriteria());
 		classi = new CollectionExpression("classi", this.getDetachedCriteria());
 		docenti = new CollectionExpression("docenti", this.getDetachedCriteria());
 	}

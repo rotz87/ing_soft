@@ -13,7 +13,7 @@ License Type: Academic
 		<many-to-one name="giustificazione" column="GiustificazioneID" class="domain.model.Giustificazione" cascade="save-update,lock" unique="true" not-null="false" lazy="no-proxy">
 		</many-to-one>
 		<list name="appelliAssenza" lazy="true" cascade="save-update,lock" inverse="false">
-			<key column="AssenzaID" not-null="true"/>
+			<key column="AssenzaID" not-null="false"/>
 			<index column="AssenzaIndex" type="integer"/>
 			<one-to-many class="domain.model.Appello"/>
 		</list>

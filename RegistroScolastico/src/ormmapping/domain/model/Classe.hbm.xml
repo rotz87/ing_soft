@@ -18,9 +18,5 @@ License Type: Academic
 		<many-to-one name="registroAssenze" column="RegistroAssenzeID" class="domain.model.RegistroAssenze" cascade="save-update,lock" unique="true" not-null="true" lazy="no-proxy">
 		</many-to-one>
 		<property name="nome" column="Nome" type="string" length="255" not-null="false" lazy="false"/>
-		<set name="studenti" lazy="true" cascade="save-update,lock" inverse="false">
-			<key column="ClasseId" not-null="true"/>
-			<one-to-many class="domain.model.Studente"/>
-		</set>
 	</class>
 </hibernate-mapping>

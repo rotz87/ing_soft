@@ -12,10 +12,10 @@ License Type: Academic
 		</id>
 		<property name="nome" column="Nome" type="string" length="255" not-null="false" lazy="false"/>
 		<property name="cognome" column="Cognome" type="string" length="255" not-null="false" lazy="false"/>
-		<list name="classi" lazy="true" cascade="save-update,lock" inverse="false">
-			<key column="DocenteId" not-null="true"/>
-			<index column="DocenteIndex" type="integer"/>
-			<one-to-many class="domain.model.Classe"/>
-		</list>
+		<set name="classi" table="Docente_Classe" lazy="true" cascade="save-update,lock">
+			<key column="DocenteIdDocente" not-null="true"/>
+			<many-to-many column="ClasseIdClasse" class="domain.model.Classe">
+			</many-to-many>
+		</set>
 	</class>
 </hibernate-mapping>
