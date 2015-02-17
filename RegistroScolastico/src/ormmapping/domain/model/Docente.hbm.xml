@@ -12,7 +12,7 @@ License Type: Academic
 		</id>
 		<property name="nome" column="Nome" type="string" length="255" not-null="false" lazy="false"/>
 		<property name="cognome" column="Cognome" type="string" length="255" not-null="false" lazy="false"/>
-		<set name="classi" table="Docente_Classe" lazy="true" cascade="save-update,lock">
+		<set name="classi" table="Docente_Classe" lazy="false" cascade="save-update,lock">
 			<key column="DocenteIdDocente" not-null="true"/>
 			<many-to-many column="ClasseIdClasse" class="domain.model.Classe">
 			</many-to-many>

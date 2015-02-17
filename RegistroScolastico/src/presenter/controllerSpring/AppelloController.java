@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import org.orm.PersistentException;
 import org.springframework.hateoas.Link;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -56,6 +57,8 @@ public class AppelloController {
 		  }catch(IllegalStateException ISE){
 			  httpStatus = HttpStatus.FORBIDDEN;
 	//				  Stempa.stampaln("AppelloController:"+ISE.getMessage());
+		  }catch(PersistentException PE){
+			  httpStatus = HttpStatus.SERVICE_UNAVAILABLE;
 		  }
 	
 		  return new ResponseEntity<>(null, httpHeaders, httpStatus);

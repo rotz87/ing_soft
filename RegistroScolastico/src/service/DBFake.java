@@ -229,10 +229,10 @@ public class DBFake {
 		for(i = 26; i<=mapStudenti.size(); i++){
 			listaStudentiSecondaB.add(mapStudenti.get(i));
 		}
-		primaA.setStudenti(listaStudentiPrimaA);
-		secondaA.setStudenti(listaStudentiSecondaA);
-		primaB.setStudenti(listaStudentiPrimaB);
-		secondaB.setStudenti(listaStudentiSecondaB);
+//		primaA.setStudenti(listaStudentiPrimaA);
+//		secondaA.setStudenti(listaStudentiSecondaA);
+//		primaB.setStudenti(listaStudentiPrimaB);
+//		secondaB.setStudenti(listaStudentiSecondaB);
 		
 		//creazione Libretti
 		 Map<Integer, LibrettoAssenze> librettiPrimaA = new HashMap<Integer, LibrettoAssenze>(); 

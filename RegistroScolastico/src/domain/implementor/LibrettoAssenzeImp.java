@@ -3,6 +3,7 @@ package domain.implementor;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
+import service.Stampa;
 import domain.model.Appello;
 import domain.model.Assenza;
 import domain.model.LibrettoAssenze;
@@ -34,9 +35,13 @@ public class LibrettoAssenzeImp {
 		Assenza ultimaAssenzaNonGiustificata = null;
 		
 		if(!(librettoAssenze.getNonGiustificate().isEmpty())){
-			ultimaAssenzaNonGiustificata = this.getUltimaAssenzaNonGiustificata(librettoAssenze);
-//			Stempa.stampaln("\n libretto di:  "+ this.getStudente().getNome() +" "+ this.getStudente().getCognome());
-//			Stempa.stampaln("ultimo appello dell'ultima assenza non giustificata "+ this.getUltimaAssenzaNonGiustificata().getUltimoAppelloAssenza().getDataL()+"\n");
+			Stampa.stampaln("\n size Giustificate:  "+ librettoAssenze.getGiustificate().size());
+			Stampa.stampaln("\n size NonGiustificate:  "+ librettoAssenze.getNonGiustificate().size());
+			Stampa.stampaln("\n NonGiustificate[0]:  "+ librettoAssenze.getNonGiustificate().get(0));
+			ultimaAssenzaNonGiustificata = getUltimaAssenzaNonGiustificata(librettoAssenze);
+			Stampa.stampaln("\n libretto di:  "+ librettoAssenze.getStudente().getNome() +" "+ librettoAssenze.getStudente().getCognome());
+			Stampa.stampaln(" appello dell'ultima assenza non giustificata "+ ultimaAssenzaNonGiustificata.getUltimoAppelloAssenza()+"\n");
+			Stampa.stampaln("Data dell'ultimo appello dell'ultima assenza non giustificata "+ librettoAssenze.getUltimaAssenzaNonGiustificata().getUltimoAppelloAssenza().getData()+"\n");
 			inseribile = ultimaAssenzaNonGiustificata.isInseribile(appello);	
 		}
 		

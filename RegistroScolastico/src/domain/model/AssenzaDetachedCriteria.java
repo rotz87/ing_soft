@@ -22,14 +22,14 @@ public class AssenzaDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression ID;
 	public final IntegerExpression giustificazioneId;
 	public final AssociationExpression giustificazione;
-	public final CollectionExpression appelliAssenza;
+	public final CollectionExpression appelli;
 	
 	public AssenzaDetachedCriteria() {
 		super(domain.model.Assenza.class, domain.model.AssenzaCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
 		giustificazioneId = new IntegerExpression("giustificazione.ID", this.getDetachedCriteria());
 		giustificazione = new AssociationExpression("giustificazione", this.getDetachedCriteria());
-		appelliAssenza = new CollectionExpression("appelliAssenza", this.getDetachedCriteria());
+		appelli = new CollectionExpression("appelli", this.getDetachedCriteria());
 	}
 	
 	public AssenzaDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -37,15 +37,15 @@ public class AssenzaDetachedCriteria extends AbstractORMDetachedCriteria {
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
 		giustificazioneId = new IntegerExpression("giustificazione.ID", this.getDetachedCriteria());
 		giustificazione = new AssociationExpression("giustificazione", this.getDetachedCriteria());
-		appelliAssenza = new CollectionExpression("appelliAssenza", this.getDetachedCriteria());
+		appelli = new CollectionExpression("appelli", this.getDetachedCriteria());
 	}
 	
 	public GiustificazioneDetachedCriteria createGiustificazioneCriteria() {
 		return new GiustificazioneDetachedCriteria(createCriteria("giustificazione"));
 	}
 	
-	public AppelloDetachedCriteria createAppelliAssenzaCriteria() {
-		return new AppelloDetachedCriteria(createCriteria("appelliAssenza"));
+	public AppelloDetachedCriteria createAppelliCriteria() {
+		return new AppelloDetachedCriteria(createCriteria("appelli"));
 	}
 	
 	public Assenza uniqueAssenza(PersistentSession session) {

@@ -3,7 +3,7 @@ package test;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import org.neo4j.cypher.internal.compiler.v2_0.untilMatched;
+import org.orm.PersistentException;
 
 import ormsamples.RetrieveAndUpdateRegistroScolasticoData;
 import service.DBFake;
@@ -90,6 +90,9 @@ public class TestFaiLAppelloController2 {
 //			controlloreAppello.avviaAppello(new Long(1), new Long(2));
 		}catch(IllegalStateException ISE){
 			Stampa.stampaln("Messaggio dell'eccezione: "+ISE.getMessage());
+		} catch (PersistentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		Integer[] listaIdStudAssenti = {new Integer(3), new Integer(1), new Integer(5), new Integer(2)};//lista per classe con id 1

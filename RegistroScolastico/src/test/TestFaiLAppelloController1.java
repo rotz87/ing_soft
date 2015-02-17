@@ -3,6 +3,8 @@ package test;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import org.orm.PersistentException;
+
 import service.DBFake;
 import service.Stampa;
 import domain.controller.FaiAppelloController;
@@ -13,7 +15,7 @@ import domain.model.RegistroAssenze;
 import domain.model.Studente;
 
 public class TestFaiLAppelloController1 {
-	public static void main(String[] args){
+	public static void main(String[] args) throws PersistentException{
 		Integer idClasseProva = new Integer(1);
 		Integer idDocenteProva = new Integer(1);
 		//creazione dal controller FaiAppelloConreoller
@@ -30,6 +32,9 @@ public class TestFaiLAppelloController1 {
 //			controlloreAppello.avviaAppello(new Long(1), new Long(2));
 		}catch(IllegalStateException ISE){
 			Stampa.stampaln("Messaggio dell'eccezione: "+ISE.getMessage());
+		} catch (PersistentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		Integer[] listaIdStudAssenti = {new Integer(3), new Integer(1), new Integer(5), new Integer(2)};//lista per classe con id 1
@@ -60,19 +65,19 @@ public class TestFaiLAppelloController1 {
 		Iterator entries = regAss.getLibrettiAssenze().entrySet().iterator();
 		while (entries.hasNext()) {
 		  Entry thisEntry = (Entry) entries.next();
-		  Studente Stud = (Studente)thisEntry.getKey();
+		  Integer idStud = (Integer)thisEntry.getKey();
 		  LibrettoAssenze libAss = (LibrettoAssenze)thisEntry.getValue();
 		  Stampa.stampaln("STUDENTE : "+libAss.getStudente().getNome() +" "+libAss.getStudente().getCognome());
 		  Stampa.stampaln("ASSENZE NON GIUSTIFICATE : \n");
 		  if (/*libAss.getNonGiustificate() != null && */ (!(libAss.getNonGiustificate().isEmpty()))){
 			  for (Assenza assNG : libAss.getNonGiustificate()) {
 				  Stampa.stampaln("---------Inizio Assenza-------- ");
-				  for (Appello app : assNG.getAppelliAssenza()){
+				  for (Appello app : assNG.getAppelli()){
 					  Stampa.stampaln("data dell'appello dell'assenza : "+app.getData().toString());
 				  }
-				  if(assNG.isCertificatoMedicoRichiesto()){
-					  Stampa.stampaln(" \n E' richiesto il certificato medico !! \n");  
-				  }
+//				  if(assNG.isCertificatoMedicoRichiesto()){
+//					  Stampa.stampaln(" \n E' richiesto il certificato medico !! \n");  
+//				  }
 				  Stampa.stampaln("-------Fine Assenza--------\n");
 					
 				}

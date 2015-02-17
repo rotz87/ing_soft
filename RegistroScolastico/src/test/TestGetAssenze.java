@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import org.orm.PersistentException;
+
 import service.DBFake;
 import service.Stampa;
 import domain.controller.FaiAppelloController;
@@ -37,7 +39,12 @@ public class TestGetAssenze {
 
 			FaiAppelloController controlloreAppello = new FaiAppelloController();
 			
-			controlloreAppello.avviaAppello(1, 1);
+			try {
+				controlloreAppello.avviaAppello(1, 1);
+			} catch (PersistentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 			Integer[] listaIdStudAssenti = {3, 1, 5, 2};
 			

@@ -22,14 +22,14 @@ public class AssenzaCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
 	public final IntegerExpression giustificazioneId;
 	public final AssociationExpression giustificazione;
-	public final CollectionExpression appelliAssenza;
+	public final CollectionExpression appelli;
 	
 	public AssenzaCriteria(Criteria criteria) {
 		super(criteria);
 		ID = new IntegerExpression("ID", this);
 		giustificazioneId = new IntegerExpression("giustificazione.ID", this);
 		giustificazione = new AssociationExpression("giustificazione", this);
-		appelliAssenza = new CollectionExpression("appelliAssenza", this);
+		appelli = new CollectionExpression("appelli", this);
 	}
 	
 	public AssenzaCriteria(PersistentSession session) {
@@ -44,8 +44,8 @@ public class AssenzaCriteria extends AbstractORMCriteria {
 		return new GiustificazioneCriteria(createCriteria("giustificazione"));
 	}
 	
-	public AppelloCriteria createAppelliAssenzaCriteria() {
-		return new AppelloCriteria(createCriteria("appelliAssenza"));
+	public AppelloCriteria createAppelliCriteria() {
+		return new AppelloCriteria(createCriteria("appelli"));
 	}
 	
 	public Assenza uniqueAssenza() {

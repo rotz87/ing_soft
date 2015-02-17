@@ -70,18 +70,6 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
-    <Column name="AssenzaID">
-      <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>Assenza.ID</ReferencedColumn>
-      <Type>9</Type>
-      <Length>11</Length>
-      <Nullable>true</Nullable>
-      <IDGenerator>native</IDGenerator>
-      <Unique>false</Unique>
-      <Index>false</Index>
-      <UserTypes/>
-    </Column>
     <Column name="RegistroAssenzeID">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
@@ -127,17 +115,6 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
-    <Column name="AssenzaIndex">
-      <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
-      <Type>9</Type>
-      <Length>11</Length>
-      <Nullable>true</Nullable>
-      <IDGenerator>native</IDGenerator>
-      <Unique>false</Unique>
-      <Index>false</Index>
-      <UserTypes/>
-    </Column>
   </Entity>
   <Entity name="Assenza">
     <Column name="ID">
@@ -157,8 +134,8 @@
       <ReferencedColumn>LibrettoAssenze.ID</ReferencedColumn>
       <Type>9</Type>
       <Length>11</Length>
-      <Nullable>false</Nullable>
-      <IDGenerator>native</IDGenerator>
+      <Nullable>true</Nullable>
+      <IDGenerator>assigned</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
       <UserTypes/>
@@ -175,14 +152,14 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
-    <Column name="LibrettoAssenzeID">
+    <Column name="LibrettoAssenzeID1">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
       <ReferencedColumn>LibrettoAssenze.ID</ReferencedColumn>
       <Type>9</Type>
       <Length>11</Length>
-      <Nullable>false</Nullable>
-      <IDGenerator>native</IDGenerator>
+      <Nullable>true</Nullable>
+      <IDGenerator>assigned</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
       <UserTypes/>
@@ -704,11 +681,48 @@
       <UserTypes/>
     </Column>
   </Entity>
-  <ForeignKey name="FKAssenza670203">
+  <Entity name="Assenza_Appello">
+    <Column name="AssenzaID">
+      <PrimaryKey>true</PrimaryKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>Assenza.ID</ReferencedColumn>
+      <Type>9</Type>
+      <Length>11</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>assigned</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="AppelloIdAppello">
+      <PrimaryKey>true</PrimaryKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>Appello.IdAppello</ReferencedColumn>
+      <Type>9</Type>
+      <Length>11</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>assigned</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="index">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>9</Type>
+      <Length>10</Length>
+      <Nullable>true</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+  </Entity>
+  <ForeignKey name="FKAssenza945289">
     <ReferenceTable>Assenza</ReferenceTable>
     <ReferencedTable>LibrettoAssenze</ReferencedTable>
     <Columns>
-      <Column>LibrettoAssenzeID</Column>
+      <Column>LibrettoAssenzeID1</Column>
     </Columns>
     <RefColumns>
       <Column>ID</Column>
@@ -874,16 +888,6 @@
       <Column>ID</Column>
     </RefColumns>
   </ForeignKey>
-  <ForeignKey name="FKAppello960917">
-    <ReferenceTable>Appello</ReferenceTable>
-    <ReferencedTable>Assenza</ReferencedTable>
-    <Columns>
-      <Column>AssenzaID</Column>
-    </Columns>
-    <RefColumns>
-      <Column>ID</Column>
-    </RefColumns>
-  </ForeignKey>
   <ForeignKey name="FKDocente_Cl506715">
     <ReferenceTable>Docente_Classe</ReferenceTable>
     <ReferencedTable>Docente</ReferencedTable>
@@ -902,6 +906,26 @@
     </Columns>
     <RefColumns>
       <Column>IdClasse</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKAssenza_Ap407034">
+    <ReferenceTable>Assenza_Appello</ReferenceTable>
+    <ReferencedTable>Assenza</ReferencedTable>
+    <Columns>
+      <Column>AssenzaID</Column>
+    </Columns>
+    <RefColumns>
+      <Column>ID</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKAssenza_Ap293752">
+    <ReferenceTable>Assenza_Appello</ReferenceTable>
+    <ReferencedTable>Appello</ReferencedTable>
+    <Columns>
+      <Column>AppelloIdAppello</Column>
+    </Columns>
+    <RefColumns>
+      <Column>IdAppello</Column>
     </RefColumns>
   </ForeignKey>
 </Model>

@@ -21,7 +21,7 @@ public class Assenza {
 	
 	private domain.model.Giustificazione giustificazione;
 	
-	private java.util.List<domain.model.Appello> appelliAssenza = new java.util.LinkedList<domain.model.Appello>();
+	private java.util.Collection<domain.model.Appello> appelli = new java.util.LinkedList<domain.model.Appello>();
 	
 	private void setID(int value) {
 		this.ID = value;
@@ -43,12 +43,12 @@ public class Assenza {
 		return giustificazione;
 	}
 	
-	public void setAppelliAssenza(java.util.List<domain.model.Appello> value) {
-		this.appelliAssenza = value;
+	public void setAppelli(java.util.Collection<domain.model.Appello> value) {
+		this.appelli = value;
 	}
 	
-	public java.util.List<domain.model.Appello> getAppelliAssenza() {
-		return appelliAssenza;
+	public java.util.Collection<domain.model.Appello> getAppelli() {
+		return appelli;
 	}
 	
 	

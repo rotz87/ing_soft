@@ -10,11 +10,11 @@ License Type: Academic
 			<generator class="native">
 			</generator>
 		</id>
-		<set name="giorniFestivi" lazy="true" cascade="save-update,lock" inverse="false">
+		<set name="giorniFestivi" lazy="false" cascade="save-update,lock" inverse="false">
 			<key column="CalendarioID" not-null="true"/>
 			<one-to-many class="domain.model.Giorno"/>
 		</set>
-		<list name="giorniSettimanaliFestivi" lazy="true" cascade="save-update,lock" inverse="false">
+		<list name="giorniSettimanaliFestivi" lazy="false" cascade="save-update,lock" inverse="false">
 			<key column="CalendarioID" not-null="true"/>
 			<index column="CalendarioIndex" type="integer"/>
 			<one-to-many class="domain.model.GiornoSettimanale"/>

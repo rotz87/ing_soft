@@ -21,13 +21,13 @@ import org.orm.criteria.*;
 public class RegistroAssenzeCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
 	public final CollectionExpression librettiAssenze;
-	public final CollectionExpression appelliRegistro;
+	public final CollectionExpression appelli;
 	
 	public RegistroAssenzeCriteria(Criteria criteria) {
 		super(criteria);
 		ID = new IntegerExpression("ID", this);
 		librettiAssenze = new CollectionExpression("librettiAssenze", this);
-		appelliRegistro = new CollectionExpression("appelliRegistro", this);
+		appelli = new CollectionExpression("appelli", this);
 	}
 	
 	public RegistroAssenzeCriteria(PersistentSession session) {
@@ -42,8 +42,8 @@ public class RegistroAssenzeCriteria extends AbstractORMCriteria {
 		return new LibrettoAssenzeCriteria(createCriteria("librettiAssenze"));
 	}
 	
-	public AppelloCriteria createAppelliRegistroCriteria() {
-		return new AppelloCriteria(createCriteria("appelliRegistro"));
+	public AppelloCriteria createAppelliCriteria() {
+		return new AppelloCriteria(createCriteria("appelli"));
 	}
 	
 	public RegistroAssenze uniqueRegistroAssenze() {

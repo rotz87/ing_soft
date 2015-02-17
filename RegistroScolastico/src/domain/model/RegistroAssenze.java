@@ -21,7 +21,7 @@ public class RegistroAssenze {
 	
 	private java.util.Map<Integer, domain.model.LibrettoAssenze> librettiAssenze = new java.util.HashMap<Integer, domain.model.LibrettoAssenze>();
 	
-	private java.util.Map<Integer, domain.model.Appello> appelliRegistro = new java.util.HashMap<Integer, domain.model.Appello>();
+	private java.util.Map<Integer, domain.model.Appello> appelli = new java.util.HashMap<Integer, domain.model.Appello>();
 	
 	private void setID(int value) {
 		this.ID = value;
@@ -44,12 +44,12 @@ public class RegistroAssenze {
 	}
 	
 	
-	public void setAppelliRegistro(java.util.Map<Integer, domain.model.Appello> value) {
-		this.appelliRegistro = value;
+	public void setAppelli(java.util.Map<Integer, domain.model.Appello> value) {
+		this.appelli = value;
 	}
 	
-	public java.util.Map<Integer, domain.model.Appello> getAppelliRegistro() {
-		return appelliRegistro;
+	public java.util.Map<Integer, domain.model.Appello> getAppelli() {
+		return appelli;
 	}
 	
 	

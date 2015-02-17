@@ -24,16 +24,18 @@ public class AssenzaImp {
 	}
 	
 	public void inizialize(Assenza assenza){
-		assenza.setAppelliAssenza(new LinkedList<Appello>());
+		assenza.setAppelli(new LinkedList<Appello>());
 	}
 	
 	public void inizialize(Assenza assenza, LinkedList<Appello> appelli){
-		assenza.setAppelliAssenza(appelli);
+		assenza.setAppelli(appelli);
 	}
 	
 
 	public Appello getUltimoAppelloAssenza(Assenza assenza) {
-		return (( java.util.LinkedList<domain.model.Appello>)(assenza.getAppelliAssenza())).getLast();
+		//return (( java.util.LinkedList<domain.model.Appello>)(assenza.getAppelli())).getLast();
+		
+		return (Appello)(( org.hibernate.collection.internal.PersistentBag)(assenza.getAppelli())).get(assenza.getAppelli().size()-1);
 	}
 
 	/**
@@ -42,11 +44,11 @@ public class AssenzaImp {
 	 */
 	public void inserisciAppelloAssenza(Assenza assenza, Appello appello) {
 		try{
-			assenza.getAppelliAssenza().add(appello);
+			assenza.getAppelli().add(appello);
 		}catch (NullPointerException NPE){
 			Stampa.stampaln("----------------------------------------- ");
 			Stampa.stampaln("sono nel catch !! ");
-			Stampa.stampaln("appelli: "+ assenza.getAppelliAssenza());
+			Stampa.stampaln("appelli: "+ assenza.getAppelli());
 			Stampa.stampaln("appello: "+ appello);
 			Stampa.stampaln("-----------------------------------------. ");
 		}
@@ -59,9 +61,15 @@ public class AssenzaImp {
 	 */
 	public boolean isInseribile(Assenza assenza, Appello appello) {
 		boolean inseribile = false;
-//		Stampa.stampaln("\n >>>>>>>>>> passo per isInseribile ");
-		
-		LocalDate ultimaDataPlus = new LocalDate(((java.util.LinkedList<Appello>)assenza.getAppelliAssenza()).getLast().getData()).plusDays(1);
+		Stampa.stampaln("\n >>>>>>>>>> passo per isInseribile ");
+		Stampa.stampaln("assenza.getAppelliAssenza(): "+assenza.getAppelli());
+		LinkedList<Appello> appelliAssenza = new LinkedList<Appello>();
+		for(Appello app : assenza.getAppelli()){
+			appelliAssenza.add(app);	
+			Stampa.stampaln("for: ");
+		}
+		LocalDate ultimaDataPlus = new LocalDate(appelliAssenza.getLast().getData()).plusDays(1);
+//		LocalDate ultimaDataPlus = new LocalDate(((java.util.LinkedList<Appello>)assenza.getAppelliAssenza()).getLast().getData()).plusDays(1);
 		LocalDate oggi = Calendario.getInstance().getDataOdierna();//per le prove, a regime usare la riga di sotto
 //		LocalDate oggi = appello.getDataL();
 //		Stampa.stampaln("appelli.getLast().getDataL(): "+appelli.getLast().getDataL());
@@ -81,16 +89,16 @@ public class AssenzaImp {
 	public boolean isCertificatoMedicoRichiesto(Assenza assenza){
 		boolean rit = false;
 				
-		if((new LocalDate(((java.util.LinkedList<Appello>)assenza.getAppelliAssenza()).getLast().getData()).getDayOfYear() - new LocalDate(((java.util.LinkedList<Appello>)assenza.getAppelliAssenza()).getFirst().getData()).getDayOfYear())+1 >= 5){
+		if((new LocalDate(((java.util.LinkedList<Appello>)assenza.getAppelli()).getLast().getData()).getDayOfYear() - new LocalDate(((java.util.LinkedList<Appello>)assenza.getAppelli()).getFirst().getData()).getDayOfYear())+1 >= 5){
 			rit = true;
 		}
-		int x = (new LocalDate(((java.util.LinkedList<Appello>)assenza.getAppelliAssenza()).getLast().getData()).getDayOfYear() - new LocalDate(((java.util.LinkedList<Appello>)assenza.getAppelliAssenza()).getFirst().getData()).getDayOfYear())+1;
+		int x = (new LocalDate(((java.util.LinkedList<Appello>)assenza.getAppelli()).getLast().getData()).getDayOfYear() - new LocalDate(((java.util.LinkedList<Appello>)assenza.getAppelli()).getFirst().getData()).getDayOfYear())+1;
 		Stampa.stampaln("\n differenza tra i giorni:"+ x +"\n ");
 		return rit;
 	}
 	
 	public boolean esisteAppello(Assenza assenza, Appello appello){
-		return assenza.getAppelliAssenza().contains(appello);
+		return assenza.getAppelli().contains(appello);
 	}
 
 	

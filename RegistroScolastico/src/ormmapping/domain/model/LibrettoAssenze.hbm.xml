@@ -10,24 +10,24 @@ License Type: Academic
 			<generator class="native">
 			</generator>
 		</id>
-		<many-to-one name="studente" column="StudenteId" class="domain.model.Studente" cascade="save-update,lock" unique="true" not-null="true" lazy="no-proxy">
+		<many-to-one name="studente" column="StudenteId" class="domain.model.Studente" cascade="save-update,lock" unique="true" not-null="true" lazy="false">
 		</many-to-one>
-		<list name="giustificate" lazy="true" cascade="save-update,lock" inverse="false">
-			<key column="LibrettoAssenzeID" not-null="true"/>
+		<list name="giustificate" lazy="false" cascade="save-update,lock" inverse="false">
+			<key column="LibrettoAssenzeID1" not-null="false"/>
 			<index column="LibrettoAssenzeIndex" type="integer"/>
 			<one-to-many class="domain.model.Assenza"/>
 		</list>
-		<list name="nonGiustificate" lazy="true" cascade="save-update,lock" inverse="false">
-			<key column="LibrettoAssenzeID2" not-null="true"/>
+		<list name="nonGiustificate" lazy="false" cascade="save-update,lock" inverse="false">
+			<key column="LibrettoAssenzeID2" not-null="false"/>
 			<index column="`Column`" type="integer"/>
 			<one-to-many class="domain.model.Assenza"/>
 		</list>
-		<list name="ritardi" lazy="true" cascade="save-update,lock" inverse="false">
+		<list name="ritardi" lazy="false" cascade="save-update,lock" inverse="false">
 			<key column="LibrettoAssenzeID" not-null="true"/>
 			<index column="LibrettoAssenzeIndex" type="integer"/>
 			<one-to-many class="domain.model.Ritardo"/>
 		</list>
-		<list name="uscite" lazy="true" cascade="save-update,lock" inverse="false">
+		<list name="uscite" lazy="false" cascade="save-update,lock" inverse="false">
 			<key column="LibrettoAssenzeID" not-null="true"/>
 			<index column="LibrettoAssenzeIndex" type="integer"/>
 			<one-to-many class="domain.model.UscitaAnticipata"/>

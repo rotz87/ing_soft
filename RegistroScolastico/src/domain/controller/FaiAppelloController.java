@@ -1,17 +1,26 @@
 package domain.controller;
 
+import java.util.List;
 import java.util.Collection;
 import java.util.HashMap;
 
+import org.apache.xalan.xsltc.compiler.sym;
 import org.joda.time.LocalDate;
+import org.orm.PersistentException;
 
 import service.DBFake;
+import service.DBService;
 import domain.model.Appello;
 import domain.model.Assenza;
 import domain.model.Classe;
+import domain.model.ClasseCriteria;
 import domain.model.Docente;
+import domain.model.DocenteCriteria;
+import domain.model.LibrettoAssenze;
+import domain.model.LibrettoAssenzeCriteria;
 import domain.model.RegistroAssenze;
 import domain.model.Studente;
+import domain.model.StudenteCriteria;
 
 public class FaiAppelloController {
 //	private Scuola scuola;
@@ -21,10 +30,18 @@ public class FaiAppelloController {
 	}
 	
 	
-	public void avviaAppello(int idClasse, int idDocente) {
+	public void avviaAppello(int idClasse, int idDocente) throws PersistentException {
 
-		Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
-		Docente docenteCorrente = DBFake.getInstance().getDocenteById(idDocente);
+		ClasseCriteria classeCriteria = new ClasseCriteria();
+		DocenteCriteria docenteCriteria = new DocenteCriteria();
+		Classe classeCorrente;
+		Docente docenteCorrente;
+		
+		classeCriteria.idClasse.eq(idClasse);
+		classeCorrente = classeCriteria.uniqueClasse();
+		
+		docenteCriteria.idDocente.eq(idDocente);
+		docenteCorrente = docenteCriteria.uniqueDocente();
 		
 //		Stempa.stampaln("docente corrente: " + docenteCorrente.getCognome());
 //		Stempa.stampaln("classe corrente: " + classeCorrente.getNome());
@@ -33,7 +50,9 @@ public class FaiAppelloController {
 		if(docenteCorrente.isInsegnante(classeCorrente)){
 			RegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();
 			registroAssenzeCorrente.avviaAppello();
-			DBFake.getInstance().storeAppello(registroAssenzeCorrente.getAppelloOdierno());
+//			DBService.getInstance().update(registroAssenzeCorrente);
+			DBService.getInstance().save(registroAssenzeCorrente.getAppelloOdierno());
+			
 			
 		}else{
 			throw new IllegalStateException("ATTENZIONE IL DOCENTE NON E' ABILITATO AD ESEGUIRE L'APPELLO SULLA CLASSE SELEZIONATA");
@@ -41,25 +60,55 @@ public class FaiAppelloController {
 		
 	}
 	
-	public void registraAssenze(Integer[] idStudenti, int idClasse, int idDocente) {
-		Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
-		Docente docenteCorrente = DBFake.getInstance().getDocenteById(idDocente);
+	public void registraAssenze(Integer[] idStudenti, int idClasse, int idDocente) throws PersistentException {
+//		Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
+//		Docente docenteCorrente = DBFake.getInstance().getDocenteById(idDocente);
+		
+		ClasseCriteria classeCriteria = new ClasseCriteria();
+		DocenteCriteria docenteCriteria = new DocenteCriteria();
+		StudenteCriteria studenteCriteria = new StudenteCriteria();
+		Classe classeCorrente;
+		Docente docenteCorrente;
+		
+		classeCriteria.idClasse.eq(idClasse);
+		classeCorrente = classeCriteria.uniqueClasse();
+		
+		docenteCriteria.idDocente.eq(idDocente);
+		docenteCorrente = docenteCriteria.uniqueDocente();
 		
 		if(docenteCorrente.isInsegnante(classeCorrente)){
 			RegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();
-			Studente[] studenti = new Studente[idStudenti.length];
+//			Studente[] studenti = new Studente[idStudenti.length];
+//			int i = 0;
+//			for (Integer idStudente : idStudenti){
+////				studenti[i] = DBFake.getInstance().getStudenteById(idStudente);
+//				studenteCriteria.id.eq(idStudente);
+//				studenti[i] = studenteCriteria.uniqueStudente();
+//				i++;
+//				
+//			}
+			studenteCriteria.id.in(idStudenti);
+			
+			registroAssenzeCorrente.registraAssenze(studenteCriteria.listStudente());
+			
+			LibrettoAssenzeCriteria librettoAssenzeCriteria = new LibrettoAssenzeCriteria();
+			librettoAssenzeCriteria.studenteId.in(idStudenti);
+
+			int size = librettoAssenzeCriteria.listLibrettoAssenze().length;
+			Assenza[] assenze = new Assenza[size];
 			int i = 0;
-			for (Integer idStudente : idStudenti){
-				studenti[i] = DBFake.getInstance().getStudenteById(idStudente);
+			for(LibrettoAssenze libAss : librettoAssenzeCriteria.listLibrettoAssenze()){
+				assenze[i] = libAss.getUltimaAssenzaNonGiustificata();
 				i++;
-				
 			}
-			registroAssenzeCorrente.registraAssenze(studenti);
-			//manca il slavataggio delle nuove assenze sun DB!!!!!
+			DBService.getInstance().save(assenze);
+//			DBService.getInstance().update(librettoAssenzeCriteria.listLibrettoAssenze());
+//			DBService.getInstance().update(registroAssenzeCorrente);
+
 		}else{
 			throw new IllegalStateException("ATTENZIONE IL DOCENTE NON E' ABILITATO A METTERE LE ASSENZE PER QUESTA CLASSE");
 		}
-		//manca il slavataggio delle nuove assenze sun DB!!!!!
+
 	}
 	
 	public Appello getAppelloOdierno(int idClasse){
@@ -89,7 +138,7 @@ public class FaiAppelloController {
 	public Collection<Appello> getAppelli(int idClasse){
 		Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
 		RegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();
-		return registroAssenzeCorrente.getAppelliRegistro().values();		
+		return registroAssenzeCorrente.getAppelli().values();		
 	}
 	
 	public boolean isAppelloOdiernoAvviabile(int idClasse){
