@@ -3,24 +3,30 @@ package test;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import org.neo4j.cypher.internal.compiler.v2_0.untilMatched;
+
 import ormsamples.RetrieveAndUpdateRegistroScolasticoData;
 import service.DBFake;
 import service.Stampa;
 import domain.controller.FaiAppelloController;
 import domain.model.Appello;
 import domain.model.Assenza;
+import domain.model.Classe;
 import domain.model.LibrettoAssenze;
 import domain.model.RegistroAssenze;
+import domain.model.RegistroAssenzeCriteria;
 import domain.model.Studente;
 
 public class TestFaiLAppelloController2 {
 	
-	private RegistroAssenze getRegistroAssenzeByIdClasse(int idClasse){
+	private static RegistroAssenze getRegistroAssenzeByIdClasse(int idClasse){
 		RegistroAssenze ret;
 		
 		ret = null;
 		try {
 			try {
+				RegistroAssenzeCriteria registroAssenzeCriteria;
+				
 				domain.model.ClasseCriteria ldomainmodelClasseCriteria = new domain.model.ClasseCriteria();
 				ldomainmodelClasseCriteria.idClasse.eq(idClasse);
 				ret = ldomainmodelClasseCriteria.uniqueClasse().getRegistroAssenze();
@@ -36,7 +42,38 @@ public class TestFaiLAppelloController2 {
 		return ret;
 	}
 	
+	public static void stampaLibretti(RegistroAssenze regAss){
+		Stampa.stampaln();
+		Stampa.stampaln("VISUALIZZAZIONE ASSENZE NON GIUSTIFICATE DEGLI STUDENTI _________________________ \n \n");
+		Iterator entries = regAss.getLibrettiAssenze().entrySet().iterator();
+		while (entries.hasNext()) {
+		  Entry thisEntry = (Entry) entries.next();
+		  Studente Stud = (Studente)thisEntry.getKey();
+		  LibrettoAssenze libAss = (LibrettoAssenze)thisEntry.getValue();
+		  Stampa.stampaln("STUDENTE : "+libAss.getStudente().getNome() +" "+libAss.getStudente().getCognome());
+		  Stampa.stampaln("ASSENZE NON GIUSTIFICATE : \n");
+		  if (/*libAss.getNonGiustificate() != null && */ (!(libAss.getNonGiustificate().isEmpty()))){
+			  for (Assenza assNG : libAss.getNonGiustificate()) {
+				  Stampa.stampaln("---------Inizio Assenza-------- ");
+				  for (Appello app : assNG.getAppelliAssenza()){
+					  Stampa.stampaln("data dell'appello dell'assenza : "+app.getData().toString());
+				  }
+				  if(assNG.isCertificatoMedicoRichiesto()){
+					  Stampa.stampaln(" \n E' richiesto il certificato medico !! \n");  
+				  }
+				  Stampa.stampaln("-------Fine Assenza--------\n");
+					
+				}
+			  Stampa.stampaln("-------fine studente---------- \n \n");
+			}else{ Stampa.stampaln("\n non ci sono assenze non giustificate \n");}
+		}
+		Stampa.stampaln("________________________________________FINE");
+		Stampa.stampaln();
+		
+	}
+	
 	public static void main(String[] args){
+		
 		Integer idClasseProva = new Integer(1);
 		Integer idDocenteProva = new Integer(1);
 		//creazione dal controller FaiAppelloConreoller
@@ -77,33 +114,4 @@ public class TestFaiLAppelloController2 {
 
 	}
 	
-	public static void stampaLibretti(RegistroAssenze regAss){
-		Stampa.stampaln();
-		Stampa.stampaln("VISUALIZZAZIONE ASSENZE NON GIUSTIFICATE DEGLI STUDENTI _________________________ \n \n");
-		Iterator entries = regAss.getLibrettiAssenze().entrySet().iterator();
-		while (entries.hasNext()) {
-		  Entry thisEntry = (Entry) entries.next();
-		  Studente Stud = (Studente)thisEntry.getKey();
-		  LibrettoAssenze libAss = (LibrettoAssenze)thisEntry.getValue();
-		  Stampa.stampaln("STUDENTE : "+libAss.getStudente().getNome() +" "+libAss.getStudente().getCognome());
-		  Stampa.stampaln("ASSENZE NON GIUSTIFICATE : \n");
-		  if (/*libAss.getNonGiustificate() != null && */ (!(libAss.getNonGiustificate().isEmpty()))){
-			  for (Assenza assNG : libAss.getNonGiustificate()) {
-				  Stampa.stampaln("---------Inizio Assenza-------- ");
-				  for (Appello app : assNG.getAppelliAssenza()){
-					  Stampa.stampaln("data dell'appello dell'assenza : "+app.getData().toString());
-				  }
-				  if(assNG.isCertificatoMedicoRichiesto()){
-					  Stampa.stampaln(" \n E' richiesto il certificato medico !! \n");  
-				  }
-				  Stampa.stampaln("-------Fine Assenza--------\n");
-					
-				}
-			  Stampa.stampaln("-------fine studente---------- \n \n");
-			}else{ Stampa.stampaln("\n non ci sono assenze non giustificate \n");}
-		}
-		Stampa.stampaln("________________________________________FINE");
-		Stampa.stampaln();
-		
-	}
 }
