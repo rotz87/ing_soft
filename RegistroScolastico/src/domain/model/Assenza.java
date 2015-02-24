@@ -21,7 +21,7 @@ public class Assenza {
 	
 	private domain.model.Giustificazione giustificazione;
 	
-	private java.util.Collection<domain.model.Appello> appelli = new java.util.LinkedList<domain.model.Appello>();
+	private java.util.Set<domain.model.Appello> appelli = new java.util.LinkedHashSet<domain.model.Appello>();
 	
 	private void setID(int value) {
 		this.ID = value;
@@ -43,11 +43,11 @@ public class Assenza {
 		return giustificazione;
 	}
 	
-	public void setAppelli(java.util.Collection<domain.model.Appello> value) {
+	public void setAppelli(java.util.Set<domain.model.Appello> value) {
 		this.appelli = value;
 	}
 	
-	public java.util.Collection<domain.model.Appello> getAppelli() {
+	public java.util.Set<domain.model.Appello> getAppelli() {
 		return appelli;
 	}
 	
@@ -76,7 +76,7 @@ public class Assenza {
 	/**
 	 * Costruttore dell'Assenza, prende come parametro una LinkedList di appelli.
 	 */
-	public Assenza(java.util.LinkedList<Appello> appelli) {
+	public Assenza(java.util.LinkedHashSet<Appello> appelli) {
 		this.implementor.inizialize(this, appelli);
 	}
 	

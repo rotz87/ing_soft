@@ -16,7 +16,9 @@ package domain.model;
 import org.hibernate.Criteria;
 import org.orm.PersistentException;
 import org.orm.PersistentSession;
-import org.orm.criteria.*;
+import org.orm.criteria.AbstractORMCriteria;
+import org.orm.criteria.AssociationExpression;
+import org.orm.criteria.IntegerExpression;
 
 public class UscitaAnticipataCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
@@ -28,7 +30,7 @@ public class UscitaAnticipataCriteria extends AbstractORMCriteria {
 	public UscitaAnticipataCriteria(Criteria criteria) {
 		super(criteria);
 		ID = new IntegerExpression("ID", this);
-		appelloId = new IntegerExpression("appello.idAppello", this);
+		appelloId = new IntegerExpression("appello.ID", this);
 		appello = new AssociationExpression("appello", this);
 		permessoId = new IntegerExpression("permesso.ID", this);
 		permesso = new AssociationExpression("permesso", this);
@@ -39,7 +41,7 @@ public class UscitaAnticipataCriteria extends AbstractORMCriteria {
 	}
 	
 	public UscitaAnticipataCriteria() throws PersistentException {
-		this(domain.model.RegistroScolasticoPersistentManager.instance().getSession());
+		this(domain.model.RSPersistentManager.instance().getSession());
 	}
 	
 	public AppelloCriteria createAppelloCriteria() {

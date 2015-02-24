@@ -1,36 +1,34 @@
 package test;
 
-import java.util.List;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.Restrictions;
-import org.joda.time.LocalDate;
 import org.orm.PersistentException;
+import org.orm.PersistentTransaction;
 
-import service.DBFake;
-import service.DBService;
 import service.Stampa;
-import domain.*;
 import domain.controller.FaiAppelloController;
-import domain.model.Appello;
 import domain.model.Classe;
 import domain.model.ClasseCriteria;
 import domain.model.Docente;
 import domain.model.LibrettoAssenze;
 import domain.model.LibrettoAssenzeCriteria;
+import domain.model.RSPersistentManager;
 import domain.model.RegistroAssenze;
 import domain.model.RegistroAssenzeCriteria;
 import domain.model.Studente;
 import domain.model.StudenteCriteria;
 
 public class TestPostBridge {
-	public static void mainn(String[] args){
+	public static void main(String[] args){
+		main6(null);
+		main3(null);
+		main6(null);
+	}
+	public static void mai0(String[] args){
 		
 		Classe classeCorrente = new Classe("1A");
 //		LinkedList<Classe> classi = new LinkedList<Classe>();
@@ -51,9 +49,9 @@ public class TestPostBridge {
 		LibrettoAssenze librettoMarinoEsposito =  new LibrettoAssenze(marinoEsposito);
 		
 		Map<Integer, LibrettoAssenze> librettiPrimaA = new HashMap<Integer, LibrettoAssenze>(); 
-		librettiPrimaA.put(marioRomano.getId(), librettoMarioRomano);
-		librettiPrimaA.put(pieroRusso.getId(), librettoPieroRusso);
-		librettiPrimaA.put(marinoEsposito.getId(), librettoMarinoEsposito);
+		librettiPrimaA.put(marioRomano.getID(), librettoMarioRomano);
+		librettiPrimaA.put(pieroRusso.getID(), librettoPieroRusso);
+		librettiPrimaA.put(marinoEsposito.getID(), librettoMarinoEsposito);
 		
 		regAss.setLibrettiAssenze(librettiPrimaA);
 		
@@ -67,7 +65,9 @@ public class TestPostBridge {
 //		classeCorrente.setStudenti(listaStudentiPrimaA);
 		
 		
-		Studente[] studenti = {pieroRusso};
+//		Studente[] studenti = {pieroRusso};
+		Collection<Studente> studenti = new LinkedList<Studente>();
+		studenti.add(pieroRusso);
 		
 //		Stempa.stampaln("docente corrente: " + docenteCorrente.getCognome());
 //		Stempa.stampaln("classe corrente: " + classeCorrente.getNome());
@@ -92,13 +92,23 @@ public class TestPostBridge {
 		try {
 			studC = new StudenteCriteria();
 			
-			studC.id.eq(idStud);
+			studC.ID.eq(idStud);
 			Studente stud = studC.uniqueStudente();
 			
 			Stampa.stampaln("stud: " +stud.getNome());
 			stud.setNome("Pippo");
 			
-			DBService.getInstance().save(stud);
+			PersistentTransaction t =RSPersistentManager.instance().getSession().beginTransaction();
+			try {
+				RSPersistentManager.instance().getSession().update(stud);
+				t.commit();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				t.rollback();
+				e.printStackTrace();
+			}
+			
+//			DBService.getInstance().save(stud);
 		} catch (PersistentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -114,13 +124,23 @@ public class TestPostBridge {
 //			RegistroAssenze regAss = regAssC.uniqueRegistroAssenze();
 			
 			ClasseCriteria classeC = new ClasseCriteria();
-			classeC.idClasse.eq(idClasse);
+			classeC.ID.eq(idClasse);
 			Classe classeCorrente = classeC.uniqueClasse();
 			
 			RegistroAssenze regAss = classeCorrente.getRegistroAssenze();
 			
 			regAss.avviaAppello();
-			DBService.getInstance().save(regAss.getAppelloOdierno());
+			
+			PersistentTransaction t =RSPersistentManager.instance().getSession().beginTransaction();
+			try {
+				RSPersistentManager.instance().getSession().save(regAss.getAppelloOdierno());
+				t.commit();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				t.rollback();
+				e.printStackTrace();
+			}
+			
 			
 		} catch (PersistentException e) {
 			// TODO Auto-generated catch block
@@ -130,12 +150,13 @@ public class TestPostBridge {
 		
 	}
 	
-	public static void main(String[] args){
+	public static void main3(String[] args){
 		int idClasse = 1;
 		int idDocente = 1;
 		Integer[] idStudenti = {2,5,6};
 		FaiAppelloController controller = new FaiAppelloController();
 		try {
+
 			try{
 				controller.avviaAppello(idClasse, idDocente);
 			}catch(IllegalStateException ise){
@@ -143,6 +164,7 @@ public class TestPostBridge {
 			}
 //			controller.avviaAppello(idClasse, idDocente);
 			controller.registraAssenze(idStudenti, idClasse, idDocente);
+
 			
 		} catch (PersistentException e) {
 			// TODO Auto-generated catch block
@@ -164,7 +186,7 @@ public class TestPostBridge {
 //			studC.add(Restrictions.eq("id", 9));
 			
 //			Criterion id1 = Restrictions.eq("id", 1);
-			studC.id.in(studentiId);
+			studC.ID.in(studentiId);
 			List<Studente> studenti = studC.list();
 			
 			for(Studente s :studenti){
@@ -194,15 +216,21 @@ public class TestPostBridge {
 			RegistroAssenze registroAssenze;
 			registroAssenze = regAssC.uniqueRegistroAssenze();
 
-			if(registroAssenze.getAppelloOdierno() == null){
-				registroAssenze.avviaAppello();
-				DBService.getInstance().update(registroAssenze);
-			}
 			
-			
-			libAss.segnaAssenza(registroAssenze.getAppelloOdierno());
-			DBService.getInstance().update(libAss);
-			
+			PersistentTransaction t =RSPersistentManager.instance().getSession().beginTransaction();
+			try {
+				if(registroAssenze.getAppelloOdierno() == null){
+					registroAssenze.avviaAppello();
+					RSPersistentManager.instance().getSession().update(registroAssenze);
+				}
+				libAss.segnaAssenza(registroAssenze.getAppelloOdierno());
+				RSPersistentManager.instance().getSession().update(libAss);
+				t.commit();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				t.rollback();
+				e.printStackTrace();
+			}			
 			
 		} catch (PersistentException e) {
 			// TODO Auto-generated catch block
@@ -210,13 +238,18 @@ public class TestPostBridge {
 		}
 		
 	}
-	public static void main6(String[] args) throws PersistentException{
-		RegistroAssenzeCriteria regAssC = new RegistroAssenzeCriteria();
-		regAssC.ID.eq(1);
-		
-		RegistroAssenze registroAssenze;
-		registroAssenze = regAssC.uniqueRegistroAssenze();
-		TestFaiLAppelloController1.stampaLibretti(registroAssenze);
+	public static void main6(String[] args) {
+		try{
+			RegistroAssenzeCriteria regAssC = new RegistroAssenzeCriteria();
+			regAssC.ID.eq(1);
+			
+			RegistroAssenze registroAssenze;
+			registroAssenze = regAssC.uniqueRegistroAssenze();
+			TestFaiLAppelloController1.stampaLibretti(registroAssenze);
+		}catch(PersistentException e){
+			e.printStackTrace();
+		}
 	}
+	
 
 }

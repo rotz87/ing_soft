@@ -14,19 +14,23 @@
 package domain.model;
 
 import java.util.List;
+
 import org.hibernate.criterion.DetachedCriteria;
 import org.orm.PersistentSession;
-import org.orm.criteria.*;
+import org.orm.criteria.AbstractORMDetachedCriteria;
+import org.orm.criteria.CollectionExpression;
+import org.orm.criteria.IntegerExpression;
+import org.orm.criteria.StringExpression;
 
 public class DocenteDetachedCriteria extends AbstractORMDetachedCriteria {
-	public final IntegerExpression idDocente;
+	public final IntegerExpression ID;
 	public final StringExpression nome;
 	public final StringExpression cognome;
 	public final CollectionExpression classi;
 	
 	public DocenteDetachedCriteria() {
 		super(domain.model.Docente.class, domain.model.DocenteCriteria.class);
-		idDocente = new IntegerExpression("idDocente", this.getDetachedCriteria());
+		ID = new IntegerExpression("ID", this.getDetachedCriteria());
 		nome = new StringExpression("nome", this.getDetachedCriteria());
 		cognome = new StringExpression("cognome", this.getDetachedCriteria());
 		classi = new CollectionExpression("classi", this.getDetachedCriteria());
@@ -34,7 +38,7 @@ public class DocenteDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public DocenteDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, domain.model.DocenteCriteria.class);
-		idDocente = new IntegerExpression("idDocente", this.getDetachedCriteria());
+		ID = new IntegerExpression("ID", this.getDetachedCriteria());
 		nome = new StringExpression("nome", this.getDetachedCriteria());
 		cognome = new StringExpression("cognome", this.getDetachedCriteria());
 		classi = new CollectionExpression("classi", this.getDetachedCriteria());

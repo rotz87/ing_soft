@@ -11,7 +11,7 @@ License Type: Academic
 			Per il momento non verr&#195;&#160; implementata in questo UC.
 			@author marco
 		</meta>
-		<id name="idClasse" column="IdClasse" type="integer" unsaved-value="0">
+		<id name="ID" column="ID" type="integer" unsaved-value="0">
 			<generator class="native">
 			</generator>
 		</id>

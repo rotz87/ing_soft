@@ -17,7 +17,7 @@ public class Appello {
 	public Appello() {
 	}
 	
-	private int idAppello;
+	private int ID;
 	
 	private java.util.Date data;
 	
@@ -31,16 +31,16 @@ public class Appello {
 		return data;
 	}
 	
-	private void setIdAppello(int value) {
-		this.idAppello = value;
+	private void setID(int value) {
+		this.ID = value;
 	}
 	
-	public int getIdAppello() {
-		return idAppello;
+	public int getID() {
+		return ID;
 	}
 	
 	public int getORMID() {
-		return getIdAppello();
+		return getID();
 	}
 	
 	public void setAssenzePrese(boolean value) {
@@ -60,13 +60,8 @@ public class Appello {
 		this.implementor.inizialize(this, data);
 	}
 	
-	public void setIdAppello(long idAppello) {
-		//TODO: Implement Method
-		throw new UnsupportedOperationException();
-	}
-	
 	public String toString() {
-		return String.valueOf(getIdAppello());
+		return String.valueOf(getID());
 	}
 	
 }

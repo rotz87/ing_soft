@@ -13,7 +13,7 @@ public class StudenteAppelloRS extends ResourceSupport{
 	private String cognome;
 	public StudenteAppelloRS(Studente studente) {
 		
-		this.idStudente = studente.getId();
+		this.idStudente = studente.getID();
 		this.nome = studente.getNome();
 		this.cognome = studente.getCognome();
 		

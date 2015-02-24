@@ -14,9 +14,12 @@
 package domain.model;
 
 import java.util.List;
+
 import org.hibernate.criterion.DetachedCriteria;
 import org.orm.PersistentSession;
-import org.orm.criteria.*;
+import org.orm.criteria.AbstractORMDetachedCriteria;
+import org.orm.criteria.AssociationExpression;
+import org.orm.criteria.IntegerExpression;
 
 public class UscitaAnticipataDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression ID;
@@ -28,7 +31,7 @@ public class UscitaAnticipataDetachedCriteria extends AbstractORMDetachedCriteri
 	public UscitaAnticipataDetachedCriteria() {
 		super(domain.model.UscitaAnticipata.class, domain.model.UscitaAnticipataCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		appelloId = new IntegerExpression("appello.idAppello", this.getDetachedCriteria());
+		appelloId = new IntegerExpression("appello.ID", this.getDetachedCriteria());
 		appello = new AssociationExpression("appello", this.getDetachedCriteria());
 		permessoId = new IntegerExpression("permesso.ID", this.getDetachedCriteria());
 		permesso = new AssociationExpression("permesso", this.getDetachedCriteria());
@@ -37,7 +40,7 @@ public class UscitaAnticipataDetachedCriteria extends AbstractORMDetachedCriteri
 	public UscitaAnticipataDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, domain.model.UscitaAnticipataCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		appelloId = new IntegerExpression("appello.idAppello", this.getDetachedCriteria());
+		appelloId = new IntegerExpression("appello.ID", this.getDetachedCriteria());
 		appello = new AssociationExpression("appello", this.getDetachedCriteria());
 		permessoId = new IntegerExpression("permesso.ID", this.getDetachedCriteria());
 		permesso = new AssociationExpression("permesso", this.getDetachedCriteria());

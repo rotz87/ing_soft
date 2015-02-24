@@ -16,7 +16,10 @@ package domain.model;
 import org.hibernate.Criteria;
 import org.orm.PersistentException;
 import org.orm.PersistentSession;
-import org.orm.criteria.*;
+import org.orm.criteria.AbstractORMCriteria;
+import org.orm.criteria.AssociationExpression;
+import org.orm.criteria.CollectionExpression;
+import org.orm.criteria.IntegerExpression;
 
 public class LibrettoAssenzeCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
@@ -30,7 +33,7 @@ public class LibrettoAssenzeCriteria extends AbstractORMCriteria {
 	public LibrettoAssenzeCriteria(Criteria criteria) {
 		super(criteria);
 		ID = new IntegerExpression("ID", this);
-		studenteId = new IntegerExpression("studente.id", this);
+		studenteId = new IntegerExpression("studente.ID", this);
 		studente = new AssociationExpression("studente", this);
 		giustificate = new CollectionExpression("giustificate", this);
 		nonGiustificate = new CollectionExpression("nonGiustificate", this);
@@ -43,7 +46,7 @@ public class LibrettoAssenzeCriteria extends AbstractORMCriteria {
 	}
 	
 	public LibrettoAssenzeCriteria() throws PersistentException {
-		this(domain.model.RegistroScolasticoPersistentManager.instance().getSession());
+		this(domain.model.RSPersistentManager.instance().getSession());
 	}
 	
 	public StudenteCriteria createStudenteCriteria() {

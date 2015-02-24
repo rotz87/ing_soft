@@ -31,6 +31,7 @@ License Type: Academic
 		<mapping resource="ormmapping/domain/model/Giorno.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/GiornoSettimanale.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/Giustificazione.hbm.xml" />
+		<mapping resource="ormmapping/domain/model/Indirizzo.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/LibrettoAssenze.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/PermessoEntrata.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/PermessoUscita.hbm.xml" />

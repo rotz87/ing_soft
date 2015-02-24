@@ -19,7 +19,7 @@ public class Calendario {
 	
 	private int ID;
 	
-	private java.util.Set<domain.model.Giorno> giorniFestivi = new java.util.HashSet<domain.model.Giorno>();
+	private java.util.Set<domain.model.Giorno> giorniFestivi = new java.util.LinkedHashSet<domain.model.Giorno>();
 	
 	private java.util.List<domain.model.GiornoSettimanale> giorniSettimanaliFestivi = new java.util.LinkedList<domain.model.GiornoSettimanale>();
 	

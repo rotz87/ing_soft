@@ -5,14 +5,14 @@ import java.util.Map.Entry;
 
 import org.orm.PersistentException;
 
-import service.DBFake;
 import service.Stampa;
 import domain.controller.FaiAppelloController;
 import domain.model.Appello;
 import domain.model.Assenza;
 import domain.model.LibrettoAssenze;
+import domain.model.RSPersistentManager;
 import domain.model.RegistroAssenze;
-import domain.model.Studente;
+import domain.model.RegistroAssenzeCriteria;
 
 public class TestFaiLAppelloController1 {
 	public static void main(String[] args) throws PersistentException{
@@ -24,7 +24,9 @@ public class TestFaiLAppelloController1 {
 		//TEST DEL METODO
 //		Stampa.stampaln("studenti della 1A : " + primaA.getStudenti() );
 		
-		stampaLibretti(DBFake.getInstance().getClasseById(idClasseProva).getRegistroAssenze());
+//		stampaLibretti(DBFake.getInstance().getClasseById(idClasseProva).getRegistroAssenze());
+		stampaLibretti(getRegistroAssenzeByIdClasse(idClasseProva));
+		
 		
 		try{
 
@@ -54,7 +56,8 @@ public class TestFaiLAppelloController1 {
 		
 		
 		//Stampa dei libretti
-		stampaLibretti(DBFake.getInstance().getClasseById(idClasseProva).getRegistroAssenze());
+//		stampaLibretti(DBFake.getInstance().getClasseById(idClasseProva).getRegistroAssenze());
+		stampaLibretti(getRegistroAssenzeByIdClasse(idClasseProva));
 		
 
 	}
@@ -87,5 +90,28 @@ public class TestFaiLAppelloController1 {
 		Stampa.stampaln("________________________________________FINE");
 		Stampa.stampaln();
 		
+	}
+	
+	private static RegistroAssenze getRegistroAssenzeByIdClasse(int idClasse){
+		RegistroAssenze ret;
+		
+		ret = null;
+		try {
+			try {
+				RegistroAssenzeCriteria registroAssenzeCriteria;
+				
+				domain.model.ClasseCriteria ldomainmodelClasseCriteria = new domain.model.ClasseCriteria();
+				ldomainmodelClasseCriteria.ID.eq(idClasse);
+				ret = ldomainmodelClasseCriteria.uniqueClasse().getRegistroAssenze();
+			}
+			finally {
+				RSPersistentManager.instance().disposePersistentManager();
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ret;
 	}
 }

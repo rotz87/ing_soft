@@ -1,7 +1,6 @@
 package domain.implementor;
 
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.Collection;
 
 import org.joda.time.LocalDate;
 
@@ -34,7 +33,7 @@ public class RegistroAssenzeImp {
 	 * 
 	 * @param idStudenti
 	 */
-	public void registraAssenze(RegistroAssenze registroAssenze, Studente[] studenti) {
+	public void registraAssenze(RegistroAssenze registroAssenze, Collection<Studente> studenti) {
 		Stampa.stampaln("Registro: "+registroAssenze);
 		Stampa.stampaln("Studenti: "+studenti);
 		Stampa.stampaln("Libretti: "+registroAssenze.getLibrettiAssenze());
@@ -42,7 +41,7 @@ public class RegistroAssenzeImp {
 		Appello appelloCorrente = getAppelloOdierno(registroAssenze);
 		if (!(appelloCorrente.getAssenzePrese())){
 			for (Studente studente : studenti){
-					registroAssenze.getLibrettiAssenze().get(studente.getId()).segnaAssenza(appelloCorrente);
+					registroAssenze.getLibrettiAssenze().get(studente.getID()).segnaAssenza(appelloCorrente);
 					
 			}
 			appelloCorrente.setAssenzePrese(true);
@@ -124,7 +123,7 @@ public class RegistroAssenzeImp {
 	}
 	
 	public LibrettoAssenze getLibretto(RegistroAssenze registroAssenze, Studente studente){
-		return registroAssenze.getLibrettiAssenze().get(studente);
+		return registroAssenze.getLibrettiAssenze().get(studente.getID());
 	}
 
 }

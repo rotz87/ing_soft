@@ -4,74 +4,79 @@
  */
 package ormsamples;
 
-import org.orm.*;
+import org.orm.PersistentException;
+import org.orm.PersistentTransaction;
 public class RetrieveAndUpdateRegistroScolasticoData {
 	public void retrieveAndUpdateTestData() throws PersistentException {
-		PersistentTransaction t = domain.model.RegistroScolasticoPersistentManager.instance().getSession().beginTransaction();
+		PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
 		try {
-			domain.model.Studente ldomainmodelStudente= (domain.model.Studente)domain.model.RegistroScolasticoPersistentManager.instance().getSession().createQuery("From domain.model.Studente").setMaxResults(1).uniqueResult();
+			domain.model.Studente ldomainmodelStudente= (domain.model.Studente)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Studente").setMaxResults(1).uniqueResult();
 			// Update the properties of the persistent object
-			domain.model.RegistroScolasticoPersistentManager.instance().getSession().update(ldomainmodelStudente);
+			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelStudente);
 			
-			domain.model.Appello ldomainmodelAppello= (domain.model.Appello)domain.model.RegistroScolasticoPersistentManager.instance().getSession().createQuery("From domain.model.Appello").setMaxResults(1).uniqueResult();
+			domain.model.Appello ldomainmodelAppello= (domain.model.Appello)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Appello").setMaxResults(1).uniqueResult();
 			// Update the properties of the persistent object
-			domain.model.RegistroScolasticoPersistentManager.instance().getSession().update(ldomainmodelAppello);
+			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelAppello);
 			
-			domain.model.Assenza ldomainmodelAssenza= (domain.model.Assenza)domain.model.RegistroScolasticoPersistentManager.instance().getSession().createQuery("From domain.model.Assenza").setMaxResults(1).uniqueResult();
+			domain.model.Assenza ldomainmodelAssenza= (domain.model.Assenza)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Assenza").setMaxResults(1).uniqueResult();
 			// Update the properties of the persistent object
-			domain.model.RegistroScolasticoPersistentManager.instance().getSession().update(ldomainmodelAssenza);
+			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelAssenza);
 			
-			domain.model.Giustificazione ldomainmodelGiustificazione= (domain.model.Giustificazione)domain.model.RegistroScolasticoPersistentManager.instance().getSession().createQuery("From domain.model.Giustificazione").setMaxResults(1).uniqueResult();
+			domain.model.Giustificazione ldomainmodelGiustificazione= (domain.model.Giustificazione)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Giustificazione").setMaxResults(1).uniqueResult();
 			// Update the properties of the persistent object
-			domain.model.RegistroScolasticoPersistentManager.instance().getSession().update(ldomainmodelGiustificazione);
+			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelGiustificazione);
 			
-			domain.model.Ritardo ldomainmodelRitardo= (domain.model.Ritardo)domain.model.RegistroScolasticoPersistentManager.instance().getSession().createQuery("From domain.model.Ritardo").setMaxResults(1).uniqueResult();
+			domain.model.Ritardo ldomainmodelRitardo= (domain.model.Ritardo)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Ritardo").setMaxResults(1).uniqueResult();
 			// Update the properties of the persistent object
-			domain.model.RegistroScolasticoPersistentManager.instance().getSession().update(ldomainmodelRitardo);
+			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelRitardo);
 			
-			domain.model.PermessoEntrata ldomainmodelPermessoEntrata= (domain.model.PermessoEntrata)domain.model.RegistroScolasticoPersistentManager.instance().getSession().createQuery("From domain.model.PermessoEntrata").setMaxResults(1).uniqueResult();
+			domain.model.PermessoEntrata ldomainmodelPermessoEntrata= (domain.model.PermessoEntrata)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.PermessoEntrata").setMaxResults(1).uniqueResult();
 			// Update the properties of the persistent object
-			domain.model.RegistroScolasticoPersistentManager.instance().getSession().update(ldomainmodelPermessoEntrata);
+			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelPermessoEntrata);
 			
-			domain.model.UscitaAnticipata ldomainmodelUscitaAnticipata= (domain.model.UscitaAnticipata)domain.model.RegistroScolasticoPersistentManager.instance().getSession().createQuery("From domain.model.UscitaAnticipata").setMaxResults(1).uniqueResult();
+			domain.model.UscitaAnticipata ldomainmodelUscitaAnticipata= (domain.model.UscitaAnticipata)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.UscitaAnticipata").setMaxResults(1).uniqueResult();
 			// Update the properties of the persistent object
-			domain.model.RegistroScolasticoPersistentManager.instance().getSession().update(ldomainmodelUscitaAnticipata);
+			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelUscitaAnticipata);
 			
-			domain.model.PermessoUscita ldomainmodelPermessoUscita= (domain.model.PermessoUscita)domain.model.RegistroScolasticoPersistentManager.instance().getSession().createQuery("From domain.model.PermessoUscita").setMaxResults(1).uniqueResult();
+			domain.model.PermessoUscita ldomainmodelPermessoUscita= (domain.model.PermessoUscita)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.PermessoUscita").setMaxResults(1).uniqueResult();
 			// Update the properties of the persistent object
-			domain.model.RegistroScolasticoPersistentManager.instance().getSession().update(ldomainmodelPermessoUscita);
+			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelPermessoUscita);
 			
-			domain.model.LibrettoAssenze ldomainmodelLibrettoAssenze= (domain.model.LibrettoAssenze)domain.model.RegistroScolasticoPersistentManager.instance().getSession().createQuery("From domain.model.LibrettoAssenze").setMaxResults(1).uniqueResult();
+			domain.model.LibrettoAssenze ldomainmodelLibrettoAssenze= (domain.model.LibrettoAssenze)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.LibrettoAssenze").setMaxResults(1).uniqueResult();
 			// Update the properties of the persistent object
-			domain.model.RegistroScolasticoPersistentManager.instance().getSession().update(ldomainmodelLibrettoAssenze);
+			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelLibrettoAssenze);
 			
-			domain.model.RegistroAssenze ldomainmodelRegistroAssenze= (domain.model.RegistroAssenze)domain.model.RegistroScolasticoPersistentManager.instance().getSession().createQuery("From domain.model.RegistroAssenze").setMaxResults(1).uniqueResult();
+			domain.model.Indirizzo ldomainmodelIndirizzo= (domain.model.Indirizzo)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Indirizzo").setMaxResults(1).uniqueResult();
 			// Update the properties of the persistent object
-			domain.model.RegistroScolasticoPersistentManager.instance().getSession().update(ldomainmodelRegistroAssenze);
+			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelIndirizzo);
 			
-			domain.model.Scuola ldomainmodelScuola= (domain.model.Scuola)domain.model.RegistroScolasticoPersistentManager.instance().getSession().createQuery("From domain.model.Scuola").setMaxResults(1).uniqueResult();
+			domain.model.RegistroAssenze ldomainmodelRegistroAssenze= (domain.model.RegistroAssenze)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.RegistroAssenze").setMaxResults(1).uniqueResult();
 			// Update the properties of the persistent object
-			domain.model.RegistroScolasticoPersistentManager.instance().getSession().update(ldomainmodelScuola);
+			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelRegistroAssenze);
 			
-			domain.model.Classe ldomainmodelClasse= (domain.model.Classe)domain.model.RegistroScolasticoPersistentManager.instance().getSession().createQuery("From domain.model.Classe").setMaxResults(1).uniqueResult();
+			domain.model.Scuola ldomainmodelScuola= (domain.model.Scuola)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Scuola").setMaxResults(1).uniqueResult();
 			// Update the properties of the persistent object
-			domain.model.RegistroScolasticoPersistentManager.instance().getSession().update(ldomainmodelClasse);
+			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelScuola);
 			
-			domain.model.Docente ldomainmodelDocente= (domain.model.Docente)domain.model.RegistroScolasticoPersistentManager.instance().getSession().createQuery("From domain.model.Docente").setMaxResults(1).uniqueResult();
+			domain.model.Classe ldomainmodelClasse= (domain.model.Classe)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Classe").setMaxResults(1).uniqueResult();
 			// Update the properties of the persistent object
-			domain.model.RegistroScolasticoPersistentManager.instance().getSession().update(ldomainmodelDocente);
+			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelClasse);
 			
-			domain.model.Calendario ldomainmodelCalendario= (domain.model.Calendario)domain.model.RegistroScolasticoPersistentManager.instance().getSession().createQuery("From domain.model.Calendario").setMaxResults(1).uniqueResult();
+			domain.model.Docente ldomainmodelDocente= (domain.model.Docente)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Docente").setMaxResults(1).uniqueResult();
 			// Update the properties of the persistent object
-			domain.model.RegistroScolasticoPersistentManager.instance().getSession().update(ldomainmodelCalendario);
+			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelDocente);
 			
-			domain.model.Giorno ldomainmodelGiorno= (domain.model.Giorno)domain.model.RegistroScolasticoPersistentManager.instance().getSession().createQuery("From domain.model.Giorno").setMaxResults(1).uniqueResult();
+			domain.model.Calendario ldomainmodelCalendario= (domain.model.Calendario)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Calendario").setMaxResults(1).uniqueResult();
 			// Update the properties of the persistent object
-			domain.model.RegistroScolasticoPersistentManager.instance().getSession().update(ldomainmodelGiorno);
+			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelCalendario);
 			
-			domain.model.GiornoSettimanale ldomainmodelGiornoSettimanale= (domain.model.GiornoSettimanale)domain.model.RegistroScolasticoPersistentManager.instance().getSession().createQuery("From domain.model.GiornoSettimanale").setMaxResults(1).uniqueResult();
+			domain.model.Giorno ldomainmodelGiorno= (domain.model.Giorno)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Giorno").setMaxResults(1).uniqueResult();
 			// Update the properties of the persistent object
-			domain.model.RegistroScolasticoPersistentManager.instance().getSession().update(ldomainmodelGiornoSettimanale);
+			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelGiorno);
+			
+			domain.model.GiornoSettimanale ldomainmodelGiornoSettimanale= (domain.model.GiornoSettimanale)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.GiornoSettimanale").setMaxResults(1).uniqueResult();
+			// Update the properties of the persistent object
+			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelGiornoSettimanale);
 			
 			t.commit();
 		}
@@ -84,13 +89,13 @@ public class RetrieveAndUpdateRegistroScolasticoData {
 		System.out.println("Retrieving Studente by StudenteCriteria");
 		domain.model.StudenteCriteria ldomainmodelStudenteCriteria = new domain.model.StudenteCriteria();
 		// Please uncomment the follow line and fill in parameter(s)
-		//ldomainmodelStudenteCriteria.id.eq();
+		//ldomainmodelStudenteCriteria.ID.eq();
 		System.out.println(ldomainmodelStudenteCriteria.uniqueStudente());
 		
 		System.out.println("Retrieving Appello by AppelloCriteria");
 		domain.model.AppelloCriteria ldomainmodelAppelloCriteria = new domain.model.AppelloCriteria();
 		// Please uncomment the follow line and fill in parameter(s)
-		//ldomainmodelAppelloCriteria.idAppello.eq();
+		//ldomainmodelAppelloCriteria.ID.eq();
 		System.out.println(ldomainmodelAppelloCriteria.uniqueAppello());
 		
 		System.out.println("Retrieving Assenza by AssenzaCriteria");
@@ -135,6 +140,12 @@ public class RetrieveAndUpdateRegistroScolasticoData {
 		//ldomainmodelLibrettoAssenzeCriteria.ID.eq();
 		System.out.println(ldomainmodelLibrettoAssenzeCriteria.uniqueLibrettoAssenze());
 		
+		System.out.println("Retrieving Indirizzo by IndirizzoCriteria");
+		domain.model.IndirizzoCriteria ldomainmodelIndirizzoCriteria = new domain.model.IndirizzoCriteria();
+		// Please uncomment the follow line and fill in parameter(s)
+		//ldomainmodelIndirizzoCriteria.ID.eq();
+		System.out.println(ldomainmodelIndirizzoCriteria.uniqueIndirizzo());
+		
 		System.out.println("Retrieving RegistroAssenze by RegistroAssenzeCriteria");
 		domain.model.RegistroAssenzeCriteria ldomainmodelRegistroAssenzeCriteria = new domain.model.RegistroAssenzeCriteria();
 		// Please uncomment the follow line and fill in parameter(s)
@@ -150,13 +161,13 @@ public class RetrieveAndUpdateRegistroScolasticoData {
 		System.out.println("Retrieving Classe by ClasseCriteria");
 		domain.model.ClasseCriteria ldomainmodelClasseCriteria = new domain.model.ClasseCriteria();
 		// Please uncomment the follow line and fill in parameter(s)
-		//ldomainmodelClasseCriteria.idClasse.eq();
+		//ldomainmodelClasseCriteria.ID.eq();
 		System.out.println(ldomainmodelClasseCriteria.uniqueClasse());
 		
 		System.out.println("Retrieving Docente by DocenteCriteria");
 		domain.model.DocenteCriteria ldomainmodelDocenteCriteria = new domain.model.DocenteCriteria();
 		// Please uncomment the follow line and fill in parameter(s)
-		//ldomainmodelDocenteCriteria.idDocente.eq();
+		//ldomainmodelDocenteCriteria.ID.eq();
 		System.out.println(ldomainmodelDocenteCriteria.uniqueDocente());
 		
 		System.out.println("Retrieving Calendario by CalendarioCriteria");
@@ -188,7 +199,7 @@ public class RetrieveAndUpdateRegistroScolasticoData {
 				//retrieveAndUpdateRegistroScolasticoData.retrieveByCriteria();
 			}
 			finally {
-				domain.model.RegistroScolasticoPersistentManager.instance().disposePersistentManager();
+				domain.model.RSPersistentManager.instance().disposePersistentManager();
 			}
 		}
 		catch (Exception e) {

@@ -16,16 +16,19 @@ package domain.model;
 import org.hibernate.Criteria;
 import org.orm.PersistentException;
 import org.orm.PersistentSession;
-import org.orm.criteria.*;
+import org.orm.criteria.AbstractORMCriteria;
+import org.orm.criteria.BooleanExpression;
+import org.orm.criteria.DateExpression;
+import org.orm.criteria.IntegerExpression;
 
 public class AppelloCriteria extends AbstractORMCriteria {
-	public final IntegerExpression idAppello;
+	public final IntegerExpression ID;
 	public final DateExpression data;
 	public final BooleanExpression assenzePrese;
 	
 	public AppelloCriteria(Criteria criteria) {
 		super(criteria);
-		idAppello = new IntegerExpression("idAppello", this);
+		ID = new IntegerExpression("ID", this);
 		data = new DateExpression("data", this);
 		assenzePrese = new BooleanExpression("assenzePrese", this);
 	}
@@ -35,7 +38,7 @@ public class AppelloCriteria extends AbstractORMCriteria {
 	}
 	
 	public AppelloCriteria() throws PersistentException {
-		this(domain.model.RegistroScolasticoPersistentManager.instance().getSession());
+		this(domain.model.RSPersistentManager.instance().getSession());
 	}
 	
 	public Appello uniqueAppello() {

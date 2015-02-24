@@ -1,6 +1,5 @@
 package domain.implementor;
 
-import java.util.LinkedList;
 import java.util.ListIterator;
 
 import service.Stampa;

@@ -3,8 +3,8 @@ package service;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -347,16 +347,16 @@ public class DBFake {
 		LocalDate data17_12_14 = new LocalDate(2014,12,17);
 		
 		//creazione di lista di appelli da assegnare all'assenza
-		LinkedList<Appello> appelliAssenzeMarioRomano = new LinkedList<Appello>();
-		LinkedList<Appello> appelliAssenzePieroRusso = new LinkedList<Appello>();
-		LinkedList<Appello> appelliAssenzeIvoMarini = new LinkedList<Appello>();
-		LinkedList<Appello> appelliAssenzeMarinoEsposito = new LinkedList<Appello>();
-		LinkedList<Appello> appelliAssenzeDavideDiSalvo = new LinkedList<Appello>();
-		LinkedList<Appello> AppelliAssenzeTestFineMese = new LinkedList<Appello>();
-		LinkedList<Appello> appelliAssenzeIvoMarini2 = new LinkedList<Appello>();
-		LinkedList<Appello> appelliAssenzeIvoMarini3 = new LinkedList<Appello>();
-		LinkedList<Appello> appelliAssenzeMariannaDonati = new LinkedList<Appello>();
-		LinkedList<Appello> appelliAssenzeLorenzoNegri = new LinkedList<Appello>();
+		Collection<Appello> appelliAssenzeMarioRomano = new LinkedList<Appello>();
+		Collection<Appello> appelliAssenzePieroRusso = new LinkedList<Appello>();
+		Collection<Appello> appelliAssenzeIvoMarini = new LinkedList<Appello>();
+		Collection<Appello> appelliAssenzeMarinoEsposito = new LinkedList<Appello>();
+		Collection<Appello> appelliAssenzeDavideDiSalvo = new LinkedList<Appello>();
+		Collection<Appello> AppelliAssenzeTestFineMese = new LinkedList<Appello>();
+		Collection<Appello> appelliAssenzeIvoMarini2 = new LinkedList<Appello>();
+		Collection<Appello> appelliAssenzeIvoMarini3 = new LinkedList<Appello>();
+		Collection<Appello> appelliAssenzeMariannaDonati = new LinkedList<Appello>();
+		Collection<Appello> appelliAssenzeLorenzoNegri = new LinkedList<Appello>();
 		
 		
 		//creazione di appelli
@@ -390,17 +390,17 @@ public class DBFake {
 
 		
 //		regAssPrimaA.getAppelli().put(appello8_12_14.getData(), appello8_12_14);
-		regAssPrimaA.getAppelliRegistro().put((new LocalDate(appello_1A_10_12_14.getData()).toDate().hashCode()), appello_1A_10_12_14);
-		regAssPrimaA.getAppelliRegistro().put((new LocalDate(appello_1A_11_12_14.getData()).toDate().hashCode()), appello_1A_11_12_14);
-		regAssPrimaA.getAppelliRegistro().put((new LocalDate(appello_1A_12_12_14.getData())).toDate().hashCode(), appello_1A_12_12_14);
-		regAssPrimaA.getAppelliRegistro().put((new LocalDate(appello_1A_13_12_14.getData())).toDate().hashCode(), appello_1A_13_12_14);
+		regAssPrimaA.getAppelli().put((new LocalDate(appello_1A_10_12_14.getData()).toDate().hashCode()), appello_1A_10_12_14);
+		regAssPrimaA.getAppelli().put((new LocalDate(appello_1A_11_12_14.getData()).toDate().hashCode()), appello_1A_11_12_14);
+		regAssPrimaA.getAppelli().put((new LocalDate(appello_1A_12_12_14.getData())).toDate().hashCode(), appello_1A_12_12_14);
+		regAssPrimaA.getAppelli().put((new LocalDate(appello_1A_13_12_14.getData())).toDate().hashCode(), appello_1A_13_12_14);
 //		regAssPrimaA.getAppelli().put(appello14_12_14.getData(), appello14_12_14);
-		regAssPrimaA.getAppelliRegistro().put((new LocalDate(appello_1A_15_12_14.getData())).toDate().hashCode(), appello_1A_15_12_14);
-		regAssPrimaA.getAppelliRegistro().put((new LocalDate(appello_1A_16_12_14.getData())).toDate().hashCode(), appello_1A_16_12_14);
+		regAssPrimaA.getAppelli().put((new LocalDate(appello_1A_15_12_14.getData())).toDate().hashCode(), appello_1A_15_12_14);
+		regAssPrimaA.getAppelli().put((new LocalDate(appello_1A_16_12_14.getData())).toDate().hashCode(), appello_1A_16_12_14);
 		
-		regAssSecondaA.getAppelliRegistro().put((new LocalDate(appello_2A_16_12_14.getData())).toDate().hashCode(), appello_2A_16_12_14);
-		regAssPrimaB.getAppelliRegistro().put((new LocalDate(appello_1B_16_12_14.getData())).toDate().hashCode(), appello_1B_16_12_14);
-		regAssSecondaB.getAppelliRegistro().put((new LocalDate(appello_2B_16_12_14.getData())).toDate().hashCode(), appello_2B_16_12_14);
+		regAssSecondaA.getAppelli().put((new LocalDate(appello_2A_16_12_14.getData())).toDate().hashCode(), appello_2A_16_12_14);
+		regAssPrimaB.getAppelli().put((new LocalDate(appello_1B_16_12_14.getData())).toDate().hashCode(), appello_1B_16_12_14);
+		regAssSecondaB.getAppelli().put((new LocalDate(appello_2B_16_12_14.getData())).toDate().hashCode(), appello_2B_16_12_14);
 		
 
 		
@@ -433,16 +433,17 @@ public class DBFake {
 		
 		
 		//assegnazione delle liste di appelli alle assenze
-		Assenza assM1 = new Assenza(appelliAssenzeMarioRomano);
-		Assenza assP1 = new Assenza(appelliAssenzePieroRusso);
-		Assenza assI1 = new Assenza(appelliAssenzeIvoMarini);
-		Assenza assI2 = new Assenza(appelliAssenzeIvoMarini2);
-		Assenza assI3 = new Assenza(appelliAssenzeIvoMarini3);
-		Assenza assD1 = new Assenza(appelliAssenzeDavideDiSalvo);
-		Assenza assMa1 = new Assenza(appelliAssenzeMarinoEsposito);
+		// aggiunto il cast per non far dare errore sicuramente lancia una ClassCastException al run time!!
+		Assenza assM1 = new Assenza((LinkedHashSet<Appello>)appelliAssenzeMarioRomano);
+		Assenza assP1 = new Assenza((LinkedHashSet<Appello>)appelliAssenzePieroRusso);
+		Assenza assI1 = new Assenza((LinkedHashSet<Appello>)appelliAssenzeIvoMarini);
+		Assenza assI2 = new Assenza((LinkedHashSet<Appello>)appelliAssenzeIvoMarini2);
+		Assenza assI3 = new Assenza((LinkedHashSet<Appello>)appelliAssenzeIvoMarini3);
+		Assenza assD1 = new Assenza((LinkedHashSet<Appello>)appelliAssenzeDavideDiSalvo);
+		Assenza assMa1 = new Assenza((LinkedHashSet<Appello>)appelliAssenzeMarinoEsposito);
 		
-		Assenza assMariannaDonati1 =  new Assenza(appelliAssenzeMariannaDonati);
-		Assenza assLorenzoNegri1 =  new Assenza(appelliAssenzeLorenzoNegri);
+		Assenza assMariannaDonati1 =  new Assenza((LinkedHashSet<Appello>)appelliAssenzeMariannaDonati);
+		Assenza assLorenzoNegri1 =  new Assenza((LinkedHashSet<Appello>)appelliAssenzeLorenzoNegri);
 		
 		//creazione delle liste di assenze da assegnare ai libretti
 		LinkedList<Assenza> listaAssenzeMarioRomano = new  LinkedList<Assenza>();

@@ -6,8 +6,8 @@ import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 
-import presenter.controllerSpring.AppelloController;
-import presenter.controllerSpring.ClasseController;
+import presenter.AppelloPresenter;
+import presenter.ClassePresenter;
 import domain.model.Appello;
 
 /**
@@ -25,7 +25,7 @@ public class AppelloRS extends ResourceSupport{
 
 	public AppelloRS(Appello appello, int idClasse) {
 		
-		this.idAppello = appello.getIdAppello();
+		this.idAppello = appello.getID();
 		this.data = appello.getData();
 		this.assenzePrese = appello.getAssenzePrese();
 //da togliere
@@ -33,11 +33,11 @@ public class AppelloRS extends ResourceSupport{
 //				ControllerLinkBuilder.methodOn(AppelloController.class, idClasse).
 //					getStudenti(idClasse, idAppello)).withRel("studenti"));
 		this.add(ControllerLinkBuilder.linkTo(
-		ControllerLinkBuilder.methodOn(ClasseController.class, idClasse).
-			getStudenti(idClasse)).withRel("studenti"));
-		this.add(ControllerLinkBuilder.linkTo(AppelloController.class, idClasse).withRel(Link.REL_PREVIOUS));
+		ControllerLinkBuilder.methodOn(ClassePresenter.class, idClasse).
+			getStudentiAppello(idClasse)).withRel("studenti"));
+		this.add(ControllerLinkBuilder.linkTo(AppelloPresenter.class, idClasse).withRel(Link.REL_PREVIOUS));
 		this.add(ControllerLinkBuilder.linkTo(
-				ControllerLinkBuilder.methodOn(AppelloController.class, idClasse).
+				ControllerLinkBuilder.methodOn(AppelloPresenter.class, idClasse).
 					getAppello(this.idAppello, idClasse)).withSelfRel());
 		
 	}

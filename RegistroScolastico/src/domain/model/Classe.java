@@ -22,7 +22,7 @@ public class Classe {
 	public Classe() {
 	}
 	
-	private int idClasse;
+	private int ID;
 	
 	private domain.model.RegistroAssenze registroAssenze;
 	
@@ -36,16 +36,16 @@ public class Classe {
 		return nome;
 	}
 	
-	private void setIdClasse(int value) {
-		this.idClasse = value;
+	private void setID(int value) {
+		this.ID = value;
 	}
 	
-	public int getIdClasse() {
-		return idClasse;
+	public int getID() {
+		return ID;
 	}
 	
 	public int getORMID() {
-		return getIdClasse();
+		return getID();
 	}
 	
 	public void setRegistroAssenze(domain.model.RegistroAssenze value) {
@@ -66,17 +66,12 @@ public class Classe {
 		this.implementor.inizialize(this, nome, registroAssenze);
 	}
 	
-	public void setIdClasse(long idClasse) {
-		//TODO: Implement Method
-		throw new UnsupportedOperationException();
-	}
-	
 	public java.util.Set<Studente> getStudenti() {
 		return this.implementor.getStudenti(this);
 	}
 	
 	public String toString() {
-		return String.valueOf(getIdClasse());
+		return String.valueOf(getID());
 	}
 	
 }

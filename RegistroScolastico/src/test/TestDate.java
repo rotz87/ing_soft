@@ -1,18 +1,13 @@
 package test;
 
-import java.sql.Date;
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.TreeSet;
 
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
-import domain.model.Appello;
 import service.Stampa;
 
 //import org.orm.util.ORMMap;

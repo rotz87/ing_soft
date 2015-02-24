@@ -16,22 +16,27 @@ package domain.model;
 import org.hibernate.Criteria;
 import org.orm.PersistentException;
 import org.orm.PersistentSession;
-import org.orm.criteria.*;
+import org.orm.criteria.AbstractORMCriteria;
+import org.orm.criteria.AssociationExpression;
+import org.orm.criteria.IntegerExpression;
+import org.orm.criteria.StringExpression;
 
 public class StudenteCriteria extends AbstractORMCriteria {
-	public final IntegerExpression id;
+	public final IntegerExpression ID;
+	public final IntegerExpression indirizzoId;
+	public final AssociationExpression indirizzo;
 	public final StringExpression nome;
 	public final StringExpression cognome;
 	public final StringExpression codiceFiscale;
-	public final IntegerExpression indrizzo;
 	
 	public StudenteCriteria(Criteria criteria) {
 		super(criteria);
-		id = new IntegerExpression("id", this);
+		ID = new IntegerExpression("ID", this);
+		indirizzoId = new IntegerExpression("indirizzo.ID", this);
+		indirizzo = new AssociationExpression("indirizzo", this);
 		nome = new StringExpression("nome", this);
 		cognome = new StringExpression("cognome", this);
 		codiceFiscale = new StringExpression("codiceFiscale", this);
-		indrizzo = new IntegerExpression("indrizzo", this);
 	}
 	
 	public StudenteCriteria(PersistentSession session) {
@@ -39,7 +44,11 @@ public class StudenteCriteria extends AbstractORMCriteria {
 	}
 	
 	public StudenteCriteria() throws PersistentException {
-		this(domain.model.RegistroScolasticoPersistentManager.instance().getSession());
+		this(domain.model.RSPersistentManager.instance().getSession());
+	}
+	
+	public IndirizzoCriteria createIndirizzoCriteria() {
+		return new IndirizzoCriteria(createCriteria("indirizzo"));
 	}
 	
 	public Studente uniqueStudente() {

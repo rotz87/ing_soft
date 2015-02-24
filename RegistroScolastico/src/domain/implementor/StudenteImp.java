@@ -16,7 +16,7 @@ public class StudenteImp {
 	
 	public void inizialize(Studente studente, String nome, String cognome, Indirizzo indrizzo, String codiceFiscale) {
 		inizialize(studente, nome, cognome);
-		studente.setIndrizzo(indrizzo);
+		studente.setIndirizzo(indrizzo);
 		studente.setCodiceFiscale(codiceFiscale);
 	}
 

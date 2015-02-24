@@ -12,10 +12,10 @@ License Type: Academic
 		</id>
 		<many-to-one name="giustificazione" column="GiustificazioneID" class="domain.model.Giustificazione" cascade="save-update,lock" unique="true" not-null="false" lazy="false">
 		</many-to-one>
-		<bag name="appelli" table="Assenza_Appello" lazy="false" cascade="save-update,lock">
+		<set name="appelli" table="Assenza_Appello" lazy="false" cascade="save-update,lock">
 			<key column="AssenzaID" not-null="true"/>
 			<many-to-many column="AppelloIdAppello" class="domain.model.Appello">
 			</many-to-many>
-		</bag>
+		</set>
 	</class>
 </hibernate-mapping>

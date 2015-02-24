@@ -5,10 +5,10 @@ import java.util.LinkedList;
 
 import org.joda.time.LocalDate;
 
+import service.Stampa;
 import domain.model.Appello;
 import domain.model.Assenza;
 import domain.model.Calendario;
-import service.Stampa;
 
 public class AssenzaImp {
 
@@ -24,10 +24,10 @@ public class AssenzaImp {
 	}
 	
 	public void inizialize(Assenza assenza){
-		assenza.setAppelli(new LinkedList<Appello>());
+
 	}
 	
-	public void inizialize(Assenza assenza, LinkedList<Appello> appelli){
+	public void inizialize(Assenza assenza, java.util.Set<Appello> appelli){
 		assenza.setAppelli(appelli);
 	}
 	
@@ -35,7 +35,7 @@ public class AssenzaImp {
 	public Appello getUltimoAppelloAssenza(Assenza assenza) {
 		//return (( java.util.LinkedList<domain.model.Appello>)(assenza.getAppelli())).getLast();
 		
-		return (Appello)(( org.hibernate.collection.internal.PersistentBag)(assenza.getAppelli())).get(assenza.getAppelli().size()-1);
+		return (Appello)assenza.getAppelli().toArray()[assenza.getAppelli().size()-1];
 	}
 
 	/**

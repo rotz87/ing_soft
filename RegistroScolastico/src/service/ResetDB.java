@@ -1,7 +1,5 @@
 package service;
 
-import java.sql.SQLException;
-
 import org.joda.time.LocalDate;
 import org.orm.ORMDatabaseInitiator;
 import org.orm.PersistentException;
@@ -12,8 +10,8 @@ import domain.model.Assenza;
 import domain.model.Classe;
 import domain.model.Docente;
 import domain.model.LibrettoAssenze;
+import domain.model.RSPersistentManager;
 import domain.model.RegistroAssenze;
-import domain.model.RegistroScolasticoPersistentManager;
 import domain.model.Scuola;
 import domain.model.Studente;
 
@@ -33,16 +31,19 @@ public class ResetDB {
 		try {
 //			DBService createRegistroScolasticoData = new DBService();
 			try {
-				ORMDatabaseInitiator.dropSchema(domain.model.RegistroScolasticoPersistentManager.instance());
-				domain.model.RegistroScolasticoPersistentManager.instance().disposePersistentManager();
+				ORMDatabaseInitiator.dropSchema(domain.model.RSPersistentManager.instance());
+				domain.model.RSPersistentManager.instance().disposePersistentManager();
 				
-				ORMDatabaseInitiator.createSchema(domain.model.RegistroScolasticoPersistentManager.instance());
-				domain.model.RegistroScolasticoPersistentManager.instance().disposePersistentManager();
+				ORMDatabaseInitiator.createSchema(domain.model.RSPersistentManager.instance());
+				domain.model.RSPersistentManager.instance().disposePersistentManager();
 				
 				createTestData();
 			}
+//			catch(Exception e1){
+//				e1.printStackTrace();
+//			}
 			finally {
-				domain.model.RegistroScolasticoPersistentManager.instance().disposePersistentManager();
+				domain.model.RSPersistentManager.instance().disposePersistentManager();
 			}
 		}
 		catch (Exception e) {
@@ -51,7 +52,7 @@ public class ResetDB {
 	}
 	
 	private static void createTestData() throws PersistentException {
-		PersistentTransaction t = domain.model.RegistroScolasticoPersistentManager.instance().getSession().beginTransaction();
+		PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
 		try {
 			Scuola scuola1 = new Scuola();
 			
@@ -129,41 +130,41 @@ public class ResetDB {
 			Studente fabrizioToscani = new Studente("Fabrizio", "Toscani");
 			Studente arturoAncona = new Studente("Arturo", "Ancona");
 			
-			RegistroScolasticoPersistentManager.instance().getSession().save(pieroRusso);
-			RegistroScolasticoPersistentManager.instance().getSession().save(marinoEsposito);
-			RegistroScolasticoPersistentManager.instance().getSession().save(marioRomano);
-			RegistroScolasticoPersistentManager.instance().getSession().save(davideDiSalvo);
-			RegistroScolasticoPersistentManager.instance().getSession().save(ivoMarino);
-			RegistroScolasticoPersistentManager.instance().getSession().save(leonardoRicci);
-			RegistroScolasticoPersistentManager.instance().getSession().save(valentinoFarina);
-			RegistroScolasticoPersistentManager.instance().getSession().save(roccoBenedetti);
-			RegistroScolasticoPersistentManager.instance().getSession().save(antonioGuerra);
-			RegistroScolasticoPersistentManager.instance().getSession().save(cristinaAngeli);
+			RSPersistentManager.instance().getSession().save(pieroRusso);
+			RSPersistentManager.instance().getSession().save(marinoEsposito);
+			RSPersistentManager.instance().getSession().save(marioRomano);
+			RSPersistentManager.instance().getSession().save(davideDiSalvo);
+			RSPersistentManager.instance().getSession().save(ivoMarino);
+			RSPersistentManager.instance().getSession().save(leonardoRicci);
+			RSPersistentManager.instance().getSession().save(valentinoFarina);
+			RSPersistentManager.instance().getSession().save(roccoBenedetti);
+			RSPersistentManager.instance().getSession().save(antonioGuerra);
+			RSPersistentManager.instance().getSession().save(cristinaAngeli);
 			
-			RegistroScolasticoPersistentManager.instance().getSession().save(mariannaDonati);
-			RegistroScolasticoPersistentManager.instance().getSession().save(elenaSarti);
-			RegistroScolasticoPersistentManager.instance().getSession().save(mariaPiaAlfredi);
-			RegistroScolasticoPersistentManager.instance().getSession().save(giorgioGatti);
-			RegistroScolasticoPersistentManager.instance().getSession().save(lorenzoNegri);
-			RegistroScolasticoPersistentManager.instance().getSession().save(mattiaVitali);
-			RegistroScolasticoPersistentManager.instance().getSession().save(emanueleDelMonte);
-			RegistroScolasticoPersistentManager.instance().getSession().save(luigiBernardi);
-			RegistroScolasticoPersistentManager.instance().getSession().save(vittorioPellegrini);
-			RegistroScolasticoPersistentManager.instance().getSession().save(alexVilla);
+			RSPersistentManager.instance().getSession().save(mariannaDonati);
+			RSPersistentManager.instance().getSession().save(elenaSarti);
+			RSPersistentManager.instance().getSession().save(mariaPiaAlfredi);
+			RSPersistentManager.instance().getSession().save(giorgioGatti);
+			RSPersistentManager.instance().getSession().save(lorenzoNegri);
+			RSPersistentManager.instance().getSession().save(mattiaVitali);
+			RSPersistentManager.instance().getSession().save(emanueleDelMonte);
+			RSPersistentManager.instance().getSession().save(luigiBernardi);
+			RSPersistentManager.instance().getSession().save(vittorioPellegrini);
+			RSPersistentManager.instance().getSession().save(alexVilla);
 			
-			RegistroScolasticoPersistentManager.instance().getSession().save(marcoBattaglia);
-			RegistroScolasticoPersistentManager.instance().getSession().save(alfredoMorelli);
-			RegistroScolasticoPersistentManager.instance().getSession().save(pieraDellaValle);
-			RegistroScolasticoPersistentManager.instance().getSession().save(ignazioBoschi);
-			RegistroScolasticoPersistentManager.instance().getSession().save(jacopoValli);
+			RSPersistentManager.instance().getSession().save(marcoBattaglia);
+			RSPersistentManager.instance().getSession().save(alfredoMorelli);
+			RSPersistentManager.instance().getSession().save(pieraDellaValle);
+			RSPersistentManager.instance().getSession().save(ignazioBoschi);
+			RSPersistentManager.instance().getSession().save(jacopoValli);
 			
-			RegistroScolasticoPersistentManager.instance().getSession().save(gianniConte);
-			RegistroScolasticoPersistentManager.instance().getSession().save(lucaBarone);
-			RegistroScolasticoPersistentManager.instance().getSession().save(giacomoSiciliano);
-			RegistroScolasticoPersistentManager.instance().getSession().save(fabrizioToscani);
-			RegistroScolasticoPersistentManager.instance().getSession().save(arturoAncona);
+			RSPersistentManager.instance().getSession().save(gianniConte);
+			RSPersistentManager.instance().getSession().save(lucaBarone);
+			RSPersistentManager.instance().getSession().save(giacomoSiciliano);
+			RSPersistentManager.instance().getSession().save(fabrizioToscani);
+			RSPersistentManager.instance().getSession().save(arturoAncona);
 			
-//			mapStudenti.put(.getId(), );
+//			mapStudenti.put(.getID(), );
 //			primaA.getStudenti().add(pieroRusso);
 //			primaA.getStudenti().add( marinoEsposito);
 //			primaA.getStudenti().add( marioRomano);
@@ -240,39 +241,39 @@ public class ResetDB {
 			RegistroAssenze regAssPrimaB = new RegistroAssenze();
 			RegistroAssenze regAssSecondaB = new RegistroAssenze();
 			
-			regAssPrimaA.getLibrettiAssenze().put(marioRomano.getId(), librettoMarioRomano);
-			regAssPrimaA.getLibrettiAssenze().put(davideDiSalvo.getId(),librettoDavideDiSalvo);
-			regAssPrimaA.getLibrettiAssenze().put(ivoMarino.getId(), librettoIvoMarino);
-			regAssPrimaA.getLibrettiAssenze().put(pieroRusso.getId(), librettoPieroRusso);
-			regAssPrimaA.getLibrettiAssenze().put(marinoEsposito.getId(),librettoMarinoEsposito);
-			regAssPrimaA.getLibrettiAssenze().put(leonardoRicci.getId(),librettoLeonardoRicci);
-			regAssPrimaA.getLibrettiAssenze().put(valentinoFarina.getId(),librettoValentinoFarina);
-			regAssPrimaA.getLibrettiAssenze().put(roccoBenedetti.getId(),librettoRoccoBenedetti);
-			regAssPrimaA.getLibrettiAssenze().put(antonioGuerra.getId(),librettoAntonioGuerra);
-			regAssPrimaA.getLibrettiAssenze().put(cristinaAngeli.getId(),librettoCristinaAngeli);
+			regAssPrimaA.getLibrettiAssenze().put(marioRomano.getID(), librettoMarioRomano);
+			regAssPrimaA.getLibrettiAssenze().put(davideDiSalvo.getID(),librettoDavideDiSalvo);
+			regAssPrimaA.getLibrettiAssenze().put(ivoMarino.getID(), librettoIvoMarino);
+			regAssPrimaA.getLibrettiAssenze().put(pieroRusso.getID(), librettoPieroRusso);
+			regAssPrimaA.getLibrettiAssenze().put(marinoEsposito.getID(),librettoMarinoEsposito);
+			regAssPrimaA.getLibrettiAssenze().put(leonardoRicci.getID(),librettoLeonardoRicci);
+			regAssPrimaA.getLibrettiAssenze().put(valentinoFarina.getID(),librettoValentinoFarina);
+			regAssPrimaA.getLibrettiAssenze().put(roccoBenedetti.getID(),librettoRoccoBenedetti);
+			regAssPrimaA.getLibrettiAssenze().put(antonioGuerra.getID(),librettoAntonioGuerra);
+			regAssPrimaA.getLibrettiAssenze().put(cristinaAngeli.getID(),librettoCristinaAngeli);
 			
-			regAssSecondaA.getLibrettiAssenze().put(mariannaDonati.getId(),librettoMariannaDonati);
-			regAssSecondaA.getLibrettiAssenze().put(elenaSarti.getId(),librettoElenaSarti);
-			regAssSecondaA.getLibrettiAssenze().put(mariaPiaAlfredi.getId(),librettoMariaPiaAlfredi);
-			regAssSecondaA.getLibrettiAssenze().put(giorgioGatti.getId(),librettoGiorgioGatti);
-			regAssSecondaA.getLibrettiAssenze().put(lorenzoNegri.getId(),librettoLorenzoNegri);
-			regAssSecondaA.getLibrettiAssenze().put(mattiaVitali.getId(),librettoMattiaVitali);
-			regAssSecondaA.getLibrettiAssenze().put(emanueleDelMonte.getId(),librettoEmanueleDelMonte);
-			regAssSecondaA.getLibrettiAssenze().put(luigiBernardi.getId(),librettoLuigiBernardi);
-			regAssSecondaA.getLibrettiAssenze().put(vittorioPellegrini.getId(),librettoVittorioPellegrini);
-			regAssSecondaA.getLibrettiAssenze().put(alexVilla.getId(),librettoAlexVilla);
+			regAssSecondaA.getLibrettiAssenze().put(mariannaDonati.getID(),librettoMariannaDonati);
+			regAssSecondaA.getLibrettiAssenze().put(elenaSarti.getID(),librettoElenaSarti);
+			regAssSecondaA.getLibrettiAssenze().put(mariaPiaAlfredi.getID(),librettoMariaPiaAlfredi);
+			regAssSecondaA.getLibrettiAssenze().put(giorgioGatti.getID(),librettoGiorgioGatti);
+			regAssSecondaA.getLibrettiAssenze().put(lorenzoNegri.getID(),librettoLorenzoNegri);
+			regAssSecondaA.getLibrettiAssenze().put(mattiaVitali.getID(),librettoMattiaVitali);
+			regAssSecondaA.getLibrettiAssenze().put(emanueleDelMonte.getID(),librettoEmanueleDelMonte);
+			regAssSecondaA.getLibrettiAssenze().put(luigiBernardi.getID(),librettoLuigiBernardi);
+			regAssSecondaA.getLibrettiAssenze().put(vittorioPellegrini.getID(),librettoVittorioPellegrini);
+			regAssSecondaA.getLibrettiAssenze().put(alexVilla.getID(),librettoAlexVilla);
 			
-			regAssPrimaB.getLibrettiAssenze().put(marcoBattaglia.getId(),librettoMarcoBattaglia);
-			regAssPrimaB.getLibrettiAssenze().put(alfredoMorelli.getId(),librettoAlfredoMorelli);
-			regAssPrimaB.getLibrettiAssenze().put(pieraDellaValle.getId(),librettoPieraDellaValle);
-			regAssPrimaB.getLibrettiAssenze().put(ignazioBoschi.getId(),librettoIgnazioBoschi);
-			regAssPrimaB.getLibrettiAssenze().put(jacopoValli.getId(),librettoJacopoValli);
+			regAssPrimaB.getLibrettiAssenze().put(marcoBattaglia.getID(),librettoMarcoBattaglia);
+			regAssPrimaB.getLibrettiAssenze().put(alfredoMorelli.getID(),librettoAlfredoMorelli);
+			regAssPrimaB.getLibrettiAssenze().put(pieraDellaValle.getID(),librettoPieraDellaValle);
+			regAssPrimaB.getLibrettiAssenze().put(ignazioBoschi.getID(),librettoIgnazioBoschi);
+			regAssPrimaB.getLibrettiAssenze().put(jacopoValli.getID(),librettoJacopoValli);
 			
-			regAssSecondaB.getLibrettiAssenze().put(gianniConte.getId(),librettoGianniConte);
-			regAssSecondaB.getLibrettiAssenze().put(lucaBarone.getId() ,librettoLucaBarone );
-			regAssSecondaB.getLibrettiAssenze().put(giacomoSiciliano.getId(),librettoGiacomoSiciliano);
-			regAssSecondaB.getLibrettiAssenze().put(fabrizioToscani.getId(),librettoFabrizioToscani);
-			regAssSecondaB.getLibrettiAssenze().put(arturoAncona.getId(),librettoArturoAncona);
+			regAssSecondaB.getLibrettiAssenze().put(gianniConte.getID(),librettoGianniConte);
+			regAssSecondaB.getLibrettiAssenze().put(lucaBarone.getID() ,librettoLucaBarone );
+			regAssSecondaB.getLibrettiAssenze().put(giacomoSiciliano.getID(),librettoGiacomoSiciliano);
+			regAssSecondaB.getLibrettiAssenze().put(fabrizioToscani.getID(),librettoFabrizioToscani);
+			regAssSecondaB.getLibrettiAssenze().put(arturoAncona.getID(),librettoArturoAncona);
 
 			//assegnazione del regitro alla classe primaA
 			primaA.setRegistroAssenze(regAssPrimaA);
@@ -319,19 +320,19 @@ public class ResetDB {
 			Appello appello_1B_16_12_14 = new Appello(data16_12_14);
 			Appello appello_2B_16_12_14 = new Appello(data16_12_14);
 			
-//			tuttiGliAppelli.put(appello8_12_14.getIdAppello(), appello8_12_14);
+//			tuttiGliAppelli.put(appello8_12_14.getIDAppello(), appello8_12_14);
 
-//			regAssPrimaA.getAppelliRegistro().put(appello_1A_10_12_14.getIdAppello(), appello_1A_10_12_14);
-//			regAssPrimaA.getAppelliRegistro().put(appello_1A_11_12_14.getIdAppello(), appello_1A_11_12_14);
-//			regAssPrimaA.getAppelliRegistro().put(appello_1A_12_12_14.getIdAppello(), appello_1A_12_12_14);
-//			regAssPrimaA.getAppelliRegistro().put(appello_1A_13_12_14.getIdAppello(), appello_1A_13_12_14);
-////			tuttiGliAppelli.put(appello14_12_14.getIdAppello(), appello14_12_14);
-//			regAssPrimaA.getAppelliRegistro().put(appello_1A_15_12_14.getIdAppello(), appello_1A_15_12_14);
-//			regAssPrimaA.getAppelliRegistro().put(appello_1A_16_12_14.getIdAppello(), appello_1A_16_12_14);
+//			regAssPrimaA.getAppelliRegistro().put(appello_1A_10_12_14.getIDAppello(), appello_1A_10_12_14);
+//			regAssPrimaA.getAppelliRegistro().put(appello_1A_11_12_14.getIDAppello(), appello_1A_11_12_14);
+//			regAssPrimaA.getAppelliRegistro().put(appello_1A_12_12_14.getIDAppello(), appello_1A_12_12_14);
+//			regAssPrimaA.getAppelliRegistro().put(appello_1A_13_12_14.getIDAppello(), appello_1A_13_12_14);
+////			tuttiGliAppelli.put(appello14_12_14.getIDAppello(), appello14_12_14);
+//			regAssPrimaA.getAppelliRegistro().put(appello_1A_15_12_14.getIDAppello(), appello_1A_15_12_14);
+//			regAssPrimaA.getAppelliRegistro().put(appello_1A_16_12_14.getIDAppello(), appello_1A_16_12_14);
 //			
-//			regAssSecondaA.getAppelliRegistro().put(appello_2A_16_12_14.getIdAppello(), appello_2A_16_12_14);
-//			regAssPrimaB.getAppelliRegistro().put(appello_1B_16_12_14.getIdAppello(), appello_1B_16_12_14);
-//			regAssSecondaB.getAppelliRegistro().put(appello_2B_16_12_14.getIdAppello(), appello_2B_16_12_14);
+//			regAssSecondaA.getAppelliRegistro().put(appello_2A_16_12_14.getIDAppello(), appello_2A_16_12_14);
+//			regAssPrimaB.getAppelliRegistro().put(appello_1B_16_12_14.getIDAppello(), appello_1B_16_12_14);
+//			regAssSecondaB.getAppelliRegistro().put(appello_2B_16_12_14.getIDAppello(), appello_2B_16_12_14);
 			
 			
 //			regAssPrimaA.getAppelli().put(appello8_12_14.getData(), appello8_12_14);
@@ -369,17 +370,16 @@ public class ResetDB {
 			assPieroRusso1.getAppelli().add(appello_1A_10_12_14);
 			assPieroRusso1.getAppelli().add(appello_1A_11_12_14);
 			assPieroRusso1.getAppelli().add(appello_1A_12_12_14);
-//					assPieroRusso1.getAppelliAssenza().add(appello16_12_14);
+//			assPieroRusso1.getAppelliAssenza().add(appello16_12_14);
+
+//			assIvoMarini1.getAppelliAssenza().add(appello14_12_14);
+			assIvoMarini1.getAppelli().add(appello_1A_15_12_14);
+			assIvoMarini1.getAppelli().add(appello_1A_16_12_14);
 			
 			assIvoMarini2.getAppelli().add(appello_1A_10_12_14);
 			assIvoMarini2.getAppelli().add(appello_1A_11_12_14);
 			
 //			assIvoMarini3.getAppelliAssenza().add(appello8_12_14);
-			
-
-//			assIvoMarini1.getAppelliAssenza().add(appello14_12_14);
-			assIvoMarini1.getAppelli().add(appello_1A_15_12_14);
-			assIvoMarini1.getAppelli().add(appello_1A_16_12_14);
 			
 			assMarinoEsposito1.getAppelli().add(appello_1A_16_12_14);
 			
@@ -443,7 +443,7 @@ public class ResetDB {
 
 			// FINE CODICE PRESO DA DBFake
 			
-			RegistroScolasticoPersistentManager.instance().getSession().save(scuola1);
+			RSPersistentManager.instance().getSession().save(scuola1);
 			
 //			Classe primaA = new Classe("1A");
 //			scuola1.getClassi().add(primaA);
@@ -453,55 +453,55 @@ public class ResetDB {
 //			Studente guidoGialli = new Studente("Guido","Gialli");
 //			primaA.getStudenti().add(guidoGialli);
 //			
-//			domain.model.RegistroScolasticoPersistentManager.instance().getSession().save(scuola1);
+//			domain.model.RSPersistentManager.instance().getSession().save(scuola1);
 			
 //			domain.model.Studente ldomainmodelStudente = new domain.model.Studente();			// Initialize the properties of the persistent object here
-//			domain.model.RegistroScolasticoPersistentManager.instance().getSession().save(ldomainmodelStudente);
+//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelStudente);
 			
 //			domain.model.Appello ldomainmodelAppello = new domain.model.Appello();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : assenzePrese
-//			domain.model.RegistroScolasticoPersistentManager.instance().getSession().save(ldomainmodelAppello);
+//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelAppello);
 //			
 //			domain.model.Assenza ldomainmodelAssenza = new domain.model.Assenza();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : appelliAssenza
-//			domain.model.RegistroScolasticoPersistentManager.instance().getSession().save(ldomainmodelAssenza);
+//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelAssenza);
 //			
 //			domain.model.Giustificazione ldomainmodelGiustificazione = new domain.model.Giustificazione();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : confermata
-//			domain.model.RegistroScolasticoPersistentManager.instance().getSession().save(ldomainmodelGiustificazione);
+//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelGiustificazione);
 //			
 //			domain.model.Ritardo ldomainmodelRitardo = new domain.model.Ritardo();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : appello
-//			domain.model.RegistroScolasticoPersistentManager.instance().getSession().save(ldomainmodelRitardo);
+//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelRitardo);
 //			
 //			domain.model.PermessoEntrata ldomainmodelPermessoEntrata = new domain.model.PermessoEntrata();			// Initialize the properties of the persistent object here
-//			domain.model.RegistroScolasticoPersistentManager.instance().getSession().save(ldomainmodelPermessoEntrata);
+//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelPermessoEntrata);
 //			
 //			domain.model.UscitaAnticipata ldomainmodelUscitaAnticipata = new domain.model.UscitaAnticipata();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : permesso, appello
-//			domain.model.RegistroScolasticoPersistentManager.instance().getSession().save(ldomainmodelUscitaAnticipata);
+//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelUscitaAnticipata);
 //			
 //			domain.model.PermessoUscita ldomainmodelPermessoUscita = new domain.model.PermessoUscita();			// Initialize the properties of the persistent object here
-//			domain.model.RegistroScolasticoPersistentManager.instance().getSession().save(ldomainmodelPermessoUscita);
+//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelPermessoUscita);
 //			
 //			domain.model.LibrettoAssenze ldomainmodelLibrettoAssenze = new domain.model.LibrettoAssenze();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : uscite, ritardi, nonGiustificate, giustificate, studente
-//			domain.model.RegistroScolasticoPersistentManager.instance().getSession().save(ldomainmodelLibrettoAssenze);
+//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelLibrettoAssenze);
 //			
 //			domain.model.RegistroAssenze ldomainmodelRegistroAssenze = new domain.model.RegistroAssenze();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : appelliRegistro, librettiAssenze, appelloOdierno
-//			domain.model.RegistroScolasticoPersistentManager.instance().getSession().save(ldomainmodelRegistroAssenze);
+//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelRegistroAssenze);
 //			
 //			domain.model.Scuola ldomainmodelScuola = new domain.model.Scuola();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : docenti, classi
-//			domain.model.RegistroScolasticoPersistentManager.instance().getSession().save(ldomainmodelScuola);
+//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelScuola);
 //			
 //			domain.model.Classe ldomainmodelClasse = new domain.model.Classe();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : studenti, registroAssenze
-//			domain.model.RegistroScolasticoPersistentManager.instance().getSession().save(ldomainmodelClasse);
+//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelClasse);
 //			
 //			domain.model.Docente ldomainmodelDocente = new domain.model.Docente();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : classi
-//			domain.model.RegistroScolasticoPersistentManager.instance().getSession().save(ldomainmodelDocente);
+//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelDocente);
 //			
 //			domain.model.Calendario ldomainmodelCalendario = new domain.model.Calendario();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : giorniSettimanaliFestivi, giorniFestivi
-//			domain.model.RegistroScolasticoPersistentManager.instance().getSession().save(ldomainmodelCalendario);
+//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelCalendario);
 //			
 //			domain.model.Giorno ldomainmodelGiorno = new domain.model.Giorno();			// Initialize the properties of the persistent object here
-//			domain.model.RegistroScolasticoPersistentManager.instance().getSession().save(ldomainmodelGiorno);
+//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelGiorno);
 //			
 //			domain.model.GiornoSettimanale ldomainmodelGiornoSettimanale = new domain.model.GiornoSettimanale();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : giorno
-//			domain.model.RegistroScolasticoPersistentManager.instance().getSession().save(ldomainmodelGiornoSettimanale);
+//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelGiornoSettimanale);
 			
 			t.commit();
 		}

@@ -14,25 +14,29 @@
 package domain.model;
 
 import java.util.List;
+
 import org.hibernate.criterion.DetachedCriteria;
 import org.orm.PersistentSession;
-import org.orm.criteria.*;
+import org.orm.criteria.AbstractORMDetachedCriteria;
+import org.orm.criteria.BooleanExpression;
+import org.orm.criteria.DateExpression;
+import org.orm.criteria.IntegerExpression;
 
 public class AppelloDetachedCriteria extends AbstractORMDetachedCriteria {
-	public final IntegerExpression idAppello;
+	public final IntegerExpression ID;
 	public final DateExpression data;
 	public final BooleanExpression assenzePrese;
 	
 	public AppelloDetachedCriteria() {
 		super(domain.model.Appello.class, domain.model.AppelloCriteria.class);
-		idAppello = new IntegerExpression("idAppello", this.getDetachedCriteria());
+		ID = new IntegerExpression("ID", this.getDetachedCriteria());
 		data = new DateExpression("data", this.getDetachedCriteria());
 		assenzePrese = new BooleanExpression("assenzePrese", this.getDetachedCriteria());
 	}
 	
 	public AppelloDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, domain.model.AppelloCriteria.class);
-		idAppello = new IntegerExpression("idAppello", this.getDetachedCriteria());
+		ID = new IntegerExpression("ID", this.getDetachedCriteria());
 		data = new DateExpression("data", this.getDetachedCriteria());
 		assenzePrese = new BooleanExpression("assenzePrese", this.getDetachedCriteria());
 	}

@@ -2,12 +2,24 @@
 
 <Model quotesql="1" tablecharset="UTF8" mysql_version="505" mssql_version="2005" derby_version="106" ingres_version="9">
   <Entity name="Studente">
-    <Column name="Id">
+    <Column name="ID">
       <PrimaryKey>true</PrimaryKey>
       <ForeignKey>false</ForeignKey>
       <Type>9</Type>
       <Length>11</Length>
       <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="IndirizzoID">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>Indirizzo.ID</ReferencedColumn>
+      <Type>9</Type>
+      <Length>11</Length>
+      <Nullable>true</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
@@ -46,20 +58,9 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
-    <Column name="Indrizzo">
-      <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
-      <Type>9</Type>
-      <Length>10</Length>
-      <Nullable>true</Nullable>
-      <IDGenerator>native</IDGenerator>
-      <Unique>false</Unique>
-      <Index>false</Index>
-      <UserTypes/>
-    </Column>
   </Entity>
   <Entity name="Appello">
-    <Column name="IdAppello">
+    <Column name="ID">
       <PrimaryKey>true</PrimaryKey>
       <ForeignKey>false</ForeignKey>
       <Type>9</Type>
@@ -250,7 +251,7 @@
     <Column name="AppelloId">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>Appello.IdAppello</ReferencedColumn>
+      <ReferencedColumn>Appello.ID</ReferencedColumn>
       <Type>9</Type>
       <Length>11</Length>
       <Nullable>false</Nullable>
@@ -299,7 +300,7 @@
     <Column name="AppelloId">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>Appello.IdAppello</ReferencedColumn>
+      <ReferencedColumn>Appello.ID</ReferencedColumn>
       <Type>9</Type>
       <Length>11</Length>
       <Nullable>false</Nullable>
@@ -372,7 +373,7 @@
     <Column name="StudenteId">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>Studente.Id</ReferencedColumn>
+      <ReferencedColumn>Studente.ID</ReferencedColumn>
       <Type>9</Type>
       <Length>11</Length>
       <Nullable>false</Nullable>
@@ -443,7 +444,7 @@
     </Column>
   </Entity>
   <Entity name="Classe">
-    <Column name="IdClasse">
+    <Column name="ID">
       <PrimaryKey>true</PrimaryKey>
       <ForeignKey>false</ForeignKey>
       <Type>9</Type>
@@ -502,7 +503,7 @@
     </Column>
   </Entity>
   <Entity name="Docente">
-    <Column name="IdDocente">
+    <Column name="ID">
       <PrimaryKey>true</PrimaryKey>
       <ForeignKey>false</ForeignKey>
       <Type>9</Type>
@@ -659,7 +660,7 @@
     <Column name="DocenteIdDocente">
       <PrimaryKey>true</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>Docente.IdDocente</ReferencedColumn>
+      <ReferencedColumn>Docente.ID</ReferencedColumn>
       <Type>9</Type>
       <Length>11</Length>
       <Nullable>false</Nullable>
@@ -671,7 +672,7 @@
     <Column name="ClasseIdClasse">
       <PrimaryKey>true</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>Classe.IdClasse</ReferencedColumn>
+      <ReferencedColumn>Classe.ID</ReferencedColumn>
       <Type>9</Type>
       <Length>11</Length>
       <Nullable>false</Nullable>
@@ -697,7 +698,7 @@
     <Column name="AppelloIdAppello">
       <PrimaryKey>true</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>Appello.IdAppello</ReferencedColumn>
+      <ReferencedColumn>Appello.ID</ReferencedColumn>
       <Type>9</Type>
       <Length>11</Length>
       <Nullable>false</Nullable>
@@ -706,12 +707,14 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
-    <Column name="index">
-      <PrimaryKey>false</PrimaryKey>
+  </Entity>
+  <Entity name="Indirizzo">
+    <Column name="ID">
+      <PrimaryKey>true</PrimaryKey>
       <ForeignKey>false</ForeignKey>
       <Type>9</Type>
-      <Length>10</Length>
-      <Nullable>true</Nullable>
+      <Length>11</Length>
+      <Nullable>false</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
@@ -728,14 +731,14 @@
       <Column>ID</Column>
     </RefColumns>
   </ForeignKey>
-  <ForeignKey name="FKRitardo694241">
+  <ForeignKey name="FKRitardo89433">
     <ReferenceTable>Ritardo</ReferenceTable>
     <ReferencedTable>Appello</ReferencedTable>
     <Columns>
       <Column>AppelloId</Column>
     </Columns>
     <RefColumns>
-      <Column>IdAppello</Column>
+      <Column>ID</Column>
     </RefColumns>
   </ForeignKey>
   <ForeignKey name="FKRitardo688648">
@@ -818,14 +821,14 @@
       <Column>ID</Column>
     </RefColumns>
   </ForeignKey>
-  <ForeignKey name="FKLibrettoAs897738">
+  <ForeignKey name="FKLibrettoAs897770">
     <ReferenceTable>LibrettoAssenze</ReferenceTable>
     <ReferencedTable>Studente</ReferencedTable>
     <Columns>
       <Column>StudenteId</Column>
     </Columns>
     <RefColumns>
-      <Column>Id</Column>
+      <Column>ID</Column>
     </RefColumns>
   </ForeignKey>
   <ForeignKey name="FKRitardo122758">
@@ -848,14 +851,14 @@
       <Column>ID</Column>
     </RefColumns>
   </ForeignKey>
-  <ForeignKey name="FKUscitaAnti987958">
+  <ForeignKey name="FKUscitaAnti383150">
     <ReferenceTable>UscitaAnticipata</ReferenceTable>
     <ReferencedTable>Appello</ReferencedTable>
     <Columns>
       <Column>AppelloId</Column>
     </Columns>
     <RefColumns>
-      <Column>IdAppello</Column>
+      <Column>ID</Column>
     </RefColumns>
   </ForeignKey>
   <ForeignKey name="FKAppello493135">
@@ -888,24 +891,24 @@
       <Column>ID</Column>
     </RefColumns>
   </ForeignKey>
-  <ForeignKey name="FKDocente_Cl506715">
+  <ForeignKey name="FKDocente_Cl188783">
     <ReferenceTable>Docente_Classe</ReferenceTable>
     <ReferencedTable>Docente</ReferencedTable>
     <Columns>
       <Column>DocenteIdDocente</Column>
     </Columns>
     <RefColumns>
-      <Column>IdDocente</Column>
+      <Column>ID</Column>
     </RefColumns>
   </ForeignKey>
-  <ForeignKey name="FKDocente_Cl451691">
+  <ForeignKey name="FKDocente_Cl367317">
     <ReferenceTable>Docente_Classe</ReferenceTable>
     <ReferencedTable>Classe</ReferencedTable>
     <Columns>
       <Column>ClasseIdClasse</Column>
     </Columns>
     <RefColumns>
-      <Column>IdClasse</Column>
+      <Column>ID</Column>
     </RefColumns>
   </ForeignKey>
   <ForeignKey name="FKAssenza_Ap407034">
@@ -918,14 +921,24 @@
       <Column>ID</Column>
     </RefColumns>
   </ForeignKey>
-  <ForeignKey name="FKAssenza_Ap293752">
+  <ForeignKey name="FKAssenza_Ap688943">
     <ReferenceTable>Assenza_Appello</ReferenceTable>
     <ReferencedTable>Appello</ReferencedTable>
     <Columns>
       <Column>AppelloIdAppello</Column>
     </Columns>
     <RefColumns>
-      <Column>IdAppello</Column>
+      <Column>ID</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKStudente999157">
+    <ReferenceTable>Studente</ReferenceTable>
+    <ReferencedTable>Indirizzo</ReferencedTable>
+    <Columns>
+      <Column>IndirizzoID</Column>
+    </Columns>
+    <RefColumns>
+      <Column>ID</Column>
     </RefColumns>
   </ForeignKey>
 </Model>

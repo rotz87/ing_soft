@@ -4,12 +4,12 @@
  */
 package ormsamples;
 
-import org.orm.*;
+import org.orm.ORMDatabaseInitiator;
 public class CreateRegistroScolasticoDatabaseSchema {
 	public static void main(String[] args) {
 		try {
-			ORMDatabaseInitiator.createSchema(domain.model.RegistroScolasticoPersistentManager.instance());
-			domain.model.RegistroScolasticoPersistentManager.instance().disposePersistentManager();
+			ORMDatabaseInitiator.createSchema(domain.model.RSPersistentManager.instance());
+			domain.model.RSPersistentManager.instance().disposePersistentManager();
 		}
 		catch (Exception e) {
 			e.printStackTrace();

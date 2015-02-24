@@ -17,7 +17,9 @@ public class Studente {
 	public Studente() {
 	}
 	
-	private int id;
+	private int ID;
+	
+	private domain.model.Indirizzo indirizzo;
 	
 	private String nome;
 	
@@ -25,18 +27,16 @@ public class Studente {
 	
 	private String codiceFiscale;
 	
-	private Integer indrizzo;
-	
-	private void setId(int value) {
-		this.id = value;
+	private void setID(int value) {
+		this.ID = value;
 	}
 	
-	public int getId() {
-		return id;
+	public int getID() {
+		return ID;
 	}
 	
 	public int getORMID() {
-		return getId();
+		return getID();
 	}
 	
 	public void setNome(String value) {
@@ -63,16 +63,12 @@ public class Studente {
 		return codiceFiscale;
 	}
 	
-	public void setIndrizzo(int value) {
-		setIndrizzo(new Integer(value));
+	public void setIndirizzo(domain.model.Indirizzo value) {
+		this.indirizzo = value;
 	}
 	
-	public void setIndrizzo(Integer value) {
-		this.indrizzo = value;
-	}
-	
-	public Integer getIndrizzo() {
-		return indrizzo;
+	public domain.model.Indirizzo getIndirizzo() {
+		return indirizzo;
 	}
 	
 	private domain.implementor.StudenteImp implementor = new domain.implementor.StudenteImp();
@@ -85,18 +81,8 @@ public class Studente {
 		this.implementor.inizialize(this, nome, cognome, indrizzo, codiceFiscale);
 	}
 	
-	public void setId(long id) {
-		//TODO: Implement Method
-		throw new UnsupportedOperationException();
-	}
-	
-	public void setIndrizzo(domain.model.Indirizzo indrizzo) {
-		//TODO: Implement Method
-		throw new UnsupportedOperationException();
-	}
-	
 	public String toString() {
-		return String.valueOf(getId());
+		return String.valueOf(getID());
 	}
 	
 }

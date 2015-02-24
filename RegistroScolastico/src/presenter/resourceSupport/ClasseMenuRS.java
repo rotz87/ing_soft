@@ -11,7 +11,7 @@ public class ClasseMenuRS extends ResourceSupport {
 	
 	
 	public ClasseMenuRS(Classe classe){
-		setIdClasse(classe.getIdClasse());
+		setIdClasse(classe.getID());
 		setNome(classe.getNome());
 	}
 	

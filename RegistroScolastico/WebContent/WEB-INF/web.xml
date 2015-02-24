@@ -6,6 +6,26 @@
     <welcome-file>index.htm</welcome-file>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
+    <filter>
+        <filter-name>cors</filter-name>
+        <filter-class>presenter.SimpleCORSFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>cors</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+	<filter>
+  	<filter-name>ORMFilter</filter-name>
+		<filter-class>domain.model.RegistroScolasticoFilter</filter-class>
+		<init-param>
+		 	<param-name>WrapServletRequest</param-name>
+			<param-value>false</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>ORMFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
   <servlet>
     <servlet-name>rest</servlet-name>
     <servlet-class>

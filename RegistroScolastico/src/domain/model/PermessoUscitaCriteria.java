@@ -16,7 +16,8 @@ package domain.model;
 import org.hibernate.Criteria;
 import org.orm.PersistentException;
 import org.orm.PersistentSession;
-import org.orm.criteria.*;
+import org.orm.criteria.AbstractORMCriteria;
+import org.orm.criteria.IntegerExpression;
 
 public class PermessoUscitaCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
@@ -31,7 +32,7 @@ public class PermessoUscitaCriteria extends AbstractORMCriteria {
 	}
 	
 	public PermessoUscitaCriteria() throws PersistentException {
-		this(domain.model.RegistroScolasticoPersistentManager.instance().getSession());
+		this(domain.model.RSPersistentManager.instance().getSession());
 	}
 	
 	public PermessoUscita uniquePermessoUscita() {

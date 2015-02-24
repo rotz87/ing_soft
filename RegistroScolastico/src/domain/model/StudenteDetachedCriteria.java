@@ -14,33 +14,44 @@
 package domain.model;
 
 import java.util.List;
+
 import org.hibernate.criterion.DetachedCriteria;
 import org.orm.PersistentSession;
-import org.orm.criteria.*;
+import org.orm.criteria.AbstractORMDetachedCriteria;
+import org.orm.criteria.AssociationExpression;
+import org.orm.criteria.IntegerExpression;
+import org.orm.criteria.StringExpression;
 
 public class StudenteDetachedCriteria extends AbstractORMDetachedCriteria {
-	public final IntegerExpression id;
+	public final IntegerExpression ID;
+	public final IntegerExpression indirizzoId;
+	public final AssociationExpression indirizzo;
 	public final StringExpression nome;
 	public final StringExpression cognome;
 	public final StringExpression codiceFiscale;
-	public final IntegerExpression indrizzo;
 	
 	public StudenteDetachedCriteria() {
 		super(domain.model.Studente.class, domain.model.StudenteCriteria.class);
-		id = new IntegerExpression("id", this.getDetachedCriteria());
+		ID = new IntegerExpression("ID", this.getDetachedCriteria());
+		indirizzoId = new IntegerExpression("indirizzo.ID", this.getDetachedCriteria());
+		indirizzo = new AssociationExpression("indirizzo", this.getDetachedCriteria());
 		nome = new StringExpression("nome", this.getDetachedCriteria());
 		cognome = new StringExpression("cognome", this.getDetachedCriteria());
 		codiceFiscale = new StringExpression("codiceFiscale", this.getDetachedCriteria());
-		indrizzo = new IntegerExpression("indrizzo", this.getDetachedCriteria());
 	}
 	
 	public StudenteDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, domain.model.StudenteCriteria.class);
-		id = new IntegerExpression("id", this.getDetachedCriteria());
+		ID = new IntegerExpression("ID", this.getDetachedCriteria());
+		indirizzoId = new IntegerExpression("indirizzo.ID", this.getDetachedCriteria());
+		indirizzo = new AssociationExpression("indirizzo", this.getDetachedCriteria());
 		nome = new StringExpression("nome", this.getDetachedCriteria());
 		cognome = new StringExpression("cognome", this.getDetachedCriteria());
 		codiceFiscale = new StringExpression("codiceFiscale", this.getDetachedCriteria());
-		indrizzo = new IntegerExpression("indrizzo", this.getDetachedCriteria());
+	}
+	
+	public IndirizzoDetachedCriteria createIndirizzoCriteria() {
+		return new IndirizzoDetachedCriteria(createCriteria("indirizzo"));
 	}
 	
 	public Studente uniqueStudente(PersistentSession session) {

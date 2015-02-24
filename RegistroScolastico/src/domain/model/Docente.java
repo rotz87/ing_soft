@@ -17,13 +17,13 @@ public class Docente {
 	public Docente() {
 	}
 	
-	private int idDocente;
+	private int ID;
 	
 	private String nome;
 	
 	private String cognome;
 	
-	private java.util.Set<domain.model.Classe> classi = new java.util.HashSet<domain.model.Classe>();
+	private java.util.Set<domain.model.Classe> classi = new java.util.LinkedHashSet<domain.model.Classe>();
 	
 	public void setNome(String value) {
 		this.nome = value;
@@ -41,16 +41,16 @@ public class Docente {
 		return cognome;
 	}
 	
-	private void setIdDocente(int value) {
-		this.idDocente = value;
+	private void setID(int value) {
+		this.ID = value;
 	}
 	
-	public int getIdDocente() {
-		return idDocente;
+	public int getID() {
+		return ID;
 	}
 	
 	public int getORMID() {
-		return getIdDocente();
+		return getID();
 	}
 	
 	public void setClassi(java.util.Set<domain.model.Classe> value) {
@@ -73,7 +73,7 @@ public class Docente {
 	}
 	
 	public String toString() {
-		return String.valueOf(getIdDocente());
+		return String.valueOf(getID());
 	}
 	
 }

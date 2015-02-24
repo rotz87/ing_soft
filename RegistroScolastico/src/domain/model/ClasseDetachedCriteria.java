@@ -14,19 +14,23 @@
 package domain.model;
 
 import java.util.List;
+
 import org.hibernate.criterion.DetachedCriteria;
 import org.orm.PersistentSession;
-import org.orm.criteria.*;
+import org.orm.criteria.AbstractORMDetachedCriteria;
+import org.orm.criteria.AssociationExpression;
+import org.orm.criteria.IntegerExpression;
+import org.orm.criteria.StringExpression;
 
 public class ClasseDetachedCriteria extends AbstractORMDetachedCriteria {
-	public final IntegerExpression idClasse;
+	public final IntegerExpression ID;
 	public final IntegerExpression registroAssenzeId;
 	public final AssociationExpression registroAssenze;
 	public final StringExpression nome;
 	
 	public ClasseDetachedCriteria() {
 		super(domain.model.Classe.class, domain.model.ClasseCriteria.class);
-		idClasse = new IntegerExpression("idClasse", this.getDetachedCriteria());
+		ID = new IntegerExpression("ID", this.getDetachedCriteria());
 		registroAssenzeId = new IntegerExpression("registroAssenze.ID", this.getDetachedCriteria());
 		registroAssenze = new AssociationExpression("registroAssenze", this.getDetachedCriteria());
 		nome = new StringExpression("nome", this.getDetachedCriteria());
@@ -34,7 +38,7 @@ public class ClasseDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public ClasseDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, domain.model.ClasseCriteria.class);
-		idClasse = new IntegerExpression("idClasse", this.getDetachedCriteria());
+		ID = new IntegerExpression("ID", this.getDetachedCriteria());
 		registroAssenzeId = new IntegerExpression("registroAssenze.ID", this.getDetachedCriteria());
 		registroAssenze = new AssociationExpression("registroAssenze", this.getDetachedCriteria());
 		nome = new StringExpression("nome", this.getDetachedCriteria());

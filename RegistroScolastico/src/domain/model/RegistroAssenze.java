@@ -71,7 +71,7 @@ public class RegistroAssenze {
 	/**
 	 * Riceve un vettore di studenti per cui segnare le assenze
 	 */
-	public void registraAssenze(domain.model.Studente[] studenti) {
+	public void registraAssenze(java.util.Collection<Studente> studenti) {
 		this.implementor.registraAssenze(this, studenti);
 	}
 	

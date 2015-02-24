@@ -16,7 +16,9 @@ package domain.model;
 import org.hibernate.Criteria;
 import org.orm.PersistentException;
 import org.orm.PersistentSession;
-import org.orm.criteria.*;
+import org.orm.criteria.AbstractORMCriteria;
+import org.orm.criteria.CollectionExpression;
+import org.orm.criteria.IntegerExpression;
 
 public class CalendarioCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
@@ -35,7 +37,7 @@ public class CalendarioCriteria extends AbstractORMCriteria {
 	}
 	
 	public CalendarioCriteria() throws PersistentException {
-		this(domain.model.RegistroScolasticoPersistentManager.instance().getSession());
+		this(domain.model.RSPersistentManager.instance().getSession());
 	}
 	
 	public GiornoCriteria createGiorniFestiviCriteria() {

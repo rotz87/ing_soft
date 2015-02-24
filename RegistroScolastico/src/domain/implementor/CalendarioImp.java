@@ -1,12 +1,8 @@
 package domain.implementor;
 
-import java.util.LinkedList;
-import java.util.TreeSet;
-
 import org.joda.time.LocalDate;
 
 import domain.model.Calendario;
-import domain.model.MyTreeSetDate;
 
 public class CalendarioImp {
 	

@@ -16,7 +16,9 @@ package domain.model;
 import org.hibernate.Criteria;
 import org.orm.PersistentException;
 import org.orm.PersistentSession;
-import org.orm.criteria.*;
+import org.orm.criteria.AbstractORMCriteria;
+import org.orm.criteria.AssociationExpression;
+import org.orm.criteria.IntegerExpression;
 
 public class RitardoCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
@@ -30,7 +32,7 @@ public class RitardoCriteria extends AbstractORMCriteria {
 		ID = new IntegerExpression("ID", this);
 		permessoEntrataId = new IntegerExpression("permessoEntrata.ID", this);
 		permessoEntrata = new AssociationExpression("permessoEntrata", this);
-		appelloId = new IntegerExpression("appello.idAppello", this);
+		appelloId = new IntegerExpression("appello.ID", this);
 		appello = new AssociationExpression("appello", this);
 	}
 	
@@ -39,7 +41,7 @@ public class RitardoCriteria extends AbstractORMCriteria {
 	}
 	
 	public RitardoCriteria() throws PersistentException {
-		this(domain.model.RegistroScolasticoPersistentManager.instance().getSession());
+		this(domain.model.RSPersistentManager.instance().getSession());
 	}
 	
 	public PermessoEntrataCriteria createPermessoEntrataCriteria() {

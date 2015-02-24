@@ -14,9 +14,13 @@
 package domain.model;
 
 import java.util.List;
+
 import org.hibernate.criterion.DetachedCriteria;
 import org.orm.PersistentSession;
-import org.orm.criteria.*;
+import org.orm.criteria.AbstractORMDetachedCriteria;
+import org.orm.criteria.AssociationExpression;
+import org.orm.criteria.CollectionExpression;
+import org.orm.criteria.IntegerExpression;
 
 public class LibrettoAssenzeDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression ID;
@@ -30,7 +34,7 @@ public class LibrettoAssenzeDetachedCriteria extends AbstractORMDetachedCriteria
 	public LibrettoAssenzeDetachedCriteria() {
 		super(domain.model.LibrettoAssenze.class, domain.model.LibrettoAssenzeCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		studenteId = new IntegerExpression("studente.id", this.getDetachedCriteria());
+		studenteId = new IntegerExpression("studente.ID", this.getDetachedCriteria());
 		studente = new AssociationExpression("studente", this.getDetachedCriteria());
 		giustificate = new CollectionExpression("giustificate", this.getDetachedCriteria());
 		nonGiustificate = new CollectionExpression("nonGiustificate", this.getDetachedCriteria());
@@ -41,7 +45,7 @@ public class LibrettoAssenzeDetachedCriteria extends AbstractORMDetachedCriteria
 	public LibrettoAssenzeDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, domain.model.LibrettoAssenzeCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		studenteId = new IntegerExpression("studente.id", this.getDetachedCriteria());
+		studenteId = new IntegerExpression("studente.ID", this.getDetachedCriteria());
 		studente = new AssociationExpression("studente", this.getDetachedCriteria());
 		giustificate = new CollectionExpression("giustificate", this.getDetachedCriteria());
 		nonGiustificate = new CollectionExpression("nonGiustificate", this.getDetachedCriteria());

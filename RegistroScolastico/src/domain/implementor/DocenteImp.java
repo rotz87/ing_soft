@@ -1,8 +1,5 @@
 package domain.implementor;
 
-import java.util.Collection;
-import java.util.LinkedList;
-
 import domain.model.Classe;
 import domain.model.Docente;
 
