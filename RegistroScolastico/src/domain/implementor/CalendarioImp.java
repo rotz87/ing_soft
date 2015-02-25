@@ -2,7 +2,9 @@ package domain.implementor;
 
 import org.joda.time.LocalDate;
 
+import service.Stampa;
 import domain.model.Calendario;
+import domain.model.Giorno;
 
 public class CalendarioImp {
 	
@@ -39,9 +41,38 @@ public class CalendarioImp {
 		boolean festivo = false;
 		
 		festivo = calendario.getGiorniSettimanaliFestivi().contains(new Integer(data.dayOfWeek().get()));
+		
+		Stampa.stampaln();
+		Stampa.stampaln();
+		Stampa.stampaln(" festivo dopo il controllo dei giorni settimanali festivi:  " + festivo + "<<--------------------------------------------------------------------");
+		Stampa.stampaln();
+		Stampa.stampaln();
+		
+		Giorno g = new Giorno();
+		g.setData(data.toDate());
 		if (!festivo){
-			festivo = calendario.getGiorniFestivi().contains(data);
+//			festivo = calendario.getGiorniFestivi().contains(data);
+			festivo = calendario.getGiorniFestivi().contains(g);
 		}
+		
+		for (domain.model.Giorno gg : Calendario.getInstance().getGiorniFestivi()){
+			Stampa.stampaln();
+			Stampa.stampaln();
+			Stampa.stampaln("data festiva:  " + gg.getData()+ "<<--------------------------------------------------------------------");
+			Stampa.stampaln();
+			Stampa.stampaln();
+		}
+		Stampa.stampaln();
+		Stampa.stampaln();
+		Stampa.stampaln(" data odierna:  " + calendario.getInstance().getDataOdierna().toDate()+ "<<--------------------------------------------------------------------");
+		Stampa.stampaln();
+		Stampa.stampaln();
+		
+		Stampa.stampaln();
+		Stampa.stampaln();
+		Stampa.stampaln(" festivo dopo il controllo dei giorni festivi:  " + festivo + "<<--------------------------------------------------------------------");
+		Stampa.stampaln();
+		Stampa.stampaln();
 		
 		return festivo;
 	}

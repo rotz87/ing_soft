@@ -5,9 +5,11 @@ import java.util.Iterator;
 import java.util.TreeSet;
 
 import org.joda.time.DateTime;
+import org.joda.time.Days;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
+import domain.model.Calendario;
 import service.Stampa;
 
 //import org.orm.util.ORMMap;
@@ -118,6 +120,15 @@ public class TestDate {
 			Stampa.stampaln("localDate: " + data);
 			Stampa.stampaln("Date: " + d + " getMonth " + d.getMonth());
 			Stampa.stampaln("data convertita da Date a LocalDate: " + dd);
+			
+			Stampa.stampaln("_________________________________________________ ");
+			
+			LocalDate start = new LocalDate(2015,01,01);
+			LocalDate end = new LocalDate(2015,02,25);
+			
+			int diff = Days.daysBetween( start, end).getDays();
+			
+			Stampa.stampaln("diff: " + diff);
 			
 	}
 

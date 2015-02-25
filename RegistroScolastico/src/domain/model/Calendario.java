@@ -13,6 +13,8 @@
  */
 package domain.model;
 
+import org.orm.PersistentException;
+
 public class Calendario {
 	public Calendario() {
 	}
@@ -75,7 +77,16 @@ public class Calendario {
 	
 	public static synchronized domain.model.Calendario getInstance() {
 		if (instance == null){
-				instance = new Calendario();
+			try {
+				CalendarioCriteria criteria = new CalendarioCriteria();
+				criteria.ID.eq(1);
+				instance = criteria.uniqueCalendario();
+			} catch (PersistentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				instance = null;
+			}
+//				instance = new Calendario();
 			}
 			return instance;
 	}

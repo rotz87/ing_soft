@@ -243,7 +243,7 @@
   </Setting>
   <Setting type="1048576">
     <Driver>MySQL5 (Connector/J Driver)</Driver>
-    <DriverFiles>&lt;&lt;MySQL Connector/J 5.1.33&gt;&gt;</DriverFiles>
+    <DriverFiles>C:\Users\Fabio\Desktop\LORENZO_\UNIVAQ\Ingegneria Del Software\mysql-connector-java-5.1.33\mysql-connector-java-5.1.33-bin.jar</DriverFiles>
     <Dialect>org.hibernate.dialect.MySQL5InnoDBDialect</Dialect>
     <DriverClass>com.mysql.jdbc.Driver</DriverClass>
     <URL>jdbc:mysql://localhost:3306/registro_scolastico</URL>

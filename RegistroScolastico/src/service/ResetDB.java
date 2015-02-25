@@ -1,5 +1,6 @@
 package service;
 
+import org.apache.tools.ant.types.resources.comparators.Date;
 import org.joda.time.LocalDate;
 import org.orm.ORMDatabaseInitiator;
 import org.orm.PersistentException;
@@ -7,8 +8,10 @@ import org.orm.PersistentTransaction;
 
 import domain.model.Appello;
 import domain.model.Assenza;
+import domain.model.Calendario;
 import domain.model.Classe;
 import domain.model.Docente;
+import domain.model.Giorno;
 import domain.model.LibrettoAssenze;
 import domain.model.RSPersistentManager;
 import domain.model.RegistroAssenze;
@@ -444,6 +447,14 @@ public class ResetDB {
 			// FINE CODICE PRESO DA DBFake
 			
 			RSPersistentManager.instance().getSession().save(scuola1);
+			
+			
+//			Giorno g = new Giorno();
+//			LocalDate data = new LocalDate(2014,12,17);
+//			g.setData(data.toDate()); 
+//			Calendario.getInstance().getGiorniFestivi().add(g);
+//			
+//			RSPersistentManager.instance().getSession().save(Calendario.getInstance());
 			
 //			Classe primaA = new Classe("1A");
 //			scuola1.getClassi().add(primaA);

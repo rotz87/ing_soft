@@ -13,4 +13,7 @@ public class Stampa {
 	public static void stampa(String stringa){
 		System.out.print(stringa);
 	}
+	public static void stampa(Object object){
+		System.out.println(object);
+	}
 }

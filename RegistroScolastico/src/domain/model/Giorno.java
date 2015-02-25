@@ -43,6 +43,12 @@ public class Giorno {
 		return data;
 	}
 	
+	private domain.implementor.GiornoImp implementor = new domain.implementor.GiornoImp();
+	
+	public boolean equals(java.lang.Object obj) {
+		return this.implementor.equals(this, obj);
+	}
+	
 	public String toString() {
 		return String.valueOf(getID());
 	}
