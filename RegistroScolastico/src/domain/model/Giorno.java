@@ -38,6 +38,8 @@ public class Giorno {
 	}
 	
 	public java.util.Date getData() {
+		java.util.Date data;
+		data = new java.util.Date(this.data.getTime());
 		return data;
 	}
 	

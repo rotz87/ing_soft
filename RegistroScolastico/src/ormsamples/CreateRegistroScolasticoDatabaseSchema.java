@@ -4,7 +4,7 @@
  */
 package ormsamples;
 
-import org.orm.ORMDatabaseInitiator;
+import org.orm.*;
 public class CreateRegistroScolasticoDatabaseSchema {
 	public static void main(String[] args) {
 		try {
