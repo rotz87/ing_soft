@@ -33,50 +33,53 @@ appelloControllers.controller('riempiAppelli', ['$scope', function($scope) {
 });
 
 appelloControllers.controller('templateTitolo', ['$scope','$location','$rootScope', function($scope, $location,$rootScope){
-	$scope.testTitle
+	$scope.testTitle;
 	$rootScope.$on("$routeChangeSuccess", function(event, currentRoute, previousRoute) {
 	    $rootScope.title = currentRoute.title;
 	    $scope.testTitle = $rootScope.title;
 	});
-	//console.log($scope.testTitle);
-	}]);
-
+}]);
+/*
+ * Controller utilizzato per visualizzare l'elenco degli appelli in base alla classe selezionata
+ */
 appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$location','$http','$rootScope','$q', function($scope, Appello, $location, $http, $rootScope, $q) {
 	  var newUri;
 	  $scope.idClasse = 0;
-	  var nuovoAppello = {}
-	  nuovoAppello = $location.path().split("/")
+	  var nuovoAppello = {};
+	  // parsing del path dell'appello selezionato
+	  nuovoAppello = $location.path().split("/");
 	  $scope.idClasse = nuovoAppello[1];
 	  
 	  $scope.mioController = "avviaAppello";
-	  
-//	  $scope.elencoAppelli = [{idAppello:"1", data:'naomi'},
-//	                          {idAppello:"2", data:'peppe'},
-//	                          {idAppello:"3", data:'giu'},
-//	                          {idAppello:"4", data:'pic'},
-//	                          {idAppello:null, data:'tiz', appelloAvviabile:true},
-//	                          {idAppello:null, data:'tiz', appelloAvviabile:false}
-//	                          ];
 	  $scope.predicate="-data";
-	  $scope.elencoAppelli={}
+	  $scope.elencoAppelli={};
 	  $scope.elencoAppelli2 = Appello.myQuery2({idClasse:$scope.idClasse},function(response,header){
 		  //successo
 	  },function(response,header){
 		  //fallimento
 	  })
+	  /* 
+	   * funzione avviata quando viene restituita la risposta dal server
+	   * gestisce l'elenco degli appelli per poter valutare l'inserimento dell'appelloAvviabile
+	   * nell'elenco degli appelli
+	   */
 	  $q.when($scope.elencoAppelli2.$promise).then(function(result){
 		  var aggiungiAppello = false;
 		  var trovato = false;
 		  $scope.elencoAppelli = result.appelli;
 		  for (key in result.appelli)
 		  {
-			  if (result.appelli[key].data == result.dataAppelloAvviabile)
+			  if (new Date(result.appelli[key].data).toDateString() == new Date(result.dataAppelloAvviabile).toDateString())
 			  {
 				  trovato = true;
 			  }
 		  }
 		  if(trovato == false)
 		  {
+			  /*
+			   * l'appello con dataAppelloAvviabile non è presente 
+			   * nell'elenco degi appelli che sono arrivati dal server
+			   */
 			  var newAppello = {};
 			  newAppello.data = result.dataAppelloAvviabile;
 			  newAppello.idAppello = null;
@@ -88,49 +91,6 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$locat
 		  $scope.erroreSistema = 'è avvenuto un errore, probabilmente la classe selezionata non esiste'
 	  })
 	  
-//	  var creaAppello = false;
-//	  for(var i=0;i<$scope.elencoAppelli.length;i++)
-//		  {
-//		  	if($scope.elencoAppelli[i].esiste == "true"){
-//		  		$scope.elencoAppelli[i].click = "";
-//		  	}
-//		  	else if ($scope.elencoAppelli[i].esiste == "false" && creaAppello == false)
-//		  	{
-//		  		creaAppello = true;
-//		  		$scope.elencoAppelli[i].click = "creaAppello";
-//		  	}
-//		  	else
-//		  	{
-//		  		$scope.elencoAppelli[i].click = "";
-//		  	}
-//		  }
-	  /*
-	   * codice per la prova dei dati json
-	   * {
-            'id': '0',
-            'data': '1288323623006',
-            'studenti': [
-                {
-                    'idStudente': '00000001',
-                    'nome': 'Maccio',
-                    'cognome': 'Capatonda'
-                },
-                {
-                    'idStudente': '00000002',
-                    'nome': 'Maccio2',
-                    'cognome': 'Capatonda2'
-                },
-                {
-                    'idStudente': '00000003',
-                    'nome': 'Maccio3',
-                    'cognome': 'Capatonda3'
-                }
-            ]
-        }
-	   *
-	   */
-	  
-	  
 	  var nuovoUri=[];
 	  $scope.appelloCreato = {};
 		$scope.creaAppello = function(miaClasse){
@@ -140,9 +100,6 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$locat
 			}
 			
 			Appello.myPost({idClasse:$scope.idClasse},function(data,header){
-				
-				//console.log(data);
-				//console.log(header("location"));
 				$scope.appelloUri = header("location");
 				nuovoUri = $scope.appelloUri.split("/");
 				
@@ -151,16 +108,12 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$locat
 				$rootScope.mioDato = {};
 				$rootScope.nuovoAppello = {};
 			    $rootScope.nuovoAppello = PostsCtrlAjax($scope, $http, $scope.myUrl, $rootScope.mioDato, $location)
-
-			    //$location.path($rootScope.nuovoAppello.url);
 			});
 		}
 		$scope.mostraAppello = function(idAppello){
-			$scope.idAppello = idAppello
-			$location.path($location.path()+"appelli/"+idAppello)
+			$scope.idAppello = idAppello;
+			$location.path($location.path()+"appelli/"+idAppello);
 		}
-//		console.log("idAppello: ")
-//		console.log($scope.idAppello)
 		$rootScope.idClasse = $scope.idClasse;
 		$rootScope.idAppello = null;
 	}])
@@ -184,73 +137,37 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 			{
 				if($scope.appelloSelezionato.data.links[key].rel == "self"){
 					resourceUrl = $scope.appelloSelezionato.data.links[key].href;
-//					console.log(resourceUrl)
 					nuovoAppello = $location.path().split("/")
 				}
 			}
 			$scope.idClasse = nuovoAppello[1];
 			$scope.idAppello = nuovoAppello[3];
 			$scope.mioAppello = retrieveObjectFromUrl($http, resourceUrl);
-			path = resourceUrl
+			path = resourceUrl;
 		}
 		else
 		{
-			nuovoAppello = $location.path().split("/")
+			nuovoAppello = $location.path().split("/");
 			$scope.idClasse = nuovoAppello[1];
 			$scope.idAppello = nuovoAppello[3];
-			path = "/RegistroScolastico/api/classi/"+$scope.idClasse+"/appelli/"+$scope.idAppello
-//			Appello.myQuery2({idClasse : $scope.idClasse, idAppello : $scope.idAppello}, function(response,header){
-//				$scope.appelloSelezionato = response;
-//			})
+			path = "/RegistroScolastico/api/classi/"+$scope.idClasse+"/appelli/"+$scope.idAppello;
 		}
 		/*
 		 * codice di esempio di un appello:
 		 * 
 		 */
-//		$scope.appelloTemp = {
-//	            'id': '0',
-//	            'data': '1288323623006',
-//	            'assenzePrese' : 'false',
-//	            'studenti': [
-//	                {
-//	                    'idStudente': '00000001',
-//	                    'nome': 'Mario',
-//	                    'cognome': 'Rossi',
-//	                    'assenza' : 'true'
-//	                },
-//	                {
-//	                    'idStudente': '00000002',
-//	                    'nome': 'Giorgio',
-//	                    'cognome': 'Ughi',
-//	                    'assenza' : 'false'
-//	                },
-//	                {
-//	                    'idStudente': '00000003',
-//	                    'nome': 'Aldo',
-//	                    'cognome': 'Verdi',
-//	                    'assenza' : 'true'
-//	                }
-//	            ],
-//				'assenzeSemplici' : [
-//					1,
-//					4,
-//					2
-//				]
-//	        }
-		$scope.predicate = 'cognome'
+		$scope.predicate = 'cognome';
 
 		var appelloStudenti = new Appello();
-		appelloStudenti.idClasse = $scope.idClasse
+		appelloStudenti.idClasse = $scope.idClasse;
 		$scope.studenti = Appello.listaStudenti(
 				{idClasse:$scope.idClasse}, 
 				function(response, header){
-//					console.log("recupero riuscito mystudenti, leggi la risposta");
-//					console.log(response);
-//					console.log($scope.idClasse)
+					//successo
 				},
 				function(response,header){
-					console.log("non sono riuscito a caricare gli studenti")
-					$scope.erroreSistema.studenti = "errore nel recupero degli studenti!!!!"
+					//fallimento
+					$scope.erroreSistema.studenti = "non sono riuscito a caricare gli studenti"
 				});
 
 		var appelloCorrente = new Appello();
@@ -260,11 +177,11 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 				{idClasse:$scope.idClasse,idAppello:$scope.idAppello},
 				function (response,header)
 				{
-					
+					//successo
 				},
 				function(response, header)
 				{
-					$scope.erroreSistema.appello = "errore nel recupero dell'appello!!!!"
+					$scope.erroreSistema.appello = "non sono riuscito a caricare l'appello!!!!"
 				})
 
 		
@@ -272,60 +189,16 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 				{idClasse:$scope.idClasse,idAppello:$scope.idAppello},
 				function(response,header)
 				{
-					//$scope.appello.assenze = response.assenti
-					//$scope.appello.assenze = response.assenti;
-					//$scope.appello.assenzeSemplici = $filter('assente')($scope.appello.assenze,$scope.studenti);
+					//successo
 				},
 				function(response,header)
 				{
-					console.log("fallito il recupero degli assenti nell'appello")
-					console.log(response)
-					console.log(response.status)
-					console.log(response.statusText)
-					$scope.erroreSistema.assenti = "errore nel recupero assenti!!!!"
-				})
-		
-//		Appello.myQuery2({idClasse:$scope.idClasse, idAppello:$scope.idAppello},function(response,header){
-//			$scope.appello = response;
-//			console.log("appello caricato")
-////			$scope.appello.data = response.data;
-////			$scope.appelloTest = response;
-////			$scope.appello.studenti = response.studenti;
-////			$scope.appello.assenze = response.assenze;
-////			
-////			$scope.appello.assenzePrese = response.assenzePrese;
-////			var arrayStudenti = [];
-////			for (var j = 0; j < $scope.appello.studenti.length;j++)
-////			{
-////				//arrayStudenti[j] = $scope.appello.studenti[j].idStudente
-////				arrayStudenti[j] = {idStudente : $scope.appello.studenti[j].idStudente}
-////			}
-//			Appello.listaStudenti({idClasse:$scope.idClasse}, function(response, header){
-//				//successo
-//				console.log(response)
-//				$scope.studenti = response
-//				console.log("recupero riuscito, leggi il response");
-//				console.log(response);
-//				Appello.recuperaAssenti({idClasse:$scope.idClasse,idAppello:$scope.idAppello},
-//						function(response,header){
-//							$scope.appello.assenze = response.assenti;
-//							$scope.appello.assenzeSemplici = $filter('assente')($scope.appello.assenze,$scope.studenti);
-//						},function(response,header){console.log("aaa")})
-//				console.log("fine sincrono studenti")
-//			},
-//			function(response,header){
-//				//fallimento
-//				console.log("recupero fallito all'url selezionato");
-//				console.log(response)
-//				console.log(response.status)
-//				console.log(response.statusText)
-//			})
-//			//$scope.appello.assenze = $scope.appello.assenzeSemplici
-//			//$scope.appello.assenzeSemplici = $filter('assente')($scope.appello.assenze,$scope.appello.studenti);
-//
-//		});
-
-		//$scope.appello.studenti = $scope.studenti;
+					$scope.erroreSistema.assenti = "fallito il recupero degli assenti nell'appello";
+				});
+		/*
+		 * Funzione richiamata ogni volta che viene cliccata una checkbox per prendere
+		 * l'assenza di uno studente
+		 */
 		$scope.segnaAssenza = function (idStudente){
 			if ($scope.appello.assenzeSemplici[idStudente].idStudente == null)
 			{
@@ -334,7 +207,7 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 				{
 					myId = idStudente;
 				}
-				$scope.assenti.assenti.push(idStudente)
+				$scope.assenti.assenti.push(idStudente);
 			}
 			else
 			{
@@ -358,10 +231,10 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 				//successo
 				$scope.appello.assenzePrese = true;
 				$scope.myInput.messaggio = "le assenze sono state registrate";
-				$scope.modalTitle = "Appello registrato"
-				$scope.modalColor = "modal-header-success"
-				$scope.modalBtn = "btn-success"
-				$scope.bottoneDesc="aggiorna appello"
+				$scope.modalTitle = "Appello registrato";
+				$scope.modalColor = "modal-header-success";
+				$scope.modalBtn = "btn-success";
+				$scope.bottoneDesc="aggiorna appello";
 				$scope.controllaAppello();
 			},function(data){
 				//fallimento
@@ -369,9 +242,9 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 				$scope.myInput.messaggio = "è avvenuto un errore nella registrazione";
 				$scope.myInput.status = data.status;
 				$scope.myInput.statusText = data.statusText;
-				$scope.modalTitle = "Errore"
-				$scope.modalColor = "modal-header-danger"
-				$scope.modalBtn = "btn-danger"
+				$scope.modalTitle = "Errore";
+				$scope.modalColor = "modal-header-danger";
+				$scope.modalBtn = "btn-danger";
 			})
 		};
 		
@@ -380,7 +253,7 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 			if ($scope.appello.assenzePrese)
 			{
 				//aggiornamento dell'appello da inviare con ritardi, uscite anticipate, giustificazioni
-				$scope.nonSupportato()
+				$scope.nonSupportato();
 			}
 			else
 			{
@@ -411,7 +284,7 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 		$scope.conferma = function()
 		{
 			$('#myModal').on('shown.bs.modal', function () {
-			    $('#myInput').focus()
+			    $('#myInput').focus();
 			  })
 		}
 		$scope.gestisciRitardo = function (){
@@ -456,15 +329,14 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 				$scope.studenti[key].disabilitaRitardo = !assente || $scope.appello.assenzePrese == false;
 			}
 		}
-		//$scope.controllaAppello()
 }]);
 
 function PostsCtrlAjax($scope, $http, myUri, destinazione, $location) {
-    var risorsa = {}
+    var risorsa = {};
     $http({method: 'GET', url: myUri }).success(function(data,header) {
         destinazione.data = data;
-        destinazione.url = $scope.idClasse+"/appelli/"+data.idAppello
-        risorsa = destinazione
+        destinazione.url = $scope.idClasse+"/appelli/"+data.idAppello;
+        risorsa = destinazione;
         $location.path(destinazione.url);
     });
     return risorsa;
@@ -491,17 +363,17 @@ appelloControllers.controller('popolamentoNavigazione', ['$scope','Appello','$q'
 							{
 								if (response[classe].idClasse == $scope.selezioneAttuale.idClasse)
 									{
-										$scope.selezioneAttuale.classe = response[classe]
+										$scope.selezioneAttuale.classe = response[classe];
 									}
 								}
 							},
 					function(response,header){
 						//fallimento
-					})
+					});
 			}
 		else if (newValue != oldValue)
 		{
-
+			
 			$scope.elencoClassi = Appello.elencoClassi({},function(response,header)
 					{
 						//successo
@@ -516,33 +388,29 @@ appelloControllers.controller('popolamentoNavigazione', ['$scope','Appello','$q'
 				  //fallimento
 			  })
 		}
-		else{
-		}
-		
-		$scope.selezioneAttuale = {}
+		$scope.selezioneAttuale = {};
 		$scope.selezioneAttuale.idClasse = $scope.idClasse;
 		$scope.selezioneAttuale.idAppello = $scope.idAppello;
 		
 		$scope.$watch("idAppello",function(newAppello,oldAppello){
 			if(newAppello != null)
 			{
-			$scope.selezioneAttuale.idAppello = newAppello
-			$scope.elencoAppelli = Appello.myQuery2({idClasse:$scope.idClasse},
+				$scope.selezioneAttuale.idAppello = newAppello;
+				$scope.elencoAppelli = Appello.myQuery2({idClasse:$scope.idClasse},
 					function(response,header)
-					{
-					  //successo
-					for(appello in response.appelli)
-					{
-						if (response.appelli[appello].idAppello == $scope.selezioneAttuale.idAppello)
-							{
-								$scope.selezioneAttuale.appello = response.appelli[appello]
+						{
+						  //successo
+						for(appello in response.appelli)
+						{
+							if (response.appelli[appello].idAppello == $scope.selezioneAttuale.idAppello)
+								{
+									$scope.selezioneAttuale.appello = response.appelli[appello];
+								}
 							}
-						}
-				  },function(response,header){
-					  //fallimento
-				  })
+						},function(response,header){
+							//fallimento
+						});
 			}
 		})
 	})
-
 }]);
