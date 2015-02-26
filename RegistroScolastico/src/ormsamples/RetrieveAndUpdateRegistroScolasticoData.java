@@ -65,17 +65,13 @@ public class RetrieveAndUpdateRegistroScolasticoData {
 			// Update the properties of the persistent object
 			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelDocente);
 			
-			domain.model.Calendario ldomainmodelCalendario= (domain.model.Calendario)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Calendario").setMaxResults(1).uniqueResult();
+			domain.model.GiornoFestivo ldomainmodelGiornoFestivo= (domain.model.GiornoFestivo)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.GiornoFestivo").setMaxResults(1).uniqueResult();
 			// Update the properties of the persistent object
-			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelCalendario);
+			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelGiornoFestivo);
 			
-			domain.model.Giorno ldomainmodelGiorno= (domain.model.Giorno)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Giorno").setMaxResults(1).uniqueResult();
+			domain.model.GiornoSettimanaleFestivo ldomainmodelGiornoSettimanaleFestivo= (domain.model.GiornoSettimanaleFestivo)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.GiornoSettimanaleFestivo").setMaxResults(1).uniqueResult();
 			// Update the properties of the persistent object
-			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelGiorno);
-			
-			domain.model.GiornoSettimanale ldomainmodelGiornoSettimanale= (domain.model.GiornoSettimanale)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.GiornoSettimanale").setMaxResults(1).uniqueResult();
-			// Update the properties of the persistent object
-			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelGiornoSettimanale);
+			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelGiornoSettimanaleFestivo);
 			
 			t.commit();
 		}
@@ -169,23 +165,17 @@ public class RetrieveAndUpdateRegistroScolasticoData {
 		//ldomainmodelDocenteCriteria.ID.eq();
 		System.out.println(ldomainmodelDocenteCriteria.uniqueDocente());
 		
-		System.out.println("Retrieving Calendario by CalendarioCriteria");
-		domain.model.CalendarioCriteria ldomainmodelCalendarioCriteria = new domain.model.CalendarioCriteria();
+		System.out.println("Retrieving GiornoFestivo by GiornoFestivoCriteria");
+		domain.model.GiornoFestivoCriteria ldomainmodelGiornoFestivoCriteria = new domain.model.GiornoFestivoCriteria();
 		// Please uncomment the follow line and fill in parameter(s)
-		//ldomainmodelCalendarioCriteria.ID.eq();
-		System.out.println(ldomainmodelCalendarioCriteria.uniqueCalendario());
+		//ldomainmodelGiornoFestivoCriteria.ID.eq();
+		System.out.println(ldomainmodelGiornoFestivoCriteria.uniqueGiornoFestivo());
 		
-		System.out.println("Retrieving Giorno by GiornoCriteria");
-		domain.model.GiornoCriteria ldomainmodelGiornoCriteria = new domain.model.GiornoCriteria();
+		System.out.println("Retrieving GiornoSettimanaleFestivo by GiornoSettimanaleFestivoCriteria");
+		domain.model.GiornoSettimanaleFestivoCriteria ldomainmodelGiornoSettimanaleFestivoCriteria = new domain.model.GiornoSettimanaleFestivoCriteria();
 		// Please uncomment the follow line and fill in parameter(s)
-		//ldomainmodelGiornoCriteria.ID.eq();
-		System.out.println(ldomainmodelGiornoCriteria.uniqueGiorno());
-		
-		System.out.println("Retrieving GiornoSettimanale by GiornoSettimanaleCriteria");
-		domain.model.GiornoSettimanaleCriteria ldomainmodelGiornoSettimanaleCriteria = new domain.model.GiornoSettimanaleCriteria();
-		// Please uncomment the follow line and fill in parameter(s)
-		//ldomainmodelGiornoSettimanaleCriteria.ID.eq();
-		System.out.println(ldomainmodelGiornoSettimanaleCriteria.uniqueGiornoSettimanale());
+		//ldomainmodelGiornoSettimanaleFestivoCriteria.ID.eq();
+		System.out.println(ldomainmodelGiornoSettimanaleFestivoCriteria.uniqueGiornoSettimanaleFestivo());
 		
 	}
 	

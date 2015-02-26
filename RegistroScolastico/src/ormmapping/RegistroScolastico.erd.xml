@@ -560,35 +560,10 @@
       <UserTypes/>
     </Column>
   </Entity>
-  <Entity name="Calendario">
+  <Entity name="GiornoFestivo">
     <Column name="ID">
       <PrimaryKey>true</PrimaryKey>
       <ForeignKey>false</ForeignKey>
-      <Type>9</Type>
-      <Length>11</Length>
-      <Nullable>false</Nullable>
-      <IDGenerator>native</IDGenerator>
-      <Unique>false</Unique>
-      <Index>false</Index>
-      <UserTypes/>
-    </Column>
-  </Entity>
-  <Entity name="Giorno">
-    <Column name="ID">
-      <PrimaryKey>true</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
-      <Type>9</Type>
-      <Length>11</Length>
-      <Nullable>false</Nullable>
-      <IDGenerator>native</IDGenerator>
-      <Unique>false</Unique>
-      <Index>false</Index>
-      <UserTypes/>
-    </Column>
-    <Column name="CalendarioID">
-      <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>Calendario.ID</ReferencedColumn>
       <Type>9</Type>
       <Length>11</Length>
       <Nullable>false</Nullable>
@@ -609,22 +584,10 @@
       <UserTypes/>
     </Column>
   </Entity>
-  <Entity name="GiornoSettimanale">
+  <Entity name="GiornoSettimanaleFestivo">
     <Column name="ID">
       <PrimaryKey>true</PrimaryKey>
       <ForeignKey>false</ForeignKey>
-      <Type>9</Type>
-      <Length>11</Length>
-      <Nullable>false</Nullable>
-      <IDGenerator>native</IDGenerator>
-      <Unique>false</Unique>
-      <Index>false</Index>
-      <UserTypes/>
-    </Column>
-    <Column name="CalendarioID">
-      <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>Calendario.ID</ReferencedColumn>
       <Type>9</Type>
       <Length>11</Length>
       <Nullable>false</Nullable>
@@ -639,17 +602,6 @@
       <Type>9</Type>
       <Length>11</Length>
       <Nullable>false</Nullable>
-      <IDGenerator>native</IDGenerator>
-      <Unique>false</Unique>
-      <Index>false</Index>
-      <UserTypes/>
-    </Column>
-    <Column name="CalendarioIndex">
-      <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
-      <Type>9</Type>
-      <Length>11</Length>
-      <Nullable>true</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
@@ -866,26 +818,6 @@
     <ReferencedTable>RegistroAssenze</ReferencedTable>
     <Columns>
       <Column>RegistroAssenzeID</Column>
-    </Columns>
-    <RefColumns>
-      <Column>ID</Column>
-    </RefColumns>
-  </ForeignKey>
-  <ForeignKey name="FKGiorno540780">
-    <ReferenceTable>Giorno</ReferenceTable>
-    <ReferencedTable>Calendario</ReferencedTable>
-    <Columns>
-      <Column>CalendarioID</Column>
-    </Columns>
-    <RefColumns>
-      <Column>ID</Column>
-    </RefColumns>
-  </ForeignKey>
-  <ForeignKey name="FKGiornoSett66416">
-    <ReferenceTable>GiornoSettimanale</ReferenceTable>
-    <ReferencedTable>Calendario</ReferencedTable>
-    <Columns>
-      <Column>CalendarioID</Column>
     </Columns>
     <RefColumns>
       <Column>ID</Column>

@@ -25,11 +25,10 @@ License Type: Academic
 		<!-- mapping files -->
 		<mapping resource="ormmapping/domain/model/Appello.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/Assenza.hbm.xml" />
-		<mapping resource="ormmapping/domain/model/Calendario.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/Classe.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/Docente.hbm.xml" />
-		<mapping resource="ormmapping/domain/model/Giorno.hbm.xml" />
-		<mapping resource="ormmapping/domain/model/GiornoSettimanale.hbm.xml" />
+		<mapping resource="ormmapping/domain/model/GiornoFestivo.hbm.xml" />
+		<mapping resource="ormmapping/domain/model/GiornoSettimanaleFestivo.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/Giustificazione.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/Indirizzo.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/LibrettoAssenze.hbm.xml" />

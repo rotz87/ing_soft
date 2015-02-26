@@ -55,7 +55,9 @@ public class RegistroAssenzeImp {
 		Appello appelloOdierno = null;
 		LocalDate dataDiRiferimento = Calendario.getInstance().getDataOdierna();
 		if(this.esisteAppello(registroAssenze, dataDiRiferimento)){
-			appelloOdierno = registroAssenze.getAppelli().get(dataDiRiferimento.toDate().hashCode());
+			
+			appelloOdierno = registroAssenze.getAppelli().get(Calendario.getInstance().getDaysFromZero(dataDiRiferimento.toDate()));
+
 		}else{
 			throw new IllegalStateException("APPELLO ODIERNO INESISTENTE!");
 		}
@@ -73,7 +75,7 @@ public class RegistroAssenzeImp {
 			if(!Calendario.getInstance().isOggiFestivo()){
 				//DA RIVEDERE E CAMBIARE
 				//TODO 
-				registroAssenze.getAppelli().put(dataRif.toDate().hashCode(), new Appello(dataRif));
+				registroAssenze.getAppelli().put(Calendario.getInstance().getDaysFromZero(dataRif.toDate()), new Appello(dataRif));
 			}else{
 				throw new IllegalStateException(" APPELLO NON AVVIABILE PER OGGI ");
 			}
@@ -97,7 +99,7 @@ public class RegistroAssenzeImp {
 
 	public boolean esisteAppello(RegistroAssenze registroAssenze, LocalDate dataDiRiferimento){
 
-		return registroAssenze.getAppelli().containsKey(dataDiRiferimento.toDate().hashCode());
+		return registroAssenze.getAppelli().containsKey(Calendario.getInstance().getDaysFromZero(dataDiRiferimento.toDate()));
 	
 	}
 	

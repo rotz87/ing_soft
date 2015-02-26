@@ -1,106 +1,95 @@
-/**
- * "Visual Paradigm: DO NOT MODIFY THIS FILE!"
- * 
- * This is an automatic generated file. It will be regenerated every time 
- * you generate persistence class.
- * 
- * Modifying its content may cause the program not work, or your work may lost.
- */
-
-/**
- * Licensee: Universita degli Studi dell'Aquila
- * License Type: Academic
- */
 package domain.model;
 
-import org.orm.PersistentException;
+import java.util.*;
+
+import domain.implementor.*;
+
+import org.eclipse.jetty.jndi.local.localContextRoot;
+import org.joda.time.*;
+
+import service.Stampa;
 
 public class Calendario {
-	public Calendario() {
+
+	private static Calendario instance;
+	private Collection<GiornoFestivo> giorniFestivi = new LinkedList<GiornoFestivo>();
+	private Collection<GiornoSettimanaleFestivo> giorniSettimanaliFestivi = new LinkedList<GiornoSettimanaleFestivo>();
+	private LocalDate dataOdierna;
+	final private LocalDate dataZero = new LocalDate(0L);
+
+	private Calendario(){
+		this.dataOdierna = calcolaDataOdierna();
 	}
 	
-	private int ID;
-	
-	private java.util.Set<domain.model.Giorno> giorniFestivi = new java.util.LinkedHashSet<domain.model.Giorno>();
-	
-	private java.util.List<domain.model.GiornoSettimanale> giorniSettimanaliFestivi = new java.util.LinkedList<domain.model.GiornoSettimanale>();
-	
-	private void setID(int value) {
-		this.ID = value;
+	public static synchronized Calendario getInstance() {
+		if(instance == null){
+			instance = new Calendario();
+		}
+		return instance;
 	}
-	
-	public int getID() {
-		return ID;
+
+	public org.joda.time.LocalDate getDataOdierna() {
+		LocalDate data =  this.calcolaDataOdierna();
+		if(!(this.dataOdierna.isEqual(data))){
+			this.dataOdierna = data;
+		}
+		return this.dataOdierna;	
 	}
-	
-	public int getORMID() {
-		return getID();
-	}
-	
+
 	/**
-	 * private LocalDate dataOdierna;
+	 * Per la prove lasciamo la date 17/12/2014 a regime bisogna fargli prendere la data odierna
 	 */
-	public void setGiorniFestivi(java.util.Set<domain.model.Giorno> value) {
-		this.giorniFestivi = value;
+	private LocalDate calcolaDataOdierna(){
+		return new LocalDate(2014,12,17);//a regime deve prendere la data odierna affettiva per ora per i test prende la data de 17 12 2014
 	}
-	
-	/**
-	 * private LocalDate dataOdierna;
-	 */
-	public java.util.Set<domain.model.Giorno> getGiorniFestivi() {
-		return giorniFestivi;
-	}
-	
-	
-	public void setGiorniSettimanaliFestivi(java.util.List<domain.model.GiornoSettimanale> value) {
-		this.giorniSettimanaliFestivi = value;
-	}
-	
-	public java.util.List<domain.model.GiornoSettimanale> getGiorniSettimanaliFestivi() {
-		return giorniSettimanaliFestivi;
-	}
-	
-	
-	private domain.implementor.CalendarioImp implementor =  new domain.implementor.CalendarioImp();
-	
-	private static domain.model.Calendario instance;
 	
 	/**
 	 * public LocalDate prendiDataOdierna(){
 	 * 
 	 * return implementor.prendiDataOdierna(this);
 	 * }
+	 * @param data
 	 */
-	public boolean isFestivo(org.joda.time.LocalDate data) {
-		return this.implementor.isFestivo(this, data);
+	public boolean isFestivo(LocalDate data){
+		boolean festivo = false;
+		
+		festivo = getGiorniSettimanaliFestivi().contains(new GiornoSettimanaleFestivo(data.getDayOfWeek()));
+				
+		if (!festivo){
+			festivo = getGiorniFestivi().contains(new GiornoFestivo(data.toDate()));
+		}
+				
+		return festivo;
 	}
-	
-	public static synchronized domain.model.Calendario getInstance() {
-		if (instance == null){
-			try {
-				CalendarioCriteria criteria = new CalendarioCriteria();
-				criteria.ID.eq(1);
-				instance = criteria.uniqueCalendario();
-			} catch (PersistentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				instance = null;
-			}
-//				instance = new Calendario();
-			}
-			return instance;
-	}
-	
-	public org.joda.time.LocalDate getDataOdierna() {
-		return this.implementor.getDataOdierna();
-	}
-	
+
 	public boolean isOggiFestivo() {
-		return this.implementor.isOggiFestivo(this);
+		return isFestivo(getDataOdierna());
 	}
 	
-	public String toString() {
-		return String.valueOf(getID());
+	public int getDaysFromZero(Date data){
+		LocalDate lData = new LocalDate(data);
+		return Days.daysBetween(dataZero, lData).getDays();
+		
 	}
-	
+
+	public Collection<GiornoSettimanaleFestivo> getGiorniSettimanaliFestivi() {
+		return this.giorniSettimanaliFestivi;
+	}
+
+	/**
+	 * 
+	 * @param giorniSettimanaliFestivi
+	 */
+	public void setGiorniSettimanaliFestivi(LinkedList<GiornoSettimanaleFestivo> giorniSettimanaliFestivi) {
+		this.giorniSettimanaliFestivi = giorniSettimanaliFestivi;
+	}
+
+	public Collection<GiornoFestivo> getGiorniFestivi() {
+		return giorniFestivi;
+	}
+
+	public void setGiorniFestivi(LinkedList<GiornoFestivo> giorniFestivi) {
+		this.giorniFestivi = giorniFestivi;
+	}
+
 }

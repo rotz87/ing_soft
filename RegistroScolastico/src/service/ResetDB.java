@@ -1,6 +1,5 @@
 package service;
 
-import org.apache.tools.ant.types.resources.comparators.Date;
 import org.joda.time.LocalDate;
 import org.orm.ORMDatabaseInitiator;
 import org.orm.PersistentException;
@@ -11,7 +10,7 @@ import domain.model.Assenza;
 import domain.model.Calendario;
 import domain.model.Classe;
 import domain.model.Docente;
-import domain.model.Giorno;
+import domain.model.GiornoSettimanaleFestivo;
 import domain.model.LibrettoAssenze;
 import domain.model.RSPersistentManager;
 import domain.model.RegistroAssenze;
@@ -339,17 +338,18 @@ public class ResetDB {
 			
 			
 //			regAssPrimaA.getAppelli().put(appello8_12_14.getData(), appello8_12_14);
-			regAssPrimaA.getAppelli().put((new LocalDate(appello_1A_10_12_14.getData()).toDate().hashCode()), appello_1A_10_12_14);
-			regAssPrimaA.getAppelli().put((new LocalDate(appello_1A_11_12_14.getData()).toDate().hashCode()), appello_1A_11_12_14);
-			regAssPrimaA.getAppelli().put((new LocalDate(appello_1A_12_12_14.getData())).toDate().hashCode(), appello_1A_12_12_14);
-			regAssPrimaA.getAppelli().put((new LocalDate(appello_1A_13_12_14.getData())).toDate().hashCode(), appello_1A_13_12_14);
+
+			regAssPrimaA.getAppelli().put( Calendario.getInstance().getDaysFromZero(appello_1A_10_12_14.getData()) , appello_1A_10_12_14);
+			regAssPrimaA.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_1A_11_12_14.getData()), appello_1A_11_12_14);
+			regAssPrimaA.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_1A_12_12_14.getData()), appello_1A_12_12_14);
+			regAssPrimaA.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_1A_13_12_14.getData()), appello_1A_13_12_14);
 //			regAssPrimaA.getAppelli().put(appello14_12_14.getData(), appello14_12_14);
-			regAssPrimaA.getAppelli().put((new LocalDate(appello_1A_15_12_14.getData())).toDate().hashCode(), appello_1A_15_12_14);
-			regAssPrimaA.getAppelli().put((new LocalDate(appello_1A_16_12_14.getData())).toDate().hashCode(), appello_1A_16_12_14);
+			regAssPrimaA.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_1A_15_12_14.getData()), appello_1A_15_12_14);
+			regAssPrimaA.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_1A_16_12_14.getData()), appello_1A_16_12_14);
 			
-			regAssSecondaA.getAppelli().put((new LocalDate(appello_2A_16_12_14.getData())).toDate().hashCode(), appello_2A_16_12_14);
-			regAssPrimaB.getAppelli().put((new LocalDate(appello_1B_16_12_14.getData())).toDate().hashCode(), appello_1B_16_12_14);
-			regAssSecondaB.getAppelli().put((new LocalDate(appello_2B_16_12_14.getData())).toDate().hashCode(), appello_2B_16_12_14);
+			regAssSecondaA.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_2A_16_12_14.getData()), appello_2A_16_12_14);
+			regAssPrimaB.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_1B_16_12_14.getData()), appello_1B_16_12_14);
+			regAssSecondaB.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_2B_16_12_14.getData()), appello_2B_16_12_14);
 			
 			//creazione delle assenze
 			Assenza assMarioRomano1 = new Assenza();
@@ -448,6 +448,12 @@ public class ResetDB {
 			
 			RSPersistentManager.instance().getSession().save(scuola1);
 			
+			
+			GiornoSettimanaleFestivo sabato = new GiornoSettimanaleFestivo(6);
+			GiornoSettimanaleFestivo domenica = new GiornoSettimanaleFestivo(7);
+			
+			RSPersistentManager.instance().getSession().save(sabato);
+			RSPersistentManager.instance().getSession().save(domenica);
 			
 //			Giorno g = new Giorno();
 //			LocalDate data = new LocalDate(2014,12,17);

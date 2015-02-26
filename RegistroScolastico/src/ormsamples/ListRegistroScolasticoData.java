@@ -135,30 +135,21 @@ public class ListRegistroScolasticoData {
 		}
 		System.out.println(length + " record(s) retrieved.");
 		
-		System.out.println("Listing Calendario...");
-		java.util.List lCalendarioList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Calendario").setMaxResults(ROW_COUNT).list();
-		domain.model.Calendario[] ldomainmodelCalendarios = (domain.model.Calendario[]) lCalendarioList.toArray(new domain.model.Calendario[lCalendarioList.size()]);
-		length = Math.min(ldomainmodelCalendarios.length, ROW_COUNT);
+		System.out.println("Listing GiornoFestivo...");
+		java.util.List lGiornoFestivoList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.GiornoFestivo").setMaxResults(ROW_COUNT).list();
+		domain.model.GiornoFestivo[] ldomainmodelGiornoFestivos = (domain.model.GiornoFestivo[]) lGiornoFestivoList.toArray(new domain.model.GiornoFestivo[lGiornoFestivoList.size()]);
+		length = Math.min(ldomainmodelGiornoFestivos.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
-			System.out.println(ldomainmodelCalendarios[i]);
+			System.out.println(ldomainmodelGiornoFestivos[i]);
 		}
 		System.out.println(length + " record(s) retrieved.");
 		
-		System.out.println("Listing Giorno...");
-		java.util.List lGiornoList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Giorno").setMaxResults(ROW_COUNT).list();
-		domain.model.Giorno[] ldomainmodelGiornos = (domain.model.Giorno[]) lGiornoList.toArray(new domain.model.Giorno[lGiornoList.size()]);
-		length = Math.min(ldomainmodelGiornos.length, ROW_COUNT);
+		System.out.println("Listing GiornoSettimanaleFestivo...");
+		java.util.List lGiornoSettimanaleFestivoList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.GiornoSettimanaleFestivo").setMaxResults(ROW_COUNT).list();
+		domain.model.GiornoSettimanaleFestivo[] ldomainmodelGiornoSettimanaleFestivos = (domain.model.GiornoSettimanaleFestivo[]) lGiornoSettimanaleFestivoList.toArray(new domain.model.GiornoSettimanaleFestivo[lGiornoSettimanaleFestivoList.size()]);
+		length = Math.min(ldomainmodelGiornoSettimanaleFestivos.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
-			System.out.println(ldomainmodelGiornos[i]);
-		}
-		System.out.println(length + " record(s) retrieved.");
-		
-		System.out.println("Listing GiornoSettimanale...");
-		java.util.List lGiornoSettimanaleList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.GiornoSettimanale").setMaxResults(ROW_COUNT).list();
-		domain.model.GiornoSettimanale[] ldomainmodelGiornoSettimanales = (domain.model.GiornoSettimanale[]) lGiornoSettimanaleList.toArray(new domain.model.GiornoSettimanale[lGiornoSettimanaleList.size()]);
-		length = Math.min(ldomainmodelGiornoSettimanales.length, ROW_COUNT);
-		for (int i = 0; i < length; i++) {
-			System.out.println(ldomainmodelGiornoSettimanales[i]);
+			System.out.println(ldomainmodelGiornoSettimanaleFestivos[i]);
 		}
 		System.out.println(length + " record(s) retrieved.");
 		
@@ -333,41 +324,29 @@ public class ListRegistroScolasticoData {
 		}
 		System.out.println(length + " Docente record(s) retrieved."); 
 		
-		System.out.println("Listing Calendario by Criteria...");
-		domain.model.CalendarioCriteria ldomainmodelCalendarioCriteria = new domain.model.CalendarioCriteria();
+		System.out.println("Listing GiornoFestivo by Criteria...");
+		domain.model.GiornoFestivoCriteria ldomainmodelGiornoFestivoCriteria = new domain.model.GiornoFestivoCriteria();
 		// Please uncomment the follow line and fill in parameter(s) 
-		//ldomainmodelCalendarioCriteria.ID.eq();
-		ldomainmodelCalendarioCriteria.setMaxResults(ROW_COUNT);
-		domain.model.Calendario[] domainmodelCalendarios = ldomainmodelCalendarioCriteria.listCalendario();
-		length =domainmodelCalendarios== null ? 0 : Math.min(domainmodelCalendarios.length, ROW_COUNT); 
+		//ldomainmodelGiornoFestivoCriteria.ID.eq();
+		ldomainmodelGiornoFestivoCriteria.setMaxResults(ROW_COUNT);
+		domain.model.GiornoFestivo[] domainmodelGiornoFestivos = ldomainmodelGiornoFestivoCriteria.listGiornoFestivo();
+		length =domainmodelGiornoFestivos== null ? 0 : Math.min(domainmodelGiornoFestivos.length, ROW_COUNT); 
 		for (int i = 0; i < length; i++) {
-			 System.out.println(domainmodelCalendarios[i]);
+			 System.out.println(domainmodelGiornoFestivos[i]);
 		}
-		System.out.println(length + " Calendario record(s) retrieved."); 
+		System.out.println(length + " GiornoFestivo record(s) retrieved."); 
 		
-		System.out.println("Listing Giorno by Criteria...");
-		domain.model.GiornoCriteria ldomainmodelGiornoCriteria = new domain.model.GiornoCriteria();
+		System.out.println("Listing GiornoSettimanaleFestivo by Criteria...");
+		domain.model.GiornoSettimanaleFestivoCriteria ldomainmodelGiornoSettimanaleFestivoCriteria = new domain.model.GiornoSettimanaleFestivoCriteria();
 		// Please uncomment the follow line and fill in parameter(s) 
-		//ldomainmodelGiornoCriteria.ID.eq();
-		ldomainmodelGiornoCriteria.setMaxResults(ROW_COUNT);
-		domain.model.Giorno[] domainmodelGiornos = ldomainmodelGiornoCriteria.listGiorno();
-		length =domainmodelGiornos== null ? 0 : Math.min(domainmodelGiornos.length, ROW_COUNT); 
+		//ldomainmodelGiornoSettimanaleFestivoCriteria.ID.eq();
+		ldomainmodelGiornoSettimanaleFestivoCriteria.setMaxResults(ROW_COUNT);
+		domain.model.GiornoSettimanaleFestivo[] domainmodelGiornoSettimanaleFestivos = ldomainmodelGiornoSettimanaleFestivoCriteria.listGiornoSettimanaleFestivo();
+		length =domainmodelGiornoSettimanaleFestivos== null ? 0 : Math.min(domainmodelGiornoSettimanaleFestivos.length, ROW_COUNT); 
 		for (int i = 0; i < length; i++) {
-			 System.out.println(domainmodelGiornos[i]);
+			 System.out.println(domainmodelGiornoSettimanaleFestivos[i]);
 		}
-		System.out.println(length + " Giorno record(s) retrieved."); 
-		
-		System.out.println("Listing GiornoSettimanale by Criteria...");
-		domain.model.GiornoSettimanaleCriteria ldomainmodelGiornoSettimanaleCriteria = new domain.model.GiornoSettimanaleCriteria();
-		// Please uncomment the follow line and fill in parameter(s) 
-		//ldomainmodelGiornoSettimanaleCriteria.ID.eq();
-		ldomainmodelGiornoSettimanaleCriteria.setMaxResults(ROW_COUNT);
-		domain.model.GiornoSettimanale[] domainmodelGiornoSettimanales = ldomainmodelGiornoSettimanaleCriteria.listGiornoSettimanale();
-		length =domainmodelGiornoSettimanales== null ? 0 : Math.min(domainmodelGiornoSettimanales.length, ROW_COUNT); 
-		for (int i = 0; i < length; i++) {
-			 System.out.println(domainmodelGiornoSettimanales[i]);
-		}
-		System.out.println(length + " GiornoSettimanale record(s) retrieved."); 
+		System.out.println(length + " GiornoSettimanaleFestivo record(s) retrieved."); 
 		
 	}
 	

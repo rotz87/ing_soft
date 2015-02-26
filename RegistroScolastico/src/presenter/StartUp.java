@@ -1,5 +1,7 @@
 package presenter;
 
+import java.util.LinkedList;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 
@@ -10,7 +12,10 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import domain.model.Calendario;
-import domain.model.CalendarioCriteria;
+import domain.model.GiornoFestivo;
+import domain.model.GiornoFestivoCriteria;
+import domain.model.GiornoSettimanaleFestivo;
+import domain.model.GiornoSettimanaleFestivoCriteria;
 
 /**
  * Inizializza gli oggetti dopo l'avvio del server
@@ -25,6 +30,20 @@ public class StartUp implements ApplicationListener{
     public void start() {
 		//ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("RegistroScolastico.cfg.xml");
 //		DBFake.getInstance();
+		
+		
+		try {
+			GiornoFestivoCriteria giornoFC = new GiornoFestivoCriteria();
+			GiornoSettimanaleFestivoCriteria giornoSFC = new GiornoSettimanaleFestivoCriteria();
+			Calendario.getInstance().getGiorniFestivi().addAll(giornoFC.list());
+			Calendario.getInstance().getGiorniSettimanaliFestivi().addAll(giornoSFC.list());
+
+			
+		} catch (PersistentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
     }
 

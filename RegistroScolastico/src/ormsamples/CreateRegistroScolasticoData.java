@@ -51,14 +51,11 @@ public class CreateRegistroScolasticoData {
 			domain.model.Docente ldomainmodelDocente = new domain.model.Docente();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : classi
 			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelDocente);
 			
-			domain.model.Calendario ldomainmodelCalendario = new domain.model.Calendario();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : giorniSettimanaliFestivi, giorniFestivi
-			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelCalendario);
+			domain.model.GiornoFestivo ldomainmodelGiornoFestivo = new domain.model.GiornoFestivo();			// Initialize the properties of the persistent object here
+			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelGiornoFestivo);
 			
-			domain.model.Giorno ldomainmodelGiorno = new domain.model.Giorno();			// Initialize the properties of the persistent object here
-			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelGiorno);
-			
-			domain.model.GiornoSettimanale ldomainmodelGiornoSettimanale = new domain.model.GiornoSettimanale();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : giorno
-			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelGiornoSettimanale);
+			domain.model.GiornoSettimanaleFestivo ldomainmodelGiornoSettimanaleFestivo = new domain.model.GiornoSettimanaleFestivo();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : giorno
+			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelGiornoSettimanaleFestivo);
 			
 			t.commit();
 		}

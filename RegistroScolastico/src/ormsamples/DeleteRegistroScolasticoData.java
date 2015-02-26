@@ -51,14 +51,11 @@ public class DeleteRegistroScolasticoData {
 			domain.model.Docente ldomainmodelDocente= (domain.model.Docente)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Docente").setMaxResults(1).uniqueResult();
 			domain.model.RSPersistentManager.instance().getSession().delete(ldomainmodelDocente);
 			
-			domain.model.Calendario ldomainmodelCalendario= (domain.model.Calendario)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Calendario").setMaxResults(1).uniqueResult();
-			domain.model.RSPersistentManager.instance().getSession().delete(ldomainmodelCalendario);
+			domain.model.GiornoFestivo ldomainmodelGiornoFestivo= (domain.model.GiornoFestivo)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.GiornoFestivo").setMaxResults(1).uniqueResult();
+			domain.model.RSPersistentManager.instance().getSession().delete(ldomainmodelGiornoFestivo);
 			
-			domain.model.Giorno ldomainmodelGiorno= (domain.model.Giorno)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Giorno").setMaxResults(1).uniqueResult();
-			domain.model.RSPersistentManager.instance().getSession().delete(ldomainmodelGiorno);
-			
-			domain.model.GiornoSettimanale ldomainmodelGiornoSettimanale= (domain.model.GiornoSettimanale)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.GiornoSettimanale").setMaxResults(1).uniqueResult();
-			domain.model.RSPersistentManager.instance().getSession().delete(ldomainmodelGiornoSettimanale);
+			domain.model.GiornoSettimanaleFestivo ldomainmodelGiornoSettimanaleFestivo= (domain.model.GiornoSettimanaleFestivo)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.GiornoSettimanaleFestivo").setMaxResults(1).uniqueResult();
+			domain.model.RSPersistentManager.instance().getSession().delete(ldomainmodelGiornoSettimanaleFestivo);
 			
 			t.commit();
 		}
