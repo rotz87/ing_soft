@@ -13,7 +13,7 @@
  */
 package domain.model;
 
-public class Assenza {
+public class Assenza implements java.lang.Comparable<Assenza> {
 	public Assenza() {
 	}
 	
@@ -54,6 +54,8 @@ public class Assenza {
 	
 	private domain.implementor.AssenzaImp implementor = new domain.implementor.AssenzaImp();
 	
+	public static final int giorniCertificatoMedico = 5;
+	
 	public domain.model.Appello getUltimoAppelloAssenza() {
 		return this.implementor.getUltimoAppelloAssenza(this);
 	}
@@ -86,6 +88,10 @@ public class Assenza {
 	
 	public boolean esisteAppello(domain.model.Appello appello) {
 		return this.implementor.esisteAppello(this, appello);
+	}
+	
+	public int compareTo(domain.model.Assenza assenza) {
+		return this.implementor.compareTo(this, assenza);
 	}
 	
 	public String toString() {

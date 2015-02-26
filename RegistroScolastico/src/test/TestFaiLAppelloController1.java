@@ -78,9 +78,9 @@ public class TestFaiLAppelloController1 {
 				  for (Appello app : assNG.getAppelli()){
 					  Stampa.stampaln("data dell'appello dell'assenza : "+app.getData().toString());
 				  }
-//				  if(assNG.isCertificatoMedicoRichiesto()){
-//					  Stampa.stampaln(" \n E' richiesto il certificato medico !! \n");  
-//				  }
+				  if(assNG.isCertificatoMedicoRichiesto()){
+					  Stampa.stampaln(" \n E' richiesto il certificato medico !! \n");  
+				  }
 				  Stampa.stampaln("-------Fine Assenza--------\n");
 					
 				}

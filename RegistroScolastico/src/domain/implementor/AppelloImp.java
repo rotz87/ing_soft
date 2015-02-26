@@ -20,6 +20,10 @@ public class AppelloImp {
 		appello.setAssenzePrese(false);
 
 	}
+
+	public int compareTo(Appello that, Appello appello) {
+		return that.getData().compareTo(appello.getData());
+	}
 	
 
 }

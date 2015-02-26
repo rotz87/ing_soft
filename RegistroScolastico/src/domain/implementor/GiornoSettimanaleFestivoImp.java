@@ -19,5 +19,11 @@ public class GiornoSettimanaleFestivoImp {
 		return ret;
 	}
 
+	public int checkGiorno(int value) {
+		if(value <1){value = 1;}
+		else if(value >7){value = 7;}
+		return value;
+	}
+
 	
 }

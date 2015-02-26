@@ -13,7 +13,7 @@
  */
 package domain.model;
 
-public class Appello {
+public class Appello implements java.lang.Comparable<Appello> {
 	public Appello() {
 	}
 	
@@ -60,6 +60,10 @@ public class Appello {
 	 */
 	public Appello(org.joda.time.LocalDate data) {
 		this.implementor.inizialize(this, data);
+	}
+	
+	public int compareTo(domain.model.Appello appello) {
+		return this.implementor.compareTo(this, appello);
 	}
 	
 	public String toString() {
