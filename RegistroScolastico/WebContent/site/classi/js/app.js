@@ -22,7 +22,9 @@ appelloApp.config(["$locationProvider","$routeProvider",function($locationProvid
 	  }
   }).when('/',
   {
-	  redirectTo:'/1'
+	  templateUrl:'partials/elencoClassi.html',
+	  controller:'riempiElencoClassi',
+	  title:'seleziona la classe'
   })
   $locationProvider.html5Mode(true);
 }]);

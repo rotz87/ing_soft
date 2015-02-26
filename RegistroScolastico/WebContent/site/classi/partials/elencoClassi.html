@@ -1,0 +1,10 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-3"
+			ng-repeat="classe in elencoClassi | orderBy : 'nome'">
+			<div class="btn btn-default" ng-click="scegliClasse(classe.idClasse)">
+				<div class="panel-body">Classe {{classe.nome}}</div>
+			</div>
+		</div>
+	</div>
+</div>

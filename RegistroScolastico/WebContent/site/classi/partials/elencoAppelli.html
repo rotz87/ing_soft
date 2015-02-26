@@ -1,21 +1,62 @@
 <meta charset="UTF-8">
-<table class="table table-responsive table-hover table-striped col-xs-6">
+<h3 class="text-center">Registro della classe {{nomeClasse}}</h3>
+<table class="table table-responsive table-hover table-striped table-bordered col-xs-6">
 	<thead>
 		<tr>
-			<th class="col-xs-6"> <a href="" ng-click="predicate='data' ; reverse=!reverse"> data appello </a></th>
-			<th class="col-xs-2"> Azione </th>
+			<th class="col-xs-1 text-center" > <a href="" ng-click="predicate='data'; reverse=!reverse"> Data </a></th>
+			<th class="col-xs-1 col-md-1 col-lg-1 col-xl-1 text-center" > Ora </th>
+			<th class="text-center" > Materia </th>
+			<th class="col-xs-2 text-center" > Appello </th>
+			<th class="text-center" > Firma docente </th>
+			<th class="text-center" > Argomenti trattati</th>
+			<th class="text-center" > Note</th>
 	</thead>
 	<tbody>
-		<tr ng-repeat="appello in elencoAppelli | orderBy:predicate:reverse" >
-			<td> {{appello.data | date:"EEEE dd MMMM yyyy" }}</td>
-			<td> 
-				<button type="button" class="btn btn-default btn-lg btn-block col-xs-12 col-md-12 btn-info" ng-if="appello.appelloAvviabile == true" ng-click="creaAppello(idClasse)"> Fai L'appello</button>
-				<button type="button" class="btn btn-default btn-lg btn-block col-xs-12 col-md-12" ng-if="appello.appelloAvviabile == false" ng-disabled="appello.appelloAvviabile == false" disabled="disabled"> festa </button>
-				<button type="button" class="btn btn-default btn-lg btn-block col-xs-12 col-md-12" ng-if="appello.idAppello!=null" ng-click="mostraAppello(appello.idAppello)"> Mostra Appello</button>
+		<tr ng-repeat-start="appello in elencoAppelli | orderBy:predicate:reverse">
+			<td class="text-center rs-text-vmiddle" rowspan="5"> {{appello.data | date:"EEEE" }}</br>{{appello.data | date:"dd MMM yyyy" }}</td>
+			<td class="text-center">1<!-- Ora -->
 			</td>
+			<td><!-- Materia --></td>
+			<td rowspan="5" class="rs-text-vmiddle"><!-- Assenti -->
+				<button type="button" class="btn btn-info    btn-md btn-block col-xs-12 col-md-12" ng-if="appello.appelloAvviabile == true" ng-click="creaAppello(idClasse)"> Fai L'appello</button>
+				<button type="button" class="btn btn-default btn-md btn-block col-xs-12 col-md-12" ng-if="appello.appelloAvviabile == false" ng-disabled="appello.appelloAvviabile == false" disabled="disabled"> Festa </button>
+				<button type="button" class="btn btn-default btn-md btn-block col-xs-12 col-md-12" ng-if="appello.idAppello!=null" ng-click="mostraAppello(appello.idAppello)"> Mostra L'Appello</button>
+			</td>
+			<td><!-- Firma docente --></td>
+			<td><!-- Argomenti trattati --></td>
+			<td><!-- Note --></td>
+			</tr>
+		<tr class="text-center">
+			<td><!-- Ora -->2</td>
+			<td><!-- Materia -->2</td>
+			<td><!-- Firma docente -->2</td>
+			<td><!-- Argomenti trattati --></td>
+			<td><!-- Note --></td>
+		</tr>
+		<tr class="text-center">
+			<td><!-- Ora -->3</td>
+			<td><!-- Materia -->3</td>
+			<td><!-- Firma docente -->3</td>
+			<td><!-- Argomenti trattati --></td>
+			<td><!-- Note --></td>
+		</tr>
+		<tr class="text-center">
+			<td><!-- Ora -->4</td>
+			<td><!-- Materia -->4</td>
+			<td><!-- Firma docente -->4</td>
+			<td><!-- Argomenti trattati --></td>
+			<td><!-- Note --></td>
+		</tr>
+		<tr class="text-center"ng-repeat-end>
+			<td><!-- Ora -->5</td>
+			<td><!-- Materia -->5</td>
+			<td><!-- Firma docente -->5</td>
+			<td><!-- Argomenti trattati --></td>
+			<td><!-- Note --></td>
 		</tr>
 	</tbody>
+	
+</table>
 	<div ng-if="erroreSistema">
 	Attenzione... {{erroreSistema}}
 	</div>
-</table>

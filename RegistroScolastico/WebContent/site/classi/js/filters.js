@@ -5,8 +5,6 @@ appelloFilters.filter('assente', function() {
 		if (input) {
 		for (var j = 0; j < arrayIdStudenti;j++)
 		{
-			//arrayStudenti[j] = $scope.appello.studenti[j].idStudente
-			
 			arrayIdStudenti[$scope.appello.studenti[j].idStudente] = {idStudente : $scope.appello.studenti[j].idStudente}
 		}
 

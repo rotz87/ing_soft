@@ -51,7 +51,8 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$locat
 	  $scope.idClasse = nuovoAppello[1];
 	  
 	  $scope.mioController = "avviaAppello";
-	  $scope.predicate="-data";
+	  $scope.predicate="data";
+	  $scope.reverse=true;
 	  $scope.elencoAppelli={};
 	  $scope.elencoAppelli2 = Appello.myQuery2({idClasse:$scope.idClasse},function(response,header){
 		  //successo
@@ -116,6 +117,15 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$locat
 		}
 		$rootScope.idClasse = $scope.idClasse;
 		$rootScope.idAppello = null;
+		$scope.elencoClassi = Appello.elencoClassi({},function(data,header){
+			for(i in data)
+				{
+				if(data[i].idClasse == $scope.idClasse)
+					$scope.nomeClasse = data[i].nome 
+				}
+		},function(data,header){
+			
+		})
 	}])
 	.directive('elencoAppello', function() {
 	  return {
@@ -350,7 +360,7 @@ function retrieveObjectFromUrl($http, resourceUrl, destinazione){
 	return remoteObject;
 }
 
-appelloControllers.controller('popolamentoNavigazione', ['$scope','Appello','$q','$rootScope','$filter', function($scope, Appello, $q, $rootScope,$filter){
+appelloControllers.controller('popolamentoNavigazione', ['$scope','Appello','$q','$rootScope','$filter','$location', function($scope, Appello, $q, $rootScope,$filter,$location){
 
 	$scope.$watch("idClasse",function(newValue,oldValue){
 		
@@ -371,7 +381,7 @@ appelloControllers.controller('popolamentoNavigazione', ['$scope','Appello','$q'
 						//fallimento
 					});
 			}
-		else if (newValue != oldValue)
+		else if (newValue != oldValue && newValue != null)
 		{
 			
 			$scope.elencoClassi = Appello.elencoClassi({},function(response,header)
@@ -413,4 +423,25 @@ appelloControllers.controller('popolamentoNavigazione', ['$scope','Appello','$q'
 			}
 		})
 	})
+	$scope.home = function(){
+		$location.path("/");
+		if ($rootScope.idClasse)
+			delete $rootScope.idClasse;
+		if ($rootScope.idAppello)
+			delete $rootScope.idAppello;
+	}
 }]);
+
+appelloControllers.controller('riempiElencoClassi', ['$scope','Appello','$q','$location','$rootScope', function($scope,Appello,$q,$location,$rootScope) {
+
+	$scope.elencoClassi = Appello.elencoClassi({},function(response,header)
+			{
+				//successo
+			},
+			function(response,header){
+				//fallimento
+			})
+	$scope.scegliClasse = function(idClasse){
+		$location.path(idClasse)
+	}
+	}])
