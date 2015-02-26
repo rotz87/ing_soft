@@ -20,18 +20,13 @@ public class TestFaiLAppelloController1 {
 		Integer idDocenteProva = new Integer(1);
 		//creazione dal controller FaiAppelloConreoller
 		FaiAppelloController controlloreAppello = new FaiAppelloController();
-		
-		//TEST DEL METODO
-//		Stampa.stampaln("studenti della 1A : " + primaA.getStudenti() );
-		
-//		stampaLibretti(DBFake.getInstance().getClasseById(idClasseProva).getRegistroAssenze());
+
 		stampaLibretti(getRegistroAssenzeByIdClasse(idClasseProva));
 		
 		
 		try{
 
 			controlloreAppello.avviaAppello(idClasseProva, idDocenteProva);
-//			controlloreAppello.avviaAppello(new Long(1), new Long(2));
 		}catch(IllegalStateException ISE){
 			Stampa.stampaln("Messaggio dell'eccezione: "+ISE.getMessage());
 		} catch (PersistentException e) {

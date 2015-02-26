@@ -66,14 +66,26 @@ public class AssenzaImp {
 
 		Appello ultimoAppello = Collections.max(assenza.getAppelli());
 		LocalDate ultimaDataPlus = new LocalDate(ultimoAppello.getData()).plusDays(1);
-		LocalDate oggi = Calendario.getInstance().getDataOdierna();//per le prove, a regime usare la riga di sotto
+		LocalDate attuale = new LocalDate(appello.getData());
+		//LocalDate oggi = Calendario.getInstance().getDataOdierna();//per le prove, a regime usare la riga di sotto
 
-		if(ultimaDataPlus.isEqual(oggi)){
+		
+		if(ultimaDataPlus.isEqual(attuale)){
 			inseribile = true;
 		}else{
 			inseribile = false;
 		}
-
+		Stampa.stampaln();
+		Stampa.stampaln("=====I=== AssenzaImp.isInseribile() =========");
+		Stampa.stampaln();
+		Stampa.stampaln("ultimoAppello: "+ultimoAppello.getData());
+		Stampa.stampaln("ultimaDataPlus: "+ultimaDataPlus);
+		Stampa.stampaln("attuale: "+attuale);
+		Stampa.stampaln("inseribile: "+inseribile);
+		Stampa.stampaln();
+		Stampa.stampaln("=====F=== AssenzaImp.isInseribile() =========");
+		Stampa.stampaln();
+		
 		return inseribile;
 	}
 	

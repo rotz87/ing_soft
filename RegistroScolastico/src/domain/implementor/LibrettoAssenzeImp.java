@@ -1,5 +1,6 @@
 package domain.implementor;
 
+import java.util.Collections;
 import java.util.ListIterator;
 
 import service.Stampa;
@@ -61,10 +62,7 @@ public class LibrettoAssenzeImp {
 	}
 
 	public Assenza getUltimaAssenzaNonGiustificata(LibrettoAssenze librettoAssenze) {
-		//probabilmente è da cambiare
-//		Stempa.stampaln("nonGiustificate.get(0): "+nonGiustificate.get(nonGiustificate.size()-1).getUltimoAppelloAssenza().getDataL());
-
-		return librettoAssenze.getNonGiustificate().get(librettoAssenze.getNonGiustificate().size()-1);
+		return Collections.max(librettoAssenze.getNonGiustificate());
 	}
 	
 	public boolean esisteAssenza(LibrettoAssenze librettoAssenze, Appello appello){
