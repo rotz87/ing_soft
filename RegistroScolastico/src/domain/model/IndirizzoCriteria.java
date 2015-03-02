@@ -20,10 +20,12 @@ import org.orm.criteria.*;
 
 public class IndirizzoCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
+	public final StringExpression via;
 	
 	public IndirizzoCriteria(Criteria criteria) {
 		super(criteria);
 		ID = new IntegerExpression("ID", this);
+		via = new StringExpression("via", this);
 	}
 	
 	public IndirizzoCriteria(PersistentSession session) {

@@ -10,12 +10,12 @@ License Type: Academic
 			<generator class="native">
 			</generator>
 		</id>
-		<map name="librettiAssenze" lazy="false" cascade="save-update,lock" inverse="false">
+		<map name="librettiAssenze" lazy="true" cascade="save-update,lock" inverse="false">
 			<key column="RegistroAssenzeID" not-null="true"/>
 			<index column="RegistroAssenzeIndex" type="integer"/>
 			<one-to-many class="domain.model.LibrettoAssenze"/>
 		</map>
-		<map name="appelli" lazy="false" cascade="save-update,lock" inverse="false" order-by="Data">
+		<map name="appelli" lazy="true" cascade="save-update,lock" inverse="false" order-by="Data">
 			<key column="RegistroAssenzeID" not-null="true"/>
 			<index column="RegistroAssenzeIndex" type="integer"/>
 			<one-to-many class="domain.model.Appello"/>

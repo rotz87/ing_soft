@@ -20,28 +20,44 @@ import org.orm.criteria.*;
 
 public class DocenteDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression ID;
+	public final IntegerExpression indirizzoId;
+	public final AssociationExpression indirizzo;
 	public final StringExpression nome;
 	public final StringExpression cognome;
+	public final StringExpression codiceFiscale;
+	public final DateExpression dataNascita;
 	public final CollectionExpression classi;
 	
 	public DocenteDetachedCriteria() {
 		super(domain.model.Docente.class, domain.model.DocenteCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
+		indirizzoId = new IntegerExpression("indirizzo.ID", this.getDetachedCriteria());
+		indirizzo = new AssociationExpression("indirizzo", this.getDetachedCriteria());
 		nome = new StringExpression("nome", this.getDetachedCriteria());
 		cognome = new StringExpression("cognome", this.getDetachedCriteria());
+		codiceFiscale = new StringExpression("codiceFiscale", this.getDetachedCriteria());
+		dataNascita = new DateExpression("dataNascita", this.getDetachedCriteria());
 		classi = new CollectionExpression("classi", this.getDetachedCriteria());
 	}
 	
 	public DocenteDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, domain.model.DocenteCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
+		indirizzoId = new IntegerExpression("indirizzo.ID", this.getDetachedCriteria());
+		indirizzo = new AssociationExpression("indirizzo", this.getDetachedCriteria());
 		nome = new StringExpression("nome", this.getDetachedCriteria());
 		cognome = new StringExpression("cognome", this.getDetachedCriteria());
+		codiceFiscale = new StringExpression("codiceFiscale", this.getDetachedCriteria());
+		dataNascita = new DateExpression("dataNascita", this.getDetachedCriteria());
 		classi = new CollectionExpression("classi", this.getDetachedCriteria());
 	}
 	
 	public ClasseDetachedCriteria createClassiCriteria() {
 		return new ClasseDetachedCriteria(createCriteria("classi"));
+	}
+	
+	public IndirizzoDetachedCriteria createIndirizzoCriteria() {
+		return new IndirizzoDetachedCriteria(createCriteria("indirizzo"));
 	}
 	
 	public Docente uniqueDocente(PersistentSession session) {

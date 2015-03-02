@@ -26,7 +26,6 @@ License Type: Academic
 		<mapping resource="ormmapping/domain/model/Appello.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/Assenza.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/Classe.hbm.xml" />
-		<mapping resource="ormmapping/domain/model/Docente.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/GiornoFestivo.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/GiornoSettimanaleFestivo.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/Giustificazione.hbm.xml" />
@@ -34,10 +33,10 @@ License Type: Academic
 		<mapping resource="ormmapping/domain/model/LibrettoAssenze.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/PermessoEntrata.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/PermessoUscita.hbm.xml" />
+		<mapping resource="ormmapping/domain/model/Persona.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/RegistroAssenze.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/Ritardo.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/Scuola.hbm.xml" />
-		<mapping resource="ormmapping/domain/model/Studente.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/UscitaAnticipata.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>

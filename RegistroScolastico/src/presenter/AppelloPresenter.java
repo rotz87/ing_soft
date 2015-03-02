@@ -21,6 +21,7 @@ import presenter.resourceSupport.AppelliContainerRS;
 import presenter.resourceSupport.AppelloRS;
 import presenter.resourceSupport.AssentiContainerRS;
 import service.Stampa;
+import domain.controller.DocenteController;
 import domain.controller.FaiAppelloController;
 import domain.model.Appello;
 import domain.model.Assenza;
@@ -31,22 +32,24 @@ import domain.model.Calendario;
 @RequestMapping("/classi/{idClasse}/appelli")
 public class AppelloPresenter {
 	
-	  private int idDocenteProva = 1;
+//	  private int idDocenteProva = 31;
 	  
 	
 	  @RequestMapping(method = RequestMethod.POST)
 	  ResponseEntity<?> creaAppello(@PathVariable int idClasse) {
 		  HttpHeaders httpHeaders;
 		  FaiAppelloController fAController;
+		  DocenteController docenteController;
 	  	
 		  Link linkAppello;
 		  httpHeaders = new HttpHeaders();
 		  HttpStatus httpStatus = HttpStatus.CREATED;
 		  
 		  fAController = new FaiAppelloController();
+		  docenteController = new DocenteController();
 		  
 		  try{
-				  fAController.avviaAppello(idClasse, this.idDocenteProva);
+				  fAController.avviaAppello(idClasse, docenteController.getIdDocenteProva());
 				  Stampa.stampaln("Appello odierno: "+fAController.getAppelloOdierno(idClasse).getID() + " | " + fAController.getAppelloOdierno(idClasse).getData());
 	
 			  //serve solo il link: si potrebbero passare meno parametri
@@ -120,10 +123,14 @@ public class AppelloPresenter {
 		@RequestMapping(value = "/{idAppello}/assenti", method = RequestMethod.POST)
 		public ResponseEntity<?> inserisciAssenze(@PathVariable int idAppello, @PathVariable int idClasse, @RequestBody AssentiContainerRS assenti){
 			FaiAppelloController fAController;
+			DocenteController docenteController;
+			
 			Integer[] idAssenti;
 			int i;
 			
 			fAController = new FaiAppelloController();
+			docenteController = new DocenteController();
+			
 			HttpHeaders httpHeaders;
 			httpHeaders = new HttpHeaders();
 			HttpStatus httpStatus = HttpStatus.CREATED;
@@ -137,7 +144,7 @@ public class AppelloPresenter {
 			
 			try{
 				Stampa.stampaln("inserisciAssenze.registraAssenze-PRIMA");
-				fAController.registraAssenze(idAssenti, idClasse, this.idDocenteProva);
+				fAController.registraAssenze(idAssenti, idClasse, docenteController.getIdDocenteProva());
 				Stampa.stampaln("inserisciAssenze.registraAssenze-DOPO");
 			}catch(IllegalStateException ISE){
 				httpStatus = HttpStatus.FORBIDDEN;

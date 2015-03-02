@@ -13,45 +13,11 @@
  */
 package domain.model;
 
-public class Docente {
+public class Docente extends domain.model.Persona {
 	public Docente() {
 	}
 	
-	private int ID;
-	
-	private String nome;
-	
-	private String cognome;
-	
 	private java.util.Set<domain.model.Classe> classi = new java.util.LinkedHashSet<domain.model.Classe>();
-	
-	public void setNome(String value) {
-		this.nome = value;
-	}
-	
-	public String getNome() {
-		return nome;
-	}
-	
-	public void setCognome(String value) {
-		this.cognome = value;
-	}
-	
-	public String getCognome() {
-		return cognome;
-	}
-	
-	private void setID(int value) {
-		this.ID = value;
-	}
-	
-	public int getID() {
-		return ID;
-	}
-	
-	public int getORMID() {
-		return getID();
-	}
 	
 	public void setClassi(java.util.Set<domain.model.Classe> value) {
 		this.classi = value;
@@ -73,7 +39,7 @@ public class Docente {
 	}
 	
 	public String toString() {
-		return String.valueOf(getID());
+		return super.toString();
 	}
 	
 }

@@ -19,6 +19,8 @@ public class Indirizzo {
 	
 	private int ID;
 	
+	private String via;
+	
 	private void setID(int value) {
 		this.ID = value;
 	}
@@ -29,6 +31,14 @@ public class Indirizzo {
 	
 	public int getORMID() {
 		return getID();
+	}
+	
+	public void setVia(String value) {
+		this.via = value;
+	}
+	
+	public String getVia() {
+		return via;
 	}
 	
 	public String toString() {

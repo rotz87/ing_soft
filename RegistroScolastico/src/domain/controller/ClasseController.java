@@ -8,6 +8,7 @@ import domain.model.Classe;
 import domain.model.ClasseCriteria;
 import domain.model.Docente;
 import domain.model.DocenteCriteria;
+import domain.model.RSPersistentManager;
 import domain.model.Studente;
 
 public class ClasseController {
@@ -23,6 +24,7 @@ public class ClasseController {
 			
 			criteria = new DocenteCriteria();
 			criteria.ID.eq(idDocente);
+
 			docente = criteria.uniqueDocente();
 
 			return docente.getClassi();

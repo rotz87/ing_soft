@@ -25,6 +25,7 @@ public class StudenteCriteria extends AbstractORMCriteria {
 	public final StringExpression nome;
 	public final StringExpression cognome;
 	public final StringExpression codiceFiscale;
+	public final DateExpression dataNascita;
 	
 	public StudenteCriteria(Criteria criteria) {
 		super(criteria);
@@ -34,6 +35,7 @@ public class StudenteCriteria extends AbstractORMCriteria {
 		nome = new StringExpression("nome", this);
 		cognome = new StringExpression("cognome", this);
 		codiceFiscale = new StringExpression("codiceFiscale", this);
+		dataNascita = new DateExpression("dataNascita", this);
 	}
 	
 	public StudenteCriteria(PersistentSession session) {

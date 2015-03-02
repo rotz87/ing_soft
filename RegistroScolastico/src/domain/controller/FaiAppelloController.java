@@ -98,6 +98,7 @@ public class FaiAppelloController {
 			
 				for(LibrettoAssenze libAss : libretti){
 					RSPersistentManager.instance().getSession().save(libAss.getUltimaAssenzaNonGiustificata());
+//					RSPersistentManager.instance().
 				}
 				t.commit();
 			}

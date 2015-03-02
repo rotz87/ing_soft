@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: Universita degli Studi dell'Aquila
+License Type: Academic
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="domain.model.Persona" table="Persona" lazy="false" discriminator-value="Persona">
+		<id name="ID" column="ID" type="integer" unsaved-value="0">
+			<generator class="native">
+			</generator>
+		</id>
+		<discriminator column="Discriminator" type="string"/>
+		<many-to-one name="indirizzo" column="IndirizzoID" class="domain.model.Indirizzo" cascade="save-update,lock" unique="true" not-null="false" lazy="no-proxy">
+		</many-to-one>
+		<property name="nome" column="Nome" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="cognome" column="Cognome" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="codiceFiscale" column="CodiceFiscale" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="dataNascita" column="DataNascita" type="date" not-null="false" lazy="false"/>
+		<subclass name="domain.model.Studente" discriminator-value="Studente" lazy="false">
+		</subclass>
+		<subclass name="domain.model.Docente" discriminator-value="Docente" lazy="false">
+			<set name="classi" table="Persona_Classe" lazy="true" cascade="save-update,lock">
+				<key column="PersonaID" not-null="true"/>
+				<many-to-many column="ClasseID" class="domain.model.Classe">
+				</many-to-many>
+			</set>
+		</subclass>
+	</class>
+</hibernate-mapping>

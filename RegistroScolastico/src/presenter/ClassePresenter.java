@@ -4,6 +4,7 @@ package presenter;
 import java.util.Collection;
 import java.util.LinkedList;
 
+
 //import org.orm.PersistentException;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import presenter.resourceSupport.ClasseMenuRS;
 import presenter.resourceSupport.StudenteAppelloRS;
 import service.Stampa;
 import domain.controller.ClasseController;
+import domain.controller.DocenteController;
 import domain.model.Classe;
 import domain.model.Docente;
 //import domain.model.DocenteCriteria;
@@ -23,7 +25,7 @@ import domain.model.Studente;
 @RequestMapping("/classi")
 public class ClassePresenter {
 	
-	private int idDocenteProva = 1;
+
 	
 	/**
 	 * Non utilizza un controller del dominio, accede direttamente al DB per prendere il docente.
@@ -37,7 +39,9 @@ public class ClassePresenter {
 //		  Stampa.stampaln("collezione di classi");
 		Docente docente;
 		domain.controller.ClasseController classeController;
+		DocenteController docenteController;
 		classeController= new domain.controller.ClasseController();
+		docenteController = new DocenteController();
 		Stampa.stampaln("=============== Thread Spring getClassi:"+ Thread.currentThread().getId() +" ================");
 //		Stampa.stampaln("_______ SONO IN classeController.getClassi !!! ___________");
 		try {
@@ -53,7 +57,7 @@ public class ClassePresenter {
 //			docente = docenteC.uniqueDocente();
 //
 			  Stampa.stampaln("dopo la query sul docente");
-			classi = classeController.getClassi(this.idDocenteProva);
+			classi = classeController.getClassi(docenteController.getIdDocenteProva());
 			classiMenu = new LinkedList<ClasseMenuRS>();
 
 			  Stampa.stampaln("prima del ciclo sulle classi");

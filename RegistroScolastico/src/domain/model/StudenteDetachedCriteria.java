@@ -25,6 +25,7 @@ public class StudenteDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final StringExpression nome;
 	public final StringExpression cognome;
 	public final StringExpression codiceFiscale;
+	public final DateExpression dataNascita;
 	
 	public StudenteDetachedCriteria() {
 		super(domain.model.Studente.class, domain.model.StudenteCriteria.class);
@@ -34,6 +35,7 @@ public class StudenteDetachedCriteria extends AbstractORMDetachedCriteria {
 		nome = new StringExpression("nome", this.getDetachedCriteria());
 		cognome = new StringExpression("cognome", this.getDetachedCriteria());
 		codiceFiscale = new StringExpression("codiceFiscale", this.getDetachedCriteria());
+		dataNascita = new DateExpression("dataNascita", this.getDetachedCriteria());
 	}
 	
 	public StudenteDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -44,6 +46,7 @@ public class StudenteDetachedCriteria extends AbstractORMDetachedCriteria {
 		nome = new StringExpression("nome", this.getDetachedCriteria());
 		cognome = new StringExpression("cognome", this.getDetachedCriteria());
 		codiceFiscale = new StringExpression("codiceFiscale", this.getDetachedCriteria());
+		dataNascita = new DateExpression("dataNascita", this.getDetachedCriteria());
 	}
 	
 	public IndirizzoDetachedCriteria createIndirizzoCriteria() {

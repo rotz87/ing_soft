@@ -20,15 +20,23 @@ import org.orm.criteria.*;
 
 public class DocenteCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
+	public final IntegerExpression indirizzoId;
+	public final AssociationExpression indirizzo;
 	public final StringExpression nome;
 	public final StringExpression cognome;
+	public final StringExpression codiceFiscale;
+	public final DateExpression dataNascita;
 	public final CollectionExpression classi;
 	
 	public DocenteCriteria(Criteria criteria) {
 		super(criteria);
 		ID = new IntegerExpression("ID", this);
+		indirizzoId = new IntegerExpression("indirizzo.ID", this);
+		indirizzo = new AssociationExpression("indirizzo", this);
 		nome = new StringExpression("nome", this);
 		cognome = new StringExpression("cognome", this);
+		codiceFiscale = new StringExpression("codiceFiscale", this);
+		dataNascita = new DateExpression("dataNascita", this);
 		classi = new CollectionExpression("classi", this);
 	}
 	
@@ -42,6 +50,10 @@ public class DocenteCriteria extends AbstractORMCriteria {
 	
 	public ClasseCriteria createClassiCriteria() {
 		return new ClasseCriteria(createCriteria("classi"));
+	}
+	
+	public IndirizzoCriteria createIndirizzoCriteria() {
+		return new IndirizzoCriteria(createCriteria("indirizzo"));
 	}
 	
 	public Docente uniqueDocente() {
