@@ -80,7 +80,7 @@ public class DBFake {
 	}
 	
 	public void storeAppello(Appello appello){
-		tuttiGliAppelli.put(appello.getIdAppello(), appello);
+		tuttiGliAppelli.put(appello.getID(), appello);
 	}
 	
 	
@@ -93,10 +93,10 @@ public class DBFake {
 		Classe secondaB = new Classe("2B");
 		
 		Map<Integer, Classe> mapClassi = new TreeMap <Integer, Classe>();
-		mapClassi.put(primaA.getIdClasse(), primaA);
-		mapClassi.put(secondaA.getIdClasse(), secondaA);
-		mapClassi.put(primaB.getIdClasse(), primaB);
-		mapClassi.put(secondaB.getIdClasse(), secondaB);
+		mapClassi.put(primaA.getID(), primaA);
+		mapClassi.put(secondaA.getID(), secondaA);
+		mapClassi.put(primaB.getID(), primaB);
+		mapClassi.put(secondaB.getID(), secondaB);
 		
 		setClassi(mapClassi);
 		
@@ -108,11 +108,11 @@ public class DBFake {
 		Docente giuseppeGialli = new Docente("Giuseppe", "Gialli");
 		
 		Map<Integer, Docente> mapDocenti = new TreeMap <Integer, Docente>();
-		mapDocenti.put(marioRossi.getIdDocente(), marioRossi);
-		mapDocenti.put(mirkoBianchi.getIdDocente(), mirkoBianchi);
-		mapDocenti.put(giulioVerdi.getIdDocente(), giulioVerdi);
-		mapDocenti.put(vincenzoNeri.getIdDocente(), vincenzoNeri);
-		mapDocenti.put(giuseppeGialli.getIdDocente(), giuseppeGialli);
+		mapDocenti.put(marioRossi.getID(), marioRossi);
+		mapDocenti.put(mirkoBianchi.getID(), mirkoBianchi);
+		mapDocenti.put(giulioVerdi.getID(), giulioVerdi);
+		mapDocenti.put(vincenzoNeri.getID(), vincenzoNeri);
+		mapDocenti.put(giuseppeGialli.getID(), giuseppeGialli);
 		
 		
 		setDocenti(mapDocenti);
@@ -172,39 +172,39 @@ public class DBFake {
 		
 		Map<Integer, Studente> mapStudenti = new TreeMap <Integer, Studente>();
 //		mapStudenti.put(.getId(), );
-		mapStudenti.put(pieroRusso.getId(), pieroRusso);
-		mapStudenti.put(marinoEsposito.getId(), marinoEsposito);
-		mapStudenti.put(marioRomano.getId(), marioRomano);
-		mapStudenti.put(davideDiSalvo.getId(), davideDiSalvo);
-		mapStudenti.put(ivoMarino.getId(), ivoMarino);
-		mapStudenti.put(leonardoRicci.getId(),leonardoRicci );
-		mapStudenti.put(valentinoFarina.getId(), valentinoFarina);
-		mapStudenti.put(roccoBenedetti.getId(), roccoBenedetti);
-		mapStudenti.put(antonioGuerra.getId(), antonioGuerra);
-		mapStudenti.put(cristinaAngeli.getId(),cristinaAngeli );
+		mapStudenti.put(pieroRusso.getID(), pieroRusso);
+		mapStudenti.put(marinoEsposito.getID(), marinoEsposito);
+		mapStudenti.put(marioRomano.getID(), marioRomano);
+		mapStudenti.put(davideDiSalvo.getID(), davideDiSalvo);
+		mapStudenti.put(ivoMarino.getID(), ivoMarino);
+		mapStudenti.put(leonardoRicci.getID(),leonardoRicci );
+		mapStudenti.put(valentinoFarina.getID(), valentinoFarina);
+		mapStudenti.put(roccoBenedetti.getID(), roccoBenedetti);
+		mapStudenti.put(antonioGuerra.getID(), antonioGuerra);
+		mapStudenti.put(cristinaAngeli.getID(),cristinaAngeli );
 		
-		mapStudenti.put(mariannaDonati.getId(), mariannaDonati);
-		mapStudenti.put(elenaSarti.getId(), elenaSarti);
-		mapStudenti.put(mariaPiaAlfredi.getId(), mariaPiaAlfredi);
-		mapStudenti.put(giorgioGatti.getId(),giorgioGatti );
-		mapStudenti.put(lorenzoNegri.getId(),lorenzoNegri );
-		mapStudenti.put(mattiaVitali.getId(), mattiaVitali);
-		mapStudenti.put(emanueleDelMonte.getId(), emanueleDelMonte);
-		mapStudenti.put(luigiBernardi.getId(), luigiBernardi);
-		mapStudenti.put(vittorioPellegrini.getId(),vittorioPellegrini );
-		mapStudenti.put(alexVilla.getId(), alexVilla);
+		mapStudenti.put(mariannaDonati.getID(), mariannaDonati);
+		mapStudenti.put(elenaSarti.getID(), elenaSarti);
+		mapStudenti.put(mariaPiaAlfredi.getID(), mariaPiaAlfredi);
+		mapStudenti.put(giorgioGatti.getID(),giorgioGatti );
+		mapStudenti.put(lorenzoNegri.getID(),lorenzoNegri );
+		mapStudenti.put(mattiaVitali.getID(), mattiaVitali);
+		mapStudenti.put(emanueleDelMonte.getID(), emanueleDelMonte);
+		mapStudenti.put(luigiBernardi.getID(), luigiBernardi);
+		mapStudenti.put(vittorioPellegrini.getID(),vittorioPellegrini );
+		mapStudenti.put(alexVilla.getID(), alexVilla);
 		
-		mapStudenti.put(marcoBattaglia.getId(), marcoBattaglia);
-		mapStudenti.put(alfredoMorelli.getId(),alfredoMorelli );
-		mapStudenti.put(pieraDellaValle.getId(),pieraDellaValle );
-		mapStudenti.put(ignazioBoschi.getId(), ignazioBoschi);
-		mapStudenti.put( jacopoValli.getId(), jacopoValli );
+		mapStudenti.put(marcoBattaglia.getID(), marcoBattaglia);
+		mapStudenti.put(alfredoMorelli.getID(),alfredoMorelli );
+		mapStudenti.put(pieraDellaValle.getID(),pieraDellaValle );
+		mapStudenti.put(ignazioBoschi.getID(), ignazioBoschi);
+		mapStudenti.put( jacopoValli.getID(), jacopoValli );
 		
-		mapStudenti.put(gianniConte.getId(), gianniConte);
-		mapStudenti.put(lucaBarone.getId(), lucaBarone);
-		mapStudenti.put(giacomoSiciliano.getId(), giacomoSiciliano);
-		mapStudenti.put(fabrizioToscani.getId(), fabrizioToscani);
-		mapStudenti.put(arturoAncona.getId(), arturoAncona);
+		mapStudenti.put(gianniConte.getID(), gianniConte);
+		mapStudenti.put(lucaBarone.getID(), lucaBarone);
+		mapStudenti.put(giacomoSiciliano.getID(), giacomoSiciliano);
+		mapStudenti.put(fabrizioToscani.getID(), fabrizioToscani);
+		mapStudenti.put(arturoAncona.getID(), arturoAncona);
 		
 		setStudenti(mapStudenti);
 		
@@ -275,39 +275,39 @@ public class DBFake {
 		LibrettoAssenze librettoFabrizioToscani =  new LibrettoAssenze(fabrizioToscani);
 		LibrettoAssenze librettoArturoAncona =  new LibrettoAssenze(arturoAncona);
 		
-		librettiPrimaA.put(marioRomano.getId(), librettoMarioRomano);
-		librettiPrimaA.put(davideDiSalvo.getId(),librettoDavideDiSalvo);
-		librettiPrimaA.put(ivoMarino.getId(), librettoIvoMarino);
-		librettiPrimaA.put(pieroRusso.getId(), librettoPieroRusso);
-		librettiPrimaA.put(marinoEsposito.getId(),librettoMarinoEsposito);
-		librettiPrimaA.put(leonardoRicci.getId(),librettoLeonardoRicci);
-		librettiPrimaA.put(valentinoFarina.getId(),librettoValentinoFarina);
-		librettiPrimaA.put(roccoBenedetti.getId(),librettoRoccoBenedetti);
-		librettiPrimaA.put(antonioGuerra.getId(),librettoAntonioGuerra);
-		librettiPrimaA.put(cristinaAngeli.getId(),librettoCristinaAngeli);
+		librettiPrimaA.put(marioRomano.getID(), librettoMarioRomano);
+		librettiPrimaA.put(davideDiSalvo.getID(),librettoDavideDiSalvo);
+		librettiPrimaA.put(ivoMarino.getID(), librettoIvoMarino);
+		librettiPrimaA.put(pieroRusso.getID(), librettoPieroRusso);
+		librettiPrimaA.put(marinoEsposito.getID(),librettoMarinoEsposito);
+		librettiPrimaA.put(leonardoRicci.getID(),librettoLeonardoRicci);
+		librettiPrimaA.put(valentinoFarina.getID(),librettoValentinoFarina);
+		librettiPrimaA.put(roccoBenedetti.getID(),librettoRoccoBenedetti);
+		librettiPrimaA.put(antonioGuerra.getID(),librettoAntonioGuerra);
+		librettiPrimaA.put(cristinaAngeli.getID(),librettoCristinaAngeli);
 		
-		librettiSecondaA.put(mariannaDonati.getId(),librettoMariannaDonati);
-		librettiSecondaA.put(elenaSarti.getId(),librettoElenaSarti);
-		librettiSecondaA.put(mariaPiaAlfredi.getId(),librettoMariaPiaAlfredi);
-		librettiSecondaA.put(giorgioGatti.getId(),librettoGiorgioGatti);
-		librettiSecondaA.put(lorenzoNegri.getId(),librettoLorenzoNegri);
-		librettiSecondaA.put(mattiaVitali.getId(),librettoMattiaVitali);
-		librettiSecondaA.put(emanueleDelMonte.getId(),librettoEmanueleDelMonte);
-		librettiSecondaA.put(luigiBernardi.getId(),librettoLuigiBernardi);
-		librettiSecondaA.put(vittorioPellegrini.getId(),librettoVittorioPellegrini);
-		librettiSecondaA.put(alexVilla.getId(),librettoAlexVilla);
+		librettiSecondaA.put(mariannaDonati.getID(),librettoMariannaDonati);
+		librettiSecondaA.put(elenaSarti.getID(),librettoElenaSarti);
+		librettiSecondaA.put(mariaPiaAlfredi.getID(),librettoMariaPiaAlfredi);
+		librettiSecondaA.put(giorgioGatti.getID(),librettoGiorgioGatti);
+		librettiSecondaA.put(lorenzoNegri.getID(),librettoLorenzoNegri);
+		librettiSecondaA.put(mattiaVitali.getID(),librettoMattiaVitali);
+		librettiSecondaA.put(emanueleDelMonte.getID(),librettoEmanueleDelMonte);
+		librettiSecondaA.put(luigiBernardi.getID(),librettoLuigiBernardi);
+		librettiSecondaA.put(vittorioPellegrini.getID(),librettoVittorioPellegrini);
+		librettiSecondaA.put(alexVilla.getID(),librettoAlexVilla);
 		
-		librettiPrimaB.put(marcoBattaglia.getId(),librettoMarcoBattaglia);
-		librettiPrimaB.put(alfredoMorelli.getId(),librettoAlfredoMorelli);
-		librettiPrimaB.put(pieraDellaValle.getId(),librettoPieraDellaValle);
-		librettiPrimaB.put(ignazioBoschi.getId(),librettoIgnazioBoschi);
-		librettiPrimaB.put(jacopoValli.getId(),librettoJacopoValli);
+		librettiPrimaB.put(marcoBattaglia.getID(),librettoMarcoBattaglia);
+		librettiPrimaB.put(alfredoMorelli.getID(),librettoAlfredoMorelli);
+		librettiPrimaB.put(pieraDellaValle.getID(),librettoPieraDellaValle);
+		librettiPrimaB.put(ignazioBoschi.getID(),librettoIgnazioBoschi);
+		librettiPrimaB.put(jacopoValli.getID(),librettoJacopoValli);
 		
-		librettiSecondaB.put(gianniConte.getId(),librettoGianniConte);
-		librettiSecondaB.put(lucaBarone.getId() ,librettoLucaBarone );
-		librettiSecondaB.put(giacomoSiciliano.getId(),librettoGiacomoSiciliano);
-		librettiSecondaB.put(fabrizioToscani.getId(),librettoFabrizioToscani);
-		librettiSecondaB.put(arturoAncona.getId(),librettoArturoAncona);
+		librettiSecondaB.put(gianniConte.getID(),librettoGianniConte);
+		librettiSecondaB.put(lucaBarone.getID() ,librettoLucaBarone );
+		librettiSecondaB.put(giacomoSiciliano.getID(),librettoGiacomoSiciliano);
+		librettiSecondaB.put(fabrizioToscani.getID(),librettoFabrizioToscani);
+		librettiSecondaB.put(arturoAncona.getID(),librettoArturoAncona);
 
 		
 		//creazione del registro
@@ -374,17 +374,17 @@ public class DBFake {
 		Appello appello_2B_16_12_14 = new Appello(data16_12_14);
 		
 //		tuttiGliAppelli.put(appello8_12_14.getIdAppello(), appello8_12_14);
-		tuttiGliAppelli.put(appello_1A_10_12_14.getIdAppello(), appello_1A_10_12_14);
-		tuttiGliAppelli.put(appello_1A_11_12_14.getIdAppello(), appello_1A_11_12_14);
-		tuttiGliAppelli.put(appello_1A_12_12_14.getIdAppello(), appello_1A_12_12_14);
-		tuttiGliAppelli.put(appello_1A_13_12_14.getIdAppello(), appello_1A_13_12_14);
+		tuttiGliAppelli.put(appello_1A_10_12_14.getID(), appello_1A_10_12_14);
+		tuttiGliAppelli.put(appello_1A_11_12_14.getID(), appello_1A_11_12_14);
+		tuttiGliAppelli.put(appello_1A_12_12_14.getID(), appello_1A_12_12_14);
+		tuttiGliAppelli.put(appello_1A_13_12_14.getID(), appello_1A_13_12_14);
 //		tuttiGliAppelli.put(appello14_12_14.getIdAppello(), appello14_12_14);
-		tuttiGliAppelli.put(appello_1A_15_12_14.getIdAppello(), appello_1A_15_12_14);
-		tuttiGliAppelli.put(appello_1A_16_12_14.getIdAppello(), appello_1A_16_12_14);
+		tuttiGliAppelli.put(appello_1A_15_12_14.getID(), appello_1A_15_12_14);
+		tuttiGliAppelli.put(appello_1A_16_12_14.getID(), appello_1A_16_12_14);
 		
-		tuttiGliAppelli.put(appello_2A_16_12_14.getIdAppello(), appello_2A_16_12_14);
-		tuttiGliAppelli.put(appello_1B_16_12_14.getIdAppello(), appello_1B_16_12_14);
-		tuttiGliAppelli.put(appello_2B_16_12_14.getIdAppello(), appello_2B_16_12_14);
+		tuttiGliAppelli.put(appello_2A_16_12_14.getID(), appello_2A_16_12_14);
+		tuttiGliAppelli.put(appello_1B_16_12_14.getID(), appello_1B_16_12_14);
+		tuttiGliAppelli.put(appello_2B_16_12_14.getID(), appello_2B_16_12_14);
 		
 		
 
