@@ -69,7 +69,7 @@ public class ResetDB {
 			scuola1.getClassi().add( primaB);
 			scuola1.getClassi().add( secondaB);
 						
-			//Crrazione dei docenti
+			//Creazione dei docenti
 			Docente marioRossi = new Docente("Mario", "Rossi");
 			Docente mirkoBianchi = new Docente("Mirko", "Bianchi");
 			Docente giulioVerdi = new Docente("Giulio", "Verdi");
@@ -97,7 +97,6 @@ public class ResetDB {
 			mirkoBianchi.getClassi().add(primaB);			
 			
 			//Creazione degli studenti
-//			Studente  = new Studente("", "");
 			Studente pieroRusso = new Studente("Piero", "Russo");
 			Studente marinoEsposito = new Studente("Marino", "Esposito");
 			Studente marioRomano = new Studente("Mario", "Romano");

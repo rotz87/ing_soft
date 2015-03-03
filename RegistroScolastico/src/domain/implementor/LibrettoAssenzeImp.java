@@ -3,7 +3,6 @@ package domain.implementor;
 import java.util.Collections;
 import java.util.ListIterator;
 
-import service.Stampa;
 import domain.model.Appello;
 import domain.model.Assenza;
 import domain.model.LibrettoAssenze;
@@ -35,13 +34,8 @@ public class LibrettoAssenzeImp {
 		Assenza ultimaAssenzaNonGiustificata = null;
 		
 		if(!(librettoAssenze.getNonGiustificate().isEmpty())){
-			Stampa.stampaln("\n size Giustificate:  "+ librettoAssenze.getGiustificate().size());
-			Stampa.stampaln("\n size NonGiustificate:  "+ librettoAssenze.getNonGiustificate().size());
-			Stampa.stampaln("\n NonGiustificate[0]:  "+ librettoAssenze.getNonGiustificate().get(0));
+			
 			ultimaAssenzaNonGiustificata = getUltimaAssenzaNonGiustificata(librettoAssenze);
-			Stampa.stampaln("\n libretto di:  "+ librettoAssenze.getStudente().getNome() +" "+ librettoAssenze.getStudente().getCognome());
-			Stampa.stampaln(" appello dell'ultima assenza non giustificata "+ ultimaAssenzaNonGiustificata.getUltimoAppelloAssenza()+"\n");
-			Stampa.stampaln("Data dell'ultimo appello dell'ultima assenza non giustificata "+ librettoAssenze.getUltimaAssenzaNonGiustificata().getUltimoAppelloAssenza().getData()+"\n");
 			inseribile = ultimaAssenzaNonGiustificata.isInseribile(appello);	
 		}
 		
@@ -50,13 +44,11 @@ public class LibrettoAssenzeImp {
 		if (inseribile){
 			
 			ultimaAssenzaNonGiustificata.inserisciAppelloAssenza(appello);
-//			Stempa.stampaln("accodo l'assenza " );
 		}else{
 			
 			Assenza nuovaAssenza = new Assenza();
 			librettoAssenze.getNonGiustificate().add(nuovaAssenza);
 			nuovaAssenza.inserisciAppelloAssenza(appello);
-//			Stempa.stampaln("creo l'assenza " );
 		}
 		
 	}

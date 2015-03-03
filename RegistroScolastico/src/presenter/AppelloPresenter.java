@@ -57,7 +57,6 @@ public class AppelloPresenter {
 			  httpHeaders.setLocation(URI.create(linkAppello.getHref()));
 		  }catch(IllegalStateException ISE){
 			  httpStatus = HttpStatus.FORBIDDEN;
-	//				  Stempa.stampaln("AppelloController:"+ISE.getMessage());
 		  }catch(Exception PE){
 			  // TODO Auto-generated catch block
 			  httpStatus = HttpStatus.SERVICE_UNAVAILABLE;
@@ -143,9 +142,7 @@ public class AppelloPresenter {
 			}
 			
 			try{
-				Stampa.stampaln("inserisciAssenze.registraAssenze-PRIMA");
 				fAController.registraAssenze(idAssenti, idClasse, docenteController.getIdDocenteProva());
-				Stampa.stampaln("inserisciAssenze.registraAssenze-DOPO");
 			}catch(IllegalStateException ISE){
 				httpStatus = HttpStatus.FORBIDDEN;
 				ISE.printStackTrace();

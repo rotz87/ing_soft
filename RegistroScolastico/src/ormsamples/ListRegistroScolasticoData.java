@@ -4,7 +4,7 @@
  */
 package ormsamples;
 
-import org.orm.*;
+import org.orm.PersistentException;
 public class ListRegistroScolasticoData {
 	private static final int ROW_COUNT = 100;
 	

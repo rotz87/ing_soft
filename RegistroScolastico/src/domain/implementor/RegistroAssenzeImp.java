@@ -4,7 +4,6 @@ import java.util.Collection;
 
 import org.joda.time.LocalDate;
 
-import service.Stampa;
 import domain.model.Appello;
 import domain.model.Calendario;
 import domain.model.LibrettoAssenze;
@@ -34,9 +33,6 @@ public class RegistroAssenzeImp {
 	 * @param idStudenti
 	 */
 	public void registraAssenze(RegistroAssenze registroAssenze, Collection<Studente> studenti) {
-		Stampa.stampaln("Registro: "+registroAssenze);
-		Stampa.stampaln("Studenti: "+studenti);
-		Stampa.stampaln("Libretti: "+registroAssenze.getLibrettiAssenze());
 		
 		Appello appelloCorrente = getAppelloOdierno(registroAssenze);
 		if (!(appelloCorrente.getAssenzePrese())){
@@ -67,11 +63,6 @@ public class RegistroAssenzeImp {
 	public void avviaAppello(RegistroAssenze registroAssenze) {
 		LocalDate dataRif = Calendario.getInstance().getDataOdierna();
 		if(!(this.esisteAppello(registroAssenze, dataRif))){
-//			//debug
-//			Appello nuovoAppello = new Appello(dataRif);
-//			appelli.put(dataRif, nuovoAppello);
-//			Stempa.stampaln("-------------------------------------------------------------------------------------->id appello : "+nuovoAppello.getIdAppello());
-//			//fine debug
 			if(!Calendario.getInstance().isOggiFestivo()){
 				//DA RIVEDERE E CAMBIARE
 				//TODO 

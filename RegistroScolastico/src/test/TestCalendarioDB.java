@@ -1,19 +1,14 @@
 package test;
 
 
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-
 import org.joda.time.LocalDate;
 import org.orm.PersistentException;
 
 import service.Stampa;
 import domain.model.Calendario;
-import domain.model.GiornoFestivo;
 import domain.model.GiornoFestivoCriteria;
 import domain.model.GiornoSettimanaleFestivo;
 import domain.model.GiornoSettimanaleFestivoCriteria;
-import domain.model.Studente;
 
 public class TestCalendarioDB {
 	public static void main(String[] args){

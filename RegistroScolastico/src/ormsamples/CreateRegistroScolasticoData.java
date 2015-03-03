@@ -4,7 +4,8 @@
  */
 package ormsamples;
 
-import org.orm.*;
+import org.orm.PersistentException;
+import org.orm.PersistentTransaction;
 public class CreateRegistroScolasticoData {
 	public void createTestData() throws PersistentException {
 		PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();

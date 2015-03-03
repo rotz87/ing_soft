@@ -16,7 +16,9 @@ package domain.model;
 import org.hibernate.Criteria;
 import org.orm.PersistentException;
 import org.orm.PersistentSession;
-import org.orm.criteria.*;
+import org.orm.criteria.AbstractORMCriteria;
+import org.orm.criteria.DateExpression;
+import org.orm.criteria.IntegerExpression;
 
 public class GiornoFestivoCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;

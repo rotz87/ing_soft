@@ -211,7 +211,6 @@ public class FaiAppelloController {
 			RegistroAssenze registroCorrente = classeCorrente.getRegistroAssenze();
 	
 			for(Studente studente : classeCorrente.getStudenti()){
-//				Stampa.stampaln(classeCorrente.getStudenti().toString());
 				rit.put(studente, registroCorrente.getLibretto(studente).esisteAssenza(appelloCorrente));
 				
 			}

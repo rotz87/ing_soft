@@ -1,7 +1,5 @@
 package presenter;
 
-import java.util.LinkedList;
-
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 
@@ -12,9 +10,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import domain.model.Calendario;
-import domain.model.GiornoFestivo;
 import domain.model.GiornoFestivoCriteria;
-import domain.model.GiornoSettimanaleFestivo;
 import domain.model.GiornoSettimanaleFestivoCriteria;
 
 /**

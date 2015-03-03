@@ -1,6 +1,5 @@
 package domain.implementor;
 
-import domain.model.GiornoFestivo;
 import domain.model.GiornoSettimanaleFestivo;
 
 public class GiornoSettimanaleFestivoImp {

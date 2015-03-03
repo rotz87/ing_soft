@@ -2,8 +2,6 @@ package domain.implementor;
 
 
 
-import service.Stampa;
-import domain.model.Calendario;
 
 
 public class CalendarioImp {

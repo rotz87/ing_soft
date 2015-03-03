@@ -2,16 +2,12 @@ package domain.implementor;
 
 
 import java.util.Collections;
-import java.util.LinkedList;
 
-import org.apache.activemq.filter.function.makeListFunction;
-import org.hsqldb.lib.Collection;
 import org.joda.time.LocalDate;
 
 import service.Stampa;
 import domain.model.Appello;
 import domain.model.Assenza;
-import domain.model.Calendario;
 
 public class AssenzaImp {
 
@@ -75,16 +71,6 @@ public class AssenzaImp {
 		}else{
 			inseribile = false;
 		}
-		Stampa.stampaln();
-		Stampa.stampaln("=====I=== AssenzaImp.isInseribile() =========");
-		Stampa.stampaln();
-		Stampa.stampaln("ultimoAppello: "+ultimoAppello.getData());
-		Stampa.stampaln("ultimaDataPlus: "+ultimaDataPlus);
-		Stampa.stampaln("attuale: "+attuale);
-		Stampa.stampaln("inseribile: "+inseribile);
-		Stampa.stampaln();
-		Stampa.stampaln("=====F=== AssenzaImp.isInseribile() =========");
-		Stampa.stampaln();
 		
 		return inseribile;
 	}
@@ -101,8 +87,6 @@ public class AssenzaImp {
 		if(ultimaData.getDayOfYear() - primaData.getDayOfYear()+1 >= Assenza.giorniCertificatoMedico){
 			rit = true;
 		}
-//		int x = ultimaData.getDayOfYear() -primaData.getDayOfYear()+1;
-//		Stampa.stampaln("\n differenza tra i giorni:"+ x +"\n ");
 		return rit;
 	}
 	

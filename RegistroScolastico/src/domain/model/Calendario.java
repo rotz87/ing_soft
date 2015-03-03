@@ -1,13 +1,11 @@
 package domain.model;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Date;
+import java.util.LinkedList;
 
-import domain.implementor.*;
-
-import org.eclipse.jetty.jndi.local.localContextRoot;
-import org.joda.time.*;
-
-import service.Stampa;
+import org.joda.time.Days;
+import org.joda.time.LocalDate;
 
 public class Calendario {
 

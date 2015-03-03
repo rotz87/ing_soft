@@ -2,10 +2,6 @@ package test;
 
 import java.util.List;
 
-import org.joda.time.LocalDate;
-
-import domain.model.Appello;
-import domain.model.LibrettoAssenzeCriteria;
 import domain.model.RegistroAssenze;
 import domain.model.RegistroAssenzeCriteria;
 

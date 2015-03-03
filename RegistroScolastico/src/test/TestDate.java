@@ -9,7 +9,6 @@ import org.joda.time.Days;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
-import domain.model.Calendario;
 import service.Stampa;
 
 //import org.orm.util.ORMMap;
