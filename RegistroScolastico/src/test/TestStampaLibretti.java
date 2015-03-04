@@ -14,7 +14,7 @@ public class TestStampaLibretti {
 		
 		ClasseCriteria classeC = null;
 		
-		
+		 
 		try {			
 			classeC = new ClasseCriteria();
 			
