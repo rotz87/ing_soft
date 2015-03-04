@@ -10,8 +10,6 @@ License Type: Academic
 			<generator class="native">
 			</generator>
 		</id>
-		<many-to-one name="studente" column="PersonaID" class="domain.model.Studente" cascade="save-update,lock" unique="true" not-null="true" lazy="no-proxy">
-		</many-to-one>
 		<list name="giustificate" lazy="true" cascade="save-update,lock" inverse="false">
 			<key column="LibrettoAssenzeID" not-null="false"/>
 			<index column="LibrettoAssenzeIndex" type="integer"/>

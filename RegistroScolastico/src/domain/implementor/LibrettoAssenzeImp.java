@@ -14,14 +14,6 @@ public class LibrettoAssenzeImp {
 	public LibrettoAssenzeImp(){
 	}
 	
-	public void inizialize(LibrettoAssenze librettoAssenze){
-
-	}
-	
-	public void inizialize(LibrettoAssenze librettoAssenze, Studente studente){
-		inizialize(librettoAssenze);
-		librettoAssenze.setStudente(studente);
-	}
 
 	/**
 	 * 

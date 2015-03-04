@@ -34,8 +34,8 @@ public class TestFaiLAppelloController2 {
 		return ret;
 	}
 	
-	public static void stampaLibretti(RegistroAssenze regAss){
-		TestFaiLAppelloController1.stampaLibretti(regAss);
+	public static void stampaLibretti(Classe classe){
+		TestFaiLAppelloController1.stampaLibretti(classe);
 		
 	}
 	
@@ -52,7 +52,7 @@ public class TestFaiLAppelloController2 {
 			classeC.ID.eq(idClasseProva);
 			Classe classeCorrente = classeC.uniqueClasse();
 			
-			stampaLibretti(classeCorrente.getRegistroAssenze());
+			stampaLibretti(classeCorrente);
 
 			controlloreAppello.avviaAppello(idClasseProva, idDocenteProva);
 //			controlloreAppello.avviaAppello(new Long(1), new Long(2));
@@ -66,7 +66,7 @@ public class TestFaiLAppelloController2 {
 			controlloreAppello.registraAssenze(listaIdStudAssenti,idClasseProva, idDocenteProva );
 			
 			//Stampa dei libretti
-			stampaLibretti(classeCorrente.getRegistroAssenze());
+			stampaLibretti(classeCorrente);
 		}catch(IllegalStateException ISE){
 			Stampa.stampaln("Messaggio dell'eccezione: "+ISE.getMessage());
 		}

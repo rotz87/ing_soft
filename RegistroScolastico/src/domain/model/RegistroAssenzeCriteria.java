@@ -20,13 +20,11 @@ import org.orm.criteria.*;
 
 public class RegistroAssenzeCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
-	public final CollectionExpression librettiAssenze;
 	public final CollectionExpression appelli;
 	
 	public RegistroAssenzeCriteria(Criteria criteria) {
 		super(criteria);
 		ID = new IntegerExpression("ID", this);
-		librettiAssenze = new CollectionExpression("librettiAssenze", this);
 		appelli = new CollectionExpression("appelli", this);
 	}
 	
@@ -36,10 +34,6 @@ public class RegistroAssenzeCriteria extends AbstractORMCriteria {
 	
 	public RegistroAssenzeCriteria() throws PersistentException {
 		this(domain.model.RSPersistentManager.instance().getSession());
-	}
-	
-	public LibrettoAssenzeCriteria createLibrettiAssenzeCriteria() {
-		return new LibrettoAssenzeCriteria(createCriteria("librettiAssenze"));
 	}
 	
 	public AppelloCriteria createAppelliCriteria() {

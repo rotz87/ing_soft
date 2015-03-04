@@ -2,6 +2,7 @@ package domain.controller;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.joda.time.LocalDate;
@@ -75,7 +76,8 @@ public class FaiAppelloController {
 		StudenteCriteria studenteCriteria = new StudenteCriteria();
 		Classe classeCorrente;
 		Docente docenteCorrente;
-		List<LibrettoAssenze> libretti;
+		List<LibrettoAssenze> libretti = new LinkedList<LibrettoAssenze>();
+		List<Studente> studenti = new LinkedList<Studente>();
 		
 		classeCriteria.ID.eq(idClasse);
 		classeCorrente = classeCriteria.uniqueClasse();
@@ -87,11 +89,16 @@ public class FaiAppelloController {
 			RegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();
 			studenteCriteria.ID.in(idStudenti);
 			
-			LibrettoAssenzeCriteria librettoAssenzeCriteria = new LibrettoAssenzeCriteria();
-			librettoAssenzeCriteria.studenteId.in(idStudenti);
-			libretti = librettoAssenzeCriteria.list();
+//			LibrettoAssenzeCriteria librettoAssenzeCriteria = new LibrettoAssenzeCriteria();
+//			librettoAssenzeCriteria.studenteId.in(idStudenti);
+//			libretti = librettoAssenzeCriteria.list();
+			studenti.addAll(studenteCriteria.list());
 			
-			registroAssenzeCorrente.registraAssenze((Collection<Studente>)studenteCriteria.list());
+			for(Studente studente : studenti){
+				libretti.add(studente.getLibrettoAssenze());
+			}
+			
+			registroAssenzeCorrente.registraAssenze(libretti);
 			
 			PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
 			try {
@@ -211,7 +218,7 @@ public class FaiAppelloController {
 			RegistroAssenze registroCorrente = classeCorrente.getRegistroAssenze();
 	
 			for(Studente studente : classeCorrente.getStudenti()){
-				rit.put(studente, registroCorrente.getLibretto(studente).esisteAssenza(appelloCorrente));
+				rit.put(studente, studente.getLibrettoAssenze().esisteAssenza(appelloCorrente));
 				
 			}
 			
@@ -248,7 +255,7 @@ public class FaiAppelloController {
 			RegistroAssenze registroCorrente = classeCorrente.getRegistroAssenze();
 	
 			for(Studente studente : classeCorrente.getStudenti()){
-				rit.put(studente.getID(), registroCorrente.getLibretto(studente).getAssenza(appelloCorrente));
+				rit.put(studente.getID(), studente.getLibrettoAssenze().getAssenza(appelloCorrente));
 				
 			}
 			

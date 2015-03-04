@@ -17,6 +17,16 @@ public class Studente extends domain.model.Persona {
 	public Studente() {
 	}
 	
+	private domain.model.LibrettoAssenze librettoAssenze;
+	
+	public void setLibrettoAssenze(domain.model.LibrettoAssenze value) {
+		this.librettoAssenze = value;
+	}
+	
+	public domain.model.LibrettoAssenze getLibrettoAssenze() {
+		return librettoAssenze;
+	}
+	
 	private domain.implementor.StudenteImp implementor = new domain.implementor.StudenteImp();
 	
 //	domain.model.LibrettoVoti librettoVoti;

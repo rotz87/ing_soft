@@ -19,8 +19,6 @@ public class LibrettoAssenze {
 	
 	private int ID;
 	
-	private domain.model.Studente studente;
-	
 	private java.util.List<domain.model.Assenza> giustificate = new java.util.LinkedList<domain.model.Assenza>();
 	
 	private java.util.List<domain.model.Assenza> nonGiustificate = new java.util.LinkedList<domain.model.Assenza>();
@@ -59,14 +57,6 @@ public class LibrettoAssenze {
 	}
 	
 	
-	public void setStudente(domain.model.Studente value) {
-		this.studente = value;
-	}
-	
-	public domain.model.Studente getStudente() {
-		return studente;
-	}
-	
 	public void setRitardi(java.util.List<domain.model.Ritardo> value) {
 		this.ritardi = value;
 	}
@@ -93,10 +83,6 @@ public class LibrettoAssenze {
 	
 	public domain.model.Assenza getUltimaAssenzaNonGiustificata() {
 		return this.implementor.getUltimaAssenzaNonGiustificata(this);
-	}
-	
-	public LibrettoAssenze(domain.model.Studente stud) {
-		this.implementor.inizialize(this, stud);
 	}
 	
 	public boolean esisteAssenza(domain.model.Appello appello) {

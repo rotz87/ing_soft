@@ -9,10 +9,13 @@ import service.Stampa;
 import domain.controller.FaiAppelloController;
 import domain.model.Appello;
 import domain.model.Assenza;
+import domain.model.Classe;
+import domain.model.ClasseCriteria;
 import domain.model.LibrettoAssenze;
 import domain.model.RSPersistentManager;
 import domain.model.RegistroAssenze;
 import domain.model.RegistroAssenzeCriteria;
+import domain.model.Studente;
 
 public class TestFaiLAppelloController1 {
 	public static void main(String[] args) throws PersistentException{
@@ -21,7 +24,7 @@ public class TestFaiLAppelloController1 {
 		//creazione dal controller FaiAppelloConreoller
 		FaiAppelloController controlloreAppello = new FaiAppelloController();
 
-		stampaLibretti(getRegistroAssenzeByIdClasse(idClasseProva));
+		stampaLibretti(getClasseById(idClasseProva));
 		
 		
 		try{
@@ -52,20 +55,19 @@ public class TestFaiLAppelloController1 {
 		
 		//Stampa dei libretti
 //		stampaLibretti(DBFake.getInstance().getClasseById(idClasseProva).getRegistroAssenze());
-		stampaLibretti(getRegistroAssenzeByIdClasse(idClasseProva));
+		stampaLibretti(getClasseById(idClasseProva));
 		
 
 	}
 	
-	public static void stampaLibretti(RegistroAssenze regAss){
+	public static void stampaLibretti(Classe classe){
 		Stampa.stampaln();
 		Stampa.stampaln("VISUALIZZAZIONE ASSENZE NON GIUSTIFICATE DEGLI STUDENTI _________________________ \n \n");
-		Iterator entries = regAss.getLibrettiAssenze().entrySet().iterator();
-		while (entries.hasNext()) {
-		  Entry thisEntry = (Entry) entries.next();
-		  Integer idStud = (Integer)thisEntry.getKey();
-		  LibrettoAssenze libAss = (LibrettoAssenze)thisEntry.getValue();
-		  Stampa.stampaln("STUDENTE : "+libAss.getStudente().getNome() +" "+libAss.getStudente().getCognome());
+
+//		while (entries.hasNext()) {
+		for(Studente stud : classe.getStudenti()){
+		  LibrettoAssenze libAss = stud.getLibrettoAssenze();
+		  Stampa.stampaln("STUDENTE : "+stud.getNome() +" "+stud.getCognome());
 		  Stampa.stampaln("ASSENZE NON GIUSTIFICATE : \n");
 		  if (/*libAss.getNonGiustificate() != null && */ (!(libAss.getNonGiustificate().isEmpty()))){
 			  for (Assenza assNG : libAss.getNonGiustificate()) {
@@ -87,17 +89,17 @@ public class TestFaiLAppelloController1 {
 		
 	}
 	
-	private static RegistroAssenze getRegistroAssenzeByIdClasse(int idClasse){
-		RegistroAssenze ret;
+	private static Classe getClasseById(int idClasse){
+		Classe ret;
 		
 		ret = null;
 		try {
 			try {
-				RegistroAssenzeCriteria registroAssenzeCriteria;
+				
 				
 				domain.model.ClasseCriteria ldomainmodelClasseCriteria = new domain.model.ClasseCriteria();
 				ldomainmodelClasseCriteria.ID.eq(idClasse);
-				ret = ldomainmodelClasseCriteria.uniqueClasse().getRegistroAssenze();
+				ret = ldomainmodelClasseCriteria.uniqueClasse();
 			}
 			finally {
 				RSPersistentManager.instance().disposePersistentManager();

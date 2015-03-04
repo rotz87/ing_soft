@@ -26,6 +26,8 @@ public class StudenteDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final StringExpression cognome;
 	public final StringExpression codiceFiscale;
 	public final DateExpression dataNascita;
+	public final IntegerExpression librettoAssenzeId;
+	public final AssociationExpression librettoAssenze;
 	
 	public StudenteDetachedCriteria() {
 		super(domain.model.Studente.class, domain.model.StudenteCriteria.class);
@@ -36,6 +38,8 @@ public class StudenteDetachedCriteria extends AbstractORMDetachedCriteria {
 		cognome = new StringExpression("cognome", this.getDetachedCriteria());
 		codiceFiscale = new StringExpression("codiceFiscale", this.getDetachedCriteria());
 		dataNascita = new DateExpression("dataNascita", this.getDetachedCriteria());
+		librettoAssenzeId = new IntegerExpression("librettoAssenze.ID", this.getDetachedCriteria());
+		librettoAssenze = new AssociationExpression("librettoAssenze", this.getDetachedCriteria());
 	}
 	
 	public StudenteDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -47,6 +51,12 @@ public class StudenteDetachedCriteria extends AbstractORMDetachedCriteria {
 		cognome = new StringExpression("cognome", this.getDetachedCriteria());
 		codiceFiscale = new StringExpression("codiceFiscale", this.getDetachedCriteria());
 		dataNascita = new DateExpression("dataNascita", this.getDetachedCriteria());
+		librettoAssenzeId = new IntegerExpression("librettoAssenze.ID", this.getDetachedCriteria());
+		librettoAssenze = new AssociationExpression("librettoAssenze", this.getDetachedCriteria());
+	}
+	
+	public LibrettoAssenzeDetachedCriteria createLibrettoAssenzeCriteria() {
+		return new LibrettoAssenzeDetachedCriteria(createCriteria("librettoAssenze"));
 	}
 	
 	public IndirizzoDetachedCriteria createIndirizzoCriteria() {

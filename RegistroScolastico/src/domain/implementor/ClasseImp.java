@@ -31,15 +31,7 @@ public class ClasseImp {
 		classe.setRegistroAssenze(registroAssenze);
 	}
 
-	public Set<Studente> getStudenti(Classe classe) {
-		this.studenti.clear();
-		
-		for (LibrettoAssenze libretto : classe.getRegistroAssenze().getLibrettiAssenze().values()) {
-			this.studenti.add(libretto.getStudente());
-		}
-		
-		return this.studenti;
-	}
+
 
 	
 }

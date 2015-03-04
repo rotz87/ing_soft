@@ -19,8 +19,6 @@ public class RegistroAssenze {
 	
 	private int ID;
 	
-	private java.util.Map<Integer, domain.model.LibrettoAssenze> librettiAssenze = new java.util.HashMap<Integer, domain.model.LibrettoAssenze>();
-	
 	private java.util.Map<Integer, domain.model.Appello> appelli = new java.util.HashMap<Integer, domain.model.Appello>();
 	
 	private void setID(int value) {
@@ -34,15 +32,6 @@ public class RegistroAssenze {
 	public int getORMID() {
 		return getID();
 	}
-	
-	public void setLibrettiAssenze(java.util.Map<Integer, domain.model.LibrettoAssenze> value) {
-		this.librettiAssenze = value;
-	}
-	
-	public java.util.Map<Integer, domain.model.LibrettoAssenze> getLibrettiAssenze() {
-		return librettiAssenze;
-	}
-	
 	
 	public void setAppelli(java.util.Map<Integer, domain.model.Appello> value) {
 		this.appelli = value;
@@ -71,8 +60,8 @@ public class RegistroAssenze {
 	/**
 	 * Riceve un vettore di studenti per cui segnare le assenze
 	 */
-	public void registraAssenze(java.util.Collection<Studente> studenti) {
-		this.implementor.registraAssenze(this, studenti);
+	public void registraAssenze(java.util.Collection<domain.model.LibrettoAssenze> libretti) {
+		this.implementor.registraAssenze(this, libretti);
 	}
 	
 	public domain.model.Appello getAppelloOdierno() {
@@ -89,10 +78,6 @@ public class RegistroAssenze {
 	
 	public boolean isAppelloOdiernoAvviabile() {
 		return this.implementor.isAppelloOdiernoAvviabile(this);
-	}
-	
-	public domain.model.LibrettoAssenze getLibretto(domain.model.Studente studente) {
-		return this.implementor.getLibretto(this, studente);
 	}
 	
 	public boolean checkPresenti(org.joda.time.LocalDate data, java.util.Collection<domain.model.Studente> studenti) {

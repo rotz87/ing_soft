@@ -34,12 +34,12 @@ public class RegistroAssenzeImp {
 	 * 
 	 * @param idStudenti
 	 */
-	public void registraAssenze(RegistroAssenze registroAssenze, Collection<Studente> studenti) {
+	public void registraAssenze(RegistroAssenze registroAssenze, Collection<LibrettoAssenze> libretti) {
 		
 		Appello appelloCorrente = getAppelloOdierno(registroAssenze);
 		if (!(appelloCorrente.getAssenzePrese())){
-			for (Studente studente : studenti){
-					registroAssenze.getLibrettiAssenze().get(studente.getID()).segnaAssenza(appelloCorrente);
+			for (LibrettoAssenze libretto : libretti){
+					libretto.segnaAssenza(appelloCorrente);
 					
 			}
 			appelloCorrente.setAssenzePrese(true);
@@ -119,16 +119,16 @@ public class RegistroAssenzeImp {
 		return avviabile;
 	}
 	
-	public LibrettoAssenze getLibretto(RegistroAssenze registroAssenze, Studente studente){
-		return registroAssenze.getLibrettiAssenze().get(studente.getID());
-	}
+//	public LibrettoAssenze getLibretto(RegistroAssenze registroAssenze, Studente studente){
+//		return registroAssenze.getLibrettiAssenze().get(studente.getID());
+//	}
 
 	public boolean checkPresenti(RegistroAssenze registro, LocalDate data, Collection<Studente> studenti) {
 		boolean rit = true;
 		Appello appello = registro.getAppelloByData(data);
 		
 		for(Studente studente : studenti ){
-			rit = rit && (!registro.getLibretto(studente).esisteAssenza(appello));
+			rit = rit && (!studente.getLibrettoAssenze().esisteAssenza(appello));
 		}
 		return rit;
 	}
