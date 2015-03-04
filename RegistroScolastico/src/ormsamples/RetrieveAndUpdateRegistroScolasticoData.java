@@ -4,8 +4,7 @@
  */
 package ormsamples;
 
-import org.orm.PersistentException;
-import org.orm.PersistentTransaction;
+import org.orm.*;
 public class RetrieveAndUpdateRegistroScolasticoData {
 	public void retrieveAndUpdateTestData() throws PersistentException {
 		PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
@@ -73,6 +72,10 @@ public class RetrieveAndUpdateRegistroScolasticoData {
 			domain.model.GiornoSettimanaleFestivo ldomainmodelGiornoSettimanaleFestivo= (domain.model.GiornoSettimanaleFestivo)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.GiornoSettimanaleFestivo").setMaxResults(1).uniqueResult();
 			// Update the properties of the persistent object
 			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelGiornoSettimanaleFestivo);
+			
+			domain.model.RegistroDocente ldomainmodelRegistroDocente= (domain.model.RegistroDocente)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.RegistroDocente").setMaxResults(1).uniqueResult();
+			// Update the properties of the persistent object
+			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelRegistroDocente);
 			
 			t.commit();
 		}
@@ -177,6 +180,12 @@ public class RetrieveAndUpdateRegistroScolasticoData {
 		// Please uncomment the follow line and fill in parameter(s)
 		//ldomainmodelGiornoSettimanaleFestivoCriteria.ID.eq();
 		System.out.println(ldomainmodelGiornoSettimanaleFestivoCriteria.uniqueGiornoSettimanaleFestivo());
+		
+		System.out.println("Retrieving RegistroDocente by RegistroDocenteCriteria");
+		domain.model.RegistroDocenteCriteria ldomainmodelRegistroDocenteCriteria = new domain.model.RegistroDocenteCriteria();
+		// Please uncomment the follow line and fill in parameter(s)
+		//ldomainmodelRegistroDocenteCriteria.ID.eq();
+		System.out.println(ldomainmodelRegistroDocenteCriteria.uniqueRegistroDocente());
 		
 	}
 	

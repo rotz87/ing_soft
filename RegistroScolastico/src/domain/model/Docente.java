@@ -17,14 +17,14 @@ public class Docente extends domain.model.Persona {
 	public Docente() {
 	}
 	
-	private java.util.Set<domain.model.Classe> classi = new java.util.LinkedHashSet<domain.model.Classe>();
+	private java.util.Set<domain.model.RegistroDocente> registriDocente = new java.util.LinkedHashSet<domain.model.RegistroDocente>();
 	
-	public void setClassi(java.util.Set<domain.model.Classe> value) {
-		this.classi = value;
+	public void setRegistriDocente(java.util.Set<domain.model.RegistroDocente> value) {
+		this.registriDocente = value;
 	}
 	
-	public java.util.Set<domain.model.Classe> getClassi() {
-		return classi;
+	public java.util.Set<domain.model.RegistroDocente> getRegistriDocente() {
+		return registriDocente;
 	}
 	
 	
@@ -36,6 +36,10 @@ public class Docente extends domain.model.Persona {
 	
 	public boolean isInsegnante(domain.model.Classe classe) {
 		return this.implementor.isInsegnante(this, classe);
+	}
+	
+	public java.util.Set<domain.model.Classe> getClassi() {
+		return this.implementor.getClassi(this);
 	}
 	
 	public String toString() {

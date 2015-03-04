@@ -14,12 +14,9 @@
 package domain.model;
 
 import java.util.List;
-
 import org.hibernate.criterion.DetachedCriteria;
 import org.orm.PersistentSession;
-import org.orm.criteria.AbstractORMDetachedCriteria;
-import org.orm.criteria.IntegerExpression;
-import org.orm.criteria.StringExpression;
+import org.orm.criteria.*;
 
 public class IndirizzoDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression ID;

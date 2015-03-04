@@ -16,12 +16,7 @@ package domain.model;
 import org.hibernate.Criteria;
 import org.orm.PersistentException;
 import org.orm.PersistentSession;
-import org.orm.criteria.AbstractORMCriteria;
-import org.orm.criteria.AssociationExpression;
-import org.orm.criteria.CollectionExpression;
-import org.orm.criteria.DateExpression;
-import org.orm.criteria.IntegerExpression;
-import org.orm.criteria.StringExpression;
+import org.orm.criteria.*;
 
 public class DocenteCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
@@ -31,7 +26,7 @@ public class DocenteCriteria extends AbstractORMCriteria {
 	public final StringExpression cognome;
 	public final StringExpression codiceFiscale;
 	public final DateExpression dataNascita;
-	public final CollectionExpression classi;
+	public final CollectionExpression registriDocente;
 	
 	public DocenteCriteria(Criteria criteria) {
 		super(criteria);
@@ -42,7 +37,7 @@ public class DocenteCriteria extends AbstractORMCriteria {
 		cognome = new StringExpression("cognome", this);
 		codiceFiscale = new StringExpression("codiceFiscale", this);
 		dataNascita = new DateExpression("dataNascita", this);
-		classi = new CollectionExpression("classi", this);
+		registriDocente = new CollectionExpression("registriDocente", this);
 	}
 	
 	public DocenteCriteria(PersistentSession session) {
@@ -53,8 +48,8 @@ public class DocenteCriteria extends AbstractORMCriteria {
 		this(domain.model.RSPersistentManager.instance().getSession());
 	}
 	
-	public ClasseCriteria createClassiCriteria() {
-		return new ClasseCriteria(createCriteria("classi"));
+	public RegistroDocenteCriteria createRegistriDocenteCriteria() {
+		return new RegistroDocenteCriteria(createCriteria("registriDocente"));
 	}
 	
 	public IndirizzoCriteria createIndirizzoCriteria() {

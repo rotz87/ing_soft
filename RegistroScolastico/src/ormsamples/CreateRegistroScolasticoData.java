@@ -4,8 +4,7 @@
  */
 package ormsamples;
 
-import org.orm.PersistentException;
-import org.orm.PersistentTransaction;
+import org.orm.*;
 public class CreateRegistroScolasticoData {
 	public void createTestData() throws PersistentException {
 		PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
@@ -49,7 +48,7 @@ public class CreateRegistroScolasticoData {
 			domain.model.Classe ldomainmodelClasse = new domain.model.Classe();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : registroAssenze
 			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelClasse);
 			
-			domain.model.Docente ldomainmodelDocente = new domain.model.Docente();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : classi
+			domain.model.Docente ldomainmodelDocente = new domain.model.Docente();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : registriDocente
 			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelDocente);
 			
 			domain.model.GiornoFestivo ldomainmodelGiornoFestivo = new domain.model.GiornoFestivo();			// Initialize the properties of the persistent object here
@@ -57,6 +56,9 @@ public class CreateRegistroScolasticoData {
 			
 			domain.model.GiornoSettimanaleFestivo ldomainmodelGiornoSettimanaleFestivo = new domain.model.GiornoSettimanaleFestivo();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : giorno
 			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelGiornoSettimanaleFestivo);
+			
+			domain.model.RegistroDocente ldomainmodelRegistroDocente = new domain.model.RegistroDocente();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : classe
+			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelRegistroDocente);
 			
 			t.commit();
 		}

@@ -20,10 +20,9 @@ License Type: Academic
 		<subclass name="domain.model.Studente" discriminator-value="Studente" lazy="false">
 		</subclass>
 		<subclass name="domain.model.Docente" discriminator-value="Docente" lazy="false">
-			<set name="classi" table="Persona_Classe" lazy="true" cascade="save-update,lock">
+			<set name="registriDocente" lazy="true" cascade="save-update,lock" inverse="false">
 				<key column="PersonaID" not-null="true"/>
-				<many-to-many column="ClasseID" class="domain.model.Classe">
-				</many-to-many>
+				<one-to-many class="domain.model.RegistroDocente"/>
 			</set>
 		</subclass>
 	</class>

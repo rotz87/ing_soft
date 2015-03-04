@@ -125,13 +125,13 @@ public class DBFake {
 		classiDiRossi.add(secondaA);
 		classiDiRossi.add(primaB);
 		classiDiRossi.add(secondaB);
-		marioRossi.setClassi(classiDiRossi);
+//		marioRossi.setClassi(classiDiRossi);
 		
 		//assegnazione delle classi a Rossi
 		Set<Classe> classiDiBianchi = new HashSet<Classe>();
 		classiDiBianchi.add(primaA);
 		classiDiBianchi.add(primaB);
-		mirkoBianchi.setClassi(classiDiBianchi);
+//		mirkoBianchi.setClassi(classiDiBianchi);
 		
 		
 		//Creazione degli studenti

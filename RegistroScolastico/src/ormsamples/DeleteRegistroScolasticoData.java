@@ -4,8 +4,7 @@
  */
 package ormsamples;
 
-import org.orm.PersistentException;
-import org.orm.PersistentTransaction;
+import org.orm.*;
 public class DeleteRegistroScolasticoData {
 	public void deleteTestData() throws PersistentException {
 		PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
@@ -57,6 +56,9 @@ public class DeleteRegistroScolasticoData {
 			
 			domain.model.GiornoSettimanaleFestivo ldomainmodelGiornoSettimanaleFestivo= (domain.model.GiornoSettimanaleFestivo)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.GiornoSettimanaleFestivo").setMaxResults(1).uniqueResult();
 			domain.model.RSPersistentManager.instance().getSession().delete(ldomainmodelGiornoSettimanaleFestivo);
+			
+			domain.model.RegistroDocente ldomainmodelRegistroDocente= (domain.model.RegistroDocente)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.RegistroDocente").setMaxResults(1).uniqueResult();
+			domain.model.RSPersistentManager.instance().getSession().delete(ldomainmodelRegistroDocente);
 			
 			t.commit();
 		}

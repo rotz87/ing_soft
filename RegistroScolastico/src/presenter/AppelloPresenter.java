@@ -57,6 +57,7 @@ public class AppelloPresenter {
 			  httpHeaders.setLocation(URI.create(linkAppello.getHref()));
 		  }catch(IllegalStateException ISE){
 			  httpStatus = HttpStatus.FORBIDDEN;
+//			  ISE.printStackTrace();
 		  }catch(Exception PE){
 			  // TODO Auto-generated catch block
 			  httpStatus = HttpStatus.SERVICE_UNAVAILABLE;

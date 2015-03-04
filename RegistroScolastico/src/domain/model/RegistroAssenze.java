@@ -95,6 +95,10 @@ public class RegistroAssenze {
 		return this.implementor.getLibretto(this, studente);
 	}
 	
+	public boolean checkPresenti(org.joda.time.LocalDate data, java.util.Collection<domain.model.Studente> studenti) {
+		return this.implementor.checkPresenti(this, data, studenti);
+	}
+	
 	public String toString() {
 		return String.valueOf(getID());
 	}

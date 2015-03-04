@@ -3,7 +3,9 @@ package domain.implementor;
 import java.util.Collection;
 
 import org.joda.time.LocalDate;
+import org.neo4j.cypher.internal.helpers.Converge.iterateUntilConverged;
 
+import service.Stampa;
 import domain.model.Appello;
 import domain.model.Calendario;
 import domain.model.LibrettoAssenze;
@@ -84,7 +86,9 @@ public class RegistroAssenzeImp {
 	 * @param data
 	 */
 	public Appello getAppelloByData(RegistroAssenze registroAssenze, org.joda.time.LocalDate data) {
-		return registroAssenze.getAppelli().get(data);
+		int dataInt = Calendario.getInstance().getDaysFromZero(data.toDate());
+		return registroAssenze.getAppelli().get(dataInt);
+		
 	}
 
 
@@ -117,6 +121,16 @@ public class RegistroAssenzeImp {
 	
 	public LibrettoAssenze getLibretto(RegistroAssenze registroAssenze, Studente studente){
 		return registroAssenze.getLibrettiAssenze().get(studente.getID());
+	}
+
+	public boolean checkPresenti(RegistroAssenze registro, LocalDate data, Collection<Studente> studenti) {
+		boolean rit = true;
+		Appello appello = registro.getAppelloByData(data);
+		
+		for(Studente studente : studenti ){
+			rit = rit && (!registro.getLibretto(studente).esisteAssenza(appello));
+		}
+		return rit;
 	}
 
 }
