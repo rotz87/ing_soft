@@ -32,12 +32,23 @@ public class FaiAppelloController {
 	}
 	
 	
-	public void avviaAppello(int idClasse, int idDocente) throws PersistentException {
+	public void avviaAppello(int idClasse, int idDocente) {
 
-		ClasseCriteria classeCriteria = new ClasseCriteria();
-		DocenteCriteria docenteCriteria = new DocenteCriteria();
+		ClasseCriteria classeCriteria;
+		DocenteCriteria docenteCriteria;
 		Classe classeCorrente;
 		Docente docenteCorrente;
+		
+		classeCriteria = null;
+		docenteCriteria = null;
+		
+		try {
+			classeCriteria = new ClasseCriteria();
+			docenteCriteria = new DocenteCriteria();
+		} catch (PersistentException e) {
+			e.printStackTrace();
+			throw new RuntimeException(ErrorMessage.APPELLO_NON_AVVIABILE);
+		}
 		
 		classeCriteria.ID.eq(idClasse);
 		classeCorrente = classeCriteria.uniqueClasse();
@@ -45,39 +56,54 @@ public class FaiAppelloController {
 		docenteCriteria.ID.eq(idDocente);
 		docenteCorrente = docenteCriteria.uniqueDocente();
 		
-//		Stempa.stampaln("docente corrente: " + docenteCorrente.getCognome());
-//		Stempa.stampaln("classe corrente: " + classeCorrente.getNome());
-//		Stempa.stampaln("lista classi: " + docenteCorrente.getClassi().toString());
-		
 		if(docenteCorrente.isInsegnante(classeCorrente)){
 			RegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();
 			registroAssenzeCorrente.avviaAppello();
 
-			PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
 			try {
-				RSPersistentManager.instance().getSession().save(registroAssenzeCorrente.getAppelloOdierno());
-				t.commit();
+				PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
+				try {
+					RSPersistentManager.instance().getSession().save(registroAssenzeCorrente.getAppelloOdierno());
+					t.commit();
+				}
+				catch (PersistentException e) {
+					t.rollback();
+					throw e;
+				}
+			} catch (PersistentException e) {
+				e.printStackTrace();
+				throw new RuntimeException(ErrorMessage.APPELLO_NON_AVVIABILE);
 			}
-			catch (PersistentException e) {
-				t.rollback();
-				throw e;
-			}
+
 			
 		}else{
-			throw new IllegalStateException("ATTENZIONE IL DOCENTE NON E' ABILITATO AD ESEGUIRE L'APPELLO SULLA CLASSE SELEZIONATA");
+			throw new IllegalStateException(ErrorMessage.DOCENTE_UNQUALIFIED);
 		}
 		
 	}
 	
-	public void registraAssenze(Integer[] idStudenti, int idClasse, int idDocente) throws PersistentException {
+	public void registraAssenze(Integer[] idStudenti, int idClasse, int idDocente) {
 		
-		ClasseCriteria classeCriteria = new ClasseCriteria();
-		DocenteCriteria docenteCriteria = new DocenteCriteria();
-		StudenteCriteria studenteCriteria = new StudenteCriteria();
+		ClasseCriteria classeCriteria;
+		DocenteCriteria docenteCriteria;
+		StudenteCriteria studenteCriteria;
 		Classe classeCorrente;
 		Docente docenteCorrente;
 		List<LibrettoAssenze> libretti = new LinkedList<LibrettoAssenze>();
 		List<Studente> studenti = new LinkedList<Studente>();
+		
+		classeCriteria = null;
+		docenteCriteria = null;
+		studenteCriteria = null;
+		
+		try {
+			classeCriteria = new ClasseCriteria();
+			docenteCriteria = new DocenteCriteria();
+			studenteCriteria = new StudenteCriteria();
+		} catch (PersistentException e) {
+			e.printStackTrace();
+			new RuntimeException(ErrorMessage.ASSENZE_UNRECORDABLE);
+		}
 		
 		classeCriteria.ID.eq(idClasse);
 		classeCorrente = classeCriteria.uniqueClasse();
@@ -89,9 +115,6 @@ public class FaiAppelloController {
 			RegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();
 			studenteCriteria.ID.in(idStudenti);
 			
-//			LibrettoAssenzeCriteria librettoAssenzeCriteria = new LibrettoAssenzeCriteria();
-//			librettoAssenzeCriteria.studenteId.in(idStudenti);
-//			libretti = librettoAssenzeCriteria.list();
 			studenti.addAll(studenteCriteria.list());
 			
 			for(Studente studente : studenti){
@@ -100,56 +123,86 @@ public class FaiAppelloController {
 			
 			registroAssenzeCorrente.registraAssenze(libretti);
 			
-			PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
-			try {
-			
-				for(LibrettoAssenze libAss : libretti){
-					RSPersistentManager.instance().getSession().save(libAss.getUltimaAssenzaNonGiustificata());
-//					RSPersistentManager.instance().
+			try{
+				PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
+				try {
+				
+					for(LibrettoAssenze libAss : libretti){
+						RSPersistentManager.instance().getSession().save(libAss.getUltimaAssenzaNonGiustificata());
+					}
+					t.commit();
 				}
-				t.commit();
+				catch (PersistentException e) {
+					t.rollback();
+					throw e;
+				}
+			}catch (PersistentException e) {
+				e.printStackTrace();
+				new RuntimeException(ErrorMessage.ASSENZE_UNRECORDABLE);
 			}
-			catch (PersistentException e) {
-				t.rollback();
-				throw e;
-			}
-			
-//			RSPersistentManager.instance().getSession().update(librettoAssenzeCriteria.listLibrettoAssenze());
-//			RSPersistentManager.instance().getSession().update(registroAssenzeCorrente);
 
 		}else{
-			throw new IllegalStateException("ATTENZIONE IL DOCENTE NON E' ABILITATO A METTERE LE ASSENZE PER QUESTA CLASSE");
+			throw new IllegalStateException(ErrorMessage.DOCENTE_UNQUALIFIED);
 		}
 
 	}
 	
-	public Appello getAppelloOdierno(int idClasse) throws PersistentException{
-		ClasseCriteria classeCriteria = new ClasseCriteria();
+	public Appello getAppelloOdierno(int idClasse) {
+		ClasseCriteria classeCriteria;
+		
+		classeCriteria = null;
+		
+		try {
+			classeCriteria = new ClasseCriteria();
+		} catch (PersistentException e) {
+			e.printStackTrace();
+			throw new RuntimeException(ErrorMessage.APPELLO_UNLOADED);
+		}
+		
 		classeCriteria.ID.eq(idClasse);
 		Classe classeCorrente = classeCriteria.uniqueClasse();
 		return classeCorrente.getRegistroAssenze().getAppelloOdierno();
-		
-//		Appello appelloCorrente = DBFake.getInstance().getAppelloById(idAppello);
-//		return DBFake.getInstance().getClasseById(idClasse).getRegistroAssenze().getAppelloOdierno();
-		
-		
+
 	}
 	
-	public Appello getAppello(int idClasse, LocalDate data) throws PersistentException{
-		ClasseCriteria classeCriteria = new ClasseCriteria();
+	public Appello getAppello(int idClasse, LocalDate data) {
+		
+		ClasseCriteria classeCriteria;
+		
+		classeCriteria = null;
+		
+		try {
+			classeCriteria = new ClasseCriteria();
+		} catch (PersistentException e) {
+			e.printStackTrace();
+			throw new RuntimeException(ErrorMessage.APPELLO_UNLOADED);
+		}
+		
 		classeCriteria.ID.eq(idClasse);
 		Classe classeCorrente = classeCriteria.uniqueClasse();
 		return classeCorrente.getRegistroAssenze().getAppelloByData(data);
-//		return DBFake.getInstance().getClasseById(idClasse).getRegistroAssenze().getAppelloByData(data);
 		
 	}
 	
-	public Appello getAppello(int idClasse, int idAppello) throws PersistentException{
-		ClasseCriteria classeCriteria = new ClasseCriteria();
+	public Appello getAppello(int idClasse, int idAppello) {
+
+		ClasseCriteria classeCriteria;
+		AppelloCriteria appelloCriteria;
+		
+		classeCriteria = null;
+		appelloCriteria = null;
+		
+		try {
+			classeCriteria = new ClasseCriteria();
+			appelloCriteria = new AppelloCriteria();
+		} catch (PersistentException e) {
+			e.printStackTrace();
+			throw new RuntimeException(ErrorMessage.APPELLO_UNLOADED);
+		}
+		
 		classeCriteria.ID.eq(idClasse);
 		Classe classeCorrente = classeCriteria.uniqueClasse();
 		
-		AppelloCriteria appelloCriteria = new AppelloCriteria();
 		appelloCriteria.ID.eq(idAppello);
 		Appello appelloCorrente = appelloCriteria.uniqueAppello();
 		
@@ -157,37 +210,45 @@ public class FaiAppelloController {
 			
 			return appelloCorrente;
 		}else{
-			throw new IllegalStateException("L'appello selezionato non appartiene alla classe selezionata");
+			throw new IllegalStateException(ErrorMessage.APPELLO_CLASSE_INCONSISTENT);
 		}
 		
-//		Appello appelloCorrente = DBFake.getInstance().getAppelloById(idAppello);
-//		Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
-//		
-//		if ( classeCorrente.getRegistroAssenze().esisteAppello(appelloCorrente)){
-//		
-//			return DBFake.getInstance().getAppelloById(idAppello);
-//		}else{
-//			throw new IllegalStateException("L'appello selezionato non appartiene alla classe selezionata");
-//		}
 	}
 	
-	public Collection<Appello> getAppelli(int idClasse) throws PersistentException{
-		ClasseCriteria classeCriteria = new ClasseCriteria();
+	public Collection<Appello> getAppelli(int idClasse) {
+		
+		ClasseCriteria classeCriteria;
+		
+		classeCriteria = null;
+		
+		try {
+			classeCriteria = new ClasseCriteria();
+		} catch (PersistentException e) {
+			e.printStackTrace();
+			throw new RuntimeException(ErrorMessage.APPELLI_UNLOADED);
+		}
+		
 		classeCriteria.ID.eq(idClasse);
 		Classe classeCorrente = classeCriteria.uniqueClasse();
 		
 		RegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();
 		return registroAssenzeCorrente.getAppelli().values();
 		
-//		Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
-//		RegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();
-//		return registroAssenzeCorrente.getAppelli().values();		
 	}
 	
-	public boolean isAppelloOdiernoAvviabile(int idClasse) throws PersistentException{
+	public boolean isAppelloOdiernoAvviabile(int idClasse) {
+
+		ClasseCriteria classeCriteria;
 		
-//		Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
-		ClasseCriteria classeCriteria = new ClasseCriteria();
+		classeCriteria = null;
+		
+		try {
+			classeCriteria = new ClasseCriteria();
+		} catch (PersistentException e) {
+			e.printStackTrace();
+			throw new RuntimeException(ErrorMessage.CLASSE_UNLOADED);
+		}
+		
 		classeCriteria.ID.eq(idClasse);
 		Classe classeCorrente = classeCriteria.uniqueClasse();
 		
@@ -195,18 +256,29 @@ public class FaiAppelloController {
 		return registroAssenzeCorrente.isAppelloOdiernoAvviabile();
 	}
 	
-	public HashMap<Studente, Boolean>  getBoolAssenze(int idClasse, int idAppello) throws PersistentException{
-		AppelloCriteria appelloCriteria = new AppelloCriteria();
-		ClasseCriteria classeCriteria = new ClasseCriteria();
+	public HashMap<Studente, Boolean>  getBoolAssenze(int idClasse, int idAppello) {
+
+		ClasseCriteria classeCriteria;
+		AppelloCriteria appelloCriteria;
+		
+		classeCriteria = null;
+		appelloCriteria = null;
+		
+		try {
+			classeCriteria = new ClasseCriteria();
+			appelloCriteria = new AppelloCriteria();
+		} catch (PersistentException e) {
+			e.printStackTrace();
+			throw new RuntimeException(ErrorMessage.ASSENZE_UNLOADED);
+		}
 		
 		appelloCriteria.ID.eq(idAppello);
 		
-//		Appello appelloCorrente = DBFake.getInstance().getAppelloById(idAppello);
 		Appello appelloCorrente = appelloCriteria.uniqueAppello();
 		HashMap<Studente, Boolean> rit;
 		
 		if(appelloCorrente == null){
-			throw new IllegalStateException("APPELLO INESISTENTE");
+			throw new IllegalStateException(ErrorMessage.APPELLO_INEXISTENT);
 		}
 
 		if(appelloCorrente.getAssenzePrese()){
@@ -224,7 +296,7 @@ public class FaiAppelloController {
 			
 			return rit;
 		}else{
-			throw new IllegalStateException("ASSENZE NON PRESE");
+			throw new IllegalStateException(ErrorMessage.ASSENZE_UNRECORDED);
 		}
 	}
 	
@@ -236,10 +308,21 @@ public class FaiAppelloController {
 	 * @return Map<idStudente, Assenza>
 	 * @throws PersistentException 
 	 */
-	public HashMap<Integer, Assenza>  getAssenze(int idClasse, int idAppello) throws PersistentException{
-//		Appello appelloCorrente = DBFake.getInstance().getAppelloById(idAppello);
-		AppelloCriteria appelloCriteria = new AppelloCriteria();
-		ClasseCriteria classeCriteria = new ClasseCriteria();
+	public HashMap<Integer, Assenza>  getAssenze(int idClasse, int idAppello) {
+
+		ClasseCriteria classeCriteria;
+		AppelloCriteria appelloCriteria;
+		
+		classeCriteria = null;
+		appelloCriteria = null;
+		
+		try {
+			classeCriteria = new ClasseCriteria();
+			appelloCriteria = new AppelloCriteria();
+		} catch (PersistentException e) {
+			e.printStackTrace();
+			throw new RuntimeException(ErrorMessage.ASSENZE_UNLOADED);
+		}
 		
 		appelloCriteria.ID.eq(idAppello);
 		
@@ -249,7 +332,6 @@ public class FaiAppelloController {
 		if(appelloCorrente.getAssenzePrese()){
 
 			rit = new HashMap<Integer, Assenza>();
-//			Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
 			classeCriteria.ID.eq(idClasse);
 			Classe classeCorrente = classeCriteria.uniqueClasse();
 			RegistroAssenze registroCorrente = classeCorrente.getRegistroAssenze();
@@ -261,7 +343,7 @@ public class FaiAppelloController {
 			
 			return rit;
 		}else{
-			throw new IllegalStateException("ASSENZE NON PRESE");
+			throw new IllegalStateException(ErrorMessage.ASSENZE_UNRECORDED);
 		}
 	}
 	

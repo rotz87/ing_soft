@@ -7,14 +7,21 @@ import domain.model.DocenteCriteria;
 
 public class DocenteController {
 	
-	public int getIdDocenteProva() throws PersistentException{
+	public int getIdDocenteProva(){
 		String cognome = "Rossi";
-//		String cognome = "Bianchi";
 		
 		DocenteCriteria criteria;
 		Docente docente;
 		
-		criteria = new DocenteCriteria();
+		criteria = null;
+		
+		try {
+			criteria = new DocenteCriteria();
+		} catch (PersistentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new RuntimeException(ErrorMessage.DOCENTE_UNLOADED);
+		}
 		criteria.cognome.eq(cognome);
 		
 		docente = criteria.uniqueDocente();
