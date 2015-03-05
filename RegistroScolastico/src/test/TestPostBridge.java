@@ -169,7 +169,7 @@ public class TestPostBridge {
 			controller.registraAssenze(idStudenti, idClasse, idDocente);
 
 			
-		} catch (Exception e) {
+		} catch (PersistentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

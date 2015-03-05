@@ -32,7 +32,7 @@ public class TestFaiLAppelloController1 {
 			controlloreAppello.avviaAppello(idClasseProva, idDocenteProva);
 		}catch(IllegalStateException ISE){
 			Stampa.stampaln("Messaggio dell'eccezione: "+ISE.getMessage());
-		} catch (Exception e) {
+		} catch (PersistentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

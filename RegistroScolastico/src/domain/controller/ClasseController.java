@@ -2,7 +2,6 @@ package domain.controller;
 
 import java.util.Collection;
 
-import org.hibernate.exception.DataException;
 import org.orm.PersistentException;
 
 import domain.model.Classe;
@@ -17,18 +16,12 @@ public class ClasseController {
 		
 	}
 
-	public Collection<Classe> getClassi(int idDocente){
+	public Collection<Classe> getClassi(int idDocente) throws PersistentException{
 		
 			Docente docente = null;
 			DocenteCriteria criteria = null;
 			
-			try {
-				criteria = new DocenteCriteria();
-			} catch (PersistentException e) {
-				e.printStackTrace();
-				throw new RuntimeException(ErrorMessage.CLASSI_UNLOADED);
-			}
-			
+			criteria = new DocenteCriteria();
 			criteria.ID.eq(idDocente);
 
 			docente = criteria.uniqueDocente();
@@ -37,19 +30,12 @@ public class ClasseController {
 			
 	}
 	
-	public Collection<Studente> getStudenti(int idClasse){
+	public Collection<Studente> getStudenti(int idClasse) throws PersistentException {
 		
 		Classe classe;
 		ClasseCriteria criteria;
 		
-		criteria = null;
-		
-		try {
-			criteria = new ClasseCriteria();
-		} catch (PersistentException e) {
-			e.printStackTrace();
-			throw new RuntimeException(ErrorMessage.STUDENTI_UNLOADED);
-		}
+		criteria = new ClasseCriteria();
 		criteria.ID.eq(idClasse);
 		classe = criteria.uniqueClasse();
 		
