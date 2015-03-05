@@ -14,15 +14,9 @@
 package domain.model;
 
 import java.util.List;
-
 import org.hibernate.criterion.DetachedCriteria;
 import org.orm.PersistentSession;
-import org.orm.criteria.AbstractORMDetachedCriteria;
-import org.orm.criteria.AssociationExpression;
-import org.orm.criteria.CollectionExpression;
-import org.orm.criteria.DateExpression;
-import org.orm.criteria.IntegerExpression;
-import org.orm.criteria.StringExpression;
+import org.orm.criteria.*;
 
 public class DocenteDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression ID;
@@ -32,7 +26,7 @@ public class DocenteDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final StringExpression cognome;
 	public final StringExpression codiceFiscale;
 	public final DateExpression dataNascita;
-	public final CollectionExpression classi;
+	public final CollectionExpression registriDocente;
 	
 	public DocenteDetachedCriteria() {
 		super(domain.model.Docente.class, domain.model.DocenteCriteria.class);
@@ -43,7 +37,7 @@ public class DocenteDetachedCriteria extends AbstractORMDetachedCriteria {
 		cognome = new StringExpression("cognome", this.getDetachedCriteria());
 		codiceFiscale = new StringExpression("codiceFiscale", this.getDetachedCriteria());
 		dataNascita = new DateExpression("dataNascita", this.getDetachedCriteria());
-		classi = new CollectionExpression("classi", this.getDetachedCriteria());
+		registriDocente = new CollectionExpression("registriDocente", this.getDetachedCriteria());
 	}
 	
 	public DocenteDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -55,11 +49,11 @@ public class DocenteDetachedCriteria extends AbstractORMDetachedCriteria {
 		cognome = new StringExpression("cognome", this.getDetachedCriteria());
 		codiceFiscale = new StringExpression("codiceFiscale", this.getDetachedCriteria());
 		dataNascita = new DateExpression("dataNascita", this.getDetachedCriteria());
-		classi = new CollectionExpression("classi", this.getDetachedCriteria());
+		registriDocente = new CollectionExpression("registriDocente", this.getDetachedCriteria());
 	}
 	
-	public ClasseDetachedCriteria createClassiCriteria() {
-		return new ClasseDetachedCriteria(createCriteria("classi"));
+	public RegistroDocenteDetachedCriteria createRegistriDocenteCriteria() {
+		return new RegistroDocenteDetachedCriteria(createCriteria("registriDocente"));
 	}
 	
 	public IndirizzoDetachedCriteria createIndirizzoCriteria() {

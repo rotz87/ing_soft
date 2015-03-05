@@ -18,12 +18,13 @@ License Type: Academic
 		<property name="codiceFiscale" column="CodiceFiscale" type="string" length="255" not-null="false" lazy="false"/>
 		<property name="dataNascita" column="DataNascita" type="date" not-null="false" lazy="false"/>
 		<subclass name="domain.model.Studente" discriminator-value="Studente" lazy="false">
+			<many-to-one name="librettoAssenze" column="LibrettoAssenzeID" class="domain.model.LibrettoAssenze" cascade="save-update,lock" unique="true" not-null="false" lazy="no-proxy">
+			</many-to-one>
 		</subclass>
 		<subclass name="domain.model.Docente" discriminator-value="Docente" lazy="false">
-			<set name="classi" table="Persona_Classe" lazy="true" cascade="save-update,lock">
+			<set name="registriDocente" lazy="true" cascade="save-update,lock" inverse="false">
 				<key column="PersonaID" not-null="true"/>
-				<many-to-many column="ClasseID" class="domain.model.Classe">
-				</many-to-many>
+				<one-to-many class="domain.model.RegistroDocente"/>
 			</set>
 		</subclass>
 	</class>

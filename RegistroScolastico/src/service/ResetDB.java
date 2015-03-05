@@ -14,6 +14,7 @@ import domain.model.GiornoSettimanaleFestivo;
 import domain.model.LibrettoAssenze;
 import domain.model.RSPersistentManager;
 import domain.model.RegistroAssenze;
+import domain.model.RegistroDocente;
 import domain.model.Scuola;
 import domain.model.Studente;
 
@@ -82,19 +83,33 @@ public class ResetDB {
 			scuola1.getDocenti().add( vincenzoNeri);
 			scuola1.getDocenti().add( giuseppeGialli);
 			
-			//assegnazione delle classi ai docenti
 			
-			//assegnazione delle classi a Rossi
-
-			marioRossi.getClassi().add(primaA);
-			marioRossi.getClassi().add(secondaA);
-			marioRossi.getClassi().add(primaB);
-			marioRossi.getClassi().add(secondaB);
+//			CREAZIONE DEI REGISTRI DOCENTE
+			RegistroDocente registroRossiPrimaA = new RegistroDocente();
+			RegistroDocente registroRossiSecondaA = new RegistroDocente();
+			RegistroDocente registroRossiPrimaB = new RegistroDocente();
+			RegistroDocente registroRossiSecondaB = new RegistroDocente();
 			
-			//assegnazione delle classi a Rossi
-
-			mirkoBianchi.getClassi().add(primaA);
-			mirkoBianchi.getClassi().add(primaB);			
+			RegistroDocente registroBianchiPrimaA = new RegistroDocente();
+			RegistroDocente registroBianchiPrimaB = new RegistroDocente();
+			
+//			ASSEGNAZIONE DELLE CLASSI AI REGISTRI DOCENTE
+			registroRossiPrimaA.setClasse(primaA);
+			registroRossiSecondaA.setClasse(secondaA);
+			registroRossiPrimaB.setClasse(primaB);
+			registroRossiSecondaB.setClasse(secondaB);
+			
+			registroBianchiPrimaA.setClasse(primaA);
+			registroBianchiPrimaB.setClasse(primaB);
+			
+//			ASSEGNAZIONE DEI REGISTRO DOCENTE AI DOCENTI
+			marioRossi.getRegistriDocente().add(registroRossiPrimaA);
+			marioRossi.getRegistriDocente().add(registroRossiSecondaA);
+			marioRossi.getRegistriDocente().add(registroRossiPrimaB);
+			marioRossi.getRegistriDocente().add(registroRossiSecondaB);
+			
+			mirkoBianchi.getRegistriDocente().add(registroBianchiPrimaA);
+			mirkoBianchi.getRegistriDocente().add(registroBianchiPrimaB);
 			
 			//Creazione degli studenti
 			Studente pieroRusso = new Studente("Piero", "Russo");
@@ -131,110 +146,107 @@ public class ResetDB {
 			Studente fabrizioToscani = new Studente("Fabrizio", "Toscani");
 			Studente arturoAncona = new Studente("Arturo", "Ancona");
 			
-			RSPersistentManager.instance().getSession().save(pieroRusso);
-			RSPersistentManager.instance().getSession().save(marinoEsposito);
-			RSPersistentManager.instance().getSession().save(marioRomano);
-			RSPersistentManager.instance().getSession().save(davideDiSalvo);
-			RSPersistentManager.instance().getSession().save(ivoMarino);
-			RSPersistentManager.instance().getSession().save(leonardoRicci);
-			RSPersistentManager.instance().getSession().save(valentinoFarina);
-			RSPersistentManager.instance().getSession().save(roccoBenedetti);
-			RSPersistentManager.instance().getSession().save(antonioGuerra);
-			RSPersistentManager.instance().getSession().save(cristinaAngeli);
 			
-			RSPersistentManager.instance().getSession().save(mariannaDonati);
-			RSPersistentManager.instance().getSession().save(elenaSarti);
-			RSPersistentManager.instance().getSession().save(mariaPiaAlfredi);
-			RSPersistentManager.instance().getSession().save(giorgioGatti);
-			RSPersistentManager.instance().getSession().save(lorenzoNegri);
-			RSPersistentManager.instance().getSession().save(mattiaVitali);
-			RSPersistentManager.instance().getSession().save(emanueleDelMonte);
-			RSPersistentManager.instance().getSession().save(luigiBernardi);
-			RSPersistentManager.instance().getSession().save(vittorioPellegrini);
-			RSPersistentManager.instance().getSession().save(alexVilla);
-			
-			RSPersistentManager.instance().getSession().save(marcoBattaglia);
-			RSPersistentManager.instance().getSession().save(alfredoMorelli);
-			RSPersistentManager.instance().getSession().save(pieraDellaValle);
-			RSPersistentManager.instance().getSession().save(ignazioBoschi);
-			RSPersistentManager.instance().getSession().save(jacopoValli);
-			
-			RSPersistentManager.instance().getSession().save(gianniConte);
-			RSPersistentManager.instance().getSession().save(lucaBarone);
-			RSPersistentManager.instance().getSession().save(giacomoSiciliano);
-			RSPersistentManager.instance().getSession().save(fabrizioToscani);
-			RSPersistentManager.instance().getSession().save(arturoAncona);
-			
-//			mapStudenti.put(.getID(), );
-//			primaA.getStudenti().add(pieroRusso);
-//			primaA.getStudenti().add( marinoEsposito);
-//			primaA.getStudenti().add( marioRomano);
-//			primaA.getStudenti().add( davideDiSalvo);
-//			primaA.getStudenti().add( ivoMarino);
-//			primaA.getStudenti().add(leonardoRicci );
-//			primaA.getStudenti().add( valentinoFarina);
-//			primaA.getStudenti().add( roccoBenedetti);
-//			primaA.getStudenti().add( antonioGuerra);
-//			primaA.getStudenti().add(cristinaAngeli );
+//			GLI STUDENTI VENGONO SALVATI UNO ALLA VOLTA PERCHE' CI SERVONO GLI ID DA METTERE NELLA MAP
+//			RSPersistentManager.instance().getSession().save(pieroRusso);
+//			RSPersistentManager.instance().getSession().save(marinoEsposito);
+//			RSPersistentManager.instance().getSession().save(marioRomano);
+//			RSPersistentManager.instance().getSession().save(davideDiSalvo);
+//			RSPersistentManager.instance().getSession().save(ivoMarino);
+//			RSPersistentManager.instance().getSession().save(leonardoRicci);
+//			RSPersistentManager.instance().getSession().save(valentinoFarina);
+//			RSPersistentManager.instance().getSession().save(roccoBenedetti);
+//			RSPersistentManager.instance().getSession().save(antonioGuerra);
+//			RSPersistentManager.instance().getSession().save(cristinaAngeli);
 //			
-//			secondaA.getStudenti().add( mariannaDonati);
-//			secondaA.getStudenti().add( elenaSarti);
-//			secondaA.getStudenti().add( mariaPiaAlfredi);
-//			secondaA.getStudenti().add(giorgioGatti );
-//			secondaA.getStudenti().add(lorenzoNegri );
-//			secondaA.getStudenti().add( mattiaVitali);
-//			secondaA.getStudenti().add( emanueleDelMonte);
-//			secondaA.getStudenti().add(luigiBernardi);
-//			secondaA.getStudenti().add(vittorioPellegrini );
-//			secondaA.getStudenti().add( alexVilla);
+//			RSPersistentManager.instance().getSession().save(mariannaDonati);
+//			RSPersistentManager.instance().getSession().save(elenaSarti);
+//			RSPersistentManager.instance().getSession().save(mariaPiaAlfredi);
+//			RSPersistentManager.instance().getSession().save(giorgioGatti);
+//			RSPersistentManager.instance().getSession().save(lorenzoNegri);
+//			RSPersistentManager.instance().getSession().save(mattiaVitali);
+//			RSPersistentManager.instance().getSession().save(emanueleDelMonte);
+//			RSPersistentManager.instance().getSession().save(luigiBernardi);
+//			RSPersistentManager.instance().getSession().save(vittorioPellegrini);
+//			RSPersistentManager.instance().getSession().save(alexVilla);
 //			
-//			primaB.getStudenti().add( marcoBattaglia);
-//			primaB.getStudenti().add(alfredoMorelli );
-//			primaB.getStudenti().add(pieraDellaValle );
-//			primaB.getStudenti().add( ignazioBoschi);
-//			primaB.getStudenti().add( jacopoValli );
+//			RSPersistentManager.instance().getSession().save(marcoBattaglia);
+//			RSPersistentManager.instance().getSession().save(alfredoMorelli);
+//			RSPersistentManager.instance().getSession().save(pieraDellaValle);
+//			RSPersistentManager.instance().getSession().save(ignazioBoschi);
+//			RSPersistentManager.instance().getSession().save(jacopoValli);
 //			
-//			secondaB.getStudenti().add( gianniConte);
-//			secondaB.getStudenti().add( lucaBarone);
-//			secondaB.getStudenti().add( giacomoSiciliano);
-//			secondaB.getStudenti().add(fabrizioToscani);
-//			secondaB.getStudenti().add( arturoAncona);
-			
+//			RSPersistentManager.instance().getSession().save(gianniConte);
+//			RSPersistentManager.instance().getSession().save(lucaBarone);
+//			RSPersistentManager.instance().getSession().save(giacomoSiciliano);
+//			RSPersistentManager.instance().getSession().save(fabrizioToscani);
+//			RSPersistentManager.instance().getSession().save(arturoAncona);
+//			
 
 //				LibrettoAssenze libretto =  new LibrettoAssenze();
-			LibrettoAssenze librettoMarioRomano = new LibrettoAssenze(marioRomano);
-			LibrettoAssenze librettoDavideDiSalvo =  new LibrettoAssenze(davideDiSalvo);
-			LibrettoAssenze librettoIvoMarino = new LibrettoAssenze(ivoMarino);
-			LibrettoAssenze librettoPieroRusso = new LibrettoAssenze(pieroRusso);
-			LibrettoAssenze librettoMarinoEsposito =  new LibrettoAssenze(marinoEsposito);
-			LibrettoAssenze librettoLeonardoRicci =  new LibrettoAssenze(leonardoRicci);
-			LibrettoAssenze librettoValentinoFarina =  new LibrettoAssenze(valentinoFarina);
-			LibrettoAssenze librettoRoccoBenedetti =  new LibrettoAssenze(roccoBenedetti);
-			LibrettoAssenze librettoAntonioGuerra =  new LibrettoAssenze(antonioGuerra);
-			LibrettoAssenze librettoCristinaAngeli =  new LibrettoAssenze(cristinaAngeli);
+			LibrettoAssenze librettoMarioRomano = new LibrettoAssenze();
+			marioRomano.setLibrettoAssenze(librettoMarioRomano);
+			LibrettoAssenze librettoDavideDiSalvo =  new LibrettoAssenze();
+			davideDiSalvo.setLibrettoAssenze(librettoDavideDiSalvo);
+			LibrettoAssenze librettoIvoMarino = new LibrettoAssenze();
+			ivoMarino.setLibrettoAssenze(librettoIvoMarino);
+			LibrettoAssenze librettoPieroRusso = new LibrettoAssenze();
+			pieroRusso.setLibrettoAssenze(librettoPieroRusso);
+			LibrettoAssenze librettoMarinoEsposito =  new LibrettoAssenze();
+			marinoEsposito.setLibrettoAssenze(librettoMarinoEsposito);
+			LibrettoAssenze librettoLeonardoRicci =  new LibrettoAssenze();
+			leonardoRicci.setLibrettoAssenze(librettoLeonardoRicci);
+			LibrettoAssenze librettoValentinoFarina =  new LibrettoAssenze();
+			valentinoFarina.setLibrettoAssenze(librettoValentinoFarina);
+			LibrettoAssenze librettoRoccoBenedetti =  new LibrettoAssenze();
+			roccoBenedetti.setLibrettoAssenze(librettoRoccoBenedetti);
+			LibrettoAssenze librettoAntonioGuerra =  new LibrettoAssenze();
+			antonioGuerra.setLibrettoAssenze(librettoAntonioGuerra);
+			LibrettoAssenze librettoCristinaAngeli =  new LibrettoAssenze();
+			cristinaAngeli.setLibrettoAssenze(librettoCristinaAngeli);
 			
-			LibrettoAssenze librettoMariannaDonati =  new LibrettoAssenze(mariannaDonati);
-			LibrettoAssenze librettoElenaSarti =  new LibrettoAssenze(elenaSarti);
-			LibrettoAssenze librettoMariaPiaAlfredi =  new LibrettoAssenze(mariaPiaAlfredi);
-			LibrettoAssenze librettoGiorgioGatti =  new LibrettoAssenze(giorgioGatti);
-			LibrettoAssenze librettoLorenzoNegri =  new LibrettoAssenze(lorenzoNegri);
-			LibrettoAssenze librettoMattiaVitali =  new LibrettoAssenze(mattiaVitali);
-			LibrettoAssenze librettoEmanueleDelMonte =  new LibrettoAssenze(emanueleDelMonte);
-			LibrettoAssenze librettoLuigiBernardi =  new LibrettoAssenze(luigiBernardi);
-			LibrettoAssenze librettoVittorioPellegrini =  new LibrettoAssenze(vittorioPellegrini);
-			LibrettoAssenze librettoAlexVilla =  new LibrettoAssenze(alexVilla);
+			LibrettoAssenze librettoMariannaDonati =  new LibrettoAssenze();
+			mariannaDonati.setLibrettoAssenze(librettoMariannaDonati);
+			LibrettoAssenze librettoElenaSarti =  new LibrettoAssenze();
+			elenaSarti.setLibrettoAssenze(librettoElenaSarti);
+			LibrettoAssenze librettoMariaPiaAlfredi =  new LibrettoAssenze();
+			mariaPiaAlfredi.setLibrettoAssenze(librettoMariaPiaAlfredi);
+			LibrettoAssenze librettoGiorgioGatti =  new LibrettoAssenze();
+			giorgioGatti.setLibrettoAssenze(librettoGiorgioGatti);
+			LibrettoAssenze librettoLorenzoNegri =  new LibrettoAssenze();
+			lorenzoNegri.setLibrettoAssenze(librettoLorenzoNegri);
+			LibrettoAssenze librettoMattiaVitali =  new LibrettoAssenze();
+			mattiaVitali.setLibrettoAssenze(librettoMattiaVitali);
+			LibrettoAssenze librettoEmanueleDelMonte =  new LibrettoAssenze();
+			emanueleDelMonte.setLibrettoAssenze(librettoEmanueleDelMonte);
+			LibrettoAssenze librettoLuigiBernardi =  new LibrettoAssenze();
+			luigiBernardi.setLibrettoAssenze(librettoLuigiBernardi);
+			LibrettoAssenze librettoVittorioPellegrini =  new LibrettoAssenze();
+			vittorioPellegrini.setLibrettoAssenze(librettoVittorioPellegrini);
+			LibrettoAssenze librettoAlexVilla =  new LibrettoAssenze();
+			alexVilla.setLibrettoAssenze(librettoAlexVilla);
 			
-			LibrettoAssenze librettoMarcoBattaglia =  new LibrettoAssenze(marcoBattaglia);
-			LibrettoAssenze librettoAlfredoMorelli =  new LibrettoAssenze(alfredoMorelli);
-			LibrettoAssenze librettoPieraDellaValle =  new LibrettoAssenze(pieraDellaValle);
-			LibrettoAssenze librettoIgnazioBoschi =  new LibrettoAssenze(ignazioBoschi);
-			LibrettoAssenze librettoJacopoValli =  new LibrettoAssenze(jacopoValli);
+			LibrettoAssenze librettoMarcoBattaglia =  new LibrettoAssenze();
+			marcoBattaglia.setLibrettoAssenze(librettoMarcoBattaglia);
+			LibrettoAssenze librettoAlfredoMorelli =  new LibrettoAssenze();
+			alfredoMorelli.setLibrettoAssenze(librettoAlfredoMorelli);
+			LibrettoAssenze librettoPieraDellaValle =  new LibrettoAssenze();
+			pieraDellaValle.setLibrettoAssenze(librettoPieraDellaValle);
+			LibrettoAssenze librettoIgnazioBoschi =  new LibrettoAssenze();
+			ignazioBoschi.setLibrettoAssenze(librettoIgnazioBoschi);
+			LibrettoAssenze librettoJacopoValli =  new LibrettoAssenze();
+			jacopoValli.setLibrettoAssenze(librettoJacopoValli);
 			
-			LibrettoAssenze librettoGianniConte =  new LibrettoAssenze(gianniConte);
-			LibrettoAssenze librettoLucaBarone =  new LibrettoAssenze(lucaBarone);
-			LibrettoAssenze librettoGiacomoSiciliano =  new LibrettoAssenze(giacomoSiciliano);
-			LibrettoAssenze librettoFabrizioToscani =  new LibrettoAssenze(fabrizioToscani);
-			LibrettoAssenze librettoArturoAncona =  new LibrettoAssenze(arturoAncona);
+			LibrettoAssenze librettoGianniConte =  new LibrettoAssenze();
+			gianniConte.setLibrettoAssenze(librettoGianniConte);
+			LibrettoAssenze librettoLucaBarone =  new LibrettoAssenze();
+			lucaBarone.setLibrettoAssenze(librettoLucaBarone);
+			LibrettoAssenze librettoGiacomoSiciliano =  new LibrettoAssenze();
+			giacomoSiciliano.setLibrettoAssenze(librettoGiacomoSiciliano);
+			LibrettoAssenze librettoFabrizioToscani =  new LibrettoAssenze();
+			fabrizioToscani.setLibrettoAssenze(librettoFabrizioToscani);
+			LibrettoAssenze librettoArturoAncona =  new LibrettoAssenze();
+			arturoAncona.setLibrettoAssenze(librettoArturoAncona);
 			
 			//creazione dei registri
 			RegistroAssenze regAssPrimaA = new RegistroAssenze();
@@ -242,40 +254,42 @@ public class ResetDB {
 			RegistroAssenze regAssPrimaB = new RegistroAssenze();
 			RegistroAssenze regAssSecondaB = new RegistroAssenze();
 			
-			regAssPrimaA.getLibrettiAssenze().put(marioRomano.getID(), librettoMarioRomano);
-			regAssPrimaA.getLibrettiAssenze().put(davideDiSalvo.getID(),librettoDavideDiSalvo);
-			regAssPrimaA.getLibrettiAssenze().put(ivoMarino.getID(), librettoIvoMarino);
-			regAssPrimaA.getLibrettiAssenze().put(pieroRusso.getID(), librettoPieroRusso);
-			regAssPrimaA.getLibrettiAssenze().put(marinoEsposito.getID(),librettoMarinoEsposito);
-			regAssPrimaA.getLibrettiAssenze().put(leonardoRicci.getID(),librettoLeonardoRicci);
-			regAssPrimaA.getLibrettiAssenze().put(valentinoFarina.getID(),librettoValentinoFarina);
-			regAssPrimaA.getLibrettiAssenze().put(roccoBenedetti.getID(),librettoRoccoBenedetti);
-			regAssPrimaA.getLibrettiAssenze().put(antonioGuerra.getID(),librettoAntonioGuerra);
-			regAssPrimaA.getLibrettiAssenze().put(cristinaAngeli.getID(),librettoCristinaAngeli);
-			
-			regAssSecondaA.getLibrettiAssenze().put(mariannaDonati.getID(),librettoMariannaDonati);
-			regAssSecondaA.getLibrettiAssenze().put(elenaSarti.getID(),librettoElenaSarti);
-			regAssSecondaA.getLibrettiAssenze().put(mariaPiaAlfredi.getID(),librettoMariaPiaAlfredi);
-			regAssSecondaA.getLibrettiAssenze().put(giorgioGatti.getID(),librettoGiorgioGatti);
-			regAssSecondaA.getLibrettiAssenze().put(lorenzoNegri.getID(),librettoLorenzoNegri);
-			regAssSecondaA.getLibrettiAssenze().put(mattiaVitali.getID(),librettoMattiaVitali);
-			regAssSecondaA.getLibrettiAssenze().put(emanueleDelMonte.getID(),librettoEmanueleDelMonte);
-			regAssSecondaA.getLibrettiAssenze().put(luigiBernardi.getID(),librettoLuigiBernardi);
-			regAssSecondaA.getLibrettiAssenze().put(vittorioPellegrini.getID(),librettoVittorioPellegrini);
-			regAssSecondaA.getLibrettiAssenze().put(alexVilla.getID(),librettoAlexVilla);
-			
-			regAssPrimaB.getLibrettiAssenze().put(marcoBattaglia.getID(),librettoMarcoBattaglia);
-			regAssPrimaB.getLibrettiAssenze().put(alfredoMorelli.getID(),librettoAlfredoMorelli);
-			regAssPrimaB.getLibrettiAssenze().put(pieraDellaValle.getID(),librettoPieraDellaValle);
-			regAssPrimaB.getLibrettiAssenze().put(ignazioBoschi.getID(),librettoIgnazioBoschi);
-			regAssPrimaB.getLibrettiAssenze().put(jacopoValli.getID(),librettoJacopoValli);
-			
-			regAssSecondaB.getLibrettiAssenze().put(gianniConte.getID(),librettoGianniConte);
-			regAssSecondaB.getLibrettiAssenze().put(lucaBarone.getID() ,librettoLucaBarone );
-			regAssSecondaB.getLibrettiAssenze().put(giacomoSiciliano.getID(),librettoGiacomoSiciliano);
-			regAssSecondaB.getLibrettiAssenze().put(fabrizioToscani.getID(),librettoFabrizioToscani);
-			regAssSecondaB.getLibrettiAssenze().put(arturoAncona.getID(),librettoArturoAncona);
 
+			//METTERE GLI STUDENTI NELLE CLASSI!!!
+			primaA.getStudenti().add(pieroRusso);
+			primaA.getStudenti().add(marinoEsposito);
+			primaA.getStudenti().add(marioRomano);
+			primaA.getStudenti().add(davideDiSalvo);
+			primaA.getStudenti().add(ivoMarino);
+			primaA.getStudenti().add(leonardoRicci);
+			primaA.getStudenti().add(valentinoFarina);
+			primaA.getStudenti().add(roccoBenedetti);
+			primaA.getStudenti().add(antonioGuerra);
+			primaA.getStudenti().add(cristinaAngeli);
+			
+			secondaA.getStudenti().add(mariannaDonati);
+			secondaA.getStudenti().add(elenaSarti);
+			secondaA.getStudenti().add(mariaPiaAlfredi);
+			secondaA.getStudenti().add(giorgioGatti);
+			secondaA.getStudenti().add(lorenzoNegri);
+			secondaA.getStudenti().add(mattiaVitali);
+			secondaA.getStudenti().add(emanueleDelMonte);
+			secondaA.getStudenti().add(luigiBernardi);
+			secondaA.getStudenti().add(vittorioPellegrini);
+			secondaA.getStudenti().add(alexVilla);
+			
+			primaB.getStudenti().add(marcoBattaglia);
+			primaB.getStudenti().add(alfredoMorelli);
+			primaB.getStudenti().add(pieraDellaValle);
+			primaB.getStudenti().add(ignazioBoschi);
+			primaB.getStudenti().add(jacopoValli);
+			
+			secondaB.getStudenti().add(gianniConte);
+			secondaB.getStudenti().add(lucaBarone);
+			secondaB.getStudenti().add(giacomoSiciliano);
+			secondaB.getStudenti().add(fabrizioToscani);
+			secondaB.getStudenti().add(arturoAncona);
+			
 			//assegnazione del regitro alla classe primaA
 			primaA.setRegistroAssenze(regAssPrimaA);
 			secondaA.setRegistroAssenze(regAssSecondaA);
@@ -294,18 +308,6 @@ public class ResetDB {
 			LocalDate data16_12_14 = new LocalDate(2014,12,16);
 			LocalDate data17_12_14 = new LocalDate(2014,12,17);
 			
-//			//creazione di lista di appelli da assegnare all'assenza
-//			LinkedList<Appello> appelliAssenzeMarioRomano = new LinkedList<Appello>();
-//			LinkedList<Appello> appelliAssenzePieroRusso = new LinkedList<Appello>();
-//			LinkedList<Appello> appelliAssenzeIvoMarini = new LinkedList<Appello>();
-//			LinkedList<Appello> appelliAssenzeMarinoEsposito = new LinkedList<Appello>();
-//			LinkedList<Appello> appelliAssenzeDavideDiSalvo = new LinkedList<Appello>();
-//			LinkedList<Appello> AppelliAssenzeTestFineMese = new LinkedList<Appello>();
-//			LinkedList<Appello> appelliAssenzeIvoMarini2 = new LinkedList<Appello>();
-//			LinkedList<Appello> appelliAssenzeIvoMarini3 = new LinkedList<Appello>();
-//			LinkedList<Appello> appelliAssenzeMariannaDonati = new LinkedList<Appello>();
-//			LinkedList<Appello> appelliAssenzeLorenzoNegri = new LinkedList<Appello>();
-			
 			
 			//creazione di appelli
 //			Appello appello8_12_14 = new Appello(data8_12_14);
@@ -321,22 +323,6 @@ public class ResetDB {
 			Appello appello_1B_16_12_14 = new Appello(data16_12_14);
 			Appello appello_2B_16_12_14 = new Appello(data16_12_14);
 			
-//			tuttiGliAppelli.put(appello8_12_14.getIDAppello(), appello8_12_14);
-
-//			regAssPrimaA.getAppelliRegistro().put(appello_1A_10_12_14.getIDAppello(), appello_1A_10_12_14);
-//			regAssPrimaA.getAppelliRegistro().put(appello_1A_11_12_14.getIDAppello(), appello_1A_11_12_14);
-//			regAssPrimaA.getAppelliRegistro().put(appello_1A_12_12_14.getIDAppello(), appello_1A_12_12_14);
-//			regAssPrimaA.getAppelliRegistro().put(appello_1A_13_12_14.getIDAppello(), appello_1A_13_12_14);
-////			tuttiGliAppelli.put(appello14_12_14.getIDAppello(), appello14_12_14);
-//			regAssPrimaA.getAppelliRegistro().put(appello_1A_15_12_14.getIDAppello(), appello_1A_15_12_14);
-//			regAssPrimaA.getAppelliRegistro().put(appello_1A_16_12_14.getIDAppello(), appello_1A_16_12_14);
-//			
-//			regAssSecondaA.getAppelliRegistro().put(appello_2A_16_12_14.getIDAppello(), appello_2A_16_12_14);
-//			regAssPrimaB.getAppelliRegistro().put(appello_1B_16_12_14.getIDAppello(), appello_1B_16_12_14);
-//			regAssSecondaB.getAppelliRegistro().put(appello_2B_16_12_14.getIDAppello(), appello_2B_16_12_14);
-			
-			
-//			regAssPrimaA.getAppelli().put(appello8_12_14.getData(), appello8_12_14);
 
 			regAssPrimaA.getAppelli().put( Calendario.getInstance().getDaysFromZero(appello_1A_10_12_14.getData()) , appello_1A_10_12_14);
 			regAssPrimaA.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_1A_11_12_14.getData()), appello_1A_11_12_14);
@@ -396,38 +382,7 @@ public class ResetDB {
 			librettoMarinoEsposito.getNonGiustificate().add(assMarinoEsposito1);
 			librettoDavideDiSalvo.getNonGiustificate().add(assDavideDiSalvo1);
 			librettoMariannaDonati.getNonGiustificate().add(assMariannaDonati1);
-			librettoLorenzoNegri.getNonGiustificate().add(assLorenzoNegri1);
-			
-//			//creazione delle liste di assenze da assegnare ai libretti
-//			LinkedList<Assenza> listaAssenzeMarioRomano = new  LinkedList<Assenza>();
-//			listaAssenzeMarioRomano.add(assM1);
-//			LinkedList<Assenza> listaAssenzePieroRusso = new  LinkedList<Assenza>();
-//			listaAssenzePieroRusso.add(assP1);
-//			LinkedList<Assenza> listaAssenzeIvoMarini = new  LinkedList<Assenza>();
-////			listaAssenzeIvoMarini.add(assI3);
-//			listaAssenzeIvoMarini.add(assI2);
-//			listaAssenzeIvoMarini.add(assI1);
-//			LinkedList<Assenza> listaAssenzeDavideDiSalvo = new  LinkedList<Assenza>();
-//			listaAssenzeDavideDiSalvo.add(assD1);
-//			LinkedList<Assenza> listaAssenzeMarinoEsposito = new  LinkedList<Assenza>();
-//			listaAssenzeMarinoEsposito.add(assMa1);
-//			
-//			LinkedList<Assenza> listaAssenzeMariannaDonati = new  LinkedList<Assenza>();
-//			listaAssenzeMariannaDonati.add(assMariannaDonati1);
-//			LinkedList<Assenza> listaAssenzeLorenzoNegri = new  LinkedList<Assenza>();
-//			listaAssenzeLorenzoNegri.add(assLorenzoNegri1);
-			
-//			//assegnazione delle liste ai libretti
-//			librettoMarioRomano.setNonGiustificate(listaAssenzeMarioRomano);
-//			librettoPieroRusso.setNonGiustificate(listaAssenzePieroRusso);
-////			librettoPiero.assengnaAssenzeNonGiustificate(listaAssenzeTsetFineMese);
-//			librettoIvoMarino.setNonGiustificate(listaAssenzeIvoMarini);
-////			librettoMarino.assengnaAssenzeNonGiustificate(listaAssenzeMarino);
-//			librettoDavideDiSalvo.setNonGiustificate(listaAssenzeDavideDiSalvo);
-//			
-//			librettoMariannaDonati.setNonGiustificate(listaAssenzeMariannaDonati);
-//			librettoLorenzoNegri.setNonGiustificate(listaAssenzeLorenzoNegri);
-			
+			librettoLorenzoNegri.getNonGiustificate().add(assLorenzoNegri1);	
 			
 			
 //			appello8_12_14.setAssenzePrese(true);
@@ -447,29 +402,12 @@ public class ResetDB {
 			
 			RSPersistentManager.instance().getSession().save(scuola1);
 			
-			
 			GiornoSettimanaleFestivo sabato = new GiornoSettimanaleFestivo(6);
 			GiornoSettimanaleFestivo domenica = new GiornoSettimanaleFestivo(7);
 			
 			RSPersistentManager.instance().getSession().save(sabato);
 			RSPersistentManager.instance().getSession().save(domenica);
 			
-//			Giorno g = new Giorno();
-//			LocalDate data = new LocalDate(2014,12,17);
-//			g.setData(data.toDate()); 
-//			Calendario.getInstance().getGiorniFestivi().add(g);
-//			
-//			RSPersistentManager.instance().getSession().save(Calendario.getInstance());
-			
-//			Classe primaA = new Classe("1A");
-//			scuola1.getClassi().add(primaA);
-//			
-//			RegistroAssenze regAssPrimaA = new RegistroAssenze();
-//			
-//			Studente guidoGialli = new Studente("Guido","Gialli");
-//			primaA.getStudenti().add(guidoGialli);
-//			
-//			domain.model.RSPersistentManager.instance().getSession().save(scuola1);
 			
 //			domain.model.Studente ldomainmodelStudente = new domain.model.Studente();			// Initialize the properties of the persistent object here
 //			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelStudente);

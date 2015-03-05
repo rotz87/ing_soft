@@ -44,16 +44,19 @@ public class TestPostBridge {
 		Studente marinoEsposito = new Studente("Marino", "Esposito");
 		Studente marioRomano = new Studente("Mario", "Romano");
 		
-		LibrettoAssenze librettoMarioRomano = new LibrettoAssenze(marioRomano);
-		LibrettoAssenze librettoPieroRusso = new LibrettoAssenze(pieroRusso);
-		LibrettoAssenze librettoMarinoEsposito =  new LibrettoAssenze(marinoEsposito);
+		LibrettoAssenze librettoMarioRomano = new LibrettoAssenze();
+		marioRomano.setLibrettoAssenze(librettoMarioRomano);
+		LibrettoAssenze librettoPieroRusso = new LibrettoAssenze();
+		pieroRusso.setLibrettoAssenze(librettoPieroRusso);
+		LibrettoAssenze librettoMarinoEsposito =  new LibrettoAssenze();
+		marinoEsposito.setLibrettoAssenze(librettoMarinoEsposito);
 		
 		Map<Integer, LibrettoAssenze> librettiPrimaA = new HashMap<Integer, LibrettoAssenze>(); 
 		librettiPrimaA.put(marioRomano.getID(), librettoMarioRomano);
 		librettiPrimaA.put(pieroRusso.getID(), librettoPieroRusso);
 		librettiPrimaA.put(marinoEsposito.getID(), librettoMarinoEsposito);
 		
-		regAss.setLibrettiAssenze(librettiPrimaA);
+		
 		
 //		Set<Studente> listaStudentiPrimaA = new HashSet<Studente>();
 		classeCorrente.getStudenti().add(marioRomano);
@@ -66,8 +69,8 @@ public class TestPostBridge {
 		
 		
 //		Studente[] studenti = {pieroRusso};
-		Collection<Studente> studenti = new LinkedList<Studente>();
-		studenti.add(pieroRusso);
+		Collection<LibrettoAssenze> libretti = new LinkedList<LibrettoAssenze>();
+		libretti.add(pieroRusso.getLibrettoAssenze());
 		
 //		Stempa.stampaln("docente corrente: " + docenteCorrente.getCognome());
 //		Stempa.stampaln("classe corrente: " + classeCorrente.getNome());
@@ -76,7 +79,7 @@ public class TestPostBridge {
 		if(docenteCorrente.isInsegnante(classeCorrente)){
 			RegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();
 			registroAssenzeCorrente.avviaAppello();
-			registroAssenzeCorrente.registraAssenze(studenti);
+			registroAssenzeCorrente.registraAssenze(libretti);
 //			DBFake.getInstance().storeAppello(registroAssenzeCorrente.getAppelloOdierno());
 			Stampa.stampa("sono dopo avvia appello!!");
 //			TestFaiLAppelloController1.stampaLibretti(registroAssenzeCorrente);
@@ -240,12 +243,11 @@ public class TestPostBridge {
 	}
 	public static void main6(String[] args) {
 		try{
-			RegistroAssenzeCriteria regAssC = new RegistroAssenzeCriteria();
-			regAssC.ID.eq(1);
+			ClasseCriteria classeC = new ClasseCriteria();
+			classeC.ID.eq(1);
 			
-			RegistroAssenze registroAssenze;
-			registroAssenze = regAssC.uniqueRegistroAssenze();
-			TestFaiLAppelloController1.stampaLibretti(registroAssenze);
+			Classe classe = classeC.uniqueClasse();
+			TestFaiLAppelloController1.stampaLibretti(classe);
 		}catch(PersistentException e){
 			e.printStackTrace();
 		}

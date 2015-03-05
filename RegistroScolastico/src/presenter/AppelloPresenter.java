@@ -51,10 +51,25 @@ public class AppelloPresenter {
 		  fAController.avviaAppello(idClasse, docenteController.getIdDocenteProva());
 		  Stampa.stampaln("Appello odierno: "+fAController.getAppelloOdierno(idClasse).getID() + " | " + fAController.getAppelloOdierno(idClasse).getData());
 	
+<<<<<<< HEAD
 		  //serve solo il link: si potrebbero passare meno parametri
 		  linkAppello = new AppelloRS(fAController.getAppelloOdierno(idClasse), idClasse).getLink("self");
 		  httpHeaders.setLocation(URI.create(linkAppello.getHref()));
 
+=======
+			  //serve solo il link: si potrebbero passare meno parametri
+			  linkAppello = new AppelloRS(fAController.getAppelloOdierno(idClasse), idClasse).getLink("self");
+			  httpHeaders.setLocation(URI.create(linkAppello.getHref()));
+		  }catch(IllegalStateException ISE){
+			  httpStatus = HttpStatus.FORBIDDEN;
+//			  ISE.printStackTrace();
+		  }catch(Exception PE){
+			  // TODO Auto-generated catch block
+			  httpStatus = HttpStatus.SERVICE_UNAVAILABLE;
+			  Stampa.stampaln("creaAppello - SERVICE_UNAVAILABLE");
+			  //TODO far ritornare uno stato http coerente con l'errore
+		  }
+>>>>>>> branch 'master' of https://github.com/rotz87/ing_soft.git
 	
 		  return new ResponseEntity<>(null, httpHeaders, httpStatus);
 	

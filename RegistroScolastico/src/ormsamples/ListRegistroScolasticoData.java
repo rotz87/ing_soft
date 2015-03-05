@@ -4,7 +4,7 @@
  */
 package ormsamples;
 
-import org.orm.PersistentException;
+import org.orm.*;
 public class ListRegistroScolasticoData {
 	private static final int ROW_COUNT = 100;
 	
@@ -150,6 +150,15 @@ public class ListRegistroScolasticoData {
 		length = Math.min(ldomainmodelGiornoSettimanaleFestivos.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
 			System.out.println(ldomainmodelGiornoSettimanaleFestivos[i]);
+		}
+		System.out.println(length + " record(s) retrieved.");
+		
+		System.out.println("Listing RegistroDocente...");
+		java.util.List lRegistroDocenteList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.RegistroDocente").setMaxResults(ROW_COUNT).list();
+		domain.model.RegistroDocente[] ldomainmodelRegistroDocentes = (domain.model.RegistroDocente[]) lRegistroDocenteList.toArray(new domain.model.RegistroDocente[lRegistroDocenteList.size()]);
+		length = Math.min(ldomainmodelRegistroDocentes.length, ROW_COUNT);
+		for (int i = 0; i < length; i++) {
+			System.out.println(ldomainmodelRegistroDocentes[i]);
 		}
 		System.out.println(length + " record(s) retrieved.");
 		
@@ -347,6 +356,18 @@ public class ListRegistroScolasticoData {
 			 System.out.println(domainmodelGiornoSettimanaleFestivos[i]);
 		}
 		System.out.println(length + " GiornoSettimanaleFestivo record(s) retrieved."); 
+		
+		System.out.println("Listing RegistroDocente by Criteria...");
+		domain.model.RegistroDocenteCriteria ldomainmodelRegistroDocenteCriteria = new domain.model.RegistroDocenteCriteria();
+		// Please uncomment the follow line and fill in parameter(s) 
+		//ldomainmodelRegistroDocenteCriteria.ID.eq();
+		ldomainmodelRegistroDocenteCriteria.setMaxResults(ROW_COUNT);
+		domain.model.RegistroDocente[] domainmodelRegistroDocentes = ldomainmodelRegistroDocenteCriteria.listRegistroDocente();
+		length =domainmodelRegistroDocentes== null ? 0 : Math.min(domainmodelRegistroDocentes.length, ROW_COUNT); 
+		for (int i = 0; i < length; i++) {
+			 System.out.println(domainmodelRegistroDocentes[i]);
+		}
+		System.out.println(length + " RegistroDocente record(s) retrieved."); 
 		
 	}
 	

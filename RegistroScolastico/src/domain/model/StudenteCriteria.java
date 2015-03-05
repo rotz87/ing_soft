@@ -16,11 +16,7 @@ package domain.model;
 import org.hibernate.Criteria;
 import org.orm.PersistentException;
 import org.orm.PersistentSession;
-import org.orm.criteria.AbstractORMCriteria;
-import org.orm.criteria.AssociationExpression;
-import org.orm.criteria.DateExpression;
-import org.orm.criteria.IntegerExpression;
-import org.orm.criteria.StringExpression;
+import org.orm.criteria.*;
 
 public class StudenteCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
@@ -30,6 +26,8 @@ public class StudenteCriteria extends AbstractORMCriteria {
 	public final StringExpression cognome;
 	public final StringExpression codiceFiscale;
 	public final DateExpression dataNascita;
+	public final IntegerExpression librettoAssenzeId;
+	public final AssociationExpression librettoAssenze;
 	
 	public StudenteCriteria(Criteria criteria) {
 		super(criteria);
@@ -40,6 +38,8 @@ public class StudenteCriteria extends AbstractORMCriteria {
 		cognome = new StringExpression("cognome", this);
 		codiceFiscale = new StringExpression("codiceFiscale", this);
 		dataNascita = new DateExpression("dataNascita", this);
+		librettoAssenzeId = new IntegerExpression("librettoAssenze.ID", this);
+		librettoAssenze = new AssociationExpression("librettoAssenze", this);
 	}
 	
 	public StudenteCriteria(PersistentSession session) {
@@ -48,6 +48,10 @@ public class StudenteCriteria extends AbstractORMCriteria {
 	
 	public StudenteCriteria() throws PersistentException {
 		this(domain.model.RSPersistentManager.instance().getSession());
+	}
+	
+	public LibrettoAssenzeCriteria createLibrettoAssenzeCriteria() {
+		return new LibrettoAssenzeCriteria(createCriteria("librettoAssenze"));
 	}
 	
 	public IndirizzoCriteria createIndirizzoCriteria() {

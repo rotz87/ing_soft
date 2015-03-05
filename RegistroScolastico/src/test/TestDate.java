@@ -1,14 +1,23 @@
 package test;
 
+import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.TreeSet;
 
+import org.hibernate.Criteria;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
+import org.neo4j.cypher.internal.compiler.v2_1.planner.logical.steps.idSeekLeafPlanner;
+import org.orm.PersistentException;
 
+import domain.model.RegistroAssenze;
+import domain.model.RegistroAssenzeCriteria;
+import domain.model.Studente;
+import domain.model.StudenteCriteria;
 import service.Stampa;
 
 //import org.orm.util.ORMMap;
@@ -128,6 +137,36 @@ public class TestDate {
 			int diff = Days.daysBetween( start, end).getDays();
 			
 			Stampa.stampaln("diff: " + diff);
+			
+			Stampa.stampaln("_________________________________________________ ");
+			
+			Collection<Studente> studenti = new LinkedList<Studente>();
+			LocalDate dataaa = new LocalDate(2014,12,16);
+			StudenteCriteria criteria;
+			Integer[] idStudenti = {1,3,6};
+			
+			try {
+				criteria = new StudenteCriteria();
+				criteria.ID.in(idStudenti);
+				
+
+				studenti.addAll(criteria.list());
+
+				
+				RegistroAssenzeCriteria regAssC = new RegistroAssenzeCriteria();
+				regAssC.ID.eq(1);
+				RegistroAssenze registro = regAssC.uniqueRegistroAssenze();
+				
+				boolean check = registro.checkPresenti(dataaa, studenti);
+				
+				Stampa.stampa("check "+check);
+				
+			} catch (PersistentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
 			
 	}
 

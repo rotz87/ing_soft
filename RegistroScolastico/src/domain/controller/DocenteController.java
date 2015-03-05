@@ -9,6 +9,7 @@ public class DocenteController {
 	
 	public int getIdDocenteProva(){
 		String cognome = "Rossi";
+//		String cognome = "Bianchi";
 		
 		DocenteCriteria criteria;
 		Docente docente;

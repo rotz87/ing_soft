@@ -14,18 +14,12 @@
 package domain.model;
 
 import java.util.List;
-
 import org.hibernate.criterion.DetachedCriteria;
 import org.orm.PersistentSession;
-import org.orm.criteria.AbstractORMDetachedCriteria;
-import org.orm.criteria.AssociationExpression;
-import org.orm.criteria.CollectionExpression;
-import org.orm.criteria.IntegerExpression;
+import org.orm.criteria.*;
 
 public class LibrettoAssenzeDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression ID;
-	public final IntegerExpression studenteId;
-	public final AssociationExpression studente;
 	public final CollectionExpression giustificate;
 	public final CollectionExpression nonGiustificate;
 	public final CollectionExpression ritardi;
@@ -34,8 +28,6 @@ public class LibrettoAssenzeDetachedCriteria extends AbstractORMDetachedCriteria
 	public LibrettoAssenzeDetachedCriteria() {
 		super(domain.model.LibrettoAssenze.class, domain.model.LibrettoAssenzeCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		studenteId = new IntegerExpression("studente.ID", this.getDetachedCriteria());
-		studente = new AssociationExpression("studente", this.getDetachedCriteria());
 		giustificate = new CollectionExpression("giustificate", this.getDetachedCriteria());
 		nonGiustificate = new CollectionExpression("nonGiustificate", this.getDetachedCriteria());
 		ritardi = new CollectionExpression("ritardi", this.getDetachedCriteria());
@@ -45,16 +37,10 @@ public class LibrettoAssenzeDetachedCriteria extends AbstractORMDetachedCriteria
 	public LibrettoAssenzeDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, domain.model.LibrettoAssenzeCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		studenteId = new IntegerExpression("studente.ID", this.getDetachedCriteria());
-		studente = new AssociationExpression("studente", this.getDetachedCriteria());
 		giustificate = new CollectionExpression("giustificate", this.getDetachedCriteria());
 		nonGiustificate = new CollectionExpression("nonGiustificate", this.getDetachedCriteria());
 		ritardi = new CollectionExpression("ritardi", this.getDetachedCriteria());
 		uscite = new CollectionExpression("uscite", this.getDetachedCriteria());
-	}
-	
-	public StudenteDetachedCriteria createStudenteCriteria() {
-		return new StudenteDetachedCriteria(createCriteria("studente"));
 	}
 	
 	public AssenzaDetachedCriteria createGiustificateCriteria() {

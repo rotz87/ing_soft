@@ -1,10 +1,16 @@
 package domain.implementor;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import domain.model.Classe;
 import domain.model.Docente;
+import domain.model.LibrettoAssenze;
+import domain.model.RegistroDocente;
+import domain.model.Studente;
 
 public class DocenteImp {
-	
+	private Set<Classe> classi = new HashSet<Classe>();
 	
 	public void inizialize(Docente docente) {
 
@@ -24,6 +30,15 @@ public class DocenteImp {
 			rit = false;
 		}
 		return rit;
+	}
+
+	public Set<Classe> getClassi(Docente docente) {
+		this.classi.clear();
+		for (RegistroDocente registroDoc : docente.getRegistriDocente()) {
+			this.classi.add(registroDoc.getClasse());
+		}
+		
+		return this.classi;
 	}
 
 }

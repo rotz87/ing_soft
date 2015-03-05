@@ -3,7 +3,9 @@ package domain.implementor;
 import java.util.Collection;
 
 import org.joda.time.LocalDate;
+import org.neo4j.cypher.internal.helpers.Converge.iterateUntilConverged;
 
+import service.Stampa;
 import domain.model.Appello;
 import domain.model.Calendario;
 import domain.model.LibrettoAssenze;
@@ -31,15 +33,27 @@ public class RegistroAssenzeImp {
 	 * 
 	 * @param idStudenti
 	 */
+<<<<<<< HEAD
 	public void registraAssenze(RegistroAssenze registroAssenze,
 			Collection<Studente> studenti) {
 
+=======
+	public void registraAssenze(RegistroAssenze registroAssenze, Collection<LibrettoAssenze> libretti) {
+		
+>>>>>>> branch 'master' of https://github.com/rotz87/ing_soft.git
 		Appello appelloCorrente = getAppelloOdierno(registroAssenze);
+<<<<<<< HEAD
 		if (!(appelloCorrente.getAssenzePrese())) {
 			for (Studente studente : studenti) {
 				registroAssenze.getLibrettiAssenze().get(studente.getID())
 						.segnaAssenza(appelloCorrente);
 
+=======
+		if (!(appelloCorrente.getAssenzePrese())){
+			for (LibrettoAssenze libretto : libretti){
+					libretto.segnaAssenza(appelloCorrente);
+					
+>>>>>>> branch 'master' of https://github.com/rotz87/ing_soft.git
 			}
 			appelloCorrente.setAssenzePrese(true);
 		} else {
@@ -92,9 +106,16 @@ public class RegistroAssenzeImp {
 	 * 
 	 * @param data
 	 */
+<<<<<<< HEAD
 	public Appello getAppelloByData(RegistroAssenze registroAssenze,
 			org.joda.time.LocalDate data) {
 		return registroAssenze.getAppelli().get(data);
+=======
+	public Appello getAppelloByData(RegistroAssenze registroAssenze, org.joda.time.LocalDate data) {
+		int dataInt = Calendario.getInstance().getDaysFromZero(data.toDate());
+		return registroAssenze.getAppelli().get(dataInt);
+		
+>>>>>>> branch 'master' of https://github.com/rotz87/ing_soft.git
 	}
 
 	public boolean esisteAppello(RegistroAssenze registroAssenze,
@@ -128,10 +149,26 @@ public class RegistroAssenzeImp {
 
 		return avviabile;
 	}
+<<<<<<< HEAD
 
 	public LibrettoAssenze getLibretto(RegistroAssenze registroAssenze,
 			Studente studente) {
 		return registroAssenze.getLibrettiAssenze().get(studente.getID());
+=======
+	
+//	public LibrettoAssenze getLibretto(RegistroAssenze registroAssenze, Studente studente){
+//		return registroAssenze.getLibrettiAssenze().get(studente.getID());
+//	}
+
+	public boolean checkPresenti(RegistroAssenze registro, LocalDate data, Collection<Studente> studenti) {
+		boolean rit = true;
+		Appello appello = registro.getAppelloByData(data);
+		
+		for(Studente studente : studenti ){
+			rit = rit && (!studente.getLibrettoAssenze().esisteAssenza(appello));
+		}
+		return rit;
+>>>>>>> branch 'master' of https://github.com/rotz87/ing_soft.git
 	}
 
 }

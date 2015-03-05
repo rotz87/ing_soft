@@ -14,34 +14,24 @@
 package domain.model;
 
 import java.util.List;
-
 import org.hibernate.criterion.DetachedCriteria;
 import org.orm.PersistentSession;
-import org.orm.criteria.AbstractORMDetachedCriteria;
-import org.orm.criteria.CollectionExpression;
-import org.orm.criteria.IntegerExpression;
+import org.orm.criteria.*;
 
 public class RegistroAssenzeDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression ID;
-	public final CollectionExpression librettiAssenze;
 	public final CollectionExpression appelli;
 	
 	public RegistroAssenzeDetachedCriteria() {
 		super(domain.model.RegistroAssenze.class, domain.model.RegistroAssenzeCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		librettiAssenze = new CollectionExpression("librettiAssenze", this.getDetachedCriteria());
 		appelli = new CollectionExpression("appelli", this.getDetachedCriteria());
 	}
 	
 	public RegistroAssenzeDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, domain.model.RegistroAssenzeCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		librettiAssenze = new CollectionExpression("librettiAssenze", this.getDetachedCriteria());
 		appelli = new CollectionExpression("appelli", this.getDetachedCriteria());
-	}
-	
-	public LibrettoAssenzeDetachedCriteria createLibrettiAssenzeCriteria() {
-		return new LibrettoAssenzeDetachedCriteria(createCriteria("librettiAssenze"));
 	}
 	
 	public AppelloDetachedCriteria createAppelliCriteria() {

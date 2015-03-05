@@ -314,29 +314,16 @@
     </Column>
     <Column name="PersonaID">
       <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>Persona.ID</ReferencedColumn>
+      <ForeignKey>false</ForeignKey>
       <Type>9</Type>
       <Length>11</Length>
-      <Nullable>false</Nullable>
+      <Nullable>true</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
       <UserTypes/>
     </Column>
-    <Column name="RegistroAssenzeID">
-      <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>RegistroAssenze.ID</ReferencedColumn>
-      <Type>9</Type>
-      <Length>11</Length>
-      <Nullable>false</Nullable>
-      <IDGenerator>native</IDGenerator>
-      <Unique>false</Unique>
-      <Index>false</Index>
-      <UserTypes/>
-    </Column>
-    <Column name="RegistroAssenzeIndex">
+    <Column name="LibrettoAssenzeID">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>false</ForeignKey>
       <Type>9</Type>
@@ -528,6 +515,18 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
+    <Column name="ClasseID">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>Classe.ID</ReferencedColumn>
+      <Type>9</Type>
+      <Length>11</Length>
+      <Nullable>true</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
     <Column name="IndirizzoID">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
@@ -618,12 +617,23 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
+    <Column name="LibrettoAssenzeID">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>LibrettoAssenze.ID</ReferencedColumn>
+      <Type>9</Type>
+      <Length>11</Length>
+      <Nullable>true</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
   </Entity>
   <Entity name="Persona_Classe">
     <Column name="PersonaID">
       <PrimaryKey>true</PrimaryKey>
-      <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>Persona.ID</ReferencedColumn>
+      <ForeignKey>false</ForeignKey>
       <Type>9</Type>
       <Length>11</Length>
       <Nullable>false</Nullable>
@@ -634,8 +644,7 @@
     </Column>
     <Column name="ClasseID">
       <PrimaryKey>true</PrimaryKey>
-      <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>Classe.ID</ReferencedColumn>
+      <ForeignKey>false</ForeignKey>
       <Type>9</Type>
       <Length>11</Length>
       <Nullable>false</Nullable>
@@ -666,6 +675,43 @@
       <Length>11</Length>
       <Nullable>false</Nullable>
       <IDGenerator>assigned</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+  </Entity>
+  <Entity name="RegistroDocente">
+    <Column name="ID">
+      <PrimaryKey>true</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>9</Type>
+      <Length>11</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="PersonaID">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>Persona.ID</ReferencedColumn>
+      <Type>9</Type>
+      <Length>11</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="ClasseID">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>Classe.ID</ReferencedColumn>
+      <Type>9</Type>
+      <Length>11</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
       <UserTypes/>
@@ -731,16 +777,6 @@
       <Column>ID</Column>
     </RefColumns>
   </ForeignKey>
-  <ForeignKey name="FKLibrettoAs636953">
-    <ReferenceTable>LibrettoAssenze</ReferenceTable>
-    <ReferencedTable>RegistroAssenze</ReferencedTable>
-    <Columns>
-      <Column>RegistroAssenzeID</Column>
-    </Columns>
-    <RefColumns>
-      <Column>ID</Column>
-    </RefColumns>
-  </ForeignKey>
   <ForeignKey name="FKClasse468533">
     <ReferenceTable>Classe</ReferenceTable>
     <ReferencedTable>Scuola</ReferencedTable>
@@ -771,11 +807,11 @@
       <Column>ID</Column>
     </RefColumns>
   </ForeignKey>
-  <ForeignKey name="FKLibrettoAs239961">
-    <ReferenceTable>LibrettoAssenze</ReferenceTable>
-    <ReferencedTable>Persona</ReferencedTable>
+  <ForeignKey name="FKPersona9585">
+    <ReferenceTable>Persona</ReferenceTable>
+    <ReferencedTable>LibrettoAssenze</ReferencedTable>
     <Columns>
-      <Column>PersonaID</Column>
+      <Column>LibrettoAssenzeID</Column>
     </Columns>
     <RefColumns>
       <Column>ID</Column>
@@ -796,26 +832,6 @@
     <ReferencedTable>LibrettoAssenze</ReferencedTable>
     <Columns>
       <Column>LibrettoAssenzeID</Column>
-    </Columns>
-    <RefColumns>
-      <Column>ID</Column>
-    </RefColumns>
-  </ForeignKey>
-  <ForeignKey name="FKPersona_Cl340639">
-    <ReferenceTable>Persona_Classe</ReferenceTable>
-    <ReferencedTable>Persona</ReferencedTable>
-    <Columns>
-      <Column>PersonaID</Column>
-    </Columns>
-    <RefColumns>
-      <Column>ID</Column>
-    </RefColumns>
-  </ForeignKey>
-  <ForeignKey name="FKPersona_Cl729542">
-    <ReferenceTable>Persona_Classe</ReferenceTable>
-    <ReferencedTable>Classe</ReferencedTable>
-    <Columns>
-      <Column>ClasseID</Column>
     </Columns>
     <RefColumns>
       <Column>ID</Column>
@@ -866,6 +882,36 @@
     <ReferencedTable>Indirizzo</ReferencedTable>
     <Columns>
       <Column>IndirizzoID</Column>
+    </Columns>
+    <RefColumns>
+      <Column>ID</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKRegistroDo869002">
+    <ReferenceTable>RegistroDocente</ReferenceTable>
+    <ReferencedTable>Classe</ReferencedTable>
+    <Columns>
+      <Column>ClasseID</Column>
+    </Columns>
+    <RefColumns>
+      <Column>ID</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKRegistroDo257906">
+    <ReferenceTable>RegistroDocente</ReferenceTable>
+    <ReferencedTable>Persona</ReferencedTable>
+    <Columns>
+      <Column>PersonaID</Column>
+    </Columns>
+    <RefColumns>
+      <Column>ID</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKPersona772854">
+    <ReferenceTable>Persona</ReferenceTable>
+    <ReferencedTable>Classe</ReferencedTable>
+    <Columns>
+      <Column>ClasseID</Column>
     </Columns>
     <RefColumns>
       <Column>ID</Column>

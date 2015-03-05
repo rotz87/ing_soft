@@ -14,14 +14,9 @@
 package domain.model;
 
 import java.util.List;
-
 import org.hibernate.criterion.DetachedCriteria;
 import org.orm.PersistentSession;
-import org.orm.criteria.AbstractORMDetachedCriteria;
-import org.orm.criteria.AssociationExpression;
-import org.orm.criteria.DateExpression;
-import org.orm.criteria.IntegerExpression;
-import org.orm.criteria.StringExpression;
+import org.orm.criteria.*;
 
 public class StudenteDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression ID;
@@ -31,6 +26,8 @@ public class StudenteDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final StringExpression cognome;
 	public final StringExpression codiceFiscale;
 	public final DateExpression dataNascita;
+	public final IntegerExpression librettoAssenzeId;
+	public final AssociationExpression librettoAssenze;
 	
 	public StudenteDetachedCriteria() {
 		super(domain.model.Studente.class, domain.model.StudenteCriteria.class);
@@ -41,6 +38,8 @@ public class StudenteDetachedCriteria extends AbstractORMDetachedCriteria {
 		cognome = new StringExpression("cognome", this.getDetachedCriteria());
 		codiceFiscale = new StringExpression("codiceFiscale", this.getDetachedCriteria());
 		dataNascita = new DateExpression("dataNascita", this.getDetachedCriteria());
+		librettoAssenzeId = new IntegerExpression("librettoAssenze.ID", this.getDetachedCriteria());
+		librettoAssenze = new AssociationExpression("librettoAssenze", this.getDetachedCriteria());
 	}
 	
 	public StudenteDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -52,6 +51,12 @@ public class StudenteDetachedCriteria extends AbstractORMDetachedCriteria {
 		cognome = new StringExpression("cognome", this.getDetachedCriteria());
 		codiceFiscale = new StringExpression("codiceFiscale", this.getDetachedCriteria());
 		dataNascita = new DateExpression("dataNascita", this.getDetachedCriteria());
+		librettoAssenzeId = new IntegerExpression("librettoAssenze.ID", this.getDetachedCriteria());
+		librettoAssenze = new AssociationExpression("librettoAssenze", this.getDetachedCriteria());
+	}
+	
+	public LibrettoAssenzeDetachedCriteria createLibrettoAssenzeCriteria() {
+		return new LibrettoAssenzeDetachedCriteria(createCriteria("librettoAssenze"));
 	}
 	
 	public IndirizzoDetachedCriteria createIndirizzoCriteria() {
