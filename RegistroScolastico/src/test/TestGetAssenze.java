@@ -108,7 +108,7 @@ public class TestGetAssenze {
 				number = Integer.parseInt(string);
 				//fine lettura
 			}	
-		} catch (PersistentException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

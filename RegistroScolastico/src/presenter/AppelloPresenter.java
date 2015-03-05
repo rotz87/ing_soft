@@ -48,21 +48,13 @@ public class AppelloPresenter {
 		  fAController = new FaiAppelloController();
 		  docenteController = new DocenteController();
 		  
-		  try{
-				  fAController.avviaAppello(idClasse, docenteController.getIdDocenteProva());
-				  Stampa.stampaln("Appello odierno: "+fAController.getAppelloOdierno(idClasse).getID() + " | " + fAController.getAppelloOdierno(idClasse).getData());
+		  fAController.avviaAppello(idClasse, docenteController.getIdDocenteProva());
+		  Stampa.stampaln("Appello odierno: "+fAController.getAppelloOdierno(idClasse).getID() + " | " + fAController.getAppelloOdierno(idClasse).getData());
 	
-			  //serve solo il link: si potrebbero passare meno parametri
-			  linkAppello = new AppelloRS(fAController.getAppelloOdierno(idClasse), idClasse).getLink("self");
-			  httpHeaders.setLocation(URI.create(linkAppello.getHref()));
-		  }catch(IllegalStateException ISE){
-			  httpStatus = HttpStatus.FORBIDDEN;
-		  }catch(Exception PE){
-			  // TODO Auto-generated catch block
-			  httpStatus = HttpStatus.SERVICE_UNAVAILABLE;
-			  Stampa.stampaln("creaAppello - SERVICE_UNAVAILABLE");
-			  //TODO far ritornare uno stato http coerente con l'errore
-		  }
+		  //serve solo il link: si potrebbero passare meno parametri
+		  linkAppello = new AppelloRS(fAController.getAppelloOdierno(idClasse), idClasse).getLink("self");
+		  httpHeaders.setLocation(URI.create(linkAppello.getHref()));
+
 	
 		  return new ResponseEntity<>(null, httpHeaders, httpStatus);
 	
@@ -76,15 +68,9 @@ public class AppelloPresenter {
 			Appello appello;
 			
 			fAController = new FaiAppelloController();
-			try {
-				appello = fAController.getAppello(idClasse, idAppello);
-				return new AppelloRS(appello, idClasse);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return null;// TODO far ritornare uno stato http coerente con l'errore
-			}
 			
+			appello = fAController.getAppello(idClasse, idAppello);
+			return new AppelloRS(appello, idClasse);
 			
 		}
 		
@@ -97,25 +83,21 @@ public class AppelloPresenter {
 			Collection<AppelloRS> appelliRS;
 			Boolean appelloAvviabile;
 			Date dataAppelloOdierno;
-			try{
-				fAController = new FaiAppelloController();
-				appelli = fAController.getAppelli(idClasse);
-				appelliRS = new LinkedList<AppelloRS>();
-				
-				
-				for (Appello appello : appelli) {
-					appelliRS.add(new AppelloRS(appello, idClasse));
-				}
-				
-				appelloAvviabile = fAController.isAppelloOdiernoAvviabile(idClasse);
-				dataAppelloOdierno = Calendario.getInstance().getDataOdierna().toDate();
-				
-				return new AppelliContainerRS(appelloAvviabile, dataAppelloOdierno, appelliRS);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return null; // TODO far ritornare uno stato http coerente con l'errore
+
+			fAController = new FaiAppelloController();
+			appelli = fAController.getAppelli(idClasse);
+			appelliRS = new LinkedList<AppelloRS>();
+			
+			
+			for (Appello appello : appelli) {
+				appelliRS.add(new AppelloRS(appello, idClasse));
 			}
+			
+			appelloAvviabile = fAController.isAppelloOdiernoAvviabile(idClasse);
+			dataAppelloOdierno = Calendario.getInstance().getDataOdierna().toDate();
+			
+			return new AppelliContainerRS(appelloAvviabile, dataAppelloOdierno, appelliRS);
+
 		}
 		
 	
@@ -141,18 +123,7 @@ public class AppelloPresenter {
 				i++;
 			}
 			
-			try{
-				fAController.registraAssenze(idAssenti, idClasse, docenteController.getIdDocenteProva());
-			}catch(IllegalStateException ISE){
-				httpStatus = HttpStatus.FORBIDDEN;
-				ISE.printStackTrace();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				httpStatus = HttpStatus.SERVICE_UNAVAILABLE;
-				Stampa.stampaln("inserisciAssenze.registraAssenze-SERVICE_UNAVAILABLE");
-				//TODO far ritornare uno stato http coerente con l'errore
-			}
+			fAController.registraAssenze(idAssenti, idClasse, docenteController.getIdDocenteProva());
 			
 			return new ResponseEntity<>(null, httpHeaders, httpStatus);
 		}
@@ -172,54 +143,21 @@ public class AppelloPresenter {
 			Appello appello;
 			AssentiContainerRS assenti;
 			HashMap<Integer, Assenza> assenze;
+
+			fAController = new FaiAppelloController();
+			appello = fAController.getAppello(idClasse, idAppello);
+			assenti = new AssentiContainerRS();
 			
-			try {
-				fAController = new FaiAppelloController();
-				appello = fAController.getAppello(idClasse, idAppello);
-				assenti = new AssentiContainerRS();
-				
-				if(fAController.getAppello(idClasse, idAppello).getAssenzePrese()){
-					assenze = fAController.getAssenze(idClasse, appello.getID());
-					for (Integer idS : assenze.keySet()) {
-						if(assenze.get(idS)!=null){
-							assenti.assenti.add(idS);
-						}
+			if(fAController.getAppello(idClasse, idAppello).getAssenzePrese()){
+				assenze = fAController.getAssenze(idClasse, appello.getID());
+				for (Integer idS : assenze.keySet()) {
+					if(assenze.get(idS)!=null){
+						assenti.assenti.add(idS);
 					}
 				}
-				
-				return assenti;
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return null; // TODO far ritornare uno stato http coerente con l'errore
 			}
+			
+			return assenti;
 		}
-		
-		
-//		@RequestMapping(value = "/provap", method = RequestMethod.POST)
-//		public ResponseEntity<?> provap(@PathVariable long idClasse, @RequestBody Collection<MyCont> appello) {
-//			
-//			HttpHeaders httpHeaders = new HttpHeaders();
-//			HttpStatus httpStatus = HttpStatus.CREATED;
-//			
-//			
-//			
-//			return new ResponseEntity<>(null, httpHeaders, httpStatus);
-//		}
-//		
-//		@RequestMapping(value = "/provag", method = RequestMethod.GET)
-//		public Collection<Object> provag() {
-//			
-//			LinkedList<Object> lista;
-//			
-//			lista = new LinkedList<Object>();
-//			
-//			lista.add(new MyCont(1, "aaa"));
-//			lista.add(new MyCont(2, "bbb"));
-//			
-//			lista.add(new MyCont1(true, null));
-//			
-//			return lista;
-//		}
 		
 }

@@ -39,20 +39,15 @@ public class ClassePresenter {
 		DocenteController docenteController;
 		classeController= new domain.controller.ClasseController();
 		docenteController = new DocenteController();
-		try {
-			classi = classeController.getClassi(docenteController.getIdDocenteProva());
-			classiMenu = new LinkedList<ClasseMenuRS>();
-			
-			for (Classe classe : classi) {
-				classiMenu.add(new ClasseMenuRS(classe));
-			}
-			
-			return classiMenu;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;  //TODO far ritornare uno stato http coerente con l'errore
+
+		classi = classeController.getClassi(docenteController.getIdDocenteProva());
+		classiMenu = new LinkedList<ClasseMenuRS>();
+		
+		for (Classe classe : classi) {
+			classiMenu.add(new ClasseMenuRS(classe));
 		}
+		
+		return classiMenu;
 	}
 	
 	/*TODO Con il path /{idClasse}/studenti si intendono studenti generici (con tutti i dati), mentre
@@ -69,15 +64,9 @@ public class ClassePresenter {
 		classeController = new ClasseController();
 		studentiRS = new LinkedList<StudenteAppelloRS>();
 		
-		try {
-			studenti = classeController.getStudenti(idClasse);
-			for (Studente studente : studenti) {
-				studentiRS.add(new StudenteAppelloRS(studente));
-			}
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		studenti = classeController.getStudenti(idClasse);
+		for (Studente studente : studenti) {
+			studentiRS.add(new StudenteAppelloRS(studente));
 		}
 		
 		return studentiRS;
