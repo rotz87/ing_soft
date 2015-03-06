@@ -47,7 +47,8 @@ public class TestGetAssenze {
 
 			Integer[] listaIdStudAssenti = {3, 1, 5, 2};
 			
-			HashSet<Studente> studenti = (HashSet<Studente>) controlloreClasse.getStudenti(1);
+			HashSet<Studente> studenti = new HashSet<Studente>();
+					studenti.addAll( controlloreClasse.getStudenti(1));
 	
 //			controlloreAppello.registraAssenze(listaIdStudAssenti,1, 1 );
 			
