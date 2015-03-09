@@ -62,7 +62,7 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$locat
 		  $scope.elencoAppelli = response.appelli;
 		  for (key in response.appelli)
 		  {
-			  if (new Date(response.appelli[key].data).toDateString() == new Date(result.dataAppelloAvviabile).toDateString())
+			  if (new Date(response.appelli[key].data).toDateString() == new Date(response.dataAppelloAvviabile).toDateString())
 			  {
 				  trovato = true;
 			  }
@@ -74,9 +74,9 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$locat
 			   * nell'elenco degi appelli che sono arrivati dal server
 			   */
 			  var newAppello = {};
-			  newAppello.data = result.dataAppelloAvviabile;
+			  newAppello.data = response.dataAppelloAvviabile;
 			  newAppello.idAppello = null;
-			  newAppello.appelloAvviabile = result.appelloAvviabile;
+			  newAppello.appelloAvviabile = response.appelloAvviabile;
 			  $scope.elencoAppelli.push(newAppello)
 		  }
 
