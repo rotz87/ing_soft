@@ -1,7 +1,7 @@
 var esisto
 var appelloControllers =  angular.module('appelloControllers',[]);
 
-appelloControllers.controller('avviaAppello',['$scope','Appello','$location',function($scope,Appello,$location){
+appelloControllers.controller('avviaAppello',['$scope','Appello','$location','$rootScope',function($scope,Appello,$location,$rootScope){
 		$scope.idClasse = 0;
 		$scope.creaAppello = function(miaClasse){
 			if (miaClasse)
@@ -9,8 +9,11 @@ appelloControllers.controller('avviaAppello',['$scope','Appello','$location',fun
 				$scope.idClasse = miaClasse;
 			}
 			
-			Appello.myPost({idClasse:$scope.idClasse},function(data,header){
+			Appello.myPost({idClasse:$scope.idClasse},
+					function(data,header){
 				$scope.appelloUri = header("location");
+			},function(response,headers){
+				erroreSistema($rootScope, response.data, true)
 			});
 			
 		}
@@ -37,27 +40,29 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$locat
 	  
 	  $scope.mioController = "avviaAppello";
 	  $scope.predicate="data";
-	  $scope.reverse=true;
+	  $scope.reverse = true;
 	  $scope.elencoAppelli={};
-	  $scope.elencoAppelli2 = Appello.myQuery2({idClasse:$scope.idClasse},function(response,header){
+	  $scope.elencoAppelli2 = Appello.myQuery2({idClasse:$scope.idClasse},
+		function(response,headers){
 		  //successo
-	  },function(response,header){
+	  },function(response,headers){
 		  //fallimento
-		  erroreSistema($rootScope, data.dati, true)
+		  erroreSistema($rootScope, response.data, true)
 	  })
 	  /* 
 	   * funzione avviata quando viene restituita la risposta dal server
 	   * gestisce l'elenco degli appelli per poter valutare l'inserimento dell'appelloAvviabile
 	   * nell'elenco degli appelli
 	   */
-	  $q.when($scope.elencoAppelli2.$promise).then(function(result){
+	  $q.when($scope.elencoAppelli2.$promise).then(
+		function(response){
 		  //successo
 		  var aggiungiAppello = false;
 		  var trovato = false;
-		  $scope.elencoAppelli = result.appelli;
-		  for (key in result.appelli)
+		  $scope.elencoAppelli = response.appelli;
+		  for (key in response.appelli)
 		  {
-			  if (new Date(result.appelli[key].data).toDateString() == new Date(result.dataAppelloAvviabile).toDateString())
+			  if (new Date(response.appelli[key].data).toDateString() == new Date(result.dataAppelloAvviabile).toDateString())
 			  {
 				  trovato = true;
 			  }
@@ -75,10 +80,10 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$locat
 			  $scope.elencoAppelli.push(newAppello)
 		  }
 
-	  },function(data,headers){
+	  },function(response,headers){
 		  //fallimento
 		  $scope.erroreSistema = 'è avvenuto un errore, probabilmente la classe selezionata non esiste'
-			  erroreSistema($rootScope, data.dati, true)
+			  erroreSistema($rootScope, response.data, true)
 	  })
 	  
 	  var nuovoUri=[];
@@ -89,7 +94,7 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$locat
 				$scope.idClasse = miaClasse;
 			}
 			
-			Appello.myPost({idClasse:$scope.idClasse},function(data,header){
+			Appello.myPost({idClasse:$scope.idClasse},function(response,header){
 				//successo
 				$scope.appelloUri = header("location");
 				nuovoUri = $scope.appelloUri.split("/");
@@ -111,16 +116,16 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$locat
 		$rootScope.idClasse = $scope.idClasse;
 		$rootScope.idAppello = null;
 		$scope.elencoClassi = Appello.elencoClassi({},
-		function(data,header){
+		function(response,headers){
 			//successo
-			for(i in data)
+			for(i in response)
 				{
-				if(data[i].idClasse == $scope.idClasse)
-					$scope.nomeClasse = data[i].nome 
+				if(response[i].idClasse == $scope.idClasse)
+					$scope.nomeClasse = response[i].nome 
 				}
-		},function(data,header){
+		},function(response,headers){
 			//fallimento
-			erroreSistema($rootScope, data.dati, true)
+			erroreSistema($rootScope, response.data, true)
 		})
 	}])
 	.directive('elencoAppello', function() {
@@ -239,7 +244,7 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 			var assenti = new Appello();
 			assenti.assenti = $scope.assenti.assenti;
 			assenti.$registraAssenti({idAppello: $scope.idAppello, idClasse: $scope.idClasse},
-			function(data,header){
+			function(response,header){
 				//successo
 				$scope.appello.assenzePrese = true;
 				
@@ -250,9 +255,9 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 				$scope.bottoneDesc="aggiorna appello";
 				$scope.controllaAppello();
 				$rootScope.modal = $scope.modal;
-			},function(data,header){
+			},function(response,header){
 				//fallimento
-				erroreSistema($rootScope,data.dati,true);
+				erroreSistema($rootScope,response.data,true);
 			})
 		};
 		
@@ -373,7 +378,7 @@ appelloControllers.controller('popolamentoNavigazione', ['$scope','Appello','$q'
 							},
 					function(response,header){
 						//fallimento
-						erroreSistema($rootScope, data.dati, true)
+						erroreSistema($rootScope, response.data, true)
 					});
 			}
 		else if (newValue != oldValue && newValue != null)
@@ -387,13 +392,13 @@ appelloControllers.controller('popolamentoNavigazione', ['$scope','Appello','$q'
 					},
 					function(response,header){
 						//fallimento
-						erroreSistema($rootScope, data.dati, true)
+						erroreSistema($rootScope, response.data, true)
 					})
 			$scope.elencoAppelli = Appello.myQuery2({idClasse:newValue},function(response,header){
 				  //successo
 			  },function(response,header){
 				  //fallimento
-				  erroreSistema($rootScope, data.dati, true)
+				  erroreSistema($rootScope, response.data, true)
 			  })
 		}
 		$scope.selezioneAttuale = {};
@@ -417,7 +422,7 @@ appelloControllers.controller('popolamentoNavigazione', ['$scope','Appello','$q'
 							}
 						},function(response,header){
 							//fallimento
-							erroreSistema($rootScope, data.dati, true)
+							erroreSistema($rootScope, response.data, true)
 						});
 			}
 		})
@@ -444,7 +449,7 @@ appelloControllers.controller('riempiElencoClassi', ['$scope','Appello','$q','$l
 			},
 			function(response,header){
 				//fallimento
-				erroreSistema($rootScope, data.dati, true)
+				erroreSistema($rootScope, response.data, true)
 			})
 	$scope.scegliClasse = function(idClasse){
 		$location.path(idClasse)
