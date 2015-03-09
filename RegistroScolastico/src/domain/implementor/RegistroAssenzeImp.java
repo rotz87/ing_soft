@@ -3,9 +3,6 @@ package domain.implementor;
 import java.util.Collection;
 
 import org.joda.time.LocalDate;
-import org.neo4j.cypher.internal.helpers.Converge.iterateUntilConverged;
-
-import service.Stampa;
 import domain.model.Appello;
 import domain.model.Calendario;
 import domain.model.LibrettoAssenze;

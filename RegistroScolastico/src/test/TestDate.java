@@ -6,19 +6,17 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.TreeSet;
 
-import org.hibernate.Criteria;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
-import org.neo4j.cypher.internal.compiler.v2_1.planner.logical.steps.idSeekLeafPlanner;
 import org.orm.PersistentException;
 
+import service.Stampa;
 import domain.model.RegistroAssenze;
 import domain.model.RegistroAssenzeCriteria;
 import domain.model.Studente;
 import domain.model.StudenteCriteria;
-import service.Stampa;
 
 //import org.orm.util.ORMMap;
 //
