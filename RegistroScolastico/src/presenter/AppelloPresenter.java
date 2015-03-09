@@ -49,7 +49,6 @@ public class AppelloPresenter {
 		  docenteController = new DocenteController();
 		  
 		  fAController.avviaAppello(idClasse, docenteController.getIdDocenteProva());
-		  Stampa.stampaln("Appello odierno: "+fAController.getAppelloOdierno(idClasse).getID() + " | " + fAController.getAppelloOdierno(idClasse).getData());
 	
 		  //serve solo il link: si potrebbero passare meno parametri
 		  linkAppello = new AppelloRS(fAController.getAppelloOdierno(idClasse), idClasse).getLink("self");

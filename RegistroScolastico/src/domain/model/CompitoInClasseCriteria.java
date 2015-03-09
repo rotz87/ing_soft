@@ -22,6 +22,9 @@ public class CompitoInClasseCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
 	public final IntegerExpression insegnamentoId;
 	public final AssociationExpression insegnamento;
+	public final DateExpression data;
+	public final TimeExpression oraInizio;
+	public final TimeExpression oraFine;
 	public final CollectionExpression argomentiEsaminati;
 	
 	public CompitoInClasseCriteria(Criteria criteria) {
@@ -29,6 +32,9 @@ public class CompitoInClasseCriteria extends AbstractORMCriteria {
 		ID = new IntegerExpression("ID", this);
 		insegnamentoId = new IntegerExpression("insegnamento.ID", this);
 		insegnamento = new AssociationExpression("insegnamento", this);
+		data = new DateExpression("data", this);
+		oraInizio = new TimeExpression("oraInizio", this);
+		oraFine = new TimeExpression("oraFine", this);
 		argomentiEsaminati = new CollectionExpression("argomentiEsaminati", this);
 	}
 	

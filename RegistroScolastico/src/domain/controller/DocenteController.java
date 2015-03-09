@@ -8,7 +8,7 @@ import domain.model.DocenteCriteria;
 public class DocenteController {
 	
 	public int getIdDocenteProva(){
-		String cognome = "Bianchi";
+		String cognome = "Rossi";
 		
 		DocenteCriteria criteria;
 		Docente docente;

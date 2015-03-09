@@ -6,14 +6,19 @@ import java.util.LinkedList;
 
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
+import domain.implementor.*;
 
 public class Calendario {
 
-	private static Calendario instance;
+	private static Calendario attribute;
 	private Collection<GiornoFestivo> giorniFestivi = new LinkedList<GiornoFestivo>();
 	private Collection<GiornoSettimanaleFestivo> giorniSettimanaliFestivi = new LinkedList<GiornoSettimanaleFestivo>();
 	private LocalDate dataOdierna;
 	final private LocalDate dataZero = new LocalDate(0L);
+	private Calendario attribute2;
+	private int ID;
+	private CalendarioImp implementor =  new domain.implementor.CalendarioImp();
+	private static Calendario instance;
 
 	private Calendario(){
 		this.dataOdierna = calcolaDataOdierna();

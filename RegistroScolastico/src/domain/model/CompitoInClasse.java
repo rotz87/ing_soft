@@ -21,6 +21,12 @@ public class CompitoInClasse {
 	
 	private domain.model.RegistroDocente insegnamento;
 	
+	private java.util.Date data;
+	
+	private java.sql.Time oraInizio;
+	
+	private java.sql.Time oraFine;
+	
 	private java.util.Set<domain.model.Argomento> argomentiEsaminati = new java.util.LinkedHashSet<domain.model.Argomento>();
 	
 	private void setID(int value) {
@@ -33,6 +39,30 @@ public class CompitoInClasse {
 	
 	public int getORMID() {
 		return getID();
+	}
+	
+	public void setData(java.util.Date value) {
+		this.data = value;
+	}
+	
+	public java.util.Date getData() {
+		return data;
+	}
+	
+	public void setOraInizio(java.sql.Time value) {
+		this.oraInizio = value;
+	}
+	
+	public java.sql.Time getOraInizio() {
+		return oraInizio;
+	}
+	
+	public void setOraFine(java.sql.Time value) {
+		this.oraFine = value;
+	}
+	
+	public java.sql.Time getOraFine() {
+		return oraFine;
 	}
 	
 	public void setInsegnamento(domain.model.RegistroDocente value) {
@@ -52,11 +82,10 @@ public class CompitoInClasse {
 	}
 	
 	
-	private java.util.Date data;
+	private domain.implementor.CompitoInClasseImp implementor = new domain.implementor.CompitoInClasseImp();
 	
-	public void setDati(java.util.Date data, java.sql.Time ora, int durata, domain.model.Argomento argomenti) {
-		//TODO: Implement Method
-		throw new UnsupportedOperationException();
+	public void setInfo(java.util.Date data, java.sql.Time oraInizio, java.sql.Time oraFine, java.util.Collection<domain.model.Argomento> argomenti) {
+		this.implementor.setInfo(this, data, oraInizio, oraFine, argomenti);
 	}
 	
 	public String toString() {

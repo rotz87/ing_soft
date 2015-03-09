@@ -130,4 +130,24 @@ public class RegistroAssenzeImp {
 		return rit;
 	}
 
+	/**
+	 * Riceve un vettore di studenti per cui segnare le assenze
+	 * @param registroAssenze
+	 * @param Studenti
+	 */
+	public void registraAssenze(RegistroAssenze registroAssenze, Studente[] Studenti) {
+		// TODO - implement RegistroAssenzeImp.registraAssenze
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * 
+	 * @param registroAssenze
+	 * @param studente
+	 */
+	public LibrettoAssenze getLibretto(RegistroAssenze registroAssenze, Studente studente) {
+		// TODO - implement RegistroAssenzeImp.getLibretto
+		throw new UnsupportedOperationException();
+	}
+
 }

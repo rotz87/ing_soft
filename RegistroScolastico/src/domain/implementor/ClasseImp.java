@@ -31,6 +31,15 @@ public class ClasseImp {
 		classe.setRegistroAssenze(registroAssenze);
 	}
 
+	/**
+	 * 
+	 * @param classe
+	 */
+	public java.util.Set<Studente> getStudenti(Classe classe) {
+		// TODO - implement ClasseImp.getStudenti
+		throw new UnsupportedOperationException();
+	}
+
 
 
 	

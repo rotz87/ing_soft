@@ -98,5 +98,15 @@ public class AssenzaImp {
 		return that.getUltimoAppelloAssenza().compareTo(assenza.getUltimoAppelloAssenza());
 	}
 
+	/**
+	 * 
+	 * @param assenza
+	 * @param appelli
+	 */
+	public void inizialize(Assenza assenza, java.util.LinkedList<Appello> appelli) {
+		// TODO - implement AssenzaImp.inizialize
+		throw new UnsupportedOperationException();
+	}
+
 	
 }

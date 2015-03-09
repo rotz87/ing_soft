@@ -90,4 +90,23 @@ public class LibrettoAssenzeImp {
 		return rit;
 	}
 
+	/**
+	 * 
+	 * @param librettoAssenze
+	 */
+	public void inizialize(LibrettoAssenze librettoAssenze) {
+		// TODO - implement LibrettoAssenzeImp.inizialize
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * 
+	 * @param librettoAssenze
+	 * @param studente
+	 */
+	public void inizialize(LibrettoAssenze librettoAssenze, Studente studente) {
+		// TODO - implement LibrettoAssenzeImp.inizialize
+		throw new UnsupportedOperationException();
+	}
+
 }

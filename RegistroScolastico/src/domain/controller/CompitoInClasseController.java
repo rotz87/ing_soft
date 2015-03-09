@@ -62,19 +62,6 @@ public class CompitoInClasseController {
 	/**
 	 * 
 	 * @param idCompito
-	 * @param data
-	 * @param ora
-	 * @param durata La durata è intesa in minuti.
-	 * @param idArgomeni
-	 */
-	public void inserisciDatiCompito(int idCompito, java.util.Date data, LocalTime ora, int durata, int[] idArgomeni) {
-		// TODO - implement CompitoInClasseController.inserisciDatiCompito
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param idCompito
 	 * @param idStudenti
 	 */
 	public void inserisciStudenti(int idCompito, int[] idStudenti) {
@@ -90,6 +77,19 @@ public class CompitoInClasseController {
 	 */
 	public void inserisciVoti(int idCompito, int[] idStudenti, int[] idVoti) {
 		// TODO - implement CompitoInClasseController.inserisciVoti
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * 
+	 * @param idCompito
+	 * @param data
+	 * @param oraInizio
+	 * @param oraFine La durata è intesa in minuti.
+	 * @param idArgomeni
+	 */
+	public void inserisciInfoCompito(int idCompito, java.util.Date data, Time oraInizio, Time oraFine, int[] idArgomeni) {
+		// TODO - implement CompitoInClasseController.inserisciInfoCompito
 		throw new UnsupportedOperationException();
 	}
 

@@ -79,14 +79,12 @@ public class RegistroDocente {
 		return this.implementor.creaCompito(this);
 	}
 	
-	public void inserisciDatiCompito(domain.model.CompitoInClasse compito, java.util.Date data, java.sql.Time ora, int durata, domain.model.Argomento[] argomenti) {
-		//TODO: Implement Method
-		throw new UnsupportedOperationException();
+	public void inserisciInfoCompito(domain.model.CompitoInClasse compito, java.util.Date data, java.sql.Time oraInizio, java.sql.Time oraFine, java.util.Collection<Argomento> argomenti) {
+		this.implementor.inserisciInfoCompito(this, compito, data, oraInizio, oraFine, argomenti);
 	}
 	
-	public boolean compitoPresente(domain.model.CompitoInClasse compito) {
-		//TODO: Implement Method
-		throw new UnsupportedOperationException();
+	public boolean isCompitoPresente(domain.model.CompitoInClasse compito) {
+		return this.implementor.isCompitoPresente(this, compito);
 	}
 	
 	public void inserisciStudenti(domain.model.CompitoInClasse compito, domain.model.Studente[] studenti) {

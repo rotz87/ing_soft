@@ -335,6 +335,114 @@ public class FaiAppelloController {
 			throw new IllegalStateException(ErrorMessage.ASSENZE_UNRECORDED);
 		}
 	}
+
+	/**
+	 * 
+	 * @param idClasse
+	 * @param idDocente
+	 */
+	public void avviaAppello(Long idClasse, Long idDocente) {
+		// TODO - implement FaiAppelloController.avviaAppello
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * 
+	 * @param idStudenti
+	 * @param idClasse
+	 * @param idDocente
+	 */
+	public void registraAssenze(Long[] idStudenti, Long idClasse, Long idDocente) {
+		// TODO - implement FaiAppelloController.registraAssenze
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * 
+	 * @param idClasse
+	 */
+	public Appello getAppelloOdierno(Long idClasse) {
+		// TODO - implement FaiAppelloController.getAppelloOdierno
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * 
+	 * @param idClasse
+	 * @param data
+	 */
+	public Appello getAppello(Long idClasse, org.joda.time.LocalDate data) {
+		// TODO - implement FaiAppelloController.getAppello
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * 
+	 * @param idClasse
+	 * @param idAppello
+	 */
+	public Appello getAppello(Long idClasse, long idAppello) {
+		// TODO - implement FaiAppelloController.getAppello
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * 
+	 * @param idClasse
+	 * @param idAppello
+	 */
+	public Appello getAppello(Long idClasse, Long idAppello) {
+		// TODO - implement FaiAppelloController.getAppello
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * 
+	 * @param idClasse
+	 */
+	public java.util.Collection<Appello> getAppelli(Long idClasse) {
+		// TODO - implement FaiAppelloController.getAppelli
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * 
+	 * @param idClasse
+	 */
+	public boolean isAppelloOdiernoAvviabile(long idClasse) {
+		// TODO - implement FaiAppelloController.isAppelloOdiernoAvviabile
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * 
+	 * @param idClasse
+	 * @param idAppello
+	 */
+	public java.util.HashMap<Studente, Boolean> getBoolAssenze(Long idClasse, Long idAppello) {
+		// TODO - implement FaiAppelloController.getBoolAssenze
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * 
+	 * @param idClasse
+	 * @param idAppello
+	 * @return Map<idStudente, Assenza>
+	 */
+	public java.util.HashMap<Long, Assenza> getAssenze(Long idClasse, Long idAppello) {
+		// TODO - implement FaiAppelloController.getAssenze
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * 
+	 * @param idClasse
+	 */
+	public java.util.Collection<Studente> getStudenti(Long idClasse) {
+		// TODO - implement FaiAppelloController.getStudenti
+		throw new UnsupportedOperationException();
+	}
 	
 
 }
