@@ -17,21 +17,6 @@ appelloControllers.controller('avviaAppello',['$scope','Appello','$location',fun
 		
 	}]);
 
-appelloControllers.controller('riempiAppelli', ['$scope', function($scope) {
-  $scope.appello1 = { data: 'Naomi', azione: 'visualizza' };
-  $scope.appello2 = { data: 'Igor', azione: 'Avvia' };
-}])
-.directive('mioAppello', function() {
-  return {
-	restrict : 'E',
-	transclude:true,
-    scope: {
-      appelloInfo: '=info'
-    },
-    templateUrl: 'partials/appelli.html'
-  };
-});
-
 appelloControllers.controller('templateTitolo', ['$scope','$location','$rootScope', function($scope, $location,$rootScope){
 	$scope.testTitle;
 	$rootScope.$on("$routeChangeSuccess", function(event, currentRoute, previousRoute) {
@@ -58,6 +43,7 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$locat
 		  //successo
 	  },function(response,header){
 		  //fallimento
+		  erroreSistema($rootScope, data.dati, true)
 	  })
 	  /* 
 	   * funzione avviata quando viene restituita la risposta dal server
@@ -65,6 +51,7 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$locat
 	   * nell'elenco degli appelli
 	   */
 	  $q.when($scope.elencoAppelli2.$promise).then(function(result){
+		  //successo
 		  var aggiungiAppello = false;
 		  var trovato = false;
 		  $scope.elencoAppelli = result.appelli;
@@ -88,8 +75,10 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$locat
 			  $scope.elencoAppelli.push(newAppello)
 		  }
 
-	  },function(result){
+	  },function(data,headers){
+		  //fallimento
 		  $scope.erroreSistema = 'è avvenuto un errore, probabilmente la classe selezionata non esiste'
+			  erroreSistema($rootScope, data.dati, true)
 	  })
 	  
 	  var nuovoUri=[];
@@ -101,6 +90,7 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$locat
 			}
 			
 			Appello.myPost({idClasse:$scope.idClasse},function(data,header){
+				//successo
 				$scope.appelloUri = header("location");
 				nuovoUri = $scope.appelloUri.split("/");
 				
@@ -109,6 +99,9 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$locat
 				$rootScope.mioDato = {};
 				$rootScope.nuovoAppello = {};
 			    $rootScope.nuovoAppello = PostsCtrlAjax($scope, $http, $scope.myUrl, $rootScope.mioDato, $location)
+			},function (response,headers){
+				//fallimento
+				erroreSistema($rootScope, response.data, true)
 			});
 		}
 		$scope.mostraAppello = function(idAppello){
@@ -117,14 +110,17 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$locat
 		}
 		$rootScope.idClasse = $scope.idClasse;
 		$rootScope.idAppello = null;
-		$scope.elencoClassi = Appello.elencoClassi({},function(data,header){
+		$scope.elencoClassi = Appello.elencoClassi({},
+		function(data,header){
+			//successo
 			for(i in data)
 				{
 				if(data[i].idClasse == $scope.idClasse)
 					$scope.nomeClasse = data[i].nome 
 				}
 		},function(data,header){
-			
+			//fallimento
+			erroreSistema($rootScope, data.dati, true)
 		})
 	}])
 	.directive('elencoAppello', function() {
@@ -178,6 +174,7 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 				function(response,header){
 					//fallimento
 					$scope.erroreSistema.studenti = "non sono riuscito a caricare gli studenti"
+					erroreSistema($rootScope, response.data, true)
 				});
 
 		var appelloCorrente = new Appello();
@@ -191,8 +188,9 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 				},
 				function(response, header)
 				{
+					//fallimento
 					$scope.erroreSistema.appello = "non sono riuscito a caricare l'appello!!!!"
-					erroreSistema($scope, response.data, true)
+					erroreSistema($rootScope, response.data, true)
 				})
 
 		
@@ -204,7 +202,9 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 				},
 				function(response,header)
 				{
+					//fallimento
 					$scope.erroreSistema.assenti = "fallito il recupero degli assenti nell'appello";
+					erroreSistema($rootScope, response.data, true)
 				});
 		/*
 		 * Funzione richiamata ogni volta che viene cliccata una checkbox per prendere
@@ -233,6 +233,7 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 			}
 		};
 		$scope.myInput = {}
+		$scope.modal = {};
 		$scope.registraAppello = function (){
 			
 			var assenti = new Appello();
@@ -241,21 +242,17 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 			function(data,header){
 				//successo
 				$scope.appello.assenzePrese = true;
-				$scope.myInput.messaggio = "le assenze sono state registrate";
-				$scope.modalTitle = "Appello registrato";
-				$scope.modalColor = "modal-header-success";
-				$scope.modalBtn = "btn-success";
+				
+				$scope.modal.messaggio = "le assenze sono state registrate";
+				$scope.modal.titolo = "Appello registrato";
+				$scope.modal.colore = "modal-header-success";
+				$scope.modal.bottone = "btn-success";
 				$scope.bottoneDesc="aggiorna appello";
 				$scope.controllaAppello();
-			},function(data){
+				$rootScope.modal = $scope.modal;
+			},function(data,header){
 				//fallimento
-				$scope.erroreSistema.registrazione = "errore in fase di registrazione!!!!";
-				$scope.myInput.messaggio = "è avvenuto un errore nella registrazione";
-				$scope.myInput.status = data.status;
-				$scope.myInput.statusText = data.statusText;
-				$scope.modalTitle = "Errore";
-				$scope.modalColor = "modal-header-danger";
-				$scope.modalBtn = "btn-danger";
+				erroreSistema($rootScope,data.dati,true);
 			})
 		};
 		
@@ -264,7 +261,7 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 			if ($scope.appello.assenzePrese)
 			{
 				//aggiornamento dell'appello da inviare con ritardi, uscite anticipate, giustificazioni
-				nonSupportato($scope)
+				nonSupportato($rootScope)
 			}
 			else
 			{
@@ -297,17 +294,17 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 			
 		}
 		$scope.gestisciRitardo = function (){
-			nonSupportato($scope,null)
+			nonSupportato($rootScope,null)
 		}
 		$scope.gestisciUscita = function (){
-			nonSupportato($scope,null)
+			nonSupportato($rootScope,null)
 		}
 		$scope.gestisciGiustificazione = function (){
-			nonSupportato($scope,null)
+			nonSupportato($rootScope,null)
 		}
 		
 		$scope.nonSupportato = function(){
-			nonSupportato($scope,null)
+			nonSupportato($rootScope,null)
 		}
 		$scope.disabilitaRitardo = true; 
 		$scope.disabilitaUscita = true;
@@ -357,7 +354,9 @@ function retrieveObjectFromUrl($http, resourceUrl, destinazione){
 
 appelloControllers.controller('popolamentoNavigazione', ['$scope','Appello','$q','$rootScope','$filter','$location', function($scope, Appello, $q, $rootScope,$filter,$location){
 
-	$scope.$watch("idClasse",function(newValue,oldValue){
+	$scope.$watch("idClasse",
+			function(newValue,oldValue){
+		//successo
 		
 		if(newValue != null)
 			{
@@ -374,23 +373,27 @@ appelloControllers.controller('popolamentoNavigazione', ['$scope','Appello','$q'
 							},
 					function(response,header){
 						//fallimento
+						erroreSistema($rootScope, data.dati, true)
 					});
 			}
 		else if (newValue != oldValue && newValue != null)
 		{
 			
-			$scope.elencoClassi = Appello.elencoClassi({},function(response,header)
+			$scope.elencoClassi = Appello.elencoClassi({},
+					function(response,header)
 					{
 						//successo
 					
 					},
 					function(response,header){
 						//fallimento
+						erroreSistema($rootScope, data.dati, true)
 					})
 			$scope.elencoAppelli = Appello.myQuery2({idClasse:newValue},function(response,header){
 				  //successo
 			  },function(response,header){
 				  //fallimento
+				  erroreSistema($rootScope, data.dati, true)
 			  })
 		}
 		$scope.selezioneAttuale = {};
@@ -414,6 +417,7 @@ appelloControllers.controller('popolamentoNavigazione', ['$scope','Appello','$q'
 							}
 						},function(response,header){
 							//fallimento
+							erroreSistema($rootScope, data.dati, true)
 						});
 			}
 		})
@@ -424,8 +428,13 @@ appelloControllers.controller('popolamentoNavigazione', ['$scope','Appello','$q'
 			delete $rootScope.idClasse;
 		if ($rootScope.idAppello)
 			delete $rootScope.idAppello;
-	}
-}]);
+	};
+}]).directive('registroScolasticoModal', function() {
+	  return {
+			transclude:true,
+		    templateUrl: 'partials/registroScolasticoModal.html'
+		  };
+		});;
 
 appelloControllers.controller('riempiElencoClassi', ['$scope','Appello','$q','$location','$rootScope', function($scope,Appello,$q,$location,$rootScope) {
 
@@ -435,6 +444,7 @@ appelloControllers.controller('riempiElencoClassi', ['$scope','Appello','$q','$l
 			},
 			function(response,header){
 				//fallimento
+				erroreSistema($rootScope, data.dati, true)
 			})
 	$scope.scegliClasse = function(idClasse){
 		$location.path(idClasse)
@@ -443,18 +453,20 @@ appelloControllers.controller('riempiElencoClassi', ['$scope','Appello','$q','$l
 	
 function gestisciMessaggio(mioScope,tipo,attivaModal)
 {
-	mioScope.modalColor = "modal-header-"+tipo;
-	mioScope.modalBtn = "btn-"+tipo;
+	mioScope.modal.colore = "modal-header-"+tipo;
+	mioScope.modal.bottone = "btn-"+tipo;
 	if(attivaModal)
 	{
 		$("#myModal").modal("show")
 	}
 }
 
-function erroreSistema(mioScope,dati,attivaModal){
-	
-	mioScope.modalTitle = "Errore nel recupero della risorsa";
-	mioScope.myInput.messaggio = dati.exMsg + " per la risorsa: "+dati.url;
+function erroreSistema(mioScope,dati,attivaModal)
+{
+	mioScope.modal = {};
+	mioScope.modal.titolo = "Errore nel recupero della risorsa";
+	mioScope.modal.messaggio = dati.exMsg + " per la risorsa: "+dati.url;
+	console.log("============= Eccezione: =========================")
 	console.log(dati)
 	console.log("==================================================");
 	gestisciMessaggio(mioScope,"danger",attivaModal)
@@ -462,7 +474,8 @@ function erroreSistema(mioScope,dati,attivaModal){
 
 function nonSupportato(mioScope,dati,attivaModal)
 {
-	mioScope.modalTitle = "Funzione non supportata";
-	mioScope.myInput.messaggio = "FAn "+"Attualmente questa azione non è supportata";
+	mioScope.modal = {};
+	mioScope.modal.titolo = "Funzione non supportata";
+	mioScope.modal.messaggio = "Attualmente questa azione non è supportata";
 	gestisciMessaggio(mioScope,"info",attivaModal)
 }

@@ -26,7 +26,8 @@
 
   </head>
   <body >
-			<nav ng-controller="popolamentoNavigazione" class="navbar navbar-default navbar-fixed-top">
+  <div ng-controller="popolamentoNavigazione">
+			<nav  class="navbar navbar-default navbar-fixed-top">
 			  <div class="container-fluid">
 			    <!-- Brand and toggle get grouped for better mobile display -->
 			    <div class="navbar-header" title="Torna all'elenco delle classi">
@@ -55,6 +56,9 @@
 			    </div><!-- /.navbar-collapse -->
 			  </div><!-- /.container-fluid -->
 			</nav>
+			
+			<registro-scolastico-modal></registro-scolastico-modal>
+		</div>
 			<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-1">

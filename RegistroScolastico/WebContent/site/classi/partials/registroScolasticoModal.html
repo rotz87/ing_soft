@@ -1,0 +1,22 @@
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog .myDialog">
+    <div class="modal-content">
+	<div class="modal-header ng-class: modal.colore;">
+        <h1>
+        	{{modal.titolo}}
+        </h1>
+      </div>
+      <div class="modal-body">
+        {{modal.messaggio}}
+        <br>
+        <p ng-if="myInput.status">
+        errore: {{moddal.status}} {{modal.statusText}}
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-md center-block ng-class:modal.bottone;" data-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>

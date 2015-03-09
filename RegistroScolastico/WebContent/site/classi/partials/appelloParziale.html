@@ -74,26 +74,3 @@
 	</div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog .myDialog">
-    <div class="modal-content">
-	
-	<div class="modal-header ng-class: modalColor;">
-        <h1>
-        	{{modalTitle}}
-        </h1>
-      </div>
-      <div class="modal-body">
-        {{myInput.messaggio}}
-        <br>
-        <p ng-if="myInput.status">
-        errore: {{myInput.status}} {{myInput.statusText}}
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-md center-block ng-class:modalBtn;" data-dismiss="modal">Ok</button>
-      </div>
-    </div>
-  </div>
-</div>
