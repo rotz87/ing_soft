@@ -192,6 +192,7 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 				function(response, header)
 				{
 					$scope.erroreSistema.appello = "non sono riuscito a caricare l'appello!!!!"
+					erroreSistema($scope, response.data, true)
 				})
 
 		
@@ -263,7 +264,7 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 			if ($scope.appello.assenzePrese)
 			{
 				//aggiornamento dell'appello da inviare con ritardi, uscite anticipate, giustificazioni
-				$scope.nonSupportato();
+				nonSupportato($scope)
 			}
 			else
 			{
@@ -293,26 +294,20 @@ appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$ht
 		
 		$scope.conferma = function()
 		{
-			$('#myModal').on('shown.bs.modal', function () {
-			    $('#myInput').focus();
-			  })
+			
 		}
 		$scope.gestisciRitardo = function (){
-			$scope.nonSupportato();
+			nonSupportato($scope,null)
 		}
 		$scope.gestisciUscita = function (){
-			$scope.nonSupportato();
+			nonSupportato($scope,null)
 		}
 		$scope.gestisciGiustificazione = function (){
-			$scope.nonSupportato();
+			nonSupportato($scope,null)
 		}
 		
 		$scope.nonSupportato = function(){
-			$scope.modalTitle = "Funzione non supportata";
-			$scope.myInput.messaggio = "Attualmente questa azione non è supportata";
-			$scope.modalColor = "modal-header-info";
-			$scope.modalBtn = "btn-info";
-			$scope.bottoneDesc="aggiorna appello";
+			nonSupportato($scope,null)
 		}
 		$scope.disabilitaRitardo = true; 
 		$scope.disabilitaUscita = true;
@@ -445,3 +440,29 @@ appelloControllers.controller('riempiElencoClassi', ['$scope','Appello','$q','$l
 		$location.path(idClasse)
 	}
 	}])
+	
+function gestisciMessaggio(mioScope,tipo,attivaModal)
+{
+	mioScope.modalColor = "modal-header-"+tipo;
+	mioScope.modalBtn = "btn-"+tipo;
+	if(attivaModal)
+	{
+		$("#myModal").modal("show")
+	}
+}
+
+function erroreSistema(mioScope,dati,attivaModal){
+	
+	mioScope.modalTitle = "Errore nel recupero della risorsa";
+	mioScope.myInput.messaggio = dati.exMsg + " per la risorsa: "+dati.url;
+	console.log(dati)
+	console.log("==================================================");
+	gestisciMessaggio(mioScope,"danger",attivaModal)
+}
+
+function nonSupportato(mioScope,dati,attivaModal)
+{
+	mioScope.modalTitle = "Funzione non supportata";
+	mioScope.myInput.messaggio = "FAn "+"Attualmente questa azione non è supportata";
+	gestisciMessaggio(mioScope,"info",attivaModal)
+}
