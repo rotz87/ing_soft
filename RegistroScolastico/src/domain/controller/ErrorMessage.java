@@ -15,5 +15,6 @@ public class ErrorMessage {
 	public static final String CLASSE_UNLOADED = "Impossibile caricare la classe";
 	public static final String ASSENZE_UNLOADED = "Impossibile caricare le assenze";
 	public static final String APPELLO_INEXISTENT = "Appello inesistente";
+	public static final String COMPITO_UNCREABLE = "Impossibile creare il compito";
 			
 }

@@ -1,4 +1,4 @@
-package test;
+package test.appello;
 
 import java.util.LinkedList;
 import java.util.List;

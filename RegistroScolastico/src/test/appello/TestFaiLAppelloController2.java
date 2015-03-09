@@ -1,4 +1,4 @@
-package test;
+package test.appello;
 
 import org.orm.PersistentException;
 

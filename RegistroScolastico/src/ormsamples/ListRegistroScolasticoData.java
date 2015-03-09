@@ -162,6 +162,60 @@ public class ListRegistroScolasticoData {
 		}
 		System.out.println(length + " record(s) retrieved.");
 		
+		System.out.println("Listing Materia...");
+		java.util.List lMateriaList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Materia").setMaxResults(ROW_COUNT).list();
+		domain.model.Materia[] ldomainmodelMaterias = (domain.model.Materia[]) lMateriaList.toArray(new domain.model.Materia[lMateriaList.size()]);
+		length = Math.min(ldomainmodelMaterias.length, ROW_COUNT);
+		for (int i = 0; i < length; i++) {
+			System.out.println(ldomainmodelMaterias[i]);
+		}
+		System.out.println(length + " record(s) retrieved.");
+		
+		System.out.println("Listing LibrettoVoti...");
+		java.util.List lLibrettoVotiList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.LibrettoVoti").setMaxResults(ROW_COUNT).list();
+		domain.model.LibrettoVoti[] ldomainmodelLibrettoVotis = (domain.model.LibrettoVoti[]) lLibrettoVotiList.toArray(new domain.model.LibrettoVoti[lLibrettoVotiList.size()]);
+		length = Math.min(ldomainmodelLibrettoVotis.length, ROW_COUNT);
+		for (int i = 0; i < length; i++) {
+			System.out.println(ldomainmodelLibrettoVotis[i]);
+		}
+		System.out.println(length + " record(s) retrieved.");
+		
+		System.out.println("Listing LibrettoVotiLineItem...");
+		java.util.List lLibrettoVotiLineItemList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.LibrettoVotiLineItem").setMaxResults(ROW_COUNT).list();
+		domain.model.LibrettoVotiLineItem[] ldomainmodelLibrettoVotiLineItems = (domain.model.LibrettoVotiLineItem[]) lLibrettoVotiLineItemList.toArray(new domain.model.LibrettoVotiLineItem[lLibrettoVotiLineItemList.size()]);
+		length = Math.min(ldomainmodelLibrettoVotiLineItems.length, ROW_COUNT);
+		for (int i = 0; i < length; i++) {
+			System.out.println(ldomainmodelLibrettoVotiLineItems[i]);
+		}
+		System.out.println(length + " record(s) retrieved.");
+		
+		System.out.println("Listing CompitoInClasse...");
+		java.util.List lCompitoInClasseList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.CompitoInClasse").setMaxResults(ROW_COUNT).list();
+		domain.model.CompitoInClasse[] ldomainmodelCompitoInClasses = (domain.model.CompitoInClasse[]) lCompitoInClasseList.toArray(new domain.model.CompitoInClasse[lCompitoInClasseList.size()]);
+		length = Math.min(ldomainmodelCompitoInClasses.length, ROW_COUNT);
+		for (int i = 0; i < length; i++) {
+			System.out.println(ldomainmodelCompitoInClasses[i]);
+		}
+		System.out.println(length + " record(s) retrieved.");
+		
+		System.out.println("Listing Voto...");
+		java.util.List lVotoList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Voto").setMaxResults(ROW_COUNT).list();
+		domain.model.Voto[] ldomainmodelVotos = (domain.model.Voto[]) lVotoList.toArray(new domain.model.Voto[lVotoList.size()]);
+		length = Math.min(ldomainmodelVotos.length, ROW_COUNT);
+		for (int i = 0; i < length; i++) {
+			System.out.println(ldomainmodelVotos[i]);
+		}
+		System.out.println(length + " record(s) retrieved.");
+		
+		System.out.println("Listing Argomento...");
+		java.util.List lArgomentoList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Argomento").setMaxResults(ROW_COUNT).list();
+		domain.model.Argomento[] ldomainmodelArgomentos = (domain.model.Argomento[]) lArgomentoList.toArray(new domain.model.Argomento[lArgomentoList.size()]);
+		length = Math.min(ldomainmodelArgomentos.length, ROW_COUNT);
+		for (int i = 0; i < length; i++) {
+			System.out.println(ldomainmodelArgomentos[i]);
+		}
+		System.out.println(length + " record(s) retrieved.");
+		
 	}
 	
 	public void listByCriteria() throws PersistentException {
@@ -368,6 +422,78 @@ public class ListRegistroScolasticoData {
 			 System.out.println(domainmodelRegistroDocentes[i]);
 		}
 		System.out.println(length + " RegistroDocente record(s) retrieved."); 
+		
+		System.out.println("Listing Materia by Criteria...");
+		domain.model.MateriaCriteria ldomainmodelMateriaCriteria = new domain.model.MateriaCriteria();
+		// Please uncomment the follow line and fill in parameter(s) 
+		//ldomainmodelMateriaCriteria.ID.eq();
+		ldomainmodelMateriaCriteria.setMaxResults(ROW_COUNT);
+		domain.model.Materia[] domainmodelMaterias = ldomainmodelMateriaCriteria.listMateria();
+		length =domainmodelMaterias== null ? 0 : Math.min(domainmodelMaterias.length, ROW_COUNT); 
+		for (int i = 0; i < length; i++) {
+			 System.out.println(domainmodelMaterias[i]);
+		}
+		System.out.println(length + " Materia record(s) retrieved."); 
+		
+		System.out.println("Listing LibrettoVoti by Criteria...");
+		domain.model.LibrettoVotiCriteria ldomainmodelLibrettoVotiCriteria = new domain.model.LibrettoVotiCriteria();
+		// Please uncomment the follow line and fill in parameter(s) 
+		//ldomainmodelLibrettoVotiCriteria.ID.eq();
+		ldomainmodelLibrettoVotiCriteria.setMaxResults(ROW_COUNT);
+		domain.model.LibrettoVoti[] domainmodelLibrettoVotis = ldomainmodelLibrettoVotiCriteria.listLibrettoVoti();
+		length =domainmodelLibrettoVotis== null ? 0 : Math.min(domainmodelLibrettoVotis.length, ROW_COUNT); 
+		for (int i = 0; i < length; i++) {
+			 System.out.println(domainmodelLibrettoVotis[i]);
+		}
+		System.out.println(length + " LibrettoVoti record(s) retrieved."); 
+		
+		System.out.println("Listing LibrettoVotiLineItem by Criteria...");
+		domain.model.LibrettoVotiLineItemCriteria ldomainmodelLibrettoVotiLineItemCriteria = new domain.model.LibrettoVotiLineItemCriteria();
+		// Please uncomment the follow line and fill in parameter(s) 
+		//ldomainmodelLibrettoVotiLineItemCriteria.ID.eq();
+		ldomainmodelLibrettoVotiLineItemCriteria.setMaxResults(ROW_COUNT);
+		domain.model.LibrettoVotiLineItem[] domainmodelLibrettoVotiLineItems = ldomainmodelLibrettoVotiLineItemCriteria.listLibrettoVotiLineItem();
+		length =domainmodelLibrettoVotiLineItems== null ? 0 : Math.min(domainmodelLibrettoVotiLineItems.length, ROW_COUNT); 
+		for (int i = 0; i < length; i++) {
+			 System.out.println(domainmodelLibrettoVotiLineItems[i]);
+		}
+		System.out.println(length + " LibrettoVotiLineItem record(s) retrieved."); 
+		
+		System.out.println("Listing CompitoInClasse by Criteria...");
+		domain.model.CompitoInClasseCriteria ldomainmodelCompitoInClasseCriteria = new domain.model.CompitoInClasseCriteria();
+		// Please uncomment the follow line and fill in parameter(s) 
+		//ldomainmodelCompitoInClasseCriteria.ID.eq();
+		ldomainmodelCompitoInClasseCriteria.setMaxResults(ROW_COUNT);
+		domain.model.CompitoInClasse[] domainmodelCompitoInClasses = ldomainmodelCompitoInClasseCriteria.listCompitoInClasse();
+		length =domainmodelCompitoInClasses== null ? 0 : Math.min(domainmodelCompitoInClasses.length, ROW_COUNT); 
+		for (int i = 0; i < length; i++) {
+			 System.out.println(domainmodelCompitoInClasses[i]);
+		}
+		System.out.println(length + " CompitoInClasse record(s) retrieved."); 
+		
+		System.out.println("Listing Voto by Criteria...");
+		domain.model.VotoCriteria ldomainmodelVotoCriteria = new domain.model.VotoCriteria();
+		// Please uncomment the follow line and fill in parameter(s) 
+		//ldomainmodelVotoCriteria.ID.eq();
+		ldomainmodelVotoCriteria.setMaxResults(ROW_COUNT);
+		domain.model.Voto[] domainmodelVotos = ldomainmodelVotoCriteria.listVoto();
+		length =domainmodelVotos== null ? 0 : Math.min(domainmodelVotos.length, ROW_COUNT); 
+		for (int i = 0; i < length; i++) {
+			 System.out.println(domainmodelVotos[i]);
+		}
+		System.out.println(length + " Voto record(s) retrieved."); 
+		
+		System.out.println("Listing Argomento by Criteria...");
+		domain.model.ArgomentoCriteria ldomainmodelArgomentoCriteria = new domain.model.ArgomentoCriteria();
+		// Please uncomment the follow line and fill in parameter(s) 
+		//ldomainmodelArgomentoCriteria.ID.eq();
+		ldomainmodelArgomentoCriteria.setMaxResults(ROW_COUNT);
+		domain.model.Argomento[] domainmodelArgomentos = ldomainmodelArgomentoCriteria.listArgomento();
+		length =domainmodelArgomentos== null ? 0 : Math.min(domainmodelArgomentos.length, ROW_COUNT); 
+		for (int i = 0; i < length; i++) {
+			 System.out.println(domainmodelArgomentos[i]);
+		}
+		System.out.println(length + " Argomento record(s) retrieved."); 
 		
 	}
 	

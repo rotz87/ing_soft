@@ -42,6 +42,10 @@ public class Docente extends domain.model.Persona {
 		return this.implementor.getClassi(this);
 	}
 	
+	public boolean haRegistroDocente(domain.model.RegistroDocente registro) {
+		return this.implementor.haRegistroDocente(this, registro);
+	}
+	
 	public String toString() {
 		return super.toString();
 	}

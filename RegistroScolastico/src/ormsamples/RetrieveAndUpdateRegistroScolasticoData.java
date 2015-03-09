@@ -77,6 +77,30 @@ public class RetrieveAndUpdateRegistroScolasticoData {
 			// Update the properties of the persistent object
 			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelRegistroDocente);
 			
+			domain.model.Materia ldomainmodelMateria= (domain.model.Materia)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Materia").setMaxResults(1).uniqueResult();
+			// Update the properties of the persistent object
+			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelMateria);
+			
+			domain.model.LibrettoVoti ldomainmodelLibrettoVoti= (domain.model.LibrettoVoti)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.LibrettoVoti").setMaxResults(1).uniqueResult();
+			// Update the properties of the persistent object
+			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelLibrettoVoti);
+			
+			domain.model.LibrettoVotiLineItem ldomainmodelLibrettoVotiLineItem= (domain.model.LibrettoVotiLineItem)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.LibrettoVotiLineItem").setMaxResults(1).uniqueResult();
+			// Update the properties of the persistent object
+			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelLibrettoVotiLineItem);
+			
+			domain.model.CompitoInClasse ldomainmodelCompitoInClasse= (domain.model.CompitoInClasse)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.CompitoInClasse").setMaxResults(1).uniqueResult();
+			// Update the properties of the persistent object
+			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelCompitoInClasse);
+			
+			domain.model.Voto ldomainmodelVoto= (domain.model.Voto)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Voto").setMaxResults(1).uniqueResult();
+			// Update the properties of the persistent object
+			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelVoto);
+			
+			domain.model.Argomento ldomainmodelArgomento= (domain.model.Argomento)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Argomento").setMaxResults(1).uniqueResult();
+			// Update the properties of the persistent object
+			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelArgomento);
+			
 			t.commit();
 		}
 		catch (Exception e) {
@@ -186,6 +210,42 @@ public class RetrieveAndUpdateRegistroScolasticoData {
 		// Please uncomment the follow line and fill in parameter(s)
 		//ldomainmodelRegistroDocenteCriteria.ID.eq();
 		System.out.println(ldomainmodelRegistroDocenteCriteria.uniqueRegistroDocente());
+		
+		System.out.println("Retrieving Materia by MateriaCriteria");
+		domain.model.MateriaCriteria ldomainmodelMateriaCriteria = new domain.model.MateriaCriteria();
+		// Please uncomment the follow line and fill in parameter(s)
+		//ldomainmodelMateriaCriteria.ID.eq();
+		System.out.println(ldomainmodelMateriaCriteria.uniqueMateria());
+		
+		System.out.println("Retrieving LibrettoVoti by LibrettoVotiCriteria");
+		domain.model.LibrettoVotiCriteria ldomainmodelLibrettoVotiCriteria = new domain.model.LibrettoVotiCriteria();
+		// Please uncomment the follow line and fill in parameter(s)
+		//ldomainmodelLibrettoVotiCriteria.ID.eq();
+		System.out.println(ldomainmodelLibrettoVotiCriteria.uniqueLibrettoVoti());
+		
+		System.out.println("Retrieving LibrettoVotiLineItem by LibrettoVotiLineItemCriteria");
+		domain.model.LibrettoVotiLineItemCriteria ldomainmodelLibrettoVotiLineItemCriteria = new domain.model.LibrettoVotiLineItemCriteria();
+		// Please uncomment the follow line and fill in parameter(s)
+		//ldomainmodelLibrettoVotiLineItemCriteria.ID.eq();
+		System.out.println(ldomainmodelLibrettoVotiLineItemCriteria.uniqueLibrettoVotiLineItem());
+		
+		System.out.println("Retrieving CompitoInClasse by CompitoInClasseCriteria");
+		domain.model.CompitoInClasseCriteria ldomainmodelCompitoInClasseCriteria = new domain.model.CompitoInClasseCriteria();
+		// Please uncomment the follow line and fill in parameter(s)
+		//ldomainmodelCompitoInClasseCriteria.ID.eq();
+		System.out.println(ldomainmodelCompitoInClasseCriteria.uniqueCompitoInClasse());
+		
+		System.out.println("Retrieving Voto by VotoCriteria");
+		domain.model.VotoCriteria ldomainmodelVotoCriteria = new domain.model.VotoCriteria();
+		// Please uncomment the follow line and fill in parameter(s)
+		//ldomainmodelVotoCriteria.ID.eq();
+		System.out.println(ldomainmodelVotoCriteria.uniqueVoto());
+		
+		System.out.println("Retrieving Argomento by ArgomentoCriteria");
+		domain.model.ArgomentoCriteria ldomainmodelArgomentoCriteria = new domain.model.ArgomentoCriteria();
+		// Please uncomment the follow line and fill in parameter(s)
+		//ldomainmodelArgomentoCriteria.ID.eq();
+		System.out.println(ldomainmodelArgomentoCriteria.uniqueArgomento());
 		
 	}
 	

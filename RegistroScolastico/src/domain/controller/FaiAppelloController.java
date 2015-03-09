@@ -46,7 +46,6 @@ public class FaiAppelloController {
 			classeCriteria = new ClasseCriteria();
 			docenteCriteria = new DocenteCriteria();
 		} catch (PersistentException e) {
-			e.printStackTrace();
 			throw new RuntimeException(ErrorMessage.APPELLO_NON_AVVIABILE);
 		}
 		
@@ -71,7 +70,6 @@ public class FaiAppelloController {
 					throw e;
 				}
 			} catch (PersistentException e) {
-				e.printStackTrace();
 				throw new RuntimeException(ErrorMessage.APPELLO_NON_AVVIABILE);
 			}
 
@@ -101,7 +99,6 @@ public class FaiAppelloController {
 			docenteCriteria = new DocenteCriteria();
 			studenteCriteria = new StudenteCriteria();
 		} catch (PersistentException e) {
-			e.printStackTrace();
 			new RuntimeException(ErrorMessage.ASSENZE_UNRECORDABLE);
 		}
 		
@@ -137,7 +134,6 @@ public class FaiAppelloController {
 					throw e;
 				}
 			}catch (PersistentException e) {
-				e.printStackTrace();
 				new RuntimeException(ErrorMessage.ASSENZE_UNRECORDABLE);
 			}
 
@@ -155,7 +151,6 @@ public class FaiAppelloController {
 		try {
 			classeCriteria = new ClasseCriteria();
 		} catch (PersistentException e) {
-			e.printStackTrace();
 			throw new RuntimeException(ErrorMessage.APPELLO_UNLOADED);
 		}
 		
@@ -174,7 +169,6 @@ public class FaiAppelloController {
 		try {
 			classeCriteria = new ClasseCriteria();
 		} catch (PersistentException e) {
-			e.printStackTrace();
 			throw new RuntimeException(ErrorMessage.APPELLO_UNLOADED);
 		}
 		
@@ -196,7 +190,6 @@ public class FaiAppelloController {
 			classeCriteria = new ClasseCriteria();
 			appelloCriteria = new AppelloCriteria();
 		} catch (PersistentException e) {
-			e.printStackTrace();
 			throw new RuntimeException(ErrorMessage.APPELLO_UNLOADED);
 		}
 		
@@ -224,7 +217,6 @@ public class FaiAppelloController {
 		try {
 			classeCriteria = new ClasseCriteria();
 		} catch (PersistentException e) {
-			e.printStackTrace();
 			throw new RuntimeException(ErrorMessage.APPELLI_UNLOADED);
 		}
 		
@@ -245,7 +237,6 @@ public class FaiAppelloController {
 		try {
 			classeCriteria = new ClasseCriteria();
 		} catch (PersistentException e) {
-			e.printStackTrace();
 			throw new RuntimeException(ErrorMessage.CLASSE_UNLOADED);
 		}
 		
@@ -268,7 +259,6 @@ public class FaiAppelloController {
 			classeCriteria = new ClasseCriteria();
 			appelloCriteria = new AppelloCriteria();
 		} catch (PersistentException e) {
-			e.printStackTrace();
 			throw new RuntimeException(ErrorMessage.ASSENZE_UNLOADED);
 		}
 		
@@ -320,7 +310,6 @@ public class FaiAppelloController {
 			classeCriteria = new ClasseCriteria();
 			appelloCriteria = new AppelloCriteria();
 		} catch (PersistentException e) {
-			e.printStackTrace();
 			throw new RuntimeException(ErrorMessage.ASSENZE_UNLOADED);
 		}
 		

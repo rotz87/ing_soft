@@ -17,6 +17,8 @@ public class Studente extends domain.model.Persona {
 	public Studente() {
 	}
 	
+	private domain.model.LibrettoVoti librettoVoti;
+	
 	private domain.model.LibrettoAssenze librettoAssenze;
 	
 	public void setLibrettoAssenze(domain.model.LibrettoAssenze value) {
@@ -27,9 +29,15 @@ public class Studente extends domain.model.Persona {
 		return librettoAssenze;
 	}
 	
-	private domain.implementor.StudenteImp implementor = new domain.implementor.StudenteImp();
+	public void setLibrettoVoti(domain.model.LibrettoVoti value) {
+		this.librettoVoti = value;
+	}
 	
-//	domain.model.LibrettoVoti librettoVoti;
+	public domain.model.LibrettoVoti getLibrettoVoti() {
+		return librettoVoti;
+	}
+	
+	private domain.implementor.StudenteImp implementor = new domain.implementor.StudenteImp();
 	
 	public Studente(String nome, String cognome) {
 		this.implementor.inizialize(this, nome, cognome);
@@ -38,11 +46,6 @@ public class Studente extends domain.model.Persona {
 	public Studente(long id, String nome, String cognome, domain.model.Indirizzo indrizzo, String codiceFiscale) {
 		this.implementor.inizialize(this, nome, cognome, indrizzo, codiceFiscale);
 	}
-	
-//	public domain.model.LibrettoVoti getLibrettoVoti() {
-//		//TODO: Implement Method
-//		throw new UnsupportedOperationException();
-//	}
 	
 	public String toString() {
 		return super.toString();

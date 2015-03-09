@@ -1,4 +1,4 @@
-package test;
+package test.appello;
 
 import java.util.Collection;
 import java.util.GregorianCalendar;

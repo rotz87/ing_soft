@@ -41,4 +41,8 @@ public class DocenteImp {
 		return this.classi;
 	}
 
+	public boolean haRegistroDocente(Docente docente, RegistroDocente registro) {
+		return docente.getRegistriDocente().contains(registro);
+	}
+
 }

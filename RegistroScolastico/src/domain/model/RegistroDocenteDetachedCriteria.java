@@ -20,25 +20,49 @@ import org.orm.criteria.*;
 
 public class RegistroDocenteDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression ID;
+	public final IntegerExpression materiaId;
+	public final AssociationExpression materia;
 	public final IntegerExpression classeId;
 	public final AssociationExpression classe;
+	public final CollectionExpression compitiInClasse;
+	public final CollectionExpression argomentiSvolti;
 	
 	public RegistroDocenteDetachedCriteria() {
 		super(domain.model.RegistroDocente.class, domain.model.RegistroDocenteCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
+		materiaId = new IntegerExpression("materia.ID", this.getDetachedCriteria());
+		materia = new AssociationExpression("materia", this.getDetachedCriteria());
 		classeId = new IntegerExpression("classe.ID", this.getDetachedCriteria());
 		classe = new AssociationExpression("classe", this.getDetachedCriteria());
+		compitiInClasse = new CollectionExpression("compitiInClasse", this.getDetachedCriteria());
+		argomentiSvolti = new CollectionExpression("argomentiSvolti", this.getDetachedCriteria());
 	}
 	
 	public RegistroDocenteDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, domain.model.RegistroDocenteCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
+		materiaId = new IntegerExpression("materia.ID", this.getDetachedCriteria());
+		materia = new AssociationExpression("materia", this.getDetachedCriteria());
 		classeId = new IntegerExpression("classe.ID", this.getDetachedCriteria());
 		classe = new AssociationExpression("classe", this.getDetachedCriteria());
+		compitiInClasse = new CollectionExpression("compitiInClasse", this.getDetachedCriteria());
+		argomentiSvolti = new CollectionExpression("argomentiSvolti", this.getDetachedCriteria());
+	}
+	
+	public MateriaDetachedCriteria createMateriaCriteria() {
+		return new MateriaDetachedCriteria(createCriteria("materia"));
 	}
 	
 	public ClasseDetachedCriteria createClasseCriteria() {
 		return new ClasseDetachedCriteria(createCriteria("classe"));
+	}
+	
+	public CompitoInClasseDetachedCriteria createCompitiInClasseCriteria() {
+		return new CompitoInClasseDetachedCriteria(createCriteria("compitiInClasse"));
+	}
+	
+	public ArgomentoDetachedCriteria createArgomentiSvoltiCriteria() {
+		return new ArgomentoDetachedCriteria(createCriteria("argomentiSvolti"));
 	}
 	
 	public RegistroDocente uniqueRegistroDocente(PersistentSession session) {

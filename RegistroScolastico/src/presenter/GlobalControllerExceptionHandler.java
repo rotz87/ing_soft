@@ -18,6 +18,7 @@ class GlobalControllerExceptionHandler {
     	
        	HttpStatus httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
        	ErrorInfo errorInfo = new ErrorInfo(req.getRequestURL().toString(), ex, httpStatus);
+       	ex.printStackTrace();
        	return new ResponseEntity(errorInfo, new HttpHeaders(), httpStatus);
        	
     }
@@ -27,6 +28,7 @@ class GlobalControllerExceptionHandler {
     	
        	HttpStatus httpStatus = HttpStatus.FORBIDDEN;
        	ErrorInfo errorInfo = new ErrorInfo(req.getRequestURL().toString(), ex, httpStatus);
+       	ex.printStackTrace();
        	return new ResponseEntity(errorInfo, new HttpHeaders(), httpStatus);
        	
     }

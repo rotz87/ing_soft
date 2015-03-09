@@ -57,8 +57,26 @@ public class CreateRegistroScolasticoData {
 			domain.model.GiornoSettimanaleFestivo ldomainmodelGiornoSettimanaleFestivo = new domain.model.GiornoSettimanaleFestivo();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : giorno
 			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelGiornoSettimanaleFestivo);
 			
-			domain.model.RegistroDocente ldomainmodelRegistroDocente = new domain.model.RegistroDocente();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : classe
+			domain.model.RegistroDocente ldomainmodelRegistroDocente = new domain.model.RegistroDocente();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : argomentiSvolti, classe
 			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelRegistroDocente);
+			
+			domain.model.Materia ldomainmodelMateria = new domain.model.Materia();			// Initialize the properties of the persistent object here
+			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelMateria);
+			
+			domain.model.LibrettoVoti ldomainmodelLibrettoVoti = new domain.model.LibrettoVoti();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : libVotiLineItems
+			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelLibrettoVoti);
+			
+			domain.model.LibrettoVotiLineItem ldomainmodelLibrettoVotiLineItem = new domain.model.LibrettoVotiLineItem();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : compitoInClasse, voto
+			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelLibrettoVotiLineItem);
+			
+			domain.model.CompitoInClasse ldomainmodelCompitoInClasse = new domain.model.CompitoInClasse();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : argomentiEsaminati
+			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelCompitoInClasse);
+			
+			domain.model.Voto ldomainmodelVoto = new domain.model.Voto();			// Initialize the properties of the persistent object here
+			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelVoto);
+			
+			domain.model.Argomento ldomainmodelArgomento = new domain.model.Argomento();			// Initialize the properties of the persistent object here
+			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelArgomento);
 			
 			t.commit();
 		}

@@ -24,13 +24,18 @@ License Type: Academic
 		<property name="query.substitutions">true 1, false 0, yes 'Y', no 'N'</property>
 		<!-- mapping files -->
 		<mapping resource="ormmapping/domain/model/Appello.hbm.xml" />
+		<mapping resource="ormmapping/domain/model/Argomento.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/Assenza.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/Classe.hbm.xml" />
+		<mapping resource="ormmapping/domain/model/CompitoInClasse.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/GiornoFestivo.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/GiornoSettimanaleFestivo.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/Giustificazione.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/Indirizzo.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/LibrettoAssenze.hbm.xml" />
+		<mapping resource="ormmapping/domain/model/LibrettoVoti.hbm.xml" />
+		<mapping resource="ormmapping/domain/model/LibrettoVotiLineItem.hbm.xml" />
+		<mapping resource="ormmapping/domain/model/Materia.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/PermessoEntrata.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/PermessoUscita.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/Persona.hbm.xml" />
@@ -39,5 +44,6 @@ License Type: Academic
 		<mapping resource="ormmapping/domain/model/Ritardo.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/Scuola.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/UscitaAnticipata.hbm.xml" />
+		<mapping resource="ormmapping/domain/model/Voto.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>

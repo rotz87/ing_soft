@@ -26,6 +26,8 @@ public class StudenteDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final StringExpression cognome;
 	public final StringExpression codiceFiscale;
 	public final DateExpression dataNascita;
+	public final IntegerExpression librettoVotiId;
+	public final AssociationExpression librettoVoti;
 	public final IntegerExpression librettoAssenzeId;
 	public final AssociationExpression librettoAssenze;
 	
@@ -38,6 +40,8 @@ public class StudenteDetachedCriteria extends AbstractORMDetachedCriteria {
 		cognome = new StringExpression("cognome", this.getDetachedCriteria());
 		codiceFiscale = new StringExpression("codiceFiscale", this.getDetachedCriteria());
 		dataNascita = new DateExpression("dataNascita", this.getDetachedCriteria());
+		librettoVotiId = new IntegerExpression("librettoVoti.ID", this.getDetachedCriteria());
+		librettoVoti = new AssociationExpression("librettoVoti", this.getDetachedCriteria());
 		librettoAssenzeId = new IntegerExpression("librettoAssenze.ID", this.getDetachedCriteria());
 		librettoAssenze = new AssociationExpression("librettoAssenze", this.getDetachedCriteria());
 	}
@@ -51,8 +55,14 @@ public class StudenteDetachedCriteria extends AbstractORMDetachedCriteria {
 		cognome = new StringExpression("cognome", this.getDetachedCriteria());
 		codiceFiscale = new StringExpression("codiceFiscale", this.getDetachedCriteria());
 		dataNascita = new DateExpression("dataNascita", this.getDetachedCriteria());
+		librettoVotiId = new IntegerExpression("librettoVoti.ID", this.getDetachedCriteria());
+		librettoVoti = new AssociationExpression("librettoVoti", this.getDetachedCriteria());
 		librettoAssenzeId = new IntegerExpression("librettoAssenze.ID", this.getDetachedCriteria());
 		librettoAssenze = new AssociationExpression("librettoAssenze", this.getDetachedCriteria());
+	}
+	
+	public LibrettoVotiDetachedCriteria createLibrettoVotiCriteria() {
+		return new LibrettoVotiDetachedCriteria(createCriteria("librettoVoti"));
 	}
 	
 	public LibrettoAssenzeDetachedCriteria createLibrettoAssenzeCriteria() {

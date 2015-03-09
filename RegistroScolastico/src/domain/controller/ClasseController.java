@@ -25,7 +25,6 @@ public class ClasseController {
 			try {
 				criteria = new DocenteCriteria();
 			} catch (PersistentException e) {
-				e.printStackTrace();
 				throw new RuntimeException(ErrorMessage.CLASSI_UNLOADED);
 			}
 			
@@ -47,7 +46,6 @@ public class ClasseController {
 		try {
 			criteria = new ClasseCriteria();
 		} catch (PersistentException e) {
-			e.printStackTrace();
 			throw new RuntimeException(ErrorMessage.STUDENTI_UNLOADED);
 		}
 		criteria.ID.eq(idClasse);

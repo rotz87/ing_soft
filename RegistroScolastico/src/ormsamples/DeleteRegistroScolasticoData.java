@@ -60,6 +60,24 @@ public class DeleteRegistroScolasticoData {
 			domain.model.RegistroDocente ldomainmodelRegistroDocente= (domain.model.RegistroDocente)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.RegistroDocente").setMaxResults(1).uniqueResult();
 			domain.model.RSPersistentManager.instance().getSession().delete(ldomainmodelRegistroDocente);
 			
+			domain.model.Materia ldomainmodelMateria= (domain.model.Materia)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Materia").setMaxResults(1).uniqueResult();
+			domain.model.RSPersistentManager.instance().getSession().delete(ldomainmodelMateria);
+			
+			domain.model.LibrettoVoti ldomainmodelLibrettoVoti= (domain.model.LibrettoVoti)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.LibrettoVoti").setMaxResults(1).uniqueResult();
+			domain.model.RSPersistentManager.instance().getSession().delete(ldomainmodelLibrettoVoti);
+			
+			domain.model.LibrettoVotiLineItem ldomainmodelLibrettoVotiLineItem= (domain.model.LibrettoVotiLineItem)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.LibrettoVotiLineItem").setMaxResults(1).uniqueResult();
+			domain.model.RSPersistentManager.instance().getSession().delete(ldomainmodelLibrettoVotiLineItem);
+			
+			domain.model.CompitoInClasse ldomainmodelCompitoInClasse= (domain.model.CompitoInClasse)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.CompitoInClasse").setMaxResults(1).uniqueResult();
+			domain.model.RSPersistentManager.instance().getSession().delete(ldomainmodelCompitoInClasse);
+			
+			domain.model.Voto ldomainmodelVoto= (domain.model.Voto)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Voto").setMaxResults(1).uniqueResult();
+			domain.model.RSPersistentManager.instance().getSession().delete(ldomainmodelVoto);
+			
+			domain.model.Argomento ldomainmodelArgomento= (domain.model.Argomento)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Argomento").setMaxResults(1).uniqueResult();
+			domain.model.RSPersistentManager.instance().getSession().delete(ldomainmodelArgomento);
+			
 			t.commit();
 		}
 		catch (Exception e) {

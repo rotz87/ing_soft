@@ -26,6 +26,8 @@ public class StudenteCriteria extends AbstractORMCriteria {
 	public final StringExpression cognome;
 	public final StringExpression codiceFiscale;
 	public final DateExpression dataNascita;
+	public final IntegerExpression librettoVotiId;
+	public final AssociationExpression librettoVoti;
 	public final IntegerExpression librettoAssenzeId;
 	public final AssociationExpression librettoAssenze;
 	
@@ -38,6 +40,8 @@ public class StudenteCriteria extends AbstractORMCriteria {
 		cognome = new StringExpression("cognome", this);
 		codiceFiscale = new StringExpression("codiceFiscale", this);
 		dataNascita = new DateExpression("dataNascita", this);
+		librettoVotiId = new IntegerExpression("librettoVoti.ID", this);
+		librettoVoti = new AssociationExpression("librettoVoti", this);
 		librettoAssenzeId = new IntegerExpression("librettoAssenze.ID", this);
 		librettoAssenze = new AssociationExpression("librettoAssenze", this);
 	}
@@ -48,6 +52,10 @@ public class StudenteCriteria extends AbstractORMCriteria {
 	
 	public StudenteCriteria() throws PersistentException {
 		this(domain.model.RSPersistentManager.instance().getSession());
+	}
+	
+	public LibrettoVotiCriteria createLibrettoVotiCriteria() {
+		return new LibrettoVotiCriteria(createCriteria("librettoVoti"));
 	}
 	
 	public LibrettoAssenzeCriteria createLibrettoAssenzeCriteria() {

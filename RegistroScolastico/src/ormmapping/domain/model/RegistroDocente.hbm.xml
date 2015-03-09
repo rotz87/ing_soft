@@ -10,7 +10,17 @@ License Type: Academic
 			<generator class="native">
 			</generator>
 		</id>
+		<many-to-one name="materia" cascade="lock" column="MateriaID" class="domain.model.Materia" not-null="false" lazy="no-proxy">
+		</many-to-one>
 		<many-to-one name="classe" cascade="lock" column="ClasseID" class="domain.model.Classe" not-null="true" lazy="no-proxy">
 		</many-to-one>
+		<set name="compitiInClasse" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="RegistroDocenteID" not-null="false"/>
+			<one-to-many class="domain.model.CompitoInClasse"/>
+		</set>
+		<set name="argomentiSvolti" lazy="true" cascade="save-update,lock" inverse="false">
+			<key column="RegistroDocenteID" not-null="true"/>
+			<one-to-many class="domain.model.Argomento"/>
+		</set>
 	</class>
 </hibernate-mapping>

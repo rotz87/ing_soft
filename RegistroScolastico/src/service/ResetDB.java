@@ -461,6 +461,7 @@ public class ResetDB {
 		}
 		catch (Exception e) {
 			t.rollback();
+			e.printStackTrace();
 		}
 		
 	}

@@ -20,14 +20,22 @@ import org.orm.criteria.*;
 
 public class RegistroDocenteCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
+	public final IntegerExpression materiaId;
+	public final AssociationExpression materia;
 	public final IntegerExpression classeId;
 	public final AssociationExpression classe;
+	public final CollectionExpression compitiInClasse;
+	public final CollectionExpression argomentiSvolti;
 	
 	public RegistroDocenteCriteria(Criteria criteria) {
 		super(criteria);
 		ID = new IntegerExpression("ID", this);
+		materiaId = new IntegerExpression("materia.ID", this);
+		materia = new AssociationExpression("materia", this);
 		classeId = new IntegerExpression("classe.ID", this);
 		classe = new AssociationExpression("classe", this);
+		compitiInClasse = new CollectionExpression("compitiInClasse", this);
+		argomentiSvolti = new CollectionExpression("argomentiSvolti", this);
 	}
 	
 	public RegistroDocenteCriteria(PersistentSession session) {
@@ -38,8 +46,20 @@ public class RegistroDocenteCriteria extends AbstractORMCriteria {
 		this(domain.model.RSPersistentManager.instance().getSession());
 	}
 	
+	public MateriaCriteria createMateriaCriteria() {
+		return new MateriaCriteria(createCriteria("materia"));
+	}
+	
 	public ClasseCriteria createClasseCriteria() {
 		return new ClasseCriteria(createCriteria("classe"));
+	}
+	
+	public CompitoInClasseCriteria createCompitiInClasseCriteria() {
+		return new CompitoInClasseCriteria(createCriteria("compitiInClasse"));
+	}
+	
+	public ArgomentoCriteria createArgomentiSvoltiCriteria() {
+		return new ArgomentoCriteria(createCriteria("argomentiSvolti"));
 	}
 	
 	public RegistroDocente uniqueRegistroDocente() {
