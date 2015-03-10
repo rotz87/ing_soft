@@ -28,7 +28,7 @@ public class TestInserisciInfoCompito {
 		Time oraInizio = Time.valueOf("10:0:0");
 		Time oraFine = Time.valueOf("12:0:0");
 		int[] idArgomenti = {1, 3};
-		
+		 
 		
 		controlloreCompito = new CompitoInClasseController();
 		
