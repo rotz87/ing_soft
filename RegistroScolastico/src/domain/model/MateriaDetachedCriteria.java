@@ -20,15 +20,18 @@ import org.orm.criteria.*;
 
 public class MateriaDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression ID;
+	public final StringExpression nome;
 	
 	public MateriaDetachedCriteria() {
 		super(domain.model.Materia.class, domain.model.MateriaCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
+		nome = new StringExpression("nome", this.getDetachedCriteria());
 	}
 	
 	public MateriaDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, domain.model.MateriaCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
+		nome = new StringExpression("nome", this.getDetachedCriteria());
 	}
 	
 	public Materia uniqueMateria(PersistentSession session) {

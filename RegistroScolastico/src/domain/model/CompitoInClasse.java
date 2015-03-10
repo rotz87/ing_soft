@@ -46,6 +46,12 @@ public class CompitoInClasse {
 	}
 	
 	public java.util.Date getData() {
+		//Perché Hibernate in pratica non utilizza java.util.Date ma java.sql.Date che
+		// ha un metodo toString Diverso
+		java.util.Date data = null;
+		if(this.data != null){
+			data = new java.util.Date(this.data.getTime());
+		}
 		return data;
 	}
 	

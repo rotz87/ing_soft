@@ -19,6 +19,8 @@ public class Materia {
 	
 	private int ID;
 	
+	private String nome;
+	
 	private void setID(int value) {
 		this.ID = value;
 	}
@@ -29,6 +31,14 @@ public class Materia {
 	
 	public int getORMID() {
 		return getID();
+	}
+	
+	public void setNome(String value) {
+		this.nome = value;
+	}
+	
+	public String getNome() {
+		return nome;
 	}
 	
 	public String toString() {

@@ -6,12 +6,14 @@ import org.orm.PersistentException;
 import org.orm.PersistentTransaction;
 
 import domain.model.Appello;
+import domain.model.Argomento;
 import domain.model.Assenza;
 import domain.model.Calendario;
 import domain.model.Classe;
 import domain.model.Docente;
 import domain.model.GiornoSettimanaleFestivo;
 import domain.model.LibrettoAssenze;
+import domain.model.Materia;
 import domain.model.RSPersistentManager;
 import domain.model.RegistroAssenze;
 import domain.model.RegistroDocente;
@@ -408,6 +410,19 @@ public class ResetDB {
 			RSPersistentManager.instance().getSession().save(sabato);
 			RSPersistentManager.instance().getSession().save(domenica);
 			
+//			Materia storia = new Materia();
+//			registroRossiPrimaA.setMateria(storia);
+			
+			Argomento worldWar1 = new Argomento("world war I", "");
+			Argomento worldWar2 = new Argomento("world war II","");
+			Argomento colonialismo = new Argomento("colonialismo","");
+			Argomento secondoDopoGuerra = new Argomento("secomdo dopoguerra","");
+			
+			registroRossiPrimaA.getArgomentiSvolti().add(worldWar1);
+			registroRossiPrimaA.getArgomentiSvolti().add(worldWar2);
+			registroRossiPrimaA.getArgomentiSvolti().add(colonialismo);
+			registroRossiPrimaA.getArgomentiSvolti().add(secondoDopoGuerra);
+			
 			
 //			domain.model.Studente ldomainmodelStudente = new domain.model.Studente();			// Initialize the properties of the persistent object here
 //			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelStudente);
@@ -466,6 +481,5 @@ public class ResetDB {
 		
 	}
 	
-
 
 }

@@ -11,7 +11,11 @@ public class CompitoInClasseImp {
 
 	public void setInfo(CompitoInClasse compitoInClasse, Date data,
 			Time oraInizio, Time oraFine, Collection<Argomento> argomenti) {
-		// TODO Auto-generated method stub
+		compitoInClasse.setData(data);
+		compitoInClasse.setOraInizio(oraInizio);
+		compitoInClasse.setOraFine(oraFine);
+		compitoInClasse.setArgomentiEsaminati((java.util.Set<Argomento>)argomenti);
 		
 	}
+
 }

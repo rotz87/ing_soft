@@ -19,6 +19,10 @@ public class Argomento {
 	
 	private int ID;
 	
+	private String nome;
+	
+	private String descrizione;
+	
 	private void setID(int value) {
 		this.ID = value;
 	}
@@ -29,6 +33,28 @@ public class Argomento {
 	
 	public int getORMID() {
 		return getID();
+	}
+	
+	public void setNome(String value) {
+		this.nome = value;
+	}
+	
+	public String getNome() {
+		return nome;
+	}
+	
+	public void setDescrizione(String value) {
+		this.descrizione = value;
+	}
+	
+	public String getDescrizione() {
+		return descrizione;
+	}
+	
+	private domain.implementor.ArgomentoImp implementor = new domain.implementor.ArgomentoImp();
+	
+	public Argomento(String nome, String descrizione) {
+		this.implementor.inizialize(this, nome, descrizione);
 	}
 	
 	public String toString() {

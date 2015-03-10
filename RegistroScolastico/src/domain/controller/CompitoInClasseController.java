@@ -1,12 +1,19 @@
 package domain.controller;
 
 import java.nio.channels.IllegalSelectorException;
+import java.sql.Time;
+import java.util.Collection;
+import java.util.LinkedHashSet;
 
 import org.joda.time.LocalTime;
 import org.orm.PersistentException;
 import org.orm.PersistentTransaction;
 
+import service.Stampa;
+import domain.model.Argomento;
+import domain.model.ArgomentoCriteria;
 import domain.model.CompitoInClasse;
+import domain.model.CompitoInClasseCriteria;
 import domain.model.Docente;
 import domain.model.DocenteCriteria;
 import domain.model.RSPersistentManager;
@@ -46,6 +53,7 @@ public class CompitoInClasseController {
 				}
 				catch (PersistentException e) {
 					t.rollback();
+					e.printStackTrace();//TODO
 					throw e;
 				}
 			} catch (PersistentException e) {
@@ -88,9 +96,69 @@ public class CompitoInClasseController {
 	 * @param oraFine La durata è intesa in minuti.
 	 * @param idArgomeni
 	 */
-	public void inserisciInfoCompito(int idCompito, java.util.Date data, Time oraInizio, Time oraFine, int[] idArgomeni) {
-		// TODO - implement CompitoInClasseController.inserisciInfoCompito
-		throw new UnsupportedOperationException();
+	public void inserisciInfoCompito(int idRegistroDocente, int idCompito, java.util.Date data, Time oraInizio, Time oraFine, int[] idArgomenti) {
+		CompitoInClasseCriteria compitoCriteria;
+		CompitoInClasse compito;
+		RegistroDocenteCriteria regDocCriteria;
+		RegistroDocente registroDocente;
+		ArgomentoCriteria argomentoCriteria;
+		Collection<Argomento> argomenti;
+		
+		argomenti = new LinkedHashSet<Argomento>();
+		
+		try{
+			compitoCriteria = new CompitoInClasseCriteria();
+			regDocCriteria = new RegistroDocenteCriteria();
+			argomentoCriteria = new ArgomentoCriteria();
+		}catch (PersistentException e){
+			throw new  RuntimeException(ErrorMessage.COMPITO_UNLOADED);
+		}
+		
+		compitoCriteria.ID.eq(idCompito);
+		compito = compitoCriteria.uniqueCompitoInClasse();
+		
+		regDocCriteria.ID.eq(idRegistroDocente);
+		registroDocente = regDocCriteria.uniqueRegistroDocente();
+		
+		argomentoCriteria.ID.in(idArgomenti);
+		argomenti.addAll(argomentoCriteria.list());
+		
+		if(registroDocente.isCompitoPresente(compito)){
+			registroDocente.inserisciInfoCompito(compito, data, oraInizio, oraFine, argomenti);
+			try {
+				PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
+				try {
+					RSPersistentManager.instance().getSession().update(compito);
+					t.commit();
+				}
+				catch (PersistentException e) {
+					t.rollback();
+					throw e;
+				}
+			} catch (PersistentException e) {
+				throw new RuntimeException(ErrorMessage.COMPITO_NON_AGGIORNABILE);
+			}
+		}else{
+			throw new IllegalStateException(ErrorMessage.COMPITO_INEXISTENT);
+		}
+		
+	}
+
+	public CompitoInClasse getCompitoInCLasse(int idCompitoInClasse) {
+		CompitoInClasseCriteria compitoCriteria;
+		CompitoInClasse compito;
+		
+		try{
+			compitoCriteria = new CompitoInClasseCriteria();
+			
+		}catch (PersistentException e){
+			throw new  RuntimeException(ErrorMessage.COMPITO_UNLOADED);
+		}
+		
+		compitoCriteria.ID.eq(idCompitoInClasse);
+		compito = compitoCriteria.uniqueCompitoInClasse();
+		
+		return compito;
 	}
 
 }
