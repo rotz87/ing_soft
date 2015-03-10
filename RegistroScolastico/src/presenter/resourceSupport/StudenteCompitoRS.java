@@ -6,7 +6,7 @@ import domain.model.Studente;
 import domain.model.Voto;
 
 public class StudenteCompitoRS extends ResourceSupport {
-	private long idStudente;
+	private int idStudente;
 	private String nome;
 	private String cognome;
 	private String voto;
@@ -22,7 +22,7 @@ public class StudenteCompitoRS extends ResourceSupport {
 		return idStudente;
 	}
 
-	public void setIdStudente(long idStudente) {
+	public void setIdStudente(int idStudente) {
 		this.idStudente = idStudente;
 	}
 

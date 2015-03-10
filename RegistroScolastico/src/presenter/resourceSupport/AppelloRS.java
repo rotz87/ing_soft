@@ -1,7 +1,5 @@
 package presenter.resourceSupport;
 
-import java.util.Date;
-
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
@@ -19,14 +17,14 @@ import domain.model.Appello;
 public class AppelloRS extends ResourceSupport{
 	
 	private int idAppello;
-	private Date data;
+	private long data;
 	private boolean assenzePrese;
 
 
 	public AppelloRS(Appello appello, int idClasse) {
 		
 		this.idAppello = appello.getID();
-		this.data = appello.getData();
+		this.data = appello.getData().getTime();
 		this.assenzePrese = appello.getAssenzePrese();
 //da togliere
 //		this.add(ControllerLinkBuilder.linkTo(
@@ -48,12 +46,12 @@ public class AppelloRS extends ResourceSupport{
 	}
 	
 	
-	public Date getData() {
+	public long getData() {
 		return data;
 	}
 
 	
-	public void setData(Date data) {
+	public void setData(long data) {
 		this.data = data;
 	}
 

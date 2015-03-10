@@ -83,7 +83,7 @@ public class CompitoInClassePresenter {
 		  
 		  compitoController = new CompitoInClasseController();
 		  
-		  compitoController.inserisciInfoCompito(idRegistroDocente, campitoRS.getIdCompito(), campitoRS.getData(), campitoRS.getOraInizio(), campitoRS.getOraFine(), null);
+		  //compitoController.inserisciInfoCompito(idRegistroDocente, campitoRS.getIdCompito(), campitoRS.getData(), campitoRS.getOraInizio(), campitoRS.getOraFine(), null);
 		  HttpHeaders httpHeaders;
 		  httpHeaders = new HttpHeaders();
 		  HttpStatus httpStatus = HttpStatus.CREATED;

@@ -8,7 +8,7 @@ import domain.model.Studente;
 
 public class StudenteAppelloRS extends ResourceSupport{
 
-	private long idStudente;
+	private int idStudente;
 	private String nome;
 	private String cognome;
 	public StudenteAppelloRS(Studente studente) {

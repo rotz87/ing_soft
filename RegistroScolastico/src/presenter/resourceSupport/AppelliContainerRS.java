@@ -8,12 +8,12 @@ import org.springframework.hateoas.ResourceSupport;
 public class AppelliContainerRS extends ResourceSupport {
 	
 	private boolean appelloAvviabile;
-	private Date dataAppelloOdierno;
+	private long dataAppelloOdierno;
 	private Collection<AppelloRS> appelli;
 	
 	public AppelliContainerRS(boolean appelloAvviabile, Date dataAppelloAvviabile, Collection<AppelloRS> appelli) {
 		setAppelloAvviabile(appelloAvviabile);
-		setDataAppelloAvviabile(dataAppelloAvviabile);
+		setDataAppelloAvviabile(dataAppelloAvviabile.getTime());
 		setAppelli(appelli);
 	}
 	
@@ -27,12 +27,12 @@ public class AppelliContainerRS extends ResourceSupport {
 	}
 	
 	
-	public Date getDataAppelloAvviabile() {
+	public long getDataAppelloAvviabile() {
 		return dataAppelloOdierno;
 	}
 	
 	
-	public void setDataAppelloAvviabile(Date dataAppelloAvviabile) {
+	public void setDataAppelloAvviabile(long dataAppelloAvviabile) {
 		this.dataAppelloOdierno = dataAppelloAvviabile;
 	}
 	

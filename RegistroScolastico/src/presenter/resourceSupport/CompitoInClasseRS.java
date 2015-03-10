@@ -13,19 +13,19 @@ public class CompitoInClasseRS extends ResourceSupport{
 	
 	private int idCompito;
 	
-	private java.util.Date data;
+	private long data;
 	
-	private java.sql.Time oraInizio;
+	private long oraInizio;
 	
-	private java.sql.Time oraFine;
+	private long oraFine;
 	
 
 	
 	public CompitoInClasseRS(CompitoInClasse compito, int idClasse, int idRegistroDocente){
 		this.idCompito = compito.getID();
-		this.data = compito.getData();
-		this.oraInizio = compito.getOraInizio();
-		this.oraFine = compito.getOraFine();
+		this.data = compito.getData().getTime();
+		this.oraInizio = compito.getOraInizio().getTime();
+		this.oraFine = compito.getOraFine().getTime();
 
 		//TODO bisogna inserire come link filgi: Argomenti e studenti e come padre RegistroDocente
 		
@@ -46,27 +46,27 @@ public class CompitoInClasseRS extends ResourceSupport{
 		this.idCompito = idCompito;
 	}
 
-	public java.util.Date getData() {
+	public long getData() {
 		return data;
 	}
 
-	public void setData(java.util.Date data) {
+	public void setData(long data) {
 		this.data = data;
 	}
 
-	public java.sql.Time getOraInizio() {
+	public long getOraInizio() {
 		return oraInizio;
 	}
 
-	public void setOraInizio(java.sql.Time oraInizio) {
+	public void setOraInizio(long oraInizio) {
 		this.oraInizio = oraInizio;
 	}
 
-	public java.sql.Time getOraFine() {
+	public long getOraFine() {
 		return oraFine;
 	}
 
-	public void setOraFine(java.sql.Time oraFine) {
+	public void setOraFine(long oraFine) {
 		this.oraFine = oraFine;
 	}
 	
