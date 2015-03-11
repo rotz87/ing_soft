@@ -21,7 +21,7 @@ public class StudenteAppelloRS extends ResourceSupport{
 		
 	}
 
-	public long getIdStudente() {
+	public int getIdStudente() {
 		return idStudente;
 	}
 

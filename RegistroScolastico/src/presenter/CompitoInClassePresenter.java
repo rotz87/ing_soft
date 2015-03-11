@@ -1,9 +1,11 @@
 package presenter;
 
 import java.net.URI;
+import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 
+import org.hibernate.metamodel.relational.Size;
 import org.springframework.hateoas.Link;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -71,9 +73,27 @@ public class CompitoInClassePresenter {
 			}
 	  
 	  @RequestMapping( method = RequestMethod.GET)
-		public String getCompitiInClasse(@PathVariable int idClasse, @PathVariable int idRegistroDocente) {
+		public CompitoInClasseRS[] getCompitiInClasse(@PathVariable int idClasse, @PathVariable int idRegistroDocente) {
 			
-			return new String("SONO IN GETCOMPITI! "+ idClasse + " " +idRegistroDocente);
+//			return new String("SONO IN GETCOMPITI! "+ idClasse + " " +idRegistroDocente);
+			Collection<CompitoInClasse> compitiCollection;
+			CompitoInClasseController compitoController;
+			compitoController = new CompitoInClasseController();
+			
+			compitiCollection = compitoController.getCompitiInCLasse(idClasse, idRegistroDocente);
+			int size = compitiCollection.size();
+
+			CompitoInClasseRS[] compitiRS = new CompitoInClasseRS[size];
+
+			  
+			  int i = 0;
+			  for(CompitoInClasse compito : compitiCollection){
+				  compitiRS[i] = new CompitoInClasseRS(compito, idClasse, idRegistroDocente);
+				  i++;
+			  }
+			  
+			  
+			  return compitiRS;
 			
 		}
 	  
@@ -83,7 +103,12 @@ public class CompitoInClassePresenter {
 		  
 		  compitoController = new CompitoInClasseController();
 		  
-		  //compitoController.inserisciInfoCompito(idRegistroDocente, campitoRS.getIdCompito(), campitoRS.getData(), campitoRS.getOraInizio(), campitoRS.getOraFine(), null);
+		  java.sql.Date dataCompito = new java.sql.Date(campitoRS.getData());
+		  java.sql.Time oraInizio = new java.sql.Time(campitoRS.getOraInizio());
+		  java.sql.Time oraFine = new java.sql.Time(campitoRS.getOraFine());
+		  
+		  compitoController.inserisciInfoCompito(idRegistroDocente, campitoRS.getIdCompito(), dataCompito, oraInizio, oraFine, null);
+		  
 		  HttpHeaders httpHeaders;
 		  httpHeaders = new HttpHeaders();
 		  HttpStatus httpStatus = HttpStatus.CREATED;

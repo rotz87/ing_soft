@@ -18,7 +18,7 @@ public class StudenteCompitoRS extends ResourceSupport {
 		this.voto = this.voto.toString();
 	}
 
-	public long getIdStudente() {
+	public int getIdStudente() {
 		return idStudente;
 	}
 

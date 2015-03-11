@@ -18,6 +18,7 @@ public class ErrorMessage {
 	public static final String COMPITO_UNCREABLE = "Impossibile creare il compito";
 	public static final String COMPITO_INEXISTENT = "Il compito non appartiene al registro docente";
 	public static final String COMPITO_UNLOADED = "Impossibile caricare il compito";
+	public static final String COMPITI_UNLOADED = "Impossibile caricare i compiti";
 	public static final String COMPITO_NON_AGGIORNABILE = "Impossibile caricare il compito";
 			
 }

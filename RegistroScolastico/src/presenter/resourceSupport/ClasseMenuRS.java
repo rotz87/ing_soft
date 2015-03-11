@@ -6,7 +6,7 @@ import domain.model.Classe;
 
 public class ClasseMenuRS extends ResourceSupport {
 	
-	private long idClasse;
+	private int idClasse;
 	private String nome;
 	
 	
@@ -16,10 +16,10 @@ public class ClasseMenuRS extends ResourceSupport {
 	}
 	
 	
-	public long getIdClasse() {
+	public int getIdClasse() {
 		return idClasse;
 	}
-	public void setIdClasse(long idClasse) {
+	public void setIdClasse(int idClasse) {
 		this.idClasse = idClasse;
 	}
 	public String getNome() {

@@ -3,7 +3,7 @@ package presenter;
 
 import java.net.URI;
 import java.util.Collection;
-import java.util.Date;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -93,7 +93,8 @@ public class AppelloPresenter {
 			}
 			
 			appelloAvviabile = fAController.isAppelloOdiernoAvviabile(idClasse);
-			dataAppelloOdierno = Calendario.getInstance().getDataOdierna().toDate();
+			dataAppelloOdierno = new java.sql.Date( Calendario.getInstance().getDataOdierna().toDate().getTime());
+//			dataAppelloOdierno = Calendario.getInstance().getDataOdierna().toDate();
 			
 			return new AppelliContainerRS(appelloAvviabile, dataAppelloOdierno, appelliRS);
 

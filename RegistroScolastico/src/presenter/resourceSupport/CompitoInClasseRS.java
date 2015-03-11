@@ -13,20 +13,25 @@ public class CompitoInClasseRS extends ResourceSupport{
 	
 	private int idCompito;
 	
-	private long data;
+	private Long data = null;
 	
-	private long oraInizio;
+	private Long oraInizio = null;
 	
-	private long oraFine;
+	private Long oraFine = null;
 	
 
 	
 	public CompitoInClasseRS(CompitoInClasse compito, int idClasse, int idRegistroDocente){
 		this.idCompito = compito.getID();
-		this.data = compito.getData().getTime();
-		this.oraInizio = compito.getOraInizio().getTime();
-		this.oraFine = compito.getOraFine().getTime();
-
+		if(compito.getData() != null){
+			this.data = compito.getData().getTime();
+		}
+		if(compito.getOraInizio() != null){
+			this.oraInizio = compito.getOraInizio().getTime();
+		}
+		if(compito.getOraFine() != null){
+			this.oraFine = compito.getOraFine().getTime();
+		}
 		//TODO bisogna inserire come link filgi: Argomenti e studenti e come padre RegistroDocente
 		
 //		this.add(ControllerLinkBuilder.linkTo(
@@ -46,27 +51,27 @@ public class CompitoInClasseRS extends ResourceSupport{
 		this.idCompito = idCompito;
 	}
 
-	public long getData() {
+	public Long getData() {
 		return data;
 	}
 
-	public void setData(long data) {
+	public void setData(Long data) {
 		this.data = data;
 	}
 
-	public long getOraInizio() {
+	public Long getOraInizio() {
 		return oraInizio;
 	}
 
-	public void setOraInizio(long oraInizio) {
+	public void setOraInizio(Long oraInizio) {
 		this.oraInizio = oraInizio;
 	}
 
-	public long getOraFine() {
+	public Long getOraFine() {
 		return oraFine;
 	}
 
-	public void setOraFine(long oraFine) {
+	public void setOraFine(Long oraFine) {
 		this.oraFine = oraFine;
 	}
 	

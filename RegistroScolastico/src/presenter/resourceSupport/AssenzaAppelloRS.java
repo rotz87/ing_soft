@@ -6,17 +6,17 @@ import domain.model.Assenza;
 
 public class AssenzaAppelloRS extends ResourceSupport {
 	
-	private long idAssenza;
+	private int idAssenza;
 
 	public AssenzaAppelloRS(Assenza assenza) {
-		setIdAssenza(/*assenza.getId()*/0L);
+		setIdAssenza(assenza.getID());
 	}
 
-	public long getIdAssenza() {
+	public int getIdAssenza() {
 		return idAssenza;
 	}
 
-	public void setIdAssenza(long idAssenza) {
+	public void setIdAssenza(int idAssenza) {
 		this.idAssenza = idAssenza;
 	}
 	

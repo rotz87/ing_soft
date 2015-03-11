@@ -17,7 +17,7 @@ import domain.model.Appello;
 public class AppelloRS extends ResourceSupport{
 	
 	private int idAppello;
-	private long data;
+	private Long data;
 	private boolean assenzePrese;
 
 
@@ -41,17 +41,17 @@ public class AppelloRS extends ResourceSupport{
 	}
 	
 	
-	public long getIdAppello() {
+	public int getIdAppello() {
 		return idAppello;
 	}
 	
 	
-	public long getData() {
+	public Long getData() {
 		return data;
 	}
 
 	
-	public void setData(long data) {
+	public void setData(Long data) {
 		this.data = data;
 	}
 

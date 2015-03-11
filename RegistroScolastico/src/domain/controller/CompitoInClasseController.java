@@ -4,6 +4,7 @@ import java.nio.channels.IllegalSelectorException;
 import java.sql.Time;
 import java.util.Collection;
 import java.util.LinkedHashSet;
+import java.util.Set;
 
 import org.joda.time.LocalTime;
 import org.orm.PersistentException;
@@ -161,4 +162,22 @@ public class CompitoInClasseController {
 		return compito;
 	}
 
+	public Set<CompitoInClasse> getCompitiInCLasse(int idClasse, int idRegistroDocente){
+// bisogna controllare che il registro docente appartenga alla classe??
+		RegistroDocenteCriteria regDocCriteria;
+		RegistroDocente registroDocente;
+
+		try{
+			
+			regDocCriteria = new RegistroDocenteCriteria();
+		}catch (PersistentException e){
+			throw new  RuntimeException(ErrorMessage.COMPITI_UNLOADED);
+		}
+		
+		regDocCriteria.ID.eq(idRegistroDocente);
+		registroDocente = regDocCriteria.uniqueRegistroDocente();
+		
+		return registroDocente.getCompitiInClasse();
+	}
+	
 }

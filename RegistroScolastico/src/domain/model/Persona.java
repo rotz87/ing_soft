@@ -27,7 +27,7 @@ public abstract class Persona {
 	
 	private String codiceFiscale;
 	
-	private java.util.Date dataNascita;
+	private java.sql.Date dataNascita;
 	
 	private void setID(int value) {
 		this.ID = value;
@@ -65,11 +65,11 @@ public abstract class Persona {
 		return codiceFiscale;
 	}
 	
-	public void setDataNascita(java.util.Date value) {
+	public void setDataNascita(java.sql.Date value) {
 		this.dataNascita = value;
 	}
 	
-	public java.util.Date getDataNascita() {
+	public java.sql.Date getDataNascita() {
 		return dataNascita;
 	}
 	
