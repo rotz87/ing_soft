@@ -4,11 +4,14 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
+import org.hibernate.criterion.Restrictions;
 import org.joda.time.LocalDate;
 import org.orm.PersistentException;
 import org.orm.PersistentTransaction;
 
+import service.Stampa;
 import domain.model.Appello;
 import domain.model.AppelloCriteria;
 import domain.model.Assenza;
@@ -20,17 +23,15 @@ import domain.model.LibrettoAssenze;
 import domain.model.LibrettoAssenzeCriteria;
 import domain.model.RSPersistentManager;
 import domain.model.RegistroAssenze;
+import domain.model.RegistroAssenzeCriteria;
 import domain.model.Studente;
 import domain.model.StudenteCriteria;
-//import service.DBFake;
 
 public class FaiAppelloController {
-//	private Scuola scuola;
 
 	public FaiAppelloController() {
-//		scuola = new Scuola();
+
 	}
-	
 	
 	public void avviaAppello(int idClasse, int idDocente) {
 
@@ -335,114 +336,44 @@ public class FaiAppelloController {
 			throw new IllegalStateException(ErrorMessage.ASSENZE_UNRECORDED);
 		}
 	}
-
-	/**
-	 * 
-	 * @param idClasse
-	 * @param idDocente
-	 */
-	public void avviaAppello(Long idClasse, Long idDocente) {
-		// TODO - implement FaiAppelloController.avviaAppello
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param idStudenti
-	 * @param idClasse
-	 * @param idDocente
-	 */
-	public void registraAssenze(Long[] idStudenti, Long idClasse, Long idDocente) {
-		// TODO - implement FaiAppelloController.registraAssenze
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param idClasse
-	 */
-	public Appello getAppelloOdierno(Long idClasse) {
-		// TODO - implement FaiAppelloController.getAppelloOdierno
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param idClasse
-	 * @param data
-	 */
-	public Appello getAppello(Long idClasse, org.joda.time.LocalDate data) {
-		// TODO - implement FaiAppelloController.getAppello
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param idClasse
-	 * @param idAppello
-	 */
-	public Appello getAppello(Long idClasse, long idAppello) {
-		// TODO - implement FaiAppelloController.getAppello
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param idClasse
-	 * @param idAppello
-	 */
-	public Appello getAppello(Long idClasse, Long idAppello) {
-		// TODO - implement FaiAppelloController.getAppello
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param idClasse
-	 */
-	public java.util.Collection<Appello> getAppelli(Long idClasse) {
-		// TODO - implement FaiAppelloController.getAppelli
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param idClasse
-	 */
-	public boolean isAppelloOdiernoAvviabile(long idClasse) {
-		// TODO - implement FaiAppelloController.isAppelloOdiernoAvviabile
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param idClasse
-	 * @param idAppello
-	 */
-	public java.util.HashMap<Studente, Boolean> getBoolAssenze(Long idClasse, Long idAppello) {
-		// TODO - implement FaiAppelloController.getBoolAssenze
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param idClasse
-	 * @param idAppello
-	 * @return Map<idStudente, Assenza>
-	 */
-	public java.util.HashMap<Long, Assenza> getAssenze(Long idClasse, Long idAppello) {
-		// TODO - implement FaiAppelloController.getAssenze
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param idClasse
-	 */
-	public java.util.Collection<Studente> getStudenti(Long idClasse) {
-		// TODO - implement FaiAppelloController.getStudenti
-		throw new UnsupportedOperationException();
-	}
 	
+	public Collection<Studente> getPresenti(int idClasse, LocalDate data){
+
+		Collection<Studente> studentiPresenti = new LinkedList<Studente>();
+		ClasseCriteria classeCriteria;
+		Classe classe;
+		RegistroAssenze registroAssenze;
+		Appello appello;
+		Map<Studente, Boolean> boolAssenze;
+		
+		try {
+			classeCriteria = new ClasseCriteria();
+		} catch (PersistentException e) {
+			throw new RuntimeException(ErrorMessage.STUDENTI_UNLOADED);
+		}
+		
+		classeCriteria.ID.eq(idClasse);
+		classe = classeCriteria.uniqueClasse();
+		registroAssenze = classe.getRegistroAssenze();
+		appello = registroAssenze.getAppelloByData(data);
+		
+		if(appello.getAssenzePrese()){
+
+			boolAssenze = getBoolAssenze(idClasse, appello.getID());
+			for (Studente studente : boolAssenze.keySet()) {
+				if(! boolAssenze.get(studente)){
+					studentiPresenti.add(studente);
+				}
+			}
+			
+			
+			
+			
+		}else{
+			throw new IllegalStateException(ErrorMessage.ASSENZE_UNRECORDED);
+		}
+		
+		return studentiPresenti;
+	}
 
 }

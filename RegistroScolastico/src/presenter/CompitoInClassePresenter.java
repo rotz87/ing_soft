@@ -120,7 +120,7 @@ public class CompitoInClassePresenter {
 		  
 		  HttpHeaders httpHeaders;
 		  httpHeaders = new HttpHeaders();
-		  HttpStatus httpStatus = HttpStatus.CREATED;
+		  HttpStatus httpStatus = HttpStatus.OK;
 		  
 		  return new ResponseEntity<>(null, httpHeaders, httpStatus);
 	  }
