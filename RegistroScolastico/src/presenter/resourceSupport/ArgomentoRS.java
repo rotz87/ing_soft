@@ -6,9 +6,13 @@ import domain.model.Argomento;
 
 public class ArgomentoRS extends ResourceSupport{
 	
-	int idArgomento;
+	private int idArgomento;
 	private String nome;
 	private String descrizione;
+	
+	public ArgomentoRS(){
+		
+	}
 	
 	public ArgomentoRS(Argomento argomento){
 		this.idArgomento = argomento.getID();
@@ -16,6 +20,12 @@ public class ArgomentoRS extends ResourceSupport{
 		this.descrizione = argomento.getDescrizione();
 	}
 	
+	public ArgomentoRS(int idArgomento, String nome, String descrizione) {
+		super();
+		this.idArgomento = idArgomento;
+		this.nome = nome;
+		this.descrizione = descrizione;
+	}
 
 	public int getIdArgomento() {
 		return idArgomento;

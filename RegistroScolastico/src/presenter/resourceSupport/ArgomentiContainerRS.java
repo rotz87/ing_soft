@@ -1,10 +1,11 @@
 package presenter.resourceSupport;
-
+/*
+ * probabilmente da eliminare
+ * TODO
+ */
 import java.util.Collection;
 
 import org.springframework.hateoas.ResourceSupport;
-
-import domain.model.Argomento;
 
 public class ArgomentiContainerRS extends ResourceSupport{
 	private Collection<ArgomentoRS> argomenti;

@@ -1,5 +1,10 @@
 package service;
 
+import presenter.resourceSupport.ArgomentoRS;
+import presenter.resourceSupport.CompitoInClasseRS;
+import domain.model.Argomento;
+import domain.model.CompitoInClasse;
+
 public class Stampa {
 	public static void stampaln(String stringa){
 		System.out.println(stringa);
@@ -16,4 +21,20 @@ public class Stampa {
 	public static void stampa(Object object){
 		System.out.println(object);
 	}
+	public static void stampaArgomenti(CompitoInClasse compito){
+		stampaln();
+		stampaln("Argomenti compito");
+		for(Argomento arg : compito.getArgomentiEsaminati()){
+			Stampa.stampaln("Argomento: "+ arg.getID() + ", nome: " + arg.getNome() + ", descrizione: "+arg.getDescrizione()+".");
+		}
+		stampaln();
+	}
+//	public static void stampaArgomenti(CompitoInClasseRS compitoRS){
+//		stampaln();
+//		stampaln("Argomenti compito");
+//		for(ArgomentoRS arg : compitoRS.getArgomentiRS()){
+//			Stampa.stampaln("Argomento: "+ arg.getIdArgomento() + ", nome: " + arg.getNome() + ", descrizione: "+arg.getDescrizione()+".");
+//		}
+//		stampaln();
+//	}
 }

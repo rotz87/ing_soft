@@ -21,6 +21,7 @@ import presenter.resourceSupport.ArgomentiContainerRS;
 import presenter.resourceSupport.ArgomentoRS;
 import presenter.resourceSupport.AssentiContainerRS;
 import presenter.resourceSupport.CompitoInClasseRS;
+import service.Stampa;
 import domain.controller.CompitoInClasseController;
 import domain.controller.DocenteController;
 import domain.controller.FaiAppelloController;
@@ -49,7 +50,7 @@ public class CompitoInClassePresenter {
 		  docenteController = new DocenteController();
 		  
 		  compito = compitoController.creaCompito(idRegistroDocente, docenteController.getIdDocenteProva());
-	
+		  
 		  linkCompito = new CompitoInClasseRS(compito, idClasse, idRegistroDocente).getLink("self");
 		  httpHeaders.setLocation(URI.create(linkCompito.getHref()));
 
@@ -68,6 +69,7 @@ public class CompitoInClassePresenter {
 				compitoController = new CompitoInClasseController();
 				
 				compito = compitoController.getCompitoInCLasse(idCompitoInClasse);
+				
 				return new CompitoInClasseRS(compito, idClasse, idRegistroDocente);
 				
 			}
@@ -98,16 +100,23 @@ public class CompitoInClassePresenter {
 		}
 	  
 	  @RequestMapping(value = "/{idCompitoInClasse}", method = RequestMethod.PUT)
-	  public ResponseEntity<?> InserisciInfoCompito(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse,  @RequestBody CompitoInClasseRS campitoRS ){
+	  public ResponseEntity<?> inserisciInfoCompito(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse,  @RequestBody CompitoInClasseRS compitoRS ){
 		  CompitoInClasseController compitoController;
-		  
+		  int[] idArgomenti = new int[compitoRS.getArgomentiRS().size()];
+
 		  compitoController = new CompitoInClasseController();
 		  
-		  java.sql.Date dataCompito = new java.sql.Date(campitoRS.getData());
-		  java.sql.Time oraInizio = new java.sql.Time(campitoRS.getOraInizio());
-		  java.sql.Time oraFine = new java.sql.Time(campitoRS.getOraFine());
+		  java.sql.Date dataCompito = new java.sql.Date(compitoRS.getData());
+		  java.sql.Time oraInizio = new java.sql.Time(compitoRS.getOraInizio());
+		  java.sql.Time oraFine = new java.sql.Time(compitoRS.getOraFine());
 		  
-		  compitoController.inserisciInfoCompito(idRegistroDocente, campitoRS.getIdCompito(), dataCompito, oraInizio, oraFine, null);
+		  int i = 0;
+		  for(ArgomentoRS argomentoRS : compitoRS.getArgomentiRS()){
+			  idArgomenti[i] = argomentoRS.getIdArgomento();
+			  i++;
+		  }
+		  
+		  compitoController.inserisciInfoCompito(idRegistroDocente, compitoRS.getIdCompito(), dataCompito, oraInizio, oraFine, idArgomenti);
 		  
 		  HttpHeaders httpHeaders;
 		  httpHeaders = new HttpHeaders();
