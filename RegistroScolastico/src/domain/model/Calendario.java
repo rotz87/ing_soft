@@ -59,7 +59,8 @@ public class Calendario {
 		festivo = getGiorniSettimanaliFestivi().contains(new GiornoSettimanaleFestivo(data.getDayOfWeek()));
 				
 		if (!festivo){
-			festivo = getGiorniFestivi().contains(new GiornoFestivo(data.toDate()));
+			java.sql.Date sqlDate = new java.sql.Date(data.toDate().getTime());
+			festivo = getGiorniFestivi().contains(new GiornoFestivo(sqlDate));
 		}
 				
 		return festivo;

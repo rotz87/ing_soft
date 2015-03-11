@@ -19,7 +19,7 @@ public class GiornoFestivo {
 	
 	private int ID;
 	
-	private java.util.Date data;
+	private java.sql.Date data;
 	
 	private void setID(int value) {
 		this.ID = value;
@@ -33,13 +33,11 @@ public class GiornoFestivo {
 		return getID();
 	}
 	
-	public void setData(java.util.Date value) {
+	public void setData(java.sql.Date value) {
 		this.data = value;
 	}
 	
-	public java.util.Date getData() {
-		java.util.Date data;
-		data = new java.util.Date(this.data.getTime());
+	public java.sql.Date getData() {
 		return data;
 	}
 	
@@ -49,7 +47,7 @@ public class GiornoFestivo {
 		return this.implementor.equals(this, obj);
 	}
 	
-	public GiornoFestivo(java.util.Date data) {
+	public GiornoFestivo(java.sql.Date data) {
 		this.implementor.inizialize(this, data);
 	}
 	

@@ -16,7 +16,8 @@ public class AppelloImp {
 	}
 
 	public void inizialize(Appello appello, LocalDate data){
-		appello.setData(data.toDate()) ;
+		java.sql.Date sqlDate = new java.sql.Date(data.toDate().getTime());
+		appello.setData(sqlDate) ;
 		appello.setAssenzePrese(false);
 
 	}

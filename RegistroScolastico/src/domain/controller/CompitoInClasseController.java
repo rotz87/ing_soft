@@ -96,7 +96,7 @@ public class CompitoInClasseController {
 	 * @param oraFine La durata è intesa in minuti.
 	 * @param idArgomeni
 	 */
-	public void inserisciInfoCompito(int idRegistroDocente, int idCompito, java.util.Date data, Time oraInizio, Time oraFine, int[] idArgomenti) {
+	public void inserisciInfoCompito(int idRegistroDocente, int idCompito, java.sql.Date data, Time oraInizio, Time oraFine, int[] idArgomenti) {
 		CompitoInClasseCriteria compitoCriteria;
 		CompitoInClasse compito;
 		RegistroDocenteCriteria regDocCriteria;

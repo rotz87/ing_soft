@@ -35,7 +35,8 @@ public class TestInserisciInfoCompito {
 		try {
 			
 			try {
-				controlloreCompito.inserisciInfoCompito(idRegistroDocenteProva, idCompitoProva, dataCompito.toDate(), oraInizio, oraFine, idArgomenti);
+				java.sql.Date sqlDate = new java.sql.Date(dataCompito.toDate().getTime());
+				controlloreCompito.inserisciInfoCompito(idRegistroDocenteProva, idCompitoProva, sqlDate, oraInizio, oraFine, idArgomenti);
 			}
 			finally {
 				domain.model.RSPersistentManager.instance().disposePersistentManager();

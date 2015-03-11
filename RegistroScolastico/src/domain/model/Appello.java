@@ -19,19 +19,15 @@ public class Appello implements java.lang.Comparable<Appello> {
 	
 	private int ID;
 	
-	private java.util.Date data;
+	private java.sql.Date data;
 	
 	private boolean assenzePrese;
 	
-	public void setData(java.util.Date value) {
+	public void setData(java.sql.Date value) {
 		this.data = value;
 	}
 	
-	public java.util.Date getData() {
-		//Perché Hibernate in pratica non utilizza java.util.Date ma java.sql.Date che
-		// ha un metodo toString Diverso
-		java.util.Date data;
-		data = new java.util.Date(this.data.getTime());
+	public java.sql.Date getData() {
 		return data;
 	}
 	

@@ -1,6 +1,6 @@
 package domain.implementor;
 
-import java.util.Date;
+import java.sql.Date;
 
 import domain.model.GiornoFestivo;
 

@@ -79,7 +79,7 @@ public class RegistroDocente {
 		return this.implementor.creaCompito(this);
 	}
 	
-	public void inserisciInfoCompito(domain.model.CompitoInClasse compito, java.util.Date data, java.sql.Time oraInizio, java.sql.Time oraFine, java.util.Collection<Argomento> argomenti) {
+	public void inserisciInfoCompito(domain.model.CompitoInClasse compito, java.sql.Date data, java.sql.Time oraInizio, java.sql.Time oraFine, java.util.Collection<Argomento> argomenti) {
 		this.implementor.inserisciInfoCompito(this, compito, data, oraInizio, oraFine, argomenti);
 	}
 	

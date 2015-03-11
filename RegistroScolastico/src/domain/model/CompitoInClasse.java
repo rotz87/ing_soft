@@ -21,7 +21,7 @@ public class CompitoInClasse {
 	
 	private domain.model.RegistroDocente insegnamento;
 	
-	private java.util.Date data;
+	private java.sql.Date data;
 	
 	private java.sql.Time oraInizio;
 	
@@ -41,17 +41,11 @@ public class CompitoInClasse {
 		return getID();
 	}
 	
-	public void setData(java.util.Date value) {
+	public void setData(java.sql.Date value) {
 		this.data = value;
 	}
 	
-	public java.util.Date getData() {
-		//Perché Hibernate in pratica non utilizza java.util.Date ma java.sql.Date che
-		// ha un metodo toString Diverso
-		java.util.Date data = null;
-		if(this.data != null){
-			data = new java.util.Date(this.data.getTime());
-		}
+	public java.sql.Date getData() {
 		return data;
 	}
 	
@@ -90,7 +84,7 @@ public class CompitoInClasse {
 	
 	private domain.implementor.CompitoInClasseImp implementor = new domain.implementor.CompitoInClasseImp();
 	
-	public void setInfo(java.util.Date data, java.sql.Time oraInizio, java.sql.Time oraFine, java.util.Collection<domain.model.Argomento> argomenti) {
+	public void setInfo(java.sql.Date data, java.sql.Time oraInizio, java.sql.Time oraFine, java.util.Collection<domain.model.Argomento> argomenti) {
 		this.implementor.setInfo(this, data, oraInizio, oraFine, argomenti);
 	}
 	

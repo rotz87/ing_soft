@@ -2,7 +2,6 @@ package domain.implementor;
 
 import java.sql.Time;
 import java.util.Collection;
-import java.util.Date;
 
 import service.Stampa;
 import domain.controller.ErrorMessage;
@@ -22,7 +21,7 @@ public class RegistroDocenteImp {
 		return compito;
 	}
 
-	public void inserisciInfoCompito(RegistroDocente registroDocente, CompitoInClasse compito, Date data,
+	public void inserisciInfoCompito(RegistroDocente registroDocente, CompitoInClasse compito, java.sql.Date data,
 			Time oraInizio, Time oraFine, Collection<Argomento> argomenti) {
 //		if(registroDocente.isCompitoPresente(compito)){
 			compito.setInfo(data, oraInizio, oraFine, argomenti);
