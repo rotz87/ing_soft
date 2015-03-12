@@ -255,7 +255,7 @@ public class CompitoInClasseController {
 			if(studente.getLibrettoVoti().getLibrettoLineItem(compito) != null){
 				rit.put(studente, studente.getLibrettoVoti().getLibrettoLineItem(compito).getVoto());
 			}else{
-				rit.put(studente, null);
+				rit.put(studente, null); 
 			}
 		}
 		
