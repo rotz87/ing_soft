@@ -19,6 +19,8 @@ public class Voto {
 	
 	private int ID;
 	
+	private byte voto;
+	
 	private void setID(int value) {
 		this.ID = value;
 	}
@@ -29,6 +31,14 @@ public class Voto {
 	
 	public int getORMID() {
 		return getID();
+	}
+	
+	public void setVoto(byte value) {
+		this.voto = value;
+	}
+	
+	public byte getVoto() {
+		return voto;
 	}
 	
 	public String toString() {

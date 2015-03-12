@@ -1,4 +1,4 @@
-package presenter.resourceSupport;
+package presenter.resourceSupport.appello;
 
 
 import org.springframework.hateoas.ResourceSupport;

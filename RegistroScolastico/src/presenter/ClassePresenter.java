@@ -4,6 +4,7 @@ package presenter;
 import java.util.Collection;
 import java.util.LinkedList;
 
+
 //import org.orm.PersistentException;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import presenter.resourceSupport.ClasseMenuRS;
-import presenter.resourceSupport.StudenteAppelloRS;
+import presenter.resourceSupport.appello.StudenteAppelloRS;
 import domain.controller.ClasseController;
 import domain.controller.DocenteController;
 import domain.model.Classe;

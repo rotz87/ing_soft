@@ -121,8 +121,10 @@ public class CompitoInClasseController {
 		regDocCriteria.ID.eq(idRegistroDocente);
 		registroDocente = regDocCriteria.uniqueRegistroDocente();
 		
-		argomentoCriteria.ID.in(idArgomenti);
-		argomenti.addAll(argomentoCriteria.list());
+		if(idArgomenti.length > 0){
+			argomentoCriteria.ID.in(idArgomenti);
+			argomenti.addAll(argomentoCriteria.list());
+		}
 		
 		if(registroDocente.isCompitoPresente(compito)){
 			registroDocente.inserisciInfoCompito(compito, data, oraInizio, oraFine, argomenti);

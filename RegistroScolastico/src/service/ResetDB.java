@@ -1,5 +1,8 @@
 package service;
 
+import java.util.Collection;
+import java.util.LinkedList;
+
 import org.joda.time.LocalDate;
 import org.orm.ORMDatabaseInitiator;
 import org.orm.PersistentException;
@@ -10,6 +13,7 @@ import domain.model.Argomento;
 import domain.model.Assenza;
 import domain.model.Calendario;
 import domain.model.Classe;
+import domain.model.CompitoInClasse;
 import domain.model.Docente;
 import domain.model.GiornoSettimanaleFestivo;
 import domain.model.LibrettoAssenze;
@@ -413,6 +417,8 @@ public class ResetDB {
 //			Materia storia = new Materia();
 //			registroRossiPrimaA.setMateria(storia);
 			
+			Collection<Argomento> argomenti = new LinkedList<Argomento>();
+			
 			Argomento worldWar1 = new Argomento("world war I", "");
 			Argomento worldWar2 = new Argomento("world war II","");
 			Argomento colonialismo = new Argomento("colonialismo","");
@@ -422,6 +428,20 @@ public class ResetDB {
 			registroRossiPrimaA.getArgomentiSvolti().add(worldWar2);
 			registroRossiPrimaA.getArgomentiSvolti().add(colonialismo);
 			registroRossiPrimaA.getArgomentiSvolti().add(secondoDopoGuerra);
+			
+			argomenti.clear();
+			argomenti.add(worldWar1);
+			argomenti.add(worldWar2);
+			CompitoInClasse compitoStoria1A = new CompitoInClasse();
+			compitoStoria1A.setInfo(java.sql.Date.valueOf("2014-12-16"), java.sql.Time.valueOf("11:00:00"), java.sql.Time.valueOf("13:00:00"), argomenti);
+			compitoStoria1A.setInsegnamento(registroRossiPrimaA);
+			registroRossiPrimaA.getCompitiInClasse().add(compitoStoria1A);
+			
+			argomenti.clear();
+			compitoStoria1A = new CompitoInClasse();
+			compitoStoria1A.setInfo(java.sql.Date.valueOf("2014-12-15"), java.sql.Time.valueOf("10:00:00"), java.sql.Time.valueOf("11:30:00"), argomenti);
+			compitoStoria1A.setInsegnamento(registroRossiPrimaA);
+			registroRossiPrimaA.getCompitiInClasse().add(compitoStoria1A);
 			
 			
 //			domain.model.Studente ldomainmodelStudente = new domain.model.Studente();			// Initialize the properties of the persistent object here

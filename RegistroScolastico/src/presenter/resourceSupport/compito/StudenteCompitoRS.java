@@ -1,4 +1,4 @@
-package presenter.resourceSupport;
+package presenter.resourceSupport.compito;
 
 import org.springframework.hateoas.ResourceSupport;
 
@@ -9,13 +9,23 @@ public class StudenteCompitoRS extends ResourceSupport {
 	private int idStudente;
 	private String nome;
 	private String cognome;
-	private String voto;
+	private byte voto;
+	private boolean assente;
 	
-	public StudenteCompitoRS(Studente studente, Voto voto){
+	public StudenteCompitoRS(Studente studente, Voto voto, boolean assente){
 		this.idStudente = studente.getID();
 		this.nome = studente.getNome();
 		this.cognome = studente.getCognome();
-		this.voto = this.voto.toString();
+		this.voto = voto.getVoto();
+		this.assente = assente;
+	}
+	
+	public StudenteCompitoRS(int idStudente, byte voto){
+		this.idStudente = idStudente;
+		this.nome = null;
+		this.cognome = null;
+		this.voto = voto;
+		this.assente = false;
 	}
 
 	public int getIdStudente() {
@@ -42,12 +52,20 @@ public class StudenteCompitoRS extends ResourceSupport {
 		this.cognome = cognome;
 	}
 
-	public String getVoto() {
+	public byte getVoto() {
 		return voto;
 	}
 
-	public void setVoto(String voto) {
+	public void setVoto(byte voto) {
 		this.voto = voto;
+	}
+
+	public boolean getAssente() {
+		return assente;
+	}
+
+	public void setAssente(boolean assente) {
+		this.assente = assente;
 	}
 	
 	

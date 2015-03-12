@@ -7,6 +7,7 @@ import java.sql.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import org.joda.time.LocalDate;
 import org.springframework.hateoas.Link;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,11 +16,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import presenter.resourceSupport.AppelliContainerRS;
-import presenter.resourceSupport.AppelloRS;
-import presenter.resourceSupport.AssentiContainerRS;
+import presenter.resourceSupport.appello.AppelliContainerRS;
+import presenter.resourceSupport.appello.AppelloRS;
+import presenter.resourceSupport.appello.AssentiContainerRS;
 import service.Stampa;
 import domain.controller.DocenteController;
 import domain.controller.FaiAppelloController;
@@ -31,8 +33,6 @@ import domain.model.Calendario;
 @RestController
 @RequestMapping("/classi/{idClasse}/appelli")
 public class AppelloPresenter {
-	
-//	  private int idDocenteProva = 31;
 	  
 	
 	  @RequestMapping(method = RequestMethod.POST)
@@ -70,6 +70,27 @@ public class AppelloPresenter {
 			
 			appello = fAController.getAppello(idClasse, idAppello);
 			return new AppelloRS(appello, idClasse);
+			
+		}
+		
+		@RequestMapping(method = RequestMethod.GET, params = {"data"})
+		public AppelloRS getAppello(@PathVariable int idClasse, @RequestParam(value="data") long data) {
+			
+			LocalDate localDate;
+			FaiAppelloController faiAppelloController;
+			Appello appello;
+			AppelloRS appelloRS;
+			
+			localDate = new LocalDate(data);
+			faiAppelloController = new FaiAppelloController();
+			appelloRS = null;
+			
+			appello = faiAppelloController.getAppello(idClasse, localDate);
+			if(appello != null){
+				appelloRS = new AppelloRS(appello, idClasse);
+			}
+			
+			return appelloRS;
 			
 		}
 		

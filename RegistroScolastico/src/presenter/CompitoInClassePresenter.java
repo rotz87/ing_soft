@@ -16,11 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import presenter.resourceSupport.AppelloRS;
-import presenter.resourceSupport.ArgomentiContainerRS;
-import presenter.resourceSupport.ArgomentoRS;
-import presenter.resourceSupport.AssentiContainerRS;
-import presenter.resourceSupport.CompitoInClasseRS;
+import presenter.resourceSupport.appello.AppelloRS;
+import presenter.resourceSupport.appello.AssentiContainerRS;
+import presenter.resourceSupport.compito.ArgomentiContainerRS;
+import presenter.resourceSupport.compito.ArgomentoRS;
+import presenter.resourceSupport.compito.CompitoInClasseRS;
+import presenter.resourceSupport.compito.StudenteCompitoRS;
 import service.Stampa;
 import domain.controller.CompitoInClasseController;
 import domain.controller.DocenteController;
@@ -72,7 +73,8 @@ public class CompitoInClassePresenter {
 				
 				return new CompitoInClasseRS(compito, idClasse, idRegistroDocente);
 				
-			}
+	  }
+	  
 	  
 	  @RequestMapping( method = RequestMethod.GET)
 		public CompitoInClasseRS[] getCompitiInClasse(@PathVariable int idClasse, @PathVariable int idRegistroDocente) {
@@ -141,4 +143,14 @@ public class CompitoInClassePresenter {
 		  return new ArgomentiContainerRS(argomentiRS);
 		  
 	  }
+	  
+	  @RequestMapping(value = "/{idCompitoInClasse}/studenti", method = RequestMethod.GET)
+	  public StudenteCompitoRS getStudentiCompito(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse) {
+	  
+	  
+	  
+	  	return null;
+	  
+	  }
+	  
 }

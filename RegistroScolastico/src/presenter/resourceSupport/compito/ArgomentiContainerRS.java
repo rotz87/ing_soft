@@ -1,4 +1,4 @@
-package presenter.resourceSupport;
+package presenter.resourceSupport.compito;
 /*
  * probabilmente da eliminare
  * TODO

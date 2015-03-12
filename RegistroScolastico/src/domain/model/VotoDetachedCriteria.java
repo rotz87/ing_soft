@@ -20,15 +20,18 @@ import org.orm.criteria.*;
 
 public class VotoDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression ID;
+	public final ByteExpression voto;
 	
 	public VotoDetachedCriteria() {
 		super(domain.model.Voto.class, domain.model.VotoCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
+		voto = new ByteExpression("voto", this.getDetachedCriteria());
 	}
 	
 	public VotoDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, domain.model.VotoCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
+		voto = new ByteExpression("voto", this.getDetachedCriteria());
 	}
 	
 	public Voto uniqueVoto(PersistentSession session) {

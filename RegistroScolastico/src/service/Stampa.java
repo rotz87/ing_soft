@@ -1,7 +1,7 @@
 package service;
 
-import presenter.resourceSupport.ArgomentoRS;
-import presenter.resourceSupport.CompitoInClasseRS;
+import presenter.resourceSupport.compito.ArgomentoRS;
+import presenter.resourceSupport.compito.CompitoInClasseRS;
 import domain.model.Argomento;
 import domain.model.CompitoInClasse;
 

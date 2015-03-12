@@ -20,10 +20,12 @@ import org.orm.criteria.*;
 
 public class VotoCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
+	public final ByteExpression voto;
 	
 	public VotoCriteria(Criteria criteria) {
 		super(criteria);
 		ID = new IntegerExpression("ID", this);
+		voto = new ByteExpression("voto", this);
 	}
 	
 	public VotoCriteria(PersistentSession session) {

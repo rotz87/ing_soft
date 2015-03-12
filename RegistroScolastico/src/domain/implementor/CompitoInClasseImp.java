@@ -14,7 +14,9 @@ public class CompitoInClasseImp {
 		compitoInClasse.setData(data);
 		compitoInClasse.setOraInizio(oraInizio);
 		compitoInClasse.setOraFine(oraFine);
-		compitoInClasse.setArgomentiEsaminati((java.util.Set<Argomento>)argomenti);
+
+		compitoInClasse.getArgomentiEsaminati().clear();
+		compitoInClasse.getArgomentiEsaminati().addAll(argomenti);
 		
 	}
 

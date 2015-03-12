@@ -10,5 +10,6 @@ License Type: Academic
 			<generator class="native">
 			</generator>
 		</id>
+		<property name="voto" column="Voto" type="byte" not-null="true" lazy="false"/>
 	</class>
 </hibernate-mapping>
