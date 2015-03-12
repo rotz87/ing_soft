@@ -17,6 +17,7 @@ import domain.model.CompitoInClasse;
 import domain.model.Docente;
 import domain.model.GiornoSettimanaleFestivo;
 import domain.model.LibrettoAssenze;
+import domain.model.LibrettoVoti;
 import domain.model.Materia;
 import domain.model.RSPersistentManager;
 import domain.model.RegistroAssenze;
@@ -192,24 +193,53 @@ public class ResetDB {
 //				LibrettoAssenze libretto =  new LibrettoAssenze();
 			LibrettoAssenze librettoMarioRomano = new LibrettoAssenze();
 			marioRomano.setLibrettoAssenze(librettoMarioRomano);
+			LibrettoVoti librettoVotioMarioRomano = new LibrettoVoti();
+			marioRomano.setLibrettoVoti(librettoVotioMarioRomano);
+			
 			LibrettoAssenze librettoDavideDiSalvo =  new LibrettoAssenze();
 			davideDiSalvo.setLibrettoAssenze(librettoDavideDiSalvo);
+			LibrettoVoti librettoVotiDavideDiSalvo = new LibrettoVoti();
+			davideDiSalvo.setLibrettoVoti(librettoVotiDavideDiSalvo);
+			
 			LibrettoAssenze librettoIvoMarino = new LibrettoAssenze();
 			ivoMarino.setLibrettoAssenze(librettoIvoMarino);
+			LibrettoVoti librettoVotiIvoMarino = new LibrettoVoti();
+			ivoMarino.setLibrettoVoti(librettoVotiIvoMarino);
+			
 			LibrettoAssenze librettoPieroRusso = new LibrettoAssenze();
 			pieroRusso.setLibrettoAssenze(librettoPieroRusso);
+			LibrettoVoti librettoVotiPieroRusso = new LibrettoVoti();
+			pieroRusso.setLibrettoVoti(librettoVotiPieroRusso);
+			
 			LibrettoAssenze librettoMarinoEsposito =  new LibrettoAssenze();
 			marinoEsposito.setLibrettoAssenze(librettoMarinoEsposito);
+			LibrettoVoti librettoVotiMarinoEsposito = new LibrettoVoti();
+			marinoEsposito.setLibrettoVoti(librettoVotiMarinoEsposito);
+			
 			LibrettoAssenze librettoLeonardoRicci =  new LibrettoAssenze();
 			leonardoRicci.setLibrettoAssenze(librettoLeonardoRicci);
+			LibrettoVoti librettoVotiLeonardoRicci = new LibrettoVoti();
+			leonardoRicci.setLibrettoVoti(librettoVotiLeonardoRicci);
+			
 			LibrettoAssenze librettoValentinoFarina =  new LibrettoAssenze();
 			valentinoFarina.setLibrettoAssenze(librettoValentinoFarina);
+			LibrettoVoti librettoVotiValentinoFarina = new LibrettoVoti();
+			valentinoFarina.setLibrettoVoti(librettoVotiValentinoFarina);
+			
 			LibrettoAssenze librettoRoccoBenedetti =  new LibrettoAssenze();
 			roccoBenedetti.setLibrettoAssenze(librettoRoccoBenedetti);
+			LibrettoVoti librettoVotiRoccoBenedetti = new LibrettoVoti();
+			roccoBenedetti.setLibrettoVoti(librettoVotiRoccoBenedetti);
+			
 			LibrettoAssenze librettoAntonioGuerra =  new LibrettoAssenze();
 			antonioGuerra.setLibrettoAssenze(librettoAntonioGuerra);
+			LibrettoVoti librettoVotiAntonioGuerra = new LibrettoVoti();
+			antonioGuerra.setLibrettoVoti(librettoVotiAntonioGuerra);
+			
 			LibrettoAssenze librettoCristinaAngeli =  new LibrettoAssenze();
 			cristinaAngeli.setLibrettoAssenze(librettoCristinaAngeli);
+			LibrettoVoti librettoVotiCristinaAngeli = new LibrettoVoti();
+			cristinaAngeli.setLibrettoVoti(librettoVotiCristinaAngeli);
 			
 			LibrettoAssenze librettoMariannaDonati =  new LibrettoAssenze();
 			mariannaDonati.setLibrettoAssenze(librettoMariannaDonati);
@@ -493,6 +523,28 @@ public class ResetDB {
 //			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelGiornoSettimanale);
 			
 			t.commit();
+			
+			Stampa.stampaln("libretto: "+ pieroRusso.getLibrettoVoti());
+			Stampa.stampaln("libretto: "+ marinoEsposito.getLibrettoVoti());
+			Stampa.stampaln("libretto: "+ marioRomano.getLibrettoVoti());
+			Stampa.stampaln("libretto: "+ davideDiSalvo.getLibrettoVoti());
+			Stampa.stampaln("libretto: "+ ivoMarino.getLibrettoVoti());
+			Stampa.stampaln("libretto: "+ leonardoRicci.getLibrettoVoti());
+			Stampa.stampaln("libretto: "+ valentinoFarina.getLibrettoVoti());
+			Stampa.stampaln("libretto: "+ roccoBenedetti.getLibrettoVoti());
+			Stampa.stampaln("libretto: "+ antonioGuerra.getLibrettoVoti());
+			Stampa.stampaln("libretto: "+ cristinaAngeli.getLibrettoVoti());
+			
+//			 pieroRusso 
+//			 marinoEsposito
+//			 marioRomano 
+//			 davideDiSalvo 
+//			 ivoMarino 
+//			 leonardoRicci 
+//			 valentinoFarina 
+//			 roccoBenedetti
+//			 antonioGuerra 
+//			 cristinaAngeli
 		}
 		catch (Exception e) {
 			t.rollback();

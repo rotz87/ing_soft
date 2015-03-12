@@ -20,14 +20,12 @@ import org.orm.criteria.*;
 
 public class LibrettoVotiCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
-	public final IntegerExpression libVotiLineItemsId;
-	public final AssociationExpression libVotiLineItems;
+	public final CollectionExpression libVotiLineItems;
 	
 	public LibrettoVotiCriteria(Criteria criteria) {
 		super(criteria);
 		ID = new IntegerExpression("ID", this);
-		libVotiLineItemsId = new IntegerExpression("libVotiLineItems.ID", this);
-		libVotiLineItems = new AssociationExpression("libVotiLineItems", this);
+		libVotiLineItems = new CollectionExpression("libVotiLineItems", this);
 	}
 	
 	public LibrettoVotiCriteria(PersistentSession session) {

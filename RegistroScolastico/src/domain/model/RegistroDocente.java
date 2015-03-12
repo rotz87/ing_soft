@@ -93,8 +93,7 @@ public class RegistroDocente {
 	}
 	
 	public void inserisciVoti(domain.model.CompitoInClasse compito, domain.model.Studente[] studenti, domain.model.Voto[] voti) {
-		//TODO: Implement Method
-		throw new UnsupportedOperationException();
+		this.implementor.inserisciVoti(this, compito, studenti, voti);
 	}
 	
 	public String toString() {

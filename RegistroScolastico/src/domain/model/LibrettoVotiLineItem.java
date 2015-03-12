@@ -13,6 +13,8 @@
  */
 package domain.model;
 
+import service.Stampa;
+
 public class LibrettoVotiLineItem {
 	public LibrettoVotiLineItem() {
 	}
@@ -51,9 +53,18 @@ public class LibrettoVotiLineItem {
 		return voto;
 	}
 	
+	private domain.implementor.LibrettoVotiLineItemImp implementor = new domain.implementor.LibrettoVotiLineItemImp();;
+	
 	public void aggiungiVoto(domain.model.Voto voto) {
-		//TODO: Implement Method
-		throw new UnsupportedOperationException();
+		this.implementor.aggiungiVoto(this, voto);
+	}
+	
+	public LibrettoVotiLineItem(domain.model.CompitoInClasse compito) {
+		this.implementor.inizialize(this,compito);
+	}
+	
+	public LibrettoVotiLineItem(domain.model.CompitoInClasse compito, domain.model.Voto voto) {
+		this.implementor.inizialize(this, compito, voto);
 	}
 	
 	public String toString() {

@@ -10,7 +10,9 @@ License Type: Academic
 			<generator class="native">
 			</generator>
 		</id>
-		<many-to-one name="libVotiLineItems" cascade="lock" column="LibrettoVotiLineItemID" class="domain.model.LibrettoVotiLineItem" not-null="true" lazy="no-proxy">
-		</many-to-one>
+		<set name="libVotiLineItems" lazy="true" cascade="save-update,lock" inverse="false">
+			<key column="LibrettoVotiID" not-null="true"/>
+			<one-to-many class="domain.model.LibrettoVotiLineItem"/>
+		</set>
 	</class>
 </hibernate-mapping>

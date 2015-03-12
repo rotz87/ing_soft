@@ -20,5 +20,8 @@ public class ErrorMessage {
 	public static final String COMPITO_UNLOADED = "Impossibile caricare il compito";
 	public static final String COMPITI_UNLOADED = "Impossibile caricare i compiti";
 	public static final String COMPITO_NON_AGGIORNABILE = "Impossibile caricare il compito";
+	public static final String COMPITO_NOT_BELONGING = "Il compito non è presente nel libretto";
+	public static final String LISTA_STUDENTI_WRONG = "Gli studenti specificati non ...?";
+	public static final String VOTI_NON_INSERIBILI = "Impossibile inserire i voti";
 			
 }

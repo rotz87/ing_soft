@@ -20,21 +20,18 @@ import org.orm.criteria.*;
 
 public class LibrettoVotiDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression ID;
-	public final IntegerExpression libVotiLineItemsId;
-	public final AssociationExpression libVotiLineItems;
+	public final CollectionExpression libVotiLineItems;
 	
 	public LibrettoVotiDetachedCriteria() {
 		super(domain.model.LibrettoVoti.class, domain.model.LibrettoVotiCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		libVotiLineItemsId = new IntegerExpression("libVotiLineItems.ID", this.getDetachedCriteria());
-		libVotiLineItems = new AssociationExpression("libVotiLineItems", this.getDetachedCriteria());
+		libVotiLineItems = new CollectionExpression("libVotiLineItems", this.getDetachedCriteria());
 	}
 	
 	public LibrettoVotiDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, domain.model.LibrettoVotiCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		libVotiLineItemsId = new IntegerExpression("libVotiLineItems.ID", this.getDetachedCriteria());
-		libVotiLineItems = new AssociationExpression("libVotiLineItems", this.getDetachedCriteria());
+		libVotiLineItems = new CollectionExpression("libVotiLineItems", this.getDetachedCriteria());
 	}
 	
 	public LibrettoVotiLineItemDetachedCriteria createLibVotiLineItemsCriteria() {

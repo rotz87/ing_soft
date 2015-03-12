@@ -19,7 +19,7 @@ public class LibrettoVoti {
 	
 	private int ID;
 	
-	private domain.model.LibrettoVotiLineItem libVotiLineItems;
+	private java.util.Set<domain.model.LibrettoVotiLineItem> libVotiLineItems = new java.util.LinkedHashSet<domain.model.LibrettoVotiLineItem>();
 	
 	private void setID(int value) {
 		this.ID = value;
@@ -33,22 +33,23 @@ public class LibrettoVoti {
 		return getID();
 	}
 	
-	public void setLibVotiLineItems(domain.model.LibrettoVotiLineItem value) {
+	public void setLibVotiLineItems(java.util.Set<domain.model.LibrettoVotiLineItem> value) {
 		this.libVotiLineItems = value;
 	}
 	
-	public domain.model.LibrettoVotiLineItem getLibVotiLineItems() {
+	public java.util.Set<domain.model.LibrettoVotiLineItem> getLibVotiLineItems() {
 		return libVotiLineItems;
 	}
 	
+	
+	private domain.implementor.LibrettoVotiImp implementor = new domain.implementor.LibrettoVotiImp();
+	
 	public void makeLineItem(domain.model.CompitoInClasse compito) {
-		//TODO: Implement Method
-		throw new UnsupportedOperationException();
+		this.implementor.makeLineItem(this, compito);
 	}
 	
 	public domain.model.LibrettoVotiLineItem getLibrettoLineItem(domain.model.CompitoInClasse compito) {
-		//TODO: Implement Method
-		throw new UnsupportedOperationException();
+		return this.implementor.getLibrettoVotiLineItem(this, compito);
 	}
 	
 	public String toString() {
