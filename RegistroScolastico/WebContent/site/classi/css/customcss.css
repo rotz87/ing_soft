@@ -67,6 +67,60 @@
 .css-form input.ng-valid.ng-touched {
   background-color: #78FA89;
 }
+.mostraNascondi_,.mostraNascondi_false{
+    height:10px;
+    border:1px solid #555;
+   	-webkit-appearance: none;
+    margin: 3px 0.5ex;
+	padding: 0;
+	background-color: none;
+	border: 0px;
+	cursor:pointer;
+}
+.mostraNascondi_:before,.mostraNascondi_false:before{
+	content:"\e114";
+	font-family:"Glyphicons Halflings";
+	line-height:1;
+	display:inline-block;
+}
+.mostraNascondi_true{
+    height:10px;
+    border:1px solid #555;
+    -webkit-appearance: none;
+    margin: 3px 0.5ex;
+	padding: 0;
+	background-color: none;
+	border: 0px;
+	cursor:pointer;
+}
+.mostraNascondi_true:before{
+	content:"\e113";
+	font-family:"Glyphicons Halflings";
+	line-height:1;
+	display:inline-block;
+}
+.mostraNascondi_.ng-hide-add, .mostraNascondi_.ng-hide-remove
+.mostraNascondi_false.ng-hide-add, .mostraNascondi_false.ng-hide-remove,
+.mostraNascondi_true.ng-hide-add, .mostraNascondi_true.ng-hide-remove {
+  /* this is required as of 1.3x to properly
+     apply all styling in a show/hide animation */
+  transition: 1s linear all;
+}
+
+.animaScomparsa{
+}
+
+.animaScomparsa.ng-hide-add.ng-hide-add-active,
+.animaScomparsa.ng-hide-remove.ng-hide-remove-active{
+	-webkit-transition: all linear 0.5s;
+	transition: all linear 0.5s;
+}
+
+.animaScomparsa.ng-hide {
+  line-height: 0;
+  opacity: 0;
+  padding: 0 10px;
+}
 
 body { padding-top: 70px; }
 /*

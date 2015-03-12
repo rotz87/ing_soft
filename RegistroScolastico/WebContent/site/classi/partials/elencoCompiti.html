@@ -1,0 +1,16 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-3"
+			ng-repeat="compito in elencoCompiti ">
+			<div class="btn btn-default" >
+				<div class="panel-body">Compito {{compito.data | date:"EEE dd MMMM yyyy"}}</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="btn btn-primary" >
+				<div class="panel-body" ng-click="creaCompito()">Nuovo Compito</div>
+			</div>
+		</div>
+	</div>
+	
+</div>

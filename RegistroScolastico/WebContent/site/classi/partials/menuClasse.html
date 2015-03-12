@@ -1,0 +1,19 @@
+<!-- template per la visualizzazione dei registri di una classe -->
+<!-- il docente può scegliere tra il registro di classe oppure i registri
+	delle sue materie -->
+
+<div class="container-fluid">
+		<h1 class="text-center"> Classe {{idClasse}}</h1>
+	<div class="row">
+		<div class="col-md-3">
+			<div class="btn btn-default" ng-click="scegliRegistro(registro.idRegistro)">
+				<div class="panel-body">Registro di Classe</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="btn btn-default" ng-click="scegliRegistro(registro.idRegistro)">
+				<div class="panel-body">Registro registro materia </div>
+			</div>
+		</div>
+	</div>
+</div>

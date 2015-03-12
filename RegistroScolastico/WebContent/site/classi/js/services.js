@@ -1,6 +1,6 @@
-var appelloServices = angular.module ('appelloServices',["ngResource"]);
+var registroServices = angular.module ('registroServices',["ngResource"]);
 
-appelloServices.factory('Appello',['$resource',
+registroServices.factory('Appello',['$resource',
 				function($resource){
 					return $resource('/RegistroScolastico/api/classi/:idClasse/appelli/:idAppello/', null,
 							{
@@ -55,9 +55,9 @@ appelloServices.factory('Appello',['$resource',
 				}]);
 
 
-appelloServices.factory('Compito',['$resource',
+registroServices.factory('Compito',['$resource',
                    				function($resource){
-                   					return $resource('/RegistroScolastico/api/classi/:idClasse/registroDocente/:idRegistroDocente/compiti/:idCompito', null,
+                   					return $resource('/RegistroScolastico/api/classi/:idClasse/registroDocente/:idRegistroDocente/compiti/:idCompito/', null,
                    							{
                    								'get':{
                    									method:'GET',
@@ -76,6 +76,18 @@ appelloServices.factory('Compito',['$resource',
                    								'save':{
                    									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente', idCompito:'@idCompito'},
                    									method:'PUT'
+                   								},
+                   								'queryStudenti':{
+                   									url:'/RegistroScolastico/api/classi/:idClasse/registroDocente/:idRegistroDocente/compiti/:idCompito/studenti',
+                   									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente', idCompito:'@idCompito'},
+                   									method:'GET',
+                   									isArray:true
+                   								},
+                   								'inviaVoti':{
+                   									url:'/RegistroScolastico/api/classi/:idClasse/registroDocente/:idRegistroDocente/compiti/:idCompito/studenti',
+                   									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente', idCompito:'@idCompito'},
+                   									method:'PUT',
+                   									isArray:true
                    								}
                    							});
                    				}]);

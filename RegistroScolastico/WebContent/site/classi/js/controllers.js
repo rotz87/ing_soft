@@ -1,7 +1,6 @@
-var esisto
-var appelloControllers =  angular.module('appelloControllers',[]);
+var registroControllers =  angular.module('registroControllers',[]);
 
-appelloControllers.controller('avviaAppello',['$scope','Appello','$location','$rootScope',function($scope,Appello,$location,$rootScope){
+registroControllers.controller('avviaAppello',['$scope','Appello','$location','$rootScope',function($scope,Appello,$location,$rootScope){
 		$scope.idClasse = 0;
 		$scope.creaAppello = function(miaClasse){
 			if (miaClasse)
@@ -15,22 +14,20 @@ appelloControllers.controller('avviaAppello',['$scope','Appello','$location','$r
 			},function(response,headers){
 				erroreSistema($rootScope, response.data, true)
 			});
-			
 		}
-		
 	}]);
 
-appelloControllers.controller('templateTitolo', ['$scope','$location','$rootScope', function($scope, $location,$rootScope){
-	$scope.testTitle;
+registroControllers.controller('templateTitolo', ['$scope','$location','$rootScope', function($scope, $location,$rootScope){
+	$scope.titolo;
 	$rootScope.$on("$routeChangeSuccess", function(event, currentRoute, previousRoute) {
 	    $rootScope.title = currentRoute.title;
-	    $scope.testTitle = $rootScope.title;
+	    $scope.titolo = $rootScope.title;
 	});
 }]);
 /*
  * Controller utilizzato per visualizzare l'elenco degli appelli in base alla classe selezionata
  */
-appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$location','$http','$rootScope','$q','$routeParams', function($scope, Appello, $location, $http, $rootScope, $q, $routeParams) {
+registroControllers.controller('riempiElencoAppelli', ['$scope','Appello','$location','$http','$rootScope','$q','$routeParams', function($scope, Appello, $location, $http, $rootScope, $q, $routeParams) {
 	  var newUri;
 	  $scope.idClasse = 0;
 	  var nuovoAppello = {};
@@ -138,7 +135,7 @@ appelloControllers.controller('riempiElencoAppelli', ['$scope','Appello','$locat
 
 	});
 
-appelloControllers.controller('faiAppello', ['$scope','Appello','$location','$http','$rootScope','$filter','$q','$routeParams', function($scope, Appello, $location, $http, $rootScope, $filter, $q,$routeParams){
+registroControllers.controller('faiAppello', ['$scope','Appello','$location','$http','$rootScope','$filter','$q','$routeParams', function($scope, Appello, $location, $http, $rootScope, $filter, $q,$routeParams){
 		$scope.appelloSelezionato = {};
 		var nuovoAppello;
 		console.log("$routeParams");
@@ -362,7 +359,7 @@ function retrieveObjectFromUrl($http, resourceUrl, destinazione){
 	return remoteObject;
 }
 
-appelloControllers.controller('popolamentoNavigazione', ['$scope','Appello','$q','$rootScope','$filter','$location', function($scope, Appello, $q, $rootScope,$filter,$location){
+registroControllers.controller('popolamentoNavigazione', ['$scope','Appello','$q','$rootScope','$filter','$location', function($scope, Appello, $q, $rootScope,$filter,$location){
 
 	$scope.$watch("idClasse",
 			function(newValue,oldValue){
@@ -446,7 +443,7 @@ appelloControllers.controller('popolamentoNavigazione', ['$scope','Appello','$q'
 		  };
 		});;
 
-appelloControllers.controller('riempiElencoClassi', ['$scope','Appello','$q','$location','$rootScope', function($scope,Appello,$q,$location,$rootScope) {
+registroControllers.controller('riempiElencoClassi', ['$scope','Appello','$q','$location','$rootScope', function($scope,Appello,$q,$location,$rootScope) {
 
 	$scope.elencoClassi = Appello.elencoClassi({},function(response,header)
 			{
@@ -461,7 +458,7 @@ appelloControllers.controller('riempiElencoClassi', ['$scope','Appello','$q','$l
 	}
 	}])
 
-appelloControllers.controller('recuperaCompitoInClasse', ['$scope','Appello','Compito','$q','$location','$rootScope','$routeParams',
+registroControllers.controller('recuperaCompitoInClasse', ['$scope','Appello','Compito','$q','$location','$rootScope','$routeParams',
     function($scope,Appello,Compito,$q,$location,$rootScope,$routeParams) {
 	
 	$scope.idClasse = $rootScope.idClasse;
@@ -498,37 +495,59 @@ appelloControllers.controller('recuperaCompitoInClasse', ['$scope','Appello','Co
 		var auxArgomento = {idArgomento : null};
 		console.log($scope.compitoInClasse.argomentiRS.length)
 		$scope.compitoInClasse.argomentiRS.push(auxArgomento);
-		
+		$scope.argsChecked = true;
 		console.log($scope.compitoInClasse.argomentiRS)
 	}
 	$scope.aggiornaCompito = function(){
-		console.log("aggiornaCompito()")
 		var CompitoInClasse = Compito.get({idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito});
-		
-		console.log("inizio ciclo")
 		temp = {};
 		for (key in $scope.compitoInClasse.toJSON())
 			{
 			temp[key] = $scope.compitoInClasse.toJSON()[key];
 			}
-		console.log("fine ciclo")
-		console.log(temp);
 		temp.data = new Date(temp.data).getTime();
 		temp.oraInizio = new Date(temp.oraInizio).getTime();
 		temp.oraFine = new Date(temp.oraFine).getTime();
-		console.log("asdasd")
-		console.log(temp.argomentiRS)
 		if (temp.argomentiRS.class = String.class)
 			{
 				temp.argomentiRS = angular.toJSON(temp.argomentiRS);
 			}
-		console.log("dopo l'if");
-		console.log(temp);
-		Compito.save({idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito},temp);
+		Compito.save({idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito}, temp.argomentiRS);
 	}
+	var studenti = [{"id":1,"cognome":"a","nome":"b","voto":8,"assente":false},
+	                {"id":2,"cognome":"c","nome":"d","voto":null,"assente":true},
+	                {"id":3,"cognome":"e","nome":"f","voto":8,"assente":false},
+	                {"id":4,"cognome":"g","nome":"h","voto":null,"assente":true}]
+	$scope.studentiCompito = studenti;
+	$scope.intervalloVoti = [0,1,2,3,4,5,6,7,8,9,10]
+	$scope.inserisciVoto = function(studente,voto){
+		studente.voto = voto;
+	}
+	$scope.salvaVoti = function(){
+		var tmpStudenti = [];
+		console.log("studenti prima del ciclo");
+		console.log(tmpStudenti);
+		for (index in $scope.studentiCompito)
+		{
+			if($scope.studentiCompito[index].assente == false)
+			{
+				stud = {};
+				stud.idStudente = $scope.studentiCompito[index].idStudente
+				stud.voto = $scope.studentiCompito[index].voto
+				tmpStudenti.push(stud);
+			}
+		}
+		console.log("studenti dopo il ciclo");
+		console.log(tmpStudenti);
+		Compito.inviaVoti({idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito}, tmpStudenti);
+	}
+	$scope.absChecked=true;
+	
+	var studentiCompito = Compito.queryStudenti({idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito});
+	$scope.studentiCompito = studentiCompito;
 }])
 
-appelloControllers.controller('riempiElencoCompiti', 
+registroControllers.controller('riempiElencoCompiti', 
 		['$scope','Appello','$q','$location','$rootScope','$resource','$routeParams',
 		 function($scope,Appello,$q,$location,$rootScope,$resource,$routeParams) 
 		 {
@@ -548,11 +567,10 @@ appelloControllers.controller('riempiElencoCompiti',
 							idCompito = idCompito[idCompito.length-1]
 							$location.path($location.path()+idCompito+"/")
 						})
-				//console.log($location.path($location.path()+"1"))
 			}
 	
 }])
-appelloControllers.controller('colonnaSinistra',
+registroControllers.controller('colonnaSinistra',
 		['$scope','Appello','$rootScope','$routeParams',
 		 function($scope,Appello,$rootScope,$routeParams)
 		 {

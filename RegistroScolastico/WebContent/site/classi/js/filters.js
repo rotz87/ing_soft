@@ -1,5 +1,5 @@
-var appelloFilters =  angular.module('appelloFilters',[]);
-appelloFilters.filter('assente', function() {
+var registroFilters =  angular.module('registroFilters',[]);
+registroFilters.filter('assente', function() {
 	return function(input,arrayIdStudenti) {
 		var output = {};
 		if (input) {
@@ -27,7 +27,7 @@ appelloFilters.filter('assente', function() {
 		return output;
 	};
 });
-appelloFilters.filter('boolAssenza',function(){
+registroFilters.filter('boolAssenza',function(){
 	return function (input)
 	{
 		var res;

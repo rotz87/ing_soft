@@ -1,0 +1,110 @@
+
+<div class="col-md-8">
+	<h1 class="text-center"> Crea Compito </h1>
+	
+	<form class="css-form form-horizontal" novalidate>
+		<fieldset>
+		<legend > Dati compito <input class="mostraNascondi_{{datiChecked}} " type="checkbox" id="visibile" ng-model="datiChecked" ></legend>
+		<div class="animaScomparsa" ng-show="datiChecked">
+		<div class="form-group">
+			<label for="dataCompito" class="col-sm-2 control-label" >Data</label>
+			<div class="col-sm-10">
+				<input id="dataCompito" type="date" ng-model="compitoInClasse.data"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="oraInizioCompito" class="col-sm-2 control-label" >Ora inizio </label>
+			<div class="col-sm-10">
+			<input id="oraInizioCompito" type="time" ng-model="compitoInClasse.oraInizio"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="oraFineCompito" class="col-sm-2 control-label" >Ora fine </label>
+			<div class="col-sm-10">
+				<input id="oraFineCompito" type="time" ng-model="compitoInClasse.oraFine" required/>
+			</div>
+		</div>
+		</div>
+			<fieldset>
+				<legend> Argomenti <input class="mostraNascondi_{{argsChecked}} " type="checkbox" id="visibile" ng-model="argsChecked"></legend>
+				<fieldset class="animaScomparsa" ng-repeat="argomento in compitoInClasse.argomentiRS" ng-show="argsChecked">
+					<legend> argomento id{{argomento.idArgomento}}</legend>
+					<div class="form-group col-sm-12 col-md-12 col-lg-12" >
+						<label for="idArgomento{{argomento.idArgomento}}" class="col-sm-3 col-md-3 col-lg-3 control-label" >id argomento</label>
+						<div class="col-sm-8 col-md-8 col-lg-8">
+							<input id="idArgomento{{argomento.idArgomento}}" ng-model="argomento.idArgomento"type="text" required/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="nomeArgomento{{argomento.idArgomento}}" class="col-sm-3 col-md-3 col-lg-3 control-label">nome Argomento</label>
+						<div class="col-sm-8 col-md-8 col-lg-8" >
+							<input id="nomeArgomento{{argomento.idArgomento}}" ng-model="argomento.nome"type="text" required/>
+						</div>
+					</div>
+				</fieldset>
+			<div class="text-center">
+				<button class="btn btn-info" ng-click="aggiungiArgomento()"> Aggiungi Argomento</button><br>
+			</div>
+			</fieldset>
+			<fieldset>
+				<legend> Studenti <input class="mostraNascondi_{{stdChecked}}" type="checkbox" ng-model="stdChecked"></legend>
+				<fieldset class="animaScomparsa" ng-show="stdChecked">
+				<div ng-hide="absChecked">mostra presenti <input class="mostraNascondi_{{absChecked}}" type="checkbox" ng-model="absChecked"></div>
+				<div ng-show="absChecked">nascondi assenti<input class="mostraNascondi_{{absChecked}}" type="checkbox" ng-model="absChecked"></div>
+					<table class="table table-responsive table-hover table-striped">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th class=""><a href="" ng-click="predicate = 'cognome'; reverse=!reverse">Cognome</a>
+												
+											</th>
+									<th class=""><a href="" ng-click="predicate = 'nome'; reverse=!reverse">Nome</a></th>
+									<th class="col-md-4 text-center">Voto</th>
+									<th class="text-center">Assente</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="animaScomparsa" ng-repeat="studente in studentiCompito | orderBy:predicate:reverse" ng-show="absChecked || !studente.assente">
+									<td>{{$index+1}}</td>
+									<td>{{studente.cognome}}</td>
+									<td>{{studente.nome}}</td>
+									<td>
+										    <div class="input-group " ng-hide="studente.assente">
+										      <input type="number" min="0" max="10" class="form-control" ng-model="studente.voto" aria-label="..." ng-disabled="studente.assente">
+										      <div class="input-group-btn">
+										        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Voto <span class="caret"></span></button>
+										        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+										          
+										          <li ng-repeat="n in intervalloVoti"><a ng-click="inserisciVoto(studente,n)">{{n}}</a></li>
+										        </ul>
+										      </div><!-- /btn-group -->
+										    </div><!-- /input-group -->
+										    <div ng-show="studente.assente"> <em>Lo studente risulta assente</em></div>
+									</td>
+									<td>
+										<div class="myCheckbox col-md-12 text-center">
+											<input name="Assenza" type="checkbox"
+												ng-model="studente.assente"
+												ng-click="segnaAssenza(studente.idStudente)" 
+												ng-true-value="true" 
+												ng-false-value="false"
+												ng-disabled = "true">
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</fieldset>
+			<div class="text-center">
+				<button class="btn btn-info" ng-click="salvaVoti()"> action ?</button><br>
+			</div>
+			</fieldset>
+			<fieldset>
+			<legend> Salva</legend>
+			<div class="text-center">
+				<button class="btn btn-info" ng-click="aggiornaCompito()"> Salva Compito</button>
+			</div>
+			</fieldset>
+		</fieldset>
+	</form>
+</div>

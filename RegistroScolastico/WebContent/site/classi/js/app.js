@@ -1,10 +1,11 @@
-var appelloApp = angular.module('appelloApp',[
-                                              'appelloControllers',
-                                              'appelloServices',
-                                              'appelloFilters',
-                                              'ngRoute'
+var registroApp = angular.module('registroApp',[
+                                              'registroControllers',
+                                              'registroServices',
+                                              'registroFilters',
+                                              'ngRoute',
+                                              'ngAnimate'
                                               ]);
-appelloApp.config(["$locationProvider","$routeProvider",function($locationProvider,$routeProvider) 
+registroApp.config(["$locationProvider","$routeProvider",function($locationProvider,$routeProvider) 
 {
   $routeProvider
   .when('/:idClasse/appelli/:idAppello/',{
