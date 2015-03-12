@@ -59,6 +59,15 @@
 	top:25%;
 	left:30%;
 }
+
+.css-form input.ng-invalid.ng-touched {
+  background-color: #FA787E;
+}
+
+.css-form input.ng-valid.ng-touched {
+  background-color: #78FA89;
+}
+
 body { padding-top: 70px; }
 /*
 @brand-primary: darken(#428bca, 6.5%); // #337ab7

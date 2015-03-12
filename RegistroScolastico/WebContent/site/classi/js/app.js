@@ -4,19 +4,38 @@ var appelloApp = angular.module('appelloApp',[
                                               'appelloFilters',
                                               'ngRoute'
                                               ]);
-appelloApp.value('$sniffer', { history: false });
 appelloApp.config(["$locationProvider","$routeProvider",function($locationProvider,$routeProvider) 
 {
-  $routeProvider.when('/:idClasse/appelli/:idAppello',{
+  $routeProvider
+  .when('/:idClasse/appelli/:idAppello/',{
 	  templateUrl: 'partials/appelloParziale.html',
 	  controller: 'faiAppello',
 	  title:'Fai l\'appello'
-  })
-  .when('/:idClasse/',{
+  }).when('/:idClasse/',{
 	  templateUrl: 'partials/elencoAppelli.html',
 	  controller: 'riempiElencoAppelli',
 	  title:'seleziona l\'appello'
-  }).when('/:idClasse/appelli',{
+  }).when('/:idClasse/registri',{
+	  templateUrl: 'partials/menuClasse.html',
+	  controller: '',
+	  title:'seleziona il registro'
+  }).when('/:idClasse/registri/registroDocente/',{
+	  templateUrl: 'partials/compito.html',
+	  controller: '',
+	  title:'seleziona il registro Docente'
+  }).when('/:idClasse/registri/registroDocente/:idRegistroDocente',{
+	  templateUrl: 'partials/compito.html',
+	  controller: '',
+	  title:'seleziona l\'operazione'
+  }).when('/:idClasse/registri/registroDocente/:idRegistroDocente/compiti/',{
+	  templateUrl: 'partials/elencoCompiti.html',
+	  controller: 'riempiElencoCompiti',
+	  title:'elenco dei compiti'
+  }).when('/:idClasse/registri/registroDocente/:idRegistroDocente/compiti/:idCompito',{
+	  templateUrl: 'partials/compito.html',
+	  controller: 'recuperaCompitoInClasse',
+	  title:'imposta il compito'
+  }).when('/:idClasse/appelli/',{
 	  redirectTo:function(routeParams){
 		  return "/"+routeParams.idClasse+'/';
 	  }
@@ -26,5 +45,5 @@ appelloApp.config(["$locationProvider","$routeProvider",function($locationProvid
 	  controller:'riempiElencoClassi',
 	  title:'seleziona la classe'
   })
-  $locationProvider.html5Mode(true);
+  //$locationProvider.html5Mode({enabled:true,requireBase:true});
 }]);
