@@ -24,6 +24,7 @@ import domain.model.RegistroAssenze;
 import domain.model.RegistroDocente;
 import domain.model.Scuola;
 import domain.model.Studente;
+import domain.model.Voto;
 
 public class ResetDB {
 
@@ -433,16 +434,6 @@ public class ResetDB {
 			appello_2A_16_12_14.setAssenzePrese(true);
 			appello_1B_16_12_14.setAssenzePrese(true);
 			appello_2B_16_12_14.setAssenzePrese(true);
-
-			// FINE CODICE PRESO DA DBFake
-			
-			RSPersistentManager.instance().getSession().save(scuola1);
-			
-			GiornoSettimanaleFestivo sabato = new GiornoSettimanaleFestivo(6);
-			GiornoSettimanaleFestivo domenica = new GiornoSettimanaleFestivo(7);
-			
-			RSPersistentManager.instance().getSession().save(sabato);
-			RSPersistentManager.instance().getSession().save(domenica);
 			
 //			Materia storia = new Materia();
 //			registroRossiPrimaA.setMateria(storia);
@@ -473,6 +464,22 @@ public class ResetDB {
 			compitoStoria1A.setInsegnamento(registroRossiPrimaA);
 			registroRossiPrimaA.getCompitiInClasse().add(compitoStoria1A);
 			
+
+			
+			Voto voto;
+			for (int i = 1; i<11; i++){
+				voto = new Voto();
+				voto.setVoto((byte)i);
+				RSPersistentManager.instance().getSession().save(voto);
+			}
+			
+			RSPersistentManager.instance().getSession().save(scuola1);
+			
+			GiornoSettimanaleFestivo sabato = new GiornoSettimanaleFestivo(6);
+			GiornoSettimanaleFestivo domenica = new GiornoSettimanaleFestivo(7);
+			
+			RSPersistentManager.instance().getSession().save(sabato);
+			RSPersistentManager.instance().getSession().save(domenica);
 			
 //			domain.model.Studente ldomainmodelStudente = new domain.model.Studente();			// Initialize the properties of the persistent object here
 //			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelStudente);
@@ -524,16 +531,16 @@ public class ResetDB {
 			
 			t.commit();
 			
-			Stampa.stampaln("libretto: "+ pieroRusso.getLibrettoVoti());
-			Stampa.stampaln("libretto: "+ marinoEsposito.getLibrettoVoti());
-			Stampa.stampaln("libretto: "+ marioRomano.getLibrettoVoti());
-			Stampa.stampaln("libretto: "+ davideDiSalvo.getLibrettoVoti());
-			Stampa.stampaln("libretto: "+ ivoMarino.getLibrettoVoti());
-			Stampa.stampaln("libretto: "+ leonardoRicci.getLibrettoVoti());
-			Stampa.stampaln("libretto: "+ valentinoFarina.getLibrettoVoti());
-			Stampa.stampaln("libretto: "+ roccoBenedetti.getLibrettoVoti());
-			Stampa.stampaln("libretto: "+ antonioGuerra.getLibrettoVoti());
-			Stampa.stampaln("libretto: "+ cristinaAngeli.getLibrettoVoti());
+//			Stampa.stampaln("libretto: "+ pieroRusso.getLibrettoVoti());
+//			Stampa.stampaln("libretto: "+ marinoEsposito.getLibrettoVoti());
+//			Stampa.stampaln("libretto: "+ marioRomano.getLibrettoVoti());
+//			Stampa.stampaln("libretto: "+ davideDiSalvo.getLibrettoVoti());
+//			Stampa.stampaln("libretto: "+ ivoMarino.getLibrettoVoti());
+//			Stampa.stampaln("libretto: "+ leonardoRicci.getLibrettoVoti());
+//			Stampa.stampaln("libretto: "+ valentinoFarina.getLibrettoVoti());
+//			Stampa.stampaln("libretto: "+ roccoBenedetti.getLibrettoVoti());
+//			Stampa.stampaln("libretto: "+ antonioGuerra.getLibrettoVoti());
+//			Stampa.stampaln("libretto: "+ cristinaAngeli.getLibrettoVoti());
 			
 //			 pieroRusso 
 //			 marinoEsposito

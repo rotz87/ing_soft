@@ -96,20 +96,20 @@ public class CompitoInClasseController {
 	 * @param idStudenti
 	 * @param idVoti
 	 */
-	public void inserisciVoti(int idCompito, int[] idStudenti, int[] idVoti) {
+	public void inserisciVoti(int idCompito, int[] idStudenti, byte[] votiByte) {
+		//TODO: non piace a marco
 		CompitoInClasseCriteria compitoCriteria;
 		StudenteCriteria studenteCriteria;
 		VotoCriteria votoCriteria;
 		
 		CompitoInClasse compito;
 		Studente[] studenti = new Studente[idStudenti.length];
-		Voto[] voti = new Voto[idVoti.length];
+		Voto[] voti = new Voto[votiByte.length];
 		RegistroDocente registroDocente;
 		
 		try {
 			compitoCriteria = new CompitoInClasseCriteria();
 			studenteCriteria = new StudenteCriteria();
-			votoCriteria = new VotoCriteria();
 		} catch (PersistentException e) {
 			throw new RuntimeException(ErrorMessage.COMPITO_UNLOADED);
 		}
@@ -120,8 +120,17 @@ public class CompitoInClasseController {
 		studenteCriteria.ID.in(idStudenti);
 		studenti = studenteCriteria.listStudente();
 		
-		votoCriteria.ID.in(idVoti);
-		voti = votoCriteria.listVoto();
+		try {
+			for(int i = 0; i< votiByte.length; i++){
+				votoCriteria = new VotoCriteria();
+				votoCriteria.voto.eq(votiByte[i]);
+				voti[i] = votoCriteria.uniqueVoto();
+			}
+		} catch (PersistentException e) {
+			throw new RuntimeException(ErrorMessage.VOTI_UNLOADED);
+		}
+//		votoCriteria.voto.in(votiByte);
+//		voti = votoCriteria.listVoto();
 		
 		registroDocente = compito.getInsegnamento();
 		

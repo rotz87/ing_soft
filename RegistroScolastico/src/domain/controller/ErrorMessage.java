@@ -23,5 +23,6 @@ public class ErrorMessage {
 	public static final String COMPITO_NOT_BELONGING = "Il compito non è presente nel libretto";
 	public static final String LISTA_STUDENTI_WRONG = "Gli studenti specificati non ...?";
 	public static final String VOTI_NON_INSERIBILI = "Impossibile inserire i voti";
+	public static final String VOTI_UNLOADED = "Impossibile caricare i voti";
 			
 }
