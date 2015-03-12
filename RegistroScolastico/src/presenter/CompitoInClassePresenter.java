@@ -2,10 +2,9 @@ package presenter;
 
 import java.net.URI;
 import java.util.Collection;
-import java.util.LinkedHashSet;
 import java.util.LinkedList;
+import java.util.Map;
 
-import org.hibernate.metamodel.relational.Size;
 import org.springframework.hateoas.Link;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import presenter.resourceSupport.appello.AppelloRS;
-import presenter.resourceSupport.appello.AssentiContainerRS;
 import presenter.resourceSupport.compito.ArgomentiContainerRS;
 import presenter.resourceSupport.compito.ArgomentoRS;
 import presenter.resourceSupport.compito.CompitoInClasseRS;
@@ -25,10 +22,10 @@ import presenter.resourceSupport.compito.StudenteCompitoRS;
 import service.Stampa;
 import domain.controller.CompitoInClasseController;
 import domain.controller.DocenteController;
-import domain.controller.FaiAppelloController;
-import domain.model.Appello;
+import domain.model.Argomento;
 import domain.model.CompitoInClasse;
-import domain.model.Argomento;;
+import domain.model.Studente;
+import domain.model.Voto;
 
 
 @RestController
@@ -145,12 +142,53 @@ public class CompitoInClassePresenter {
 	  }
 	  
 	  @RequestMapping(value = "/{idCompitoInClasse}/studenti", method = RequestMethod.GET)
-	  public StudenteCompitoRS getStudentiCompito(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse) {
-	  
-	  
-	  
-	  	return null;
-	  
+	  public Collection<StudenteCompitoRS> getStudentiCompito(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse) {
+		  
+		  //TODO Controllare i parametri che non servono
+		  
+		  CompitoInClasseController compitoInClasseController;
+		  Map<Studente, Boolean> assenze;
+		  Map<Studente, Voto> voti;
+		  Collection<StudenteCompitoRS> studentiCompito;
+
+		  compitoInClasseController = new CompitoInClasseController();
+
+		  assenze = compitoInClasseController.getAssenzeCompito(idCompitoInClasse);
+		  voti = compitoInClasseController.getVotiCompito(idCompitoInClasse);
+		  
+		  studentiCompito = new LinkedList<StudenteCompitoRS>();
+		  for (Studente studente : assenze.keySet()) {
+			studentiCompito.add(new StudenteCompitoRS(studente, voti.get(studente), assenze.get(studente)));
+		  }
+		  
+		  return studentiCompito;
+		  
 	  }
 	  
+	  @RequestMapping(value = "/{idCompitoInClasse}/studenti", method = RequestMethod.PUT)
+	  public ResponseEntity<?> updateStudentiCompito(@PathVariable int idCompitoInClasse, @RequestBody StudenteCompitoRS[] studentiCompito) {
+		   
+		  CompitoInClasseController compitoInClasseController;
+		  int[] idStudenti;
+		  byte[] voti;
+		  int size;
+		  
+		  compitoInClasseController = new CompitoInClasseController();
+		  size = studentiCompito.length;
+		  idStudenti = new int[size];
+		  voti = new byte[size];
+
+		  for(int i=0;i<size;i++){
+			  idStudenti[i] = studentiCompito[i].getIdStudente();
+			  voti[i] = studentiCompito[i].getVoto();
+		  }
+		  
+		  compitoInClasseController.inserisciVoti(idCompitoInClasse, idStudenti, voti);
+		  
+		  HttpHeaders httpHeaders;
+		  httpHeaders = new HttpHeaders();
+		  HttpStatus httpStatus = HttpStatus.OK;
+		  
+		  return new ResponseEntity<>(null, httpHeaders, httpStatus);
+	  }
 }

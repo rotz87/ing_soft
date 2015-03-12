@@ -9,24 +9,24 @@ public class StudenteCompitoRS extends ResourceSupport {
 	private int idStudente;
 	private String nome;
 	private String cognome;
-	private byte voto;
+	private Byte voto;
 	private boolean assente;
+	
+	public StudenteCompitoRS(){
+		
+	}
 	
 	public StudenteCompitoRS(Studente studente, Voto voto, boolean assente){
 		this.idStudente = studente.getID();
 		this.nome = studente.getNome();
 		this.cognome = studente.getCognome();
-		this.voto = voto.getVoto();
 		this.assente = assente;
+		this.voto = null;
+		if(voto!=null){
+			this.voto = voto.getVoto();
+		}
 	}
 	
-	public StudenteCompitoRS(int idStudente, byte voto){
-		this.idStudente = idStudente;
-		this.nome = null;
-		this.cognome = null;
-		this.voto = voto;
-		this.assente = false;
-	}
 
 	public int getIdStudente() {
 		return idStudente;
@@ -52,11 +52,11 @@ public class StudenteCompitoRS extends ResourceSupport {
 		this.cognome = cognome;
 	}
 
-	public byte getVoto() {
+	public Byte getVoto() {
 		return voto;
 	}
 
-	public void setVoto(byte voto) {
+	public void setVoto(Byte voto) {
 		this.voto = voto;
 	}
 
