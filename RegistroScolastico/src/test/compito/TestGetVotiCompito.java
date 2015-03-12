@@ -22,7 +22,7 @@ public class TestGetVotiCompito {
 				CompitoInClasseController compitoController = new CompitoInClasseController();
 				Map<Studente, Voto> mapVoti = compitoController.getVotiCompito(idCompitoInClasse);
 				Stampa.stampaln();
-				Stampa.stampaln("VISUALIZZAZIONE STUDENTI E VOTI _________________________ \n \n");
+				Stampa.stampaln("VISUALIZZAZIONE STUDENTI E VOTI COMPITO CON ID = "+idCompitoInClasse+ "_________________________ \n \n");
 				Iterator entries = mapVoti.entrySet().iterator();
 				while (entries.hasNext()) {
 				  Entry thisEntry = (Entry) entries.next();
@@ -33,7 +33,7 @@ public class TestGetVotiCompito {
 				  Stampa.stampaln("VOTO :"+ voto);
 				  
 				}
-				Stampa.stampaln("________________________________________FINE");
+				Stampa.stampaln("___________________________________________________________________________FINE");
 				Stampa.stampaln();
 			}
 			finally {

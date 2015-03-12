@@ -154,6 +154,7 @@ public class ResetDB {
 			Studente fabrizioToscani = new Studente("Fabrizio", "Toscani");
 			Studente arturoAncona = new Studente("Arturo", "Ancona");
 			
+			Studente[]studenti  = {pieroRusso, marinoEsposito, marioRomano, davideDiSalvo, ivoMarino, leonardoRicci, valentinoFarina, roccoBenedetti, antonioGuerra, cristinaAngeli, mariannaDonati, elenaSarti, mariaPiaAlfredi, giorgioGatti, lorenzoNegri, mattiaVitali, emanueleDelMonte, 	luigiBernardi, vittorioPellegrini, alexVilla, marcoBattaglia, alfredoMorelli, pieraDellaValle, ignazioBoschi, jacopoValli, gianniConte, lucaBarone, giacomoSiciliano, fabrizioToscani, arturoAncona};
 			
 //			GLI STUDENTI VENGONO SALVATI UNO ALLA VOLTA PERCHE' CI SERVONO GLI ID DA METTERE NELLA MAP
 //			RSPersistentManager.instance().getSession().save(pieroRusso);
@@ -194,53 +195,53 @@ public class ResetDB {
 //				LibrettoAssenze libretto =  new LibrettoAssenze();
 			LibrettoAssenze librettoMarioRomano = new LibrettoAssenze();
 			marioRomano.setLibrettoAssenze(librettoMarioRomano);
-			LibrettoVoti librettoVotioMarioRomano = new LibrettoVoti();
-			marioRomano.setLibrettoVoti(librettoVotioMarioRomano);
+//			LibrettoVoti librettoVotioMarioRomano = new LibrettoVoti();
+//			marioRomano.setLibrettoVoti(librettoVotioMarioRomano);
 			
 			LibrettoAssenze librettoDavideDiSalvo =  new LibrettoAssenze();
 			davideDiSalvo.setLibrettoAssenze(librettoDavideDiSalvo);
-			LibrettoVoti librettoVotiDavideDiSalvo = new LibrettoVoti();
-			davideDiSalvo.setLibrettoVoti(librettoVotiDavideDiSalvo);
+//			LibrettoVoti librettoVotiDavideDiSalvo = new LibrettoVoti();
+//			davideDiSalvo.setLibrettoVoti(librettoVotiDavideDiSalvo);
 			
 			LibrettoAssenze librettoIvoMarino = new LibrettoAssenze();
 			ivoMarino.setLibrettoAssenze(librettoIvoMarino);
-			LibrettoVoti librettoVotiIvoMarino = new LibrettoVoti();
-			ivoMarino.setLibrettoVoti(librettoVotiIvoMarino);
+//			LibrettoVoti librettoVotiIvoMarino = new LibrettoVoti();
+//			ivoMarino.setLibrettoVoti(librettoVotiIvoMarino);
 			
 			LibrettoAssenze librettoPieroRusso = new LibrettoAssenze();
 			pieroRusso.setLibrettoAssenze(librettoPieroRusso);
-			LibrettoVoti librettoVotiPieroRusso = new LibrettoVoti();
-			pieroRusso.setLibrettoVoti(librettoVotiPieroRusso);
+//			LibrettoVoti librettoVotiPieroRusso = new LibrettoVoti();
+//			pieroRusso.setLibrettoVoti(librettoVotiPieroRusso);
 			
 			LibrettoAssenze librettoMarinoEsposito =  new LibrettoAssenze();
 			marinoEsposito.setLibrettoAssenze(librettoMarinoEsposito);
-			LibrettoVoti librettoVotiMarinoEsposito = new LibrettoVoti();
-			marinoEsposito.setLibrettoVoti(librettoVotiMarinoEsposito);
+//			LibrettoVoti librettoVotiMarinoEsposito = new LibrettoVoti();
+//			marinoEsposito.setLibrettoVoti(librettoVotiMarinoEsposito);
 			
 			LibrettoAssenze librettoLeonardoRicci =  new LibrettoAssenze();
 			leonardoRicci.setLibrettoAssenze(librettoLeonardoRicci);
-			LibrettoVoti librettoVotiLeonardoRicci = new LibrettoVoti();
-			leonardoRicci.setLibrettoVoti(librettoVotiLeonardoRicci);
+//			LibrettoVoti librettoVotiLeonardoRicci = new LibrettoVoti();
+//			leonardoRicci.setLibrettoVoti(librettoVotiLeonardoRicci);
 			
 			LibrettoAssenze librettoValentinoFarina =  new LibrettoAssenze();
 			valentinoFarina.setLibrettoAssenze(librettoValentinoFarina);
-			LibrettoVoti librettoVotiValentinoFarina = new LibrettoVoti();
-			valentinoFarina.setLibrettoVoti(librettoVotiValentinoFarina);
+//			LibrettoVoti librettoVotiValentinoFarina = new LibrettoVoti();
+//			valentinoFarina.setLibrettoVoti(librettoVotiValentinoFarina);
 			
 			LibrettoAssenze librettoRoccoBenedetti =  new LibrettoAssenze();
 			roccoBenedetti.setLibrettoAssenze(librettoRoccoBenedetti);
-			LibrettoVoti librettoVotiRoccoBenedetti = new LibrettoVoti();
-			roccoBenedetti.setLibrettoVoti(librettoVotiRoccoBenedetti);
+//			LibrettoVoti librettoVotiRoccoBenedetti = new LibrettoVoti();
+//			roccoBenedetti.setLibrettoVoti(librettoVotiRoccoBenedetti);
 			
 			LibrettoAssenze librettoAntonioGuerra =  new LibrettoAssenze();
 			antonioGuerra.setLibrettoAssenze(librettoAntonioGuerra);
-			LibrettoVoti librettoVotiAntonioGuerra = new LibrettoVoti();
-			antonioGuerra.setLibrettoVoti(librettoVotiAntonioGuerra);
+//			LibrettoVoti librettoVotiAntonioGuerra = new LibrettoVoti();
+//			antonioGuerra.setLibrettoVoti(librettoVotiAntonioGuerra);
 			
 			LibrettoAssenze librettoCristinaAngeli =  new LibrettoAssenze();
 			cristinaAngeli.setLibrettoAssenze(librettoCristinaAngeli);
-			LibrettoVoti librettoVotiCristinaAngeli = new LibrettoVoti();
-			cristinaAngeli.setLibrettoVoti(librettoVotiCristinaAngeli);
+//			LibrettoVoti librettoVotiCristinaAngeli = new LibrettoVoti();
+//			cristinaAngeli.setLibrettoVoti(librettoVotiCristinaAngeli);
 			
 			LibrettoAssenze librettoMariannaDonati =  new LibrettoAssenze();
 			mariannaDonati.setLibrettoAssenze(librettoMariannaDonati);
@@ -284,6 +285,12 @@ public class ResetDB {
 			fabrizioToscani.setLibrettoAssenze(librettoFabrizioToscani);
 			LibrettoAssenze librettoArturoAncona =  new LibrettoAssenze();
 			arturoAncona.setLibrettoAssenze(librettoArturoAncona);
+			
+			LibrettoVoti librettoVoti;
+			for(Studente studente : studenti){
+				librettoVoti = new LibrettoVoti();
+				studente.setLibrettoVoti(librettoVoti);
+			}
 			
 			//creazione dei registri
 			RegistroAssenze regAssPrimaA = new RegistroAssenze();
@@ -435,7 +442,17 @@ public class ResetDB {
 			appello_1B_16_12_14.setAssenzePrese(true);
 			appello_2B_16_12_14.setAssenzePrese(true);
 			
+			Voto[] votos = new Voto[11];
+			Voto voto;
+			for (int i = 1; i<11; i++){
+				voto = new Voto();
+				voto.setVoto((byte)i);
+				votos[i] = voto;
+				RSPersistentManager.instance().getSession().save(voto);
+			}
+			
 //			Materia storia = new Materia();
+//			storia.setNome("Storia");
 //			registroRossiPrimaA.setMateria(storia);
 			
 			Collection<Argomento> argomenti = new LinkedList<Argomento>();
@@ -458,20 +475,19 @@ public class ResetDB {
 			compitoStoria1A.setInsegnamento(registroRossiPrimaA);
 			registroRossiPrimaA.getCompitiInClasse().add(compitoStoria1A);
 			
+			Voto[] voti = {        votos[4],   votos[8],     votos[9],     votos[7],        votos[5],       votos[7],      votos[6]};
+			Studente[] studentiCompito ={ pieroRusso, marioRomano, leonardoRicci, valentinoFarina, roccoBenedetti, antonioGuerra, cristinaAngeli};
+			
+			registroRossiPrimaA.inserisciVoti(compitoStoria1A, studentiCompito, voti);
+			
 			argomenti.clear();
 			compitoStoria1A = new CompitoInClasse();
 			compitoStoria1A.setInfo(java.sql.Date.valueOf("2014-12-15"), java.sql.Time.valueOf("10:00:00"), java.sql.Time.valueOf("11:30:00"), argomenti);
 			compitoStoria1A.setInsegnamento(registroRossiPrimaA);
 			registroRossiPrimaA.getCompitiInClasse().add(compitoStoria1A);
 			
-
 			
-			Voto voto;
-			for (int i = 1; i<11; i++){
-				voto = new Voto();
-				voto.setVoto((byte)i);
-				RSPersistentManager.instance().getSession().save(voto);
-			}
+			
 			
 			RSPersistentManager.instance().getSession().save(scuola1);
 			
@@ -531,16 +547,7 @@ public class ResetDB {
 			
 			t.commit();
 			
-//			Stampa.stampaln("libretto: "+ pieroRusso.getLibrettoVoti());
-//			Stampa.stampaln("libretto: "+ marinoEsposito.getLibrettoVoti());
-//			Stampa.stampaln("libretto: "+ marioRomano.getLibrettoVoti());
-//			Stampa.stampaln("libretto: "+ davideDiSalvo.getLibrettoVoti());
-//			Stampa.stampaln("libretto: "+ ivoMarino.getLibrettoVoti());
-//			Stampa.stampaln("libretto: "+ leonardoRicci.getLibrettoVoti());
-//			Stampa.stampaln("libretto: "+ valentinoFarina.getLibrettoVoti());
-//			Stampa.stampaln("libretto: "+ roccoBenedetti.getLibrettoVoti());
-//			Stampa.stampaln("libretto: "+ antonioGuerra.getLibrettoVoti());
-//			Stampa.stampaln("libretto: "+ cristinaAngeli.getLibrettoVoti());
+
 			
 //			 pieroRusso 
 //			 marinoEsposito

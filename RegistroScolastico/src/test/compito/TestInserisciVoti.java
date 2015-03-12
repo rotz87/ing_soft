@@ -19,7 +19,7 @@ public class TestInserisciVoti {
 	CompitoInClasseController controlloreCompito; 
 	int idRegistroDocenteProva = 1;
 	int idDocenteProva = 31;
-	int idCompitoProva = 1;
+	int idCompitoProva = 2;
 	CompitoInClasse compito = null;
 	
 	int[] idStudenti = {1,8,9};
