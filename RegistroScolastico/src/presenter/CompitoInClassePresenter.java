@@ -2,6 +2,7 @@ package presenter;
 
 import java.net.URI;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -169,21 +170,16 @@ public class CompitoInClassePresenter {
 	  public ResponseEntity<?> updateStudentiCompito(@PathVariable int idCompitoInClasse, @RequestBody StudenteCompitoRS[] studentiCompito) {
 		   
 		  CompitoInClasseController compitoInClasseController;
-		  int[] idStudenti;
-		  byte[] voti;
-		  int size;
+		  Map<Integer, Byte> mapVoti;
 		  
 		  compitoInClasseController = new CompitoInClasseController();
-		  size = studentiCompito.length;
-		  idStudenti = new int[size];
-		  voti = new byte[size];
-
-		  for(int i=0;i<size;i++){
-			  idStudenti[i] = studentiCompito[i].getIdStudente();
-			  voti[i] = studentiCompito[i].getVoto();
+		  mapVoti = new HashMap<Integer, Byte>();
+		  
+		  for(StudenteCompitoRS studenteConpitoRS : studentiCompito){
+			  mapVoti.put(studenteConpitoRS.getIdStudente(), studenteConpitoRS.getVoto());
 		  }
 		  
-		  compitoInClasseController.inserisciVoti(idCompitoInClasse, idStudenti, voti);
+		  compitoInClasseController.inserisciVoti(idCompitoInClasse, mapVoti);
 		  
 		  HttpHeaders httpHeaders;
 		  httpHeaders = new HttpHeaders();

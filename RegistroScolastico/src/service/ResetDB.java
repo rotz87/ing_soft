@@ -1,7 +1,9 @@
 package service;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 import org.joda.time.LocalDate;
 import org.orm.ORMDatabaseInitiator;
@@ -475,10 +477,21 @@ public class ResetDB {
 			compitoStoria1A.setInsegnamento(registroRossiPrimaA);
 			registroRossiPrimaA.getCompitiInClasse().add(compitoStoria1A);
 			
-			Voto[] voti = {        votos[4],   votos[8],     votos[9],     votos[7],        votos[5],       votos[7],      votos[6]};
-			Studente[] studentiCompito ={ pieroRusso, marioRomano, leonardoRicci, valentinoFarina, roccoBenedetti, antonioGuerra, cristinaAngeli};
+			Map<Studente, Voto> mapVoti;
+			mapVoti = new HashMap<Studente, Voto>();
 			
-			registroRossiPrimaA.inserisciVoti(compitoStoria1A, studentiCompito, voti);
+			mapVoti.put(pieroRusso, votos[4]);
+			mapVoti.put(marioRomano, votos[8]);
+			mapVoti.put(leonardoRicci, votos[9]);
+			mapVoti.put(valentinoFarina, votos[7]);
+			mapVoti.put(roccoBenedetti, votos[5]);
+			mapVoti.put(antonioGuerra, votos[7]);
+			mapVoti.put(cristinaAngeli, votos[6]);
+			
+//			Voto[] voti = {                votos[4],   votos[8],     votos[9],     votos[7],        votos[5],       votos[7],      votos[6]};
+//			Studente[] studentiCompito ={ pieroRusso, marioRomano, leonardoRicci, valentinoFarina, roccoBenedetti, antonioGuerra, cristinaAngeli};
+			
+			registroRossiPrimaA.inserisciVoti(compitoStoria1A, mapVoti);
 			
 			argomenti.clear();
 			compitoStoria1A = new CompitoInClasse();

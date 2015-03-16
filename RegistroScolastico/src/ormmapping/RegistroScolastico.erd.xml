@@ -768,6 +768,18 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
+    <Column name="LibrettoVotiID">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>LibrettoVoti.ID</ReferencedColumn>
+      <Type>9</Type>
+      <Length>11</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>assigned</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
     <Column name="VotoID">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
@@ -784,18 +796,6 @@
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
       <ReferencedColumn>CompitoInClasse.ID</ReferencedColumn>
-      <Type>9</Type>
-      <Length>11</Length>
-      <Nullable>false</Nullable>
-      <IDGenerator>native</IDGenerator>
-      <Unique>false</Unique>
-      <Index>false</Index>
-      <UserTypes/>
-    </Column>
-    <Column name="LibrettoVotiID">
-      <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>LibrettoVoti.ID</ReferencedColumn>
       <Type>9</Type>
       <Length>11</Length>
       <Nullable>false</Nullable>
@@ -1050,6 +1050,36 @@
       <Column>ID</Column>
     </RefColumns>
   </ForeignKey>
+  <ForeignKey name="FKPersona9585">
+    <ReferenceTable>Persona</ReferenceTable>
+    <ReferencedTable>LibrettoAssenze</ReferencedTable>
+    <Columns>
+      <Column>LibrettoAssenzeID</Column>
+    </Columns>
+    <RefColumns>
+      <Column>ID</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKRitardo122758">
+    <ReferenceTable>Ritardo</ReferenceTable>
+    <ReferencedTable>LibrettoAssenze</ReferencedTable>
+    <Columns>
+      <Column>LibrettoAssenzeID</Column>
+    </Columns>
+    <RefColumns>
+      <Column>ID</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKUscitaAnti416475">
+    <ReferenceTable>UscitaAnticipata</ReferenceTable>
+    <ReferencedTable>LibrettoAssenze</ReferencedTable>
+    <Columns>
+      <Column>LibrettoAssenzeID</Column>
+    </Columns>
+    <RefColumns>
+      <Column>ID</Column>
+    </RefColumns>
+  </ForeignKey>
   <ForeignKey name="FKUscitaAnti383182">
     <ReferenceTable>UscitaAnticipata</ReferenceTable>
     <ReferencedTable>Appello</ReferencedTable>
@@ -1150,16 +1180,6 @@
       <Column>ID</Column>
     </RefColumns>
   </ForeignKey>
-  <ForeignKey name="FKLibrettoVo788402">
-    <ReferenceTable>LibrettoVotiLineItem</ReferenceTable>
-    <ReferencedTable>LibrettoVoti</ReferencedTable>
-    <Columns>
-      <Column>LibrettoVotiID</Column>
-    </Columns>
-    <RefColumns>
-      <Column>ID</Column>
-    </RefColumns>
-  </ForeignKey>
   <ForeignKey name="FKLibrettoVo262968">
     <ReferenceTable>LibrettoVotiLineItem</ReferenceTable>
     <ReferencedTable>CompitoInClasse</ReferencedTable>
@@ -1220,31 +1240,11 @@
       <Column>ID</Column>
     </RefColumns>
   </ForeignKey>
-  <ForeignKey name="FKUscitaAnti416475">
-    <ReferenceTable>UscitaAnticipata</ReferenceTable>
-    <ReferencedTable>LibrettoAssenze</ReferencedTable>
+  <ForeignKey name="FKLibrettoVo788402">
+    <ReferenceTable>LibrettoVotiLineItem</ReferenceTable>
+    <ReferencedTable>LibrettoVoti</ReferencedTable>
     <Columns>
-      <Column>LibrettoAssenzeID</Column>
-    </Columns>
-    <RefColumns>
-      <Column>ID</Column>
-    </RefColumns>
-  </ForeignKey>
-  <ForeignKey name="FKRitardo122758">
-    <ReferenceTable>Ritardo</ReferenceTable>
-    <ReferencedTable>LibrettoAssenze</ReferencedTable>
-    <Columns>
-      <Column>LibrettoAssenzeID</Column>
-    </Columns>
-    <RefColumns>
-      <Column>ID</Column>
-    </RefColumns>
-  </ForeignKey>
-  <ForeignKey name="FKPersona9585">
-    <ReferenceTable>Persona</ReferenceTable>
-    <ReferencedTable>LibrettoAssenze</ReferencedTable>
-    <Columns>
-      <Column>LibrettoAssenzeID</Column>
+      <Column>LibrettoVotiID</Column>
     </Columns>
     <RefColumns>
       <Column>ID</Column>

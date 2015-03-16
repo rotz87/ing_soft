@@ -8,7 +8,10 @@ import java.util.LinkedList;
 
 
 
+import java.util.Map;
+
 import org.joda.time.LocalDate;
+
 
 
 
@@ -49,45 +52,14 @@ public class RegistroDocenteImp {
 		
 	}
 
-	public void inserisciVoti(RegistroDocente registroDocente, CompitoInClasse compito, Studente[] studenti, Voto[] voti) {
-		Collection<Studente> studentiCollection = new LinkedList<Studente>();
-		Collection<Voto> votiCollection = new LinkedList<Voto>();
-		
-		for(Studente studente: studenti){
-			studentiCollection.add(studente);
-		}
-		for(Voto voto: voti){
-			votiCollection.add(voto);
-		}
-		
+	public void inserisciVoti(RegistroDocente registroDocente, CompitoInClasse compito, Map<Studente, Voto> mapVoti ) {
 		RegistroAssenze registroAssezne = registroDocente.getClasse().getRegistroAssenze();
 		LocalDate data = new LocalDate(compito.getData());
-		if(registroAssezne.checkPresenti(data, studentiCollection)){
-			Iterator<Studente> iteratorStud = studentiCollection.iterator();
-			Iterator<Voto> iteratorVoto = votiCollection.iterator();
-
-			while(iteratorStud.hasNext() && iteratorVoto.hasNext()) {
-			    Studente studente = iteratorStud.next();
-			    Voto voto = iteratorVoto.next();
+		if(registroAssezne.checkPresenti(data, mapVoti.keySet())){
+			for (Studente studente : mapVoti.keySet()) {
 			    studente.getLibrettoVoti().makeLineItem(compito);
-			    studente.getLibrettoVoti().getLibrettoLineItem(compito).aggiungiVoto(voto);
+			    studente.getLibrettoVoti().getLibrettoLineItem(compito).aggiungiVoto(mapVoti.get(studente));
 			}
-//			while(iteratorStud.hasNext()) {
-//			    Studente studente = iteratorStud.next();
-//
-//			    studente.getLibrettoVoti().makeLineItem(compito);
-//			    
-//
-//			}
-//			iteratorStud = studentiCollection.iterator();
-//			while(iteratorStud.hasNext() && iteratorVoto.hasNext()) {
-//			    Studente studente = iteratorStud.next();
-//			    Voto voto = iteratorVoto.next();
-////			    studente.getLibrettoVoti().makeLineItem(compito);
-//			    studente.getLibrettoVoti().getLibrettoLineItem(compito).aggiungiVoto(voto);
-//			}
-			
-			
 		}else{
 			throw new IllegalStateException(ErrorMessage.LISTA_STUDENTI_WRONG);
 		}

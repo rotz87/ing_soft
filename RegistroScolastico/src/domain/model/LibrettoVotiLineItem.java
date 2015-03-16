@@ -13,8 +13,6 @@
  */
 package domain.model;
 
-import service.Stampa;
-
 public class LibrettoVotiLineItem {
 	public LibrettoVotiLineItem() {
 	}

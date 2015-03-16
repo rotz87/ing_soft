@@ -97,20 +97,22 @@ public class CompitoInClasseController {
 	 * @param idStudenti
 	 * @param idVoti
 	 */
-	public void inserisciVoti(int idCompito, int[] idStudenti, byte[] votiByte) {
+	public void inserisciVoti(int idCompito, Map<Integer, Byte> mapVotiGUI) {
 
 		CompitoInClasseCriteria compitoCriteria;
 		StudenteCriteria studenteCriteria;
 		VotoCriteria votoCriteria;
 		
 		CompitoInClasse compito;
-		Studente[] studenti = new Studente[idStudenti.length];
-		Voto[] voti = new Voto[votiByte.length];
 		RegistroDocente registroDocente;
+		Map<Studente, Voto> mapVoti;
+		Studente studente;
+		Voto voto;
+		
+		mapVoti = new HashMap<Studente, Voto>();
 		
 		try {
 			compitoCriteria = new CompitoInClasseCriteria();
-			studenteCriteria = new StudenteCriteria();
 		} catch (PersistentException e) {
 			throw new RuntimeException(ErrorMessage.COMPITO_UNLOADED);
 		}
@@ -118,30 +120,32 @@ public class CompitoInClasseController {
 		compitoCriteria.ID.eq(idCompito);
 		compito = compitoCriteria.uniqueCompitoInClasse();
 		
-		studenteCriteria.ID.in(idStudenti);
-		studenti = studenteCriteria.listStudente();
-		
 		try {
-			for(int i = 0; i< votiByte.length; i++){
+			for(Integer idS : mapVotiGUI.keySet()){
+				studenteCriteria = new StudenteCriteria();
 				votoCriteria = new VotoCriteria();
-				votoCriteria.voto.eq(votiByte[i]);
-				voti[i] = votoCriteria.uniqueVoto();
+				
+				studenteCriteria.ID.eq(idS);
+				votoCriteria.voto.eq(mapVotiGUI.get(idS));
+				
+				studente = studenteCriteria.uniqueStudente();
+				voto = votoCriteria.uniqueVoto();
+				
+				mapVoti.put(studente, voto);
 			}
 		} catch (PersistentException e) {
 			throw new RuntimeException(ErrorMessage.VOTI_UNLOADED);
 		}
-//		votoCriteria.voto.in(votiByte);
-//		voti = votoCriteria.listVoto();
 		
 		registroDocente = compito.getInsegnamento();
 		
-		registroDocente.inserisciVoti(compito, studenti, voti);
+		registroDocente.inserisciVoti(compito, mapVoti);
 		
 		try {
 			PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
 			try {
-				for(Studente studente: studenti){
-					RSPersistentManager.instance().getSession().save(studente.getLibrettoVoti());
+				for(Studente s: mapVoti.keySet()){
+					RSPersistentManager.instance().getSession().save(s.getLibrettoVoti());
 				}
 				t.commit();
 			}

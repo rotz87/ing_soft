@@ -1,6 +1,8 @@
 package test.compito;
 
 import java.sql.Time;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.joda.time.LocalDate;
 import org.orm.PersistentException;
@@ -26,15 +28,20 @@ public class TestInserisciVoti {
 //	int[] idVoti = {10,80,90};
 //	int[] idVoti = {1,8,9};
 	byte[] voti = {1,8,9};
-	 
+	Map<Integer, Byte> mapVoti;
 	
 	controlloreCompito = new CompitoInClasseController();
+	mapVoti = new HashMap<Integer, Byte>();
+	
+	mapVoti.put(new Integer(1), new Byte((byte)1));
+	mapVoti.put(new Integer(8), new Byte((byte)8));
+	mapVoti.put(new Integer(9), new Byte((byte)9));
 	
 	try {
 		
 		try {
 			
-			controlloreCompito.inserisciVoti(idCompitoProva, idStudenti, voti);
+			controlloreCompito.inserisciVoti(idCompitoProva, mapVoti);
 		}
 		finally {
 			domain.model.RSPersistentManager.instance().disposePersistentManager();
