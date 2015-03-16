@@ -19,18 +19,23 @@ public class ArgomentoRS extends ResourceSupport{
 		this.nome = argomento.getNome();
 		this.descrizione = argomento.getDescrizione();
 	}
+
 	
-	public ArgomentoRS(int idArgomento, String nome, String descrizione) {
-		super();
+	public void setIdArgomento(int idArgomento) {
 		this.idArgomento = idArgomento;
-		this.nome = nome;
-		this.descrizione = descrizione;
 	}
 
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+	
 	public int getIdArgomento() {
 		return idArgomento;
 	}
-
 
 	public String getNome() {
 		return nome;

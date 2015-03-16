@@ -98,7 +98,7 @@ public class CompitoInClasseController {
 	 * @param idVoti
 	 */
 	public void inserisciVoti(int idCompito, int[] idStudenti, byte[] votiByte) {
-		//TODO: non piace a marco
+
 		CompitoInClasseCriteria compitoCriteria;
 		StudenteCriteria studenteCriteria;
 		VotoCriteria votoCriteria;
