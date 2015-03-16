@@ -508,19 +508,24 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','Appello','C
 		tmpCompito.data = new Date(tmpCompito.data).getTime();
 		tmpCompito.oraInizio = new Date(tmpCompito.oraInizio).getTime();
 		tmpCompito.oraFine = new Date(tmpCompito.oraFine).getTime();
-		console.log(tmpCompito.argomentiRS)
 		if (tmpCompito.argomentiRS.class = String.class)
 			{
 			tmpCompito.argomentiRS = angular.toJSON(temp.argomentiRS);
 			}
-
 		Compito.save({idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito}, tmpCompito);
+		
+		if ( typeof $scope.studentiCompito != "undefined")
+		{
+			console.log(typeof $scope.studentiCompito != "undefined")
+			$scope.salvaVoti();
+		}
+		
 	}
-	var studenti = [{"id":1,"cognome":"a","nome":"b","voto":8,"assente":false},
-	                {"id":2,"cognome":"c","nome":"d","voto":null,"assente":true},
-	                {"id":3,"cognome":"e","nome":"f","voto":8,"assente":false},
-	                {"id":4,"cognome":"g","nome":"h","voto":null,"assente":true}]
-	$scope.studentiCompito = studenti;
+//	var studenti = [{"id":1,"cognome":"a","nome":"b","voto":8,"assente":false},
+//	                {"id":2,"cognome":"c","nome":"d","voto":null,"assente":true},
+//	                {"id":3,"cognome":"e","nome":"f","voto":8,"assente":false},
+//	                {"id":4,"cognome":"g","nome":"h","voto":null,"assente":true}]
+//	$scope.studentiCompito = studenti;
 	$scope.intervalloVoti = [0,1,2,3,4,5,6,7,8,9,10]
 	$scope.inserisciVoto = function(studente,voto){
 		studente.voto = voto;
@@ -542,6 +547,8 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','Appello','C
 		console.log("studenti dopo il ciclo");
 		console.log(tmpStudenti);
 		Compito.inviaVoti({idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito}, tmpStudenti);
+		
+
 	}
 	$scope.absChecked=true;
 	
