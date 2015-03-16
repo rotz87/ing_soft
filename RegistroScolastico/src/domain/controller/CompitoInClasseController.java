@@ -1,6 +1,7 @@
 package domain.controller;
 
 import java.nio.channels.IllegalSelectorException;
+import java.sql.Date;
 import java.sql.Time;
 import java.util.Collection;
 import java.util.HashMap;
@@ -274,13 +275,20 @@ public class CompitoInClasseController {
 	private Appello getAppello(int idCompito){
 		CompitoInClasse compito;
 		FaiAppelloController appelloController;
-		LocalDate data;
+		LocalDate localDate;
+		Date sqlDate;
 		
-		compito = getCompitoInCLasse(idCompito);
-		data = new LocalDate(compito.getData());
 		appelloController = new FaiAppelloController();
+		compito = getCompitoInCLasse(idCompito);
+		sqlDate = compito.getData();
 		
-		return appelloController.getAppello(compito.getInsegnamento().getClasse().getID(), data);
+		if(sqlDate != null){
+		localDate = new LocalDate(sqlDate);
+		}else{
+			throw new IllegalStateException(ErrorMessage.COMPITO_WITHOUT_DATE);
+		}
+		
+		return appelloController.getAppello(compito.getInsegnamento().getClasse().getID(), localDate);
  
 	}
 	
@@ -292,6 +300,9 @@ public class CompitoInClasseController {
 		appello = getAppello(idCompito);
 		compito = getCompitoInCLasse(idCompito);
 		appelloController = new FaiAppelloController();
+		
+		Stampa.stampaln("ClasseID: "+compito.getInsegnamento().getClasse().getID());
+		Stampa.stampaln("AppelloID: "+ appello.getID());
 		
 		return appelloController.getBoolAssenze(compito.getInsegnamento().getClasse().getID(), appello.getID());
 		

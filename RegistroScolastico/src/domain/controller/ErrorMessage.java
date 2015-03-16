@@ -4,24 +4,27 @@ public class ErrorMessage {
 	
 	public static final String APPELLI_UNLOADED = "Impossibile caricare gli appelli";
 	public static final String APPELLO_CLASSE_INCONSISTENT = "L'appello selezionato non appartiene alla classe selezionata";
+	public static final String APPELLO_INEXISTENT = "Appello inesistente";
 	public static final String APPELLO_NON_AVVIABILE = "Impossibile avviare l'appello";
 	public static final String APPELLO_UNLOADED = "Impossibile caricare l'appello";
+	public static final String ARGOMENTI_UNLOADED = "Impossibile caricare gli argomenti";
+	public static final String ASSENZE_UNLOADED = "Impossibile caricare le assenze";
 	public static final String ASSENZE_UNRECORDABLE = "Impossibile registrare le assenze";
 	public static final String ASSENZE_UNRECORDED = "Assenze non prese";
-	public static final String CLASSI_UNLOADED = "Impossibile caricare le classi";
-	public static final String DOCENTE_UNLOADED = "Impossibile caricare il docente";
-	public static final String DOCENTE_UNQUALIFIED = "Attenzione il docente non e' abilitato a eseguire questa operazione";
-	public static final String STUDENTI_UNLOADED = "Impossibile caricare gli studenti";
 	public static final String CLASSE_UNLOADED = "Impossibile caricare la classe";
-	public static final String ASSENZE_UNLOADED = "Impossibile caricare le assenze";
-	public static final String APPELLO_INEXISTENT = "Appello inesistente";
-	public static final String COMPITO_UNCREABLE = "Impossibile creare il compito";
-	public static final String COMPITO_INEXISTENT = "Il compito non appartiene al registro docente";
-	public static final String COMPITO_UNLOADED = "Impossibile caricare il compito";
+	public static final String CLASSI_UNLOADED = "Impossibile caricare le classi";
 	public static final String COMPITI_UNLOADED = "Impossibile caricare i compiti";
+	public static final String COMPITO_INEXISTENT = "Il compito non appartiene al registro docente";
 	public static final String COMPITO_NON_AGGIORNABILE = "Impossibile caricare il compito";
 	public static final String COMPITO_NOT_BELONGING = "Il compito non è presente nel libretto";
+	public static final String COMPITO_UNCREABLE = "Impossibile creare il compito";
+	public static final String COMPITO_UNLOADED = "Impossibile caricare il compito";
+	public static final String COMPITO_WITHOUT_DATE = "Il compito non ha ancora una data";
+	public static final String DOCENTE_UNLOADED = "Impossibile caricare il docente";
+	public static final String DOCENTE_UNQUALIFIED = "Attenzione il docente non e' abilitato a eseguire questa operazione";
 	public static final String LISTA_STUDENTI_WRONG = "Gli studenti specificati non ...?";
+	public static final String REGISTRO_DOCENTE_UNLOADED = "Impossibile caricare il registro docente";
+	public static final String STUDENTI_UNLOADED = "Impossibile caricare gli studenti";
 	public static final String VOTI_NON_INSERIBILI = "Impossibile inserire i voti";
 	public static final String VOTI_UNLOADED = "Impossibile caricare i voti";
 			
