@@ -50,7 +50,12 @@ registroServices.factory('Appello',['$resource',
 									url:'/RegistroScolastico/api/classi/:idClasse/registroDocente/:idRegistroDocente/compiti/:idCompito',
 									method:'PUT',
 									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente', idCompito:'@idCompito'}
-								}
+								},'argomentiSvolti':{
+   									url:'/RegistroScolastico/api/classi/:idClasse/registroDocente/:idRegistroDocente/argomentiSvolti',
+   									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente'},
+   									method:'GET',
+   									isArray:true
+   								}
 							});
 				}]);
 

@@ -42,62 +42,67 @@
 						</div>
 					</div>
 				</fieldset>
-			<div class="text-center">
-				<button class="btn btn-info" ng-click="aggiungiArgomento()"> Aggiungi Argomento</button><br>
-			</div>
+					<div class="text-center animaScomparsa" ng-show="argsChecked">
+						<button class="btn btn-info" ng-click="selezionaArgomenti()"> Seleziona Argomenti</button><br>
+					</div>
 			</fieldset>
 			<fieldset>
 				<legend> Studenti <input class="mostraNascondi_{{stdChecked}}" type="checkbox" ng-model="stdChecked"></legend>
 				<fieldset class="animaScomparsa" ng-show="stdChecked">
-				<div ng-hide="absChecked">mostra presenti <input class="mostraNascondi_{{absChecked}}" type="checkbox" ng-model="absChecked"></div>
-				<div ng-show="absChecked">nascondi assenti<input class="mostraNascondi_{{absChecked}}" type="checkbox" ng-model="absChecked"></div>
-					<table class="table table-responsive table-hover table-striped">
-							<thead>
-								<tr>
-									<th>#</th>
-									<th class=""><a href="" ng-click="predicate = 'cognome'; reverse=!reverse">Cognome</a>
-												
-											</th>
-									<th class=""><a href="" ng-click="predicate = 'nome'; reverse=!reverse">Nome</a></th>
-									<th class="col-md-4 text-center">Voto</th>
-									<th class="text-center">Assente</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr class="animaScomparsa" ng-repeat="studente in studentiCompito | orderBy:predicate:reverse" ng-show="absChecked || !studente.assente">
-									<td>{{$index+1}}</td>
-									<td>{{studente.cognome}}</td>
-									<td>{{studente.nome}}</td>
-									<td>
-										    <div class="input-group " ng-hide="studente.assente">
-										      <input type="number" min="0" max="10" class="form-control" ng-model="studente.voto" aria-label="..." ng-disabled="studente.assente">
-										      <div class="input-group-btn">
-										        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Voto <span class="caret"></span></button>
-										        <ul class="dropdown-menu dropdown-menu-right" role="menu">
-										          
-										          <li ng-repeat="n in intervalloVoti"><a ng-click="inserisciVoto(studente,n)">{{n}}</a></li>
-										        </ul>
-										      </div><!-- /btn-group -->
-										    </div><!-- /input-group -->
-										    <div ng-show="studente.assente"> <em>Lo studente risulta assente</em></div>
-									</td>
-									<td>
-										<div class="myCheckbox col-md-12 text-center">
-											<input name="Assenza" type="checkbox"
-												ng-model="studente.assente"
-												ng-click="segnaAssenza(studente.idStudente)" 
-												ng-true-value="true" 
-												ng-false-value="false"
-												ng-disabled = "true">
-										</div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
+				<div ng-show="erroreStudenti"> {{erroreStudenti}}</div>
+				<div ng-hide="erroreStudenti">
+					<div ng-hide="absChecked">mostra presenti <input class="mostraNascondi_{{absChecked}}" type="checkbox" ng-model="absChecked"></div>
+					<div ng-show="absChecked">nascondi assenti<input class="mostraNascondi_{{absChecked}}" type="checkbox" ng-model="absChecked"></div>
+						<table class="table table-responsive table-hover table-striped">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th class=""><a href="" ng-click="predicate = 'cognome'; reverse=!reverse">Cognome</a>
+													
+												</th>
+										<th class=""><a href="" ng-click="predicate = 'nome'; reverse=!reverse">Nome</a></th>
+										<th class="col-md-4 text-center">Voto</th>
+										<th class="text-center">Assente</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="animaScomparsa" ng-repeat="studente in studentiCompito | orderBy:predicate:reverse" ng-show="absChecked || !studente.assente">
+										<td>{{$index+1}}</td>
+										<td>{{studente.cognome}}</td>
+										<td>{{studente.nome}}</td>
+										<td>
+											    <div class="input-group " ng-hide="studente.assente">
+											      <input type="number" min="0" max="10" class="form-control" ng-model="studente.voto" aria-label="..." ng-disabled="studente.assente">
+											      <div class="input-group-btn">
+											        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Voto <span class="caret"></span></button>
+											        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+											          
+											          <li ng-repeat="n in intervalloVoti"><a ng-click="inserisciVoto(studente,n)">{{n}}</a></li>
+											        </ul>
+											      </div><!-- /btn-group -->
+											    </div><!-- /input-group -->
+											    <div ng-show="studente.assente"> <em>Lo studente risulta assente</em></div>
+										</td>
+										<td>
+											<div class="myCheckbox col-md-12 text-center">
+												<input name="Assenza" type="checkbox"
+													ng-model="studente.assente"
+													ng-click="segnaAssenza(studente.idStudente)" 
+													ng-true-value="true" 
+													ng-false-value="false"
+													ng-disabled = "true">
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 					</fieldset>
+		<!-- 			
 			<div class="text-center">
 				<button class="btn btn-info" ng-click="salvaVoti()"> action ?</button><br>
 			</div>
+			 -->
 			</fieldset>
 			<fieldset>
 			<legend> Salva</legend>

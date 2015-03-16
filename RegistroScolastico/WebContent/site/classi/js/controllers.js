@@ -500,19 +500,21 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','Appello','C
 	}
 	$scope.aggiornaCompito = function(){
 		var CompitoInClasse = Compito.get({idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito});
-		temp = {};
+		var tmpCompito = {};
 		for (key in $scope.compitoInClasse.toJSON())
 			{
-			temp[key] = $scope.compitoInClasse.toJSON()[key];
+			tmpCompito[key] = $scope.compitoInClasse.toJSON()[key];
 			}
-		temp.data = new Date(temp.data).getTime();
-		temp.oraInizio = new Date(temp.oraInizio).getTime();
-		temp.oraFine = new Date(temp.oraFine).getTime();
-		if (temp.argomentiRS.class = String.class)
+		tmpCompito.data = new Date(tmpCompito.data).getTime();
+		tmpCompito.oraInizio = new Date(tmpCompito.oraInizio).getTime();
+		tmpCompito.oraFine = new Date(tmpCompito.oraFine).getTime();
+		console.log(tmpCompito.argomentiRS)
+		if (tmpCompito.argomentiRS.class = String.class)
 			{
-				temp.argomentiRS = angular.toJSON(temp.argomentiRS);
+			tmpCompito.argomentiRS = angular.toJSON(temp.argomentiRS);
 			}
-		Compito.save({idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito}, temp.argomentiRS);
+
+		Compito.save({idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito}, tmpCompito);
 	}
 	var studenti = [{"id":1,"cognome":"a","nome":"b","voto":8,"assente":false},
 	                {"id":2,"cognome":"c","nome":"d","voto":null,"assente":true},
@@ -543,8 +545,28 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','Appello','C
 	}
 	$scope.absChecked=true;
 	
-	var studentiCompito = Compito.queryStudenti({idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito});
-	$scope.studentiCompito = studentiCompito;
+	var studentiCompito = Compito.queryStudenti(
+			{idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito},
+			function(response,headers){
+		//successo
+		$scope.studentiCompito = response;
+		},
+		function(response,headers){
+			erroreSistema($rootScope, response.data, true);
+			$scope.erroreStudenti = response.data.exMsg;
+		});
+	$scope.selezionaArgomenti = function(){
+		//query per il recupero di tutti gli argomenti del compito
+		var argomentiSvolti = Appello.argomentiSvolti({idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente},
+			function(response,headers){
+			//successo
+		},function(response,headers){
+			//fallimento
+			erroreSistema($rootScope, response.data, true)
+		});
+		var tmpArgomenti = $scope.compitoInClasse.argomentiRS;
+		
+	};
 }])
 
 registroControllers.controller('riempiElencoCompiti', 
@@ -563,9 +585,12 @@ registroControllers.controller('riempiElencoCompiti',
 						{idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente, compito : $scope.compitoInClasse},
 						function(response,headers)
 						{
-							idCompito = headers().location.split("/")
-							idCompito = idCompito[idCompito.length-1]
-							$location.path($location.path()+idCompito+"/")
+							idCompito = headers().location.split("/");
+							idCompito = idCompito[idCompito.length-1];
+							$location.path($location.path()+idCompito+"/");
+						},
+						function(response,headers){
+							erroreSistema($rootScope, response.data, true);
 						})
 			}
 	
@@ -574,7 +599,6 @@ registroControllers.controller('colonnaSinistra',
 		['$scope','Appello','$rootScope','$routeParams',
 		 function($scope,Appello,$rootScope,$routeParams)
 		 {
-			
 			
 }])
 
