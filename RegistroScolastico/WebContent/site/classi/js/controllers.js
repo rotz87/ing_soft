@@ -140,29 +140,7 @@ registroControllers.controller('faiAppello', ['$scope','Appello','$location','$h
 		var nuovoAppello;
 		console.log("$routeParams");
 		console.log($routeParams)
-//		if ($rootScope.mioDato)
-//		{
-//			var resourceUrl;
-//			$scope.appelloSelezionato = $rootScope.mioDato;
-//			for (var key in $scope.appelloSelezionato.data.links)
-//			{
-//				if($scope.appelloSelezionato.data.links[key].rel == "self"){
-//					resourceUrl = $scope.appelloSelezionato.data.links[key].href;
-//					nuovoAppello = $location.path().split("/")
-//				}
-//			}
-//			$scope.idClasse = nuovoAppello[1];
-//			$scope.idAppello = nuovoAppello[3];
-//			$scope.mioAppello = retrieveObjectFromUrl($http, resourceUrl);
-//			path = resourceUrl;
-//		}
-//		else
-//		{
-//			nuovoAppello = $location.path().split("/");
-//			$scope.idClasse = nuovoAppello[1];
-//			$scope.idAppello = nuovoAppello[3];
-//			path = "/RegistroScolastico/api/classi/"+$scope.idClasse+"/appelli/"+$scope.idAppello;
-//		}
+		
 		$scope.idClasse = $routeParams.idClasse;
 		$scope.idAppello = $routeParams.idAppello;
 		/*
@@ -439,12 +417,12 @@ registroControllers.controller('popolamentoNavigazione', ['$scope','Appello','$q
 }]).directive('registroScolasticoModal', function() {
 	  return {
 			transclude:true,
-		    templateUrl: 'partials/registroScolasticoModal.html'
+		    templateUrl: 'partials/directives/registroScolasticoModal.html'
 		  };
-		});;
+		});
 
 registroControllers.controller('riempiElencoClassi', ['$scope','Appello','$q','$location','$rootScope', function($scope,Appello,$q,$location,$rootScope) {
-
+	
 	$scope.elencoClassi = Appello.elencoClassi({},function(response,header)
 			{
 				//successo
@@ -458,10 +436,10 @@ registroControllers.controller('riempiElencoClassi', ['$scope','Appello','$q','$
 	}
 	}])
 
-registroControllers.controller('recuperaCompitoInClasse', ['$scope','Appello','Compito','$q','$location','$rootScope','$routeParams',
-    function($scope,Appello,Compito,$q,$location,$rootScope,$routeParams) {
+registroControllers.controller('recuperaCompitoInClasse', ['$scope','Appello','Compito','$q','$location','$rootScope','$routeParams','$route',
+    function($scope,Appello,Compito,$q,$location,$rootScope,$routeParams,$route) {
 	
-	$scope.idClasse = $rootScope.idClasse;
+	$scope.idClasse = $routeParams.idClasse;
 	var compito = {
 			data : 1418770800000,
 			oraInizio : 79199000,
@@ -472,7 +450,6 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','Appello','C
 			'exMsg':'Pippooo',
 			'url' : 'Plutooo'
 	};
-	console.log($routeParams);
 	$scope.compitoInClasse = new Appello();
 	$scope.compitoInClasse.idClasse = $routeParams.idClasse
 	$scope.compitoInClasse.idRegistroDocente = $routeParams.idRegistroDocente;
@@ -486,17 +463,14 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','Appello','C
 		$scope.compitoInClasse.oraFine = miaOraFine
 		$scope.compitoInClasse.oraFine.setSeconds(00,00)
 		//$scope.compitoInClasse.argomentiRS = JSON.stringify($scope.compitoInClasse.argomentiRS)
-		console.log($scope.compitoInClasse)
-		console.log("fine recupero")
 	},function(response,headers){
 		erroreSistema($rootScope, response.data, true)
 	});
+	$scope.args_predicate = "idArgomento"
 	$scope.aggiungiArgomento = function(){
 		var auxArgomento = {idArgomento : null};
-		console.log($scope.compitoInClasse.argomentiRS.length)
 		$scope.compitoInClasse.argomentiRS.push(auxArgomento);
 		$scope.argsChecked = true;
-		console.log($scope.compitoInClasse.argomentiRS)
 	}
 	$scope.aggiornaCompito = function(){
 		var CompitoInClasse = Compito.get({idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito});
@@ -516,24 +490,24 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','Appello','C
 		
 		if ( typeof $scope.studentiCompito != "undefined")
 		{
-			console.log(typeof $scope.studentiCompito != "undefined")
 			$scope.salvaVoti();
 		}
+		$scope.modal = {};
+		$scope.modal.messaggio = "Il compito è stato registrato correttamente";
+		$scope.modal.titolo = "Compito registrato";
+		$scope.modal.colore = "modal-header-success";
+		$scope.modal.bottone = "btn-success";
+		$rootScope.modal = $scope.modal;
+		$("#myModal").modal("show")
+		$route.reload();
 		
 	}
-//	var studenti = [{"id":1,"cognome":"a","nome":"b","voto":8,"assente":false},
-//	                {"id":2,"cognome":"c","nome":"d","voto":null,"assente":true},
-//	                {"id":3,"cognome":"e","nome":"f","voto":8,"assente":false},
-//	                {"id":4,"cognome":"g","nome":"h","voto":null,"assente":true}]
-//	$scope.studentiCompito = studenti;
 	$scope.intervalloVoti = [0,1,2,3,4,5,6,7,8,9,10]
 	$scope.inserisciVoto = function(studente,voto){
 		studente.voto = voto;
 	}
 	$scope.salvaVoti = function(){
 		var tmpStudenti = [];
-		console.log("studenti prima del ciclo");
-		console.log(tmpStudenti);
 		for (index in $scope.studentiCompito)
 		{
 			if($scope.studentiCompito[index].assente == false)
@@ -544,11 +518,8 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','Appello','C
 				tmpStudenti.push(stud);
 			}
 		}
-		console.log("studenti dopo il ciclo");
-		console.log(tmpStudenti);
 		Compito.inviaVoti({idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito}, tmpStudenti);
 		
-
 	}
 	$scope.absChecked=true;
 	
@@ -562,19 +533,38 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','Appello','C
 			erroreSistema($rootScope, response.data, true);
 			$scope.erroreStudenti = response.data.exMsg;
 		});
+	
 	$scope.selezionaArgomenti = function(){
 		//query per il recupero di tutti gli argomenti del compito
-		var argomentiSvolti = Appello.argomentiSvolti({idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente},
-			function(response,headers){
+		
+		$scope.argomentiSvolti = Appello.argomentiSvolti({idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente},
+			function(response,headers)
+			{
 			//successo
+			//idArgomento e nome
+			$scope.modal={}
+			$scope.modal.titolo = "Seleziona gli argomenti";
+			$scope.modal.coloreOk = "modal-header-primary";
+			$scope.modal.bottoneOk = "btn-primary";
+			$scope.modal.coloreAnnulla = "modal-header-default";
+			$scope.modal.bottoneAnnulla = "btn-default";
+			//copia gli attributi dell'oggetto senza usare lo stesso oggetto
+			$scope.modal.argomenti = angular.copy($scope.compitoInClasse.argomentiRS);
+			$("#myModal2").modal("show")
 		},function(response,headers){
 			//fallimento
 			erroreSistema($rootScope, response.data, true)
 		});
-		var tmpArgomenti = $scope.compitoInClasse.argomentiRS;
-		
 	};
-}])
+	$scope.confermaArgomenti = function(){
+		$scope.compitoInClasse.argomentiRS = $scope.modal.argomenti;
+	}
+}]).directive('compitoArgomentiModal', function() {
+	  return {
+			transclude:true,
+		    templateUrl: 'partials/directives/compitoArgomentiModal.html'
+		  };
+		});
 
 registroControllers.controller('riempiElencoCompiti', 
 		['$scope','Appello','$q','$location','$rootScope','$resource','$routeParams',
@@ -637,4 +627,14 @@ function nonSupportato(mioScope,dati,attivaModal)
 	mioScope.modal.titolo = "Funzione non supportata";
 	mioScope.modal.messaggio = "Attualmente questa azione non è supportata";
 	gestisciMessaggio(mioScope,"info",attivaModal)
+}
+
+function argomentiModal(mioScope){
+	mioScope.modal = {};
+	mioScope.modal.titolo = "Seleziona gli argomenti";
+	tipo = "primary";
+	mioScope.modal.colore = "modal-header-"+tipo;
+	mioScope.modal.bottone = "btn-"+tipo;
+
+		$("#myModal2").modal("show")
 }

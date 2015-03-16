@@ -1,6 +1,6 @@
 
 <div class="col-md-8">
-	<h1 class="text-center"> Crea Compito </h1>
+	<h1 class="text-center"> Modifica Compito </h1>
 	
 	<form class="css-form form-horizontal" novalidate>
 		<fieldset>
@@ -27,19 +27,9 @@
 		</div>
 			<fieldset>
 				<legend> Argomenti <input class="mostraNascondi_{{argsChecked}} " type="checkbox" id="visibile" ng-model="argsChecked"></legend>
-				<fieldset class="animaScomparsa" ng-repeat="argomento in compitoInClasse.argomentiRS" ng-show="argsChecked">
-					<legend> argomento id{{argomento.idArgomento}}</legend>
-					<div class="form-group col-sm-12 col-md-12 col-lg-12" >
-						<label for="idArgomento{{argomento.idArgomento}}" class="col-sm-3 col-md-3 col-lg-3 control-label" >id argomento</label>
-						<div class="col-sm-8 col-md-8 col-lg-8">
-							<input id="idArgomento{{argomento.idArgomento}}" ng-model="argomento.idArgomento"type="text" required/>
-						</div>
-					</div>
+				<fieldset class="animaScomparsa" ng-repeat="argomento in compitoInClasse.argomentiRS | orderBy:args_predicate" ng-show="argsChecked">
 					<div class="form-group">
-						<label for="nomeArgomento{{argomento.idArgomento}}" class="col-sm-3 col-md-3 col-lg-3 control-label">nome Argomento</label>
-						<div class="col-sm-8 col-md-8 col-lg-8" >
-							<input id="nomeArgomento{{argomento.idArgomento}}" ng-model="argomento.nome"type="text" required/>
-						</div>
+						<p class="col-sm-8 col-md-8 col-lg-8 ">{{$index+1}}.{{argomento.nome}}</label>
 					</div>
 				</fieldset>
 					<div class="text-center animaScomparsa" ng-show="argsChecked">
@@ -53,7 +43,7 @@
 				<div ng-hide="erroreStudenti">
 					<div ng-hide="absChecked">mostra presenti <input class="mostraNascondi_{{absChecked}}" type="checkbox" ng-model="absChecked"></div>
 					<div ng-show="absChecked">nascondi assenti<input class="mostraNascondi_{{absChecked}}" type="checkbox" ng-model="absChecked"></div>
-						<table class="table table-responsive table-hover table-striped">
+						<table class="table table-hover table-striped">
 								<thead>
 									<tr>
 										<th>#</th>
@@ -67,23 +57,23 @@
 								</thead>
 								<tbody>
 									<tr class="animaScomparsa" ng-repeat="studente in studentiCompito | orderBy:predicate:reverse" ng-show="absChecked || !studente.assente">
-										<td>{{$index+1}}</td>
-										<td>{{studente.cognome}}</td>
-										<td>{{studente.nome}}</td>
-										<td>
-											    <div class="input-group " ng-hide="studente.assente">
-											      <input type="number" min="0" max="10" class="form-control" ng-model="studente.voto" aria-label="..." ng-disabled="studente.assente">
+										<td class="rs-text-vmiddle">{{$index+1}}</td>
+										<td class="rs-text-vmiddle">{{studente.cognome}}</td>
+										<td class="rs-text-vmiddle">{{studente.nome}}</td>
+										<td class="rs-text-vmiddle">
+											    <div class="input-group " ng-hide="studente.assente" >
+											      <input type="number" min="0" max="10" class="form-control input-sm" ng-model="studente.voto" aria-label="..." ng-disabled="studente.assente">
 											      <div class="input-group-btn">
-											        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Voto <span class="caret"></span></button>
+											        <button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false">Voto <span class="caret"></span></button>
 											        <ul class="dropdown-menu dropdown-menu-right" role="menu">
 											          
 											          <li ng-repeat="n in intervalloVoti"><a ng-click="inserisciVoto(studente,n)">{{n}}</a></li>
 											        </ul>
 											      </div><!-- /btn-group -->
 											    </div><!-- /input-group -->
-											    <div ng-show="studente.assente"> <em>Lo studente risulta assente</em></div>
+											    <div style="height: 30px; line-height: 30px" ng-show="studente.assente"> <em style="vertical-align:middle;">Lo studente risulta assente</em></div>
 										</td>
-										<td>
+										<td class="rs-text-vmiddle">
 											<div class="myCheckbox col-md-12 text-center">
 												<input name="Assenza" type="checkbox"
 													ng-model="studente.assente"
@@ -113,3 +103,5 @@
 		</fieldset>
 	</form>
 </div>
+
+<compito-argomenti-modal></compito-argomenti-modal>

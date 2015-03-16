@@ -3,7 +3,8 @@ var registroApp = angular.module('registroApp',[
                                               'registroServices',
                                               'registroFilters',
                                               'ngRoute',
-                                              'ngAnimate'
+                                              'ngAnimate',
+                                              'checklist-model'
                                               ]);
 registroApp.config(["$locationProvider","$routeProvider",function($locationProvider,$routeProvider) 
 {
@@ -15,27 +16,27 @@ registroApp.config(["$locationProvider","$routeProvider",function($locationProvi
   }).when('/:idClasse/',{
 	  templateUrl: 'partials/elencoAppelli.html',
 	  controller: 'riempiElencoAppelli',
-	  title:'seleziona l\'appello'
+	  title:'Seleziona l\'appello'
   }).when('/:idClasse/registri',{
 	  templateUrl: 'partials/menuClasse.html',
 	  controller: '',
-	  title:'seleziona il registro'
+	  title:'Seleziona il registro'
   }).when('/:idClasse/registri/registroDocente/',{
 	  templateUrl: 'partials/compito.html',
 	  controller: '',
-	  title:'seleziona il registro Docente'
+	  title:'Seleziona il registro Docente'
   }).when('/:idClasse/registri/registroDocente/:idRegistroDocente',{
 	  templateUrl: 'partials/compito.html',
 	  controller: '',
-	  title:'seleziona l\'operazione'
+	  title:'Seleziona l\'operazione'
   }).when('/:idClasse/registri/registroDocente/:idRegistroDocente/compiti/',{
 	  templateUrl: 'partials/elencoCompiti.html',
 	  controller: 'riempiElencoCompiti',
-	  title:'elenco dei compiti'
+	  title:'Elenco dei compiti'
   }).when('/:idClasse/registri/registroDocente/:idRegistroDocente/compiti/:idCompito',{
 	  templateUrl: 'partials/compito.html',
 	  controller: 'recuperaCompitoInClasse',
-	  title:'imposta il compito'
+	  title:'Imposta il compito'
   }).when('/:idClasse/appelli/',{
 	  redirectTo:function(routeParams){
 		  return "/"+routeParams.idClasse+'/';
