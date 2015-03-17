@@ -500,7 +500,6 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','Appello','C
 		$rootScope.modal = $scope.modal;
 		$("#myModal").modal("show")
 		$route.reload();
-		
 	}
 	$scope.intervalloVoti = [0,1,2,3,4,5,6,7,8,9,10]
 	$scope.inserisciVoto = function(studente,voto){
@@ -527,7 +526,11 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','Appello','C
 			{idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito},
 			function(response,headers){
 		//successo
-		$scope.studentiCompito = response;
+			$scope.studentiCompito = response
+			if (response.length == 0)
+			{
+				$scope.erroreStudenti = "Il compito è previsto per un appello futuro"
+			}
 		},
 		function(response,headers){
 			erroreSistema($rootScope, response.data, true);
@@ -570,11 +573,9 @@ registroControllers.controller('riempiElencoCompiti',
 		['$scope','Appello','$q','$location','$rootScope','$resource','$routeParams',
 		 function($scope,Appello,$q,$location,$rootScope,$resource,$routeParams) 
 		 {
+			console.log($routeParams)
 			$scope.elencoCompiti = Appello.prendiCompitiInClasse(
-					{idClasse : 1,idRegistroDocente : 1})
-			for (compito in $scope.elencoCompiti){
-				
-			}
+					{idClasse : $routeParams.idClasse,idRegistroDocente : $routeParams.idRegistroDocente})
 			
 			$scope.creaCompito = function(){
 				
