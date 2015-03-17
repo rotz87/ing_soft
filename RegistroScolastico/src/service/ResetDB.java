@@ -462,7 +462,7 @@ public class ResetDB {
 			Argomento worldWar1 = new Argomento("world war I", "");
 			Argomento worldWar2 = new Argomento("world war II","");
 			Argomento colonialismo = new Argomento("colonialismo","");
-			Argomento secondoDopoGuerra = new Argomento("secomdo dopoguerra","");
+			Argomento secondoDopoGuerra = new Argomento("secondo dopoguerra","");
 			
 			registroRossiPrimaA.getArgomentiSvolti().add(worldWar1);
 			registroRossiPrimaA.getArgomentiSvolti().add(worldWar2);

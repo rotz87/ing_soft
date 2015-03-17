@@ -281,18 +281,21 @@ public class CompitoInClasseController {
 		FaiAppelloController appelloController;
 		LocalDate localDate;
 		Date sqlDate;
+		Appello rit = null;
 		
 		appelloController = new FaiAppelloController();
 		compito = getCompitoInCLasse(idCompito);
 		sqlDate = compito.getData();
 		
 		if(sqlDate != null){
-		localDate = new LocalDate(sqlDate);
-		}else{
-			throw new IllegalStateException(ErrorMessage.COMPITO_WITHOUT_DATE);
+			localDate = new LocalDate(sqlDate);
+			rit =  appelloController.getAppello(compito.getInsegnamento().getClasse().getID(), localDate);
 		}
+//		else{ 
+//			throw new IllegalStateException(ErrorMessage.COMPITO_WITHOUT_DATE);
+//		}
 		
-		return appelloController.getAppello(compito.getInsegnamento().getClasse().getID(), localDate);
+		return rit;
  
 	}
 	
@@ -300,15 +303,24 @@ public class CompitoInClasseController {
 		Appello appello;
 		CompitoInClasse compito;
 		FaiAppelloController appelloController;
+		Map<Studente, Boolean> rit;
+		
 		
 		appello = getAppello(idCompito);
-		compito = getCompitoInCLasse(idCompito);
-		appelloController = new FaiAppelloController();
 		
-		Stampa.stampaln("ClasseID: "+compito.getInsegnamento().getClasse().getID());
-		Stampa.stampaln("AppelloID: "+ appello.getID());
+		if(appello != null){
+			compito = getCompitoInCLasse(idCompito);
+			appelloController = new FaiAppelloController();
+			rit =  appelloController.getBoolAssenze(compito.getInsegnamento().getClasse().getID(), appello.getID());
+		}else{
+			rit = new HashMap<Studente, Boolean>();
+		}
 		
-		return appelloController.getBoolAssenze(compito.getInsegnamento().getClasse().getID(), appello.getID());
+		
+//		Stampa.stampaln("ClasseID: "+compito.getInsegnamento().getClasse().getID());
+//		Stampa.stampaln("AppelloID: "+ appello.getID());
+		
+		return rit;
 		
 	}
 }
