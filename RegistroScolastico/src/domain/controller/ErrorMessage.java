@@ -22,7 +22,7 @@ public class ErrorMessage {
 	public static final String COMPITO_WITHOUT_DATE = "Il compito non ha ancora una data";
 	public static final String DOCENTE_UNLOADED = "Impossibile caricare il docente";
 	public static final String DOCENTE_UNQUALIFIED = "Attenzione il docente non e' abilitato a eseguire questa operazione";
-	public static final String LISTA_STUDENTI_WRONG = "Gli studenti specificati non ...?";
+	public static final String LISTA_STUDENTI_WRONG = "La lista di studenti specificata contiene uno o più studenti assenti";
 	public static final String REGISTRO_DOCENTE_UNLOADED = "Impossibile caricare il registro docente";
 	public static final String STUDENTI_UNLOADED = "Impossibile caricare gli studenti";
 	public static final String VOTI_NON_INSERIBILI = "Impossibile inserire i voti";
