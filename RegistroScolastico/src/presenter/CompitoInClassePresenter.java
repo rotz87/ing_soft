@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
+import org.joda.time.LocalDate;
 import org.springframework.hateoas.Link;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import presenter.resourceSupport.appello.AppelloRS;
 import presenter.resourceSupport.compito.ArgomentiContainerRS;
 import presenter.resourceSupport.compito.ArgomentoRS;
 import presenter.resourceSupport.compito.CompitoInClasseRS;
@@ -23,6 +26,7 @@ import presenter.resourceSupport.compito.StudenteCompitoRS;
 import service.Stampa;
 import domain.controller.CompitoInClasseController;
 import domain.controller.DocenteController;
+import domain.controller.FaiAppelloController;
 import domain.model.Argomento;
 import domain.model.CompitoInClasse;
 import domain.model.Studente;
@@ -142,22 +146,55 @@ public class CompitoInClassePresenter {
 		  
 	  }
 	  
-	  @RequestMapping(value = "/{idCompitoInClasse}/studenti", method = RequestMethod.GET)
-	  public Collection<StudenteCompitoRS> getStudentiCompito(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse) {
+//	  @RequestMapping(value = "/{idCompitoInClasse}/studenti", method = RequestMethod.GET)
+//	  public Collection<StudenteCompitoRS> getStudentiCompito(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse) {
+//		  
+//		  //TODO Controllare i parametri che non servono
+//		  
+//		  CompitoInClasseController compitoInClasseController;
+//		  Map<Studente, Boolean> assenze;
+//		  Map<Studente, Voto> voti;
+//		  Collection<StudenteCompitoRS> studentiCompito;
+//
+//		  compitoInClasseController = new CompitoInClasseController();
+//
+//		  assenze = compitoInClasseController.getAssenzeCompito(idCompitoInClasse);
+//		  voti = compitoInClasseController.getVotiCompito(idCompitoInClasse);
+//		  
+//		  studentiCompito = new LinkedList<StudenteCompitoRS>();
+//		  for (Studente studente : assenze.keySet()) {
+//			studentiCompito.add(new StudenteCompitoRS(studente, voti.get(studente), assenze.get(studente)));
+//		  }
+//		  
+//		  return studentiCompito;
+//		  
+//	  }
+	  
+	  @RequestMapping(value = "/{idCompitoInClasse}/studenti", method = RequestMethod.GET, params = {"data"})
+	  public Collection<StudenteCompitoRS> getStudentiCompito(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse, @RequestParam(value="data") long data) {
 		  
 		  //TODO Controllare i parametri che non servono
 		  
 		  CompitoInClasseController compitoInClasseController;
+		  FaiAppelloController faiAppelloController;
 		  Map<Studente, Boolean> assenze;
 		  Map<Studente, Voto> voti;
 		  Collection<StudenteCompitoRS> studentiCompito;
+		  LocalDate localDate;
 
 		  compitoInClasseController = new CompitoInClasseController();
+		  faiAppelloController = new FaiAppelloController();
 
-		  assenze = compitoInClasseController.getAssenzeCompito(idCompitoInClasse);
+		  localDate = new LocalDate(data);
+		  assenze = faiAppelloController.getBoolAssenze(idClasse, localDate);
 		  voti = compitoInClasseController.getVotiCompito(idCompitoInClasse);
 		  
 		  studentiCompito = new LinkedList<StudenteCompitoRS>();
+		  /*
+		   * Il ciclo FOR deve scorrere le assenze, perché se le assenze sono vuote
+		   * significa che non c'è un appello con le assenze registrate, corrispondente alla data richiesta.
+		   * 
+		   */
 		  for (Studente studente : assenze.keySet()) {
 			studentiCompito.add(new StudenteCompitoRS(studente, voti.get(studente), assenze.get(studente)));
 		  }

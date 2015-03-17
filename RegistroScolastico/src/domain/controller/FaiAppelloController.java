@@ -249,7 +249,9 @@ public class FaiAppelloController {
 	}
 	
 	public HashMap<Studente, Boolean>  getBoolAssenze(int idClasse, int idAppello) {
-
+		Appello appelloCorrente;
+		Classe classeCorrente;
+		HashMap<Studente, Boolean> rit;
 		ClasseCriteria classeCriteria;
 		AppelloCriteria appelloCriteria;
 		
@@ -265,30 +267,49 @@ public class FaiAppelloController {
 		
 		appelloCriteria.ID.eq(idAppello);
 		
-		Appello appelloCorrente = appelloCriteria.uniqueAppello();
-		HashMap<Studente, Boolean> rit;
+		appelloCorrente = appelloCriteria.uniqueAppello();
 		
-		if(appelloCorrente == null){
-			throw new IllegalStateException(ErrorMessage.APPELLO_INEXISTENT);
-		}
-
-		if(appelloCorrente.getAssenzePrese()){
-
-			rit = new HashMap<Studente, Boolean>();
-//			Classe classeCorrente = DBFake.getInstance().getClasseById(idClasse);
-			classeCriteria.ID.eq(idClasse);
-			Classe classeCorrente = classeCriteria.uniqueClasse();
-			RegistroAssenze registroCorrente = classeCorrente.getRegistroAssenze();
-	
-			for(Studente studente : classeCorrente.getStudenti()){
-				rit.put(studente, studente.getLibrettoAssenze().esisteAssenza(appelloCorrente));
+		rit = new HashMap<Studente, Boolean>();
+		
+		if(appelloCorrente != null && appelloCorrente.getAssenzePrese()){
 				
-			}
-			
-			return rit;
-		}else{
-			throw new IllegalStateException(ErrorMessage.ASSENZE_UNRECORDED);
+				classeCriteria.ID.eq(idClasse);
+				classeCorrente = classeCriteria.uniqueClasse();
+				for(Studente studente : classeCorrente.getStudenti()){
+					rit.put(studente, studente.getLibrettoAssenze().esisteAssenza(appelloCorrente));	
+				}
+
 		}
+			
+		return rit;
+	}
+	
+	public HashMap<Studente, Boolean> getBoolAssenze(int idClasse, LocalDate data){
+
+		ClasseCriteria classeCriteria;
+		Classe classe;
+		RegistroAssenze registroAssenze;
+		Appello appello;
+		HashMap<Studente, Boolean> assenzePrese;
+		
+		try {
+			classeCriteria = new ClasseCriteria();
+		} catch (PersistentException e) {
+			throw new RuntimeException(ErrorMessage.STUDENTI_UNLOADED);
+		}
+		
+		classeCriteria.ID.eq(idClasse);
+		classe = classeCriteria.uniqueClasse();
+		registroAssenze = classe.getRegistroAssenze();
+		appello = registroAssenze.getAppelloByData(data);
+		
+		if(appello != null){
+			assenzePrese = getBoolAssenze(idClasse, appello.getID());
+		}else{
+			assenzePrese = new HashMap<Studente, Boolean>();
+		}
+		
+		return assenzePrese;
 	}
 	
 	
