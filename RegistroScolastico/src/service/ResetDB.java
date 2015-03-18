@@ -17,6 +17,7 @@ import domain.model.Calendario;
 import domain.model.Classe;
 import domain.model.CompitoInClasse;
 import domain.model.Docente;
+import domain.model.GiornoFestivo;
 import domain.model.GiornoSettimanaleFestivo;
 import domain.model.LibrettoAssenze;
 import domain.model.LibrettoVoti;
@@ -507,8 +508,28 @@ public class ResetDB {
 			GiornoSettimanaleFestivo sabato = new GiornoSettimanaleFestivo(6);
 			GiornoSettimanaleFestivo domenica = new GiornoSettimanaleFestivo(7);
 			
+			LocalDate l8Dic = new LocalDate(2014,12,8);
+			java.sql.Date d8Dic = new java.sql.Date(l8Dic.toDate().getTime());
+			GiornoFestivo ottoDic = new GiornoFestivo(d8Dic);
+			
+			LocalDate lDataNatale = new LocalDate(2014,12,25);
+			java.sql.Date dataNatale = new java.sql.Date(lDataNatale.toDate().getTime());
+			GiornoFestivo natale = new GiornoFestivo(dataNatale);
+			
+			LocalDate lDataSStefano = new LocalDate(2014,12,26);
+			java.sql.Date dataSStefano = new java.sql.Date(lDataSStefano.toDate().getTime());
+			GiornoFestivo sStefano = new GiornoFestivo(dataSStefano);
+			
+			LocalDate lDataCapodanno = new LocalDate(2015,1,1);
+			java.sql.Date dataCapodanno = new java.sql.Date(lDataCapodanno.toDate().getTime());
+			GiornoFestivo capodanno = new GiornoFestivo(dataCapodanno);
+			
 			RSPersistentManager.instance().getSession().save(sabato);
 			RSPersistentManager.instance().getSession().save(domenica);
+			RSPersistentManager.instance().getSession().save(ottoDic);
+			RSPersistentManager.instance().getSession().save(natale);
+			RSPersistentManager.instance().getSession().save(sStefano);
+			RSPersistentManager.instance().getSession().save(capodanno);
 			
 //			domain.model.Studente ldomainmodelStudente = new domain.model.Studente();			// Initialize the properties of the persistent object here
 //			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelStudente);

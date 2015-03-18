@@ -7,11 +7,16 @@ import java.util.LinkedList;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
 
+import service.Stampa;
+
 public class Calendario {
 
 	private Collection<GiornoFestivo> giorniFestivi = new LinkedList<GiornoFestivo>();
 	private Collection<GiornoSettimanaleFestivo> giorniSettimanaliFestivi = new LinkedList<GiornoSettimanaleFestivo>();
 	private LocalDate dataOdierna;
+	private LocalDate inizioLezioni = new LocalDate(2014,9,15);// TODO da rivedere
+	private LocalDate fineLezioni = new LocalDate(2015,6,12);// TODO da rivedere
+
 	final private LocalDate dataZero = new LocalDate(0L);
 	private static Calendario instance;
 
@@ -70,6 +75,27 @@ public class Calendario {
 		return Days.daysBetween(dataZero, lData).getDays();
 		
 	}
+	
+	public Collection<LocalDate> getDateFestive(){
+		Collection<LocalDate> rit = new LinkedList<LocalDate>();
+		
+		for(LocalDate data = this.inizioLezioni; data.isBefore(this.fineLezioni.plusDays(1)); data = data.plusDays(1) ){
+			if(isFestivo(data)){
+				rit.add(data);
+			}
+		}
+		
+//		LocalDate data = calcolaDataOdierna().plusDays(1);
+//		while (data.isBefore(this.fineLezioni)) { 
+//			if(!(isFestivo(data))){
+//				rit.add(data);
+//				Stampa.stampaln(data);
+//			}
+//			data = data.plusDays(1);
+//		}
+		
+		return rit;
+	}
 
 	public Collection<GiornoSettimanaleFestivo> getGiorniSettimanaliFestivi() {
 		return this.giorniSettimanaliFestivi;
@@ -91,4 +117,19 @@ public class Calendario {
 		this.giorniFestivi = giorniFestivi;
 	}
 
+	public LocalDate getInizioLezioni() {
+		return inizioLezioni;
+	}
+
+	public void setInizioLezioni(LocalDate inizioLezioni) {
+		this.inizioLezioni = inizioLezioni;
+	}
+
+	public LocalDate getFineLezioni() {
+		return fineLezioni;
+	}
+
+	public void setFineLezioni(LocalDate fineLezioni) {
+		this.fineLezioni = fineLezioni;
+	}
 }

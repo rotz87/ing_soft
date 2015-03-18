@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 
+
+import org.joda.time.LocalDate;
 //import org.orm.PersistentException;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -71,6 +73,25 @@ public class ClassePresenter {
 		}
 		
 		return studentiRS;
+	}
+	
+	@RequestMapping(value = "/{idClasse}/dateFestive", method = RequestMethod.GET)
+	public Collection<Long> getDateFestive(@PathVariable int idClasse) {
+		
+		ClasseController classeController;
+		Collection<LocalDate> date;
+		Collection<Long> dateLong;
+		
+		date = null;
+		classeController = new ClasseController();
+		dateLong = new LinkedList<Long>();
+		
+		date = classeController.getDateFestive(idClasse);
+		for (LocalDate data : date) {
+			dateLong.add(data.toDate().getTime());
+		}
+		
+		return dateLong;
 	}
 	
 }

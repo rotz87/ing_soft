@@ -3,8 +3,11 @@ package domain.controller;
 import java.util.Collection;
 
 import org.hibernate.exception.DataException;
+import org.joda.time.LocalDate;
 import org.orm.PersistentException;
 
+import domain.model.Appello;
+import domain.model.Calendario;
 import domain.model.Classe;
 import domain.model.ClasseCriteria;
 import domain.model.Docente;
@@ -56,4 +59,24 @@ public class ClasseController {
 	}
 
 	
+	public Collection<LocalDate> getDateFestive(int idClasse){
+		Collection<LocalDate> dateFestive;
+		Collection<Appello> appelli;
+		Collection<LocalDate> rit;
+		FaiAppelloController appelloController;
+		
+		dateFestive = Calendario.getInstance().getDateFestive();
+		appelloController = new FaiAppelloController();
+		
+		appelloController.getAppelli(idClasse);
+		/**
+		 * TODO
+		 *	NON controlla che una data passata ammessa abbia effettivamente l'appello
+		 *	Si dovrebbe controllare che non ci sia una data passata che non è contenuta nelle date festive e contemporaneamente non ha un appello
+		 *  per il momento ritorna solo le date festive.
+		 */
+		rit = dateFestive;
+		
+		return rit;
+	}
 }

@@ -228,6 +228,7 @@ public class FaiAppelloController {
 		return registroAssenzeCorrente.getAppelli().values();
 		
 	}
+
 	
 	public boolean isAppelloOdiernoAvviabile(int idClasse) {
 

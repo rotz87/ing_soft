@@ -21,6 +21,7 @@ import service.Stampa;
 import domain.model.Appello;
 import domain.model.Argomento;
 import domain.model.ArgomentoCriteria;
+import domain.model.Calendario;
 import domain.model.Classe;
 import domain.model.CompitoInClasse;
 import domain.model.CompitoInClasseCriteria;
@@ -323,4 +324,5 @@ public class CompitoInClasseController {
 		return rit;
 		
 	}
+
 }
