@@ -91,8 +91,15 @@ public class AssenzaImp {
 	}
 	
 	public boolean esisteAppello(Assenza assenza, Appello appello){
+		
+		//Se appello == null non ha senso vedere se esiste 
+		if(appello == null){
+			throw new NullPointerException();
+		}
+		
 		return assenza.getAppelli().contains(appello);
 	}
+	
 	public int compareTo(Assenza that, Assenza assenza) {
 		
 		return that.getUltimoAppelloAssenza().compareTo(assenza.getUltimoAppelloAssenza());

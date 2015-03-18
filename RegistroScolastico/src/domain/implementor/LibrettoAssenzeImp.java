@@ -50,24 +50,43 @@ public class LibrettoAssenzeImp {
 	}
 	
 	public boolean esisteAssenza(LibrettoAssenze librettoAssenze, Appello appello){
-		boolean rit = false;
-		 ListIterator<Assenza> listIteratorNG = librettoAssenze.getNonGiustificate().listIterator();
-	        while (listIteratorNG.hasNext() && rit == false) {
-	        	Assenza assenza = listIteratorNG.next();
-	            if(assenza.esisteAppello(appello)){
-	            	rit = true;
-	            }
+		boolean rit;
+		
+		///e appello == null non ha senso vedere se esiste un'assenza in appello
+		if(appello == null){
+			throw new NullPointerException();
+		}
+		
+		rit = false;
+		
+		//Ricerca tra le assenze non giustificate
+		ListIterator<Assenza> listIteratorNG = librettoAssenze.getNonGiustificate().listIterator();
+	    while (listIteratorNG.hasNext() && rit == false) {
+	    	Assenza assenza = listIteratorNG.next();
+	        if(assenza.esisteAppello(appello)){
+	        	rit = true;
 	        }
-	        ListIterator<Assenza> listIteratorG = librettoAssenze.getGiustificate().listIterator();
-	        while (listIteratorG.hasNext() && rit == false) {
-	        	Assenza assenza = listIteratorG.next();
-	            if(assenza.esisteAppello(appello)){
-	            	rit = true;
-	            }
-	        }
-	        return rit;
+	    }
+	    
+	    //Ricerca tra le assenze giustificate
+		ListIterator<Assenza> listIteratorG = librettoAssenze.getGiustificate().listIterator();
+		while (listIteratorG.hasNext() && rit == false) {
+			Assenza assenza = listIteratorG.next();
+		    if(assenza.esisteAppello(appello)){
+		    	rit = true;
+		    }
+		}
+		
+		return rit;
 	}
 	
+	/**
+	 * Ritorna null se l'assenza non esiste.
+	 * 
+	 * @param librettoAssenze
+	 * @param appello
+	 * @return
+	 */
 	public Assenza getAssenza(LibrettoAssenze librettoAssenze, Appello appello){
 
 		Assenza rit = null;
@@ -88,25 +107,6 @@ public class LibrettoAssenzeImp {
         }
 		
 		return rit;
-	}
-
-	/**
-	 * 
-	 * @param librettoAssenze
-	 */
-	public void inizialize(LibrettoAssenze librettoAssenze) {
-		// TODO - implement LibrettoAssenzeImp.inizialize
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param librettoAssenze
-	 * @param studente
-	 */
-	public void inizialize(LibrettoAssenze librettoAssenze, Studente studente) {
-		// TODO - implement LibrettoAssenzeImp.inizialize
-		throw new UnsupportedOperationException();
 	}
 
 }

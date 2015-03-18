@@ -28,10 +28,12 @@ import domain.model.Studente;
 import domain.model.StudenteCriteria;
 
 public class FaiAppelloController {
+	
 
 	public FaiAppelloController() {
 
 	}
+	
 	
 	public void avviaAppello(int idClasse, int idDocente) {
 
@@ -80,6 +82,7 @@ public class FaiAppelloController {
 		}
 		
 	}
+	
 	
 	public void registraAssenze(Integer[] idStudenti, int idClasse, int idDocente) {
 		
@@ -144,6 +147,7 @@ public class FaiAppelloController {
 
 	}
 	
+	
 	public Appello getAppelloOdierno(int idClasse) {
 		ClasseCriteria classeCriteria;
 		
@@ -157,9 +161,11 @@ public class FaiAppelloController {
 		
 		classeCriteria.ID.eq(idClasse);
 		Classe classeCorrente = classeCriteria.uniqueClasse();
+		
 		return classeCorrente.getRegistroAssenze().getAppelloOdierno();
 
 	}
+	
 	
 	public Appello getAppello(int idClasse, LocalDate data) {
 		
@@ -178,6 +184,7 @@ public class FaiAppelloController {
 		return classeCorrente.getRegistroAssenze().getAppelloByData(data);
 		
 	}
+	
 	
 	public Appello getAppello(int idClasse, int idAppello) {
 
@@ -200,14 +207,14 @@ public class FaiAppelloController {
 		appelloCriteria.ID.eq(idAppello);
 		Appello appelloCorrente = appelloCriteria.uniqueAppello();
 		
-		if ( classeCorrente.getRegistroAssenze().esisteAppello(appelloCorrente)){
-			
+		if ( classeCorrente.getRegistroAssenze().esisteAppello(appelloCorrente)){		
 			return appelloCorrente;
 		}else{
 			throw new IllegalStateException(ErrorMessage.APPELLO_CLASSE_INCONSISTENT);
 		}
 		
 	}
+	
 	
 	public Collection<Appello> getAppelli(int idClasse) {
 		
@@ -225,6 +232,7 @@ public class FaiAppelloController {
 		Classe classeCorrente = classeCriteria.uniqueClasse();
 		
 		RegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();
+		
 		return registroAssenzeCorrente.getAppelli().values();
 		
 	}
@@ -249,7 +257,7 @@ public class FaiAppelloController {
 		return registroAssenzeCorrente.isAppelloOdiernoAvviabile();
 	}
 	
-	public HashMap<Studente, Boolean>  getBoolAssenze(int idClasse, int idAppello) {
+	public HashMap<Studente, Boolean> getBoolAssenze(int idClasse, int idAppello) {
 		Appello appelloCorrente;
 		Classe classeCorrente;
 		HashMap<Studente, Boolean> rit;
@@ -284,6 +292,7 @@ public class FaiAppelloController {
 			
 		return rit;
 	}
+	
 	
 	public HashMap<Studente, Boolean> getBoolAssenze(int idClasse, LocalDate data){
 
@@ -321,7 +330,7 @@ public class FaiAppelloController {
 	 * @return Map<idStudente, Assenza>
 	 * @throws PersistentException 
 	 */
-	public HashMap<Integer, Assenza>  getAssenze(int idClasse, int idAppello) {
+	public HashMap<Integer, Assenza> getAssenze(int idClasse, int idAppello) {
 
 		ClasseCriteria classeCriteria;
 		AppelloCriteria appelloCriteria;
@@ -346,7 +355,6 @@ public class FaiAppelloController {
 			rit = new HashMap<Integer, Assenza>();
 			classeCriteria.ID.eq(idClasse);
 			Classe classeCorrente = classeCriteria.uniqueClasse();
-			RegistroAssenze registroCorrente = classeCorrente.getRegistroAssenze();
 	
 			for(Studente studente : classeCorrente.getStudenti()){
 				rit.put(studente.getID(), studente.getLibrettoAssenze().getAssenza(appelloCorrente));
@@ -359,7 +367,7 @@ public class FaiAppelloController {
 		}
 	}
 	
-	public Collection<Studente> getPresenti(int idClasse, LocalDate data){
+	public Collection<Studente> getSoloPresenti(int idClasse, LocalDate data){
 
 		Collection<Studente> studentiPresenti = new LinkedList<Studente>();
 		ClasseCriteria classeCriteria;
@@ -386,11 +394,7 @@ public class FaiAppelloController {
 				if(! boolAssenze.get(studente)){
 					studentiPresenti.add(studente);
 				}
-			}
-			
-			
-			
-			
+			}	
 		}else{
 			throw new IllegalStateException(ErrorMessage.ASSENZE_UNRECORDED);
 		}

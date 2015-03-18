@@ -21,7 +21,7 @@ public class TestGetPresenti {
 				
 				
 				
-				Collection<Studente> presenti = appelloController.getPresenti(1, new LocalDate(2014,12,16));
+				Collection<Studente> presenti = appelloController.getSoloPresenti(1, new LocalDate(2014,12,16));
 				
 				for(Studente stud : presenti){
 					Stampa.stampaln("Studente "+ stud.getID()+" " + stud.getNome()+" "+stud.getCognome());

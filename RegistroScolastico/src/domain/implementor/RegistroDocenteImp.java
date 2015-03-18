@@ -38,11 +38,12 @@ public class RegistroDocenteImp {
 
 	public void inserisciInfoCompito(RegistroDocente registroDocente, CompitoInClasse compito, java.sql.Date data,
 			Time oraInizio, Time oraFine, Collection<Argomento> argomenti) {
-//		if(registroDocente.isCompitoPresente(compito)){
+		
+		if(registroDocente.isCompitoPresente(compito)){
 			compito.setInfo(data, oraInizio, oraFine, argomenti);
-//		}else{
-//			throw new IllegalStateException(ErrorMessage.COMPITO_INEXISTENT);
-//		}
+		}else{
+			throw new IllegalStateException(ErrorMessage.COMPITO_INEXISTENT);
+		}
 		
 	}
 

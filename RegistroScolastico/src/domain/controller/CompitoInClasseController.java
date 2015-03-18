@@ -1,6 +1,5 @@
 package domain.controller;
 
-import java.nio.channels.IllegalSelectorException;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.Collection;
@@ -9,11 +8,7 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-import javax.management.RuntimeErrorException;
-
-import org.bouncycastle.crypto.RuntimeCryptoException;
 import org.joda.time.LocalDate;
-import org.joda.time.LocalTime;
 import org.orm.PersistentException;
 import org.orm.PersistentTransaction;
 
@@ -21,7 +16,6 @@ import service.Stampa;
 import domain.model.Appello;
 import domain.model.Argomento;
 import domain.model.ArgomentoCriteria;
-import domain.model.Calendario;
 import domain.model.Classe;
 import domain.model.CompitoInClasse;
 import domain.model.CompitoInClasseCriteria;
@@ -37,6 +31,7 @@ import domain.model.VotoCriteria;
 
 public class CompitoInClasseController {
 
+	
 	public CompitoInClasse creaCompito(int idRegistroDocente, int idDocente) {
 		RegistroDocenteCriteria regDocCriteria;
 		DocenteCriteria docenteCriteria;
@@ -44,10 +39,10 @@ public class CompitoInClasseController {
 		Docente docente;
 		CompitoInClasse compito;
 		
+		
 		try {
 			regDocCriteria = new RegistroDocenteCriteria();
 			docenteCriteria = new DocenteCriteria();
-	
 		} catch (PersistentException e) {
 			throw new RuntimeException(ErrorMessage.COMPITO_UNCREABLE);
 		}
@@ -68,7 +63,6 @@ public class CompitoInClasseController {
 				}
 				catch (PersistentException e) {
 					t.rollback();
-					e.printStackTrace();//TODO
 					throw e;
 				}
 			} catch (PersistentException e) {
@@ -82,15 +76,6 @@ public class CompitoInClasseController {
 		return compito;
 	}
 
-	/**
-	 * 
-	 * @param idCompito
-	 * @param idStudenti
-	 */
-	public void inserisciStudenti(int idCompito, int[] idStudenti) {
-		// TODO - implement CompitoInClasseController.inserisciStudenti
-		throw new UnsupportedOperationException();
-	}
 
 	/**
 	 * 
@@ -110,6 +95,7 @@ public class CompitoInClasseController {
 		Studente studente;
 		Voto voto;
 		
+		
 		mapVoti = new HashMap<Studente, Voto>();
 		
 		try {
@@ -122,6 +108,8 @@ public class CompitoInClasseController {
 		compito = compitoCriteria.uniqueCompitoInClasse();
 		
 		try {
+			
+			//trasforma mapVotiGUI in mapVoti
 			for(Integer idS : mapVotiGUI.keySet()){
 				studenteCriteria = new StudenteCriteria();
 				votoCriteria = new VotoCriteria();
@@ -134,6 +122,7 @@ public class CompitoInClasseController {
 				
 				mapVoti.put(studente, voto);
 			}
+			
 		} catch (PersistentException e) {
 			throw new RuntimeException(ErrorMessage.VOTI_UNLOADED);
 		}
@@ -180,6 +169,7 @@ public class CompitoInClasseController {
 		ArgomentoCriteria argomentoCriteria;
 		Collection<Argomento> argomenti;
 		
+		
 		argomenti = new LinkedHashSet<Argomento>();
 		
 		try{
@@ -201,23 +191,20 @@ public class CompitoInClasseController {
 			argomenti.addAll(argomentoCriteria.list());
 		}
 		
-		if(registroDocente.isCompitoPresente(compito)){
-			registroDocente.inserisciInfoCompito(compito, data, oraInizio, oraFine, argomenti);
+		registroDocente.inserisciInfoCompito(compito, data, oraInizio, oraFine, argomenti);
+		
+		try {
+			PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
 			try {
-				PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
-				try {
-					RSPersistentManager.instance().getSession().update(compito);
-					t.commit();
-				}
-				catch (PersistentException e) {
-					t.rollback();
-					throw e;
-				}
-			} catch (PersistentException e) {
-				throw new RuntimeException(ErrorMessage.COMPITO_NON_AGGIORNABILE);
+				RSPersistentManager.instance().getSession().update(compito);
+				t.commit();
 			}
-		}else{
-			throw new IllegalStateException(ErrorMessage.COMPITO_INEXISTENT);
+			catch (PersistentException e) {
+				t.rollback();
+				throw e;
+			}
+		} catch (PersistentException e) {
+			throw new RuntimeException(ErrorMessage.COMPITO_NON_AGGIORNABILE);
 		}
 		
 	}
@@ -225,6 +212,7 @@ public class CompitoInClasseController {
 	public CompitoInClasse getCompitoInCLasse(int idCompitoInClasse) {
 		CompitoInClasseCriteria compitoCriteria;
 		CompitoInClasse compito;
+		
 		
 		try{
 			compitoCriteria = new CompitoInClasseCriteria();
@@ -244,8 +232,8 @@ public class CompitoInClasseController {
 		RegistroDocenteCriteria regDocCriteria;
 		RegistroDocente registroDocente;
 
+		
 		try{
-			
 			regDocCriteria = new RegistroDocenteCriteria();
 		}catch (PersistentException e){
 			throw new  RuntimeException(ErrorMessage.COMPITI_UNLOADED);
@@ -261,6 +249,7 @@ public class CompitoInClasseController {
 		CompitoInClasse compito;
 		HashMap<Studente, Voto> rit;
 		Classe classe;
+		
 		
 		compito = getCompitoInCLasse(idCompito);
 		rit = new HashMap<Studente, Voto>();
@@ -283,6 +272,7 @@ public class CompitoInClasseController {
 		LocalDate localDate;
 		Date sqlDate;
 		Appello rit = null;
+		
 		
 		appelloController = new FaiAppelloController();
 		compito = getCompitoInCLasse(idCompito);
@@ -307,19 +297,15 @@ public class CompitoInClasseController {
 		Map<Studente, Boolean> rit;
 		
 		
+		appelloController = new FaiAppelloController();
 		appello = getAppello(idCompito);
 		
 		if(appello != null){
 			compito = getCompitoInCLasse(idCompito);
-			appelloController = new FaiAppelloController();
 			rit =  appelloController.getBoolAssenze(compito.getInsegnamento().getClasse().getID(), appello.getID());
 		}else{
 			rit = new HashMap<Studente, Boolean>();
-		}
-		
-		
-//		Stampa.stampaln("ClasseID: "+compito.getInsegnamento().getClasse().getID());
-//		Stampa.stampaln("AppelloID: "+ appello.getID());
+		};
 		
 		return rit;
 		
