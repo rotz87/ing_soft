@@ -1,11 +1,15 @@
 package presenter;
 
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.LinkedList;
 
 
 
+
+
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 //import org.orm.PersistentException;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -88,7 +92,14 @@ public class ClassePresenter {
 		
 		date = classeController.getDateFestive(idClasse);
 		for (LocalDate data : date) {
+//			java.sql.Date sqlData = new java.sql.Date(data.toDate().getTime());
+//			dateLong.add(sqlData.getTime());
+			
+//			DateTime dt = data.toDateTimeAtStartOfDay().plusHours(12);
+//			dateLong.add(dt.getMillis());
+			
 			dateLong.add(data.toDate().getTime());
+			
 		}
 		
 		return dateLong;
