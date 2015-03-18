@@ -116,9 +116,6 @@ public class RegistroAssenzeImp {
 		return avviabile;
 	}
 	
-//	public LibrettoAssenze getLibretto(RegistroAssenze registroAssenze, Studente studente){
-//		return registroAssenze.getLibrettiAssenze().get(studente.getID());
-//	}
 
 	public boolean checkPresenti(RegistroAssenze registro, LocalDate data, Collection<Studente> studenti) {
 		boolean rit = true;
@@ -128,26 +125,6 @@ public class RegistroAssenzeImp {
 			rit = rit && (!studente.getLibrettoAssenze().esisteAssenza(appello));
 		}
 		return rit;
-	}
-
-	/**
-	 * Riceve un vettore di studenti per cui segnare le assenze
-	 * @param registroAssenze
-	 * @param Studenti
-	 */
-	public void registraAssenze(RegistroAssenze registroAssenze, Studente[] Studenti) {
-		// TODO - implement RegistroAssenzeImp.registraAssenze
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param registroAssenze
-	 * @param studente
-	 */
-	public LibrettoAssenze getLibretto(RegistroAssenze registroAssenze, Studente studente) {
-		// TODO - implement RegistroAssenzeImp.getLibretto
-		throw new UnsupportedOperationException();
 	}
 
 }
