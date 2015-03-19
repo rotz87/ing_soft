@@ -258,36 +258,21 @@ public class FaiAppelloController {
 	}
 	
 	public HashMap<Studente, Boolean> getBoolAssenze(int idClasse, int idAppello) {
-		Appello appelloCorrente;
-		Classe classeCorrente;
-		HashMap<Studente, Boolean> rit;
-		ClasseCriteria classeCriteria;
-		AppelloCriteria appelloCriteria;
-		
-		classeCriteria = null;
-		appelloCriteria = null;
-		
-		try {
-			classeCriteria = new ClasseCriteria();
-			appelloCriteria = new AppelloCriteria();
-		} catch (PersistentException e) {
-			throw new RuntimeException(ErrorMessage.ASSENZE_UNLOADED);
-		}
-		
-		appelloCriteria.ID.eq(idAppello);
-		
-		appelloCorrente = appelloCriteria.uniqueAppello();
-		
-		rit = new HashMap<Studente, Boolean>();
-		
-		if(appelloCorrente != null && appelloCorrente.getAssenzePrese()){
-				
-				classeCriteria.ID.eq(idClasse);
-				classeCorrente = classeCriteria.uniqueClasse();
-				for(Studente studente : classeCorrente.getStudenti()){
-					rit.put(studente, studente.getLibrettoAssenze().esisteAssenza(appelloCorrente));	
-				}
 
+		HashMap<Studente, Boolean> rit;
+		HashMap<Studente, Assenza> assenze;
+		
+		assenze = getAssenze(idClasse, idAppello);
+		rit = new HashMap<Studente, Boolean>();
+		boolean b;
+		
+		for(Studente studente : assenze.keySet()){
+			if(assenze.get(studente) == null){
+				b=false;
+			}else{
+				b=true;
+			}
+			rit.put(studente, b);
 		}
 			
 		return rit;
@@ -330,7 +315,7 @@ public class FaiAppelloController {
 	 * @return Map<idStudente, Assenza>
 	 * @throws PersistentException 
 	 */
-	public HashMap<Integer, Assenza> getAssenze(int idClasse, int idAppello) {
+	public HashMap<Studente, Assenza> getAssenze(int idClasse, int idAppello) {
 
 		ClasseCriteria classeCriteria;
 		AppelloCriteria appelloCriteria;
@@ -349,15 +334,15 @@ public class FaiAppelloController {
 		
 		Appello appelloCorrente = appelloCriteria.uniqueAppello();
 		
-		HashMap<Integer, Assenza> rit;
+		HashMap<Studente, Assenza> rit;
 		if(appelloCorrente.getAssenzePrese()){
 
-			rit = new HashMap<Integer, Assenza>();
+			rit = new HashMap<Studente, Assenza>();
 			classeCriteria.ID.eq(idClasse);
 			Classe classeCorrente = classeCriteria.uniqueClasse();
 	
 			for(Studente studente : classeCorrente.getStudenti()){
-				rit.put(studente.getID(), studente.getLibrettoAssenze().getAssenza(appelloCorrente));
+				rit.put(studente, studente.getLibrettoAssenze().getAssenza(appelloCorrente));
 				
 			}
 			

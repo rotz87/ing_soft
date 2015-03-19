@@ -81,7 +81,7 @@ public class TestGetAssenze {
 				Stampa.stampaln("________________________________________FINE");
 				Stampa.stampaln();
 				
-				HashMap<Integer, Assenza>  mapIdStudAss = controlloreAppello.getAssenze(1, idAppello);
+				HashMap<Studente, Assenza>  mapIdStudAss = controlloreAppello.getAssenze(1, idAppello);
 				
 			
 				Stampa.stampaln();
@@ -89,9 +89,9 @@ public class TestGetAssenze {
 				Iterator entries2 = mapIdStudAss.entrySet().iterator();
 				while (entries2.hasNext()) {
 				  Entry thisEntry = (Entry) entries2.next();
-				  int idStud = (int)thisEntry.getKey();
+				  Studente stud = (Studente)thisEntry.getKey();
 				  Assenza assenza = (Assenza)thisEntry.getValue();
-				  Stampa.stampa("ID_STUDENTE : " + idStud+" :");
+				  Stampa.stampa("ID_STUDENTE : " + stud.getID()+" :");
 				  Stampa.stampaln("ASSENZA :"+ assenza);
 				  
 				}
@@ -99,6 +99,9 @@ public class TestGetAssenze {
 				Stampa.stampaln();
 				}catch(IllegalStateException ise){
 					Stampa.stampaln("ECCEZZIONE " + ise.getMessage());
+				}
+				catch(Exception e){
+					Stampa.stampaln("ECCEZZIONE " + e.getMessage());
 				}
 				// lettura intero da tastiera
 				Stampa.stampaln("Inserire codice appello (0 per uscire) ->");

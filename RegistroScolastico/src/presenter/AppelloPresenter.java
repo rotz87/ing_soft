@@ -28,6 +28,7 @@ import domain.controller.FaiAppelloController;
 import domain.model.Appello;
 import domain.model.Assenza;
 import domain.model.Calendario;
+import domain.model.Studente;
 
 
 @RestController
@@ -163,7 +164,7 @@ public class AppelloPresenter {
 			FaiAppelloController fAController;
 			Appello appello;
 			AssentiContainerRS assenti;
-			HashMap<Integer, Assenza> assenze;
+			HashMap<Studente, Assenza> assenze;
 
 			fAController = new FaiAppelloController();
 			appello = fAController.getAppello(idClasse, idAppello);
@@ -171,9 +172,9 @@ public class AppelloPresenter {
 			
 			if(fAController.getAppello(idClasse, idAppello).getAssenzePrese()){
 				assenze = fAController.getAssenze(idClasse, appello.getID());
-				for (Integer idS : assenze.keySet()) {
-					if(assenze.get(idS)!=null){
-						assenti.assenti.add(idS);
+				for (Studente stud : assenze.keySet()) {
+					if(assenze.get(stud)!=null){
+						assenti.assenti.add(stud.getID());
 					}
 				}
 			}

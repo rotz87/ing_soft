@@ -14,9 +14,6 @@ import domain.model.Studente;
  *
  */
 public class ClasseImp {
-
-	private Set<Studente> studenti = new HashSet<Studente>();
-	
 	
 	public ClasseImp(){
 
