@@ -30,28 +30,28 @@ registroServices.factory('rsClasse',['$resource',
 									isArray:true
 									},
 								'prendiCompitoInClasse':{
-									url:'/RegistroScolastico/api/classi/:idClasse/registroDocente/:idRegistroDocente/compiti/:idCompito',
+									url:'/RegistroScolastico/api/classi/:idClasse/registriDocente/:idRegistroDocente/compiti/:idCompito',
 									method:'GET',
 									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente', idCompito:'@idCompito'},
 									isArray:false
 								},
 								'prendiCompitiInClasse':{
-									url:'/RegistroScolastico/api/classi/:idClasse/registroDocente/:idRegistroDocente/compiti/',
+									url:'/RegistroScolastico/api/classi/:idClasse/registriDocente/:idRegistroDocente/compiti/',
 									method:'GET',
 									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente'},
 									isArray:true,
 								},
 								'creaCompitoInClasse':{
-									url:'/RegistroScolastico/api/classi/:idClasse/registroDocente/:idRegistroDocente/compiti/',
+									url:'/RegistroScolastico/api/classi/:idClasse/registriDocente/:idRegistroDocente/compiti/',
 									method:'POST',
 									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente'}
 								},
 								'aggiornaCompitoInClasse':{
-									url:'/RegistroScolastico/api/classi/:idClasse/registroDocente/:idRegistroDocente/compiti/:idCompito',
+									url:'/RegistroScolastico/api/classi/:idClasse/registriDocente/:idRegistroDocente/compiti/:idCompito',
 									method:'PUT',
 									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente', idCompito:'@idCompito'}
 								},'argomentiSvolti':{
-   									url:'/RegistroScolastico/api/classi/:idClasse/registroDocente/:idRegistroDocente/argomentiSvolti',
+   									url:'/RegistroScolastico/api/classi/:idClasse/registriDocente/:idRegistroDocente/argomentiSvolti',
    									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente'},
    									method:'GET',
    									isArray:true
@@ -66,6 +66,12 @@ registroServices.factory('rsClasse',['$resource',
    									url:'/RegistroScolastico/api/calendario',
    									method:'GET',
    									isArray: false
+   								},
+   								'registriDocente':{
+   									url:'/RegistroScolastico/api/classi/:idClasse/registriDocente',
+   									params:{idClasse : '@idClasse'},
+   									method:'GET',
+   									isArray: true
    								}
 							});
 				}]);
@@ -73,7 +79,7 @@ registroServices.factory('rsClasse',['$resource',
 
 registroServices.factory('Compito',['$resource',
                    				function($resource){
-                   					return $resource('/RegistroScolastico/api/classi/:idClasse/registroDocente/:idRegistroDocente/compiti/:idCompito/', null,
+                   					return $resource('/RegistroScolastico/api/classi/:idClasse/registriDocente/:idRegistroDocente/compiti/:idCompito/', null,
                    							{
                    								'get':{
                    									method:'GET',
@@ -94,13 +100,13 @@ registroServices.factory('Compito',['$resource',
                    									method:'PUT'
                    								},
                    								'queryStudenti':{
-                   									url:'/RegistroScolastico/api/classi/:idClasse/registroDocente/:idRegistroDocente/compiti/:idCompito/studenti',
+                   									url:'/RegistroScolastico/api/classi/:idClasse/registriDocente/:idRegistroDocente/compiti/:idCompito/studenti',
                    									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente', idCompito:'@idCompito'},
                    									method:'GET',
                    									isArray:true
                    								},
                    								'inviaVoti':{
-                   									url:'/RegistroScolastico/api/classi/:idClasse/registroDocente/:idRegistroDocente/compiti/:idCompito/studenti',
+                   									url:'/RegistroScolastico/api/classi/:idClasse/registriDocente/:idRegistroDocente/compiti/:idCompito/studenti',
                    									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente', idCompito:'@idCompito'},
                    									method:'PUT',
                    									isArray:true

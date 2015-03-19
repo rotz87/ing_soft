@@ -96,7 +96,8 @@ public class ResetDB {
 			
 			
 //			CREAZIONE DEI REGISTRI DOCENTE
-			RegistroDocente registroRossiPrimaA = new RegistroDocente();
+			RegistroDocente registroRossiPrimaAstoria = new RegistroDocente();
+			RegistroDocente registroRossiPrimaAmat = new RegistroDocente();
 			RegistroDocente registroRossiSecondaA = new RegistroDocente();
 			RegistroDocente registroRossiPrimaB = new RegistroDocente();
 			RegistroDocente registroRossiSecondaB = new RegistroDocente();
@@ -105,7 +106,9 @@ public class ResetDB {
 			RegistroDocente registroBianchiPrimaB = new RegistroDocente();
 			
 //			ASSEGNAZIONE DELLE CLASSI AI REGISTRI DOCENTE
-			registroRossiPrimaA.setClasse(primaA);
+			registroRossiPrimaAstoria.setClasse(primaA);
+			registroRossiPrimaAmat.setClasse(primaA);
+			
 			registroRossiSecondaA.setClasse(secondaA);
 			registroRossiPrimaB.setClasse(primaB);
 			registroRossiSecondaB.setClasse(secondaB);
@@ -114,7 +117,8 @@ public class ResetDB {
 			registroBianchiPrimaB.setClasse(primaB);
 			
 //			ASSEGNAZIONE DEI REGISTRO DOCENTE AI DOCENTI
-			marioRossi.getRegistriDocente().add(registroRossiPrimaA);
+			marioRossi.getRegistriDocente().add(registroRossiPrimaAstoria);
+			marioRossi.getRegistriDocente().add(registroRossiPrimaAmat);
 			marioRossi.getRegistriDocente().add(registroRossiSecondaA);
 			marioRossi.getRegistriDocente().add(registroRossiPrimaB);
 			marioRossi.getRegistriDocente().add(registroRossiSecondaB);
@@ -454,9 +458,23 @@ public class ResetDB {
 				RSPersistentManager.instance().getSession().save(voto);
 			}
 			
-//			Materia storia = new Materia();
-//			storia.setNome("Storia");
-//			registroRossiPrimaA.setMateria(storia);
+			Materia storia = new Materia();
+			storia.setNome("Storia");
+			registroRossiPrimaAstoria.setMateria(storia);
+			
+			
+			Materia geografia = new Materia();
+			geografia.setNome("Geografia");
+			
+			registroRossiPrimaB.setMateria(geografia);
+			
+			Materia matematica = new Materia();
+			matematica.setNome("Matematica");
+			registroRossiPrimaAmat.setMateria(matematica);
+			
+			RSPersistentManager.instance().getSession().save(storia);
+			RSPersistentManager.instance().getSession().save(geografia);
+			RSPersistentManager.instance().getSession().save(matematica);
 			
 			Collection<Argomento> argomenti = new LinkedList<Argomento>();
 			
@@ -465,18 +483,21 @@ public class ResetDB {
 			Argomento colonialismo = new Argomento("colonialismo","");
 			Argomento secondoDopoGuerra = new Argomento("secondo dopoguerra","");
 			
-			registroRossiPrimaA.getArgomentiSvolti().add(worldWar1);
-			registroRossiPrimaA.getArgomentiSvolti().add(worldWar2);
-			registroRossiPrimaA.getArgomentiSvolti().add(colonialismo);
-			registroRossiPrimaA.getArgomentiSvolti().add(secondoDopoGuerra);
+			registroRossiPrimaAstoria.getArgomentiSvolti().add(worldWar1);
+			registroRossiPrimaAstoria.getArgomentiSvolti().add(worldWar2);
+			registroRossiPrimaAstoria.getArgomentiSvolti().add(colonialismo);
+			registroRossiPrimaAstoria.getArgomentiSvolti().add(secondoDopoGuerra);
+			
+			
+			
 			
 			argomenti.clear();
 			argomenti.add(worldWar1);
 			argomenti.add(worldWar2);
 			CompitoInClasse compitoStoria1A = new CompitoInClasse();
 			compitoStoria1A.setInfo(java.sql.Date.valueOf("2014-12-16"), java.sql.Time.valueOf("11:00:00"), java.sql.Time.valueOf("13:00:00"), argomenti);
-			compitoStoria1A.setInsegnamento(registroRossiPrimaA);
-			registroRossiPrimaA.getCompitiInClasse().add(compitoStoria1A);
+			compitoStoria1A.setInsegnamento(registroRossiPrimaAstoria);
+			registroRossiPrimaAstoria.getCompitiInClasse().add(compitoStoria1A);
 			
 			Map<Studente, Voto> mapVoti;
 			mapVoti = new HashMap<Studente, Voto>();
@@ -492,13 +513,13 @@ public class ResetDB {
 //			Voto[] voti = {                votos[4],   votos[8],     votos[9],     votos[7],        votos[5],       votos[7],      votos[6]};
 //			Studente[] studentiCompito ={ pieroRusso, marioRomano, leonardoRicci, valentinoFarina, roccoBenedetti, antonioGuerra, cristinaAngeli};
 			
-			registroRossiPrimaA.inserisciVoti(compitoStoria1A, mapVoti);
+			registroRossiPrimaAstoria.inserisciVoti(compitoStoria1A, mapVoti);
 			
 			argomenti.clear();
 			compitoStoria1A = new CompitoInClasse();
 			compitoStoria1A.setInfo(java.sql.Date.valueOf("2014-12-15"), java.sql.Time.valueOf("10:00:00"), java.sql.Time.valueOf("11:30:00"), argomenti);
-			compitoStoria1A.setInsegnamento(registroRossiPrimaA);
-			registroRossiPrimaA.getCompitiInClasse().add(compitoStoria1A);
+			compitoStoria1A.setInsegnamento(registroRossiPrimaAstoria);
+			registroRossiPrimaAstoria.getCompitiInClasse().add(compitoStoria1A);
 			
 			
 			

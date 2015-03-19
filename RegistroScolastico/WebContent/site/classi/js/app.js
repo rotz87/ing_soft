@@ -9,31 +9,31 @@ var registroApp = angular.module('registroApp',[
 registroApp.config(["$locationProvider","$routeProvider",function($locationProvider,$routeProvider) 
 {
   $routeProvider
-  .when('/:idClasse/appelli/:idAppello/',{
+  .when('/:idClasse/registroDiClasse/appelli/:idAppello/',{
 	  templateUrl: 'partials/appelloParziale.html',
 	  controller: 'faiAppello',
 	  title:'Fai l\'appello'
-  }).when('/:idClasse/',{
+  }).when('/:idClasse/registroDiClasse/',{
 	  templateUrl: 'partials/elencoAppelli.html',
 	  controller: 'riempiElencoAppelli',
 	  title:'Seleziona l\'appello'
-  }).when('/:idClasse/registri',{
+  }).when('/:idClasse/',{
 	  templateUrl: 'partials/menuClasse.html',
-	  controller: '',
+	  controller: 'elencoRegistri',
 	  title:'Seleziona il registro'
-  }).when('/:idClasse/registri/registroDocente/',{
+  }).when('/:idClasse/registroDocente/',{
 	  templateUrl: 'partials/compito.html',
-	  controller: '',
+	  controller: 'elencoMaterie',
 	  title:'Seleziona il registro Docente'
-  }).when('/:idClasse/registri/registroDocente/:idRegistroDocente',{
+  }).when('/:idClasse/registroDocente/:idRegistroDocente',{
 	  templateUrl: 'partials/compito.html',
 	  controller: '',
 	  title:'Seleziona l\'operazione'
-  }).when('/:idClasse/registri/registroDocente/:idRegistroDocente/compiti/',{
+  }).when('/:idClasse/registroDocente/:idRegistroDocente/compiti/',{
 	  templateUrl: 'partials/elencoCompiti.html',
 	  controller: 'riempiElencoCompiti',
 	  title:'Elenco dei compiti'
-  }).when('/:idClasse/registri/registroDocente/:idRegistroDocente/compiti/:idCompito',{
+  }).when('/:idClasse/registroDocente/:idRegistroDocente/compiti/:idCompito',{
 	  templateUrl: 'partials/compito.html',
 	  controller: 'recuperaCompitoInClasse',
 	  title:'Imposta il compito'

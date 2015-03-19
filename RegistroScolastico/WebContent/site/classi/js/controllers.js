@@ -441,16 +441,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	
 	$scope.idClasse = $routeParams.idClasse;
 	$rootScope.idClasse = $routeParams.idClasse;
-	var compito = {
-			data : 1418770800000,
-			oraInizio : 79199000,
-			oraFine : 79199000,
-			argomentiRS : ['asd','bsd','...']
-		};
-	var dati = {
-			'exMsg':'Pippooo',
-			'url' : 'Plutooo'
-	};
+	
 	$scope.compitoInClasse = new rsClasse();
 	$scope.compitoInClasse.idClasse = $routeParams.idClasse
 	$scope.compitoInClasse.idRegistroDocente = $routeParams.idRegistroDocente;
@@ -461,23 +452,30 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	},function(response,headers){
 		
 	})
+	
 	$scope.compitoInClasse.$prendiCompitoInClasse({},
 		function(response,headers){
 		var miaData;
 		// a questo punto il calendario è già caricato
 		if(response.data == null && $scope.compitoInClasse.data == null)
 		{
-			miaData = new Date($scope.calendario.oggi);
+			//miaData = new Date($scope.calendario.oggi);
 		}
 		else{
-			miaData = new Date(response.data)
+			miaData = new Date(response.data).toLocaleDateString()
 		}
-		$scope.compitoInClasse.data = miaData.toLocaleDateString();
-		miaOraInizio = new Date (response.oraInizio)
+		$scope.compitoInClasse.data = miaData;
+		
+		var miaOraInizio
+		if(response.oraInizio)
+			miaOraInizio = new Date (response.oraInizio)
 		$scope.compitoInClasse.oraInizio = miaOraInizio
-		miaOraFine = new Date (response.oraFine)
+		
+		var miaOraFine
+		if(response.oraFine)
+			miaOraFine = new Date (response.oraFine)
 		$scope.compitoInClasse.oraFine = miaOraFine
-		$scope.compitoInClasse.oraFine.setSeconds(00,00)
+		//$scope.compitoInClasse.oraFine.setSeconds(00,00)
 		//$scope.compitoInClasse.argomentiRS = JSON.stringify($scope.compitoInClasse.argomentiRS)
 	},function(response,headers){
 		erroreSistema($rootScope, response.data, true)
@@ -558,21 +556,6 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	}
 	$scope.absChecked=true;
 	
-//	var studentiCompito = Compito.queryStudenti(
-//			{idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito},
-//			function(response,headers){
-//		//successo
-//			$scope.studentiCompito = response
-//			if (response.length == 0)
-//			{
-//				$scope.erroreStudenti = "Il compito è previsto per un appello futuro"
-//			}
-//		},
-//		function(response,headers){
-//			erroreSistema($rootScope, response.data, true);
-//			$scope.erroreStudenti = response.data.exMsg;
-//		});
-	
 	$scope.selezionaArgomenti = function(){
 		//query per il recupero di tutti gli argomenti del compito
 		
@@ -614,7 +597,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		 * $scope.dateCalendario
 		 * 
 		 **/
-		console.log($scope.calendario)
+		
 		var inizioAnno = new Date($scope.calendario.inizioAnno).toLocaleDateString();
 		var fineAnno = new Date($scope.calendario.fineAnno).toLocaleDateString();
 		$("#bootstrapCalendario").datepicker({
@@ -628,14 +611,16 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		    startDate: inizioAnno,
 		    endDate: fineAnno
 		})
-	},function(){
+		
+	},function(response,headers){
 		console.log("errore")
+		erroreSistema($rootScope, response.data, true)
 	})
 
 	$scope.$watch("compitoInClasse.data",
 		function(newValue,oldValue){
-		
-		if ( typeof newValue != "undefined")
+		var dataReg = new RegExp("(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[012])/((19|20)\\d\\d)");
+		if (newValue && newValue.match(dataReg))
 		{
 			//converte la data dal formato dd/mm/yyyy a yyyy-mm-dd
 			newValue = newValue.split('/').reverse().join("-")
@@ -661,7 +646,12 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 
 		}
 	})
-
+	
+	$scope.invertiDatiChecked = function(){
+		console.log("asd")
+		$scope.datiChecked = !$scope.datiChecked
+	}
+	
 	
 }]).directive('compitoArgomentiModal', function() {
 	  return {
@@ -703,8 +693,37 @@ registroControllers.controller('colonnaSinistra',
 		 {
 			
 }])
-
-
+registroControllers.controller('elencoRegistri',['$scope','rsClasse','$location','$rootScope','$routeParams',function($scope,rsClasse,$location,$rootScope,$routeParams){
+	$scope.idClasse = $routeParams.idClasse;
+	$rootScope.idClasse = $scope.idClasse;
+	$scope.registriDisponibili = [1,2,3,4];
+	$scope.vaiRegistroDiClasse = function(){
+		$location.path($location.path()+"registroDiClasse/");
+	}
+	$scope.vaiRegistroDocente = function(idRegistro){
+		$location.path($location.path()+"registroDocente/"+idRegistro);
+	}
+	$scope.registriDisponibili = rsClasse.registriDocente({idClasse : $scope.idClasse},
+		function(response,headers)
+			{
+				//attributi:
+				//idRegistroDocente, materia
+		console.log(response)
+			},
+			function(response,headers){
+		erroreSistema($rootScope, response.data, true)
+	})
+	$scope.scegliRegistro = function (idRegistro){
+		if (idRegistro == null)
+		{
+			$location.path($location.path()+"registroDiClasse/");
+		}
+		else
+		{
+			$location.path($location.path()+"registroDocente/"+idRegistro+"/compiti/");
+		}
+	}
+}]);
 function gestisciMessaggio(mioScope,tipo,attivaModal)
 {
 	mioScope.modal.colore = "modal-header-"+tipo;

@@ -6,13 +6,13 @@
 		<h1 class="text-center"> Classe {{idClasse}}</h1>
 	<div class="row">
 		<div class="col-md-3">
-			<div class="btn btn-default" ng-click="scegliRegistro(registro.idRegistro)">
+			<div class="btn btn-default" ng-click="scegliRegistro()">
 				<div class="panel-body">Registro di Classe</div>
 			</div>
 		</div>
 		<div class="col-md-3">
-			<div class="btn btn-default" ng-click="scegliRegistro(registro.idRegistro)">
-				<div class="panel-body">Registro registro materia </div>
+			<div class="btn btn-default" ng-repeat="registroDoc in registriDisponibili" ng-click="scegliRegistro(registroDoc.idRegistroDocente)">
+				<div class="panel-body">Registro {{registroDoc.materia}} </div>
 			</div>
 		</div>
 	</div>
