@@ -1,17 +1,22 @@
 package domain.controller;
 
 import java.util.Collection;
+import java.util.LinkedList;
 
+import org.apache.cassandra.thrift.cassandraConstants;
 import org.hibernate.exception.DataException;
 import org.joda.time.LocalDate;
 import org.orm.PersistentException;
 
+import service.Stampa;
 import domain.model.Appello;
 import domain.model.Calendario;
 import domain.model.Classe;
 import domain.model.ClasseCriteria;
 import domain.model.Docente;
 import domain.model.DocenteCriteria;
+import domain.model.RegistroDocente;
+import domain.model.RegistroDocenteCriteria;
 import domain.model.Studente;
 
 public class ClasseController {
@@ -75,5 +80,46 @@ public class ClasseController {
 		rit = dateFestive;
 		
 		return rit;
+	}
+
+	public Collection<RegistroDocente> getRegistriDocente(int idClasse, int idDocente) {
+		Classe classe;
+		Docente docente;
+		ClasseCriteria classeCriteria;
+		DocenteCriteria docenteCriteria;
+		RegistroDocenteCriteria registroDocenteCriteria;
+		Collection<RegistroDocente> registri;
+		
+		classeCriteria = null;
+		docenteCriteria = null;
+		registri = new LinkedList<RegistroDocente>();
+		
+		try {
+			classeCriteria = new ClasseCriteria();
+			docenteCriteria = new DocenteCriteria();
+			registroDocenteCriteria = new RegistroDocenteCriteria();
+		} catch (PersistentException e) {
+			throw new RuntimeException(ErrorMessage.REGISTRO_DOCENTE_UNLOADED);
+		}
+		classeCriteria.ID.eq(idClasse);
+		classe = classeCriteria.uniqueClasse();
+		docenteCriteria.ID.eq(idDocente);
+
+		docente = docenteCriteria.uniqueDocente();
+		
+		registroDocenteCriteria.classeId.eq(idClasse);
+
+		registri.addAll(registroDocenteCriteria.list());
+		
+		registri.retainAll(docente.getRegistriDocente());
+		
+//		for(RegistroDocente regDoc : registri){
+//			if(! (docente.getRegistriDocente().contains(regDoc))){
+//				registri.remove(regDoc);
+//			}
+//		}
+		
+		
+		return registri;
 	}
 }

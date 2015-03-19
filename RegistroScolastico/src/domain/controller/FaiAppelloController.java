@@ -257,29 +257,31 @@ public class FaiAppelloController {
 		return registroAssenzeCorrente.isAppelloOdiernoAvviabile();
 	}
 	
-	public HashMap<Studente, Boolean> getBoolAssenze(int idClasse, int idAppello) {
+	public HashMap<Studente, Boolean> getAssenzeCompito(int idClasse, int idAppello) {
 
 		HashMap<Studente, Boolean> rit;
 		HashMap<Studente, Assenza> assenze;
 		
-		assenze = getAssenze(idClasse, idAppello);
+		assenze = getAssenzeNoException(idClasse, idAppello);
 		rit = new HashMap<Studente, Boolean>();
 		boolean b;
-		
-		for(Studente studente : assenze.keySet()){
-			if(assenze.get(studente) == null){
-				b=false;
-			}else{
-				b=true;
+		if(assenze != null){
+			for(Studente studente : assenze.keySet()){
+				if(assenze.get(studente) == null){
+					b=false;
+				}else{
+					b=true;
+				}
+				rit.put(studente, b);
 			}
-			rit.put(studente, b);
-		}
-			
+		}else{
+
+		}	
 		return rit;
 	}
 	
 	
-	public HashMap<Studente, Boolean> getBoolAssenze(int idClasse, LocalDate data){
+	public HashMap<Studente, Boolean> getAssenzeCompito(int idClasse, LocalDate data){
 
 		ClasseCriteria classeCriteria;
 		Classe classe;
@@ -299,7 +301,7 @@ public class FaiAppelloController {
 		appello = registroAssenze.getAppelloByData(data);
 		
 		if(appello != null){
-			assenzePrese = getBoolAssenze(idClasse, appello.getID());
+			assenzePrese = getAssenzeCompito(idClasse, appello.getID());
 		}else{
 			assenzePrese = new HashMap<Studente, Boolean>();
 		}
@@ -316,6 +318,54 @@ public class FaiAppelloController {
 	 * @throws PersistentException 
 	 */
 	public HashMap<Studente, Assenza> getAssenze(int idClasse, int idAppello) {
+		
+		HashMap<Studente, Assenza> rit;
+		
+		rit = getAssenzeNoException(idClasse, idAppello);
+		
+		if (rit == null){
+			throw new IllegalStateException(ErrorMessage.ASSENZE_UNRECORDED);
+		}
+		
+		return rit;
+	}
+	
+	public Collection<Studente> getSoloPresenti(int idClasse, LocalDate data){
+
+		Collection<Studente> studentiPresenti = new LinkedList<Studente>();
+		ClasseCriteria classeCriteria;
+		Classe classe;
+		RegistroAssenze registroAssenze;
+		Appello appello;
+		Map<Studente, Boolean> boolAssenze;
+		
+		try {
+			classeCriteria = new ClasseCriteria();
+		} catch (PersistentException e) {
+			throw new RuntimeException(ErrorMessage.STUDENTI_UNLOADED);
+		}
+		
+		classeCriteria.ID.eq(idClasse);
+		classe = classeCriteria.uniqueClasse();
+		registroAssenze = classe.getRegistroAssenze();
+		appello = registroAssenze.getAppelloByData(data);
+		
+		if(appello.getAssenzePrese()){
+
+			boolAssenze = getAssenzeCompito(idClasse, appello.getID());
+			for (Studente studente : boolAssenze.keySet()) {
+				if(! boolAssenze.get(studente)){
+					studentiPresenti.add(studente);
+				}
+			}	
+		}else{
+			throw new IllegalStateException(ErrorMessage.ASSENZE_UNRECORDED);
+		}
+		
+		return studentiPresenti;
+	}
+	
+	private HashMap<Studente, Assenza> getAssenzeNoException(int idClasse, int idAppello){
 
 		ClasseCriteria classeCriteria;
 		AppelloCriteria appelloCriteria;
@@ -346,45 +396,10 @@ public class FaiAppelloController {
 				
 			}
 			
-			return rit;
 		}else{
-			throw new IllegalStateException(ErrorMessage.ASSENZE_UNRECORDED);
+			rit = null;
 		}
-	}
-	
-	public Collection<Studente> getSoloPresenti(int idClasse, LocalDate data){
-
-		Collection<Studente> studentiPresenti = new LinkedList<Studente>();
-		ClasseCriteria classeCriteria;
-		Classe classe;
-		RegistroAssenze registroAssenze;
-		Appello appello;
-		Map<Studente, Boolean> boolAssenze;
-		
-		try {
-			classeCriteria = new ClasseCriteria();
-		} catch (PersistentException e) {
-			throw new RuntimeException(ErrorMessage.STUDENTI_UNLOADED);
-		}
-		
-		classeCriteria.ID.eq(idClasse);
-		classe = classeCriteria.uniqueClasse();
-		registroAssenze = classe.getRegistroAssenze();
-		appello = registroAssenze.getAppelloByData(data);
-		
-		if(appello.getAssenzePrese()){
-
-			boolAssenze = getBoolAssenze(idClasse, appello.getID());
-			for (Studente studente : boolAssenze.keySet()) {
-				if(! boolAssenze.get(studente)){
-					studentiPresenti.add(studente);
-				}
-			}	
-		}else{
-			throw new IllegalStateException(ErrorMessage.ASSENZE_UNRECORDED);
-		}
-		
-		return studentiPresenti;
+		return rit;
 	}
 
 }

@@ -57,7 +57,7 @@ public class TestGetAssenze {
 				try{
 				int idAppello = number;
 				
-				HashMap<Studente, Boolean>  mapStudBool = controlloreAppello.getBoolAssenze(1, idAppello);
+				HashMap<Studente, Boolean>  mapStudBool = controlloreAppello.getAssenzeCompito(1, idAppello);
 				
 				
 				Stampa.stampaln("VISUALIZZAZIONE STUDENTI  _________________________ \n \n");

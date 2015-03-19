@@ -319,9 +319,9 @@ public class CompitoInClasseController {
 		appelloController = new FaiAppelloController();
 		appello = getAppello(idCompito);
 		
-		if(appello != null){
+		if(appello != null  && !appello.getAssenzePrese()){
 			compito = getCompitoInCLasse(idCompito);
-			rit =  appelloController.getBoolAssenze(compito.getInsegnamento().getClasse().getID(), appello.getID());
+			rit =  appelloController.getAssenzeCompito(compito.getInsegnamento().getClasse().getID(), appello.getID());
 		}else{
 			rit = new HashMap<Studente, Boolean>();
 		};

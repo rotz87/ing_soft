@@ -35,7 +35,7 @@ import domain.model.Voto;
 
 
 @RestController
-@RequestMapping("/classi/{idClasse}/registroDocente/{idRegistroDocente}/compiti")
+@RequestMapping("/classi/{idClasse}/registriDocente/{idRegistroDocente}/compiti")
 public class CompitoInClassePresenter {
 
 	
@@ -190,7 +190,7 @@ public class CompitoInClassePresenter {
 		  faiAppelloController = new FaiAppelloController();
 
 		  localDate = new LocalDate(data);
-		  assenze = faiAppelloController.getBoolAssenze(idClasse, localDate);
+		  assenze = faiAppelloController.getAssenzeCompito(idClasse, localDate);
 		  voti = compitoInClasseController.getVotiCompito(idCompitoInClasse);
 		  
 		  studentiCompito = new LinkedList<StudenteCompitoRS>();

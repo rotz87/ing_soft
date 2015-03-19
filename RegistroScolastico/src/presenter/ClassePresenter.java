@@ -8,6 +8,8 @@ import java.util.LinkedList;
 
 
 
+
+
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 //import org.orm.PersistentException;
@@ -17,11 +19,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import presenter.resourceSupport.ClasseMenuRS;
+import presenter.resourceSupport.RegistroDocenteRS;
 import presenter.resourceSupport.appello.StudenteAppelloRS;
 import domain.controller.ClasseController;
 import domain.controller.DocenteController;
 import domain.model.Classe;
 import domain.model.Docente;
+import domain.model.RegistroDocente;
 //import domain.model.DocenteCriteria;
 import domain.model.Studente;
 
@@ -104,4 +108,22 @@ public class ClassePresenter {
 		return dateLong;
 	}
 	
+	@RequestMapping(value = "/{idClasse}/registriDocente", method = RequestMethod.GET)
+	public Collection<RegistroDocenteRS> getRegistriDocente(@PathVariable int idClasse) {
+		ClasseController classeController;
+		DocenteController docenteController;
+		Collection<RegistroDocente> registri;
+		Collection<RegistroDocenteRS> registriRS;
+		
+		classeController = new ClasseController();
+		docenteController = new DocenteController();
+		registriRS = new LinkedList<RegistroDocenteRS>();
+		
+		registri = classeController.getRegistriDocente(idClasse, docenteController.getIdDocenteProva());
+		
+		for(RegistroDocente registro : registri){
+			registriRS.add(new RegistroDocenteRS(registro));
+		}
+		return registriRS;
+	}
 }
