@@ -3,7 +3,7 @@
 		<div class="col-md-3"
 			ng-repeat="compito in elencoCompiti ">
 			<div class="btn btn-default" >
-				<div class="panel-body">Compito {{compito.data | date:"EEE dd MMMM yyyy"}}</div>
+				<div class="panel-body" ng-click="vaiAlCompito(compito.idCompito)">Compito {{compito.data | date:"EEE dd MMMM yyyy"}}</div>
 			</div>
 		</div>
 		<div class="col-md-3">

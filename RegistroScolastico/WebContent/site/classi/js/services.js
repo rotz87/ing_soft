@@ -61,6 +61,11 @@ registroServices.factory('rsClasse',['$resource',
    									params:{idClasse : '@idClasse'},
    									method:'GET',
    									isArray:true
+   								},
+   								'calendario':{
+   									url:'/RegistroScolastico/api/calendario',
+   									method:'GET',
+   									isArray: false
    								}
 							});
 				}]);

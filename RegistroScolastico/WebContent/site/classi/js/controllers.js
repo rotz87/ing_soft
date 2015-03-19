@@ -455,9 +455,24 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	$scope.compitoInClasse.idClasse = $routeParams.idClasse
 	$scope.compitoInClasse.idRegistroDocente = $routeParams.idRegistroDocente;
 	$scope.compitoInClasse.idCompito = $routeParams.idCompito;
+	$scope.calendario = rsClasse.calendario({}
+	,function(response,headers){
+		
+	},function(response,headers){
+		
+	})
 	$scope.compitoInClasse.$prendiCompitoInClasse({},
 		function(response,headers){
-		$scope.compitoInClasse.data = new Date(response.data).toLocaleDateString();
+		var miaData;
+		// a questo punto il calendario è già caricato
+		if(response.data == null && $scope.compitoInClasse.data == null)
+		{
+			miaData = new Date($scope.calendario.oggi);
+		}
+		else{
+			miaData = new Date(response.data)
+		}
+		$scope.compitoInClasse.data = miaData.toLocaleDateString();
 		miaOraInizio = new Date (response.oraInizio)
 		$scope.compitoInClasse.oraInizio = miaOraInizio
 		miaOraFine = new Date (response.oraFine)
@@ -467,6 +482,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	},function(response,headers){
 		erroreSistema($rootScope, response.data, true)
 	});
+	
 	$scope.stud_predicate = "cognome"
 	$scope.args_predicate = "idArgomento"
 	$scope.aggiungiArgomento = function(){
@@ -481,11 +497,9 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 			{
 			tmpCompito[key] = $scope.compitoInClasse.toJSON()[key];
 			}
-		console.log("aggiornamento compito...")
-		console.log($scope.compitoInClasse.data)
 		
 		tmpCompito.data = new Date(tmpCompito.data.split("/").reverse().join("-")).getTime();
-		console.log(tmpCompito.data)
+		
 		tmpCompito.oraInizio = new Date(tmpCompito.oraInizio).getTime();
 		tmpCompito.oraFine = new Date(tmpCompito.oraFine).getTime();
 		if (tmpCompito.argomentiRS.class = String.class)
@@ -529,7 +543,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 				tmpStudenti.push(stud);
 			}
 		}
-		console.log(tmpStudenti)
+		
 		Compito.inviaVoti({idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito}, tmpStudenti,
 				function (response,headers)
 				{
@@ -600,6 +614,9 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		 * $scope.dateCalendario
 		 * 
 		 **/
+		console.log($scope.calendario)
+		var inizioAnno = new Date($scope.calendario.inizioAnno).toLocaleDateString();
+		var fineAnno = new Date($scope.calendario.fineAnno).toLocaleDateString();
 		$("#bootstrapCalendario").datepicker({
 		    todayBtn: true,
 		    format: "dd/mm/yyyy",
@@ -607,24 +624,23 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		    language:"it",
 		    //daysOfWeekDisabled: "0",
 		    todayHighlight: true,
-		    datesDisabled: $scope.dateCalendario
+		    datesDisabled: $scope.dateCalendario,
+		    startDate: inizioAnno,
+		    endDate: fineAnno
 		})
-		console.log($scope.dateCalendario)
-		console.log(response)
 	},function(){
 		console.log("errore")
 	})
-	
+
 	$scope.$watch("compitoInClasse.data",
 		function(newValue,oldValue){
+		
 		if ( typeof newValue != "undefined")
 		{
-			console.log("newValue: "+ newValue)
 			//converte la data dal formato dd/mm/yyyy a yyyy-mm-dd
 			newValue = newValue.split('/').reverse().join("-")
-			console.log("newValue: "+ newValue)
+			
 			var nuovaData = new Date(newValue).getTime();
-			console.log(nuovaData)
 			$scope.studentiCompito = Compito.queryStudenti(
 					{idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito, data : nuovaData},
 					function(response,headers)
@@ -675,6 +691,9 @@ registroControllers.controller('riempiElencoCompiti',
 						function(response,headers){
 							erroreSistema($rootScope, response.data, true);
 						})
+			}
+			$scope.vaiAlCompito = function(idCompito){
+				$location.path($location.path()+idCompito+"/")
 			}
 	
 }])
