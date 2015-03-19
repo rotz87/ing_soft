@@ -1,6 +1,6 @@
 var registroServices = angular.module ('registroServices',["ngResource"]);
 
-registroServices.factory('Appello',['$resource',
+registroServices.factory('rsClasse',['$resource',
 				function($resource){
 					return $resource('/RegistroScolastico/api/classi/:idClasse/appelli/:idAppello/', null,
 							{
@@ -53,6 +53,12 @@ registroServices.factory('Appello',['$resource',
 								},'argomentiSvolti':{
    									url:'/RegistroScolastico/api/classi/:idClasse/registroDocente/:idRegistroDocente/argomentiSvolti',
    									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente'},
+   									method:'GET',
+   									isArray:true
+   								},
+   								'dateFestive':{
+   									url:'/RegistroScolastico/api/classi/:idClasse/dateFestive',
+   									params:{idClasse : '@idClasse'},
    									method:'GET',
    									isArray:true
    								}
