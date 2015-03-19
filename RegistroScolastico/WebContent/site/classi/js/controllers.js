@@ -483,7 +483,8 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 			}
 		console.log("aggiornamento compito...")
 		console.log($scope.compitoInClasse.data)
-		tmpCompito.data = new Date(tmpCompito.data).getTime();
+		
+		tmpCompito.data = new Date(tmpCompito.data.split("/").reverse().join("-")).getTime();
 		console.log(tmpCompito.data)
 		tmpCompito.oraInizio = new Date(tmpCompito.oraInizio).getTime();
 		tmpCompito.oraFine = new Date(tmpCompito.oraFine).getTime();
