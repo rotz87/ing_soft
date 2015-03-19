@@ -28,6 +28,7 @@ import domain.controller.CompitoInClasseController;
 import domain.controller.DocenteController;
 import domain.controller.FaiAppelloController;
 import domain.model.Argomento;
+import domain.model.Calendario;
 import domain.model.CompitoInClasse;
 import domain.model.Studente;
 import domain.model.Voto;
@@ -68,12 +69,15 @@ public class CompitoInClassePresenter {
 				
 			  	CompitoInClasseController compitoController;
 				CompitoInClasse compito;
+				CompitoInClasseRS compitoInClasseRS;
 				
 				compitoController = new CompitoInClasseController();
 				
 				compito = compitoController.getCompitoInCLasse(idCompitoInClasse);
 				
-				return new CompitoInClasseRS(compito, idClasse, idRegistroDocente);
+				compitoInClasseRS = new CompitoInClasseRS(compito, idClasse, idRegistroDocente);
+				
+				return compitoInClasseRS;
 				
 	  }
 	  
