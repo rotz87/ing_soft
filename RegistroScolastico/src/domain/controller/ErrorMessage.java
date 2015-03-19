@@ -27,5 +27,6 @@ public class ErrorMessage {
 	public static final String STUDENTI_UNLOADED = "Impossibile caricare gli studenti";
 	public static final String VOTI_NON_INSERIBILI = "Impossibile inserire i voti";
 	public static final String VOTI_UNLOADED = "Impossibile caricare i voti";
+	public static final String DATA_WRONG = "La data non è corretta";
 			
 }

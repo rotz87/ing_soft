@@ -16,6 +16,7 @@ import service.Stampa;
 import domain.model.Appello;
 import domain.model.Argomento;
 import domain.model.ArgomentoCriteria;
+import domain.model.Calendario;
 import domain.model.Classe;
 import domain.model.CompitoInClasse;
 import domain.model.CompitoInClasseCriteria;
@@ -169,6 +170,11 @@ public class CompitoInClasseController {
 		RegistroDocente registroDocente;
 		ArgomentoCriteria argomentoCriteria;
 		Collection<Argomento> argomenti;
+
+		Classe classe;
+
+		java.sql.Date dataCorretta;
+		boolean isDataCorretta;
 		
 		
 		argomenti = new LinkedHashSet<Argomento>();
@@ -191,8 +197,16 @@ public class CompitoInClasseController {
 			argomentoCriteria.ID.in(idArgomenti);
 			argomenti.addAll(argomentoCriteria.list());
 		}
-		
-		registroDocente.inserisciInfoCompito(compito, data, oraInizio, oraFine, argomenti);
+
+		//Controllo correttezza data
+		classe = registroDocente.getClasse();
+		isDataCorretta = isDataCompitoCorretta(data, classe);
+		dataCorretta = data;
+		if(!isDataCorretta){
+			dataCorretta = compito.getData();
+		}
+
+		registroDocente.inserisciInfoCompito(compito, dataCorretta, oraInizio, oraFine, argomenti);
 		
 		try {
 			PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
@@ -206,6 +220,10 @@ public class CompitoInClasseController {
 			}
 		} catch (PersistentException e) {
 			throw new RuntimeException(ErrorMessage.COMPITO_NON_AGGIORNABILE);
+		}
+		
+		if(!isDataCorretta){
+			throw new IllegalStateException(ErrorMessage.DATA_WRONG);
 		}
 		
 	}
@@ -310,6 +328,26 @@ public class CompitoInClasseController {
 		
 		return rit;
 		
+	}
+	
+	private boolean isDataCompitoCorretta(java.sql.Date data, Classe classe){
+		
+		ClasseController classeController;
+		Collection<LocalDate> dateFestive;
+		LocalDate localDate;
+		boolean rit;
+		
+		rit = true;
+		classeController = new ClasseController();
+		localDate = new LocalDate(data);
+		
+		dateFestive = classeController.getDateFestive(classe.getID());
+		
+		if(dateFestive.contains(localDate) || !Calendario.getInstance().isInAnnoCorrente(data)){
+			rit = false;
+		}
+
+		return rit;
 	}
 
 }

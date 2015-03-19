@@ -88,6 +88,19 @@ public class Calendario {
 		
 		return rit;
 	}
+	
+	public boolean isInAnnoCorrente(java.sql.Date data){
+		
+		LocalDate localDate;
+		boolean rit;
+		
+		localDate = new LocalDate(data);
+		
+		rit = localDate.isAfter(this.inizioLezioni.minusDays(1)) && localDate.isBefore(this.fineLezioni.plusDays(1));
+		
+		return rit;
+		
+	}
 
 	public Collection<GiornoSettimanaleFestivo> getGiorniSettimanaliFestivi() {
 		return this.giorniSettimanaliFestivi;
