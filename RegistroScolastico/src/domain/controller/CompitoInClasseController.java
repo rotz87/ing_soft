@@ -8,6 +8,7 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.activemq.filter.function.inListFunction;
 import org.joda.time.LocalDate;
 import org.orm.PersistentException;
 import org.orm.PersistentTransaction;
@@ -128,10 +129,12 @@ public class CompitoInClasseController {
 		} catch (PersistentException e) {
 			throw new RuntimeException(ErrorMessage.VOTI_UNLOADED);
 		}
-		
-		registroDocente = compito.getInsegnamento();
-		
-		registroDocente.inserisciVoti(compito, mapVoti);
+		//////////////////////////////////////////////////
+//		registroDocente = compito.getInsegnamento();
+//		
+//		registroDocente.inserisciVoti(compito, mapVoti);
+		///////////////////////////////////////////////////
+		compito.inserisciVoti(mapVoti);
 		
 		try {
 			PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
@@ -205,8 +208,8 @@ public class CompitoInClasseController {
 		if(!isDataCorretta){
 			dataCorretta = compito.getData();
 		}
-
-		registroDocente.inserisciInfoCompito(compito, dataCorretta, oraInizio, oraFine, argomenti);
+		compito.setInfo(dataCorretta, oraInizio, oraFine, argomenti);
+//		registroDocente.inserisciInfoCompito(compito, dataCorretta, oraInizio, oraFine, argomenti);
 		
 		try {
 			PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();

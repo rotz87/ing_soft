@@ -88,6 +88,10 @@ public class CompitoInClasse {
 		this.implementor.setInfo(this, data, oraInizio, oraFine, argomenti);
 	}
 	
+	public void inserisciVoti(java.util.Map<Studente, Voto> mapVoti) {
+		this.implementor.inserisciVoti(this, mapVoti);
+	}
+	
 	public String toString() {
 		return String.valueOf(getID());
 	}
