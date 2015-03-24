@@ -32,7 +32,7 @@ import domain.model.Voto;
 
 
 @RestController
-@RequestMapping("/classi/{idClasse}/registroDocente/{idRegistroDocente}")
+@RequestMapping("/classi/{idClasse}/registriDocente/{idRegistroDocente}")
 public class RegistroDocentePresenter {
 	
 	@RequestMapping(value = "/argomentiSvolti",  method = RequestMethod.GET)
