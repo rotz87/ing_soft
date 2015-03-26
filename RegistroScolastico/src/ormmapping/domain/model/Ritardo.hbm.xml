@@ -10,9 +10,9 @@ License Type: Academic
 			<generator class="native">
 			</generator>
 		</id>
-		<many-to-one name="permessoEntrata" column="PermessoEntrataID" class="domain.model.PermessoEntrata" cascade="save-update,lock" unique="true" not-null="false" lazy="no-proxy">
+		<many-to-one name="_permesso" column="PermessoEntrataID" class="domain.model.PermessoEntrata" cascade="save-update,lock" unique="true" not-null="false" lazy="no-proxy">
 		</many-to-one>
-		<many-to-one name="appello" cascade="lock" column="AppelloID" class="domain.model.Appello" not-null="true" lazy="no-proxy">
+		<many-to-one name="_appello" cascade="lock" column="AppelloID" class="domain.model.Appello" not-null="true" lazy="no-proxy">
 		</many-to-one>
 	</class>
 </hibernate-mapping>

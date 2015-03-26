@@ -19,8 +19,8 @@ import domain.model.Argomento;
 import domain.model.ArgomentoCriteria;
 import domain.model.Calendario;
 import domain.model.Classe;
-import domain.model.CompitoInClasse;
-import domain.model.CompitoInClasseCriteria;
+import domain.model.compitoInClasse.CompitoInClasse;
+import domain.model.compitoInClasse.CompitoInClasseCriteria;
 import domain.model.Docente;
 import domain.model.DocenteCriteria;
 import domain.model.RSPersistentManager;
@@ -117,7 +117,7 @@ public class CompitoInClasseController {
 				votoCriteria = new VotoCriteria();
 				
 				studenteCriteria.ID.eq(idS);
-				votoCriteria.voto.eq(mapVotiGUI.get(idS));
+				votoCriteria._voto.eq(mapVotiGUI.get(idS));
 				
 				studente = studenteCriteria.uniqueStudente();
 				voto = votoCriteria.uniqueVoto();

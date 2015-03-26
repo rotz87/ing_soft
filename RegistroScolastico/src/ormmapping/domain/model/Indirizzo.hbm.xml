@@ -10,6 +10,6 @@ License Type: Academic
 			<generator class="native">
 			</generator>
 		</id>
-		<property name="via" column="Via" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="_via" column="_via" type="string" length="255" not-null="false" lazy="false"/>
 	</class>
 </hibernate-mapping>

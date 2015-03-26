@@ -19,7 +19,7 @@ public class GiornoSettimanaleFestivo {
 	
 	private int ID;
 	
-	private int giorno;
+	private int _giorno;
 	
 	private void setID(int value) {
 		this.ID = value;
@@ -33,13 +33,12 @@ public class GiornoSettimanaleFestivo {
 		return getID();
 	}
 	
-	public void setGiorno(int value) {
-		this.giorno = value;
-		this.giorno = this.implementor.checkGiorno(value);
+	private void set_giorno(int value) {
+		this._giorno = value;
 	}
 	
-	public int getGiorno() {
-		return giorno;
+	private int get_giorno() {
+		return _giorno;
 	}
 	
 	private domain.implementor.GiornoSettimanaleFestivoImp implementor = new domain.implementor.GiornoSettimanaleFestivoImp();
@@ -50,6 +49,15 @@ public class GiornoSettimanaleFestivo {
 	
 	public GiornoSettimanaleFestivo(int giorno) {
 		this.implementor.inizialize(this, giorno);
+	}
+	
+	public int getGiorno() {
+		return this._giorno;
+	}
+	
+	public void setGiorno(int giorno) {
+		//this._giorno = giorno;
+		this._giorno = this.implementor.checkGiorno(giorno);
 	}
 	
 	public String toString() {

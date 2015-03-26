@@ -20,43 +20,43 @@ import org.orm.criteria.*;
 
 public class LibrettoAssenzeDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression ID;
-	public final CollectionExpression giustificate;
-	public final CollectionExpression nonGiustificate;
-	public final CollectionExpression ritardi;
-	public final CollectionExpression uscite;
+	public final CollectionExpression _giustificate;
+	public final CollectionExpression _nonGiustificate;
+	public final CollectionExpression _ritardi;
+	public final CollectionExpression _uscite;
 	
 	public LibrettoAssenzeDetachedCriteria() {
 		super(domain.model.LibrettoAssenze.class, domain.model.LibrettoAssenzeCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		giustificate = new CollectionExpression("giustificate", this.getDetachedCriteria());
-		nonGiustificate = new CollectionExpression("nonGiustificate", this.getDetachedCriteria());
-		ritardi = new CollectionExpression("ritardi", this.getDetachedCriteria());
-		uscite = new CollectionExpression("uscite", this.getDetachedCriteria());
+		_giustificate = new CollectionExpression("_giustificate", this.getDetachedCriteria());
+		_nonGiustificate = new CollectionExpression("_nonGiustificate", this.getDetachedCriteria());
+		_ritardi = new CollectionExpression("_ritardi", this.getDetachedCriteria());
+		_uscite = new CollectionExpression("_uscite", this.getDetachedCriteria());
 	}
 	
 	public LibrettoAssenzeDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, domain.model.LibrettoAssenzeCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		giustificate = new CollectionExpression("giustificate", this.getDetachedCriteria());
-		nonGiustificate = new CollectionExpression("nonGiustificate", this.getDetachedCriteria());
-		ritardi = new CollectionExpression("ritardi", this.getDetachedCriteria());
-		uscite = new CollectionExpression("uscite", this.getDetachedCriteria());
+		_giustificate = new CollectionExpression("_giustificate", this.getDetachedCriteria());
+		_nonGiustificate = new CollectionExpression("_nonGiustificate", this.getDetachedCriteria());
+		_ritardi = new CollectionExpression("_ritardi", this.getDetachedCriteria());
+		_uscite = new CollectionExpression("_uscite", this.getDetachedCriteria());
 	}
 	
-	public AssenzaDetachedCriteria createGiustificateCriteria() {
-		return new AssenzaDetachedCriteria(createCriteria("giustificate"));
+	public AssenzaDetachedCriteria create_giustificateCriteria() {
+		return new AssenzaDetachedCriteria(createCriteria("_giustificate"));
 	}
 	
-	public AssenzaDetachedCriteria createNonGiustificateCriteria() {
-		return new AssenzaDetachedCriteria(createCriteria("nonGiustificate"));
+	public AssenzaDetachedCriteria create_nonGiustificateCriteria() {
+		return new AssenzaDetachedCriteria(createCriteria("_nonGiustificate"));
 	}
 	
-	public RitardoDetachedCriteria createRitardiCriteria() {
-		return new RitardoDetachedCriteria(createCriteria("ritardi"));
+	public RitardoDetachedCriteria create_ritardiCriteria() {
+		return new RitardoDetachedCriteria(createCriteria("_ritardi"));
 	}
 	
-	public UscitaAnticipataDetachedCriteria createUsciteCriteria() {
-		return new UscitaAnticipataDetachedCriteria(createCriteria("uscite"));
+	public UscitaAnticipataDetachedCriteria create_usciteCriteria() {
+		return new UscitaAnticipataDetachedCriteria(createCriteria("_uscite"));
 	}
 	
 	public LibrettoAssenze uniqueLibrettoAssenze(PersistentSession session) {

@@ -20,30 +20,30 @@ import org.orm.criteria.*;
 
 public class StudenteCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
-	public final IntegerExpression indirizzoId;
-	public final AssociationExpression indirizzo;
-	public final StringExpression nome;
-	public final StringExpression cognome;
-	public final StringExpression codiceFiscale;
-	public final DateExpression dataNascita;
-	public final IntegerExpression librettoVotiId;
-	public final AssociationExpression librettoVoti;
-	public final IntegerExpression librettoAssenzeId;
-	public final AssociationExpression librettoAssenze;
+	public final IntegerExpression _indirizzoId;
+	public final AssociationExpression _indirizzo;
+	public final StringExpression _nome;
+	public final StringExpression _cognome;
+	public final StringExpression _codiceFiscale;
+	public final DateExpression _dataNascita;
+	public final IntegerExpression _librettoVotiId;
+	public final AssociationExpression _librettoVoti;
+	public final IntegerExpression _librettoAssenzeId;
+	public final AssociationExpression _librettoAssenze;
 	
 	public StudenteCriteria(Criteria criteria) {
 		super(criteria);
 		ID = new IntegerExpression("ID", this);
-		indirizzoId = new IntegerExpression("indirizzo.ID", this);
-		indirizzo = new AssociationExpression("indirizzo", this);
-		nome = new StringExpression("nome", this);
-		cognome = new StringExpression("cognome", this);
-		codiceFiscale = new StringExpression("codiceFiscale", this);
-		dataNascita = new DateExpression("dataNascita", this);
-		librettoVotiId = new IntegerExpression("librettoVoti.ID", this);
-		librettoVoti = new AssociationExpression("librettoVoti", this);
-		librettoAssenzeId = new IntegerExpression("librettoAssenze.ID", this);
-		librettoAssenze = new AssociationExpression("librettoAssenze", this);
+		_indirizzoId = new IntegerExpression("_indirizzo.ID", this);
+		_indirizzo = new AssociationExpression("_indirizzo", this);
+		_nome = new StringExpression("_nome", this);
+		_cognome = new StringExpression("_cognome", this);
+		_codiceFiscale = new StringExpression("_codiceFiscale", this);
+		_dataNascita = new DateExpression("_dataNascita", this);
+		_librettoVotiId = new IntegerExpression("_librettoVoti.ID", this);
+		_librettoVoti = new AssociationExpression("_librettoVoti", this);
+		_librettoAssenzeId = new IntegerExpression("_librettoAssenze.ID", this);
+		_librettoAssenze = new AssociationExpression("_librettoAssenze", this);
 	}
 	
 	public StudenteCriteria(PersistentSession session) {
@@ -54,16 +54,16 @@ public class StudenteCriteria extends AbstractORMCriteria {
 		this(domain.model.RSPersistentManager.instance().getSession());
 	}
 	
-	public LibrettoVotiCriteria createLibrettoVotiCriteria() {
-		return new LibrettoVotiCriteria(createCriteria("librettoVoti"));
+	public LibrettoVotiCriteria create_librettoVotiCriteria() {
+		return new LibrettoVotiCriteria(createCriteria("_librettoVoti"));
 	}
 	
-	public LibrettoAssenzeCriteria createLibrettoAssenzeCriteria() {
-		return new LibrettoAssenzeCriteria(createCriteria("librettoAssenze"));
+	public LibrettoAssenzeCriteria create_librettoAssenzeCriteria() {
+		return new LibrettoAssenzeCriteria(createCriteria("_librettoAssenze"));
 	}
 	
-	public IndirizzoCriteria createIndirizzoCriteria() {
-		return new IndirizzoCriteria(createCriteria("indirizzo"));
+	public IndirizzoCriteria create_indirizzoCriteria() {
+		return new IndirizzoCriteria(createCriteria("_indirizzo"));
 	}
 	
 	public Studente uniqueStudente() {

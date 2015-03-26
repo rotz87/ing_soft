@@ -20,18 +20,18 @@ import org.orm.criteria.*;
 
 public class RitardoCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
-	public final IntegerExpression permessoEntrataId;
-	public final AssociationExpression permessoEntrata;
-	public final IntegerExpression appelloId;
-	public final AssociationExpression appello;
+	public final IntegerExpression _permessoId;
+	public final AssociationExpression _permesso;
+	public final IntegerExpression _appelloId;
+	public final AssociationExpression _appello;
 	
 	public RitardoCriteria(Criteria criteria) {
 		super(criteria);
 		ID = new IntegerExpression("ID", this);
-		permessoEntrataId = new IntegerExpression("permessoEntrata.ID", this);
-		permessoEntrata = new AssociationExpression("permessoEntrata", this);
-		appelloId = new IntegerExpression("appello.ID", this);
-		appello = new AssociationExpression("appello", this);
+		_permessoId = new IntegerExpression("_permesso.ID", this);
+		_permesso = new AssociationExpression("_permesso", this);
+		_appelloId = new IntegerExpression("_appello.ID", this);
+		_appello = new AssociationExpression("_appello", this);
 	}
 	
 	public RitardoCriteria(PersistentSession session) {
@@ -42,12 +42,12 @@ public class RitardoCriteria extends AbstractORMCriteria {
 		this(domain.model.RSPersistentManager.instance().getSession());
 	}
 	
-	public PermessoEntrataCriteria createPermessoEntrataCriteria() {
-		return new PermessoEntrataCriteria(createCriteria("permessoEntrata"));
+	public PermessoEntrataCriteria create_permessoCriteria() {
+		return new PermessoEntrataCriteria(createCriteria("_permesso"));
 	}
 	
-	public AppelloCriteria createAppelloCriteria() {
-		return new AppelloCriteria(createCriteria("appello"));
+	public AppelloCriteria create_appelloCriteria() {
+		return new AppelloCriteria(createCriteria("_appello"));
 	}
 	
 	public Ritardo uniqueRitardo() {

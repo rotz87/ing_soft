@@ -8,8 +8,8 @@ import org.orm.PersistentException;
 import service.Stampa;
 import domain.controller.CompitoInClasseController;
 import domain.model.Argomento;
-import domain.model.CompitoInClasse;
-import domain.model.CompitoInClasseCriteria;
+import domain.model.compitoInClasse.CompitoInClasse;
+import domain.model.compitoInClasse.CompitoInClasseCriteria;
 
 public class TestCompitoArgomenti {
 

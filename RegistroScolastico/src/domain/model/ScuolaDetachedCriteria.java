@@ -20,32 +20,32 @@ import org.orm.criteria.*;
 
 public class ScuolaDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression ID;
-	public final StringExpression nome;
-	public final CollectionExpression classi;
-	public final CollectionExpression docenti;
+	public final StringExpression _nome;
+	public final CollectionExpression _classi;
+	public final CollectionExpression _docenti;
 	
 	public ScuolaDetachedCriteria() {
 		super(domain.model.Scuola.class, domain.model.ScuolaCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		nome = new StringExpression("nome", this.getDetachedCriteria());
-		classi = new CollectionExpression("classi", this.getDetachedCriteria());
-		docenti = new CollectionExpression("docenti", this.getDetachedCriteria());
+		_nome = new StringExpression("_nome", this.getDetachedCriteria());
+		_classi = new CollectionExpression("_classi", this.getDetachedCriteria());
+		_docenti = new CollectionExpression("_docenti", this.getDetachedCriteria());
 	}
 	
 	public ScuolaDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, domain.model.ScuolaCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		nome = new StringExpression("nome", this.getDetachedCriteria());
-		classi = new CollectionExpression("classi", this.getDetachedCriteria());
-		docenti = new CollectionExpression("docenti", this.getDetachedCriteria());
+		_nome = new StringExpression("_nome", this.getDetachedCriteria());
+		_classi = new CollectionExpression("_classi", this.getDetachedCriteria());
+		_docenti = new CollectionExpression("_docenti", this.getDetachedCriteria());
 	}
 	
-	public ClasseDetachedCriteria createClassiCriteria() {
-		return new ClasseDetachedCriteria(createCriteria("classi"));
+	public ClasseDetachedCriteria create_classiCriteria() {
+		return new ClasseDetachedCriteria(createCriteria("_classi"));
 	}
 	
-	public DocenteDetachedCriteria createDocentiCriteria() {
-		return new DocenteDetachedCriteria(createCriteria("docenti"));
+	public DocenteDetachedCriteria create_docentiCriteria() {
+		return new DocenteDetachedCriteria(createCriteria("_docenti"));
 	}
 	
 	public Scuola uniqueScuola(PersistentSession session) {

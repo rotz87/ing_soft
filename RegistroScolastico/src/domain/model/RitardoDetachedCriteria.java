@@ -20,35 +20,35 @@ import org.orm.criteria.*;
 
 public class RitardoDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression ID;
-	public final IntegerExpression permessoEntrataId;
-	public final AssociationExpression permessoEntrata;
-	public final IntegerExpression appelloId;
-	public final AssociationExpression appello;
+	public final IntegerExpression _permessoId;
+	public final AssociationExpression _permesso;
+	public final IntegerExpression _appelloId;
+	public final AssociationExpression _appello;
 	
 	public RitardoDetachedCriteria() {
 		super(domain.model.Ritardo.class, domain.model.RitardoCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		permessoEntrataId = new IntegerExpression("permessoEntrata.ID", this.getDetachedCriteria());
-		permessoEntrata = new AssociationExpression("permessoEntrata", this.getDetachedCriteria());
-		appelloId = new IntegerExpression("appello.ID", this.getDetachedCriteria());
-		appello = new AssociationExpression("appello", this.getDetachedCriteria());
+		_permessoId = new IntegerExpression("_permesso.ID", this.getDetachedCriteria());
+		_permesso = new AssociationExpression("_permesso", this.getDetachedCriteria());
+		_appelloId = new IntegerExpression("_appello.ID", this.getDetachedCriteria());
+		_appello = new AssociationExpression("_appello", this.getDetachedCriteria());
 	}
 	
 	public RitardoDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, domain.model.RitardoCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		permessoEntrataId = new IntegerExpression("permessoEntrata.ID", this.getDetachedCriteria());
-		permessoEntrata = new AssociationExpression("permessoEntrata", this.getDetachedCriteria());
-		appelloId = new IntegerExpression("appello.ID", this.getDetachedCriteria());
-		appello = new AssociationExpression("appello", this.getDetachedCriteria());
+		_permessoId = new IntegerExpression("_permesso.ID", this.getDetachedCriteria());
+		_permesso = new AssociationExpression("_permesso", this.getDetachedCriteria());
+		_appelloId = new IntegerExpression("_appello.ID", this.getDetachedCriteria());
+		_appello = new AssociationExpression("_appello", this.getDetachedCriteria());
 	}
 	
-	public PermessoEntrataDetachedCriteria createPermessoEntrataCriteria() {
-		return new PermessoEntrataDetachedCriteria(createCriteria("permessoEntrata"));
+	public PermessoEntrataDetachedCriteria create_permessoCriteria() {
+		return new PermessoEntrataDetachedCriteria(createCriteria("_permesso"));
 	}
 	
-	public AppelloDetachedCriteria createAppelloCriteria() {
-		return new AppelloDetachedCriteria(createCriteria("appello"));
+	public AppelloDetachedCriteria create_appelloCriteria() {
+		return new AppelloDetachedCriteria(createCriteria("_appello"));
 	}
 	
 	public Ritardo uniqueRitardo(PersistentSession session) {

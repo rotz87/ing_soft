@@ -6,7 +6,7 @@ import java.util.Map.Entry;
 
 import service.Stampa;
 import domain.controller.CompitoInClasseController;
-import domain.model.CompitoInClasse;
+import domain.model.compitoInClasse.CompitoInClasse;
 import domain.model.Studente;
 import domain.model.Voto;
 

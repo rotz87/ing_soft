@@ -17,24 +17,24 @@ public class Studente extends domain.model.Persona {
 	public Studente() {
 	}
 	
-	private domain.model.LibrettoVoti librettoVoti;
+	private domain.model.LibrettoVoti _librettoVoti;
 	
-	private domain.model.LibrettoAssenze librettoAssenze;
+	private domain.model.LibrettoAssenze _librettoAssenze;
 	
-	public void setLibrettoAssenze(domain.model.LibrettoAssenze value) {
-		this.librettoAssenze = value;
+	private void set_librettoAssenze(domain.model.LibrettoAssenze value) {
+		this._librettoAssenze = value;
 	}
 	
-	public domain.model.LibrettoAssenze getLibrettoAssenze() {
-		return librettoAssenze;
+	private domain.model.LibrettoAssenze get_librettoAssenze() {
+		return _librettoAssenze;
 	}
 	
-	public void setLibrettoVoti(domain.model.LibrettoVoti value) {
-		this.librettoVoti = value;
+	private void set_librettoVoti(domain.model.LibrettoVoti value) {
+		this._librettoVoti = value;
 	}
 	
-	public domain.model.LibrettoVoti getLibrettoVoti() {
-		return librettoVoti;
+	private domain.model.LibrettoVoti get_librettoVoti() {
+		return _librettoVoti;
 	}
 	
 	private domain.implementor.StudenteImp implementor = new domain.implementor.StudenteImp();
@@ -45,6 +45,22 @@ public class Studente extends domain.model.Persona {
 	
 	public Studente(long id, String nome, String cognome, domain.model.Indirizzo indrizzo, String codiceFiscale) {
 		this.implementor.inizialize(this, nome, cognome, indrizzo, codiceFiscale);
+	}
+	
+	public domain.model.LibrettoVoti getLibrettoVoti() {
+		return this._librettoVoti;
+	}
+	
+	public void setLibrettoVoti(domain.model.LibrettoVoti librettoVoti) {
+		this._librettoVoti = librettoVoti;
+	}
+	
+	public domain.model.LibrettoAssenze getLibrettoAssenze() {
+		return this._librettoAssenze;
+	}
+	
+	public void setLibrettoAssenze(domain.model.LibrettoAssenze librettoAssenze) {
+		this._librettoAssenze = librettoAssenze;
 	}
 	
 	public String toString() {

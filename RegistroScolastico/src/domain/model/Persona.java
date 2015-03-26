@@ -19,15 +19,15 @@ public abstract class Persona {
 	
 	private int ID;
 	
-	private domain.model.Indirizzo indirizzo;
+	private domain.model.Indirizzo _indirizzo;
 	
-	private String nome;
+	private String _nome;
 	
-	private String cognome;
+	private String _cognome;
 	
-	private String codiceFiscale;
+	private String _codiceFiscale;
 	
-	private java.sql.Date dataNascita;
+	private java.sql.Date _dataNascita;
 	
 	private void setID(int value) {
 		this.ID = value;
@@ -41,44 +41,84 @@ public abstract class Persona {
 		return getID();
 	}
 	
-	public void setNome(String value) {
-		this.nome = value;
+	private void set_nome(String value) {
+		this._nome = value;
+	}
+	
+	private String get_nome() {
+		return _nome;
+	}
+	
+	private void set_cognome(String value) {
+		this._cognome = value;
+	}
+	
+	private String get_cognome() {
+		return _cognome;
+	}
+	
+	private void set_codiceFiscale(String value) {
+		this._codiceFiscale = value;
+	}
+	
+	private String get_codiceFiscale() {
+		return _codiceFiscale;
+	}
+	
+	private void set_dataNascita(java.sql.Date value) {
+		this._dataNascita = value;
+	}
+	
+	private java.sql.Date get_dataNascita() {
+		return _dataNascita;
+	}
+	
+	private void set_indirizzo(domain.model.Indirizzo value) {
+		this._indirizzo = value;
+	}
+	
+	private domain.model.Indirizzo get_indirizzo() {
+		return _indirizzo;
 	}
 	
 	public String getNome() {
-		return nome;
+		return this._nome;
 	}
 	
-	public void setCognome(String value) {
-		this.cognome = value;
+	public void setNome(String nome) {
+		this._nome = nome;
 	}
 	
 	public String getCognome() {
-		return cognome;
+		return this._cognome;
 	}
 	
-	public void setCodiceFiscale(String value) {
-		this.codiceFiscale = value;
+	public void setCognome(String cognome) {
+		this._cognome = cognome;
 	}
 	
 	public String getCodiceFiscale() {
-		return codiceFiscale;
+		return this._codiceFiscale;
 	}
 	
-	public void setDataNascita(java.sql.Date value) {
-		this.dataNascita = value;
+	public void setCodiceFiscale(String codiceFiscale) {
+		this._codiceFiscale = codiceFiscale;
 	}
 	
 	public java.sql.Date getDataNascita() {
-		return dataNascita;
+		return this._dataNascita;
 	}
 	
-	public void setIndirizzo(domain.model.Indirizzo value) {
-		this.indirizzo = value;
+	public void setDataNascita(java.sql.Date dataNascita) {
+		this._dataNascita = dataNascita;
 	}
 	
 	public domain.model.Indirizzo getIndirizzo() {
-		return indirizzo;
+		return this._indirizzo;
+	}
+	
+	public void setIndirizzo(domain.model.Indirizzo indirizzo) {
+		this._indirizzo = indirizzo;
 	}
 	
 	public String toString() {

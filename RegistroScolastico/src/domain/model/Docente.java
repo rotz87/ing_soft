@@ -17,14 +17,14 @@ public class Docente extends domain.model.Persona {
 	public Docente() {
 	}
 	
-	private java.util.Set<domain.model.RegistroDocente> registriDocente = new java.util.LinkedHashSet<domain.model.RegistroDocente>();
+	private java.util.Set<domain.model.RegistroDocente> _registriDocente = new java.util.LinkedHashSet<domain.model.RegistroDocente>();
 	
-	public void setRegistriDocente(java.util.Set<domain.model.RegistroDocente> value) {
-		this.registriDocente = value;
+	private void set_registriDocente(java.util.Set<domain.model.RegistroDocente> value) {
+		this._registriDocente = value;
 	}
 	
-	public java.util.Set<domain.model.RegistroDocente> getRegistriDocente() {
-		return registriDocente;
+	private java.util.Set<domain.model.RegistroDocente> get_registriDocente() {
+		return _registriDocente;
 	}
 	
 	
@@ -34,16 +34,20 @@ public class Docente extends domain.model.Persona {
 		this.implementor.inizialize(this, nome, cognome);
 	}
 	
-	public boolean isInsegnante(domain.model.Classe classe) {
-		return this.implementor.isInsegnante(this, classe);
-	}
-	
 	public java.util.Set<domain.model.Classe> getClassi() {
 		return this.implementor.getClassi(this);
 	}
 	
+	public java.util.Set<RegistroDocente> getRegistriDocente() {
+		return this._registriDocente;
+	}
+	
 	public boolean haRegistroDocente(domain.model.RegistroDocente registro) {
 		return this.implementor.haRegistroDocente(this, registro);
+	}
+	
+	public boolean isInsegnante(domain.model.Classe classe) {
+		return this.implementor.isInsegnante(this, classe);
 	}
 	
 	public String toString() {

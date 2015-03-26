@@ -19,7 +19,7 @@ public class Indirizzo {
 	
 	private int ID;
 	
-	private String via;
+	private String _via;
 	
 	private void setID(int value) {
 		this.ID = value;
@@ -33,12 +33,20 @@ public class Indirizzo {
 		return getID();
 	}
 	
-	public void setVia(String value) {
-		this.via = value;
+	private void set_via(String value) {
+		this._via = value;
+	}
+	
+	private String get_via() {
+		return _via;
 	}
 	
 	public String getVia() {
-		return via;
+		return this._via;
+	}
+	
+	public void setVia(String via) {
+		this._via = via;
 	}
 	
 	public String toString() {

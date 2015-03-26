@@ -4,7 +4,7 @@ import ormsamples.CreateRegistroScolasticoData;
 import service.Stampa;
 import domain.controller.CompitoInClasseController;
 import domain.controller.DocenteController;
-import domain.model.CompitoInClasse;
+import domain.model.compitoInClasse.CompitoInClasse;
 
 public class testCreaCompito {
 

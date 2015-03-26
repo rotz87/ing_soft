@@ -20,14 +20,14 @@ import org.orm.criteria.*;
 
 public class ArgomentoCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
-	public final StringExpression nome;
-	public final StringExpression descrizione;
+	public final StringExpression _nome;
+	public final StringExpression _descrizione;
 	
 	public ArgomentoCriteria(Criteria criteria) {
 		super(criteria);
 		ID = new IntegerExpression("ID", this);
-		nome = new StringExpression("nome", this);
-		descrizione = new StringExpression("descrizione", this);
+		_nome = new StringExpression("_nome", this);
+		_descrizione = new StringExpression("_descrizione", this);
 	}
 	
 	public ArgomentoCriteria(PersistentSession session) {

@@ -20,22 +20,22 @@ import org.orm.criteria.*;
 
 public class RegistroDocenteCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
-	public final IntegerExpression materiaId;
-	public final AssociationExpression materia;
-	public final IntegerExpression classeId;
-	public final AssociationExpression classe;
-	public final CollectionExpression compitiInClasse;
-	public final CollectionExpression argomentiSvolti;
+	public final IntegerExpression _materiaId;
+	public final AssociationExpression _materia;
+	public final IntegerExpression _classeId;
+	public final AssociationExpression _classe;
+	public final CollectionExpression _compitiInClasse;
+	public final CollectionExpression _argomentiSvolti;
 	
 	public RegistroDocenteCriteria(Criteria criteria) {
 		super(criteria);
 		ID = new IntegerExpression("ID", this);
-		materiaId = new IntegerExpression("materia.ID", this);
-		materia = new AssociationExpression("materia", this);
-		classeId = new IntegerExpression("classe.ID", this);
-		classe = new AssociationExpression("classe", this);
-		compitiInClasse = new CollectionExpression("compitiInClasse", this);
-		argomentiSvolti = new CollectionExpression("argomentiSvolti", this);
+		_materiaId = new IntegerExpression("_materia.ID", this);
+		_materia = new AssociationExpression("_materia", this);
+		_classeId = new IntegerExpression("_classe.ID", this);
+		_classe = new AssociationExpression("_classe", this);
+		_compitiInClasse = new CollectionExpression("_compitiInClasse", this);
+		_argomentiSvolti = new CollectionExpression("_argomentiSvolti", this);
 	}
 	
 	public RegistroDocenteCriteria(PersistentSession session) {
@@ -46,20 +46,20 @@ public class RegistroDocenteCriteria extends AbstractORMCriteria {
 		this(domain.model.RSPersistentManager.instance().getSession());
 	}
 	
-	public MateriaCriteria createMateriaCriteria() {
-		return new MateriaCriteria(createCriteria("materia"));
+	public MateriaCriteria create_materiaCriteria() {
+		return new MateriaCriteria(createCriteria("_materia"));
 	}
 	
-	public ClasseCriteria createClasseCriteria() {
-		return new ClasseCriteria(createCriteria("classe"));
+	public ClasseCriteria create_classeCriteria() {
+		return new ClasseCriteria(createCriteria("_classe"));
 	}
 	
-	public CompitoInClasseCriteria createCompitiInClasseCriteria() {
-		return new CompitoInClasseCriteria(createCriteria("compitiInClasse"));
+	public domain.model.compitoInClasse.CompitoInClasseCriteria create_compitiInClasseCriteria() {
+		return new domain.model.compitoInClasse.CompitoInClasseCriteria(createCriteria("_compitiInClasse"));
 	}
 	
-	public ArgomentoCriteria createArgomentiSvoltiCriteria() {
-		return new ArgomentoCriteria(createCriteria("argomentiSvolti"));
+	public ArgomentoCriteria create_argomentiSvoltiCriteria() {
+		return new ArgomentoCriteria(createCriteria("_argomentiSvolti"));
 	}
 	
 	public RegistroDocente uniqueRegistroDocente() {

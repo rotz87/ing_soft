@@ -20,18 +20,18 @@ import org.orm.criteria.*;
 
 public class ClasseCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
-	public final IntegerExpression registroAssenzeId;
-	public final AssociationExpression registroAssenze;
-	public final StringExpression nome;
-	public final CollectionExpression studenti;
+	public final IntegerExpression _registroAssenzeId;
+	public final AssociationExpression _registroAssenze;
+	public final StringExpression _nome;
+	public final CollectionExpression _studenti;
 	
 	public ClasseCriteria(Criteria criteria) {
 		super(criteria);
 		ID = new IntegerExpression("ID", this);
-		registroAssenzeId = new IntegerExpression("registroAssenze.ID", this);
-		registroAssenze = new AssociationExpression("registroAssenze", this);
-		nome = new StringExpression("nome", this);
-		studenti = new CollectionExpression("studenti", this);
+		_registroAssenzeId = new IntegerExpression("_registroAssenze.ID", this);
+		_registroAssenze = new AssociationExpression("_registroAssenze", this);
+		_nome = new StringExpression("_nome", this);
+		_studenti = new CollectionExpression("_studenti", this);
 	}
 	
 	public ClasseCriteria(PersistentSession session) {
@@ -42,12 +42,12 @@ public class ClasseCriteria extends AbstractORMCriteria {
 		this(domain.model.RSPersistentManager.instance().getSession());
 	}
 	
-	public RegistroAssenzeCriteria createRegistroAssenzeCriteria() {
-		return new RegistroAssenzeCriteria(createCriteria("registroAssenze"));
+	public RegistroAssenzeCriteria create_registroAssenzeCriteria() {
+		return new RegistroAssenzeCriteria(createCriteria("_registroAssenze"));
 	}
 	
-	public StudenteCriteria createStudentiCriteria() {
-		return new StudenteCriteria(createCriteria("studenti"));
+	public StudenteCriteria create_studentiCriteria() {
+		return new StudenteCriteria(createCriteria("_studenti"));
 	}
 	
 	public Classe uniqueClasse() {

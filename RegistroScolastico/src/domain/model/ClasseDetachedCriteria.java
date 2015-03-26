@@ -20,35 +20,35 @@ import org.orm.criteria.*;
 
 public class ClasseDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression ID;
-	public final IntegerExpression registroAssenzeId;
-	public final AssociationExpression registroAssenze;
-	public final StringExpression nome;
-	public final CollectionExpression studenti;
+	public final IntegerExpression _registroAssenzeId;
+	public final AssociationExpression _registroAssenze;
+	public final StringExpression _nome;
+	public final CollectionExpression _studenti;
 	
 	public ClasseDetachedCriteria() {
 		super(domain.model.Classe.class, domain.model.ClasseCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		registroAssenzeId = new IntegerExpression("registroAssenze.ID", this.getDetachedCriteria());
-		registroAssenze = new AssociationExpression("registroAssenze", this.getDetachedCriteria());
-		nome = new StringExpression("nome", this.getDetachedCriteria());
-		studenti = new CollectionExpression("studenti", this.getDetachedCriteria());
+		_registroAssenzeId = new IntegerExpression("_registroAssenze.ID", this.getDetachedCriteria());
+		_registroAssenze = new AssociationExpression("_registroAssenze", this.getDetachedCriteria());
+		_nome = new StringExpression("_nome", this.getDetachedCriteria());
+		_studenti = new CollectionExpression("_studenti", this.getDetachedCriteria());
 	}
 	
 	public ClasseDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, domain.model.ClasseCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		registroAssenzeId = new IntegerExpression("registroAssenze.ID", this.getDetachedCriteria());
-		registroAssenze = new AssociationExpression("registroAssenze", this.getDetachedCriteria());
-		nome = new StringExpression("nome", this.getDetachedCriteria());
-		studenti = new CollectionExpression("studenti", this.getDetachedCriteria());
+		_registroAssenzeId = new IntegerExpression("_registroAssenze.ID", this.getDetachedCriteria());
+		_registroAssenze = new AssociationExpression("_registroAssenze", this.getDetachedCriteria());
+		_nome = new StringExpression("_nome", this.getDetachedCriteria());
+		_studenti = new CollectionExpression("_studenti", this.getDetachedCriteria());
 	}
 	
-	public RegistroAssenzeDetachedCriteria createRegistroAssenzeCriteria() {
-		return new RegistroAssenzeDetachedCriteria(createCriteria("registroAssenze"));
+	public RegistroAssenzeDetachedCriteria create_registroAssenzeCriteria() {
+		return new RegistroAssenzeDetachedCriteria(createCriteria("_registroAssenze"));
 	}
 	
-	public StudenteDetachedCriteria createStudentiCriteria() {
-		return new StudenteDetachedCriteria(createCriteria("studenti"));
+	public StudenteDetachedCriteria create_studentiCriteria() {
+		return new StudenteDetachedCriteria(createCriteria("_studenti"));
 	}
 	
 	public Classe uniqueClasse(PersistentSession session) {

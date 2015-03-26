@@ -19,11 +19,11 @@ public class Scuola {
 	
 	private int ID;
 	
-	private String nome;
+	private String _nome;
 	
-	private java.util.List<domain.model.Classe> classi = new java.util.LinkedList<domain.model.Classe>();
+	private java.util.List<domain.model.Classe> _classi = new java.util.LinkedList<domain.model.Classe>();
 	
-	private java.util.List<domain.model.Docente> docenti = new java.util.LinkedList<domain.model.Docente>();
+	private java.util.List<domain.model.Docente> _docenti = new java.util.LinkedList<domain.model.Docente>();
 	
 	private void setID(int value) {
 		this.ID = value;
@@ -37,31 +37,47 @@ public class Scuola {
 		return getID();
 	}
 	
-	public void setNome(String value) {
-		this.nome = value;
+	private void set_nome(String value) {
+		this._nome = value;
+	}
+	
+	private String get_nome() {
+		return _nome;
+	}
+	
+	private void set_classi(java.util.List<domain.model.Classe> value) {
+		this._classi = value;
+	}
+	
+	private java.util.List<domain.model.Classe> get_classi() {
+		return _classi;
+	}
+	
+	
+	private void set_docenti(java.util.List<domain.model.Docente> value) {
+		this._docenti = value;
+	}
+	
+	private java.util.List<domain.model.Docente> get_docenti() {
+		return _docenti;
+	}
+	
+	
+	public java.util.List<Classe> getClassi() {
+		return this._classi;
+	}
+	
+	public java.util.List<Docente> getDocenti() {
+		return this._docenti;
 	}
 	
 	public String getNome() {
-		return nome;
+		return this._nome;
 	}
 	
-	public void setClassi(java.util.List<domain.model.Classe> value) {
-		this.classi = value;
+	public void setNome(String nome) {
+		this._nome = nome;
 	}
-	
-	public java.util.List<domain.model.Classe> getClassi() {
-		return classi;
-	}
-	
-	
-	public void setDocenti(java.util.List<domain.model.Docente> value) {
-		this.docenti = value;
-	}
-	
-	public java.util.List<domain.model.Docente> getDocenti() {
-		return docenti;
-	}
-	
 	
 	public String toString() {
 		return String.valueOf(getID());

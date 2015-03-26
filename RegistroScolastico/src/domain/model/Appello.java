@@ -19,16 +19,16 @@ public class Appello implements java.lang.Comparable<Appello> {
 	
 	private int ID;
 	
-	private java.sql.Date data;
+	private java.sql.Date _data;
 	
-	private boolean assenzePrese;
+	private boolean _assenzePrese;
 	
-	public void setData(java.sql.Date value) {
-		this.data = value;
+	private void set_data(java.sql.Date value) {
+		this._data = value;
 	}
 	
-	public java.sql.Date getData() {
-		return data;
+	private java.sql.Date get_data() {
+		return _data;
 	}
 	
 	private void setID(int value) {
@@ -43,12 +43,12 @@ public class Appello implements java.lang.Comparable<Appello> {
 		return getID();
 	}
 	
-	public void setAssenzePrese(boolean value) {
-		this.assenzePrese = value;
+	private void set_assenzePrese(boolean value) {
+		this._assenzePrese = value;
 	}
 	
-	public boolean getAssenzePrese() {
-		return assenzePrese;
+	private boolean get_assenzePrese() {
+		return _assenzePrese;
 	}
 	
 	private domain.implementor.AppelloImp implementor = new domain.implementor.AppelloImp();
@@ -62,6 +62,22 @@ public class Appello implements java.lang.Comparable<Appello> {
 	
 	public int compareTo(domain.model.Appello appello) {
 		return this.implementor.compareTo(this, appello);
+	}
+	
+	public java.sql.Date getData() {
+		return this._data;
+	}
+	
+	public void setData(java.sql.Date data) {
+		this._data = data;
+	}
+	
+	public boolean getAssenzePrese() {
+		return this._assenzePrese;
+	}
+	
+	public void setAssenzePrese(boolean assenzePrese) {
+		this._assenzePrese = assenzePrese;
 	}
 	
 	public String toString() {

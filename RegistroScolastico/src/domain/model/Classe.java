@@ -24,18 +24,18 @@ public class Classe {
 	
 	private int ID;
 	
-	private domain.model.RegistroAssenze registroAssenze;
+	private domain.model.RegistroAssenze _registroAssenze;
 	
-	private String nome;
+	private String _nome;
 	
-	private java.util.Set<domain.model.Studente> studenti = new java.util.LinkedHashSet<domain.model.Studente>();
+	private java.util.Set<domain.model.Studente> _studenti = new java.util.LinkedHashSet<domain.model.Studente>();
 	
-	public void setNome(String value) {
-		this.nome = value;
+	private void set_nome(String value) {
+		this._nome = value;
 	}
 	
-	public String getNome() {
-		return nome;
+	private String get_nome() {
+		return _nome;
 	}
 	
 	private void setID(int value) {
@@ -50,20 +50,20 @@ public class Classe {
 		return getID();
 	}
 	
-	public void setRegistroAssenze(domain.model.RegistroAssenze value) {
-		this.registroAssenze = value;
+	private void set_registroAssenze(domain.model.RegistroAssenze value) {
+		this._registroAssenze = value;
 	}
 	
-	public domain.model.RegistroAssenze getRegistroAssenze() {
-		return registroAssenze;
+	private domain.model.RegistroAssenze get_registroAssenze() {
+		return _registroAssenze;
 	}
 	
-	public void setStudenti(java.util.Set<domain.model.Studente> value) {
-		this.studenti = value;
+	public void set_studenti(java.util.Set<domain.model.Studente> value) {
+		this._studenti = value;
 	}
 	
-	public java.util.Set<domain.model.Studente> getStudenti() {
-		return studenti;
+	public java.util.Set<domain.model.Studente> get_studenti() {
+		return _studenti;
 	}
 	
 	
@@ -75,6 +75,26 @@ public class Classe {
 	
 	public Classe(String nome, domain.model.RegistroAssenze registroAssenze) {
 		this.implementor.inizialize(this, nome, registroAssenze);
+	}
+	
+	public String getNome() {
+		return this._nome;
+	}
+	
+	public void setNome(String nome) {
+		this._nome = nome;
+	}
+	
+	public domain.model.RegistroAssenze getRegistroAssenze() {
+		return this._registroAssenze;
+	}
+	
+	public void setRegistroAssenze(domain.model.RegistroAssenze registroAssenze) {
+		this._registroAssenze = registroAssenze;
+	}
+	
+	public java.util.Set<Studente> getStudenti() {
+		return this._studenti;
 	}
 	
 	public String toString() {

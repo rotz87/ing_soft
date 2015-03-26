@@ -20,21 +20,21 @@ import org.orm.criteria.*;
 
 public class ArgomentoDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression ID;
-	public final StringExpression nome;
-	public final StringExpression descrizione;
+	public final StringExpression _nome;
+	public final StringExpression _descrizione;
 	
 	public ArgomentoDetachedCriteria() {
 		super(domain.model.Argomento.class, domain.model.ArgomentoCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		nome = new StringExpression("nome", this.getDetachedCriteria());
-		descrizione = new StringExpression("descrizione", this.getDetachedCriteria());
+		_nome = new StringExpression("_nome", this.getDetachedCriteria());
+		_descrizione = new StringExpression("_descrizione", this.getDetachedCriteria());
 	}
 	
 	public ArgomentoDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, domain.model.ArgomentoCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		nome = new StringExpression("nome", this.getDetachedCriteria());
-		descrizione = new StringExpression("descrizione", this.getDetachedCriteria());
+		_nome = new StringExpression("_nome", this.getDetachedCriteria());
+		_descrizione = new StringExpression("_descrizione", this.getDetachedCriteria());
 	}
 	
 	public Argomento uniqueArgomento(PersistentSession session) {

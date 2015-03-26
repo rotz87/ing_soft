@@ -15,7 +15,7 @@ import domain.model.Argomento;
 import domain.model.Assenza;
 import domain.model.Calendario;
 import domain.model.Classe;
-import domain.model.CompitoInClasse;
+import domain.model.compitoInClasse.CompitoInClasse;
 import domain.model.Docente;
 import domain.model.GiornoFestivo;
 import domain.model.GiornoSettimanaleFestivo;

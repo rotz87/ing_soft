@@ -18,20 +18,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import presenter.resourceSupport.appello.AppelloRS;
 import presenter.resourceSupport.compito.ArgomentiContainerRS;
 import presenter.resourceSupport.compito.ArgomentoRS;
 import presenter.resourceSupport.compito.CompitoInClasseRS;
 import presenter.resourceSupport.compito.StudenteCompitoRS;
-import service.Stampa;
 import domain.controller.CompitoInClasseController;
 import domain.controller.DocenteController;
 import domain.controller.FaiAppelloController;
 import domain.model.Argomento;
-import domain.model.Calendario;
-import domain.model.CompitoInClasse;
 import domain.model.Studente;
 import domain.model.Voto;
+import domain.model.compitoInClasse.CompitoInClasse;
 
 
 @RestController
@@ -171,11 +168,23 @@ public class CompitoInClassePresenter {
 //		  }
 //		  
 //		  return studentiCompito;
-//		  
-//	  }
+/**
+	 * 
+	 * @param idClasse
+	 * @param idRegistroDocente
+	 * @param idCompitoInClasse
+	 * @param data
+	 */
+/**
+	 * 
+	 * @param idClasse
+	 * @param idRegistroDocente
+	 * @param idCompitoInClasse
+	 * @param data
+	 */
 	  
-	  @RequestMapping(value = "/{idCompitoInClasse}/studenti", method = RequestMethod.GET, params = {"data"})
-	  public Collection<StudenteCompitoRS> getStudentiCompito(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse, @RequestParam(value="data") long data) {
+	  @RequestMapping(value="/{idCompitoInClasse}/studenti", method=RequestMethod.GET, params={"data"})
+	  public Collection<StudenteCompitoRS> getStudentiCompito(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse, @RequestParam("data") long data) {
 		  
 		  //TODO Controllare i parametri che non servono
 		  

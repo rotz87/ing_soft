@@ -19,7 +19,7 @@ public class Materia {
 	
 	private int ID;
 	
-	private String nome;
+	private String _nome;
 	
 	private void setID(int value) {
 		this.ID = value;
@@ -33,12 +33,20 @@ public class Materia {
 		return getID();
 	}
 	
-	public void setNome(String value) {
-		this.nome = value;
+	private void set_nome(String value) {
+		this._nome = value;
+	}
+	
+	private String get_nome() {
+		return _nome;
 	}
 	
 	public String getNome() {
-		return nome;
+		return this._nome;
+	}
+	
+	public void setNome(String nome) {
+		this._nome = nome;
 	}
 	
 	public String toString() {

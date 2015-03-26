@@ -22,15 +22,6 @@ public class AssenzaImp {
 //		appelli = new LinkedList<AppelloImp>();
 	}
 	
-	public void inizialize(Assenza assenza){
-
-	}
-	
-	public void inizialize(Assenza assenza, java.util.Set<Appello> appelli){
-		assenza.setAppelli(appelli);
-	}
-	
-
 	public Appello getUltimoAppelloAssenza(Assenza assenza) {
 
 		return Collections.max(assenza.getAppelli());
@@ -105,15 +96,6 @@ public class AssenzaImp {
 		return that.getUltimoAppelloAssenza().compareTo(assenza.getUltimoAppelloAssenza());
 	}
 
-	/**
-	 * 
-	 * @param assenza
-	 * @param appelli
-	 */
-	public void inizialize(Assenza assenza, java.util.LinkedList<Appello> appelli) {
-		// TODO - implement AssenzaImp.inizialize
-		throw new UnsupportedOperationException();
-	}
 
 	
 }

@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import domain.controller.CompitoInClasseController;
-import domain.model.CompitoInClasseCriteria;
-import domain.model.CompitoInClasse;
+import domain.model.compitoInClasse.CompitoInClasseCriteria;
+import domain.model.compitoInClasse.CompitoInClasse;
 import domain.model.Studente;
 import domain.model.Voto;
 

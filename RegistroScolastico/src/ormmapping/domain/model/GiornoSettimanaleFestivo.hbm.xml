@@ -10,6 +10,6 @@ License Type: Academic
 			<generator class="native">
 			</generator>
 		</id>
-		<property name="giorno" column="Giorno" type="integer" length="11" not-null="true" lazy="false"/>
+		<property name="_giorno" column="_giorno" type="integer" length="11" not-null="true" lazy="false"/>
 	</class>
 </hibernate-mapping>

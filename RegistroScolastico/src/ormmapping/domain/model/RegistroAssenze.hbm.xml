@@ -10,7 +10,7 @@ License Type: Academic
 			<generator class="native">
 			</generator>
 		</id>
-		<map name="appelli" lazy="true" cascade="save-update,lock" inverse="false" order-by="Data">
+		<map name="_appelli" lazy="true" cascade="save-update,lock" inverse="false" order-by="_data">
 			<key column="RegistroAssenzeID" not-null="true"/>
 			<index column="RegistroAssenzeIndex" type="integer"/>
 			<one-to-many class="domain.model.Appello"/>

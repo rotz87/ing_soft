@@ -19,9 +19,9 @@ public class LibrettoVotiLineItem {
 	
 	private int ID;
 	
-	private domain.model.Voto voto;
+	private domain.model.Voto _voto;
 	
-	private domain.model.CompitoInClasse compitoInClasse;
+	private domain.model.compitoInClasse.CompitoInClasse _compitoInClasse;
 	
 	private void setID(int value) {
 		this.ID = value;
@@ -35,20 +35,20 @@ public class LibrettoVotiLineItem {
 		return getID();
 	}
 	
-	public void setCompitoInClasse(domain.model.CompitoInClasse value) {
-		this.compitoInClasse = value;
+	private void set_compitoInClasse(domain.model.compitoInClasse.CompitoInClasse value) {
+		this._compitoInClasse = value;
 	}
 	
-	public domain.model.CompitoInClasse getCompitoInClasse() {
-		return compitoInClasse;
+	private domain.model.compitoInClasse.CompitoInClasse get_compitoInClasse() {
+		return _compitoInClasse;
 	}
 	
-	public void setVoto(domain.model.Voto value) {
-		this.voto = value;
+	private void set_voto(domain.model.Voto value) {
+		this._voto = value;
 	}
 	
-	public domain.model.Voto getVoto() {
-		return voto;
+	private domain.model.Voto get_voto() {
+		return _voto;
 	}
 	
 	private domain.implementor.LibrettoVotiLineItemImp implementor = new domain.implementor.LibrettoVotiLineItemImp();;
@@ -57,12 +57,28 @@ public class LibrettoVotiLineItem {
 		this.implementor.aggiungiVoto(this, voto);
 	}
 	
-	public LibrettoVotiLineItem(domain.model.CompitoInClasse compito) {
+	public LibrettoVotiLineItem(domain.model.compitoInClasse.CompitoInClasse compito) {
 		this.implementor.inizialize(this,compito);
 	}
 	
-	public LibrettoVotiLineItem(domain.model.CompitoInClasse compito, domain.model.Voto voto) {
+	public LibrettoVotiLineItem(domain.model.compitoInClasse.CompitoInClasse compito, domain.model.Voto voto) {
 		this.implementor.inizialize(this, compito, voto);
+	}
+	
+	public domain.model.Voto getVoto() {
+		return this._voto;
+	}
+	
+	public void setVoto(domain.model.Voto voto) {
+		this._voto = voto;
+	}
+	
+	public domain.model.compitoInClasse.CompitoInClasse getCompitoInClasse() {
+		return this._compitoInClasse;
+	}
+	
+	public void setCompitoInClasse(domain.model.compitoInClasse.CompitoInClasse compitoInClasse) {
+		this._compitoInClasse = compitoInClasse;
 	}
 	
 	public String toString() {

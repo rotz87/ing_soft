@@ -10,6 +10,6 @@ License Type: Academic
 			<generator class="native">
 			</generator>
 		</id>
-		<property name="data" column="Data" type="date" not-null="false" lazy="false"/>
+		<property name="_data" column="_data" type="date" not-null="false" lazy="false"/>
 	</class>
 </hibernate-mapping>

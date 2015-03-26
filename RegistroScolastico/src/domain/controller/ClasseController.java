@@ -107,8 +107,8 @@ public class ClasseController {
 
 		docente = docenteCriteria.uniqueDocente();
 		
-		registroDocenteCriteria.classeId.eq(idClasse);
-
+		registroDocenteCriteria._classeId.eq(idClasse);
+		
 		registri.addAll(registroDocenteCriteria.list());
 		
 		registri.retainAll(docente.getRegistriDocente());

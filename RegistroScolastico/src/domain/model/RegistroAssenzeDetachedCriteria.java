@@ -20,22 +20,22 @@ import org.orm.criteria.*;
 
 public class RegistroAssenzeDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression ID;
-	public final CollectionExpression appelli;
+	public final CollectionExpression _appelli;
 	
 	public RegistroAssenzeDetachedCriteria() {
 		super(domain.model.RegistroAssenze.class, domain.model.RegistroAssenzeCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		appelli = new CollectionExpression("appelli", this.getDetachedCriteria());
+		_appelli = new CollectionExpression("_appelli", this.getDetachedCriteria());
 	}
 	
 	public RegistroAssenzeDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, domain.model.RegistroAssenzeCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		appelli = new CollectionExpression("appelli", this.getDetachedCriteria());
+		_appelli = new CollectionExpression("_appelli", this.getDetachedCriteria());
 	}
 	
-	public AppelloDetachedCriteria createAppelliCriteria() {
-		return new AppelloDetachedCriteria(createCriteria("appelli"));
+	public AppelloDetachedCriteria create_appelliCriteria() {
+		return new AppelloDetachedCriteria(createCriteria("_appelli"));
 	}
 	
 	public RegistroAssenze uniqueRegistroAssenze(PersistentSession session) {

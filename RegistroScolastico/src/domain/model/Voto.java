@@ -19,7 +19,7 @@ public class Voto {
 	
 	private int ID;
 	
-	private byte voto;
+	private byte _voto;
 	
 	private void setID(int value) {
 		this.ID = value;
@@ -33,12 +33,20 @@ public class Voto {
 		return getID();
 	}
 	
-	public void setVoto(byte value) {
-		this.voto = value;
+	private void set_voto(byte value) {
+		this._voto = value;
+	}
+	
+	private byte get_voto() {
+		return _voto;
 	}
 	
 	public byte getVoto() {
-		return voto;
+		return this._voto;
+	}
+	
+	public void setVoto(byte voto) {
+		this._voto = voto;
 	}
 	
 	public String toString() {

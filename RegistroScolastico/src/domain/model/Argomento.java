@@ -19,9 +19,9 @@ public class Argomento {
 	
 	private int ID;
 	
-	private String nome;
+	private String _nome;
 	
-	private String descrizione;
+	private String _descrizione;
 	
 	private void setID(int value) {
 		this.ID = value;
@@ -35,26 +35,42 @@ public class Argomento {
 		return getID();
 	}
 	
-	public void setNome(String value) {
-		this.nome = value;
+	private void set_nome(String value) {
+		this._nome = value;
 	}
 	
-	public String getNome() {
-		return nome;
+	private String get_nome() {
+		return _nome;
 	}
 	
-	public void setDescrizione(String value) {
-		this.descrizione = value;
+	private void set_descrizione(String value) {
+		this._descrizione = value;
 	}
 	
-	public String getDescrizione() {
-		return descrizione;
+	private String get_descrizione() {
+		return _descrizione;
 	}
 	
 	private domain.implementor.ArgomentoImp implementor = new domain.implementor.ArgomentoImp();
 	
 	public Argomento(String nome, String descrizione) {
 		this.implementor.inizialize(this, nome, descrizione);
+	}
+	
+	public String getNome() {
+		return this._nome;
+	}
+	
+	public void setNome(String nome) {
+		this._nome = nome;
+	}
+	
+	public String getDescrizione() {
+		return this._descrizione;
+	}
+	
+	public void setDescrizione(String descrizione) {
+		this._descrizione = descrizione;
 	}
 	
 	public String toString() {

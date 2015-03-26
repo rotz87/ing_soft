@@ -19,7 +19,7 @@ public class LibrettoVoti {
 	
 	private int ID;
 	
-	private java.util.Set<domain.model.LibrettoVotiLineItem> libVotiLineItems = new java.util.LinkedHashSet<domain.model.LibrettoVotiLineItem>();
+	private java.util.Set<domain.model.LibrettoVotiLineItem> _libVotiLineItems = new java.util.LinkedHashSet<domain.model.LibrettoVotiLineItem>();
 	
 	private void setID(int value) {
 		this.ID = value;
@@ -33,23 +33,27 @@ public class LibrettoVoti {
 		return getID();
 	}
 	
-	public void setLibVotiLineItems(java.util.Set<domain.model.LibrettoVotiLineItem> value) {
-		this.libVotiLineItems = value;
+	private void set_libVotiLineItems(java.util.Set<domain.model.LibrettoVotiLineItem> value) {
+		this._libVotiLineItems = value;
 	}
 	
-	public java.util.Set<domain.model.LibrettoVotiLineItem> getLibVotiLineItems() {
-		return libVotiLineItems;
+	private java.util.Set<domain.model.LibrettoVotiLineItem> get_libVotiLineItems() {
+		return _libVotiLineItems;
 	}
 	
 	
 	private domain.implementor.LibrettoVotiImp implementor = new domain.implementor.LibrettoVotiImp();
 	
-	public void makeLineItem(domain.model.CompitoInClasse compito) {
+	public void makeLineItem(domain.model.compitoInClasse.CompitoInClasse compito) {
 		this.implementor.makeLineItem(this, compito);
 	}
 	
-	public domain.model.LibrettoVotiLineItem getLibrettoLineItem(domain.model.CompitoInClasse compito) {
+	public domain.model.LibrettoVotiLineItem getLibrettoLineItem(domain.model.compitoInClasse.CompitoInClasse compito) {
 		return this.implementor.getLibrettoVotiLineItem(this, compito);
+	}
+	
+	public java.util.Set<LibrettoVotiLineItem> getLibVotiLineItems() {
+		return this._libVotiLineItems;
 	}
 	
 	public String toString() {

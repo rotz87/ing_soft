@@ -19,9 +19,9 @@ public class UscitaAnticipata {
 	
 	private int ID;
 	
-	private domain.model.Appello appello;
+	private domain.model.Appello _appello;
 	
-	private domain.model.PermessoUscita permesso;
+	private domain.model.PermessoUscita _permesso;
 	
 	private void setID(int value) {
 		this.ID = value;
@@ -35,20 +35,36 @@ public class UscitaAnticipata {
 		return getID();
 	}
 	
-	public void setPermesso(domain.model.PermessoUscita value) {
-		this.permesso = value;
+	private void set_permesso(domain.model.PermessoUscita value) {
+		this._permesso = value;
 	}
 	
-	public domain.model.PermessoUscita getPermesso() {
-		return permesso;
+	private domain.model.PermessoUscita get_permesso() {
+		return _permesso;
 	}
 	
-	public void setAppello(domain.model.Appello value) {
-		this.appello = value;
+	private void set_appello(domain.model.Appello value) {
+		this._appello = value;
+	}
+	
+	private domain.model.Appello get_appello() {
+		return _appello;
 	}
 	
 	public domain.model.Appello getAppello() {
-		return appello;
+		return this._appello;
+	}
+	
+	public void setAppello(domain.model.Appello appello) {
+		this._appello = appello;
+	}
+	
+	public domain.model.PermessoUscita getPermesso() {
+		return this._permesso;
+	}
+	
+	public void setPermesso(domain.model.PermessoUscita permesso) {
+		this._permesso = permesso;
 	}
 	
 	public String toString() {

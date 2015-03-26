@@ -20,7 +20,7 @@ public class DocenteController {
 		} catch (PersistentException e) {
 			throw new RuntimeException(ErrorMessage.DOCENTE_UNLOADED);
 		}
-		criteria.cognome.eq(cognome);
+		criteria._cognome.eq(cognome);
 		
 		docente = criteria.uniqueDocente();
 		

@@ -20,22 +20,22 @@ import org.orm.criteria.*;
 
 public class LibrettoVotiDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression ID;
-	public final CollectionExpression libVotiLineItems;
+	public final CollectionExpression _libVotiLineItems;
 	
 	public LibrettoVotiDetachedCriteria() {
 		super(domain.model.LibrettoVoti.class, domain.model.LibrettoVotiCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		libVotiLineItems = new CollectionExpression("libVotiLineItems", this.getDetachedCriteria());
+		_libVotiLineItems = new CollectionExpression("_libVotiLineItems", this.getDetachedCriteria());
 	}
 	
 	public LibrettoVotiDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, domain.model.LibrettoVotiCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		libVotiLineItems = new CollectionExpression("libVotiLineItems", this.getDetachedCriteria());
+		_libVotiLineItems = new CollectionExpression("_libVotiLineItems", this.getDetachedCriteria());
 	}
 	
-	public LibrettoVotiLineItemDetachedCriteria createLibVotiLineItemsCriteria() {
-		return new LibrettoVotiLineItemDetachedCriteria(createCriteria("libVotiLineItems"));
+	public LibrettoVotiLineItemDetachedCriteria create_libVotiLineItemsCriteria() {
+		return new LibrettoVotiLineItemDetachedCriteria(createCriteria("_libVotiLineItems"));
 	}
 	
 	public LibrettoVoti uniqueLibrettoVoti(PersistentSession session) {

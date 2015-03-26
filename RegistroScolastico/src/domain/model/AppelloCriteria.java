@@ -20,14 +20,14 @@ import org.orm.criteria.*;
 
 public class AppelloCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
-	public final DateExpression data;
-	public final BooleanExpression assenzePrese;
+	public final DateExpression _data;
+	public final BooleanExpression _assenzePrese;
 	
 	public AppelloCriteria(Criteria criteria) {
 		super(criteria);
 		ID = new IntegerExpression("ID", this);
-		data = new DateExpression("data", this);
-		assenzePrese = new BooleanExpression("assenzePrese", this);
+		_data = new DateExpression("_data", this);
+		_assenzePrese = new BooleanExpression("_assenzePrese", this);
 	}
 	
 	public AppelloCriteria(PersistentSession session) {

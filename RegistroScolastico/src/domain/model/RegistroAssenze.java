@@ -19,7 +19,7 @@ public class RegistroAssenze {
 	
 	private int ID;
 	
-	private java.util.Map<Integer, domain.model.Appello> appelli = new java.util.HashMap<Integer, domain.model.Appello>();
+	private java.util.Map<Integer, domain.model.Appello> _appelli = new java.util.HashMap<Integer, domain.model.Appello>();
 	
 	private void setID(int value) {
 		this.ID = value;
@@ -33,12 +33,12 @@ public class RegistroAssenze {
 		return getID();
 	}
 	
-	public void setAppelli(java.util.Map<Integer, domain.model.Appello> value) {
-		this.appelli = value;
+	public void set_appelli(java.util.Map<Integer, domain.model.Appello> value) {
+		this._appelli = value;
 	}
 	
-	public java.util.Map<Integer, domain.model.Appello> getAppelli() {
-		return appelli;
+	public java.util.Map<Integer, domain.model.Appello> get_appelli() {
+		return _appelli;
 	}
 	
 	
@@ -46,6 +46,22 @@ public class RegistroAssenze {
 	
 	public void avviaAppello() {
 		this.implementor.avviaAppello(this);
+	}
+	
+	public boolean checkPresenti(org.joda.time.LocalDate data, java.util.Collection<domain.model.Studente> studenti) {
+		return this.implementor.checkPresenti(this, data, studenti);
+	}
+	
+	public boolean esisteAppello(domain.model.Appello appello) {
+		return this.implementor.esisteAppello(this, appello);
+	}
+	
+	public boolean esisteAppello(org.joda.time.LocalDate dataDiRiferimento) {
+		return this.implementor.esisteAppello(this, dataDiRiferimento);
+	}
+	
+	public java.util.Map<Integer, Appello> getAppelli() {
+		return this._appelli;
 	}
 	
 	/**
@@ -57,31 +73,19 @@ public class RegistroAssenze {
 		return this.implementor.getAppelloByData(this, data);
 	}
 	
-	/**
-	 * Riceve un vettore di studenti per cui segnare le assenze
-	 */
-	public void registraAssenze(java.util.Collection<domain.model.LibrettoAssenze> libretti) {
-		this.implementor.registraAssenze(this, libretti);
-	}
-	
 	public domain.model.Appello getAppelloOdierno() {
 		return this.implementor.getAppelloOdierno(this);
-	}
-	
-	public boolean esisteAppello(domain.model.Appello appello) {
-		return this.implementor.esisteAppello(this, appello);
-	}
-	
-	public boolean esisteAppello(org.joda.time.LocalDate dataDiRiferimento) {
-		return this.implementor.esisteAppello(this, dataDiRiferimento);
 	}
 	
 	public boolean isAppelloOdiernoAvviabile() {
 		return this.implementor.isAppelloOdiernoAvviabile(this);
 	}
 	
-	public boolean checkPresenti(org.joda.time.LocalDate data, java.util.Collection<domain.model.Studente> studenti) {
-		return this.implementor.checkPresenti(this, data, studenti);
+	/**
+	 * Riceve un vettore di studenti per cui segnare le assenze
+	 */
+	public void registraAssenze(java.util.Collection<domain.model.LibrettoAssenze> libretti) {
+		this.implementor.registraAssenze(this, libretti);
 	}
 	
 	public String toString() {

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: Universita degli Studi dell'Aquila
+License Type: Academic
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="domain.model.compitoInClasse.CompitoInClasse" table="CompitoInClasse" lazy="false">
+		<id name="ID" column="ID" type="integer" unsaved-value="0">
+			<generator class="native">
+			</generator>
+		</id>
+		<many-to-one name="_insegnamento" cascade="lock" column="RegistroDocenteID" class="domain.model.RegistroDocente" not-null="false" lazy="no-proxy">
+		</many-to-one>
+		<property name="_data" column="_data" type="date" not-null="false" lazy="false"/>
+		<property name="_oraInizio" column="_oraInizio" type="time" not-null="false" lazy="false"/>
+		<property name="_oraFine" column="_oraFine" type="time" not-null="false" lazy="false"/>
+		<property name="_state" column="_state" type="domain.model.compitoInClasse.CompitoInClasseStateUserType" length="255" not-null="true" lazy="false"/>
+		<set name="_argomentiEsaminati" table="Argomento_CompitoInClasse" lazy="true" cascade="save-update,lock" inverse="false">
+			<key column="CompitoInClasseID" not-null="true"/>
+			<many-to-many column="ArgomentoID" class="domain.model.Argomento">
+			</many-to-many>
+		</set>
+	</class>
+</hibernate-mapping>

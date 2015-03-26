@@ -20,12 +20,12 @@ import org.orm.criteria.*;
 
 public class LibrettoVotiCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
-	public final CollectionExpression libVotiLineItems;
+	public final CollectionExpression _libVotiLineItems;
 	
 	public LibrettoVotiCriteria(Criteria criteria) {
 		super(criteria);
 		ID = new IntegerExpression("ID", this);
-		libVotiLineItems = new CollectionExpression("libVotiLineItems", this);
+		_libVotiLineItems = new CollectionExpression("_libVotiLineItems", this);
 	}
 	
 	public LibrettoVotiCriteria(PersistentSession session) {
@@ -36,8 +36,8 @@ public class LibrettoVotiCriteria extends AbstractORMCriteria {
 		this(domain.model.RSPersistentManager.instance().getSession());
 	}
 	
-	public LibrettoVotiLineItemCriteria createLibVotiLineItemsCriteria() {
-		return new LibrettoVotiLineItemCriteria(createCriteria("libVotiLineItems"));
+	public LibrettoVotiLineItemCriteria create_libVotiLineItemsCriteria() {
+		return new LibrettoVotiLineItemCriteria(createCriteria("_libVotiLineItems"));
 	}
 	
 	public LibrettoVoti uniqueLibrettoVoti() {

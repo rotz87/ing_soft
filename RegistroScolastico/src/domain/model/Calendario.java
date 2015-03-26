@@ -19,6 +19,7 @@ public class Calendario {
 
 	final private LocalDate dataZero = new LocalDate(0L);
 	private static Calendario instance;
+	private Calendario attribute2;
 
 	private Calendario(){
 		this.dataOdierna = calcolaDataOdierna();

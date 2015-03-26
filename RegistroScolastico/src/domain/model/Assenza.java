@@ -19,9 +19,9 @@ public class Assenza implements java.lang.Comparable<Assenza> {
 	
 	private int ID;
 	
-	private domain.model.Giustificazione giustificazione;
+	private domain.model.Giustificazione _giustificazione;
 	
-	private java.util.Set<domain.model.Appello> appelli = new java.util.LinkedHashSet<domain.model.Appello>();
+	private java.util.Set<domain.model.Appello> _appelli = new java.util.LinkedHashSet<domain.model.Appello>();
 	
 	private void setID(int value) {
 		this.ID = value;
@@ -35,20 +35,20 @@ public class Assenza implements java.lang.Comparable<Assenza> {
 		return getID();
 	}
 	
-	public void setGiustificazione(domain.model.Giustificazione value) {
-		this.giustificazione = value;
+	private void set_giustificazione(domain.model.Giustificazione value) {
+		this._giustificazione = value;
 	}
 	
-	public domain.model.Giustificazione getGiustificazione() {
-		return giustificazione;
+	private domain.model.Giustificazione get_giustificazione() {
+		return _giustificazione;
 	}
 	
-	public void setAppelli(java.util.Set<domain.model.Appello> value) {
-		this.appelli = value;
+	public void set_appelli(java.util.Set<domain.model.Appello> value) {
+		this._appelli = value;
 	}
 	
-	public java.util.Set<domain.model.Appello> getAppelli() {
-		return appelli;
+	public java.util.Set<domain.model.Appello> get_appelli() {
+		return _appelli;
 	}
 	
 	
@@ -75,13 +75,6 @@ public class Assenza implements java.lang.Comparable<Assenza> {
 		return this.implementor.isInseribile(this, appello);
 	}
 	
-	/**
-	 * Costruttore dell'Assenza, prende come parametro una LinkedList di appelli.
-	 */
-	public Assenza(java.util.LinkedHashSet<Appello> appelli) {
-		this.implementor.inizialize(this, appelli);
-	}
-	
 	public boolean isCertificatoMedicoRichiesto() {
 		return this.implementor.isCertificatoMedicoRichiesto(this);
 	}
@@ -92,6 +85,18 @@ public class Assenza implements java.lang.Comparable<Assenza> {
 	
 	public int compareTo(domain.model.Assenza assenza) {
 		return this.implementor.compareTo(this, assenza);
+	}
+	
+	public domain.model.Giustificazione getGiustificazione() {
+		return this._giustificazione;
+	}
+	
+	public void setGiustificazione(domain.model.Giustificazione giustificazione) {
+		this._giustificazione = giustificazione;
+	}
+	
+	public java.util.Set<Appello> getAppelli() {
+		return this._appelli;
 	}
 	
 	public String toString() {

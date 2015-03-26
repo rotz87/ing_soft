@@ -19,7 +19,7 @@ public class GiornoFestivo {
 	
 	private int ID;
 	
-	private java.sql.Date data;
+	private java.sql.Date _data;
 	
 	private void setID(int value) {
 		this.ID = value;
@@ -33,12 +33,12 @@ public class GiornoFestivo {
 		return getID();
 	}
 	
-	public void setData(java.sql.Date value) {
-		this.data = value;
+	private void set_data(java.sql.Date value) {
+		this._data = value;
 	}
 	
-	public java.sql.Date getData() {
-		return data;
+	private java.sql.Date get_data() {
+		return _data;
 	}
 	
 	private domain.implementor.GiornoFestivoImp implementor = new domain.implementor.GiornoFestivoImp();
@@ -49,6 +49,14 @@ public class GiornoFestivo {
 	
 	public GiornoFestivo(java.sql.Date data) {
 		this.implementor.inizialize(this, data);
+	}
+	
+	public java.sql.Date getData() {
+		return this._data;
+	}
+	
+	public void setData(java.sql.Date data) {
+		this._data = data;
 	}
 	
 	public String toString() {

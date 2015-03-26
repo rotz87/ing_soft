@@ -19,9 +19,9 @@ public class Ritardo {
 	
 	private int ID;
 	
-	private domain.model.PermessoEntrata permessoEntrata;
+	private domain.model.PermessoEntrata _permesso;
 	
-	private domain.model.Appello appello;
+	private domain.model.Appello _appello;
 	
 	private void setID(int value) {
 		this.ID = value;
@@ -35,20 +35,36 @@ public class Ritardo {
 		return getID();
 	}
 	
-	public void setAppello(domain.model.Appello value) {
-		this.appello = value;
+	private void set_appello(domain.model.Appello value) {
+		this._appello = value;
+	}
+	
+	private domain.model.Appello get_appello() {
+		return _appello;
+	}
+	
+	private void set_permesso(domain.model.PermessoEntrata value) {
+		this._permesso = value;
+	}
+	
+	private domain.model.PermessoEntrata get_permesso() {
+		return _permesso;
 	}
 	
 	public domain.model.Appello getAppello() {
-		return appello;
+		return this._appello;
 	}
 	
-	public void setPermessoEntrata(domain.model.PermessoEntrata value) {
-		this.permessoEntrata = value;
+	public void setAppello(domain.model.Appello appello) {
+		this._appello = appello;
 	}
 	
-	public domain.model.PermessoEntrata getPermessoEntrata() {
-		return permessoEntrata;
+	public domain.model.PermessoEntrata getPermesso() {
+		return this._permesso;
+	}
+	
+	public void setPermesso(domain.model.PermessoEntrata permesso) {
+		this._permesso = permesso;
 	}
 	
 	public String toString() {

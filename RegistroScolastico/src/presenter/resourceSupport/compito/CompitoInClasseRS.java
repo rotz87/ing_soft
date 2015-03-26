@@ -13,7 +13,7 @@ import presenter.ClassePresenter;
 import presenter.CompitoInClassePresenter;
 import service.Stampa;
 import domain.model.Argomento;
-import domain.model.CompitoInClasse;
+import domain.model.compitoInClasse.CompitoInClasse;
 
 public class CompitoInClasseRS extends ResourceSupport{
 	

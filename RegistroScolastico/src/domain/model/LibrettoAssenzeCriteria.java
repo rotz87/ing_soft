@@ -20,18 +20,18 @@ import org.orm.criteria.*;
 
 public class LibrettoAssenzeCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
-	public final CollectionExpression giustificate;
-	public final CollectionExpression nonGiustificate;
-	public final CollectionExpression ritardi;
-	public final CollectionExpression uscite;
+	public final CollectionExpression _giustificate;
+	public final CollectionExpression _nonGiustificate;
+	public final CollectionExpression _ritardi;
+	public final CollectionExpression _uscite;
 	
 	public LibrettoAssenzeCriteria(Criteria criteria) {
 		super(criteria);
 		ID = new IntegerExpression("ID", this);
-		giustificate = new CollectionExpression("giustificate", this);
-		nonGiustificate = new CollectionExpression("nonGiustificate", this);
-		ritardi = new CollectionExpression("ritardi", this);
-		uscite = new CollectionExpression("uscite", this);
+		_giustificate = new CollectionExpression("_giustificate", this);
+		_nonGiustificate = new CollectionExpression("_nonGiustificate", this);
+		_ritardi = new CollectionExpression("_ritardi", this);
+		_uscite = new CollectionExpression("_uscite", this);
 	}
 	
 	public LibrettoAssenzeCriteria(PersistentSession session) {
@@ -42,20 +42,20 @@ public class LibrettoAssenzeCriteria extends AbstractORMCriteria {
 		this(domain.model.RSPersistentManager.instance().getSession());
 	}
 	
-	public AssenzaCriteria createGiustificateCriteria() {
-		return new AssenzaCriteria(createCriteria("giustificate"));
+	public AssenzaCriteria create_giustificateCriteria() {
+		return new AssenzaCriteria(createCriteria("_giustificate"));
 	}
 	
-	public AssenzaCriteria createNonGiustificateCriteria() {
-		return new AssenzaCriteria(createCriteria("nonGiustificate"));
+	public AssenzaCriteria create_nonGiustificateCriteria() {
+		return new AssenzaCriteria(createCriteria("_nonGiustificate"));
 	}
 	
-	public RitardoCriteria createRitardiCriteria() {
-		return new RitardoCriteria(createCriteria("ritardi"));
+	public RitardoCriteria create_ritardiCriteria() {
+		return new RitardoCriteria(createCriteria("_ritardi"));
 	}
 	
-	public UscitaAnticipataCriteria createUsciteCriteria() {
-		return new UscitaAnticipataCriteria(createCriteria("uscite"));
+	public UscitaAnticipataCriteria create_usciteCriteria() {
+		return new UscitaAnticipataCriteria(createCriteria("_uscite"));
 	}
 	
 	public LibrettoAssenze uniqueLibrettoAssenze() {

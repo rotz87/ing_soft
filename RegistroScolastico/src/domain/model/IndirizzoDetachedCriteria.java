@@ -20,18 +20,18 @@ import org.orm.criteria.*;
 
 public class IndirizzoDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression ID;
-	public final StringExpression via;
+	public final StringExpression _via;
 	
 	public IndirizzoDetachedCriteria() {
 		super(domain.model.Indirizzo.class, domain.model.IndirizzoCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		via = new StringExpression("via", this.getDetachedCriteria());
+		_via = new StringExpression("_via", this.getDetachedCriteria());
 	}
 	
 	public IndirizzoDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, domain.model.IndirizzoCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		via = new StringExpression("via", this.getDetachedCriteria());
+		_via = new StringExpression("_via", this.getDetachedCriteria());
 	}
 	
 	public Indirizzo uniqueIndirizzo(PersistentSession session) {

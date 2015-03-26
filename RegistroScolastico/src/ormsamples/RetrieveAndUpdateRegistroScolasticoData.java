@@ -89,9 +89,9 @@ public class RetrieveAndUpdateRegistroScolasticoData {
 			// Update the properties of the persistent object
 			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelLibrettoVotiLineItem);
 			
-			domain.model.CompitoInClasse ldomainmodelCompitoInClasse= (domain.model.CompitoInClasse)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.CompitoInClasse").setMaxResults(1).uniqueResult();
+			domain.model.compitoInClasse.CompitoInClasse ldomainmodelcompitoInClasseCompitoInClasse= (domain.model.compitoInClasse.CompitoInClasse)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.compitoInClasse.CompitoInClasse").setMaxResults(1).uniqueResult();
 			// Update the properties of the persistent object
-			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelCompitoInClasse);
+			domain.model.RSPersistentManager.instance().getSession().update(ldomainmodelcompitoInClasseCompitoInClasse);
 			
 			domain.model.Voto ldomainmodelVoto= (domain.model.Voto)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Voto").setMaxResults(1).uniqueResult();
 			// Update the properties of the persistent object
@@ -230,10 +230,10 @@ public class RetrieveAndUpdateRegistroScolasticoData {
 		System.out.println(ldomainmodelLibrettoVotiLineItemCriteria.uniqueLibrettoVotiLineItem());
 		
 		System.out.println("Retrieving CompitoInClasse by CompitoInClasseCriteria");
-		domain.model.CompitoInClasseCriteria ldomainmodelCompitoInClasseCriteria = new domain.model.CompitoInClasseCriteria();
+		domain.model.compitoInClasse.CompitoInClasseCriteria ldomainmodelcompitoInClasseCompitoInClasseCriteria = new domain.model.compitoInClasse.CompitoInClasseCriteria();
 		// Please uncomment the follow line and fill in parameter(s)
-		//ldomainmodelCompitoInClasseCriteria.ID.eq();
-		System.out.println(ldomainmodelCompitoInClasseCriteria.uniqueCompitoInClasse());
+		//ldomainmodelcompitoInClasseCompitoInClasseCriteria.ID.eq();
+		System.out.println(ldomainmodelcompitoInClasseCompitoInClasseCriteria.uniqueCompitoInClasse());
 		
 		System.out.println("Retrieving Voto by VotoCriteria");
 		domain.model.VotoCriteria ldomainmodelVotoCriteria = new domain.model.VotoCriteria();

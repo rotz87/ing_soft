@@ -10,9 +10,9 @@ License Type: Academic
 			<generator class="native">
 			</generator>
 		</id>
-		<many-to-one name="voto" column="VotoID" class="domain.model.Voto" cascade="save-update,lock" unique="true" not-null="true" lazy="no-proxy">
+		<many-to-one name="_voto" column="VotoID" class="domain.model.Voto" cascade="save-update,lock" unique="true" not-null="true" lazy="no-proxy">
 		</many-to-one>
-		<many-to-one name="compitoInClasse" cascade="lock" column="CompitoInClasseID" class="domain.model.CompitoInClasse" not-null="true" lazy="no-proxy">
+		<many-to-one name="_compitoInClasse" cascade="lock" column="CompitoInClasseID" class="domain.model.compitoInClasse.CompitoInClasse" not-null="true" lazy="no-proxy">
 		</many-to-one>
 	</class>
 </hibernate-mapping>

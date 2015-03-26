@@ -20,18 +20,18 @@ import org.orm.criteria.*;
 
 public class GiustificazioneDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression ID;
-	public final BooleanExpression confermata;
+	public final BooleanExpression _confermata;
 	
 	public GiustificazioneDetachedCriteria() {
 		super(domain.model.Giustificazione.class, domain.model.GiustificazioneCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		confermata = new BooleanExpression("confermata", this.getDetachedCriteria());
+		_confermata = new BooleanExpression("_confermata", this.getDetachedCriteria());
 	}
 	
 	public GiustificazioneDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, domain.model.GiustificazioneCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		confermata = new BooleanExpression("confermata", this.getDetachedCriteria());
+		_confermata = new BooleanExpression("_confermata", this.getDetachedCriteria());
 	}
 	
 	public Giustificazione uniqueGiustificazione(PersistentSession session) {

@@ -10,7 +10,7 @@ License Type: Academic
 			<generator class="native">
 			</generator>
 		</id>
-		<property name="nome" column="Nome" type="string" length="255" not-null="false" lazy="false"/>
-		<property name="descrizione" column="Descrizione" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="_nome" column="_nome" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="_descrizione" column="_descrizione" type="string" length="255" not-null="false" lazy="false"/>
 	</class>
 </hibernate-mapping>

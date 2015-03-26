@@ -20,12 +20,12 @@ import org.orm.criteria.*;
 
 public class MateriaCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
-	public final StringExpression nome;
+	public final StringExpression _nome;
 	
 	public MateriaCriteria(Criteria criteria) {
 		super(criteria);
 		ID = new IntegerExpression("ID", this);
-		nome = new StringExpression("nome", this);
+		_nome = new StringExpression("_nome", this);
 	}
 	
 	public MateriaCriteria(PersistentSession session) {

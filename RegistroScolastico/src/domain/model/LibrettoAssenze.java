@@ -19,13 +19,13 @@ public class LibrettoAssenze {
 	
 	private int ID;
 	
-	private java.util.List<domain.model.Assenza> giustificate = new java.util.LinkedList<domain.model.Assenza>();
+	private java.util.List<domain.model.Assenza> _giustificate = new java.util.LinkedList<domain.model.Assenza>();
 	
-	private java.util.List<domain.model.Assenza> nonGiustificate = new java.util.LinkedList<domain.model.Assenza>();
+	private java.util.List<domain.model.Assenza> _nonGiustificate = new java.util.LinkedList<domain.model.Assenza>();
 	
-	private java.util.List<domain.model.Ritardo> ritardi = new java.util.LinkedList<domain.model.Ritardo>();
+	private java.util.List<domain.model.Ritardo> _ritardi = new java.util.LinkedList<domain.model.Ritardo>();
 	
-	private java.util.List<domain.model.UscitaAnticipata> uscite = new java.util.LinkedList<domain.model.UscitaAnticipata>();
+	private java.util.List<domain.model.UscitaAnticipata> _uscite = new java.util.LinkedList<domain.model.UscitaAnticipata>();
 	
 	private void setID(int value) {
 		this.ID = value;
@@ -39,39 +39,39 @@ public class LibrettoAssenze {
 		return getID();
 	}
 	
-	public void setGiustificate(java.util.List<domain.model.Assenza> value) {
-		this.giustificate = value;
+	private void set_giustificate(java.util.List<domain.model.Assenza> value) {
+		this._giustificate = value;
 	}
 	
-	public java.util.List<domain.model.Assenza> getGiustificate() {
-		return giustificate;
-	}
-	
-	
-	public void setNonGiustificate(java.util.List<domain.model.Assenza> value) {
-		this.nonGiustificate = value;
-	}
-	
-	public java.util.List<domain.model.Assenza> getNonGiustificate() {
-		return nonGiustificate;
+	private java.util.List<domain.model.Assenza> get_giustificate() {
+		return _giustificate;
 	}
 	
 	
-	public void setRitardi(java.util.List<domain.model.Ritardo> value) {
-		this.ritardi = value;
+	private void set_nonGiustificate(java.util.List<domain.model.Assenza> value) {
+		this._nonGiustificate = value;
 	}
 	
-	public java.util.List<domain.model.Ritardo> getRitardi() {
-		return ritardi;
+	private java.util.List<domain.model.Assenza> get_nonGiustificate() {
+		return _nonGiustificate;
 	}
 	
 	
-	public void setUscite(java.util.List<domain.model.UscitaAnticipata> value) {
-		this.uscite = value;
+	private void set_ritardi(java.util.List<domain.model.Ritardo> value) {
+		this._ritardi = value;
 	}
 	
-	public java.util.List<domain.model.UscitaAnticipata> getUscite() {
-		return uscite;
+	private java.util.List<domain.model.Ritardo> get_ritardi() {
+		return _ritardi;
+	}
+	
+	
+	private void set_uscite(java.util.List<domain.model.UscitaAnticipata> value) {
+		this._uscite = value;
+	}
+	
+	private java.util.List<domain.model.UscitaAnticipata> get_uscite() {
+		return _uscite;
 	}
 	
 	
@@ -91,6 +91,22 @@ public class LibrettoAssenze {
 	
 	public domain.model.Assenza getAssenza(domain.model.Appello appello) {
 		return this.implementor.getAssenza(this, appello);
+	}
+	
+	public java.util.List<Assenza> getGiustificate() {
+		return this._giustificate;
+	}
+	
+	public java.util.List<Assenza> getNonGiustificate() {
+		return this._nonGiustificate;
+	}
+	
+	public java.util.List<Ritardo> getRitardi() {
+		return this._ritardi;
+	}
+	
+	public java.util.List<UscitaAnticipata> getUscite() {
+		return this._uscite;
 	}
 	
 	public String toString() {

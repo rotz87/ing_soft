@@ -20,12 +20,12 @@ import org.orm.criteria.*;
 
 public class GiustificazioneCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
-	public final BooleanExpression confermata;
+	public final BooleanExpression _confermata;
 	
 	public GiustificazioneCriteria(Criteria criteria) {
 		super(criteria);
 		ID = new IntegerExpression("ID", this);
-		confermata = new BooleanExpression("confermata", this);
+		_confermata = new BooleanExpression("_confermata", this);
 	}
 	
 	public GiustificazioneCriteria(PersistentSession session) {

@@ -20,32 +20,32 @@ import org.orm.criteria.*;
 
 public class AssenzaDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression ID;
-	public final IntegerExpression giustificazioneId;
-	public final AssociationExpression giustificazione;
-	public final CollectionExpression appelli;
+	public final IntegerExpression _giustificazioneId;
+	public final AssociationExpression _giustificazione;
+	public final CollectionExpression _appelli;
 	
 	public AssenzaDetachedCriteria() {
 		super(domain.model.Assenza.class, domain.model.AssenzaCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		giustificazioneId = new IntegerExpression("giustificazione.ID", this.getDetachedCriteria());
-		giustificazione = new AssociationExpression("giustificazione", this.getDetachedCriteria());
-		appelli = new CollectionExpression("appelli", this.getDetachedCriteria());
+		_giustificazioneId = new IntegerExpression("_giustificazione.ID", this.getDetachedCriteria());
+		_giustificazione = new AssociationExpression("_giustificazione", this.getDetachedCriteria());
+		_appelli = new CollectionExpression("_appelli", this.getDetachedCriteria());
 	}
 	
 	public AssenzaDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, domain.model.AssenzaCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		giustificazioneId = new IntegerExpression("giustificazione.ID", this.getDetachedCriteria());
-		giustificazione = new AssociationExpression("giustificazione", this.getDetachedCriteria());
-		appelli = new CollectionExpression("appelli", this.getDetachedCriteria());
+		_giustificazioneId = new IntegerExpression("_giustificazione.ID", this.getDetachedCriteria());
+		_giustificazione = new AssociationExpression("_giustificazione", this.getDetachedCriteria());
+		_appelli = new CollectionExpression("_appelli", this.getDetachedCriteria());
 	}
 	
-	public GiustificazioneDetachedCriteria createGiustificazioneCriteria() {
-		return new GiustificazioneDetachedCriteria(createCriteria("giustificazione"));
+	public GiustificazioneDetachedCriteria create_giustificazioneCriteria() {
+		return new GiustificazioneDetachedCriteria(createCriteria("_giustificazione"));
 	}
 	
-	public AppelloDetachedCriteria createAppelliCriteria() {
-		return new AppelloDetachedCriteria(createCriteria("appelli"));
+	public AppelloDetachedCriteria create_appelliCriteria() {
+		return new AppelloDetachedCriteria(createCriteria("_appelli"));
 	}
 	
 	public Assenza uniqueAssenza(PersistentSession session) {

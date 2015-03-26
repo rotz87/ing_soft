@@ -19,7 +19,7 @@ public class Giustificazione {
 	
 	private int ID;
 	
-	private boolean confermata;
+	private boolean _confermata;
 	
 	private void setID(int value) {
 		this.ID = value;
@@ -33,12 +33,20 @@ public class Giustificazione {
 		return getID();
 	}
 	
-	public void setConfermata(boolean value) {
-		this.confermata = value;
+	private void set_confermata(boolean value) {
+		this._confermata = value;
+	}
+	
+	private boolean get_confermata() {
+		return _confermata;
 	}
 	
 	public boolean getConfermata() {
-		return confermata;
+		return this._confermata;
+	}
+	
+	public void setConfermata(boolean confermata) {
+		this._confermata = confermata;
 	}
 	
 	public String toString() {

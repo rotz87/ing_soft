@@ -2,12 +2,17 @@ package domain.implementor;
 
 import service.Stampa;
 import domain.controller.ErrorMessage;
-import domain.model.CompitoInClasse;
 import domain.model.LibrettoVoti;
 import domain.model.LibrettoVotiLineItem;
+import domain.model.compitoInClasse.*;
 
 public class LibrettoVotiImp {
 
+	/**
+	 * 
+	 * @param librettoVoti
+	 * @param compito
+	 */
 	public void makeLineItem(LibrettoVoti librettoVoti, CompitoInClasse compito) {
 		LibrettoVotiLineItem lineItem;
 		if(librettoVoti.getLibrettoLineItem(compito) ==  null){
@@ -16,6 +21,11 @@ public class LibrettoVotiImp {
 		}
 	}
 
+	/**
+	 * 
+	 * @param librettoVoti
+	 * @param compito
+	 */
 	public LibrettoVotiLineItem getLibrettoVotiLineItem(LibrettoVoti librettoVoti, CompitoInClasse compito) {
 		LibrettoVotiLineItem rit = null;
 		for(LibrettoVotiLineItem lineItem: librettoVoti.getLibVotiLineItems()){

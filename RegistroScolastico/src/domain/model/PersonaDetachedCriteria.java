@@ -20,37 +20,37 @@ import org.orm.criteria.*;
 
 public class PersonaDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression ID;
-	public final IntegerExpression indirizzoId;
-	public final AssociationExpression indirizzo;
-	public final StringExpression nome;
-	public final StringExpression cognome;
-	public final StringExpression codiceFiscale;
-	public final DateExpression dataNascita;
+	public final IntegerExpression _indirizzoId;
+	public final AssociationExpression _indirizzo;
+	public final StringExpression _nome;
+	public final StringExpression _cognome;
+	public final StringExpression _codiceFiscale;
+	public final DateExpression _dataNascita;
 	
 	public PersonaDetachedCriteria() {
 		super(domain.model.Persona.class, domain.model.PersonaCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		indirizzoId = new IntegerExpression("indirizzo.ID", this.getDetachedCriteria());
-		indirizzo = new AssociationExpression("indirizzo", this.getDetachedCriteria());
-		nome = new StringExpression("nome", this.getDetachedCriteria());
-		cognome = new StringExpression("cognome", this.getDetachedCriteria());
-		codiceFiscale = new StringExpression("codiceFiscale", this.getDetachedCriteria());
-		dataNascita = new DateExpression("dataNascita", this.getDetachedCriteria());
+		_indirizzoId = new IntegerExpression("_indirizzo.ID", this.getDetachedCriteria());
+		_indirizzo = new AssociationExpression("_indirizzo", this.getDetachedCriteria());
+		_nome = new StringExpression("_nome", this.getDetachedCriteria());
+		_cognome = new StringExpression("_cognome", this.getDetachedCriteria());
+		_codiceFiscale = new StringExpression("_codiceFiscale", this.getDetachedCriteria());
+		_dataNascita = new DateExpression("_dataNascita", this.getDetachedCriteria());
 	}
 	
 	public PersonaDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, domain.model.PersonaCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		indirizzoId = new IntegerExpression("indirizzo.ID", this.getDetachedCriteria());
-		indirizzo = new AssociationExpression("indirizzo", this.getDetachedCriteria());
-		nome = new StringExpression("nome", this.getDetachedCriteria());
-		cognome = new StringExpression("cognome", this.getDetachedCriteria());
-		codiceFiscale = new StringExpression("codiceFiscale", this.getDetachedCriteria());
-		dataNascita = new DateExpression("dataNascita", this.getDetachedCriteria());
+		_indirizzoId = new IntegerExpression("_indirizzo.ID", this.getDetachedCriteria());
+		_indirizzo = new AssociationExpression("_indirizzo", this.getDetachedCriteria());
+		_nome = new StringExpression("_nome", this.getDetachedCriteria());
+		_cognome = new StringExpression("_cognome", this.getDetachedCriteria());
+		_codiceFiscale = new StringExpression("_codiceFiscale", this.getDetachedCriteria());
+		_dataNascita = new DateExpression("_dataNascita", this.getDetachedCriteria());
 	}
 	
-	public IndirizzoDetachedCriteria createIndirizzoCriteria() {
-		return new IndirizzoDetachedCriteria(createCriteria("indirizzo"));
+	public IndirizzoDetachedCriteria create_indirizzoCriteria() {
+		return new IndirizzoDetachedCriteria(createCriteria("_indirizzo"));
 	}
 	
 	public Persona uniquePersona(PersistentSession session) {

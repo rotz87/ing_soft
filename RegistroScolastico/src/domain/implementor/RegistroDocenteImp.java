@@ -18,11 +18,11 @@ import org.joda.time.LocalDate;
 import service.Stampa;
 import domain.controller.ErrorMessage;
 import domain.model.Argomento;
-import domain.model.CompitoInClasse;
 import domain.model.RegistroAssenze;
 import domain.model.RegistroDocente;
 import domain.model.Studente;
 import domain.model.Voto;
+import domain.model.compitoInClasse.*;
 
 public class RegistroDocenteImp {
 
@@ -66,7 +66,6 @@ public class RegistroDocenteImp {
 		}
 		
 	}
-	
-	
+
 
 }

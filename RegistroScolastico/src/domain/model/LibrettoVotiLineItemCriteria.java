@@ -20,18 +20,18 @@ import org.orm.criteria.*;
 
 public class LibrettoVotiLineItemCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
-	public final IntegerExpression votoId;
-	public final AssociationExpression voto;
-	public final IntegerExpression compitoInClasseId;
-	public final AssociationExpression compitoInClasse;
+	public final IntegerExpression _votoId;
+	public final AssociationExpression _voto;
+	public final IntegerExpression _compitoInClasseId;
+	public final AssociationExpression _compitoInClasse;
 	
 	public LibrettoVotiLineItemCriteria(Criteria criteria) {
 		super(criteria);
 		ID = new IntegerExpression("ID", this);
-		votoId = new IntegerExpression("voto.ID", this);
-		voto = new AssociationExpression("voto", this);
-		compitoInClasseId = new IntegerExpression("compitoInClasse.ID", this);
-		compitoInClasse = new AssociationExpression("compitoInClasse", this);
+		_votoId = new IntegerExpression("_voto.ID", this);
+		_voto = new AssociationExpression("_voto", this);
+		_compitoInClasseId = new IntegerExpression("_compitoInClasse.ID", this);
+		_compitoInClasse = new AssociationExpression("_compitoInClasse", this);
 	}
 	
 	public LibrettoVotiLineItemCriteria(PersistentSession session) {
@@ -42,12 +42,12 @@ public class LibrettoVotiLineItemCriteria extends AbstractORMCriteria {
 		this(domain.model.RSPersistentManager.instance().getSession());
 	}
 	
-	public VotoCriteria createVotoCriteria() {
-		return new VotoCriteria(createCriteria("voto"));
+	public VotoCriteria create_votoCriteria() {
+		return new VotoCriteria(createCriteria("_voto"));
 	}
 	
-	public CompitoInClasseCriteria createCompitoInClasseCriteria() {
-		return new CompitoInClasseCriteria(createCriteria("compitoInClasse"));
+	public domain.model.compitoInClasse.CompitoInClasseCriteria create_compitoInClasseCriteria() {
+		return new domain.model.compitoInClasse.CompitoInClasseCriteria(createCriteria("_compitoInClasse"));
 	}
 	
 	public LibrettoVotiLineItem uniqueLibrettoVotiLineItem() {

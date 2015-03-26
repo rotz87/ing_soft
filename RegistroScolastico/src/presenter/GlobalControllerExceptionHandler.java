@@ -13,6 +13,11 @@ import presenter.resourceSupport.ErrorInfo;
 @ControllerAdvice
 class GlobalControllerExceptionHandler {
 	
+	/**
+	 * 
+	 * @param req
+	 * @param ex
+	 */
 	@ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ErrorInfo> defaultHandler(HttpServletRequest req, Exception ex){
     	
@@ -23,7 +28,12 @@ class GlobalControllerExceptionHandler {
        	
     }
     
-    @ExceptionHandler(IllegalStateException.class)
+    /**
+	 * 
+	 * @param req
+	 * @param ex
+	 */
+	@ExceptionHandler(IllegalStateException.class)
     public ResponseEntity<ErrorInfo> handleForbiddenOperation(HttpServletRequest req, Exception ex) {
     	
        	HttpStatus httpStatus = HttpStatus.FORBIDDEN;

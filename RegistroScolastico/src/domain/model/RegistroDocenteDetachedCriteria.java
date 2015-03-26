@@ -20,49 +20,49 @@ import org.orm.criteria.*;
 
 public class RegistroDocenteDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression ID;
-	public final IntegerExpression materiaId;
-	public final AssociationExpression materia;
-	public final IntegerExpression classeId;
-	public final AssociationExpression classe;
-	public final CollectionExpression compitiInClasse;
-	public final CollectionExpression argomentiSvolti;
+	public final IntegerExpression _materiaId;
+	public final AssociationExpression _materia;
+	public final IntegerExpression _classeId;
+	public final AssociationExpression _classe;
+	public final CollectionExpression _compitiInClasse;
+	public final CollectionExpression _argomentiSvolti;
 	
 	public RegistroDocenteDetachedCriteria() {
 		super(domain.model.RegistroDocente.class, domain.model.RegistroDocenteCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		materiaId = new IntegerExpression("materia.ID", this.getDetachedCriteria());
-		materia = new AssociationExpression("materia", this.getDetachedCriteria());
-		classeId = new IntegerExpression("classe.ID", this.getDetachedCriteria());
-		classe = new AssociationExpression("classe", this.getDetachedCriteria());
-		compitiInClasse = new CollectionExpression("compitiInClasse", this.getDetachedCriteria());
-		argomentiSvolti = new CollectionExpression("argomentiSvolti", this.getDetachedCriteria());
+		_materiaId = new IntegerExpression("_materia.ID", this.getDetachedCriteria());
+		_materia = new AssociationExpression("_materia", this.getDetachedCriteria());
+		_classeId = new IntegerExpression("_classe.ID", this.getDetachedCriteria());
+		_classe = new AssociationExpression("_classe", this.getDetachedCriteria());
+		_compitiInClasse = new CollectionExpression("_compitiInClasse", this.getDetachedCriteria());
+		_argomentiSvolti = new CollectionExpression("_argomentiSvolti", this.getDetachedCriteria());
 	}
 	
 	public RegistroDocenteDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, domain.model.RegistroDocenteCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		materiaId = new IntegerExpression("materia.ID", this.getDetachedCriteria());
-		materia = new AssociationExpression("materia", this.getDetachedCriteria());
-		classeId = new IntegerExpression("classe.ID", this.getDetachedCriteria());
-		classe = new AssociationExpression("classe", this.getDetachedCriteria());
-		compitiInClasse = new CollectionExpression("compitiInClasse", this.getDetachedCriteria());
-		argomentiSvolti = new CollectionExpression("argomentiSvolti", this.getDetachedCriteria());
+		_materiaId = new IntegerExpression("_materia.ID", this.getDetachedCriteria());
+		_materia = new AssociationExpression("_materia", this.getDetachedCriteria());
+		_classeId = new IntegerExpression("_classe.ID", this.getDetachedCriteria());
+		_classe = new AssociationExpression("_classe", this.getDetachedCriteria());
+		_compitiInClasse = new CollectionExpression("_compitiInClasse", this.getDetachedCriteria());
+		_argomentiSvolti = new CollectionExpression("_argomentiSvolti", this.getDetachedCriteria());
 	}
 	
-	public MateriaDetachedCriteria createMateriaCriteria() {
-		return new MateriaDetachedCriteria(createCriteria("materia"));
+	public MateriaDetachedCriteria create_materiaCriteria() {
+		return new MateriaDetachedCriteria(createCriteria("_materia"));
 	}
 	
-	public ClasseDetachedCriteria createClasseCriteria() {
-		return new ClasseDetachedCriteria(createCriteria("classe"));
+	public ClasseDetachedCriteria create_classeCriteria() {
+		return new ClasseDetachedCriteria(createCriteria("_classe"));
 	}
 	
-	public CompitoInClasseDetachedCriteria createCompitiInClasseCriteria() {
-		return new CompitoInClasseDetachedCriteria(createCriteria("compitiInClasse"));
+	public domain.model.compitoInClasse.CompitoInClasseDetachedCriteria create_compitiInClasseCriteria() {
+		return new domain.model.compitoInClasse.CompitoInClasseDetachedCriteria(createCriteria("_compitiInClasse"));
 	}
 	
-	public ArgomentoDetachedCriteria createArgomentiSvoltiCriteria() {
-		return new ArgomentoDetachedCriteria(createCriteria("argomentiSvolti"));
+	public ArgomentoDetachedCriteria create_argomentiSvoltiCriteria() {
+		return new ArgomentoDetachedCriteria(createCriteria("_argomentiSvolti"));
 	}
 	
 	public RegistroDocente uniqueRegistroDocente(PersistentSession session) {

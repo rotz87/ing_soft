@@ -20,12 +20,12 @@ import org.orm.criteria.*;
 
 public class GiornoSettimanaleFestivoCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
-	public final IntegerExpression giorno;
+	public final IntegerExpression _giorno;
 	
 	public GiornoSettimanaleFestivoCriteria(Criteria criteria) {
 		super(criteria);
 		ID = new IntegerExpression("ID", this);
-		giorno = new IntegerExpression("giorno", this);
+		_giorno = new IntegerExpression("_giorno", this);
 	}
 	
 	public GiornoSettimanaleFestivoCriteria(PersistentSession session) {

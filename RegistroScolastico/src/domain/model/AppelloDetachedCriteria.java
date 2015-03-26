@@ -20,21 +20,21 @@ import org.orm.criteria.*;
 
 public class AppelloDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression ID;
-	public final DateExpression data;
-	public final BooleanExpression assenzePrese;
+	public final DateExpression _data;
+	public final BooleanExpression _assenzePrese;
 	
 	public AppelloDetachedCriteria() {
 		super(domain.model.Appello.class, domain.model.AppelloCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		data = new DateExpression("data", this.getDetachedCriteria());
-		assenzePrese = new BooleanExpression("assenzePrese", this.getDetachedCriteria());
+		_data = new DateExpression("_data", this.getDetachedCriteria());
+		_assenzePrese = new BooleanExpression("_assenzePrese", this.getDetachedCriteria());
 	}
 	
 	public AppelloDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, domain.model.AppelloCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		data = new DateExpression("data", this.getDetachedCriteria());
-		assenzePrese = new BooleanExpression("assenzePrese", this.getDetachedCriteria());
+		_data = new DateExpression("_data", this.getDetachedCriteria());
+		_assenzePrese = new BooleanExpression("_assenzePrese", this.getDetachedCriteria());
 	}
 	
 	public Appello uniqueAppello(PersistentSession session) {

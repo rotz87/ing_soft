@@ -10,7 +10,7 @@ License Type: Academic
 			<generator class="native">
 			</generator>
 		</id>
-		<set name="libVotiLineItems" lazy="true" cascade="save-update,lock" inverse="false">
+		<set name="_libVotiLineItems" lazy="true" cascade="save-update,lock" inverse="false">
 			<key column="LibrettoVotiID" not-null="true"/>
 			<one-to-many class="domain.model.LibrettoVotiLineItem"/>
 		</set>

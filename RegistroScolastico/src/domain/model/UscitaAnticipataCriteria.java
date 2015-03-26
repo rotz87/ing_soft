@@ -20,18 +20,18 @@ import org.orm.criteria.*;
 
 public class UscitaAnticipataCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
-	public final IntegerExpression appelloId;
-	public final AssociationExpression appello;
-	public final IntegerExpression permessoId;
-	public final AssociationExpression permesso;
+	public final IntegerExpression _appelloId;
+	public final AssociationExpression _appello;
+	public final IntegerExpression _permessoId;
+	public final AssociationExpression _permesso;
 	
 	public UscitaAnticipataCriteria(Criteria criteria) {
 		super(criteria);
 		ID = new IntegerExpression("ID", this);
-		appelloId = new IntegerExpression("appello.ID", this);
-		appello = new AssociationExpression("appello", this);
-		permessoId = new IntegerExpression("permesso.ID", this);
-		permesso = new AssociationExpression("permesso", this);
+		_appelloId = new IntegerExpression("_appello.ID", this);
+		_appello = new AssociationExpression("_appello", this);
+		_permessoId = new IntegerExpression("_permesso.ID", this);
+		_permesso = new AssociationExpression("_permesso", this);
 	}
 	
 	public UscitaAnticipataCriteria(PersistentSession session) {
@@ -42,12 +42,12 @@ public class UscitaAnticipataCriteria extends AbstractORMCriteria {
 		this(domain.model.RSPersistentManager.instance().getSession());
 	}
 	
-	public AppelloCriteria createAppelloCriteria() {
-		return new AppelloCriteria(createCriteria("appello"));
+	public AppelloCriteria create_appelloCriteria() {
+		return new AppelloCriteria(createCriteria("_appello"));
 	}
 	
-	public PermessoUscitaCriteria createPermessoCriteria() {
-		return new PermessoUscitaCriteria(createCriteria("permesso"));
+	public PermessoUscitaCriteria create_permessoCriteria() {
+		return new PermessoUscitaCriteria(createCriteria("_permesso"));
 	}
 	
 	public UscitaAnticipata uniqueUscitaAnticipata() {

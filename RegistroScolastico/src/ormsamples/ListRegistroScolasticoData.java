@@ -190,11 +190,11 @@ public class ListRegistroScolasticoData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing CompitoInClasse...");
-		java.util.List lCompitoInClasseList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.CompitoInClasse").setMaxResults(ROW_COUNT).list();
-		domain.model.CompitoInClasse[] ldomainmodelCompitoInClasses = (domain.model.CompitoInClasse[]) lCompitoInClasseList.toArray(new domain.model.CompitoInClasse[lCompitoInClasseList.size()]);
-		length = Math.min(ldomainmodelCompitoInClasses.length, ROW_COUNT);
+		java.util.List lCompitoInClasseList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.compitoInClasse.CompitoInClasse").setMaxResults(ROW_COUNT).list();
+		domain.model.compitoInClasse.CompitoInClasse[] ldomainmodelcompitoInClasseCompitoInClasses = (domain.model.compitoInClasse.CompitoInClasse[]) lCompitoInClasseList.toArray(new domain.model.compitoInClasse.CompitoInClasse[lCompitoInClasseList.size()]);
+		length = Math.min(ldomainmodelcompitoInClasseCompitoInClasses.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
-			System.out.println(ldomainmodelCompitoInClasses[i]);
+			System.out.println(ldomainmodelcompitoInClasseCompitoInClasses[i]);
 		}
 		System.out.println(length + " record(s) retrieved.");
 		
@@ -460,14 +460,14 @@ public class ListRegistroScolasticoData {
 		System.out.println(length + " LibrettoVotiLineItem record(s) retrieved."); 
 		
 		System.out.println("Listing CompitoInClasse by Criteria...");
-		domain.model.CompitoInClasseCriteria ldomainmodelCompitoInClasseCriteria = new domain.model.CompitoInClasseCriteria();
+		domain.model.compitoInClasse.CompitoInClasseCriteria ldomainmodelcompitoInClasseCompitoInClasseCriteria = new domain.model.compitoInClasse.CompitoInClasseCriteria();
 		// Please uncomment the follow line and fill in parameter(s) 
-		//ldomainmodelCompitoInClasseCriteria.ID.eq();
-		ldomainmodelCompitoInClasseCriteria.setMaxResults(ROW_COUNT);
-		domain.model.CompitoInClasse[] domainmodelCompitoInClasses = ldomainmodelCompitoInClasseCriteria.listCompitoInClasse();
-		length =domainmodelCompitoInClasses== null ? 0 : Math.min(domainmodelCompitoInClasses.length, ROW_COUNT); 
+		//ldomainmodelcompitoInClasseCompitoInClasseCriteria.ID.eq();
+		ldomainmodelcompitoInClasseCompitoInClasseCriteria.setMaxResults(ROW_COUNT);
+		domain.model.compitoInClasse.CompitoInClasse[] domainmodelcompitoInClasseCompitoInClasses = ldomainmodelcompitoInClasseCompitoInClasseCriteria.listCompitoInClasse();
+		length =domainmodelcompitoInClasseCompitoInClasses== null ? 0 : Math.min(domainmodelcompitoInClasseCompitoInClasses.length, ROW_COUNT); 
 		for (int i = 0; i < length; i++) {
-			 System.out.println(domainmodelCompitoInClasses[i]);
+			 System.out.println(domainmodelcompitoInClasseCompitoInClasses[i]);
 		}
 		System.out.println(length + " CompitoInClasse record(s) retrieved."); 
 		

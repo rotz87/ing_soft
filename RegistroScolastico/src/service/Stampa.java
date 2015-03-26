@@ -3,7 +3,7 @@ package service;
 import presenter.resourceSupport.compito.ArgomentoRS;
 import presenter.resourceSupport.compito.CompitoInClasseRS;
 import domain.model.Argomento;
-import domain.model.CompitoInClasse;
+import domain.model.compitoInClasse.CompitoInClasse;
 
 public class Stampa {
 	public static void stampaln(String stringa){

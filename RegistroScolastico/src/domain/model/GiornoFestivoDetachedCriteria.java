@@ -20,18 +20,18 @@ import org.orm.criteria.*;
 
 public class GiornoFestivoDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression ID;
-	public final DateExpression data;
+	public final DateExpression _data;
 	
 	public GiornoFestivoDetachedCriteria() {
 		super(domain.model.GiornoFestivo.class, domain.model.GiornoFestivoCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		data = new DateExpression("data", this.getDetachedCriteria());
+		_data = new DateExpression("_data", this.getDetachedCriteria());
 	}
 	
 	public GiornoFestivoDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, domain.model.GiornoFestivoCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
-		data = new DateExpression("data", this.getDetachedCriteria());
+		_data = new DateExpression("_data", this.getDetachedCriteria());
 	}
 	
 	public GiornoFestivo uniqueGiornoFestivo(PersistentSession session) {

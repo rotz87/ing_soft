@@ -19,13 +19,13 @@ public class RegistroDocente {
 	
 	private int ID;
 	
-	private domain.model.Materia materia;
+	private domain.model.Materia _materia;
 	
-	private domain.model.Classe classe;
+	private domain.model.Classe _classe;
 	
-	private java.util.Set<domain.model.CompitoInClasse> compitiInClasse = new java.util.LinkedHashSet<domain.model.CompitoInClasse>();
+	private java.util.Set<domain.model.compitoInClasse.CompitoInClasse> _compitiInClasse = new java.util.LinkedHashSet<domain.model.compitoInClasse.CompitoInClasse>();
 	
-	private java.util.Set<domain.model.Argomento> argomentiSvolti = new java.util.LinkedHashSet<domain.model.Argomento>();
+	private java.util.Set<domain.model.Argomento> _argomentiSvolti = new java.util.LinkedHashSet<domain.model.Argomento>();
 	
 	private void setID(int value) {
 		this.ID = value;
@@ -39,61 +39,85 @@ public class RegistroDocente {
 		return getID();
 	}
 	
-	public void setClasse(domain.model.Classe value) {
-		this.classe = value;
+	private void set_classe(domain.model.Classe value) {
+		this._classe = value;
 	}
 	
-	public domain.model.Classe getClasse() {
-		return classe;
+	private domain.model.Classe get_classe() {
+		return _classe;
 	}
 	
-	public void setMateria(domain.model.Materia value) {
-		this.materia = value;
+	private void set_materia(domain.model.Materia value) {
+		this._materia = value;
 	}
 	
-	public domain.model.Materia getMateria() {
-		return materia;
+	private domain.model.Materia get_materia() {
+		return _materia;
 	}
 	
-	public void setCompitiInClasse(java.util.Set<domain.model.CompitoInClasse> value) {
-		this.compitiInClasse = value;
+	private void set_compitiInClasse(java.util.Set<domain.model.compitoInClasse.CompitoInClasse> value) {
+		this._compitiInClasse = value;
 	}
 	
-	public java.util.Set<domain.model.CompitoInClasse> getCompitiInClasse() {
-		return compitiInClasse;
+	private java.util.Set<domain.model.compitoInClasse.CompitoInClasse> get_compitiInClasse() {
+		return _compitiInClasse;
 	}
 	
 	
-	public void setArgomentiSvolti(java.util.Set<domain.model.Argomento> value) {
-		this.argomentiSvolti = value;
+	private void set_argomentiSvolti(java.util.Set<domain.model.Argomento> value) {
+		this._argomentiSvolti = value;
 	}
 	
-	public java.util.Set<domain.model.Argomento> getArgomentiSvolti() {
-		return argomentiSvolti;
+	private java.util.Set<domain.model.Argomento> get_argomentiSvolti() {
+		return _argomentiSvolti;
 	}
 	
 	
 	private domain.implementor.RegistroDocenteImp implementor = new domain.implementor.RegistroDocenteImp();
 	
-	public domain.model.CompitoInClasse creaCompito() {
+	public domain.model.compitoInClasse.CompitoInClasse creaCompito() {
 		return this.implementor.creaCompito(this);
 	}
 	
-	public void inserisciInfoCompito(domain.model.CompitoInClasse compito, java.sql.Date data, java.sql.Time oraInizio, java.sql.Time oraFine, java.util.Collection<Argomento> argomenti) {
+	public java.util.Set<Argomento> getArgomentiSvolti() {
+		return this._argomentiSvolti;
+	}
+	
+	public domain.model.Classe getClasse() {
+		return this._classe;
+	}
+	
+	public java.util.Set<domain.model.compitoInClasse.CompitoInClasse> getCompitiInClasse() {
+		return this._compitiInClasse;
+	}
+	
+	public domain.model.Materia getMateria() {
+		return this._materia;
+	}
+	
+	public void inserisciInfoCompito(domain.model.compitoInClasse.CompitoInClasse compito, java.sql.Date data, java.sql.Time oraInizio, java.sql.Time oraFine, java.util.Collection<Argomento> argomenti) {
 		this.implementor.inserisciInfoCompito(this, compito, data, oraInizio, oraFine, argomenti);
 	}
 	
-	public boolean isCompitoPresente(domain.model.CompitoInClasse compito) {
-		return this.implementor.isCompitoPresente(this, compito);
-	}
-	
-	public void inserisciStudenti(domain.model.CompitoInClasse compito, domain.model.Studente[] studenti) {
+	public void inserisciStudenti(domain.model.compitoInClasse.CompitoInClasse compito, domain.model.Studente[] studenti) {
 		//TODO: Implement Method
 		throw new UnsupportedOperationException();
 	}
 	
-	public void inserisciVoti(domain.model.CompitoInClasse compito, java.util.Map<Studente, Voto> mapVoti) {
+	public void inserisciVoti(domain.model.compitoInClasse.CompitoInClasse compito, java.util.Map<Studente, Voto> mapVoti) {
 		this.implementor.inserisciVoti(this, compito, mapVoti);
+	}
+	
+	public boolean isCompitoPresente(domain.model.compitoInClasse.CompitoInClasse compito) {
+		return this.implementor.isCompitoPresente(this, compito);
+	}
+	
+	public void setClasse(domain.model.Classe classe) {
+		this._classe = classe;
+	}
+	
+	public void setMateria(domain.model.Materia materia) {
+		this._materia = materia;
 	}
 	
 	public String toString() {

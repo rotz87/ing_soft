@@ -20,16 +20,16 @@ import org.orm.criteria.*;
 
 public class AssenzaCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
-	public final IntegerExpression giustificazioneId;
-	public final AssociationExpression giustificazione;
-	public final CollectionExpression appelli;
+	public final IntegerExpression _giustificazioneId;
+	public final AssociationExpression _giustificazione;
+	public final CollectionExpression _appelli;
 	
 	public AssenzaCriteria(Criteria criteria) {
 		super(criteria);
 		ID = new IntegerExpression("ID", this);
-		giustificazioneId = new IntegerExpression("giustificazione.ID", this);
-		giustificazione = new AssociationExpression("giustificazione", this);
-		appelli = new CollectionExpression("appelli", this);
+		_giustificazioneId = new IntegerExpression("_giustificazione.ID", this);
+		_giustificazione = new AssociationExpression("_giustificazione", this);
+		_appelli = new CollectionExpression("_appelli", this);
 	}
 	
 	public AssenzaCriteria(PersistentSession session) {
@@ -40,12 +40,12 @@ public class AssenzaCriteria extends AbstractORMCriteria {
 		this(domain.model.RSPersistentManager.instance().getSession());
 	}
 	
-	public GiustificazioneCriteria createGiustificazioneCriteria() {
-		return new GiustificazioneCriteria(createCriteria("giustificazione"));
+	public GiustificazioneCriteria create_giustificazioneCriteria() {
+		return new GiustificazioneCriteria(createCriteria("_giustificazione"));
 	}
 	
-	public AppelloCriteria createAppelliCriteria() {
-		return new AppelloCriteria(createCriteria("appelli"));
+	public AppelloCriteria create_appelliCriteria() {
+		return new AppelloCriteria(createCriteria("_appelli"));
 	}
 	
 	public Assenza uniqueAssenza() {

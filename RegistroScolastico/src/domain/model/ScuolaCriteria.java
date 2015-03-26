@@ -20,16 +20,16 @@ import org.orm.criteria.*;
 
 public class ScuolaCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
-	public final StringExpression nome;
-	public final CollectionExpression classi;
-	public final CollectionExpression docenti;
+	public final StringExpression _nome;
+	public final CollectionExpression _classi;
+	public final CollectionExpression _docenti;
 	
 	public ScuolaCriteria(Criteria criteria) {
 		super(criteria);
 		ID = new IntegerExpression("ID", this);
-		nome = new StringExpression("nome", this);
-		classi = new CollectionExpression("classi", this);
-		docenti = new CollectionExpression("docenti", this);
+		_nome = new StringExpression("_nome", this);
+		_classi = new CollectionExpression("_classi", this);
+		_docenti = new CollectionExpression("_docenti", this);
 	}
 	
 	public ScuolaCriteria(PersistentSession session) {
@@ -40,12 +40,12 @@ public class ScuolaCriteria extends AbstractORMCriteria {
 		this(domain.model.RSPersistentManager.instance().getSession());
 	}
 	
-	public ClasseCriteria createClassiCriteria() {
-		return new ClasseCriteria(createCriteria("classi"));
+	public ClasseCriteria create_classiCriteria() {
+		return new ClasseCriteria(createCriteria("_classi"));
 	}
 	
-	public DocenteCriteria createDocentiCriteria() {
-		return new DocenteCriteria(createCriteria("docenti"));
+	public DocenteCriteria create_docentiCriteria() {
+		return new DocenteCriteria(createCriteria("_docenti"));
 	}
 	
 	public Scuola uniqueScuola() {

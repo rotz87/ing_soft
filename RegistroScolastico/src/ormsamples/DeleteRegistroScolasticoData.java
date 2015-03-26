@@ -69,8 +69,8 @@ public class DeleteRegistroScolasticoData {
 			domain.model.LibrettoVotiLineItem ldomainmodelLibrettoVotiLineItem= (domain.model.LibrettoVotiLineItem)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.LibrettoVotiLineItem").setMaxResults(1).uniqueResult();
 			domain.model.RSPersistentManager.instance().getSession().delete(ldomainmodelLibrettoVotiLineItem);
 			
-			domain.model.CompitoInClasse ldomainmodelCompitoInClasse= (domain.model.CompitoInClasse)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.CompitoInClasse").setMaxResults(1).uniqueResult();
-			domain.model.RSPersistentManager.instance().getSession().delete(ldomainmodelCompitoInClasse);
+			domain.model.compitoInClasse.CompitoInClasse ldomainmodelcompitoInClasseCompitoInClasse= (domain.model.compitoInClasse.CompitoInClasse)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.compitoInClasse.CompitoInClasse").setMaxResults(1).uniqueResult();
+			domain.model.RSPersistentManager.instance().getSession().delete(ldomainmodelcompitoInClasseCompitoInClasse);
 			
 			domain.model.Voto ldomainmodelVoto= (domain.model.Voto)domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Voto").setMaxResults(1).uniqueResult();
 			domain.model.RSPersistentManager.instance().getSession().delete(ldomainmodelVoto);
