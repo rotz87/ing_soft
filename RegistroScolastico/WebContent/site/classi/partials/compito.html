@@ -4,6 +4,7 @@
 	
 	<form class="css-form form-horizontal" >
 		<fieldset>
+		<fieldset>
 		<legend > Dati compito 
 				<input class="mostraNascondi_{{datiChecked}} " type="checkbox" id="visibile" ng-model="datiChecked">
 					
@@ -14,7 +15,7 @@
 		<div class="form-group">
 			<label for="dataCompito" class="col-sm-2 control-label" >Data</label>
 			<div id="bootstrapCalendario" class="col-sm-10 input-group date">
-				<input id="dataCompito" type="text" ng-model="compitoInClasse.data" class="form-control" placeholder="gg/mm/aaaa" ><span class="input-group-addon" ><i class="glyphicon glyphicon-calendar"></i></span>
+				<input id="dataCompito" type="text" ng-model="compitoInClasse.data" class="form-control" placeholder="gg/mm/aaaa" title="seleziona per modificare" readonly/><span class="input-group-addon" ><i class="glyphicon glyphicon-calendar"></i></span>
 			</div>
 		</div>
 		<div class="form-group">
@@ -30,6 +31,8 @@
 			</div>
 		</div>
 		</div>
+
+		</fieldset>
 			<fieldset>
 				<legend> Argomenti <input class="mostraNascondi_{{argsChecked}} " type="checkbox" id="visibile" ng-model="argsChecked"></legend>
 				<fieldset class="animaScomparsa" ng-repeat="argomento in compitoInClasse.argomentiRS | orderBy:args_predicate" ng-show="argsChecked">
@@ -41,8 +44,11 @@
 						<button class="btn btn-info" ng-click="selezionaArgomenti()"> Seleziona Argomenti</button><br>
 					</div>
 			</fieldset>
+			<div class="text-center">
+				<button class="btn btn-default" ng-click="" title="la data non sar&agrave; modificabile; sar&agrave; possibile inserire i voti"> Svolto </button>
+			</div>
 			<fieldset>
-				<legend> Studenti <input class="mostraNascondi_{{stdChecked}}" type="checkbox" ng-model="stdChecked"></legend>
+				<legend> Voti <input class="mostraNascondi_{{stdChecked}}" type="checkbox" ng-model="stdChecked"></legend>
 				<fieldset class="animaScomparsa" ng-show="stdChecked">
 				<div ng-show="erroreStudenti"> {{erroreStudenti}}</div>
 				<div ng-hide="erroreStudenti">
@@ -99,9 +105,11 @@
 			 -->
 			</fieldset>
 			<fieldset>
-			<legend> Salva</legend>
+			<legend ng-show="stdChecked"></legend>
 			<div class="text-center">
-				<button class="btn btn-primary" ng-click="aggiornaCompito()"> Salva Compito <span class="glyphicon glyphicon-save"></span></button>
+				<button class="btn btn-default" ng-click="" title="il compito &egrave; annullato e i voti non saranno considerati nella carriera degli studenti"> Annulla </button>
+				<button class="btn btn-primary" ng-click="aggiornaCompito()" title="salva il compito con i dati inseriti"> Salva Compito <span class="glyphicon glyphicon-save"></span></button>
+				<button class="btn btn-default" ng-click="" title="chiudendo il compito non sarà più possibile modificare i voti inseriti"> Chiudi </button>
 			</div>
 			</fieldset>
 		</fieldset>

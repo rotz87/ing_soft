@@ -46,6 +46,8 @@ registroApp.config(["$locationProvider","$routeProvider",function($locationProvi
 	  templateUrl:'partials/elencoClassi.html',
 	  controller:'riempiElencoClassi',
 	  title:'seleziona la classe'
-  })
+  }).otherwise({
+	redirectTo:'/'}
+  )
   //$locationProvider.html5Mode({enabled:true,requireBase:true});
 }]);

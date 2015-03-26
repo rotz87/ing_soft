@@ -1,5 +1,5 @@
 <div class="container-fluid">
-	<div class="row">
+<!-- 	<div class="row">
 		<div class="col-md-3"
 			ng-repeat="compito in elencoCompiti ">
 			<div class="btn btn-default" >
@@ -10,6 +10,38 @@
 			<div class="btn btn-primary" >
 				<div class="panel-body" ng-click="creaCompito()">Nuovo Compito</div>
 			</div>
+		</div>
+	</div> -->
+	<h3 class="text-center">Registro di {{currRegistro.materia}} per la classe {{nomeClasse}}</h3>
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-responsive table-hover table-striped table-bordered">
+				<thead>
+					<tr>
+						<th class="text-center">#</th><th>Data Compito</th><th> Azione</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td colspan="3" class="text-center">
+								<button class="btn btn-info btn-sm" ng-click="creaCompito()" type="button">Fissa un nuovo Compito</button>
+						</td>
+					</tr>
+					<tr ng-repeat="compito in elencoCompiti | orderBy:'data'">
+						<td class="text-center">
+							{{$index+1}}
+						</td>
+						<td>
+							{{compito.data | date:"EEEE dd MMMM yyyy"}}
+						</td>
+						<td class="text-center">
+							 
+							 <button class="btn btn-default" ng-click="vaiAlCompito(compito.idCompito)"> Mostra dettagli <span class="glyphicon glyphicon-edit"></span></button> 
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
 		</div>
 	</div>
 	
