@@ -27,7 +27,7 @@ public class CompitoInClasse {
 	
 	protected java.sql.Time _oraFine;
 	
-	protected domain.model.compitoInClasse.CompitoInClasseState _state = domain.model.compitoInClasse.OldImplementor.getInstance();
+	protected domain.model.compitoInClasse.CompitoInClasseState _state = domain.model.compitoInClasse.CompitoDaSvolgere.getInstance();
 	
 	private java.util.Set<domain.model.Argomento> _argomentiEsaminati = new java.util.LinkedHashSet<domain.model.Argomento>();
 	
@@ -100,10 +100,6 @@ public class CompitoInClasse {
 		this._state.inserisciVoti(this, mapVoti);
 	}
 	
-	public void setInsegnamento(domain.model.RegistroDocente insegnamento) {
-		this._state.setInsegnamento(this, insegnamento);
-	}
-	
 	public java.sql.Date getData() {
 		return this._data;
 	}
@@ -122,6 +118,30 @@ public class CompitoInClasse {
 	
 	public java.util.Set<domain.model.Argomento> getArgomentiEsaminati() {
 		return this._argomentiEsaminati;
+	}
+	
+	public CompitoInClasse(domain.model.RegistroDocente insegnamento) {
+		this._insegnamento = insegnamento;
+	}
+	
+	public void svolgi() {
+		this._state.svolgi(this);
+	}
+	
+	public void annulla() {
+		this._state.annulla(this);
+	}
+	
+	public void chiudi() {
+		this._state.chiudi(this);
+	}
+	
+	public void disannulla() {
+		this._state.disannulla(this);
+	}
+	
+	public void elimina() {
+		this._state.elimina(this);
 	}
 	
 	public String toString() {

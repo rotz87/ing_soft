@@ -15,6 +15,7 @@ import org.joda.time.LocalDate;
 
 
 
+
 import service.Stampa;
 import domain.controller.ErrorMessage;
 import domain.model.Argomento;
@@ -29,8 +30,8 @@ public class RegistroDocenteImp {
 	public CompitoInClasse creaCompito(RegistroDocente registroDocente) {
 		CompitoInClasse compito;
 		
-		compito = new CompitoInClasse();
-		compito.setInsegnamento(registroDocente);
+		compito = new CompitoInClasse(registroDocente);
+//		compito.setInsegnamento(registroDocente);
 		registroDocente.getCompitiInClasse().add(compito);
 		
 		return compito;
@@ -65,6 +66,10 @@ public class RegistroDocenteImp {
 			throw new IllegalStateException(ErrorMessage.LISTA_STUDENTI_WRONG);
 		}
 		
+	}
+
+	public void eliminCompito(RegistroDocente registroDocente, CompitoInClasse compitoInClasse) {
+		registroDocente.getCompitiInClasse().remove(compitoInClasse);		
 	}
 
 

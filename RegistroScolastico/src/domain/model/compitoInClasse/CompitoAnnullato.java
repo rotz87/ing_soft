@@ -1,14 +1,21 @@
 package domain.model.compitoInClasse;
 
-import java.sql.Date;
-import java.sql.Time;
-import java.util.Collection;
-import java.util.Map;
+public class CompitoAnnullato extends CompitoInClasseStateImp {
+	
+	static private CompitoAnnullato instance;
 
-import domain.model.Argomento;
-import domain.model.Studente;
-import domain.model.Voto;
+	private CompitoAnnullato() {
+	}
 
-public class CompitoAnnullato extends CompitoInClasseState {
-
+	static public CompitoAnnullato getInstance() {
+		if (CompitoAnnullato.instance == null) {
+			CompitoAnnullato.instance = new CompitoAnnullato();
+		}
+		return CompitoAnnullato.instance;
+	}
+	
+	@Override
+	public void disannulla(CompitoInClasse compitoInClasse) {
+		compitoInClasse.set_state(CompitoSvolto.getInstance());
+	}
 }

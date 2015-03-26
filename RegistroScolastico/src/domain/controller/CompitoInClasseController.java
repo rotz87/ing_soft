@@ -230,7 +230,174 @@ public class CompitoInClasseController {
 		}
 		
 	}
+	
+	public void svolgiCompito(int idCompitoInClasse){
+		CompitoInClasseCriteria compitoCriteria;
+		CompitoInClasse compito;
+		
+		
+		try{
+			compitoCriteria = new CompitoInClasseCriteria();
+			
+		}catch (PersistentException e){
+			throw new  RuntimeException(ErrorMessage.COMPITO_UNLOADED);
+		}
+		
+		compitoCriteria.ID.eq(idCompitoInClasse);
+		compito = compitoCriteria.uniqueCompitoInClasse();
+		
+		compito.svolgi();
+		
+		try {
+			PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
+			try {
+				RSPersistentManager.instance().getSession().save(compito);
+				t.commit();
+			}
+			catch (PersistentException e) {
+				t.rollback();
+				throw e;
+			}
+		} catch (PersistentException e) {
+			throw new RuntimeException(ErrorMessage.COMPITO_NON_AGGIORNABILE);
+		}
+		
+		
+	}
+	
+	public void eliminaCompito(int idCompitoInClasse){
+		CompitoInClasseCriteria compitoCriteria;
+		CompitoInClasse compito;
+		
+		
+		try{
+			compitoCriteria = new CompitoInClasseCriteria();
+			
+		}catch (PersistentException e){
+			throw new  RuntimeException(ErrorMessage.COMPITO_UNLOADED);
+		}
+		
+		compitoCriteria.ID.eq(idCompitoInClasse);
+		compito = compitoCriteria.uniqueCompitoInClasse();
+		
+		compito.elimina();
+		
+		try {
+			PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
+			try {
+				RSPersistentManager.instance().getSession().delete(compito);
+				t.commit();
+			}
+			catch (PersistentException e) {
+				t.rollback();
+				throw e;
+			}
+		} catch (PersistentException e) {
+			throw new RuntimeException(ErrorMessage.COMPITO_NON_ELIMINABILE);
+		}
+	}
+	
 
+
+	public void annullaCompito(int idCompitoInClasse) {
+		CompitoInClasseCriteria compitoCriteria;
+		CompitoInClasse compito;
+		
+		
+		try{
+			compitoCriteria = new CompitoInClasseCriteria();
+			
+		}catch (PersistentException e){
+			throw new  RuntimeException(ErrorMessage.COMPITO_UNLOADED);
+		}
+		
+		compitoCriteria.ID.eq(idCompitoInClasse);
+		compito = compitoCriteria.uniqueCompitoInClasse();
+		
+		compito.annulla();
+		
+		try {
+			PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
+			try {
+				RSPersistentManager.instance().getSession().save(compito);
+				t.commit();
+			}
+			catch (PersistentException e) {
+				t.rollback();
+				throw e;
+			}
+		} catch (PersistentException e) {
+			throw new RuntimeException(ErrorMessage.COMPITO_NON_AGGIORNABILE);
+		}
+		
+	}
+	
+	public void disannullaCompito(int idCompitoInClasse) {
+		CompitoInClasseCriteria compitoCriteria;
+		CompitoInClasse compito;
+		
+		
+		try{
+			compitoCriteria = new CompitoInClasseCriteria();
+			
+		}catch (PersistentException e){
+			throw new  RuntimeException(ErrorMessage.COMPITO_UNLOADED);
+		}
+		
+		compitoCriteria.ID.eq(idCompitoInClasse);
+		compito = compitoCriteria.uniqueCompitoInClasse();
+		
+		compito.disannulla();
+		
+		try {
+			PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
+			try {
+				RSPersistentManager.instance().getSession().save(compito);
+				t.commit();
+			}
+			catch (PersistentException e) {
+				t.rollback();
+				throw e;
+			}
+		} catch (PersistentException e) {
+			throw new RuntimeException(ErrorMessage.COMPITO_NON_AGGIORNABILE);
+		}
+		
+	}
+	
+	public void chiudiCompito(int idCompitoInClasse) {
+		CompitoInClasseCriteria compitoCriteria;
+		CompitoInClasse compito;
+		
+		
+		try{
+			compitoCriteria = new CompitoInClasseCriteria();
+			
+		}catch (PersistentException e){
+			throw new  RuntimeException(ErrorMessage.COMPITO_UNLOADED);
+		}
+		
+		compitoCriteria.ID.eq(idCompitoInClasse);
+		compito = compitoCriteria.uniqueCompitoInClasse();
+		
+		compito.chiudi();
+		
+		try {
+			PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
+			try {
+				RSPersistentManager.instance().getSession().save(compito);
+				t.commit();
+			}
+			catch (PersistentException e) {
+				t.rollback();
+				throw e;
+			}
+		} catch (PersistentException e) {
+			throw new RuntimeException(ErrorMessage.COMPITO_NON_AGGIORNABILE);
+		}
+		
+	}
+	
 	public CompitoInClasse getCompitoInCLasse(int idCompitoInClasse) {
 		CompitoInClasseCriteria compitoCriteria;
 		CompitoInClasse compito;
@@ -352,5 +519,6 @@ public class CompitoInClasseController {
 
 		return rit;
 	}
+
 
 }

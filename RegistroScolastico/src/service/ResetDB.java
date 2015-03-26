@@ -500,9 +500,9 @@ public class ResetDB {
 			argomenti.clear();
 			argomenti.add(worldWar1);
 			argomenti.add(worldWar2);
-			CompitoInClasse compitoStoria1A = new CompitoInClasse();
+			CompitoInClasse compitoStoria1A = new CompitoInClasse(registroRossiPrimaAstoria);
 			compitoStoria1A.setInfo(java.sql.Date.valueOf("2014-12-16"), java.sql.Time.valueOf("11:00:00"), java.sql.Time.valueOf("13:00:00"), argomenti);
-			compitoStoria1A.setInsegnamento(registroRossiPrimaAstoria);
+
 			registroRossiPrimaAstoria.getCompitiInClasse().add(compitoStoria1A);
 			
 			Map<Studente, Voto> mapVoti;
@@ -522,9 +522,10 @@ public class ResetDB {
 			registroRossiPrimaAstoria.inserisciVoti(compitoStoria1A, mapVoti);
 			
 			argomenti.clear();
-			compitoStoria1A = new CompitoInClasse();
+			compitoStoria1A = new CompitoInClasse(registroRossiPrimaAstoria);
 			compitoStoria1A.setInfo(java.sql.Date.valueOf("2014-12-15"), java.sql.Time.valueOf("10:00:00"), java.sql.Time.valueOf("11:30:00"), argomenti);
-			compitoStoria1A.setInsegnamento(registroRossiPrimaAstoria);
+			compitoStoria1A.svolgi();
+
 			registroRossiPrimaAstoria.getCompitiInClasse().add(compitoStoria1A);
 			
 			

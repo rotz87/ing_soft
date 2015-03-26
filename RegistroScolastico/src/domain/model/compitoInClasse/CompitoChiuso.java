@@ -1,14 +1,16 @@
 package domain.model.compitoInClasse;
 
-import java.sql.Date;
-import java.sql.Time;
-import java.util.Collection;
-import java.util.Map;
+public class CompitoChiuso extends CompitoInClasseStateImp {
+	
+	static private CompitoChiuso instance;
 
-import domain.model.Argomento;
-import domain.model.Studente;
-import domain.model.Voto;
+	private CompitoChiuso() {
+	}
 
-public class CompitoChiuso extends CompitoInClasseState {
-
+	static public CompitoChiuso getInstance() {
+		if (CompitoChiuso.instance == null) {
+			CompitoChiuso.instance = new CompitoChiuso();
+		}
+		return CompitoChiuso.instance;
+	}
 }

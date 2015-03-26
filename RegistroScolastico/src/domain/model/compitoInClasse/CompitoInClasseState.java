@@ -4,20 +4,24 @@
  */
 package domain.model.compitoInClasse;
 
-public class CompitoInClasseState {
-	public void setInfo(domain.model.compitoInClasse.CompitoInClasse compitoInClasse, java.sql.Date data, java.sql.Time oraInizio, java.sql.Time oraFine, java.util.Collection<domain.model.Argomento> argomenti) {
-		//TODO: Implement Method
-		throw new UnsupportedOperationException();
-	}
+import domain.model.Argomento;
+import domain.model.Studente;
+import domain.model.Voto;
+
+public interface CompitoInClasseState {
+	public abstract void setInfo(domain.model.compitoInClasse.CompitoInClasse compitoInClasse, java.sql.Date data, java.sql.Time oraInizio, java.sql.Time oraFine, java.util.Collection<Argomento> argomenti);
 	
-	public void inserisciVoti(domain.model.compitoInClasse.CompitoInClasse compito, java.util.Map<domain.model.Studente, domain.model.Voto> mapVoti) {
-		//TODO: Implement Method
-		throw new UnsupportedOperationException();
-	}
+	public abstract void inserisciVoti(domain.model.compitoInClasse.CompitoInClasse compito, java.util.Map<Studente, Voto> mapVoti);
 	
-	public void setInsegnamento(domain.model.compitoInClasse.CompitoInClasse compito, domain.model.RegistroDocente registroDocente) {
-		compito.set_insegnamento(registroDocente);
-	}
+	public abstract void svolgi(domain.model.compitoInClasse.CompitoInClasse compitoInClasse);
+	
+	public abstract void annulla(domain.model.compitoInClasse.CompitoInClasse compitoInClasse);
+	
+	public abstract void disannulla(domain.model.compitoInClasse.CompitoInClasse compitoInClasse);
+	
+	public abstract void chiudi(domain.model.compitoInClasse.CompitoInClasse compitoInClasse);
+	
+	public abstract void elimina(domain.model.compitoInClasse.CompitoInClasse compitoInClasse);
 	
 }
-//ORM Hash:397c454b7523be5e384d64339c14840b
+//ORM Hash:afebb4641f068c64fa718856bd16ff97
