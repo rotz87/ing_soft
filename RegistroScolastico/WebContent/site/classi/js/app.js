@@ -18,14 +18,16 @@ registroApp.config(["$locationProvider","$routeProvider",function($locationProvi
 	  controller: 'riempiElencoAppelli',
 	  title:'Seleziona l\'appello'
   }).when('/:idClasse/',{
-	  templateUrl: 'partials/menuClasse.html',
+	  templateUrl: 'partials/elencoRegistri.html',
 	  controller: 'elencoRegistri',
 	  title:'Seleziona il registro'
-  }).when('/:idClasse/registroDocente/',{
-	  templateUrl: 'partials/compito.html',
-	  controller: 'elencoMaterie',
-	  title:'Seleziona il registro Docente'
-  }).when('/:idClasse/registroDocente/:idRegistroDocente',{
+  })
+//  	.when('/:idClasse/registroDocente/',{
+//	  templateUrl: 'partials/compito.html',
+//	  controller: 'elencoMaterie',
+//	  title:'Seleziona il registro Docente'
+//  })
+  .when('/:idClasse/registroDocente/:idRegistroDocente',{
 	  templateUrl: 'partials/compito.html',
 	  controller: '',
 	  title:'Seleziona l\'operazione'
@@ -46,8 +48,6 @@ registroApp.config(["$locationProvider","$routeProvider",function($locationProvi
 	  templateUrl:'partials/elencoClassi.html',
 	  controller:'riempiElencoClassi',
 	  title:'seleziona la classe'
-  }).otherwise({
-	redirectTo:'/'}
-  )
+  })
   //$locationProvider.html5Mode({enabled:true,requireBase:true});
 }]);

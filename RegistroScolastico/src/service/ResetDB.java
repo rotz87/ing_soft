@@ -461,16 +461,22 @@ public class ResetDB {
 			Materia storia = new Materia();
 			storia.setNome("Storia");
 			registroRossiPrimaAstoria.setMateria(storia);
+			registroRossiPrimaB.setMateria(storia);
 			
 			
 			Materia geografia = new Materia();
 			geografia.setNome("Geografia");
 			
-			registroRossiPrimaB.setMateria(geografia);
+			
+			registroBianchiPrimaA.setMateria(geografia);
+			registroBianchiPrimaB.setMateria(geografia);
+			registroRossiSecondaA.setMateria(geografia);
+			registroRossiSecondaB.setMateria(geografia);
 			
 			Materia matematica = new Materia();
 			matematica.setNome("Matematica");
 			registroRossiPrimaAmat.setMateria(matematica);
+
 			
 			RSPersistentManager.instance().getSession().save(storia);
 			RSPersistentManager.instance().getSession().save(geografia);

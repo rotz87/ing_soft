@@ -319,7 +319,8 @@ function PostsCtrlAjax($scope, $http, myUri, destinazione, $location) {
     var risorsa = {};
     $http({method: 'GET', url: myUri }).success(function(data,header) {
         destinazione.data = data;
-        destinazione.url = $scope.idClasse+"/appelli/"+data.idAppello;
+        
+        destinazione.url = $scope.idClasse+"/registroDiClasse/appelli/"+data.idAppello;
         risorsa = destinazione;
         $location.path(destinazione.url);
     });
