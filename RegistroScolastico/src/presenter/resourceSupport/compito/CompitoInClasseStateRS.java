@@ -30,11 +30,11 @@ public class CompitoInClasseStateRS extends ResourceSupport{
 //					getCompitoInClasse(idClasse, idRegistroDocente, this.idCompito)).withSelfRel());
 	}
 
-	public CompitoInClasseStateEnum getStateEnum() {
+	public CompitoInClasseStateEnum getState() {
 		return this.state;
 	}
 
-	public void setStateEnum(CompitoInClasseStateEnum stateEnum) {
+	public void setState(CompitoInClasseStateEnum stateEnum) {
 		this.state = stateEnum;
 	}
 	

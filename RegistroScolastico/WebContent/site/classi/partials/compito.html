@@ -45,7 +45,7 @@
 					</div>
 			</fieldset>
 			<div class="text-center">
-				<button class="btn btn-default" ng-click="" title="la data non sar&agrave; modificabile; sar&agrave; possibile inserire i voti"> Svolto </button>
+				<button class="btn btn-default" ng-click="svolgiCompito()" title="la data non sar&agrave; modificabile; sar&agrave; possibile inserire i voti"> Svolto </button>
 			</div>
 			<fieldset>
 				<legend> Voti <input class="mostraNascondi_{{stdChecked}}" type="checkbox" ng-model="stdChecked"></legend>
@@ -107,9 +107,9 @@
 			<fieldset>
 			<legend ng-show="stdChecked"></legend>
 			<div class="text-center">
-				<button class="btn btn-default" ng-click="" title="il compito &egrave; annullato e i voti non saranno considerati nella carriera degli studenti"> Annulla </button>
-				<button class="btn btn-primary" ng-click="aggiornaCompito()" title="salva il compito con i dati inseriti"> Salva Compito <span class="glyphicon glyphicon-save"></span></button>
-				<button class="btn btn-default" ng-click="" title="chiudendo il compito non sarà più possibile modificare i voti inseriti"> Chiudi </button>
+				<button class="btn btn-default" ng-click="annullaRipristinaCompito()" title="il compito &egrave; annullato e i voti non saranno considerati nella carriera degli studenti"> Annulla </button>
+				<button class="btn btn-primary" ng-click="salvaCompito()" title="salva il compito con i dati inseriti"> Salva Compito <span class="glyphicon glyphicon-save"></span></button>
+				<button class="btn btn-default" ng-click="chiudiCompito()" title="chiudendo il compito non sarà più possibile modificare i voti inseriti"> Chiudi </button>
 			</div>
 			</fieldset>
 		</fieldset>

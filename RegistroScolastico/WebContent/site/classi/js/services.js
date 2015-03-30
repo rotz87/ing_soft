@@ -110,7 +110,20 @@ registroServices.factory('Compito',['$resource',
                    									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente', idCompito:'@idCompito'},
                    									method:'PUT',
                    									isArray:true
+                   								},
+                   								'getState':{
+                   									url:'/RegistroScolastico/api/classi/:idClasse/registriDocente/:idRegistroDocente/compiti/:idCompito/state',
+                   									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente', idCompito:'@idCompito'},
+                   									method:'GET',
+                   									isArray:false
+                   								},
+                   								'setState':{
+                   									url:'/RegistroScolastico/api/classi/:idClasse/registriDocente/:idRegistroDocente/compiti/:idCompito/state',
+                   									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente', idCompito:'@idCompito'},
+                   									method:'PUT',
+                   									isArray:false
                    								}
+                   									
                    							});
                    				}]);
 
