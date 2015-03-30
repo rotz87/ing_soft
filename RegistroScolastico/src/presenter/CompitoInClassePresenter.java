@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
+import org.jgroups.protocols.DELAY;
 import org.joda.time.LocalDate;
 import org.springframework.hateoas.Link;
 import org.springframework.http.HttpHeaders;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import presenter.resourceSupport.compito.ArgomentiContainerRS;
 import presenter.resourceSupport.compito.ArgomentoRS;
 import presenter.resourceSupport.compito.CompitoInClasseRS;
+import presenter.resourceSupport.compito.CompitoInClasseStateRS;
 import presenter.resourceSupport.compito.StudenteCompitoRS;
 import domain.controller.CompitoInClasseController;
 import domain.controller.DocenteController;
@@ -29,6 +31,7 @@ import domain.model.Argomento;
 import domain.model.Studente;
 import domain.model.Voto;
 import domain.model.compitoInClasse.CompitoInClasse;
+import domain.model.compitoInClasse.CompitoInClasseStateEnum;
 
 
 @RestController
@@ -79,6 +82,24 @@ public class CompitoInClassePresenter {
 	  }
 	  
 	  
+	  @RequestMapping(value = "/{idCompitoInClasse}/state",  method = RequestMethod.GET)
+			public CompitoInClasseStateRS getCompitoState(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse) {
+				
+			  	CompitoInClasseController compitoController;
+				CompitoInClasse compito;
+				CompitoInClasseStateRS compitoStateRS;
+				
+				compitoController = new CompitoInClasseController();
+				
+				compito = compitoController.getCompitoInCLasse(idCompitoInClasse);
+				
+				compitoStateRS = new CompitoInClasseStateRS(compito, idClasse, idRegistroDocente);
+				
+				return compitoStateRS;
+				
+	  }
+	  
+	  
 	  @RequestMapping( method = RequestMethod.GET)
 		public CompitoInClasseRS[] getCompitiInClasse(@PathVariable int idClasse, @PathVariable int idRegistroDocente) {
 			
@@ -122,6 +143,38 @@ public class CompitoInClassePresenter {
 		  }
 		  
 		  compitoController.inserisciInfoCompito(idRegistroDocente, compitoRS.getIdCompito(), dataCompito, oraInizio, oraFine, idArgomenti);
+		  
+		  HttpHeaders httpHeaders;
+		  httpHeaders = new HttpHeaders();
+		  HttpStatus httpStatus = HttpStatus.OK;
+		  
+		  return new ResponseEntity<>(null, httpHeaders, httpStatus);
+	  }
+	  
+	  @RequestMapping(value = "/{idCompitoInClasse}/state", method = RequestMethod.PUT)
+	  public ResponseEntity<?> updateCompitoState(@PathVariable int idCompitoInClasse, @RequestBody CompitoInClasseStateRS compitoState) {
+		  
+		  CompitoInClasseController compitoInClasseController;
+		  
+		  compitoInClasseController = new CompitoInClasseController();
+		  
+		  compitoInClasseController.changeState(idCompitoInClasse, compitoState.getStateEnum());
+		  
+		  HttpHeaders httpHeaders;
+		  httpHeaders = new HttpHeaders();
+		  HttpStatus httpStatus = HttpStatus.OK;
+		  
+		  return new ResponseEntity<>(null, httpHeaders, httpStatus);
+	  }
+	  
+	  @RequestMapping(value = "/{idCompitoInClasse}/state", method = RequestMethod.DELETE)
+	  public ResponseEntity<?> eliminaCompito(@PathVariable int idCompitoInClasse) {
+		   
+		  CompitoInClasseController compitoInClasseController;
+		  
+		  compitoInClasseController = new CompitoInClasseController();
+		  
+		  compitoInClasseController.eliminaCompito(idCompitoInClasse);
 		  
 		  HttpHeaders httpHeaders;
 		  httpHeaders = new HttpHeaders();

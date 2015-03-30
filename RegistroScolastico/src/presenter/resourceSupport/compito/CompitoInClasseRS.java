@@ -65,6 +65,8 @@ public class CompitoInClasseRS extends ResourceSupport{
 		this.oraInizio = oraInizio;
 		this.oraFine = oraFine;
 		this.argomentiRS = argomentiRS;
+		
+		//TODO inserire i links
 	}
 
 	public int getIdCompito() {

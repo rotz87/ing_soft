@@ -21,6 +21,7 @@ import domain.model.Calendario;
 import domain.model.Classe;
 import domain.model.compitoInClasse.CompitoInClasse;
 import domain.model.compitoInClasse.CompitoInClasseCriteria;
+import domain.model.compitoInClasse.CompitoInClasseStateEnum;
 import domain.model.Docente;
 import domain.model.DocenteCriteria;
 import domain.model.RSPersistentManager;
@@ -231,7 +232,7 @@ public class CompitoInClasseController {
 		
 	}
 	
-	public void svolgiCompito(int idCompitoInClasse){
+	private void svolgiCompito(int idCompitoInClasse){
 		CompitoInClasseCriteria compitoCriteria;
 		CompitoInClasse compito;
 		
@@ -299,7 +300,7 @@ public class CompitoInClasseController {
 	
 
 
-	public void annullaCompito(int idCompitoInClasse) {
+	private void annullaCompito(int idCompitoInClasse) {
 		CompitoInClasseCriteria compitoCriteria;
 		CompitoInClasse compito;
 		
@@ -332,7 +333,7 @@ public class CompitoInClasseController {
 		
 	}
 	
-	public void disannullaCompito(int idCompitoInClasse) {
+	private void disannullaCompito(int idCompitoInClasse) {
 		CompitoInClasseCriteria compitoCriteria;
 		CompitoInClasse compito;
 		
@@ -365,7 +366,7 @@ public class CompitoInClasseController {
 		
 	}
 	
-	public void chiudiCompito(int idCompitoInClasse) {
+	private void chiudiCompito(int idCompitoInClasse) {
 		CompitoInClasseCriteria compitoCriteria;
 		CompitoInClasse compito;
 		
@@ -518,6 +519,48 @@ public class CompitoInClasseController {
 		}
 
 		return rit;
+	}
+	
+	public void changeState(int idCompito, CompitoInClasseStateEnum statoFuturo){
+		
+		CompitoInClasse compito;
+		CompitoInClasseStateEnum statoAttuale;
+		
+		compito = getCompitoInCLasse(idCompito);
+		statoAttuale = compito.getState().getStateEnum();
+		
+		switch (statoFuturo) {
+
+		  case SVOLTO:
+			  
+			  switch (statoAttuale) {
+			  	case DA_SVOLGERE:
+			  		svolgiCompito(idCompito);
+				break;
+				
+			  	case ANNULLATO:
+					disannullaCompito(idCompito);
+				break;
+
+				default:
+					throw new IllegalStateException(ErrorMessage.COMPITO_STATE_UNCHANGEABLE);
+			  }
+			  
+		  break;
+		
+		  case ANNULLATO:
+			  annullaCompito(idCompito);
+		  break;
+		  
+		  case CHIUSO:
+			  chiudiCompito(idCompito);
+		  break;
+		  
+		  default:
+			  throw new IllegalStateException(ErrorMessage.COMPITO_STATE_UNCHANGEABLE);
+	  }
+	
+		
 	}
 
 

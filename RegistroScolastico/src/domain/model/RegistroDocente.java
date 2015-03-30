@@ -120,10 +120,6 @@ public class RegistroDocente {
 		this._materia = materia;
 	}
 	
-	/**
-	 * Questo metodo dovrebbe essere utilizzato solo dal CompitoInCLasseState
-	 * @param compitoInClasse
-	 */
 	public void eliminaCompito(domain.model.compitoInClasse.CompitoInClasse compitoInClasse) {
 		this.implementor.eliminCompito(this, compitoInClasse);
 	}

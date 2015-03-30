@@ -144,6 +144,10 @@ public class CompitoInClasse {
 		this._state.elimina(this);
 	}
 	
+	public domain.model.compitoInClasse.CompitoInClasseState getState() {
+		return this._state;
+	}
+	
 	public String toString() {
 		return String.valueOf(getID());
 	}

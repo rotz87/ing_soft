@@ -69,4 +69,8 @@ public abstract class CompitoInClasseStateImp implements CompitoInClasseState {
 	public void svolgi(CompitoInClasse compitoInClasse) {
 		throw new IllegalStateException(WRONG_STATE);
 	}
+
+	public CompitoInClasseStateEnum getStateEnum() {
+		throw new UnsupportedOperationException();
+	}
 }

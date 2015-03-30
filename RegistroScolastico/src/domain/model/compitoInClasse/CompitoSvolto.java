@@ -7,6 +7,8 @@ import domain.model.Voto;
 
 public class CompitoSvolto extends CompitoInClasseStateImp {
 	static private CompitoSvolto instance;
+	
+	private final CompitoInClasseStateEnum stateEnum = CompitoInClasseStateEnum.SVOLTO;
 
 	private CompitoSvolto() {
 	}
@@ -31,6 +33,11 @@ public class CompitoSvolto extends CompitoInClasseStateImp {
 	@Override
 	public void chiudi(CompitoInClasse compitoInClasse) {
 		compitoInClasse.set_state(CompitoChiuso.getInstance());
+	}
+	
+	@Override
+	public CompitoInClasseStateEnum getStateEnum() {
+		return this.stateEnum;
 	}
 	
 }

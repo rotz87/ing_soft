@@ -18,29 +18,57 @@ private static final int[] SQL_TYPES = {Types.VARCHAR};
 	}
 	
 	public Object nullSafeGet(ResultSet aResultSet, String[] aStrings, org.hibernate.engine.spi.SessionImplementor aSessionImplementor, Object aObject) throws HibernateException, SQLException {
-		String classSimpleName = aResultSet.getString(aStrings[0]);
-		String packageName = CompitoInClasseState.class.getPackage().getName();
+//		String classSimpleName = aResultSet.getString(aStrings[0]);
+//		String packageName = CompitoInClasseState.class.getPackage().getName();
+//		Object ret;
+//		
+//		ret = null;
+//		if(!aResultSet.wasNull()){
+//			try {
+//				ret  = Class.forName(packageName+"."+classSimpleName).getDeclaredMethod("getInstance").invoke(null);
+//			} catch (IllegalAccessException | IllegalArgumentException
+//					| InvocationTargetException | NoSuchMethodException
+//					| SecurityException | ClassNotFoundException e) {
+//				throw new HibernateException("Impossibile istanziare CompitoState");
+//			}
+//		}
+//		
+//        return ret;
+		
+		String compitoStateString;
+		CompitoInClasseStateEnum compitoStateEnum;
 		Object ret;
+		
+		compitoStateString = aResultSet.getString(aStrings[0]);
+		compitoStateEnum = CompitoInClasseStateEnum.valueOf(compitoStateString);
 		
 		ret = null;
 		if(!aResultSet.wasNull()){
 			try {
-				ret  = Class.forName(packageName+"."+classSimpleName).getDeclaredMethod("getInstance").invoke(null);
-			} catch (IllegalAccessException | IllegalArgumentException
-					| InvocationTargetException | NoSuchMethodException
-					| SecurityException | ClassNotFoundException e) {
+				ret = CompitoInClasseStateFactory.getInstance().create(compitoStateEnum);
+			} catch (IllegalArgumentException e) {
 				throw new HibernateException("Impossibile istanziare CompitoState");
 			}
 		}
 		
         return ret;
+		
 	}
 	
 	public void nullSafeSet(PreparedStatement aPreparedStatement, Object aObject, int aint, org.hibernate.engine.spi.SessionImplementor aSessionImplementor) throws HibernateException, SQLException {
+//		if (aObject == null){
+//            aPreparedStatement.setNull(aint, Types.VARCHAR);
+//        }else{
+//            aPreparedStatement.setString(aint, aObject.getClass().getSimpleName());
+//        }
+		
+		CompitoInClasseState compitoState;
+		
 		if (aObject == null){
             aPreparedStatement.setNull(aint, Types.VARCHAR);
         }else{
-            aPreparedStatement.setString(aint, aObject.getClass().getSimpleName());
+        	compitoState = (CompitoInClasseState) aObject;
+            aPreparedStatement.setString(aint, compitoState.getStateEnum().toString());
         }
 	}
 	

@@ -12,6 +12,8 @@ import domain.model.Calendario;
 public class CompitoDaSvolgere extends CompitoInClasseStateImp {
 	static private CompitoDaSvolgere instance;
 
+	private final CompitoInClasseStateEnum stateEnum = CompitoInClasseStateEnum.DA_SVOLGERE;
+	
 	private CompitoDaSvolgere() {
 	}
 
@@ -53,5 +55,10 @@ public class CompitoDaSvolgere extends CompitoInClasseStateImp {
 	public void elimina(CompitoInClasse compitoInClasse) {
 		compitoInClasse.getInsegnamento().eliminaCompito(compitoInClasse);
 		compitoInClasse.set_insegnamento(null);
+	}
+	
+	@Override
+	public CompitoInClasseStateEnum getStateEnum() {
+		return this.stateEnum;
 	}
 }
