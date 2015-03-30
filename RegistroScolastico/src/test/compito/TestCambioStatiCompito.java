@@ -12,6 +12,7 @@ import domain.controller.CompitoInClasseController;
 import domain.controller.DocenteController;
 import domain.model.Argomento;
 import domain.model.compitoInClasse.CompitoInClasse;
+import domain.model.compitoInClasse.CompitoInClasseStateEnum;
 
 public class TestCambioStatiCompito {
 	private static int idRegistroDocente = 1;
@@ -43,8 +44,8 @@ public class TestCambioStatiCompito {
 				
 				Stampa.stampaln();
 				
-				
-				controllerCompito.svolgiCompito(compito.getID());
+				controllerCompito.changeState(compito.getID(), CompitoInClasseStateEnum.SVOLTO);
+//				controllerCompito.svolgiCompito(compito.getID());
 				Stampa.stampaln("ID del compito svolto: " + compito.getID());
 				
 				
@@ -61,26 +62,26 @@ public class TestCambioStatiCompito {
 				Stampa.stampaln();
 				
 				compito2.setInfo(sqlDate, oraInizio, oraFine, argomenti);
-				controllerCompito.svolgiCompito(compito2.getID());
+				controllerCompito.changeState(compito2.getID(), CompitoInClasseStateEnum.SVOLTO);
 				Stampa.stampaln();
-				controllerCompito.annullaCompito(compito2.getID());
+				controllerCompito.changeState(compito2.getID(), CompitoInClasseStateEnum.ANNULLATO);
 				Stampa.stampaln("ID del compito annullato: " + compito2.getID());
 				
 				Stampa.stampaln();
 				compito3 = controllerCompito.creaCompito(idRegistroDocente, docenteController.getIdDocenteProva());
 				compito3.setInfo(sqlDate, oraInizio, oraFine, argomenti);
-				controllerCompito.svolgiCompito(compito3.getID());
+				controllerCompito.changeState(compito3.getID(), CompitoInClasseStateEnum.SVOLTO);;
 				Stampa.stampaln();
-				controllerCompito.annullaCompito(compito3.getID());
+				controllerCompito.changeState(compito3.getID(), CompitoInClasseStateEnum.ANNULLATO);
 				Stampa.stampaln();
-				controllerCompito.disannullaCompito(compito3.getID());
+				controllerCompito.changeState(compito3.getID(), CompitoInClasseStateEnum.SVOLTO);
 				Stampa.stampaln("ID del compito disannullato: " + compito3.getID());
 				
 				Stampa.stampaln();
 				compito4 = controllerCompito.creaCompito(idRegistroDocente, docenteController.getIdDocenteProva());
 				compito4.setInfo(sqlDate, oraInizio, oraFine, argomenti);
-				controllerCompito.svolgiCompito(compito4.getID());
-				controllerCompito.chiudiCompito(compito4.getID());
+				controllerCompito.changeState(compito4.getID(), CompitoInClasseStateEnum.SVOLTO);
+				controllerCompito.changeState(compito4.getID(), CompitoInClasseStateEnum.CHIUSO);
 
 				Stampa.stampaln("ID del compito chiuso: " + compito4.getID());
 								

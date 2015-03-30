@@ -519,12 +519,15 @@ public class ResetDB {
 //			Voto[] voti = {                votos[4],   votos[8],     votos[9],     votos[7],        votos[5],       votos[7],      votos[6]};
 //			Studente[] studentiCompito ={ pieroRusso, marioRomano, leonardoRicci, valentinoFarina, roccoBenedetti, antonioGuerra, cristinaAngeli};
 			
-			registroRossiPrimaAstoria.inserisciVoti(compitoStoria1A, mapVoti);
+			compitoStoria1A.svolgi();
+			compitoStoria1A.inserisciVoti(mapVoti);
+//			registroRossiPrimaAstoria.inserisciVoti(compitoStoria1A, mapVoti);
+			
 			
 			argomenti.clear();
 			compitoStoria1A = new CompitoInClasse(registroRossiPrimaAstoria);
 			compitoStoria1A.setInfo(java.sql.Date.valueOf("2014-12-15"), java.sql.Time.valueOf("10:00:00"), java.sql.Time.valueOf("11:30:00"), argomenti);
-			compitoStoria1A.svolgi();
+			
 
 			registroRossiPrimaAstoria.getCompitiInClasse().add(compitoStoria1A);
 			
