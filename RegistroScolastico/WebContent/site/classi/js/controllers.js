@@ -612,11 +612,21 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		studente.voto = voto;
 	}
 	
+	$scope.chiudiCompito = function(){
+		mioCompito.chiudi($scope.chudiCompitoAjax);
+	}
+	$scope.chiudiCompitoAjax = function(){
+		impostaStato("CHIUSO")
+	}
+	
 	$scope.svolgiCompito = function(){
 		var success = mioCompito.svolgi($scope.svolgiCompitoAjax);
 	}
 	$scope.svolgiCompitoAjax = function(){
-		var reqPayload = {state : "SVOLTO"}
+		impostaStato("SVOLTO")
+	}
+	var impostaStato = function(prossimoStato){
+		var reqPayload = {state : prossimoStato}
 		var parametri = {idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito}
 		Compito.setState(parametri,
 				reqPayload,
@@ -628,7 +638,6 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 				{
 					erroreSistema($scope, response.data, true)
 				})
-		
 	}
 	
 	$scope.annullaRipristinaCompito = function(){
