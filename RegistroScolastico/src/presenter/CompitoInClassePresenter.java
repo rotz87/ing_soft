@@ -35,12 +35,13 @@ import domain.model.compitoInClasse.CompitoInClasseStateEnum;
 
 
 @RestController
-@RequestMapping("/classi/{idClasse}/registriDocente/{idRegistroDocente}/compiti")
+//@RequestMapping("/classi/{idClasse}/registriDocente/{idRegistroDocente}/compiti")
+@RequestMapping(ApiPath.REGISTRO_DOCENTE_COMPITI)
 public class CompitoInClassePresenter {
 
 	
 	  @RequestMapping(method = RequestMethod.POST)
-	  	ResponseEntity<?> creaCompito(@PathVariable int idClasse, @PathVariable int idRegistroDocente) {
+	  public ResponseEntity<?> creaCompito(@PathVariable int idClasse, @PathVariable int idRegistroDocente) {
 		  HttpHeaders httpHeaders;
 		  CompitoInClasseController compitoController;
 		  DocenteController docenteController;
@@ -64,68 +65,71 @@ public class CompitoInClassePresenter {
 	  }
 
 	  
-	  @RequestMapping(value = "/{idCompitoInClasse}",  method = RequestMethod.GET)
-			public CompitoInClasseRS getCompitoInClasse(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse) {
+//	  @RequestMapping(value = "/{idCompitoInClasse}",  method = RequestMethod.GET)
+	  @RequestMapping(value = ApiPath.ID_COMPITO,  method = RequestMethod.GET)
+	  public CompitoInClasseRS getCompitoInClasse(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse) {
 				
-			  	CompitoInClasseController compitoController;
-				CompitoInClasse compito;
-				CompitoInClasseRS compitoInClasseRS;
-				
-				compitoController = new CompitoInClasseController();
-				
-				compito = compitoController.getCompitoInCLasse(idCompitoInClasse);
-				
-				compitoInClasseRS = new CompitoInClasseRS(compito, idClasse, idRegistroDocente);
-				
-				return compitoInClasseRS;
+		CompitoInClasseController compitoController;
+		CompitoInClasse compito;
+		CompitoInClasseRS compitoInClasseRS;
+		
+		compitoController = new CompitoInClasseController();
+		
+		compito = compitoController.getCompitoInCLasse(idCompitoInClasse);
+		
+		compitoInClasseRS = new CompitoInClasseRS(compito, idClasse, idRegistroDocente);
+		
+		return compitoInClasseRS;
 				
 	  }
 	  
 	  
-	  @RequestMapping(value = "/{idCompitoInClasse}/state",  method = RequestMethod.GET)
-			public CompitoInClasseStateRS getCompitoState(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse) {
+//	  @RequestMapping(value = "/{idCompitoInClasse}/state",  method = RequestMethod.GET)
+	  @RequestMapping(value = ApiPath.COMPITO_STATE,  method = RequestMethod.GET)
+	  public CompitoInClasseStateRS getCompitoState(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse) {
 				
-			  	CompitoInClasseController compitoController;
-				CompitoInClasse compito;
-				CompitoInClasseStateRS compitoStateRS;
-				
-				compitoController = new CompitoInClasseController();
-				
-				compito = compitoController.getCompitoInCLasse(idCompitoInClasse);
-				
-				compitoStateRS = new CompitoInClasseStateRS(compito, idClasse, idRegistroDocente);
-				
-				return compitoStateRS;
+		CompitoInClasseController compitoController;
+		CompitoInClasse compito;
+		CompitoInClasseStateRS compitoStateRS;
+		
+		compitoController = new CompitoInClasseController();
+		
+		compito = compitoController.getCompitoInCLasse(idCompitoInClasse);
+		
+		compitoStateRS = new CompitoInClasseStateRS(compito, idClasse, idRegistroDocente);
+		
+		return compitoStateRS;
 				
 	  }
 	  
 	  
 	  @RequestMapping( method = RequestMethod.GET)
-		public CompitoInClasseRS[] getCompitiInClasse(@PathVariable int idClasse, @PathVariable int idRegistroDocente) {
+	  public CompitoInClasseRS[] getCompitiInClasse(@PathVariable int idClasse, @PathVariable int idRegistroDocente) {
 			
-//			return new String("SONO IN GETCOMPITI! "+ idClasse + " " +idRegistroDocente);
-			Collection<CompitoInClasse> compitiCollection;
-			CompitoInClasseController compitoController;
-			compitoController = new CompitoInClasseController();
-			
-			compitiCollection = compitoController.getCompitiInCLasse(idClasse, idRegistroDocente);
-			int size = compitiCollection.size();
-
-			CompitoInClasseRS[] compitiRS = new CompitoInClasseRS[size];
-
-			  
-			  int i = 0;
-			  for(CompitoInClasse compito : compitiCollection){
-				  compitiRS[i] = new CompitoInClasseRS(compito, idClasse, idRegistroDocente);
-				  i++;
-			  }
-			  
-			  
-			  return compitiRS;
+//		return new String("SONO IN GETCOMPITI! "+ idClasse + " " +idRegistroDocente);
+		Collection<CompitoInClasse> compitiCollection;
+		CompitoInClasseController compitoController;
+		compitoController = new CompitoInClasseController();
+		
+		compitiCollection = compitoController.getCompitiInCLasse(idClasse, idRegistroDocente);
+		int size = compitiCollection.size();
+		
+		CompitoInClasseRS[] compitiRS = new CompitoInClasseRS[size];
+		
+		  
+		  int i = 0;
+		  for(CompitoInClasse compito : compitiCollection){
+			  compitiRS[i] = new CompitoInClasseRS(compito, idClasse, idRegistroDocente);
+			  i++;
+		  }
+		  
+		  
+		  return compitiRS;
 			
 		}
 	  
-	  @RequestMapping(value = "/{idCompitoInClasse}", method = RequestMethod.PUT)
+//	  @RequestMapping(value = "/{idCompitoInClasse}", method = RequestMethod.PUT)
+	  @RequestMapping(value = ApiPath.ID_COMPITO, method = RequestMethod.PUT)
 	  public ResponseEntity<?> inserisciInfoCompito(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse,  @RequestBody CompitoInClasseRS compitoRS ){
 		  CompitoInClasseController compitoController;
 		  int[] idArgomenti = new int[compitoRS.getArgomentiRS().size()];
@@ -151,7 +155,8 @@ public class CompitoInClassePresenter {
 		  return new ResponseEntity<>(null, httpHeaders, httpStatus);
 	  }
 	  
-	  @RequestMapping(value = "/{idCompitoInClasse}/state", method = RequestMethod.PUT)
+//	  @RequestMapping(value = "/{idCompitoInClasse}/state", method = RequestMethod.PUT)
+	  @RequestMapping(value = ApiPath.COMPITO_STATE, method = RequestMethod.PUT)
 	  public ResponseEntity<?> updateCompitoState(@PathVariable int idCompitoInClasse, @RequestBody CompitoInClasseStateRS compitoState) {
 		  
 		  CompitoInClasseController compitoInClasseController;
@@ -167,7 +172,8 @@ public class CompitoInClassePresenter {
 		  return new ResponseEntity<>(null, httpHeaders, httpStatus);
 	  }
 	  
-	  @RequestMapping(value = "/{idCompitoInClasse}/state", method = RequestMethod.DELETE)
+//	  @RequestMapping(value = "/{idCompitoInClasse}/state", method = RequestMethod.DELETE)
+	  @RequestMapping(value = ApiPath.COMPITO_STATE, method = RequestMethod.DELETE)
 	  public ResponseEntity<?> eliminaCompito(@PathVariable int idCompitoInClasse) {
 		   
 		  CompitoInClasseController compitoInClasseController;
@@ -183,7 +189,8 @@ public class CompitoInClassePresenter {
 		  return new ResponseEntity<>(null, httpHeaders, httpStatus);
 	  }
 	  
-	  @RequestMapping(value = "/{idCompitoInClasse}/argomenti", method = RequestMethod.GET)
+//	  @RequestMapping(value = "/{idCompitoInClasse}/argomenti", method = RequestMethod.GET)
+	  @RequestMapping(value = ApiPath.COMPITO_ARGOMENTI, method = RequestMethod.GET)
 	  public ArgomentiContainerRS getArgomentiCompito(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse) {
 		  CompitoInClasseController compitoController;
 		  CompitoInClasse compito;
@@ -200,34 +207,6 @@ public class CompitoInClassePresenter {
 		  
 	  }
 	  
-//	  @RequestMapping(value = "/{idCompitoInClasse}/studenti", method = RequestMethod.GET)
-//	  public Collection<StudenteCompitoRS> getStudentiCompito(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse) {
-//		  
-//		  //TODO Controllare i parametri che non servono
-//		  
-//		  CompitoInClasseController compitoInClasseController;
-//		  Map<Studente, Boolean> assenze;
-//		  Map<Studente, Voto> voti;
-//		  Collection<StudenteCompitoRS> studentiCompito;
-//
-//		  compitoInClasseController = new CompitoInClasseController();
-//
-//		  assenze = compitoInClasseController.getAssenzeCompito(idCompitoInClasse);
-//		  voti = compitoInClasseController.getVotiCompito(idCompitoInClasse);
-//		  
-//		  studentiCompito = new LinkedList<StudenteCompitoRS>();
-//		  for (Studente studente : assenze.keySet()) {
-//			studentiCompito.add(new StudenteCompitoRS(studente, voti.get(studente), assenze.get(studente)));
-//		  }
-//		  
-//		  return studentiCompito;
-/**
-	 * 
-	 * @param idClasse
-	 * @param idRegistroDocente
-	 * @param idCompitoInClasse
-	 * @param data
-	 */
 /**
 	 * 
 	 * @param idClasse
@@ -236,10 +215,11 @@ public class CompitoInClassePresenter {
 	 * @param data
 	 */
 	  
-	  @RequestMapping(value="/{idCompitoInClasse}/studenti", method=RequestMethod.GET, params={"data"})
+//	  @RequestMapping(value="/{idCompitoInClasse}/studenti", method=RequestMethod.GET, params={"data"})
+	  @RequestMapping(value= ApiPath.COMPITO_STUDENTI, method=RequestMethod.GET, params={"data"})
 	  public Collection<StudenteCompitoRS> getStudentiCompito(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse, @RequestParam("data") long data) {
 		  
-		  //TODO Controllare i parametri che non servono
+		  //FIXME Controllare i parametri che non servono
 		  
 		  CompitoInClasseController compitoInClasseController;
 		  FaiAppelloController faiAppelloController;
@@ -269,7 +249,8 @@ public class CompitoInClassePresenter {
 		  
 	  }
 	  
-	  @RequestMapping(value = "/{idCompitoInClasse}/studenti", method = RequestMethod.PUT)
+//	  @RequestMapping(value = "/{idCompitoInClasse}/studenti", method = RequestMethod.PUT)
+	  @RequestMapping(value= ApiPath.COMPITO_STUDENTI,  method = RequestMethod.PUT)
 	  public ResponseEntity<?> updateStudentiCompito(@PathVariable int idCompitoInClasse, @RequestBody StudenteCompitoRS[] studentiCompito) {
 		   
 		  CompitoInClasseController compitoInClasseController;

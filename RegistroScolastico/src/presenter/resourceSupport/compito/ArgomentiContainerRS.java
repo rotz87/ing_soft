@@ -1,7 +1,6 @@
 package presenter.resourceSupport.compito;
-/*
- * probabilmente da eliminare
- * TODO
+/**
+ * FIXME probabilmente da eliminare
  */
 import java.util.Collection;
 

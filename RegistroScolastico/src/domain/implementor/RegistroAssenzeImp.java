@@ -3,6 +3,8 @@ package domain.implementor;
 import java.util.Collection;
 
 import org.joda.time.LocalDate;
+
+import domain.controller.ErrorMessage;
 import domain.model.Appello;
 import domain.model.Calendario;
 import domain.model.LibrettoAssenze;
@@ -63,14 +65,12 @@ public class RegistroAssenzeImp {
 		LocalDate dataRif = Calendario.getInstance().getDataOdierna();
 		if(!(this.esisteAppello(registroAssenze, dataRif))){
 			if(!Calendario.getInstance().isOggiFestivo()){
-				//DA RIVEDERE E CAMBIARE
-				//TODO 
 				registroAssenze.getAppelli().put(Calendario.getInstance().getDaysFromZero(dataRif.toDate()), new Appello(dataRif));
 			}else{
-				throw new IllegalStateException(" APPELLO NON AVVIABILE PER OGGI ");
+				throw new IllegalStateException(ErrorMessage.APPELLO_NON_AVVIABILE_OGGI);
 			}
 		}else{
-			throw new IllegalStateException(" -- ATTENZIONE L'APPELLO ODIERNO E' GIA' STATO AVVIATO -- ");
+			throw new IllegalStateException(ErrorMessage.APPELLO_ALREADY_EXIST);
 		}
 		
 	}

@@ -122,7 +122,7 @@ public class CompitoInClasseController {
 				
 				studente = studenteCriteria.uniqueStudente();
 				voto = votoCriteria.uniqueVoto();
-				if(voto != null){//TODO in questo modo i voti voti che vengono successivamente rimessi a null non vengono considerati e rimane il voto vecchio
+				if(voto != null){//FIXME in questo modo i voti voti che vengono successivamente rimessi a null non vengono considerati e rimane il voto vecchio
 					mapVoti.put(studente, voto);
 				}
 			}

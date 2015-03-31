@@ -33,7 +33,6 @@ public class TestFaiLAppelloController1 {
 		}catch(IllegalStateException ISE){
 			Stampa.stampaln("Messaggio dell'eccezione: "+ISE.getMessage());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

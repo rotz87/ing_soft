@@ -6,6 +6,8 @@ public class ErrorMessage {
 	public static final String APPELLO_CLASSE_INCONSISTENT = "L'appello selezionato non appartiene alla classe selezionata";
 	public static final String APPELLO_INEXISTENT = "Appello inesistente";
 	public static final String APPELLO_NON_AVVIABILE = "Impossibile avviare l'appello";
+	public static final String APPELLO_NON_AVVIABILE_OGGI = " L'appello non è avviabile per la data odierna ";
+	public static final String APPELLO_ALREADY_EXIST = "L'appello odierno è già stato avviato";
 	public static final String APPELLO_UNLOADED = "Impossibile caricare l'appello";
 	public static final String ARGOMENTI_UNLOADED = "Impossibile caricare gli argomenti";
 	public static final String ASSENZE_UNLOADED = "Impossibile caricare le assenze";

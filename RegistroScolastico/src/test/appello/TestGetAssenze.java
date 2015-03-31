@@ -113,7 +113,6 @@ public class TestGetAssenze {
 				//fine lettura
 			}	
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

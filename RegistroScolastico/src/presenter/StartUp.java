@@ -36,7 +36,7 @@ public class StartUp implements ApplicationListener{
 
 			
 		} catch (PersistentException e) {
-			// TODO Auto-generated catch block
+			// XXX sarebbe da mettere un log Auto-generated catch block
 			e.printStackTrace();
 		}
 		

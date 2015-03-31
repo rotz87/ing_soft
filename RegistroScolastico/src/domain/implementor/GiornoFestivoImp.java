@@ -19,13 +19,4 @@ public class GiornoFestivoImp {
 		return ret;
 	}
 
-	/**
-	 * 
-	 * @param giorno
-	 * @param data
-	 */
-	public void inizialize(GiornoFestivo giorno, java.util.Date data) {
-		// TODO - implement GiornoFestivoImp.inizialize
-		throw new UnsupportedOperationException();
-	}
 }

@@ -16,10 +16,12 @@ import domain.model.RegistroDocente;
 
 
 @RestController
-@RequestMapping("/classi/{idClasse}/registriDocente/{idRegistroDocente}")
+//@RequestMapping("/classi/{idClasse}/registriDocente/{idRegistroDocente}")
+@RequestMapping(ApiPath.REGISTRO_DOCENTE)
 public class RegistroDocentePresenter {
 	
-	@RequestMapping(value = "/argomentiSvolti",  method = RequestMethod.GET)
+//	@RequestMapping(value = "/argomentiSvolti",  method = RequestMethod.GET)
+	@RequestMapping(value = ApiPath.ARGOMENTI_SVOLTI,  method = RequestMethod.GET)
 	public Collection<ArgomentoRS> getArgomentiSvolti(@PathVariable int idClasse, @PathVariable int idRegistroDocente) {
 		
 		RegistroDocenteController registroDocenteController;
