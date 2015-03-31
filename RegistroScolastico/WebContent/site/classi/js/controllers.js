@@ -585,7 +585,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 			{
 			tmpCompito.argomentiRS = angular.toJSON(temp.argomentiRS);
 			}
-		Compito.save({idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito, state : "SVOLTO"}, tmpCompito,
+		Compito.save({idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito}, tmpCompito,
 				function(response,headers){
 					//successo
 					if ( typeof $scope.studentiCompito != "undefined")
@@ -616,17 +616,15 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		var success = mioCompito.svolgi($scope.svolgiCompitoAjax);
 	}
 	$scope.svolgiCompitoAjax = function(){
-		nuovoStato = new Compito();
-		nuovoStato.idClasse = $routeParams.idClasse;
-		nuovoStato.idRegistroDocente = $routeParams.idRegistroDocente
-		nuovoStato.idCompito = $routeParams.idCompito
-		Compito.setState(
-				{idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito},
-				function(response,data)
+		var reqPayload = {state : "SVOLTO"}
+		var parametri = {idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito}
+		Compito.setState(parametri,
+				reqPayload,
+				function(response,headers)
 				{
 					
 				},
-				function(response,data)
+				function(response,headers)
 				{
 					erroreSistema($scope, response.data, true)
 				})
