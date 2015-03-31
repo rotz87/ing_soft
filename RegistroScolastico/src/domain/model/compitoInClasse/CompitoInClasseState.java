@@ -23,7 +23,7 @@ public interface CompitoInClasseState {
 	
 	public abstract void elimina(domain.model.compitoInClasse.CompitoInClasse compitoInClasse);
 	
-	public abstract CompitoInClasseStateEnum getStateEnum();
+	public abstract domain.model.compitoInClasse.CompitoInClasseStateEnum getStateEnum();
 	
 }
-//ORM Hash:afebb4641f068c64fa718856bd16ff97
+//ORM Hash:b668739f755106798c4b0ecd2dbf889f

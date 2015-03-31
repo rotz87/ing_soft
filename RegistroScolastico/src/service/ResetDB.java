@@ -484,10 +484,10 @@ public class ResetDB {
 			
 			Collection<Argomento> argomenti = new LinkedList<Argomento>();
 			
-			Argomento worldWar1 = new Argomento("world war I", "");
-			Argomento worldWar2 = new Argomento("world war II","");
-			Argomento colonialismo = new Argomento("colonialismo","");
-			Argomento secondoDopoGuerra = new Argomento("secondo dopoguerra","");
+			Argomento worldWar1 = new Argomento("world war I", "", java.sql.Date.valueOf("2014-11-11"));
+			Argomento worldWar2 = new Argomento("world war II","", java.sql.Date.valueOf("2014-11-18"));
+			Argomento colonialismo = new Argomento("colonialismo","", java.sql.Date.valueOf("2014-12-25"));
+			Argomento secondoDopoGuerra = new Argomento("secondo dopoguerra","",java.sql.Date.valueOf("2014-12-10") );
 			
 			registroRossiPrimaAstoria.getArgomentiSvolti().add(worldWar1);
 			registroRossiPrimaAstoria.getArgomentiSvolti().add(worldWar2);

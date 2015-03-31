@@ -29,7 +29,7 @@ public class TestCompitoArgomenti {
 			compito = controlloreCompito.getCompitoInCLasse(idCompitoProva);
 			
 			for(Argomento arg : compito.getArgomentiEsaminati()){
-				Stampa.stampaln("Argomento: "+ arg.getID() + ", nome: " + arg.getNome() + ", descrizione: "+arg.getDescrizione()+".");
+				Stampa.stampaln("Argomento: "+ arg.getID() + ", nome: " + arg.getNome() + ", descrizione: "+arg.getDescrizione()+", data: "+arg.getData()+".");
 			}
 		}
 		catch (Exception e) {

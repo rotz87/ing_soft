@@ -22,12 +22,14 @@ public class ArgomentoDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression ID;
 	public final StringExpression _nome;
 	public final StringExpression _descrizione;
+	public final DateExpression _data;
 	
 	public ArgomentoDetachedCriteria() {
 		super(domain.model.Argomento.class, domain.model.ArgomentoCriteria.class);
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
 		_nome = new StringExpression("_nome", this.getDetachedCriteria());
 		_descrizione = new StringExpression("_descrizione", this.getDetachedCriteria());
+		_data = new DateExpression("_data", this.getDetachedCriteria());
 	}
 	
 	public ArgomentoDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -35,6 +37,7 @@ public class ArgomentoDetachedCriteria extends AbstractORMDetachedCriteria {
 		ID = new IntegerExpression("ID", this.getDetachedCriteria());
 		_nome = new StringExpression("_nome", this.getDetachedCriteria());
 		_descrizione = new StringExpression("_descrizione", this.getDetachedCriteria());
+		_data = new DateExpression("_data", this.getDetachedCriteria());
 	}
 	
 	public Argomento uniqueArgomento(PersistentSession session) {

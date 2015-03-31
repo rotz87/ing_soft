@@ -22,12 +22,14 @@ public class ArgomentoCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
 	public final StringExpression _nome;
 	public final StringExpression _descrizione;
+	public final DateExpression _data;
 	
 	public ArgomentoCriteria(Criteria criteria) {
 		super(criteria);
 		ID = new IntegerExpression("ID", this);
 		_nome = new StringExpression("_nome", this);
 		_descrizione = new StringExpression("_descrizione", this);
+		_data = new DateExpression("_data", this);
 	}
 	
 	public ArgomentoCriteria(PersistentSession session) {

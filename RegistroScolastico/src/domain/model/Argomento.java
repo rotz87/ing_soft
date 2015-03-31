@@ -23,6 +23,8 @@ public class Argomento {
 	
 	private String _descrizione;
 	
+	private java.sql.Date _data;
+	
 	private void setID(int value) {
 		this.ID = value;
 	}
@@ -51,6 +53,14 @@ public class Argomento {
 		return _descrizione;
 	}
 	
+	private void set_data(java.sql.Date value) {
+		this._data = value;
+	}
+	
+	private java.sql.Date get_data() {
+		return _data;
+	}
+	
 	private domain.implementor.ArgomentoImp implementor = new domain.implementor.ArgomentoImp();
 	
 	public Argomento(String nome, String descrizione) {
@@ -71,6 +81,18 @@ public class Argomento {
 	
 	public void setDescrizione(String descrizione) {
 		this._descrizione = descrizione;
+	}
+	
+	public Argomento(String nome, String descrizione, java.sql.Date data) {
+		this.implementor.inizialize(this, nome, descrizione, data);
+	}
+	
+	public void setData(java.sql.Date data) {
+		this._data = data;
+	}
+	
+	public java.sql.Date getData() {
+		return this._data;
 	}
 	
 	public String toString() {

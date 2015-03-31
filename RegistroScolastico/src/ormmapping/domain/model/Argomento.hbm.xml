@@ -12,5 +12,6 @@ License Type: Academic
 		</id>
 		<property name="_nome" column="_nome" type="string" length="255" not-null="false" lazy="false"/>
 		<property name="_descrizione" column="_descrizione" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="_data" column="_data" type="date" not-null="false" lazy="false"/>
 	</class>
 </hibernate-mapping>

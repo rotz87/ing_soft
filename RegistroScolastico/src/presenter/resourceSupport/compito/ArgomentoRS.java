@@ -9,6 +9,7 @@ public class ArgomentoRS extends ResourceSupport{
 	private int idArgomento;
 	private String nome;
 	private String descrizione;
+	private Long data;
 	
 	public ArgomentoRS(){
 		
@@ -18,6 +19,9 @@ public class ArgomentoRS extends ResourceSupport{
 		this.idArgomento = argomento.getID();
 		this.nome = argomento.getNome();
 		this.descrizione = argomento.getDescrizione();
+		if(argomento.getData() != null){
+			this.data = argomento.getData().getTime();
+		}
 	}
 
 	
@@ -32,6 +36,10 @@ public class ArgomentoRS extends ResourceSupport{
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
+
+	public void setData(Long data) {
+		this.data = data;
+	}
 	
 	public int getIdArgomento() {
 		return idArgomento;
@@ -44,5 +52,10 @@ public class ArgomentoRS extends ResourceSupport{
 	public String getDescrizione() {
 		return descrizione;
 	}
-	
+
+	public Long getData() {
+		return data;
+	}
+
+
 }

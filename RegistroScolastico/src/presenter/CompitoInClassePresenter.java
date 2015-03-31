@@ -158,7 +158,7 @@ public class CompitoInClassePresenter {
 		  
 		  compitoInClasseController = new CompitoInClasseController();
 		  
-		  compitoInClasseController.changeState(idCompitoInClasse, compitoState.getStateEnum());
+		  compitoInClasseController.changeState(idCompitoInClasse, compitoState.getState());
 		  
 		  HttpHeaders httpHeaders;
 		  httpHeaders = new HttpHeaders();
