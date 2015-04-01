@@ -10,24 +10,9 @@ import org.orm.ORMDatabaseInitiator;
 import org.orm.PersistentException;
 import org.orm.PersistentTransaction;
 
-import domain.model.Appello;
-import domain.model.Argomento;
-import domain.model.Assenza;
-import domain.model.Calendario;
-import domain.model.Classe;
-import domain.model.compitoInClasse.CompitoInClasse;
-import domain.model.Docente;
-import domain.model.GiornoFestivo;
-import domain.model.GiornoSettimanaleFestivo;
-import domain.model.LibrettoAssenze;
-import domain.model.LibrettoVoti;
-import domain.model.Materia;
-import domain.model.RSPersistentManager;
-import domain.model.RegistroAssenze;
-import domain.model.RegistroDocente;
-import domain.model.Scuola;
-import domain.model.Studente;
-import domain.model.Voto;
+import test.compito.TestCambioStatiCompito;
+import domain.model.*;
+import domain.model.compitoInClasse.*;
 
 public class ResetDB {
 
@@ -67,9 +52,10 @@ public class ResetDB {
 	private static void createTestData() throws PersistentException {
 		PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
 		try {
+//			CREAZIONE DELLA SCUOLA
 			Scuola scuola1 = new Scuola();
 			
-			//creazione delle classi
+//			CREAZIONE DELLE CLASSI
 			Classe primaA = new Classe("1A");
 			Classe secondaA = new Classe("2A");
 			Classe primaB = new Classe("1B");
@@ -80,13 +66,14 @@ public class ResetDB {
 			scuola1.getClassi().add( primaB);
 			scuola1.getClassi().add( secondaB);
 						
-			//Creazione dei docenti
+//			CREAZIONE DEI DOCENTI
 			Docente marioRossi = new Docente("Mario", "Rossi");
 			Docente mirkoBianchi = new Docente("Mirko", "Bianchi");
 			Docente giulioVerdi = new Docente("Giulio", "Verdi");
 			Docente vincenzoNeri = new Docente("Vincenzo", "Neri");
 			Docente giuseppeGialli = new Docente("Giuseppe", "Gialli");
 			
+//			ASSEGNAZIONE DEI DOCENTI ALLA SCUOLA
 			scuola1.getDocenti().add(marioRossi);
 			scuola1.getDocenti().add( mirkoBianchi);
 			scuola1.getDocenti().add( giulioVerdi);
@@ -125,7 +112,7 @@ public class ResetDB {
 			mirkoBianchi.getRegistriDocente().add(registroBianchiPrimaA);
 			mirkoBianchi.getRegistriDocente().add(registroBianchiPrimaB);
 			
-			//Creazione degli studenti
+//			CREAZIONE DEGLI STUDENTI
 			Studente pieroRusso = new Studente("Piero", "Russo");
 			Studente marinoEsposito = new Studente("Marino", "Esposito");
 			Studente marioRomano = new Studente("Mario", "Romano");
@@ -160,94 +147,31 @@ public class ResetDB {
 			Studente fabrizioToscani = new Studente("Fabrizio", "Toscani");
 			Studente arturoAncona = new Studente("Arturo", "Ancona");
 			
+//			VETTORE CON TUTTI GLI STUDENTI
 			Studente[]studenti  = {pieroRusso, marinoEsposito, marioRomano, davideDiSalvo, ivoMarino, leonardoRicci, valentinoFarina, roccoBenedetti, antonioGuerra, cristinaAngeli, mariannaDonati, elenaSarti, mariaPiaAlfredi, giorgioGatti, lorenzoNegri, mattiaVitali, emanueleDelMonte, 	luigiBernardi, vittorioPellegrini, alexVilla, marcoBattaglia, alfredoMorelli, pieraDellaValle, ignazioBoschi, jacopoValli, gianniConte, lucaBarone, giacomoSiciliano, fabrizioToscani, arturoAncona};
-			
-//			GLI STUDENTI VENGONO SALVATI UNO ALLA VOLTA PERCHE' CI SERVONO GLI ID DA METTERE NELLA MAP
-//			RSPersistentManager.instance().getSession().save(pieroRusso);
-//			RSPersistentManager.instance().getSession().save(marinoEsposito);
-//			RSPersistentManager.instance().getSession().save(marioRomano);
-//			RSPersistentManager.instance().getSession().save(davideDiSalvo);
-//			RSPersistentManager.instance().getSession().save(ivoMarino);
-//			RSPersistentManager.instance().getSession().save(leonardoRicci);
-//			RSPersistentManager.instance().getSession().save(valentinoFarina);
-//			RSPersistentManager.instance().getSession().save(roccoBenedetti);
-//			RSPersistentManager.instance().getSession().save(antonioGuerra);
-//			RSPersistentManager.instance().getSession().save(cristinaAngeli);
-//			
-//			RSPersistentManager.instance().getSession().save(mariannaDonati);
-//			RSPersistentManager.instance().getSession().save(elenaSarti);
-//			RSPersistentManager.instance().getSession().save(mariaPiaAlfredi);
-//			RSPersistentManager.instance().getSession().save(giorgioGatti);
-//			RSPersistentManager.instance().getSession().save(lorenzoNegri);
-//			RSPersistentManager.instance().getSession().save(mattiaVitali);
-//			RSPersistentManager.instance().getSession().save(emanueleDelMonte);
-//			RSPersistentManager.instance().getSession().save(luigiBernardi);
-//			RSPersistentManager.instance().getSession().save(vittorioPellegrini);
-//			RSPersistentManager.instance().getSession().save(alexVilla);
-//			
-//			RSPersistentManager.instance().getSession().save(marcoBattaglia);
-//			RSPersistentManager.instance().getSession().save(alfredoMorelli);
-//			RSPersistentManager.instance().getSession().save(pieraDellaValle);
-//			RSPersistentManager.instance().getSession().save(ignazioBoschi);
-//			RSPersistentManager.instance().getSession().save(jacopoValli);
-//			
-//			RSPersistentManager.instance().getSession().save(gianniConte);
-//			RSPersistentManager.instance().getSession().save(lucaBarone);
-//			RSPersistentManager.instance().getSession().save(giacomoSiciliano);
-//			RSPersistentManager.instance().getSession().save(fabrizioToscani);
-//			RSPersistentManager.instance().getSession().save(arturoAncona);
-//			
 
+//			CREAZIONE DEI LIBRETTI ASSENZA E ASSEGNAZIONE AGLI STUDENTI
 //				LibrettoAssenze libretto =  new LibrettoAssenze();
 			LibrettoAssenze librettoMarioRomano = new LibrettoAssenze();
 			marioRomano.setLibrettoAssenze(librettoMarioRomano);
-//			LibrettoVoti librettoVotioMarioRomano = new LibrettoVoti();
-//			marioRomano.setLibrettoVoti(librettoVotioMarioRomano);
-			
 			LibrettoAssenze librettoDavideDiSalvo =  new LibrettoAssenze();
 			davideDiSalvo.setLibrettoAssenze(librettoDavideDiSalvo);
-//			LibrettoVoti librettoVotiDavideDiSalvo = new LibrettoVoti();
-//			davideDiSalvo.setLibrettoVoti(librettoVotiDavideDiSalvo);
-			
 			LibrettoAssenze librettoIvoMarino = new LibrettoAssenze();
 			ivoMarino.setLibrettoAssenze(librettoIvoMarino);
-//			LibrettoVoti librettoVotiIvoMarino = new LibrettoVoti();
-//			ivoMarino.setLibrettoVoti(librettoVotiIvoMarino);
-			
 			LibrettoAssenze librettoPieroRusso = new LibrettoAssenze();
 			pieroRusso.setLibrettoAssenze(librettoPieroRusso);
-//			LibrettoVoti librettoVotiPieroRusso = new LibrettoVoti();
-//			pieroRusso.setLibrettoVoti(librettoVotiPieroRusso);
-			
 			LibrettoAssenze librettoMarinoEsposito =  new LibrettoAssenze();
 			marinoEsposito.setLibrettoAssenze(librettoMarinoEsposito);
-//			LibrettoVoti librettoVotiMarinoEsposito = new LibrettoVoti();
-//			marinoEsposito.setLibrettoVoti(librettoVotiMarinoEsposito);
-			
 			LibrettoAssenze librettoLeonardoRicci =  new LibrettoAssenze();
-			leonardoRicci.setLibrettoAssenze(librettoLeonardoRicci);
-//			LibrettoVoti librettoVotiLeonardoRicci = new LibrettoVoti();
-//			leonardoRicci.setLibrettoVoti(librettoVotiLeonardoRicci);
-			
+			leonardoRicci.setLibrettoAssenze(librettoLeonardoRicci);		
 			LibrettoAssenze librettoValentinoFarina =  new LibrettoAssenze();
 			valentinoFarina.setLibrettoAssenze(librettoValentinoFarina);
-//			LibrettoVoti librettoVotiValentinoFarina = new LibrettoVoti();
-//			valentinoFarina.setLibrettoVoti(librettoVotiValentinoFarina);
-			
 			LibrettoAssenze librettoRoccoBenedetti =  new LibrettoAssenze();
 			roccoBenedetti.setLibrettoAssenze(librettoRoccoBenedetti);
-//			LibrettoVoti librettoVotiRoccoBenedetti = new LibrettoVoti();
-//			roccoBenedetti.setLibrettoVoti(librettoVotiRoccoBenedetti);
-			
 			LibrettoAssenze librettoAntonioGuerra =  new LibrettoAssenze();
-			antonioGuerra.setLibrettoAssenze(librettoAntonioGuerra);
-//			LibrettoVoti librettoVotiAntonioGuerra = new LibrettoVoti();
-//			antonioGuerra.setLibrettoVoti(librettoVotiAntonioGuerra);
-			
+			antonioGuerra.setLibrettoAssenze(librettoAntonioGuerra);	
 			LibrettoAssenze librettoCristinaAngeli =  new LibrettoAssenze();
 			cristinaAngeli.setLibrettoAssenze(librettoCristinaAngeli);
-//			LibrettoVoti librettoVotiCristinaAngeli = new LibrettoVoti();
-//			cristinaAngeli.setLibrettoVoti(librettoVotiCristinaAngeli);
 			
 			LibrettoAssenze librettoMariannaDonati =  new LibrettoAssenze();
 			mariannaDonati.setLibrettoAssenze(librettoMariannaDonati);
@@ -292,20 +216,21 @@ public class ResetDB {
 			LibrettoAssenze librettoArturoAncona =  new LibrettoAssenze();
 			arturoAncona.setLibrettoAssenze(librettoArturoAncona);
 			
+//			CREAZIONE DEI LIBRETTI VOTI E ASSEGNAZIONE AGLI STUDENTI
 			LibrettoVoti librettoVoti;
 			for(Studente studente : studenti){
 				librettoVoti = new LibrettoVoti();
 				studente.setLibrettoVoti(librettoVoti);
 			}
 			
-			//creazione dei registri
+//			CREAZIONE DEI REGISTRI ASSENZA
 			RegistroAssenze regAssPrimaA = new RegistroAssenze();
 			RegistroAssenze regAssSecondaA = new RegistroAssenze();
 			RegistroAssenze regAssPrimaB = new RegistroAssenze();
 			RegistroAssenze regAssSecondaB = new RegistroAssenze();
 			
 
-			//METTERE GLI STUDENTI NELLE CLASSI!!!
+//			ASSEGNAZIONE DEGLI STUDENTI ALLE CLASSI
 			primaA.getStudenti().add(pieroRusso);
 			primaA.getStudenti().add(marinoEsposito);
 			primaA.getStudenti().add(marioRomano);
@@ -340,14 +265,14 @@ public class ResetDB {
 			secondaB.getStudenti().add(fabrizioToscani);
 			secondaB.getStudenti().add(arturoAncona);
 			
-			//assegnazione del regitro alla classe primaA
+//			ASSEGNAZIONE DEI REGISTRI ASSENZA ALLE CLASSI
 			primaA.setRegistroAssenze(regAssPrimaA);
 			secondaA.setRegistroAssenze(regAssSecondaA);
 			primaB.setRegistroAssenze(regAssPrimaB);
 			secondaB.setRegistroAssenze(regAssSecondaB);
 			
 			
-			// creazione delle date
+//			CREAZIONE DELLE DATE
 			LocalDate data8_12_14 = new LocalDate(2014,12,8);
 			LocalDate data10_12_14 = new LocalDate(2014,12,10);
 			LocalDate data11_12_14 = new LocalDate(2014,12,11);
@@ -359,13 +284,11 @@ public class ResetDB {
 			LocalDate data17_12_14 = new LocalDate(2014,12,17);
 			
 			
-			//creazione di appelli
-//			Appello appello8_12_14 = new Appello(data8_12_14);
+//			CREAZIONE DEGLI APPELLI
 			Appello appello_1A_10_12_14 = new Appello(data10_12_14);
 			Appello appello_1A_11_12_14 = new Appello(data11_12_14);
 			Appello appello_1A_12_12_14 = new Appello(data12_12_14);
 			Appello appello_1A_13_12_14 = new Appello(data13_12_14);
-//			Appello appello14_12_14 = new Appello(data14_12_14);
 			Appello appello_1A_15_12_14 = new Appello(data15_12_14);
 			Appello appello_1A_16_12_14 = new Appello(data16_12_14);
 			
@@ -373,7 +296,7 @@ public class ResetDB {
 			Appello appello_1B_16_12_14 = new Appello(data16_12_14);
 			Appello appello_2B_16_12_14 = new Appello(data16_12_14);
 			
-
+//			ASSEGNAZIONE DEGLI APPELLI AI REGISTRI
 			regAssPrimaA.getAppelli().put( Calendario.getInstance().getDaysFromZero(appello_1A_10_12_14.getData()) , appello_1A_10_12_14);
 			regAssPrimaA.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_1A_11_12_14.getData()), appello_1A_11_12_14);
 			regAssPrimaA.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_1A_12_12_14.getData()), appello_1A_12_12_14);
@@ -386,7 +309,7 @@ public class ResetDB {
 			regAssPrimaB.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_1B_16_12_14.getData()), appello_1B_16_12_14);
 			regAssSecondaB.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_2B_16_12_14.getData()), appello_2B_16_12_14);
 			
-			//creazione delle assenze
+//			CREAZIONE DELLE ASSENZE
 			Assenza assMarioRomano1 = new Assenza();
 			Assenza assPieroRusso1 = new Assenza();
 			Assenza assIvoMarini1 = new Assenza();
@@ -398,12 +321,9 @@ public class ResetDB {
 			Assenza assMariannaDonati1 =  new Assenza();
 			Assenza assLorenzoNegri1 =  new Assenza();
 			
-			//assegnazione di appelli alle liste di appelli
-			
-
+// 			ASSEGNAZIONE DEGLI APPELLI ALLE ASSENZE
 			assMarioRomano1.getAppelli().add(appello_1A_10_12_14);
 			assMarioRomano1.getAppelli().add(appello_1A_11_12_14);
-//					AppelliAssenzeMaccio.add(appello12_12_14);
 			 
 			assPieroRusso1.getAppelli().add(appello_1A_10_12_14);
 			assPieroRusso1.getAppelli().add(appello_1A_11_12_14);
@@ -426,6 +346,7 @@ public class ResetDB {
 			assMariannaDonati1.getAppelli().add(appello_2A_16_12_14);
 			assLorenzoNegri1.getAppelli().add(appello_2A_16_12_14);
 			
+//			ASSEGNAZIONE DELLE ASSENZE AI LIBRETTI
 			librettoMarioRomano.getNonGiustificate().add(assMarioRomano1);
 			librettoIvoMarino.getNonGiustificate().add(assIvoMarini1);
 			librettoIvoMarino.getNonGiustificate().add(assIvoMarini2);
@@ -434,19 +355,116 @@ public class ResetDB {
 			librettoMariannaDonati.getNonGiustificate().add(assMariannaDonati1);
 			librettoLorenzoNegri.getNonGiustificate().add(assLorenzoNegri1);	
 			
-			
-//			appello8_12_14.setAssenzePrese(true);
+//			-----------------------------------------			
 			appello_1A_10_12_14.setAssenzePrese(true);
 			appello_1A_11_12_14.setAssenzePrese(true);
 			appello_1A_12_12_14.setAssenzePrese(true);
 			appello_1A_13_12_14.setAssenzePrese(true);
-//			appello14_12_14.setAssenzePrese(true);
 			appello_1A_15_12_14.setAssenzePrese(true);
 			appello_1A_16_12_14.setAssenzePrese(true);
 			
 			appello_2A_16_12_14.setAssenzePrese(true);
 			appello_1B_16_12_14.setAssenzePrese(true);
 			appello_2B_16_12_14.setAssenzePrese(true);
+			
+
+			
+//			CREAZIONE DELLE MATERIE
+			Materia storia = new Materia();
+			storia.setNome("Storia");
+
+			Materia geografia = new Materia();
+			geografia.setNome("Geografia");
+
+			Materia matematica = new Materia();
+			matematica.setNome("Matematica");
+			
+//			ASSEGNAZIONE DELLE MATERIE AI REGISTRI
+			registroRossiPrimaAstoria.setMateria(storia);
+			registroRossiPrimaB.setMateria(storia);
+			
+			registroBianchiPrimaA.setMateria(geografia);
+			registroBianchiPrimaB.setMateria(geografia);
+			
+			registroRossiSecondaA.setMateria(geografia);
+			registroRossiSecondaB.setMateria(geografia);
+			
+			registroRossiPrimaAmat.setMateria(matematica);
+
+//			SALVATAGGIO DELLE MATERIE
+			RSPersistentManager.instance().getSession().save(storia);
+			RSPersistentManager.instance().getSession().save(geografia);
+			RSPersistentManager.instance().getSession().save(matematica);
+			
+//			CREAZIONE DEGLI ARGOMENTI
+			Argomento worldWar1 = new Argomento("I Guerra Mondiale", "", java.sql.Date.valueOf("2014-11-11"));
+			Argomento worldWar2 = new Argomento("II Guerra Mondiale","", java.sql.Date.valueOf("2014-11-18"));
+			Argomento colonialismo = new Argomento("colonialismo","", java.sql.Date.valueOf("2014-12-23"));
+			Argomento secondoDopoGuerra = new Argomento("secondo dopoguerra","",java.sql.Date.valueOf("2014-12-10") );
+			
+			Argomento romanEmpireFall = new Argomento("Caduta dell'Impero Romano", "", java.sql.Date.valueOf("2014-11-11"));
+			Argomento epocaDeiComuni = new Argomento("Epoca dei comuni", "", java.sql.Date.valueOf("2014-11-15"));
+			Argomento fondazioneRoma = new Argomento("Fondazione di Roma", "", java.sql.Date.valueOf("2014-11-16"));
+			
+			Argomento equazioni = new Argomento("Equazioni", "", java.sql.Date.valueOf("2014-11-11"));
+			Argomento disequazioni = new Argomento("Disequazioni", "", java.sql.Date.valueOf("2014-11-15"));
+			Argomento sistemiEquazioni = new Argomento("Sistemi di Equazioni", "", java.sql.Date.valueOf("2014-11-16"));
+			
+			Argomento regioniItalia = new Argomento("Regioni D'Italia", "", java.sql.Date.valueOf("2014-11-11"));
+			Argomento provincePiemonte = new Argomento("Province del Piemonte", "", java.sql.Date.valueOf("2014-11-15"));
+			Argomento provinceLombardia = new Argomento("Province della Lombardia", "", java.sql.Date.valueOf("2014-11-16"));
+			
+			Argomento provinceAbruzzo = new Argomento("Province del Abruzzo", "", java.sql.Date.valueOf("2014-11-11"));
+			Argomento provincePuglia = new Argomento("Province della Puglia", "", java.sql.Date.valueOf("2014-11-15"));
+			Argomento provinceSardegna = new Argomento("Province della Sardegna", "", java.sql.Date.valueOf("2014-11-16"));
+			
+			Argomento scandinavia = new Argomento("Scandinavia", "", java.sql.Date.valueOf("2014-11-11"));
+			Argomento penisolaIberica = new Argomento("Penisola Iberica", "", java.sql.Date.valueOf("2014-11-15"));
+			Argomento balcani = new Argomento("Balcani", "", java.sql.Date.valueOf("2014-11-16"));
+			
+			Argomento usa = new Argomento("U.S.A", "", java.sql.Date.valueOf("2014-11-11"));
+			Argomento canada = new Argomento("Canada", "", java.sql.Date.valueOf("2014-11-15"));
+			Argomento massico = new Argomento("Massico", "", java.sql.Date.valueOf("2014-11-16"));
+			
+//			ASSEGNAZIONE DEGLI ARGOMENTI AI REGISTRI
+			registroRossiPrimaAstoria.getArgomentiSvolti().add(worldWar1);
+			registroRossiPrimaAstoria.getArgomentiSvolti().add(worldWar2);
+			registroRossiPrimaAstoria.getArgomentiSvolti().add(colonialismo);
+			registroRossiPrimaAstoria.getArgomentiSvolti().add(secondoDopoGuerra);
+			
+			registroRossiPrimaAmat.getArgomentiSvolti().add(equazioni);
+			registroRossiPrimaAmat.getArgomentiSvolti().add(disequazioni);
+			registroRossiPrimaAmat.getArgomentiSvolti().add(sistemiEquazioni);
+			
+			registroRossiPrimaB.getArgomentiSvolti().add(romanEmpireFall);
+			registroRossiPrimaB.getArgomentiSvolti().add(epocaDeiComuni);
+			registroRossiPrimaB.getArgomentiSvolti().add(fondazioneRoma);
+			
+			registroRossiSecondaA.getArgomentiSvolti().add(regioniItalia);
+			registroRossiSecondaA.getArgomentiSvolti().add(provincePiemonte);
+			registroRossiSecondaA.getArgomentiSvolti().add(provinceLombardia);
+			
+			registroRossiSecondaB.getArgomentiSvolti().add(provinceAbruzzo);
+			registroRossiSecondaB.getArgomentiSvolti().add(provincePuglia);
+			registroRossiSecondaB.getArgomentiSvolti().add(provinceSardegna);
+			
+			registroBianchiPrimaA.getArgomentiSvolti().add(scandinavia);
+			registroBianchiPrimaA.getArgomentiSvolti().add(penisolaIberica);
+			registroBianchiPrimaA.getArgomentiSvolti().add(balcani);
+			
+			registroBianchiPrimaB.getArgomentiSvolti().add(usa);
+			registroBianchiPrimaB.getArgomentiSvolti().add(canada);
+			registroBianchiPrimaB.getArgomentiSvolti().add(massico);
+
+//			CREAZIONE DEL PRIMO COMPITO IN CLASSE
+			Collection<Argomento> argomenti = new LinkedList<Argomento>();
+			argomenti.clear();
+			argomenti.add(worldWar1);
+			argomenti.add(worldWar2);
+			CompitoInClasse compitoStoria1A = new CompitoInClasse(registroRossiPrimaAstoria);
+			compitoStoria1A.setInfo(java.sql.Date.valueOf("2014-12-16"), java.sql.Time.valueOf("11:00:00"), java.sql.Time.valueOf("13:00:00"), argomenti);
+
+			registroRossiPrimaAstoria.getCompitiInClasse().add(compitoStoria1A);
 			
 			Voto[] votos = new Voto[11];
 			Voto voto;
@@ -456,53 +474,6 @@ public class ResetDB {
 				votos[i] = voto;
 				RSPersistentManager.instance().getSession().save(voto);
 			}
-			
-			Materia storia = new Materia();
-			storia.setNome("Storia");
-			registroRossiPrimaAstoria.setMateria(storia);
-			registroRossiPrimaB.setMateria(storia);
-			
-			
-			Materia geografia = new Materia();
-			geografia.setNome("Geografia");
-			
-			
-			registroBianchiPrimaA.setMateria(geografia);
-			registroBianchiPrimaB.setMateria(geografia);
-			registroRossiSecondaA.setMateria(geografia);
-			registroRossiSecondaB.setMateria(geografia);
-			
-			Materia matematica = new Materia();
-			matematica.setNome("Matematica");
-			registroRossiPrimaAmat.setMateria(matematica);
-
-			
-			RSPersistentManager.instance().getSession().save(storia);
-			RSPersistentManager.instance().getSession().save(geografia);
-			RSPersistentManager.instance().getSession().save(matematica);
-			
-			Collection<Argomento> argomenti = new LinkedList<Argomento>();
-			
-			Argomento worldWar1 = new Argomento("world war I", "", java.sql.Date.valueOf("2014-11-11"));
-			Argomento worldWar2 = new Argomento("world war II","", java.sql.Date.valueOf("2014-11-18"));
-			Argomento colonialismo = new Argomento("colonialismo","", java.sql.Date.valueOf("2014-12-25"));
-			Argomento secondoDopoGuerra = new Argomento("secondo dopoguerra","",java.sql.Date.valueOf("2014-12-10") );
-			
-			registroRossiPrimaAstoria.getArgomentiSvolti().add(worldWar1);
-			registroRossiPrimaAstoria.getArgomentiSvolti().add(worldWar2);
-			registroRossiPrimaAstoria.getArgomentiSvolti().add(colonialismo);
-			registroRossiPrimaAstoria.getArgomentiSvolti().add(secondoDopoGuerra);
-			
-			
-			
-			
-			argomenti.clear();
-			argomenti.add(worldWar1);
-			argomenti.add(worldWar2);
-			CompitoInClasse compitoStoria1A = new CompitoInClasse(registroRossiPrimaAstoria);
-			compitoStoria1A.setInfo(java.sql.Date.valueOf("2014-12-16"), java.sql.Time.valueOf("11:00:00"), java.sql.Time.valueOf("13:00:00"), argomenti);
-
-			registroRossiPrimaAstoria.getCompitiInClasse().add(compitoStoria1A);
 			
 			Map<Studente, Voto> mapVoti;
 			mapVoti = new HashMap<Studente, Voto>();
@@ -515,14 +486,10 @@ public class ResetDB {
 			mapVoti.put(antonioGuerra, votos[7]);
 			mapVoti.put(cristinaAngeli, votos[6]);
 			
-//			Voto[] voti = {                votos[4],   votos[8],     votos[9],     votos[7],        votos[5],       votos[7],      votos[6]};
-//			Studente[] studentiCompito ={ pieroRusso, marioRomano, leonardoRicci, valentinoFarina, roccoBenedetti, antonioGuerra, cristinaAngeli};
-			
 			compitoStoria1A.svolgi();
 			compitoStoria1A.inserisciVoti(mapVoti);
-//			registroRossiPrimaAstoria.inserisciVoti(compitoStoria1A, mapVoti);
 			
-			
+//			CREAZIONE DEL SECONDO COMPITO IN CLASSE
 			argomenti.clear();
 			compitoStoria1A = new CompitoInClasse(registroRossiPrimaAstoria);
 			compitoStoria1A.setInfo(java.sql.Date.valueOf("2014-12-15"), java.sql.Time.valueOf("10:00:00"), java.sql.Time.valueOf("11:30:00"), argomenti);
@@ -530,11 +497,14 @@ public class ResetDB {
 
 			registroRossiPrimaAstoria.getCompitiInClasse().add(compitoStoria1A);
 			
+			//FIXME da togliere
+//			TestCambioStatiCompito.main(null);
 			
-			
-			
+//			SALVATAGGIO DELLA SCUOLA SUL DATABASE -------------------------------------------------------------
 			RSPersistentManager.instance().getSession().save(scuola1);
+//          ---------------------------------------------------------------------------------------------------
 			
+//  		CREAZIONE ESALVATAGGIO DEI GIORNI FESTIVI
 			GiornoSettimanaleFestivo sabato = new GiornoSettimanaleFestivo(6);
 			GiornoSettimanaleFestivo domenica = new GiornoSettimanaleFestivo(7);
 			
@@ -610,19 +580,7 @@ public class ResetDB {
 //			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelGiornoSettimanale);
 			
 			t.commit();
-			
 
-			
-//			 pieroRusso 
-//			 marinoEsposito
-//			 marioRomano 
-//			 davideDiSalvo 
-//			 ivoMarino 
-//			 leonardoRicci 
-//			 valentinoFarina 
-//			 roccoBenedetti
-//			 antonioGuerra 
-//			 cristinaAngeli
 		}
 		catch (Exception e) {
 			t.rollback();
