@@ -465,6 +465,9 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		$scope.modal.messaggio = "confermi di voler cambiare lo stato del compito?"
 		$scope.modal.colore = "modal-header-"+tipo;
 		$scope.modal.bottone = "btn-"+tipo;
+		$scope.modal.bottoneOk = "btn-"+tipo;
+		$scope.modal.coloreAnnulla = "modal-header-default";
+		$scope.modal.bottoneAnnulla = "btn-default";
 		$scope.modal.okButtonModal = function(){
 			funzioneDaEseguire()
 		}//funzioneDaEseguire();
@@ -547,7 +550,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	});
 	
 	$scope.stud_predicate = "cognome"
-	$scope.args_predicate = "idArgomento"
+	$scope.args_predicate = "-data"
 	$scope.aggiungiArgomento = function(){
 		var auxArgomento = {idArgomento : null};
 		$scope.compitoInClasse.argomentiRS.push(auxArgomento);
@@ -1017,6 +1020,6 @@ function argomentiModal(mioScope){
 	tipo = "primary";
 	mioScope.modal.colore = "modal-header-"+tipo;
 	mioScope.modal.bottone = "btn-"+tipo;
-	mioScope.modal.okButtonModal = mioScope.confermaArgomenti();
+	mioScope.modal.okButtonModal = function(){mioScope.confermaArgomenti()};
 		$("#myModal2").modal("show")
 }

@@ -12,7 +12,11 @@
 		<div class="form-group">
 			<label for="dataCompito" class="col-sm-2 control-label" >Data</label>
 			<div id="bootstrapCalendario" class="col-sm-8 input-group date">
-				<input id="dataCompito" type="text" ng-model="compitoInClasse.data" class="form-control" placeholder="gg/mm/aaaa" title="seleziona per modificare" readonly ng-disabled="currState != statiAmmissibili.daSvolgere" /><span class="input-group-addon" ng-hide="currState == statiAmmissibili.svolto"><i class="glyphicon glyphicon-calendar"></i></span>
+				<input id="dataCompito" type="text" 
+						ng-model="compitoInClasse.data" class="form-control" 
+						placeholder="gg/mm/aaaa" title="seleziona per modificare" readonly 
+						ng-disabled="currState != statiAmmissibili.DA_SVOLGERE.stato" />
+						<span class="input-group-addon" ng-hide="currState != statiAmmissibili.DA_SVOLGERE.stato"><i class="glyphicon glyphicon-calendar"></i></span>
 			</div>
 		</div>
 		<div class="form-group">
@@ -102,10 +106,6 @@
 			<fieldset>
 			<legend >Azioni sullo stato corrente </legend>
 			<div class="text-center">
-				<p>{{vecchioCompitoInClasse}}</p>
-				<p>{{compitoInClasse}}</p>
-				
-				<p>sono uguali? {{compitiUguali}}</p>
 				<button class="btn btn-default" ng-click="annullaModificheCompito()" title="annulla le modifiche effettuate fino ad ora" ng-disabled="compitiUguali"> Annulla modifiche</button>
 				<button class="btn btn-primary" ng-click="salvaCompito()" title="salva il compito con i dati inseriti"> Salva Compito <span class="glyphicon glyphicon-save"></span></button>
 				<button class="btn btn-default" ng-click="tornaAlRegistro()" title="torna all'elenco dei compiti in classe">Torna al registro</button>
