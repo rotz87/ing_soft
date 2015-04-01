@@ -11,8 +11,10 @@
 			</div>
 		</div>
 		<div class="col-md-3">
-			<div class="btn btn-default" ng-repeat="registroDoc in registriDisponibili" ng-click="scegliRegistro(registroDoc.idRegistroDocente)">
-				<div class="panel-body">Registro {{registroDoc.materia}} </div>
+			<div 	class="btn btn-default col-md-5" 
+					ng-repeat="registroDoc in registriDisponibili" 
+					ng-click="scegliRegistro(registroDoc.idRegistroDocente)">
+				<div class="panel-body"> Registro {{registroDoc.materia}} </div>
 			</div>
 		</div>
 	</div>
