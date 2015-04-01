@@ -49,7 +49,7 @@ CompitoInClasse.prototype.chiudi = function(funzioneEsterna){
 	return ret;
 };
 CompitoInClasse.prototype.elimina = function(funzioneEsterna){
-	ret = this.cState.elimina();
+	ret = this.cState.elimina(funzioneEsterna);
 	console.log("elimina")
 	return ret;
 };

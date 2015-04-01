@@ -27,15 +27,16 @@ registroApp.config(["$locationProvider","$routeProvider",function($locationProvi
 //	  controller: 'elencoMaterie',
 //	  title:'Seleziona il registro Docente'
 //  })
-  .when('/:idClasse/registroDocente/:idRegistroDocente',{
-	  templateUrl: 'partials/compito.html',
-	  controller: '',
-	  title:'Seleziona l\'operazione'
-  }).when('/:idClasse/registroDocente/:idRegistroDocente/compiti/',{
+//  	.when('/:idClasse/registriDocente/:idRegistroDocente',{
+//	  templateUrl: 'partials/compito.html',
+//	  controller: '',
+//	  title:'Seleziona l\'operazione'
+//  })
+  .when('/:idClasse/registriDocente/:idRegistroDocente/compiti/',{
 	  templateUrl: 'partials/elencoCompiti.html',
 	  controller: 'riempiElencoCompiti',
 	  title:'Elenco dei compiti'
-  }).when('/:idClasse/registroDocente/:idRegistroDocente/compiti/:idCompito',{
+  }).when('/:idClasse/registriDocente/:idRegistroDocente/compiti/:idCompito',{
 	  templateUrl: 'partials/compito.html',
 	  controller: 'recuperaCompitoInClasse',
 	  title:'Imposta il compito'

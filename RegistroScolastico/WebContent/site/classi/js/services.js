@@ -122,8 +122,13 @@ registroServices.factory('Compito',['$resource',
                    									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente', idCompito:'@idCompito'},
                    									method:'PUT',
                    									isArray:false
+                   								},
+                   								'eliminaCompito':{
+                   									url:'/RegistroScolastico/api/classi/:idClasse/registriDocente/:idRegistroDocente/compiti/:idCompito/state',
+                   									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente', idCompito:'@idCompito'},
+                   									method:'DELETE',
+                   									isArray:false
                    								}
-                   									
                    							});
                    				}]);
 

@@ -43,7 +43,8 @@ DaSvolgereState.prototype.chiudi = function(){
 	console.log("non puoi chiudere un compito non ancora svolto");
 	return false;
 };
-DaSvolgereState.prototype.elimina = function(){
+DaSvolgereState.prototype.elimina = function(funzioneEsterna){
+	funzioneEsterna();
 	console.log("compito eliminato");
 	return true;
 };
