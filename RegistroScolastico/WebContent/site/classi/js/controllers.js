@@ -948,7 +948,7 @@ registroControllers.controller('riempiElencoCompiti',
 							//successo
 							idCompito = headers().location.split("/");
 							idCompito = idCompito[idCompito.length-1];
-							$location.path($location.path()+$routeParams.idCompito+"/");
+							$location.path($location.path()+idCompito+"/");
 						},
 						function(response,headers){
 							//fallimento
