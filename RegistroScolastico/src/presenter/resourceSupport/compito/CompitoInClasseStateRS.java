@@ -17,14 +17,13 @@ public class CompitoInClasseStateRS extends ResourceSupport{
 		
 		this.state = compito.getState().getStateEnum();
 		
-		//TODO bisogna inserire come link filgi: Argomenti e studenti e come padre RegistroDocente
+		//FIXME bisogna inserire come link filgi: Argomenti e studenti e come padre RegistroDocente
 		
 //		this.add(ControllerLinkBuilder.linkTo(
 //				ControllerLinkBuilder.methodOn(ClassePresenter.class, idClasse).
 //					getStudentiAppello(idClasse)).withRel("studenti"));
 //		this.add(ControllerLinkBuilder.linkTo(AppelloPresenter.class, idClasse).withRel(Link.REL_PREVIOUS));
 		
-		//TODO
 //		this.add(ControllerLinkBuilder.linkTo(
 //				ControllerLinkBuilder.methodOn(CompitoInClassePresenter.class, idClasse, idRegistroDocente).
 //					getCompitoInClasse(idClasse, idRegistroDocente, this.idCompito)).withSelfRel());

@@ -73,7 +73,6 @@ public class TestFaiLAppelloController2 {
 		catch(NullPointerException NPE){
 			Stampa.stampaln("NULL POINTER EXCEPTION: "+NPE.getMessage());
 		} catch (PersistentException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

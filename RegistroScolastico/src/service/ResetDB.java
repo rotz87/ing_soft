@@ -36,7 +36,6 @@ public class ResetDB {
 			initDB();
 			Stampa.stampa("DATABASE rigenerato!!!");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

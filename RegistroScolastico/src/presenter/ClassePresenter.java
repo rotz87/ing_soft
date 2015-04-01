@@ -30,7 +30,8 @@ import domain.model.RegistroDocente;
 import domain.model.Studente;
 
 @RestController
-@RequestMapping("/classi")
+//@RequestMapping("/classi")
+@RequestMapping(ApiPath.CLASSI)
 public class ClassePresenter {
 	
 
@@ -60,10 +61,11 @@ public class ClassePresenter {
 		return classiMenu;
 	}
 	
-	/*TODO Con il path /{idClasse}/studenti si intendono studenti generici (con tutti i dati), mentre
+	/*FIXME Con il path /{idClasse}/studenti si intendono studenti generici (con tutti i dati), mentre
 	 * esso ritorna StudenteAppelloRS
 	*/
-	@RequestMapping(value = "/{idClasse}/studenti", method = RequestMethod.GET)
+//	@RequestMapping(value = "/{idClasse}/studenti", method = RequestMethod.GET)
+	@RequestMapping(value = ApiPath.CLASSE_STUDENTI, method = RequestMethod.GET)
 	public Collection<StudenteAppelloRS> getStudentiAppello(@PathVariable int idClasse) {
 		
 		ClasseController classeController;
@@ -82,7 +84,8 @@ public class ClassePresenter {
 		return studentiRS;
 	}
 	
-	@RequestMapping(value = "/{idClasse}/dateFestive", method = RequestMethod.GET)
+//	@RequestMapping(value = "/{idClasse}/dateFestive", method = RequestMethod.GET)
+	@RequestMapping(value = ApiPath.CLASSE_FESTIVI, method = RequestMethod.GET)
 	public Collection<Long> getDateFestive(@PathVariable int idClasse) {
 		
 		ClasseController classeController;
@@ -108,7 +111,8 @@ public class ClassePresenter {
 		return dateLong;
 	}
 	
-	@RequestMapping(value = "/{idClasse}/registriDocente", method = RequestMethod.GET)
+//	@RequestMapping(value = "/{idClasse}/registriDocente", method = RequestMethod.GET)
+	@RequestMapping(value = ApiPath.CLASSE_REGISTRI_DOCENTE, method = RequestMethod.GET)
 	public Collection<RegistroDocenteRS> getRegistriDocente(@PathVariable int idClasse) {
 		ClasseController classeController;
 		DocenteController docenteController;

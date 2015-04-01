@@ -15,8 +15,6 @@ import domain.model.compitoInClasse.CompitoInClasseCriteria;
 public class TestInserisciVoti {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
 	
 	CompitoInClasseController controlloreCompito; 
 	int idRegistroDocenteProva = 1;

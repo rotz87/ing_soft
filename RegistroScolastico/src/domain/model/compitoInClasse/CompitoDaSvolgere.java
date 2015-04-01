@@ -43,7 +43,7 @@ public class CompitoDaSvolgere extends CompitoInClasseStateImp {
 		data = compitoInClasse.getData();
 		lData = new LocalDate(data);
 		
-		// TODO aggiungere altri controlli!!
+		// FIXME aggiungere altri controlli!!
 		if(lData.equals(Calendario.getInstance().getDataOdierna()) || lData.isBefore(Calendario.getInstance().getDataOdierna())){
 			compitoInClasse.set_state(CompitoSvolto.getInstance());
 		}else{

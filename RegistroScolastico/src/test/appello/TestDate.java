@@ -160,7 +160,6 @@ public class TestDate {
 				Stampa.stampa("check "+check);
 				
 			} catch (PersistentException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			

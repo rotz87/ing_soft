@@ -402,14 +402,4 @@ public class FaiAppelloController {
 		return rit;
 	}
 
-	/**
-	 * 
-	 * @param idClasse
-	 * @param idAppello
-	 */
-	public java.util.HashMap<Studente, Boolean> getBoolAssenze(int idClasse, int idAppello) {
-		// TODO - implement FaiAppelloController.getBoolAssenze
-		throw new UnsupportedOperationException();
-	}
-
 }

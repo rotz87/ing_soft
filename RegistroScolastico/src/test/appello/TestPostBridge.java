@@ -106,14 +106,12 @@ public class TestPostBridge {
 				RSPersistentManager.instance().getSession().update(stud);
 				t.commit();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				t.rollback();
 				e.printStackTrace();
 			}
 			
 //			DBService.getInstance().save(stud);
 		} catch (PersistentException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -139,14 +137,12 @@ public class TestPostBridge {
 				RSPersistentManager.instance().getSession().save(regAss.getAppelloOdierno());
 				t.commit();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				t.rollback();
 				e.printStackTrace();
 			}
 			
 			
 		} catch (PersistentException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -170,7 +166,6 @@ public class TestPostBridge {
 
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -199,7 +194,6 @@ public class TestPostBridge {
 //			Stampa.stampaln("FINE ");
 			
 		} catch (PersistentException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -230,13 +224,11 @@ public class TestPostBridge {
 				RSPersistentManager.instance().getSession().update(libAss);
 				t.commit();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				t.rollback();
 				e.printStackTrace();
 			}			
 			
 		} catch (PersistentException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

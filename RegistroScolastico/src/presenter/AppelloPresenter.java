@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 import presenter.resourceSupport.appello.AppelliContainerRS;
 import presenter.resourceSupport.appello.AppelloRS;
 import presenter.resourceSupport.appello.AssentiContainerRS;
-import service.Stampa;
 import domain.controller.DocenteController;
 import domain.controller.FaiAppelloController;
 import domain.model.Appello;
@@ -32,12 +31,13 @@ import domain.model.Studente;
 
 
 @RestController
-@RequestMapping("/classi/{idClasse}/appelli")
+//@RequestMapping("/classi/{idClasse}/appelli")
+@RequestMapping(ApiPath.CLASSE_APPELLI)
 public class AppelloPresenter {
 	  
-	
+
 	  @RequestMapping(method = RequestMethod.POST)
-	  ResponseEntity<?> creaAppello(@PathVariable int idClasse) {
+	  public ResponseEntity<?> creaAppello(@PathVariable int idClasse) {
 		  HttpHeaders httpHeaders;
 		  FaiAppelloController fAController;
 		  DocenteController docenteController;
@@ -61,7 +61,8 @@ public class AppelloPresenter {
 	  }
 		
 	  
-		@RequestMapping(value = "/{idAppello}", method = RequestMethod.GET)
+//		@RequestMapping(value = "/{idAppello}", method = RequestMethod.GET)
+		@RequestMapping(value = ApiPath.ID_APPELLO, method = RequestMethod.GET)
 		public AppelloRS getAppello(@PathVariable int idAppello, @PathVariable int idClasse) {
 			
 			FaiAppelloController fAController;
@@ -123,7 +124,8 @@ public class AppelloPresenter {
 		}
 		
 	
-		@RequestMapping(value = "/{idAppello}/assenti", method = RequestMethod.POST)
+//		@RequestMapping(value = "/{idAppello}/assenti", method = RequestMethod.POST)
+		@RequestMapping(value = ApiPath.APPELLO_ASSENTI, method = RequestMethod.POST)
 		public ResponseEntity<?> inserisciAssenze(@PathVariable int idAppello, @PathVariable int idClasse, @RequestBody AssentiContainerRS assenti){
 			FaiAppelloController fAController;
 			DocenteController docenteController;
@@ -158,7 +160,8 @@ public class AppelloPresenter {
 		 * @param idClasse
 		 * @return Collection<idStudentiAssenti>
 		 */
-		@RequestMapping(value = "/{idAppello}/assenti", method = RequestMethod.GET)
+//		@RequestMapping(value = "/{idAppello}/assenti", method = RequestMethod.GET)
+		@RequestMapping(value = ApiPath.APPELLO_ASSENTI, method = RequestMethod.GET)
 		public AssentiContainerRS getAssenti(@PathVariable int idAppello, @PathVariable int idClasse) {
 			
 			FaiAppelloController fAController;

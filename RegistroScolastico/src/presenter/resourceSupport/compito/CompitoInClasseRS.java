@@ -46,7 +46,7 @@ public class CompitoInClasseRS extends ResourceSupport{
 			this.argomentiRS.add(new ArgomentoRS(argomento));
 		}
 		
-		//TODO bisogna inserire come link filgi: Argomenti e studenti e come padre RegistroDocente
+		//FIXME bisogna inserire come link filgi: Argomenti e studenti e come padre RegistroDocente
 		
 //		this.add(ControllerLinkBuilder.linkTo(
 //				ControllerLinkBuilder.methodOn(ClassePresenter.class, idClasse).
@@ -66,7 +66,7 @@ public class CompitoInClasseRS extends ResourceSupport{
 		this.oraFine = oraFine;
 		this.argomentiRS = argomentiRS;
 		
-		//TODO inserire i links
+		//FIXME inserire i links
 	}
 
 	public int getIdCompito() {
