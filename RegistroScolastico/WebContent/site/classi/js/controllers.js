@@ -553,7 +553,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	$scope.compitoInClasse.azione.attivaRiattiva = false;
 	
 	$scope.salvaCompito = function(){
-		mioCompito.salvaCompito($scope.aggiornaDatiCompito)
+		mioCompito.salvaCompito($scope)
 	}
 	
 	$scope.aggiornaDatiCompito = function(){
@@ -658,9 +658,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	$scope.chiudiCompitoAjax = function(){
 		impostaStato($scope.statiAmmissibili.CHIUSO.stato)
 	}
-	$scope.testCo = function(){
-		console.log("ciaoooo")
-	}
+	
 	$scope.svolgiCompito = function(){
 		var success = mioCompito.svolgi($scope.svolgiCompitoAjax);
 	}

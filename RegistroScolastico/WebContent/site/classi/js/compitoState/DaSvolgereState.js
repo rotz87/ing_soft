@@ -4,13 +4,14 @@ var DaSvolgereState = function(cCompitoInClasse){
 	this.label = "da svolgere"
 };
 
-DaSvolgereState.prototype.salvaCompito = function(funzioneEsterna){
-	funzioneEsterna();
+DaSvolgereState.prototype.salvaCompito = function(obj){
+	this.inserisciInfo(obj)
 	console.log("DaSvolgereState - informazioni salvate")
 	return true;
 };
 
-DaSvolgereState.prototype.inserisciInfo = function(){
+DaSvolgereState.prototype.inserisciInfo = function(obj){
+	obj.aggiornaDatiCompito();
 	console.log("info cambiate");
 	return true;
 };
