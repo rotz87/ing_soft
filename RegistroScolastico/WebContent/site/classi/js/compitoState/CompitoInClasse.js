@@ -9,8 +9,8 @@ CompitoInClasse.prototype.setState = function(cState){
 	this.cState = cState;
 };
 
-CompitoInClasse.prototype.salvaCompito = function(scope){
-	ret = this.cState.salvaCompito(scope);
+CompitoInClasse.prototype.salvaCompito = function(funzioneEsterna){
+	ret = this.cState.salvaCompito(funzioneEsterna);
 	return ret;
 };
 
@@ -19,7 +19,7 @@ CompitoInClasse.prototype.inserisciInfo = function(funzioneEsterna){
 	console.log("inserisciInfo")
 	return ret;
 };
-CompitoInClasse.prototype.inserisciVoti = function(){
+CompitoInClasse.prototype.inserisciVoti = function(funzioneEsterna){
 	ret = this.cState.inserisciVoti();
 	console.log("inserisciVoti")
 	return ret;
@@ -29,16 +29,16 @@ CompitoInClasse.prototype.svolgi = function(funzioneEsterna){
 	console.log("svolgi")
 	return ret;
 };
-CompitoInClasse.prototype.annullaRipristina = function(){
+CompitoInClasse.prototype.annullaRipristina = function(funzioneEsterna){
 	ret = this.cState.annullaRipristina();
 	return ret;
 }
-CompitoInClasse.prototype.annulla = function(){
-	ret = this.cState.annulla();
+CompitoInClasse.prototype.annulla = function(funzioneEsterna){
+	ret = this.cState.annulla(funzioneEsterna);
 	console.log("annulla")
 	return ret;
 };
-CompitoInClasse.prototype.disannulla = function(funzioneEsterna){
+CompitoInClasse.prototype.ripristina = function(funzioneEsterna){
 	ret = this.cState.disannulla(funzioneEsterna);
 	console.log("ripristina")
 	return ret;

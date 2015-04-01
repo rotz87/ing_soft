@@ -1,10 +1,11 @@
 var DaSvolgereState = function(cCompitoInClasse){
 	this.cCompitoInClasse = cCompitoInClasse;
 	this.stato = "DA_SVOLGERE"
+	this.label = "da svolgere"
 };
 
-DaSvolgereState.prototype.salvaCompito = function(scope){
-	scope.aggiornaDatiCompito();
+DaSvolgereState.prototype.salvaCompito = function(funzioneEsterna){
+	funzioneEsterna();
 	console.log("DaSvolgereState - informazioni salvate")
 	return true;
 };

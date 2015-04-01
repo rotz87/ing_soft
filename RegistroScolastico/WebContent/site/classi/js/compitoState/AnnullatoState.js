@@ -1,6 +1,7 @@
 var AnnullatoState = function(cCompitoInClasse){
 	this.cCompitoInClasse = cCompitoInClasse;
 	this.stato = "ANNULLATO"
+	this.label = "annullato"
 };
 AnnullatoState.prototype.salvaCompito = function(scope){
 	console.log("non è possibile salvare un compito annullato")
@@ -22,9 +23,10 @@ AnnullatoState.prototype.annulla = function(){
 	console.log("il compito è già annullato");
 	return false;
 };
-AnnullatoState.prototype.disannulla = function(){
+AnnullatoState.prototype.disannulla = function(funzioneEsterna){
 	console.log("il compito è riattivato/ripristinato");
 	this.cCompitoInClasse.setState(this.cCompitoInClasse.getSvoltoState())
+	funzioneEsterna()
 	return true;
 };
 AnnullatoState.prototype.chiudi = function(){

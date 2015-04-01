@@ -1,15 +1,17 @@
 <!-- Modal -->
-<div class="modal fade " id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog .myDialog modal-lg">
     <div class="modal-content">
-	<div class="modal-header">
+	<div class="modal-header ng-class: modal.colore;">
 		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		<h1>
 			{{modal.titolo}}
 		</h1>
       </div>
       <div class="modal-body">
+      {{modal.messaggio}}
       <div class="row">
+      	<p></p>
         <label ng-repeat="argomento in argomentiSvolti | orderBy:args_predicate" class="col-md-4">
 			<input type="checkbox" checklist-model="modal.argomenti" checklist-value="argomento" > {{argomento.nome}}<br>
         </label>
@@ -17,7 +19,7 @@
       </div>
       <div class="modal-footer">
       	<button type="button" class="btn btn-md ng-class:modal.bottoneAnnulla" data-dismiss="modal">Annulla</button>
-        <button type="button" class="btn btn-md ng-class:modal.bottoneOk;" data-dismiss="modal" ng-click="confermaArgomenti()"> Ok </button>
+        <button type="button" class="btn btn-md ng-class:modal.bottoneOk" data-dismiss="modal" ng-click="modal.okButtonModal()"> Ok </button>
       </div>
     </div>
   </div>

@@ -1,6 +1,7 @@
 var ChiusoState = function(cCompitoInClasse){
 	this.cCompitoInClasse = cCompitoInClasse;
 	this.stato = "CHIUSO"
+	this.label = "chiuso"
 };
 ChiusoState.prototype.salvaCompito = function(scope){
 	console.log("non è possibile salvare un compito chiuso")

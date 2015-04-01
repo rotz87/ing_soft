@@ -1,10 +1,12 @@
 var SvoltoState = function(cCompitoInClasse){
 	this.cCompitoInClasse = cCompitoInClasse;
-	this.stao = "SVOLTO"
+	this.stato = "SVOLTO"
+	this.label = "svolto"
 };
 
-SvoltoState.prototype.salvaCompito = function(scope){
-	scope.salvaVoti();
+SvoltoState.prototype.salvaCompito = function(funzioneEsterna){
+	console.log(funzioneEsterna)
+	funzioneEsterna();
 	console.log("SvoltoState - informazioni salvate")
 	return true;
 };
@@ -27,18 +29,20 @@ SvoltoState.prototype.annullaRipristina = function(){
 	console.log("il compito è svolto, dunque annullo");
 	return true;
 };
-SvoltoState.prototype.annulla = function(){
-	this.cCompitoInClasse.setState(this.cCompitoInClasse.getAnnullatoState())
+SvoltoState.prototype.annulla = function(funzioneEsterna){
+	funzioneEsterna()
 	console.log("il compito è annullato");
+	this.cCompitoInClasse.setState(this.cCompitoInClasse.getAnnullatoState())
 	return true;
 };
 SvoltoState.prototype.disannulla = function(){
-	console.log("non puoi riattivare/ripristinare un compito non annullato");
+	console.log("non puoi riattivare/ripristinare un compito non annullato (SVOLTO)");
 	return false;
 };
-SvoltoState.prototype.chiudi = function(){
-	console.log("il compito è chiuso");
+SvoltoState.prototype.chiudi = function(funzioneEsterna){
+	funzioneEsterna();
 	this.cCompitoInClasse.setState(this.cCompitoInClasse.getChiusoState())
+	
 	return true;
 };
 SvoltoState.prototype.elimina = function(){
@@ -47,5 +51,5 @@ SvoltoState.prototype.elimina = function(){
 	//procedura eliminazione compito
 };
 SvoltoState.prototype.getStato = function(){
-	return "SVOLTO"
-}
+	return this.stato
+};

@@ -9,9 +9,11 @@ registroControllers.controller('avviaAppello',['$scope','rsClasse','$location','
 			}
 			
 			rsClasse.myPost({idClasse:$scope.idClasse},
-					function(data,header){
+					function(response,headers){
+				//successo
 				$scope.appelloUri = header("location");
 			},function(response,headers){
+				//fallimento
 				erroreSistema($rootScope, response.data, true)
 			});
 		}
@@ -53,7 +55,7 @@ registroControllers.controller('riempiElencoAppelli', ['$scope','rsClasse','$loc
 	   * nell'elenco degli appelli
 	   **/
 	  $q.when($scope.elencoAppelli2.$promise).then(
-		function(response){
+		function(response,headers){
 		  //successo
 		  var aggiungiAppello = false;
 		  var trovato = false;
@@ -339,7 +341,7 @@ registroControllers.controller('popolamentoNavigazione', ['$scope','rsClasse','$
 
 	$scope.$watch("idClasse",
 			function(newValue,oldValue){
-		//successo
+		//c'è un nuovo valore di idClasse
 		
 		if(newValue != null)
 			{
@@ -364,18 +366,19 @@ registroControllers.controller('popolamentoNavigazione', ['$scope','rsClasse','$
 		{
 			
 			$scope.elencoClassi = rsClasse.elencoClassi({},
-					function(response,header)
+					function(response,headers)
 					{
 						//successo
 					
 					},
-					function(response,header){
+					function(response,headers){
 						//fallimento
 						erroreSistema($rootScope, response.data, true)
 					})
-			$scope.elencoAppelli = rsClasse.myQuery2({idClasse:newValue},function(response,header){
+			$scope.elencoAppelli = rsClasse.myQuery2({idClasse:newValue},
+				function(response,headers){
 				  //successo
-			  },function(response,header){
+			  },function(response,headers){
 				  //fallimento
 				  erroreSistema($rootScope, response.data, true)
 			  })
@@ -389,7 +392,7 @@ registroControllers.controller('popolamentoNavigazione', ['$scope','rsClasse','$
 			{
 				$scope.selezioneAttuale.idAppello = newAppello;
 				$scope.elencoAppelli = rsClasse.myQuery2({idClasse:$scope.idClasse},
-					function(response,header)
+					function(response,headers)
 						{
 						  //successo
 						for(appello in response.appelli)
@@ -399,7 +402,7 @@ registroControllers.controller('popolamentoNavigazione', ['$scope','rsClasse','$
 									$scope.selezioneAttuale.appello = response.appelli[appello];
 								}
 							}
-						},function(response,header){
+						},function(response,headers){
 							//fallimento
 							erroreSistema($rootScope, response.data, true)
 						});
@@ -427,7 +430,7 @@ registroControllers.controller('riempiElencoClassi', ['$scope','rsClasse','$q','
 			{
 				//successo
 			},
-			function(response,header){
+			function(response,headers){
 				//fallimento
 				erroreSistema($rootScope, response.data, true)
 			})
@@ -439,8 +442,23 @@ registroControllers.controller('riempiElencoClassi', ['$scope','rsClasse','$q','
 registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','Compito','$q','$location','$rootScope','$routeParams','$route',
     function($scope,rsClasse,Compito,$q,$location,$rootScope,$routeParams,$route) {
 	
-	var mioCompito;
-	var stateFactory = new CompitoStateFactory();
+	var mioCompito = {};
+	var stateFactory = new CompitoInClasseStateFactory();
+	$scope.statiAmmissibili = stateFactory.getStatiAmmissibili();
+	console.log($scope.statiAmmissibili)
+	$scope.cambioStatoCompito = function (funzioneDaEseguire){
+		$scope.modal = {};
+		$scope.modal.titolo = "Cambio dello stato del compito in corso";
+		tipo = "info";
+		$scope.modal.messaggio = "confermi di voler cambiare lo stato del compito?"
+		$scope.modal.colore = "modal-header-"+tipo;
+		$scope.modal.bottone = "btn-"+tipo;
+		$scope.modal.okButtonModal = function(){
+			funzioneDaEseguire()
+		}//funzioneDaEseguire();
+		$("#myModal2").modal("show")
+		
+	}
 	
 //	mioCompito.svolgi()
 //	mioCompito.inserisciVoti()
@@ -448,7 +466,8 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 //	mioCompito.disannulla()
 //	mioCompito.chiudi()
 	
-	
+	$scope.mioCompito = {};
+	$scope.currState = {};
 	$scope.idClasse = $routeParams.idClasse;
 	$rootScope.idClasse = $routeParams.idClasse;
 	
@@ -458,13 +477,15 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	$scope.compitoInClasse.idCompito = $routeParams.idCompito;
 	$scope.calendario = rsClasse.calendario({}
 	,function(response,headers){
-		
+		//successo
 	},function(response,headers){
-		
+		//fallimento
+		erroreSistema($rootScope, response.data, true)
 	})
 	
 	$scope.compitoInClasse.$prendiCompitoInClasse({},
 		function(response,headers){
+		//successo
 		var miaData;
 		// a questo punto il calendario è già caricato
 		
@@ -491,22 +512,27 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		//$scope.compitoInClasse.argomentiRS = JSON.stringify($scope.compitoInClasse.argomentiRS)
 
 		
-		mioCompito = stateFactory.creaCompitoState("Svolto")
-		mioCompito.setInfo($scope.compitoInClasse.data, $scope.compitoInClasse.oraInizio,$scope.compitoInClasse.oraFine);
+		//mioCompito = stateFactory.creaCompitoState("Svolto")
+		
+		//mioCompito.setInfo($scope.compitoInClasse.data, $scope.compitoInClasse.oraInizio,$scope.compitoInClasse.oraFine);
 		//bisogna inserire la richiesta per lo stato del compito al server
 		Compito.getState(
 				{idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito},
 				function(response,headers)
 				{
+					//successo
 					mioCompito = stateFactory.creaCompitoState(response.state)
 					mioCompito.setInfo($scope.compitoInClasse.data, $scope.compitoInClasse.oraInizio,$scope.compitoInClasse.oraFine);
+					$scope.currState = mioCompito.getStato()
 				},
 				function(response,headers)
 				{
+					//fallimento
 					erroreSistema($rootScope, response.data, true)
 				})
-		
+
 	},function(response,headers){
+		//fallimento
 		erroreSistema($rootScope, response.data, true)
 	});
 	
@@ -527,7 +553,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	$scope.compitoInClasse.azione.attivaRiattiva = false;
 	
 	$scope.salvaCompito = function(){
-		mioCompito.salvaCompito($scope)
+		mioCompito.salvaCompito($scope.aggiornaDatiCompito)
 	}
 	
 	$scope.aggiornaDatiCompito = function(){
@@ -560,7 +586,8 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 					$("#myModal").modal("show");
 				},
 				function(response,headers){
-					erroreSistema($scope, response.data, true)
+					//fallimento
+					erroreSistema($rootScope, response.data, true)
 				});
 	}
 	
@@ -594,10 +621,9 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 					}
 				},
 				function(response,headers){
-					
+					//fallimento
+					erroreSistema($rootScope, response.data, true)
 				});
-		
-
 		$scope.modal = {};
 		$scope.modal.messaggio = "Il compito è stato registrato correttamente";
 		$scope.modal.titolo = "Compito registrato";
@@ -611,19 +637,35 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	$scope.inserisciVoto = function(studente,voto){
 		studente.voto = voto;
 	}
+
+	$scope.ripristinaCompito = function(){
+		mioCompito.ripristina($scope.ripristinaCompitoAjax)
+	}
+	$scope.ripristinaCompitoAjax = function(){
+		impostaStato($scope.statiAmmissibili.SVOLTO.stato)
+	}
+	
+	$scope.annullaCompito = function(){
+		mioCompito.annulla($scope.annullaCompitoAjax)
+	}
+	$scope.annullaCompitoAjax = function(){
+		impostaStato($scope.statiAmmissibili.ANNULLATO.stato)
+	}
 	
 	$scope.chiudiCompito = function(){
-		mioCompito.chiudi($scope.chudiCompitoAjax);
+		mioCompito.chiudi($scope.chiudiCompitoAjax);
 	}
 	$scope.chiudiCompitoAjax = function(){
-		impostaStato("CHIUSO")
+		impostaStato($scope.statiAmmissibili.CHIUSO.stato)
 	}
-	
+	$scope.testCo = function(){
+		console.log("ciaoooo")
+	}
 	$scope.svolgiCompito = function(){
 		var success = mioCompito.svolgi($scope.svolgiCompitoAjax);
 	}
 	$scope.svolgiCompitoAjax = function(){
-		impostaStato("SVOLTO")
+		impostaStato($scope.statiAmmissibili.SVOLTO.stato)
 	}
 	var impostaStato = function(prossimoStato){
 		var reqPayload = {state : prossimoStato}
@@ -632,20 +674,18 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 				reqPayload,
 				function(response,headers)
 				{
-					
+					//successo
+					$scope.currState = prossimoStato
 				},
 				function(response,headers)
 				{
-					erroreSistema($scope, response.data, true)
+					//fallimento
+					erroreSistema($rootScope, response.data, true)
 				})
 	}
 	
 	$scope.annullaRipristinaCompito = function(){
 		var success = mioCompito.annullaRipristina();
-	}
-
-	$scope.chiudiCompito = function(){
-		var success = mioCompito.chiudi();
 	}
 	
 	$scope.salvaVoti = function(){
@@ -692,6 +732,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 			//idArgomento e nome
 			$scope.modal={}
 			$scope.modal.titolo = "Seleziona gli argomenti";
+			$scope.modal.colore = "modal-header-info";
 			$scope.modal.coloreOk = "modal-header-primary";
 			$scope.modal.bottoneOk = "btn-primary";
 			$scope.modal.coloreAnnulla = "modal-header-default";
@@ -709,7 +750,9 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	}
 	//array di date in millisecondi
 	$scope.dateCalendario = [];
-	rsClasse.dateFestive ({idClasse : $scope.idClasse},function(response,headers){
+	rsClasse.dateFestive ({idClasse : $scope.idClasse},
+		function(response,headers){
+		//successo
 		for (index in response)
 		{
 			var data = new Date(response[index]);
@@ -746,6 +789,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		})
 		
 	},function(response,headers){
+		//fallimento
 		//recupero della risorsa fallito
 		erroreSistema($rootScope, response.data, true)
 	})
@@ -797,6 +841,7 @@ registroControllers.controller('riempiElencoCompiti',
 				$scope.registriDisponibili = rsClasse.registriDocente({idClasse : $routeParams.idClasse},
 						function(response,headers)
 						{
+							//successo
 							for(key in $scope.registriDisponibili)
 							{
 								if($scope.registriDisponibili[key].idRegistroDocente == $routeParams.idRegistroDocente)
@@ -808,6 +853,7 @@ registroControllers.controller('riempiElencoCompiti',
 						},
 						function(response,headers)
 						{
+							//fallimento
 							erroreSistema($rootScope, response.data, true)
 						})
 				$scope.currRegistro.idRegistroDocente = $routeParams.idRegistroDocente;
@@ -824,11 +870,13 @@ registroControllers.controller('riempiElencoCompiti',
 						{idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente, compito : $scope.compitoInClasse},
 						function(response,headers)
 						{
+							//successo
 							idCompito = headers().location.split("/");
 							idCompito = idCompito[idCompito.length-1];
 							$location.path($location.path()+idCompito+"/");
 						},
 						function(response,headers){
+							//fallimento
 							erroreSistema($rootScope, response.data, true);
 						})
 			}
@@ -859,10 +907,12 @@ registroControllers.controller('elencoRegistri',['$scope','rsClasse','$location'
 	$scope.registriDisponibili = rsClasse.registriDocente({idClasse : $scope.idClasse},
 		function(response,headers)
 			{
+				//successo
 				//attributi:
 				//idRegistroDocente, materia
 			},
 			function(response,headers){
+				//fallimento
 				erroreSistema($rootScope, response.data, true)
 	})
 	$scope.scegliRegistro = function (idRegistro){
@@ -933,6 +983,6 @@ function argomentiModal(mioScope){
 	tipo = "primary";
 	mioScope.modal.colore = "modal-header-"+tipo;
 	mioScope.modal.bottone = "btn-"+tipo;
-
+	mioScope.modal.okButtonModal = mioScope.confermaArgomenti();
 		$("#myModal2").modal("show")
 }
