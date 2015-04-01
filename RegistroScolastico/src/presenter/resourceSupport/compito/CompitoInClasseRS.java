@@ -90,7 +90,7 @@ public class CompitoInClasseRS extends ResourceSupport{
 	}
 
 	public void setOraInizio(Long oraInizio) {
-		this.oraInizio = oraInizio;
+			this.oraInizio = oraInizio;
 	}
 
 	public Long getOraFine() {
@@ -98,7 +98,7 @@ public class CompitoInClasseRS extends ResourceSupport{
 	}
 
 	public void setOraFine(Long oraFine) {
-		this.oraFine = oraFine;
+			this.oraFine = oraFine;
 	}
 
 	public Collection<ArgomentoRS> getArgomentiRS() {

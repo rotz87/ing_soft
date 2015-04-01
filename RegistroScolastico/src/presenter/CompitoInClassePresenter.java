@@ -132,14 +132,25 @@ public class CompitoInClassePresenter {
 	  @RequestMapping(value = ApiPath.ID_COMPITO, method = RequestMethod.PUT)
 	  public ResponseEntity<?> inserisciInfoCompito(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse,  @RequestBody CompitoInClasseRS compitoRS ){
 		  CompitoInClasseController compitoController;
-		  int[] idArgomenti = new int[compitoRS.getArgomentiRS().size()];
+		  int[] idArgomenti;
 
+		  java.sql.Date dataCompito = null;
+		  java.sql.Time oraInizio = null;
+		  java.sql.Time oraFine = null;
+
+		  idArgomenti = new int[compitoRS.getArgomentiRS().size()];
+		  
 		  compitoController = new CompitoInClasseController();
 		  
-		  java.sql.Date dataCompito = new java.sql.Date(compitoRS.getData());
-		  java.sql.Time oraInizio = new java.sql.Time(compitoRS.getOraInizio());
-		  java.sql.Time oraFine = new java.sql.Time(compitoRS.getOraFine());
-		  
+		  if(compitoRS.getData() != null){
+			  dataCompito = new java.sql.Date(compitoRS.getData());
+		  }
+		  if(compitoRS.getOraInizio() != null){
+			  oraInizio = new java.sql.Time(compitoRS.getOraInizio());
+		  }
+		  if(compitoRS.getOraFine() != null){
+			  oraFine = new java.sql.Time(compitoRS.getOraFine());
+		  }
 		  int i = 0;
 		  for(ArgomentoRS argomentoRS : compitoRS.getArgomentiRS()){
 			  idArgomenti[i] = argomentoRS.getIdArgomento();
