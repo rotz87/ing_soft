@@ -67,7 +67,7 @@ public class FaiAppelloController {
 				try {
 					RSPersistentManager.instance().getSession().save(registroAssenzeCorrente.getAppelloOdierno());
 					t.commit();
-				}
+				} 
 				catch (PersistentException e) {
 					t.rollback();
 					throw e;
