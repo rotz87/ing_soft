@@ -88,27 +88,18 @@ public class CompitoInClasseController {
 	 */
 	public void inserisciVoti(int idCompito, Map<Integer, Byte> mapVotiGUI) {
 
-		CompitoInClasseCriteria compitoCriteria;
 		StudenteCriteria studenteCriteria;
 		VotoCriteria votoCriteria;
 		
 		CompitoInClasse compito;
-		RegistroDocente registroDocente;
 		Map<Studente, Voto> mapVoti;
 		Studente studente;
 		Voto voto;
 		
 		
 		mapVoti = new HashMap<Studente, Voto>();
-		
-		try {
-			compitoCriteria = new CompitoInClasseCriteria();
-		} catch (PersistentException e) {
-			throw new RuntimeException(ErrorMessage.COMPITO_UNLOADED);
-		}
-		
-		compitoCriteria.ID.eq(idCompito);
-		compito = compitoCriteria.uniqueCompitoInClasse();
+
+		compito = getCompitoInCLasse(idCompito);
 		
 		try {
 			
@@ -168,7 +159,7 @@ public class CompitoInClasseController {
 	 * @param idArgomeni
 	 */
 	public void inserisciInfoCompito(int idRegistroDocente, int idCompito, java.sql.Date data, Time oraInizio, Time oraFine, int[] idArgomenti) {
-		CompitoInClasseCriteria compitoCriteria;
+
 		CompitoInClasse compito;
 		RegistroDocenteCriteria regDocCriteria;
 		RegistroDocente registroDocente;
@@ -184,15 +175,14 @@ public class CompitoInClasseController {
 		argomenti = new LinkedHashSet<Argomento>();
 		
 		try{
-			compitoCriteria = new CompitoInClasseCriteria();
+
 			regDocCriteria = new RegistroDocenteCriteria();
 			argomentoCriteria = new ArgomentoCriteria();
 		}catch (PersistentException e){
 			throw new  RuntimeException(ErrorMessage.COMPITO_UNLOADED);
 		}
 		
-		compitoCriteria.ID.eq(idCompito);
-		compito = compitoCriteria.uniqueCompitoInClasse();
+		compito = getCompitoInCLasse(idCompito);
 		
 		regDocCriteria.ID.eq(idRegistroDocente);
 		registroDocente = regDocCriteria.uniqueRegistroDocente();
@@ -233,20 +223,10 @@ public class CompitoInClasseController {
 	}
 	
 	private void svolgiCompito(int idCompitoInClasse){
-		CompitoInClasseCriteria compitoCriteria;
+
 		CompitoInClasse compito;
-		
-		
-		try{
-			compitoCriteria = new CompitoInClasseCriteria();
-			
-		}catch (PersistentException e){
-			throw new  RuntimeException(ErrorMessage.COMPITO_UNLOADED);
-		}
-		
-		compitoCriteria.ID.eq(idCompitoInClasse);
-		compito = compitoCriteria.uniqueCompitoInClasse();
-		
+
+		compito = getCompitoInCLasse(idCompitoInClasse);
 		compito.svolgi();
 		
 		try {
@@ -270,17 +250,7 @@ public class CompitoInClasseController {
 		CompitoInClasseCriteria compitoCriteria;
 		CompitoInClasse compito;
 		
-		
-		try{
-			compitoCriteria = new CompitoInClasseCriteria();
-			
-		}catch (PersistentException e){
-			throw new  RuntimeException(ErrorMessage.COMPITO_UNLOADED);
-		}
-		
-		compitoCriteria.ID.eq(idCompitoInClasse);
-		compito = compitoCriteria.uniqueCompitoInClasse();
-		
+		compito = getCompitoInCLasse(idCompitoInClasse);
 		compito.elimina();
 		
 		try {
@@ -301,20 +271,10 @@ public class CompitoInClasseController {
 
 
 	private void annullaCompito(int idCompitoInClasse) {
-		CompitoInClasseCriteria compitoCriteria;
+
 		CompitoInClasse compito;
 		
-		
-		try{
-			compitoCriteria = new CompitoInClasseCriteria();
-			
-		}catch (PersistentException e){
-			throw new  RuntimeException(ErrorMessage.COMPITO_UNLOADED);
-		}
-		
-		compitoCriteria.ID.eq(idCompitoInClasse);
-		compito = compitoCriteria.uniqueCompitoInClasse();
-		
+		compito = getCompitoInCLasse(idCompitoInClasse);
 		compito.annulla();
 		
 		try {
@@ -334,20 +294,10 @@ public class CompitoInClasseController {
 	}
 	
 	private void disannullaCompito(int idCompitoInClasse) {
-		CompitoInClasseCriteria compitoCriteria;
+
 		CompitoInClasse compito;
-		
-		
-		try{
-			compitoCriteria = new CompitoInClasseCriteria();
-			
-		}catch (PersistentException e){
-			throw new  RuntimeException(ErrorMessage.COMPITO_UNLOADED);
-		}
-		
-		compitoCriteria.ID.eq(idCompitoInClasse);
-		compito = compitoCriteria.uniqueCompitoInClasse();
-		
+
+		compito = getCompitoInCLasse(idCompitoInClasse);
 		compito.disannulla();
 		
 		try {
@@ -367,20 +317,10 @@ public class CompitoInClasseController {
 	}
 	
 	private void chiudiCompito(int idCompitoInClasse) {
-		CompitoInClasseCriteria compitoCriteria;
+
 		CompitoInClasse compito;
-		
-		
-		try{
-			compitoCriteria = new CompitoInClasseCriteria();
-			
-		}catch (PersistentException e){
-			throw new  RuntimeException(ErrorMessage.COMPITO_UNLOADED);
-		}
-		
-		compitoCriteria.ID.eq(idCompitoInClasse);
-		compito = compitoCriteria.uniqueCompitoInClasse();
-		
+
+		compito = getCompitoInCLasse(idCompitoInClasse);
 		compito.chiudi();
 		
 		try {
@@ -418,7 +358,7 @@ public class CompitoInClasseController {
 	}
 
 	public Set<CompitoInClasse> getCompitiInCLasse(int idClasse, int idRegistroDocente){
-// bisogna controllare che il registro docente appartenga alla classe??
+//XXX bisogna controllare che il registro docente appartenga alla classe??
 		RegistroDocenteCriteria regDocCriteria;
 		RegistroDocente registroDocente;
 

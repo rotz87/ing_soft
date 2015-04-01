@@ -20,7 +20,7 @@ public class TestInserisciInfoCompito {
 		CompitoInClasseController controlloreCompito; 
 		int idRegistroDocenteProva = 1;
 		int idDocenteProva = 31;
-		int idCompitoProva = 2;
+		int idCompitoProva = 1;//<<----------------------------------
 		CompitoInClasse compito = null;
 		LocalDate dataCompito = new LocalDate(2014,12,19);
 //		Time oraInizio = new Time(10, 0, 0);

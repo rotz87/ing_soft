@@ -56,6 +56,10 @@ public class LibrettoVoti {
 		return this._libVotiLineItems;
 	}
 	
+	public boolean esisteLineItem(domain.model.compitoInClasse.CompitoInClasse compito) {
+		return this.implementor.esisteLineItem(this, compito);
+	}
+	
 	public String toString() {
 		return String.valueOf(getID());
 	}

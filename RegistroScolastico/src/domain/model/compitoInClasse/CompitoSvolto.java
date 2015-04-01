@@ -1,7 +1,12 @@
 package domain.model.compitoInClasse;
 
 import java.util.Map;
+import java.util.Set;
 
+import service.Stampa;
+import domain.controller.ErrorMessage;
+import domain.model.LibrettoVoti;
+import domain.model.LibrettoVotiLineItem;
 import domain.model.Studente;
 import domain.model.Voto;
 
@@ -32,7 +37,21 @@ public class CompitoSvolto extends CompitoInClasseStateImp {
 	
 	@Override
 	public void chiudi(CompitoInClasse compitoInClasse) {
-		compitoInClasse.set_state(CompitoChiuso.getInstance());
+		boolean almenoUnVotoInserito = false;
+		Set<Studente> studenti = compitoInClasse.getInsegnamento().getClasse().getStudenti();
+		Stampa.stampaln();
+		for(Studente studente : studenti){
+//			LibrettoVotiLineItem lvli = studente.getLibrettoVoti().getLibrettoLineItem(compitoInClasse);
+//			Stampa.stampaln("LineItem = "+lvli);
+			if(studente.getLibrettoVoti().esisteLineItem(compitoInClasse)){
+				almenoUnVotoInserito = studente.getLibrettoVoti().esisteLineItem(compitoInClasse);
+			}
+		}Stampa.stampaln();
+		if(almenoUnVotoInserito){
+			compitoInClasse.set_state(CompitoChiuso.getInstance());
+		}else{
+			throw new IllegalStateException(ErrorMessage.COMPITO_UNCLOSABLE);
+		}
 	}
 	
 	@Override

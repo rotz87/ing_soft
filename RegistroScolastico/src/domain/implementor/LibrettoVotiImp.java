@@ -39,4 +39,14 @@ public class LibrettoVotiImp {
 //		}
 		return rit;
 	}
+	
+	public boolean esisteLineItem(LibrettoVoti librettoVoti, CompitoInClasse compito){
+		boolean rit = false;
+		for(LibrettoVotiLineItem lineItem: librettoVoti.getLibVotiLineItems()){
+			if(lineItem.getCompitoInClasse() == compito){
+				rit = true;
+			}
+		}
+		return rit;
+	}
 }

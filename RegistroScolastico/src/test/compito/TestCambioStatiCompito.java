@@ -2,7 +2,9 @@ package test.compito;
 
 import java.sql.Time;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 import org.apache.cassandra.thrift.Cassandra.AsyncProcessor.system_add_column_family;
 import org.joda.time.LocalDate;
@@ -31,6 +33,7 @@ public class TestCambioStatiCompito {
 		Time oraInizio = Time.valueOf("10:0:0");
 		Time oraFine = Time.valueOf("12:0:0");	
 		Collection<Argomento> argomenti = new LinkedList<Argomento>();
+		Map<Integer, Byte> mapVotiGUI = new HashMap<Integer, Byte>();
 		
 	try {
 			
@@ -81,6 +84,8 @@ public class TestCambioStatiCompito {
 				compito4 = controllerCompito.creaCompito(idRegistroDocente, docenteController.getIdDocenteProva());
 				compito4.setInfo(sqlDate, oraInizio, oraFine, argomenti);
 				controllerCompito.changeState(compito4.getID(), CompitoInClasseStateEnum.SVOLTO);
+				mapVotiGUI.put(10, new Byte((byte) 5));
+				controllerCompito.inserisciVoti(compito4.getID(), mapVotiGUI);
 				controllerCompito.changeState(compito4.getID(), CompitoInClasseStateEnum.CHIUSO);
 
 				Stampa.stampaln("ID del compito chiuso: " + compito4.getID());
