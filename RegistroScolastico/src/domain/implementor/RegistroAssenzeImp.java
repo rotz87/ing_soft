@@ -62,10 +62,15 @@ public class RegistroAssenzeImp {
 	}
 
 	public void avviaAppello(RegistroAssenze registroAssenze) {
-		LocalDate dataRif = Calendario.getInstance().getDataOdierna();
+		Appello appello;
+		LocalDate dataRif;
+		
+		dataRif = Calendario.getInstance().getDataOdierna();
+
 		if(!(this.esisteAppello(registroAssenze, dataRif))){
 			if(!Calendario.getInstance().isOggiFestivo()){
-				registroAssenze.getAppelli().put(Calendario.getInstance().getDaysFromZero(dataRif.toDate()), new Appello(dataRif));
+				appello = new Appello(dataRif);
+				registroAssenze.getAppelli().put(Calendario.getInstance().getDaysFromZero(dataRif.toDate()), appello);
 			}else{
 				throw new IllegalStateException(ErrorMessage.APPELLO_NON_AVVIABILE_OGGI);
 			}
