@@ -560,7 +560,6 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	$scope.salvaCompito = function(){
 		mioCompito.salvaCompito($scope)
 	}
-	
 	$scope.aggiornaDatiCompito = function(){
 		//var CompitoInClasse = Compito.get({idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito});
 		var tmpCompito = {};
@@ -568,32 +567,69 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 			{
 			tmpCompito[key] = $scope.compitoInClasse.toJSON()[key];
 			}
-		
-		tmpCompito.data = new Date(tmpCompito.data.split("/").reverse().join("-")).getTime();
-		
-		tmpCompito.oraInizio = new Date(tmpCompito.oraInizio).getTime();
-		tmpCompito.oraFine = new Date(tmpCompito.oraFine).getTime();
-		
-		if (tmpCompito.argomentiRS.class = String.class)
+//		if(typeof tmpCompito.data == 'undefined')
+//		{
+//			dati = {exMsg : 'non puoi salvare il compito senza fissare una data'}
+//			erroreSistema($rootScope, dati, true)
+//		}
+//		else
+//		{
+			
+			if(tmpCompito.data)
 			{
-			tmpCompito.argomentiRS = angular.toJSON(temp.argomentiRS);
+				tmpCompito.data = new Date(tmpCompito.data.split("/").reverse().join("-")).getTime();
 			}
-		Compito.save({idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito}, tmpCompito,
-				function(response,headers)
+			else{
+				
+				tmpCompito.data = null
+			}
+			if (tmpCompito.oraInizio)
+			{
+				tmpCompito.oraInizio = new Date(tmpCompito.oraInizio).getTime();
+			}
+			else {
+				tmpCompito.oraInizio = null
+			}
+			if (tmpCompito.oraFine)
+			{
+				tmpCompito.oraFine = new Date(tmpCompito.oraFine).getTime();
+			}
+			else{
+				tmpCompito.oraFine = null
+			}
+			if (tmpCompito.argomentiRS.class = String.class)
 				{
-					//successo
-					$scope.modal = {};
-					$scope.modal.messaggio = "Il compito è stato registrato correttamente";
-					$scope.modal.titolo = "Compito registrato";
-					$scope.modal.colore = "modal-header-success";
-					$scope.modal.bottone = "btn-success";
-					$rootScope.modal = $scope.modal;
-					$("#myModal").modal("show");
-				},
-				function(response,headers){
-					//fallimento
-					erroreSistema($rootScope, response.data, true)
-				});
+				tmpCompito.argomentiRS = angular.toJSON(temp.argomentiRS);
+				}
+			Compito.save({idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito}, tmpCompito,
+					function(response,headers)
+					{
+						//successo
+						$scope.modal = {};
+						$scope.modal.messaggio = "Il compito è stato registrato correttamente";
+						$scope.modal.titolo = "Compito registrato";
+						$scope.modal.colore = "modal-header-success";
+						$scope.modal.bottone = "btn-success";
+						$rootScope.modal = $scope.modal;
+						$("#myModal").modal("show");
+						
+						$scope.compitoInClasse.$prendiCompitoInClasse($routeParams,
+								function(response,headers){
+							//successo
+							//in questo modo aggiorno lo stato del vecchio compito
+							$scope.vecchioCompitoInClasse = angular.copy($scope.compitoInClasse)
+						},function(response,headers){
+							//fallimento
+							erroreSistema($rootScope, response.data, true)
+						})
+						
+						
+					},
+					function(response,headers){
+						//fallimento
+						erroreSistema($rootScope, response.data, true)
+					});
+//		}
 	}
 	
 	
@@ -830,6 +866,10 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	
 	$scope.$watch("compitoInClasse.data",
 		function(newValue,oldValue){
+		if(typeof newValue == 'undefined')
+			{
+			newValue = null
+			}
 		var dataReg = new RegExp("(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[012])/((19|20)\\d\\d)");
 		if (newValue && newValue.match(dataReg))
 		{
@@ -854,7 +894,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 					{	//fallimento
 						erroreSistema($rootScope, response.data, true)
 					});
-
+			
 		}
 	})
 	
@@ -908,7 +948,7 @@ registroControllers.controller('riempiElencoCompiti',
 							//successo
 							idCompito = headers().location.split("/");
 							idCompito = idCompito[idCompito.length-1];
-							$location.path($location.path()+idCompito+"/");
+							$location.path($location.path()+$routeParams.idCompito+"/");
 						},
 						function(response,headers){
 							//fallimento
@@ -996,8 +1036,13 @@ function gestisciMessaggio(mioScope,tipo,attivaModal)
 function erroreSistema(mioScope,dati,attivaModal)
 {
 	mioScope.modal = {};
-	mioScope.modal.titolo = "Errore nel recupero della risorsa";
-	mioScope.modal.messaggio = dati.exMsg + " per la risorsa: "+dati.url;
+	mioScope.modal.messaggio = dati.exMsg 
+	mioScope.modal.titolo = "Errore nell'operazione richiesta"
+	if(dati.url)
+	{
+		mioScope.modal.titolo = "Errore nel recupero della risorsa";
+		mioScope.modal.messaggio = mioScope.modal.messaggio + " per la risorsa: "+dati.url;
+	}
 	console.log("============= Eccezione: =========================")
 	console.log(dati)
 	console.log("==================================================");
