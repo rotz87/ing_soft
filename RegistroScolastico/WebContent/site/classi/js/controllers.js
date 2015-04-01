@@ -796,10 +796,8 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		
 		var inizioAnno = new Date($scope.calendario.inizioAnno).toLocaleDateString();
 		var fineAnno = new Date($scope.calendario.fineAnno).toLocaleDateString();
-		var datepicker = $.fn.datepicker.noConflict();
-		$.fn.bootstrapDP = datepicker;  
-		
-		$("#bootstrapCalendario").bootstrapDP({
+
+		$("#bootstrapCalendario").datepicker({
 		    todayBtn: true,
 		    todayHighlight: true,
 		    format: "dd/mm/yyyy",
