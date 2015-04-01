@@ -44,7 +44,7 @@
 					</div>
 				</fieldset>
 					<div class="text-center animaScomparsa" ng-show="argsChecked">
-						<button class="btn btn-info" ng-click="selezionaArgomenti()" ng-disabled="currState != statiAmmissibili.DA_SVOLGERE.stato"> Seleziona Argomenti</button><br>
+						<button class="btn btn-info" type="button" ng-click="selezionaArgomenti()" ng-disabled="currState != statiAmmissibili.DA_SVOLGERE.stato"> Seleziona Argomenti</button><br>
 					</div>
 			</fieldset>
 			<fieldset>
@@ -72,9 +72,9 @@
 										<td class="rs-text-vmiddle">{{studente.nome}}</td>
 										<td class="rs-text-vmiddle">
 											    <div class="input-group " ng-hide="studente.assente" >
-											      <input type="number" min="0" max="10" class="form-control input-sm" ng-model="studente.voto" aria-label="..." ng-disabled="studente.assente">
+											      <input type="number" min="0" max="10" class="form-control input-sm" ng-model="studente.voto" aria-label="..." ng-disabled="currState != statiAmmissibili.SVOLTO.stato">
 											      <div class="input-group-btn">
-											        <button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false">Voto <span class="caret"></span></button>
+											        <button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false" ng-disabled="currState != statiAmmissibili.SVOLTO.stato">Voto <span class="caret"></span></button>
 											        <ul class="dropdown-menu dropdown-menu-right" role="menu">
 											          
 											          <li ng-repeat="n in intervalloVoti"><a ng-click="inserisciVoto(studente,n)">{{n}}</a></li>
@@ -109,16 +109,16 @@
 			<legend >Azioni sullo stato corrente </legend>
 			<div class="text-center">
 				<button class="btn btn-default" ng-click="annullaModificheCompito()" title="annulla le modifiche effettuate fino ad ora" ng-disabled="compitiUguali" > Annulla modifiche</button>
-				<button class="btn btn-primary" ng-click="salvaCompito()" title="salva il compito con i dati inseriti" ng-disabled="compitiUguali" > Salva Compito <span class="glyphicon glyphicon-save"></span></button>
-				<button class="btn btn-default" ng-click="tornaAlRegistro()" title="torna all'elenco dei compiti in classe">Torna al registro</button>
+				<button class="btn btn-primary" ng-click="salvaCompito()" title="salva il compito con i dati inseriti" ng-disabled="compitiUguali && currState != statiAmmissibili.SVOLTO.stato" > Salva modifiche <span class="glyphicon glyphicon-save"></span></button>
+				<button class="btn btn-default" ng-click="tornaAlRegistro()" title="torna all'elenco dei compiti in classe senza salvare">Torna al registro</button>
 			</div>
 			</fieldset>
 
 			<fieldset>
-			<legend >Stato Attuale : {{ statiAmmissibili[currState].label}}</legend>
+			<legend >Stato attuale compito: {{ statiAmmissibili[currState].label}}</legend>
 			<div class="text-center">
 				<button class="btn btn-default" ng-click="cambioStatoCompito(svolgiCompito)" 		title="il compito &egrave; annullato e i voti non saranno considerati nella carriera degli studenti"  	ng-disabled="currState != statiAmmissibili.DA_SVOLGERE.stato"> 	Svolgi </button>
-				<button class="btn btn-default" ng-click="cambioStatoCompito(chiudiCompito)" 		title="chiudendo il compito non sarà; più possibile modificare i voti inserit" 							ng-disabled="currState != statiAmmissibili.SVOLTO.stato"> 		Chiudi </button>
+				<button class="btn btn-default" ng-click="cambioStatoCompito(chiudiCompito)" 		title="chiudendo il compito non sarà più possibile modificare i voti inserit" 							ng-disabled="currState != statiAmmissibili.SVOLTO.stato"> 		Chiudi </button>
 				<button class="btn btn-default" ng-click="eliminaCompitoModal(eliminaCompito)" 	title="il compito verrà eliminato" 																			ng-disabled="currState != statiAmmissibili.DA_SVOLGERE.stato"> 	Elimina </button>
 				<button class="btn btn-default" ng-click="cambioStatoCompito(annullaCompito)" 	title="il compito verrà annullato e i voti non saranno considerati" 										ng-disabled="currState != statiAmmissibili.SVOLTO.stato"> 		Annulla </button>
 				<button class="btn btn-default" ng-click="cambioStatoCompito(ripristinaCompito)" 	title="il compito verrà ripristinato e sarà possibile chiudere il compito" 								ng-disabled="currState != statiAmmissibili.ANNULLATO.stato"> 	Ripristina </button>

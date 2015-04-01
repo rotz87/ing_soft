@@ -605,6 +605,8 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 					function(response,headers)
 					{
 						//successo
+						$scope.vecchioCompitoInClasse = angular.copy($scope.compitoInClasse)
+						
 						$scope.modal = {};
 						$scope.modal.messaggio = "Il compito è stato registrato correttamente";
 						$scope.modal.titolo = "Compito registrato";
@@ -612,18 +614,6 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 						$scope.modal.bottone = "btn-success";
 						$rootScope.modal = $scope.modal;
 						$("#myModal").modal("show");
-						
-						$scope.compitoInClasse.$prendiCompitoInClasse($routeParams,
-								function(response,headers){
-							//successo
-							//in questo modo aggiorno lo stato del vecchio compito
-							$scope.vecchioCompitoInClasse = angular.copy($scope.compitoInClasse)
-						},function(response,headers){
-							//fallimento
-							erroreSistema($rootScope, response.data, true)
-						})
-						
-						
 					},
 					function(response,headers){
 						//fallimento
@@ -948,7 +938,7 @@ registroControllers.controller('riempiElencoCompiti',
 							//successo
 							idCompito = headers().location.split("/");
 							idCompito = idCompito[idCompito.length-1];
-							$location.path($location.path()+$routeParams.idCompito+"/");
+							$location.path($location.path()+idCompito+"/");
 						},
 						function(response,headers){
 							//fallimento
