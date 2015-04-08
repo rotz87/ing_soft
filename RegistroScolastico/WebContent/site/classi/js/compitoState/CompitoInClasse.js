@@ -7,6 +7,7 @@ var CompitoInClasse = function(){
 CompitoInClasse.prototype.setState = function(cState){
 	//controllo del cambio di stato
 	this.cState = cState;
+	console.log(this.cState)
 };
 
 CompitoInClasse.prototype.salvaCompito = function(funzioneEsterna){

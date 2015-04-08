@@ -41,7 +41,6 @@ SvoltoState.prototype.disannulla = function(){
 SvoltoState.prototype.chiudi = function(funzioneEsterna){
 	funzioneEsterna();
 	this.cCompitoInClasse.setState(this.cCompitoInClasse.getChiusoState())
-	
 	return true;
 };
 SvoltoState.prototype.elimina = function(){

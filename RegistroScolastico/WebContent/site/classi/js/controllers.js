@@ -1,3 +1,5 @@
+var tmpCompito = {};
+
 var registroControllers =  angular.module('registroControllers',[]);
 
 registroControllers.controller('avviaAppello',['$scope','rsClasse','$location','$rootScope',function($scope,rsClasse,$location,$rootScope){
@@ -719,6 +721,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 				{
 					//successo
 					$scope.currState = prossimoStato
+					mioCompito.setState(stateFactory.getStatiAmmissibili()[prossimoStato])
 				},
 				function(response,headers)
 				{
@@ -802,42 +805,50 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		$scope.compitoInClasse.argomentiRS = angular.copy($scope.modal.argomenti);
 	}
 	//array di date in millisecondi
-	$scope.dateCalendario = [];
+	$scope.dateCalendario = {};
+	$scope.dateCalendario.giorniFestivi = [];
+	$scope.dateCalendario.giorniSettimanaliFestivi = []
 	rsClasse.dateFestive ({idClasse : $scope.idClasse},
 		function(response,headers){
-		//successo
-		for (index in response)
-		{
-			var data = new Date(response[index]);
-			data.setTime( data.getTime() + (-1)*data.getTimezoneOffset()*60*1000 );
-			//console.log(data.toLocaleDateString());
-			$scope.dateCalendario[index] = data.toLocaleDateString();
-		}
-		/**
-		 * 
-		 * inizializzare il calendario dopo che le date sono state caricate!!!
-		 * $scope.dateCalendario
-		 * 
-		 **/
-		
-		var inizioAnno = new Date($scope.calendario.inizioAnno).toLocaleDateString();
-		var fineAnno = new Date($scope.calendario.fineAnno).toLocaleDateString();
-
-		$("#bootstrapCalendario").datepicker({
-		    todayBtn: true,
-		    todayHighlight: true,
-		    format: "dd/mm/yyyy",
-//		    dateFormat: "dd/mm/yyyy",
-		    language:"it",
-		    //daysOfWeekDisabled: "0",
-		    datesDisabled: $scope.dateCalendario,
-		    startDate: inizioAnno,
-		    endDate: fineAnno,
-		    //defaultViewDate: new Date("2014-12-17"),
-		    gotoCurrent: true,
-		    enableOnReadonly: false,
-		    disableTouchKeyboard: true
-		})
+			//successo
+			var auxData = new Date(response.giorniFestivi[1])
+				auxData.setTime( auxData.getTime() + (-1)*auxData.getTimezoneOffset()*60*1000 )
+			console.log(auxData.toLocaleDateString())
+			for (index in response.giorniFestivi)
+			{
+				
+				var data = new Date(response.giorniFestivi[index]);
+				//data.setTime( data.getTime() + (-1)*data.getTimezoneOffset()*60*1000 );
+				//console.log(data.toLocaleDateString());
+				$scope.dateCalendario.giorniFestivi[index] = data.toLocaleDateString();
+			}
+			$scope.dateCalendario.giorniSettimanaliFestivi = response.giorniSettimanaliFestivi;
+			/**
+			 * 
+			 * inizializzare il calendario dopo che le date sono state caricate!!!
+			 * $scope.dateCalendario
+			 * 
+			 **/
+			
+			var inizioAnno = new Date($scope.calendario.inizioAnno).toLocaleDateString();
+			var fineAnno = new Date($scope.calendario.fineAnno).toLocaleDateString();
+			var dataOdierna = new Date($scope.calendario.oggi).toLocaleDateString();
+			console.log($scope.dateCalendario)
+			$("#bootstrapCalendario").datepicker({
+			    todayBtn: false,
+			    todayHighlight: false,
+			    format: "dd/mm/yyyy",
+	//		    dateFormat: "dd/mm/yyyy",
+			    language:"it",
+			    daysOfWeekDisabled: $scope.dateCalendario.giorniSettimanaliFestivi,
+			    datesDisabled: $scope.dateCalendario.giorniFestivi,
+			    startDate: inizioAnno,
+			    endDate: fineAnno,
+			    defaultViewDate: dataOdierna,
+			    gotoCurrent: true,
+			    enableOnReadonly: false,
+			    disableTouchKeyboard: true
+			})
 		
 	},function(response,headers){
 		//fallimento
@@ -859,6 +870,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		if(typeof newValue == 'undefined')
 			{
 			newValue = null
+			$scope.erroreStudenti = "Il compito non ha ancora una data definita"
 			}
 		var dataReg = new RegExp("(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[012])/((19|20)\\d\\d)");
 		if (newValue && newValue.match(dataReg))
@@ -927,7 +939,13 @@ registroControllers.controller('riempiElencoCompiti',
 			$rootScope.idClasse = $scope.idClasse;
 			
 			$scope.elencoCompiti = rsClasse.prendiCompitiInClasse(
-					{idClasse : $routeParams.idClasse,idRegistroDocente : $routeParams.idRegistroDocente})
+					{idClasse : $routeParams.idClasse,idRegistroDocente : $routeParams.idRegistroDocente},
+					function(response,headers){
+						//successo
+					},function(response,headers){
+						//fallimento
+						erroreSistema($rootScope, response.data, true)
+					})
 			
 			$scope.creaCompito = function(){
 				
@@ -948,8 +966,8 @@ registroControllers.controller('riempiElencoCompiti',
 			$scope.vaiAlCompito = function(idCompito){
 				$location.path($location.path()+idCompito+"/")
 			}
-	
 }])
+
 registroControllers.controller('colonnaSinistra',
 		['$scope','rsClasse','$rootScope','$routeParams',
 		 function($scope,rsClasse,$rootScope,$routeParams)

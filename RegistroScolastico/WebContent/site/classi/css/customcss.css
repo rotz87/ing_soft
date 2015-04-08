@@ -60,13 +60,13 @@
 	left:30%;
 }
 
-.css-form input.ng-invalid.ng-touched {
+/* .css-form input.ng-invalid.ng-touched {
   background-color: #FA787E;
 }
 
 .css-form input.ng-valid.ng-touched {
   background-color: #78FA89;
-}
+} */
 .mostraNascondi_,.mostraNascondi_false{
     height:10px;
     border:1px solid #555;
@@ -120,6 +120,10 @@
   line-height: 0;
   opacity: 0;
   padding: 0 10px;
+}
+
+input[readonly].pointer-cursor {
+    cursor: pointer;
 }
 
 body { padding-top: 70px; }

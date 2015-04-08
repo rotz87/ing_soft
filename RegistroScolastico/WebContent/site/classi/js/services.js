@@ -60,7 +60,7 @@ registroServices.factory('rsClasse',['$resource',
    									url:'/RegistroScolastico/api/classi/:idClasse/dateFestive',
    									params:{idClasse : '@idClasse'},
    									method:'GET',
-   									isArray:true
+   									isArray:false
    								},
    								'calendario':{
    									url:'/RegistroScolastico/api/calendario',

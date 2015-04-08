@@ -21,10 +21,9 @@ DaSvolgereState.prototype.inserisciVoti = function(){
 };
 DaSvolgereState.prototype.svolgi = function(funzioneEsterna){
 	console.log("il compito è svolto");
-	//this.cCompitoInClasse.setState(this.cCompitoInClasse.getSvoltoState())
 	//valutare se è il caso di cambiare
+	this.cCompitoInClasse.setState(this.cCompitoInClasse.getSvoltoState())
 	funzioneEsterna()
-	console.log(funzioneEsterna)
 	return true;
 };
 DaSvolgereState.prototype.annullaRipristina = function(){

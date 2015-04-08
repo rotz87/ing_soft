@@ -20,7 +20,7 @@ CompitoInClasseStateFactory.prototype.getStatiAmmissibili = function(){
 	return this.statiAmmissibili;
 }
 
-CompitoInClasseStateFactory.prototype.creaCompitoState = function (stato) {
+CompitoInClasseStateFactory.prototype.creaCompitoState = function (stato,compito) {
     	var compito = new CompitoInClasse();
     	if (this.statiAmmissibili[stato])
     	{

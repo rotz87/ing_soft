@@ -2,40 +2,41 @@
 <div class="col-md-8">
 	<h1 class="text-center"> Il compito &egrave; {{statiAmmissibili[currState].label}} </h1>
 	
-	<form class="css-form form-horizontal" >
+	<form class="css-form form-horizontal" name="form" novalidate="true">
 		<fieldset>
-		<fieldset>
-		<legend> Dati compito 
-				<input class="mostraNascondi_{{datiChecked}} " type="checkbox" id="visibile" ng-model="datiChecked">
-		</legend>
-		<div class="animaScomparsa" ng-show="datiChecked">
-		<div class="form-group">
-			<label for="dataCompito" class="col-sm-2 control-label" >Data</label>
-			<div id="bootstrapCalendario" class="col-sm-8 input-group date">
-				<input id="dataCompito" type="text" 
-						ng-model="compitoInClasse.data" class="form-control" 
-						placeholder="gg/mm/aaaa" title="seleziona per modificare" readonly 
-						ng-disabled="currState != statiAmmissibili.DA_SVOLGERE.stato" />
-						<span class="input-group-addon" ng-hide="currState != statiAmmissibili.DA_SVOLGERE.stato">
-							<i class="glyphicon glyphicon-calendar"></i>
-						</span>
+			<fieldset>
+			<legend> Dati compito 
+					<input class="mostraNascondi_{{datiChecked}} " type="checkbox" id="visibile" ng-model="datiChecked">
+			</legend>
+			<div class="animaScomparsa" ng-show="datiChecked">
+			<div class="form-group">
+				<label for="dataCompito" class="col-sm-2 control-label" >Data</label>
+				<div id="bootstrapCalendario" class="col-sm-8 input-group date">
+					<input id="dataCompito" type="text" 
+							ng-model="compitoInClasse.data" class="form-control pointer-cursor" 
+							placeholder="gg/mm/aaaa" title="seleziona per modificare"
+							ng-disabled="currState != statiAmmissibili.DA_SVOLGERE.stato" 
+							readonly/>
+							<span class="input-group-addon" ng-hide="currState != statiAmmissibili.DA_SVOLGERE.stato">
+								<i class="glyphicon glyphicon-calendar"></i>
+							</span>
+				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<label for="oraInizioCompito" class="col-sm-2 control-label" required>Ora inizio </label>
-			<div class="col-sm-8">
-				<input id="oraInizioCompito" class="form-control" type="time" ng-model="compitoInClasse.oraInizio" ng-disabled="currState != statiAmmissibili.DA_SVOLGERE.stato" />
+			<div class="form-group" ng-class="{'has-error': form.oraInizioCompito.$invalid, 'has-success': !form.email.$invalid}">
+				<label for="oraInizioCompito" class="col-sm-2 control-label" required>Ora inizio </label>
+				<div class="col-sm-8">
+					<input id="oraInizioCompito" name="oraInizioCompito" class="form-control" type="time" ng-model="compitoInClasse.oraInizio" ng-disabled="currState != statiAmmissibili.DA_SVOLGERE.stato" required/>
+				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<label for="oraFineCompito" class="col-sm-2 control-label" >Ora fine </label>
-			<div class="col-sm-8">
-				<input id="oraFineCompito" class="form-control" type="time" ng-model="compitoInClasse.oraFine" ng-disabled="currState != statiAmmissibili.DA_SVOLGERE.stato"/>
+			<div class="form-group" ng-class="{'has-error': form.oraFineCompito.$invalid, 'has-success': !form.email.$invalid}">
+				<label for="oraFineCompito" class="col-sm-2 control-label" >Ora fine </label>
+				<div class="col-sm-8">
+					<input id="oraFineCompito" name="oraFineCompito" class="form-control" type="time" ng-model="compitoInClasse.oraFine" ng-disabled="currState != statiAmmissibili.DA_SVOLGERE.stato" required/>
+				</div>
 			</div>
-		</div>
-		</div>
-
-		</fieldset>
+			</div>
+	
+			</fieldset>
 			<fieldset>
 				<legend> Argomenti <input class="mostraNascondi_{{argsChecked}} " type="checkbox" id="visibile" ng-model="argsChecked"></legend>
 				<fieldset class="animaScomparsa" ng-repeat="argomento in compitoInClasse.argomentiRS | orderBy:args_predicate" ng-show="argsChecked">
@@ -111,9 +112,10 @@
 				<button class="btn btn-default" ng-click="annullaModificheCompito()" title="annulla le modifiche effettuate fino ad ora" ng-disabled="compitiUguali" > Annulla modifiche</button>
 				<button class="btn btn-primary" ng-click="salvaCompito()" title="salva il compito con i dati inseriti" ng-disabled="compitiUguali && currState != statiAmmissibili.SVOLTO.stato" > Salva modifiche <span class="glyphicon glyphicon-save"></span></button>
 				<button class="btn btn-default" ng-click="tornaAlRegistro()" title="torna all'elenco dei compiti in classe senza salvare">Torna al registro</button>
+				<button class="btn btn-danger" >ASD!!</button>
 			</div>
 			</fieldset>
-
+			
 			<fieldset>
 			<legend >Stato attuale compito: {{ statiAmmissibili[currState].label}}</legend>
 			<div class="text-center">
