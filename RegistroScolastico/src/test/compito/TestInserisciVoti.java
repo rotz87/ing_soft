@@ -18,6 +18,7 @@ public class TestInserisciVoti {
 	
 	CompitoInClasseController controlloreCompito; 
 	int idRegistroDocenteProva = 1;
+	int idClasseProva = 1;
 	int idDocenteProva = 31;
 	int idCompitoProva = 2;//<<---------------------------
 	CompitoInClasse compito = null;
@@ -39,7 +40,7 @@ public class TestInserisciVoti {
 		
 		try {
 			
-			controlloreCompito.inserisciVoti(idCompitoProva, mapVoti);
+			controlloreCompito.inserisciVoti(idClasseProva, idRegistroDocenteProva, idCompitoProva, mapVoti);
 		}
 		finally {
 			domain.model.RSPersistentManager.instance().disposePersistentManager();

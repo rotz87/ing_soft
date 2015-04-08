@@ -20,6 +20,7 @@ public class TestInserisciInfoCompito {
 		CompitoInClasseController controlloreCompito; 
 		int idRegistroDocenteProva = 1;
 		int idDocenteProva = 31;
+		int idClasseProva = 1;
 		int idCompitoProva = 1;//<<----------------------------------
 		CompitoInClasse compito = null;
 		LocalDate dataCompito = new LocalDate(2014,12,19);
@@ -36,7 +37,7 @@ public class TestInserisciInfoCompito {
 			
 			try {
 				java.sql.Date sqlDate = new java.sql.Date(dataCompito.toDate().getTime());
-				controlloreCompito.inserisciInfoCompito(idRegistroDocenteProva, idCompitoProva, sqlDate, oraInizio, oraFine, idArgomenti);
+				controlloreCompito.inserisciInfoCompito(idClasseProva, idRegistroDocenteProva, idCompitoProva, sqlDate, oraInizio, oraFine, idArgomenti);
 			}
 			finally {
 				domain.model.RSPersistentManager.instance().disposePersistentManager();

@@ -73,7 +73,7 @@ public class ClasseController {
 		appelloController = new FaiAppelloController();
 		
 		for(LocalDate data = Calendario.getInstance().getInizioLezioni(); data.isBefore(Calendario.getInstance().getDataOdierna()); data = data.plusDays(1) ){
-			if(appelloController.getAppello(idClasse, data) == null){
+			if(!Calendario.getInstance().isSettimanaleFestivo(data) && appelloController.getAppello(idClasse, data) == null){
 				dateFestive.add(data);
 			}
 		}

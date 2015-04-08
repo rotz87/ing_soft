@@ -18,7 +18,8 @@ public class ErrorMessage {
 	public static final String COMPITI_UNLOADED = "Impossibile caricare i compiti";
 	public static final String COMPITO_INEXISTENT = "Il compito non appartiene al registro docente";
 	public static final String COMPITO_NON_AGGIORNABILE = "Impossibile caricare il compito";
-	public static final String COMPITO_NOT_BELONGING = "Il compito non è presente nel libretto";
+	public static final String COMPITO_NOT_BELONGING_LIBRETTO = "Il compito non è presente nel libretto";
+	public static final String COMPITO_NOT_BELONGING_REGISTRO = "Il compito non appartiene al Registro";
 	public static final String COMPITO_UNCREABLE = "Impossibile creare il compito";
 	public static final String COMPITO_UNLOADED = "Impossibile caricare il compito";
 	public static final String COMPITO_WITHOUT_DATE = "Il compito non ha ancora una data";
@@ -33,5 +34,6 @@ public class ErrorMessage {
 	public static final String COMPITO_NON_ELIMINABILE = "Impossibile eliminare il compito";
 	public static final String COMPITO_STATE_UNCHANGEABLE = "Impossibile modificare lo stato del compito";
 	public static final String COMPITO_UNCLOSABLE = "Non è possibile chiudere il compito se non contiene almeno un voto";
+	public static final String REGISTRO_DOCENTE_UNBELONGING = "Il registro Docente non appartiene alla classe ";
 			
 }

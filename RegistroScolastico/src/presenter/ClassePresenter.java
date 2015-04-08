@@ -10,6 +10,9 @@ import java.util.LinkedList;
 
 
 
+
+
+
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 //import org.orm.PersistentException;
@@ -19,12 +22,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import presenter.resourceSupport.ClasseMenuRS;
+import presenter.resourceSupport.DateFestiveRS;
 import presenter.resourceSupport.RegistroDocenteRS;
 import presenter.resourceSupport.appello.StudenteAppelloRS;
 import domain.controller.ClasseController;
 import domain.controller.DocenteController;
+import domain.model.Calendario;
 import domain.model.Classe;
 import domain.model.Docente;
+import domain.model.GiornoSettimanaleFestivo;
 import domain.model.RegistroDocente;
 //import domain.model.DocenteCriteria;
 import domain.model.Studente;
@@ -85,30 +91,50 @@ public class ClassePresenter {
 	}
 	
 //	@RequestMapping(value = "/{idClasse}/dateFestive", method = RequestMethod.GET)
+//	@RequestMapping(value = ApiPath.CLASSE_FESTIVI, method = RequestMethod.GET)
+//	public Collection<Long> getDateFestive(@PathVariable int idClasse) {
+//		
+//		ClasseController classeController;
+//		Collection<LocalDate> date;
+//		Collection<Long> dateLong;
+//		
+//		date = null;
+//		classeController = new ClasseController();
+//		dateLong = new LinkedList<Long>();
+//		
+//		date = classeController.getDateFestive(idClasse);
+//		
+//		
+//		for (LocalDate data : date) {
+////			java.sql.Date sqlData = new java.sql.Date(data.toDate().getTime());
+////			dateLong.add(sqlData.getTime());
+//			
+////			DateTime dt = data.toDateTimeAtStartOfDay().plusHours(12);
+////			dateLong.add(dt.getMillis());
+//			
+//			dateLong.add(data.toDate().getTime());
+//			
+//		}
+//		
+//		return dateLong;
+//	}
+	
 	@RequestMapping(value = ApiPath.CLASSE_FESTIVI, method = RequestMethod.GET)
-	public Collection<Long> getDateFestive(@PathVariable int idClasse) {
+	public DateFestiveRS getDateFestive(@PathVariable int idClasse) {
 		
 		ClasseController classeController;
 		Collection<LocalDate> date;
-		Collection<Long> dateLong;
+		Collection<GiornoSettimanaleFestivo> giorniSettimanali;
+		DateFestiveRS dateFestiveRS;
 		
-		date = null;
 		classeController = new ClasseController();
-		dateLong = new LinkedList<Long>();
-		
+
 		date = classeController.getDateFestive(idClasse);
-		for (LocalDate data : date) {
-//			java.sql.Date sqlData = new java.sql.Date(data.toDate().getTime());
-//			dateLong.add(sqlData.getTime());
-			
-//			DateTime dt = data.toDateTimeAtStartOfDay().plusHours(12);
-//			dateLong.add(dt.getMillis());
-			
-			dateLong.add(data.toDate().getTime());
-			
-		}
+		giorniSettimanali = Calendario.getInstance().getGiorniSettimanaliFestivi();
 		
-		return dateLong;
+		dateFestiveRS = new DateFestiveRS(date, giorniSettimanali);
+
+		return dateFestiveRS;
 	}
 	
 //	@RequestMapping(value = "/{idClasse}/registriDocente", method = RequestMethod.GET)

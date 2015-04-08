@@ -424,7 +424,7 @@ public class ResetDB {
 			
 			Argomento usa = new Argomento("U.S.A", "", java.sql.Date.valueOf("2014-11-11"));
 			Argomento canada = new Argomento("Canada", "", java.sql.Date.valueOf("2014-11-15"));
-			Argomento massico = new Argomento("Massico", "", java.sql.Date.valueOf("2014-11-16"));
+			Argomento messico = new Argomento("Messico", "", java.sql.Date.valueOf("2014-11-16"));
 			
 //			ASSEGNAZIONE DEGLI ARGOMENTI AI REGISTRI
 			registroRossiPrimaAstoria.getArgomentiSvolti().add(worldWar1);
@@ -454,7 +454,7 @@ public class ResetDB {
 			
 			registroBianchiPrimaB.getArgomentiSvolti().add(usa);
 			registroBianchiPrimaB.getArgomentiSvolti().add(canada);
-			registroBianchiPrimaB.getArgomentiSvolti().add(massico);
+			registroBianchiPrimaB.getArgomentiSvolti().add(messico);
 
 //			CREAZIONE DEL PRIMO COMPITO IN CLASSE
 			Collection<Argomento> argomenti = new LinkedList<Argomento>();

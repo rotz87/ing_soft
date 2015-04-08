@@ -57,13 +57,35 @@ public class Calendario {
 	public boolean isFestivo(LocalDate data){
 		boolean festivo = false;
 		
-		festivo = getGiorniSettimanaliFestivi().contains(new GiornoSettimanaleFestivo(data.getDayOfWeek()));
-				
+//		festivo = getGiorniSettimanaliFestivi().contains(new GiornoSettimanaleFestivo(data.getDayOfWeek()));
+//				
+//		if (!festivo){
+//			java.sql.Date sqlDate = new java.sql.Date(data.toDate().getTime());
+//			festivo = getGiorniFestivi().contains(new GiornoFestivo(sqlDate));
+//		}
+//				
+//		return festivo;
+		
+		festivo = isSettimanaleFestivo(data);
+		
 		if (!festivo){
-			java.sql.Date sqlDate = new java.sql.Date(data.toDate().getTime());
-			festivo = getGiorniFestivi().contains(new GiornoFestivo(sqlDate));
+			festivo = isFestivoSemplice(data);
 		}
-				
+		
+		return festivo;
+		
+	}
+	
+	public boolean isFestivoSemplice(LocalDate data){
+		boolean festivo;
+		java.sql.Date sqlDate = new java.sql.Date(data.toDate().getTime());
+		festivo = getGiorniFestivi().contains(new GiornoFestivo(sqlDate));
+		return festivo;
+	}
+	
+	public boolean isSettimanaleFestivo(LocalDate data){
+		boolean festivo;
+		festivo = getGiorniSettimanaliFestivi().contains(new GiornoSettimanaleFestivo(data.getDayOfWeek()));
 		return festivo;
 	}
 
@@ -81,7 +103,7 @@ public class Calendario {
 		Collection<LocalDate> rit = new LinkedList<LocalDate>();
 		
 		for(LocalDate data = calcolaDataOdierna(); data.isBefore(this.fineLezioni); data = data.plusDays(1) ){
-			if(isFestivo(data)){
+			if(isFestivoSemplice(data)){
 				rit.add(data);
 			}
 		}

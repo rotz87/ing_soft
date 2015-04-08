@@ -17,6 +17,7 @@ public class TestCompitoArgomenti {
 
 		CompitoInClasseController controlloreCompito; 
 		int idRegistroDocenteProva = 1;
+		int idClasseProva = 1;
 		int idDocenteProva = 31;
 		int idCompitoProva = 1;
 		CompitoInClasse compito = null;
@@ -26,7 +27,7 @@ public class TestCompitoArgomenti {
 		
 		try {
 			
-			compito = controlloreCompito.getCompitoInCLasse(idCompitoProva);
+			compito = controlloreCompito.getCompitoInCLasse(idClasseProva,idRegistroDocenteProva,idCompitoProva);
 			
 			for(Argomento arg : compito.getArgomentiEsaminati()){
 				Stampa.stampaln("Argomento: "+ arg.getID() + ", nome: " + arg.getNome() + ", descrizione: "+arg.getDescrizione()+", data: "+arg.getData()+".");

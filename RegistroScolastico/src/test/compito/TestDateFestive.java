@@ -33,10 +33,17 @@ public class TestDateFestive {
 		
 		ClassePresenter classePresenter = new ClassePresenter();
 		classePresenter.getDateFestive(1);
-		for (Long l : classePresenter.getDateFestive(1)) {
+		Stampa.stampaln("Festivi ");
+		for (Long l : classePresenter.getDateFestive(1).getGiorniFestivi()) {
 			Stampa.stampaln("--------------------");
 			Stampa.stampaln(new LocalDate(l));
 			Stampa.stampaln(l);
+		}
+		Stampa.stampaln("Settimanali Festivi ");
+		for (Integer i : classePresenter.getDateFestive(1).getGiorniSettimanaliFestivi()) {
+			Stampa.stampaln("--------------------");
+			Stampa.stampaln("giorno settimanale festivo " + i);
+			
 		}
 		Stampa.stampaln("--------------------");
 	}

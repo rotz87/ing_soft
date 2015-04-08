@@ -75,7 +75,7 @@ public class CompitoInClassePresenter {
 		
 		compitoController = new CompitoInClasseController();
 		
-		compito = compitoController.getCompitoInCLasse(idCompitoInClasse);
+		compito = compitoController.getCompitoInCLasse(idClasse, idRegistroDocente, idCompitoInClasse);
 		
 		compitoInClasseRS = new CompitoInClasseRS(compito, idClasse, idRegistroDocente);
 		
@@ -94,7 +94,7 @@ public class CompitoInClassePresenter {
 		
 		compitoController = new CompitoInClasseController();
 		
-		compito = compitoController.getCompitoInCLasse(idCompitoInClasse);
+		compito = compitoController.getCompitoInCLasse(idClasse, idRegistroDocente, idCompitoInClasse);
 		
 		compitoStateRS = new CompitoInClasseStateRS(compito, idClasse, idRegistroDocente);
 		
@@ -157,7 +157,7 @@ public class CompitoInClassePresenter {
 			  i++;
 		  }
 		  
-		  compitoController.inserisciInfoCompito(idRegistroDocente, compitoRS.getIdCompito(), dataCompito, oraInizio, oraFine, idArgomenti);
+		  compitoController.inserisciInfoCompito(idClasse, idRegistroDocente, compitoRS.getIdCompito(), dataCompito, oraInizio, oraFine, idArgomenti);
 		  
 		  HttpHeaders httpHeaders;
 		  httpHeaders = new HttpHeaders();
@@ -168,13 +168,13 @@ public class CompitoInClassePresenter {
 	  
 //	  @RequestMapping(value = "/{idCompitoInClasse}/state", method = RequestMethod.PUT)
 	  @RequestMapping(value = ApiPath.COMPITO_STATE, method = RequestMethod.PUT)
-	  public ResponseEntity<?> updateCompitoState(@PathVariable int idCompitoInClasse, @RequestBody CompitoInClasseStateRS compitoState) {
+	  public ResponseEntity<?> updateCompitoState(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse, @RequestBody CompitoInClasseStateRS compitoState) {
 		  
 		  CompitoInClasseController compitoInClasseController;
 		  
 		  compitoInClasseController = new CompitoInClasseController();
 		  
-		  compitoInClasseController.changeState(idCompitoInClasse, compitoState.getState());
+		  compitoInClasseController.changeState(idClasse, idRegistroDocente, idCompitoInClasse, compitoState.getState());
 		  
 		  HttpHeaders httpHeaders;
 		  httpHeaders = new HttpHeaders();
@@ -185,13 +185,13 @@ public class CompitoInClassePresenter {
 	  
 //	  @RequestMapping(value = "/{idCompitoInClasse}/state", method = RequestMethod.DELETE)
 	  @RequestMapping(value = ApiPath.COMPITO_STATE, method = RequestMethod.DELETE)
-	  public ResponseEntity<?> eliminaCompito(@PathVariable int idCompitoInClasse) {
+	  public ResponseEntity<?> eliminaCompito(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse) {
 		   
 		  CompitoInClasseController compitoInClasseController;
 		  
 		  compitoInClasseController = new CompitoInClasseController();
 		  
-		  compitoInClasseController.eliminaCompito(idCompitoInClasse);
+		  compitoInClasseController.eliminaCompito(idClasse, idRegistroDocente, idCompitoInClasse);
 		  
 		  HttpHeaders httpHeaders;
 		  httpHeaders = new HttpHeaders();
@@ -208,7 +208,7 @@ public class CompitoInClassePresenter {
 		  LinkedList<ArgomentoRS> argomentiRS = new LinkedList<ArgomentoRS>();
 
 		  compitoController = new CompitoInClasseController();
-		  compito = compitoController.getCompitoInCLasse(idCompitoInClasse);
+		  compito = compitoController.getCompitoInCLasse(idClasse, idRegistroDocente, idCompitoInClasse);
 		  for(Argomento argomento : compito.getArgomentiEsaminati()){
 			  argomentiRS.add(new ArgomentoRS(argomento));
 		  }
@@ -244,7 +244,7 @@ public class CompitoInClassePresenter {
 
 		  localDate = new LocalDate(data);
 		  assenze = faiAppelloController.getAssenzeCompito(idClasse, localDate);
-		  voti = compitoInClasseController.getVotiCompito(idCompitoInClasse);
+		  voti = compitoInClasseController.getVotiCompito(idClasse, idRegistroDocente, idCompitoInClasse);
 		  
 		  studentiCompito = new LinkedList<StudenteCompitoRS>();
 		  /*
@@ -262,7 +262,7 @@ public class CompitoInClassePresenter {
 	  
 //	  @RequestMapping(value = "/{idCompitoInClasse}/studenti", method = RequestMethod.PUT)
 	  @RequestMapping(value= ApiPath.COMPITO_STUDENTI,  method = RequestMethod.PUT)
-	  public ResponseEntity<?> updateStudentiCompito(@PathVariable int idCompitoInClasse, @RequestBody StudenteCompitoRS[] studentiCompito) {
+	  public ResponseEntity<?> updateStudentiCompito(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse, @RequestBody StudenteCompitoRS[] studentiCompito) {
 		   
 		  CompitoInClasseController compitoInClasseController;
 		  Map<Integer, Byte> mapVoti;
@@ -274,7 +274,7 @@ public class CompitoInClassePresenter {
 			  mapVoti.put(studenteConpitoRS.getIdStudente(), studenteConpitoRS.getVoto());
 		  }
 		  
-		  compitoInClasseController.inserisciVoti(idCompitoInClasse, mapVoti);
+		  compitoInClasseController.inserisciVoti(idClasse, idRegistroDocente, idCompitoInClasse, mapVoti);
 		  
 		  HttpHeaders httpHeaders;
 		  httpHeaders = new HttpHeaders();

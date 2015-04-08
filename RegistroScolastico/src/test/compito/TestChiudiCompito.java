@@ -17,6 +17,8 @@ import domain.model.compitoInClasse.CompitoInClasseStateEnum;
 
 public class TestChiudiCompito {
 	private static int idRegistroDocente = 1;
+	private static int idClasse = 1;
+	
 
 	public static void main(String[] args) {
 		CompitoInClasseController controllerCompito;
@@ -41,7 +43,7 @@ public class TestChiudiCompito {
 //				
 //				controllerCompito.changeState(compito.getID(), CompitoInClasseStateEnum.SVOLTO);
 	
-				controllerCompito.changeState(1, CompitoInClasseStateEnum.CHIUSO);
+				controllerCompito.changeState(idClasse, idRegistroDocente, 1, CompitoInClasseStateEnum.CHIUSO);
 				
 //				CompitoInClassePresenter presenteCompito = new CompitoInClassePresenter();
 //				
