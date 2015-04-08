@@ -9,8 +9,10 @@ import java.util.LinkedList;
 
 
 import java.util.Map;
+import java.util.Set;
 
 import org.joda.time.LocalDate;
+
 
 
 
@@ -29,10 +31,14 @@ public class RegistroDocenteImp {
 
 	public CompitoInClasse creaCompito(RegistroDocente registroDocente) {
 		CompitoInClasse compito;
+		Set<CompitoInClasse> compitiInClasse;
 		
 		compito = new CompitoInClasse(registroDocente);
 //		compito.setInsegnamento(registroDocente);
-		registroDocente.getCompitiInClasse().add(compito);
+		
+		compitiInClasse = registroDocente.getCompitiInClasse();
+		
+		compitiInClasse.add(compito);
 		
 		return compito;
 	}
