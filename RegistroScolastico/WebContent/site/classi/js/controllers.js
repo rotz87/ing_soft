@@ -44,15 +44,23 @@ registroControllers.controller('riempiElencoAppelli', ['$scope','rsClasse','$loc
 	  $scope.predicate="data";
 	  $scope.reverse = true;
 	  $scope.elencoAppelli={};
-	  $scope.elencoAppelli2 = rsClasse.myQuery2({idClasse:$scope.idClasse},
-		function(response,headers){
-		  //successo
-	  },function(response,headers){
-		  //fallimento
-		  erroreSistema($rootScope, response.data, true)
-	  })
+	  if(isNaN($routeParams.idClasse))
+	  {
+		  erroreSistema($rootScope, {exMsg:"la classe deve essere un numero",url:"http://..."}, true)
+	  }else{
+		  $scope.elencoAppelli2 = rsClasse.myQuery2({idClasse:$scope.idClasse},
+			function(response,headers){
+			  //successo
+		  },function(response,headers){
+			  //fallimento
+			  erroreSistema($rootScope, response.data, true)
+	
+				  
+			 
+		  })
+	  }
 	  /**
-	   * funzione avviata quando viene restituita la risposta dal server
+	   * funzione avviata quando viene restituita la risposta dal server;
 	   * gestisce l'elenco degli appelli per poter valutare l'inserimento dell'appelloAvviabile
 	   * nell'elenco degli appelli
 	   **/
@@ -709,6 +717,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 					$scope.tornaAlRegistro()
 				},function(response,headers){
 					//fallimento
+					erroreSistema($rootScope, response.data, true)
 				})
 	}
 	
@@ -811,15 +820,11 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	rsClasse.dateFestive ({idClasse : $scope.idClasse},
 		function(response,headers){
 			//successo
-			var auxData = new Date(response.giorniFestivi[1])
-				auxData.setTime( auxData.getTime() + (-1)*auxData.getTimezoneOffset()*60*1000 )
-			console.log(auxData.toLocaleDateString())
 			for (index in response.giorniFestivi)
 			{
 				
 				var data = new Date(response.giorniFestivi[index]);
 				//data.setTime( data.getTime() + (-1)*data.getTimezoneOffset()*60*1000 );
-				//console.log(data.toLocaleDateString());
 				$scope.dateCalendario.giorniFestivi[index] = data.toLocaleDateString();
 			}
 			$scope.dateCalendario.giorniSettimanaliFestivi = response.giorniSettimanaliFestivi;
@@ -833,7 +838,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 			var inizioAnno = new Date($scope.calendario.inizioAnno).toLocaleDateString();
 			var fineAnno = new Date($scope.calendario.fineAnno).toLocaleDateString();
 			var dataOdierna = new Date($scope.calendario.oggi).toLocaleDateString();
-			console.log($scope.dateCalendario)
+			
 			$("#bootstrapCalendario").datepicker({
 			    todayBtn: false,
 			    todayHighlight: false,
@@ -1049,7 +1054,8 @@ function erroreSistema(mioScope,dati,attivaModal)
 	if(dati.url)
 	{
 		mioScope.modal.titolo = "Errore nel recupero della risorsa";
-		mioScope.modal.messaggio = mioScope.modal.messaggio + " per la risorsa: "+dati.url;
+		mioScope.modal.messaggio = mioScope.modal.messaggio
+		mioScope.modal.urlRisorsa = dati.url;
 	}
 	console.log("============= Eccezione: =========================")
 	console.log(dati)

@@ -8,10 +8,13 @@
         </h1>
       </div>
       <div class="modal-body">
+      <p>
         {{modal.messaggio}}
+        </p>
+        <p> per la risorsa <br>  {{modal.urlRisorsa}}</p>
         <br>
         <p ng-if="myInput.status">
-        errore: {{moddal.status}} {{modal.statusText}}
+        errore: {{modal.status}} {{modal.statusText}}
         </p>
       </div>
       <div class="modal-footer">
