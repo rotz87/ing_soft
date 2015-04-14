@@ -10,7 +10,7 @@ registroControllers.controller('avviaAppello',['$scope','rsClasse','$location','
 				$scope.idClasse = miaClasse;
 			}
 			
-			rsClasse.myPost({idClasse:$scope.idClasse},
+			rsClasse.creaAppello({idClasse:$scope.idClasse},
 					function(response,headers){
 				//successo
 				$scope.appelloUri = header("location");
@@ -48,7 +48,7 @@ registroControllers.controller('riempiElencoAppelli', ['$scope','rsClasse','$loc
 	  {
 		  erroreSistema($rootScope, {exMsg:"la classe deve essere un numero",url:"http://..."}, true)
 	  }else{
-		  $scope.elencoAppelli2 = rsClasse.myQuery2({idClasse:$scope.idClasse},
+		  $scope.elencoAppelli2 = rsClasse.getAppelliClasse({idClasse:$scope.idClasse},
 			function(response,headers){
 			  //successo
 		  },function(response,headers){
@@ -104,7 +104,7 @@ registroControllers.controller('riempiElencoAppelli', ['$scope','rsClasse','$loc
 				$scope.idClasse = miaClasse;
 			}
 			
-			rsClasse.myPost({idClasse:$scope.idClasse},function(response,header){
+			rsClasse.creaAppello({idClasse:$scope.idClasse},function(response,header){
 				//successo
 				$scope.appelloUri = header("location");
 				nuovoUri = $scope.appelloUri.split("/");
@@ -144,7 +144,6 @@ registroControllers.controller('riempiElencoAppelli', ['$scope','rsClasse','$loc
 		transclude:true,
 	    templateUrl: 'partials/elencoAppelli.html'
 	  };
-
 	});
 
 registroControllers.controller('faiAppello', ['$scope','rsClasse','$location','$http','$rootScope','$filter','$q','$routeParams', function($scope, rsClasse, $location, $http, $rootScope, $filter, $q,$routeParams){
@@ -157,7 +156,7 @@ registroControllers.controller('faiAppello', ['$scope','rsClasse','$location','$
 		 * 
 		 */
 		$scope.predicate = 'cognome';
-
+		
 		var appelloStudenti = new rsClasse();
 		appelloStudenti.idClasse = $scope.idClasse;
 		$scope.studenti = rsClasse.listaStudenti(
@@ -174,7 +173,7 @@ registroControllers.controller('faiAppello', ['$scope','rsClasse','$location','$
 		var appelloCorrente = new rsClasse();
 		appelloCorrente.idClasse = $scope.idClasse;
 		appelloCorrente.idAppello = $scope.idAppello;
-		$scope.appello = rsClasse.myQuery2(
+		$scope.appello = rsClasse.getAppelliClasse(
 				{idClasse:$scope.idClasse,idAppello:$scope.idAppello},
 				function (response,header)
 				{
@@ -385,7 +384,7 @@ registroControllers.controller('popolamentoNavigazione', ['$scope','rsClasse','$
 						//fallimento
 						erroreSistema($rootScope, response.data, true)
 					})
-			$scope.elencoAppelli = rsClasse.myQuery2({idClasse:newValue},
+			$scope.elencoAppelli = rsClasse.getAppelliClasse({idClasse:newValue},
 				function(response,headers){
 				  //successo
 			  },function(response,headers){
@@ -401,7 +400,7 @@ registroControllers.controller('popolamentoNavigazione', ['$scope','rsClasse','$
 			if(newAppello != null)
 			{
 				$scope.selezioneAttuale.idAppello = newAppello;
-				$scope.elencoAppelli = rsClasse.myQuery2({idClasse:$scope.idClasse},
+				$scope.elencoAppelli = rsClasse.getAppelliClasse({idClasse:$scope.idClasse},
 					function(response,headers)
 						{
 						  //successo

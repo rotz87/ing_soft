@@ -7,10 +7,10 @@ registroServices.factory('rsClasse',['$resource',
 				function($resource){
 					return $resource(host+'/RegistroScolastico/api/classi/:idClasse/appelli/:idAppello/', null,
 							{
-								'myQuery': {method:'GET', params:{idClasse:'@idClasse',idAppello:'@idAppello'}, isArray:true},
-								'myPost': {method:'POST', params:{idClasse:'@idClasse'}},
-								'myUpdate': {method:'PUT', params:{idClasse:'@idClasse', idAppello:'@idAppello'}},
-								'myQuery2': {method:'GET', params:{idClasse:'@idClasse',idAppello:'@idAppello'}, isArray:false},
+								'getAppello': {method:'GET', params:{idClasse:'@idClasse',idAppello:'@idAppello'}, isArray:true},
+								'creaAppello': {method:'POST', params:{idClasse:'@idClasse'}},
+								'aggiornaAppello': {method:'PUT', params:{idClasse:'@idClasse', idAppello:'@idAppello'}},
+								'getAppelliClasse': {method:'GET', params:{idClasse:'@idClasse',idAppello:'@idAppello'}, isArray:false},
 								'recuperaAssenti':{
 									url: host+'/RegistroScolastico/api/classi/:idClasse/appelli/:idAppello/assenti/', 
 									method: 'GET', 
@@ -53,7 +53,8 @@ registroServices.factory('rsClasse',['$resource',
 									url:host+'/RegistroScolastico/api/classi/:idClasse/registriDocente/:idRegistroDocente/compiti/:idCompito',
 									method:'PUT',
 									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente', idCompito:'@idCompito'}
-								},'argomentiSvolti':{
+								},
+								'argomentiSvolti':{
    									url:host+'/RegistroScolastico/api/classi/:idClasse/registriDocente/:idRegistroDocente/argomentiSvolti',
    									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente'},
    									method:'GET',
