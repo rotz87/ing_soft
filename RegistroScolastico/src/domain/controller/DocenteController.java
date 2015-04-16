@@ -4,6 +4,7 @@ import org.orm.PersistentException;
 
 import domain.model.Docente;
 import domain.model.DocenteCriteria;
+import domain.model.ErrorMessage;
 
 public class DocenteController {
 	

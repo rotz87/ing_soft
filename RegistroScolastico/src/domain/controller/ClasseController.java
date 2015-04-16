@@ -15,6 +15,7 @@ import domain.model.Classe;
 import domain.model.ClasseCriteria;
 import domain.model.Docente;
 import domain.model.DocenteCriteria;
+import domain.model.ErrorMessage;
 import domain.model.RegistroDocente;
 import domain.model.RegistroDocenteCriteria;
 import domain.model.Studente;

@@ -19,6 +19,7 @@ import domain.model.Classe;
 import domain.model.ClasseCriteria;
 import domain.model.Docente;
 import domain.model.DocenteCriteria;
+import domain.model.ErrorMessage;
 import domain.model.LibrettoAssenze;
 import domain.model.LibrettoAssenzeCriteria;
 import domain.model.RSPersistentManager;
@@ -114,9 +115,11 @@ public class FaiAppelloController {
 		
 		if(docenteCorrente.isInsegnante(classeCorrente)){
 			RegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();
-			studenteCriteria.ID.in(idStudenti);
 			
-			studenti.addAll(studenteCriteria.list());
+			if(idStudenti.length >0){
+				studenteCriteria.ID.in(idStudenti);
+				studenti.addAll(studenteCriteria.list());
+			}
 			
 			for(Studente studente : studenti){
 				libretti.add(studente.getLibrettoAssenze());
@@ -127,7 +130,7 @@ public class FaiAppelloController {
 			try{
 				PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
 				try {
-				
+					RSPersistentManager.instance().getSession().save(registroAssenzeCorrente.getAppelloOdierno());
 					for(LibrettoAssenze libAss : libretti){
 						RSPersistentManager.instance().getSession().save(libAss.getUltimaAssenzaNonGiustificata());
 					}

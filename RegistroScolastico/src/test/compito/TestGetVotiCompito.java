@@ -8,9 +8,9 @@ import org.orm.PersistentException;
 
 import service.Stampa;
 import domain.controller.CompitoInClasseController;
-import domain.controller.ErrorMessage;
 import domain.model.compitoInClasse.CompitoInClasse;
 import domain.model.compitoInClasse.CompitoInClasseCriteria;
+import domain.model.ErrorMessage;
 import domain.model.Studente;
 import domain.model.Voto;
 

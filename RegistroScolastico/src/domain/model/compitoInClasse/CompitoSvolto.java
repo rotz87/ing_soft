@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Set;
 
 import service.Stampa;
-import domain.controller.ErrorMessage;
+import domain.model.ErrorMessage;
 import domain.model.LibrettoVoti;
 import domain.model.LibrettoVotiLineItem;
 import domain.model.Studente;

@@ -8,6 +8,7 @@ import org.joda.time.LocalDate;
 
 import domain.model.Argomento;
 import domain.model.Calendario;
+import domain.model.ErrorMessage;
 
 public class CompitoDaSvolgere extends CompitoInClasseStateImp {
 	static private CompitoDaSvolgere instance;
@@ -47,7 +48,7 @@ public class CompitoDaSvolgere extends CompitoInClasseStateImp {
 		if(lData.equals(Calendario.getInstance().getDataOdierna()) || lData.isBefore(Calendario.getInstance().getDataOdierna())){
 			compitoInClasse.set_state(CompitoSvolto.getInstance());
 		}else{
-			throw new IllegalStateException(super.WRONG_STATE);
+			throw new IllegalStateException(ErrorMessage.DATA_FUTURE);
 		}
 	}
 	

@@ -2,6 +2,7 @@ package domain.controller;
 
 import org.orm.PersistentException;
 
+import domain.model.ErrorMessage;
 import domain.model.RegistroDocente;
 import domain.model.RegistroDocenteCriteria;
 

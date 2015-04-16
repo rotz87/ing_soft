@@ -1,4 +1,4 @@
-package domain.controller;
+package domain.model;
 
 public class ErrorMessage {
 	
@@ -35,5 +35,7 @@ public class ErrorMessage {
 	public static final String COMPITO_STATE_UNCHANGEABLE = "Impossibile modificare lo stato del compito";
 	public static final String COMPITO_UNCLOSABLE = "Non è possibile chiudere il compito se non contiene almeno un voto";
 	public static final String REGISTRO_DOCENTE_UNBELONGING = "Il registro Docente non appartiene alla classe ";
+	public static final String WRONG_STATE = " Lo stato del compito non consente di eseguire l'operazione richiesta ";
+	public static final String DATA_FUTURE = "La data del compito non consente di eseguire l'operazione richiesta ";
 			
 }

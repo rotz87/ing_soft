@@ -4,9 +4,9 @@ import java.util.Collection;
 
 import org.joda.time.LocalDate;
 
-import domain.controller.ErrorMessage;
 import domain.model.Appello;
 import domain.model.Calendario;
+import domain.model.ErrorMessage;
 import domain.model.LibrettoAssenze;
 import domain.model.RegistroAssenze;
 import domain.model.Studente;
