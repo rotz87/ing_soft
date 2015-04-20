@@ -486,7 +486,7 @@ public class ResetDB {
 			mapVoti.put(antonioGuerra, votos[7]);
 			mapVoti.put(cristinaAngeli, votos[6]);
 			
-			compitoStoria1A.svolgi();
+			compitoStoria1A.setSvolto();
 			compitoStoria1A.inserisciVoti(mapVoti);
 			
 //			CREAZIONE DEL SECONDO COMPITO IN CLASSE
@@ -496,9 +496,6 @@ public class ResetDB {
 			
 
 			registroRossiPrimaAstoria.getCompitiInClasse().add(compitoStoria1A);
-			
-			//FIXME da togliere
-//			TestCambioStatiCompito.main(null);
 			
 //			SALVATAGGIO DELLA SCUOLA SUL DATABASE -------------------------------------------------------------
 			RSPersistentManager.instance().getSession().save(scuola1);

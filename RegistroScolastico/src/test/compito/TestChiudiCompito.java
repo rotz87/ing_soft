@@ -23,7 +23,8 @@ public class TestChiudiCompito {
 	public static void main(String[] args) {
 		CompitoInClasseController controllerCompito;
 		DocenteController docenteController;
-		CompitoInClasse compito;
+//		CompitoInClasse compito;
+		int idCompitoProva = 1;
 		
 		LocalDate dataCompito = new LocalDate(2014,12,16);
 		Time oraInizio = Time.valueOf("10:0:0");
@@ -43,7 +44,7 @@ public class TestChiudiCompito {
 //				
 //				controllerCompito.changeState(compito.getID(), CompitoInClasseStateEnum.SVOLTO);
 	
-				controllerCompito.changeState(idClasse, idRegistroDocente, 1, CompitoInClasseStateEnum.CHIUSO);
+				controllerCompito.chiudiCompito(idClasse, idRegistroDocente, idCompitoProva);
 				
 //				CompitoInClassePresenter presenteCompito = new CompitoInClassePresenter();
 //				

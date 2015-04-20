@@ -8,12 +8,13 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.activemq.filter.function.inListFunction;
 import org.joda.time.LocalDate;
 import org.orm.PersistentException;
 import org.orm.PersistentTransaction;
 
 import service.Stampa;
+import domain.error.DomainCheckedException;
+import domain.error.ErrorMessage;
 import domain.model.Appello;
 import domain.model.Argomento;
 import domain.model.ArgomentoCriteria;
@@ -21,11 +22,9 @@ import domain.model.Calendario;
 import domain.model.Classe;
 import domain.model.compitoInClasse.CompitoInClasse;
 import domain.model.compitoInClasse.CompitoInClasseCriteria;
-import domain.model.compitoInClasse.CompitoInClasseStateEnum;
 import domain.model.ClasseCriteria;
 import domain.model.Docente;
 import domain.model.DocenteCriteria;
-import domain.model.ErrorMessage;
 import domain.model.RSPersistentManager;
 import domain.model.RegistroDocente;
 import domain.model.RegistroDocenteCriteria;
@@ -37,33 +36,37 @@ import domain.model.VotoCriteria;
 public class CompitoInClasseController {
 
 	
-	public CompitoInClasse creaCompito(int idRegistroDocente, int idDocente) {
+	public CompitoInClasse creaCompito(int idClasse, int idRegistroDocente, int idDocente) {
 
 		RegistroDocente registroDocente;
 		Docente docente;
 		CompitoInClasse compito;
+		Classe classe;
 
 		registroDocente = getRegistroDocenteById(idRegistroDocente);
-		
+		classe = getClasseById(idClasse);
 		docente = getDocenteById(idDocente);
 		
 		if(docente.haRegistroDocente(registroDocente)){
-			compito = registroDocente.creaCompito();
-			try {
-				PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
+			if(registroDocente.getClasse().equals(classe)){
+				compito = registroDocente.creaCompito();
 				try {
-					RSPersistentManager.instance().getSession().save(compito);
-					t.commit();
+					PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
+					try {
+						RSPersistentManager.instance().getSession().save(compito);
+						t.commit();
+					}
+					catch (PersistentException e) {
+						t.rollback();
+						throw e;
+					}
+				} catch (PersistentException e) {
+					throw new RuntimeException(ErrorMessage.COMPITO_UNCREABLE);
 				}
-				catch (PersistentException e) {
-					t.rollback();
-					throw e;
-				}
-			} catch (PersistentException e) {
-				throw new RuntimeException(ErrorMessage.COMPITO_UNCREABLE);
+			
+			}else{
+				throw new IllegalStateException(ErrorMessage.REGISTRO_DOCENTE_UNBELONGING);
 			}
-			
-			
 		}else{
 			throw new IllegalStateException(ErrorMessage.DOCENTE_UNQUALIFIED);
 		}
@@ -81,88 +84,63 @@ public class CompitoInClasseController {
 
 		StudenteCriteria studenteCriteria;
 		VotoCriteria votoCriteria;
-		DocenteController docenteController;
-		Docente docente;
-		
-		Classe classe;
-		RegistroDocente registroDocente;
+
 		CompitoInClasse compito;
 		Map<Studente, Voto> mapVoti;
 		Studente studente;
 		Voto voto;
-		
-		classe = getClasseById(idClasse);
-		registroDocente = getRegistroDocenteById(idRegistroDocente);
-		docenteController = new DocenteController();
-		docente = getDocenteById(docenteController.getIdDocenteProva());
-		
+				
 		mapVoti = new HashMap<Studente, Voto>();
 
 		compito = getCompitoInCLasseByID(idCompito);
 
-		if(docente.haRegistroDocente(registroDocente) ){
-			if(registroDocente.getCompitiInClasse().contains(compito)){
-				if (registroDocente.getClasse().equals(classe)){
+		try{
+			checkCompito(idClasse, idRegistroDocente, compito);
+			try {
+				
+				//trasforma mapVotiGUI in mapVoti
+				for(Integer idS : mapVotiGUI.keySet()){
+					studenteCriteria = new StudenteCriteria();
+					votoCriteria = new VotoCriteria();
 					
-					try {
-						
-						//trasforma mapVotiGUI in mapVoti
-						for(Integer idS : mapVotiGUI.keySet()){
-							studenteCriteria = new StudenteCriteria();
-							votoCriteria = new VotoCriteria();
-							
-							studenteCriteria.ID.eq(idS);
-							votoCriteria._voto.eq(mapVotiGUI.get(idS));
-							
-							studente = studenteCriteria.uniqueStudente();
-							voto = votoCriteria.uniqueVoto();
-							if(voto != null){//FIXME in questo modo i voti voti che vengono successivamente rimessi a null non vengono considerati e rimane il voto vecchio
-								mapVoti.put(studente, voto);
-							}
-						}
-						
-					} catch (PersistentException e) {
-						throw new RuntimeException(ErrorMessage.VOTI_UNLOADED);
+					studenteCriteria.ID.eq(idS);
+					votoCriteria._voto.eq(mapVotiGUI.get(idS));
+					
+					studente = studenteCriteria.uniqueStudente();
+					voto = votoCriteria.uniqueVoto();
+					if(voto != null){//FIXME in questo modo i voti voti che vengono successivamente rimessi a null non vengono considerati e rimane il voto vecchio
+						mapVoti.put(studente, voto);
 					}
-					//////////////////////////////////////////////////
-//					registroDocente = compito.getInsegnamento();
-//					
-//					registroDocente.inserisciVoti(compito, mapVoti);
-					///////////////////////////////////////////////////
-					compito.inserisciVoti(mapVoti);
-					
-					try {
-						PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
-						try {
-							for(Studente s: mapVoti.keySet()){
-								RSPersistentManager.instance().getSession().save(s.getLibrettoVoti());
-							}
-							t.commit();
-						}
-						catch (PersistentException e) {
-							t.rollback();
-							throw e;
-						}
-					} catch (PersistentException e) {
-						Stampa.stampaln("getCause: "+e.getCause());
-						Stampa.stampaln();
-
-						throw new RuntimeException(ErrorMessage.VOTI_NON_INSERIBILI);
-					}
-					
-				}else{
-					throw new IllegalStateException(ErrorMessage.REGISTRO_DOCENTE_UNBELONGING);
 				}
-			}else{
-				throw new IllegalStateException(ErrorMessage.COMPITO_NOT_BELONGING_REGISTRO);
+				
+			} catch (PersistentException e) {
+				throw new RuntimeException(ErrorMessage.VOTI_UNLOADED);
 			}
-		}else{
-			throw new IllegalStateException(ErrorMessage.DOCENTE_UNQUALIFIED);
+			compito.inserisciVoti(mapVoti);
+			
+			try {
+				PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
+				try {
+					for(Studente s: mapVoti.keySet()){
+						RSPersistentManager.instance().getSession().save(s.getLibrettoVoti());
+					}
+					t.commit();
+				}
+				catch (PersistentException e) {
+					t.rollback();
+					throw e;
+				}
+			} catch (PersistentException e) {
+				Stampa.stampaln("getCause: "+e.getCause());
+				Stampa.stampaln();
+	
+				throw new RuntimeException(ErrorMessage.VOTI_NON_INSERIBILI);
+			}
+					
+		}catch(DomainCheckedException e){
+			throw new IllegalStateException(e.getMessage());
 		}
-		
-		
-		
-		
+	
 	}
 
 	/**
@@ -179,19 +157,11 @@ public class CompitoInClasseController {
 		RegistroDocente registroDocente;
 		ArgomentoCriteria argomentoCriteria;
 		Collection<Argomento> argomenti;
-		Docente docente;
-		DocenteController docenteController;
-
-		Classe classe;
 		Classe classeReg;
-
 		java.sql.Date dataCorretta;
 		boolean isDataCorretta;
-
+		
 		argomenti = new LinkedHashSet<Argomento>();
-		docenteController = new DocenteController();
-		docente = getDocenteById(docenteController.getIdDocenteProva());
-		classe = getClasseById(idClasse);
 		registroDocente = getRegistroDocenteById(idRegistroDocente);
 		
 		try{
@@ -203,101 +173,62 @@ public class CompitoInClasseController {
 		
 		compito = getCompitoInCLasseByID(idCompito);
 		
-		if(docente.haRegistroDocente(registroDocente) ){
-			if(registroDocente.getCompitiInClasse().contains(compito)){
-				if (registroDocente.getClasse().equals(classe)){
-					registroDocente = getRegistroDocenteById(idRegistroDocente);
-					
-					if(idArgomenti.length > 0){
-						argomentoCriteria.ID.in(idArgomenti);
-						argomenti.addAll(argomentoCriteria.list());
-					}
+		try{
+			checkCompito(idClasse, idRegistroDocente, compito);
+			registroDocente = getRegistroDocenteById(idRegistroDocente);
 			
-					//Controllo correttezza data
-					classeReg = registroDocente.getClasse();
-					isDataCorretta = isDataCompitoCorretta(data, classeReg);
-					dataCorretta = data;
-					if(!isDataCorretta){
-						dataCorretta = compito.getData();
-					}
-					compito.setInfo(dataCorretta, oraInizio, oraFine, argomenti);
-			//		registroDocente.inserisciInfoCompito(compito, dataCorretta, oraInizio, oraFine, argomenti);
-					
-					try {
-						PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
-						try {
-							RSPersistentManager.instance().getSession().update(compito);
-							t.commit();
-						}
-						catch (PersistentException e) {
-							t.rollback();
-							throw e;
-						}
-					} catch (PersistentException e) {
-						throw new RuntimeException(ErrorMessage.COMPITO_NON_AGGIORNABILE);
-					}
-					
-					if(!isDataCorretta){
-						throw new IllegalStateException(ErrorMessage.DATA_WRONG);
-					}
-				}else{
-					throw new IllegalStateException(ErrorMessage.REGISTRO_DOCENTE_UNBELONGING);
-				}
-			}else{
-				throw new IllegalStateException(ErrorMessage.COMPITO_NOT_BELONGING_REGISTRO);
+			if(idArgomenti.length > 0){
+				argomentoCriteria.ID.in(idArgomenti);
+				argomenti.addAll(argomentoCriteria.list());
 			}
-		}else{
-			throw new IllegalStateException(ErrorMessage.DOCENTE_UNQUALIFIED);
-		}				
+	
+			//Controllo correttezza data
+			classeReg = registroDocente.getClasse();
+			isDataCorretta = isDataCompitoCorretta(data, classeReg);
+			dataCorretta = data;
+			if(!isDataCorretta){
+				dataCorretta = compito.getData();
+			}
+			compito.setInfo(dataCorretta, oraInizio, oraFine, argomenti);
+			
+			updateCompitoDB(compito);
+			
+			if(!isDataCorretta){
+				throw new IllegalStateException(ErrorMessage.DATA_WRONG);
+			}
+		}catch(DomainCheckedException e){
+			throw new IllegalStateException(e.getMessage());
+		}			
 	}
 	
 
 	
 	public void eliminaCompito(int idClasse, int idRegistroDocente, int idCompitoInClasse){
 
-		CompitoInClasse compito;
-
-		RegistroDocente registroDocente;
-		Docente docente;
-		DocenteController docenteController;
-
-		Classe classe;
-		
-		docenteController = new DocenteController();
-		docente = getDocenteById(docenteController.getIdDocenteProva());
-		classe = getClasseById(idClasse);
-		registroDocente = getRegistroDocenteById(idRegistroDocente);
-		
+		CompitoInClasse compito;		
 		compito = getCompitoInCLasseByID(idCompitoInClasse);
 		
-		if(docente.haRegistroDocente(registroDocente) ){
-			if(registroDocente.getCompitiInClasse().contains(compito)){
-				if (registroDocente.getClasse().equals(classe)){
-		
-					compito.elimina();
-					
-					try {
-						PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
-						try {
-							RSPersistentManager.instance().getSession().delete(compito);
-							t.commit();
-						}
-						catch (PersistentException e) {
-							t.rollback();
-							throw e;
-						}
-					} catch (PersistentException e) {
-						throw new RuntimeException(ErrorMessage.COMPITO_NON_ELIMINABILE);
-					}
-				}else{
-					throw new IllegalStateException(ErrorMessage.REGISTRO_DOCENTE_UNBELONGING);
+		try{
+			checkCompito(idClasse, idRegistroDocente, compito);
+			compito.elimina();
+			
+			try {
+				PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
+				try {
+					RSPersistentManager.instance().getSession().delete(compito);
+					t.commit();
 				}
-			}else{
-				throw new IllegalStateException(ErrorMessage.COMPITO_NOT_BELONGING_REGISTRO);
+				catch (PersistentException e) {
+					t.rollback();
+					throw e;
+				}
+			} catch (PersistentException e) {
+				throw new RuntimeException(ErrorMessage.COMPITO_NON_ELIMINABILE);
 			}
-		}else{
-		throw new IllegalStateException(ErrorMessage.DOCENTE_UNQUALIFIED);
+		}catch(DomainCheckedException e ){
+			throw new IllegalStateException(e.getMessage());
 		}
+			
 	}
 
 	public CompitoInClasse getCompitoInCLasse(int idClasse, int idRegistroDocente, int idCompitoInClasse) {
@@ -319,7 +250,7 @@ public class CompitoInClasseController {
 	}
 
 	public Set<CompitoInClasse> getCompitiInCLasse(int idClasse, int idRegistroDocente){
-//XXX - RISOLTO bisogna controllare che il registro docente appartenga alla classe??
+
 		Classe classe;
 		RegistroDocente registroDocente;
 		
@@ -389,159 +320,49 @@ public class CompitoInClasseController {
 		
 	}
 	
-	public void changeState(int idClasse, int idRegistroDocente, int idCompito, CompitoInClasseStateEnum statoFuturo){
-		
+	public void setSvoltoCompito(int idClasse, int idRegistroDocente, int idCompitoInClasse){
+
 		CompitoInClasse compito;
-		CompitoInClasseStateEnum statoAttuale;
-		Docente docente;
-		DocenteController docenteController;
-		RegistroDocente registroDocente;
-		Classe classe;
+		compito = getCompitoInCLasseByID(idCompitoInClasse);
 		
-		docenteController = new DocenteController();
-		docente = getDocenteById(docenteController.getIdDocenteProva());
-		classe = getClasseById(idClasse);
-		registroDocente = getRegistroDocenteById(idRegistroDocente);
+		try{
+			checkCompito(idClasse, idRegistroDocente, compito);
+			compito.setSvolto();
+			updateCompitoDB(compito);
+		}catch(DomainCheckedException e){
+			throw new IllegalStateException(e.getMessage());
+		}
 		
-		compito = getCompitoInCLasseByID(idCompito);
-		
-		if(docente.haRegistroDocente(registroDocente) ){
-			if(registroDocente.getCompitiInClasse().contains(compito)){
-				if (registroDocente.getClasse().equals(classe)){
-					statoAttuale = compito.getState().getStateEnum();
-					
-					switch (statoFuturo) {
-			
-					  case SVOLTO:
-						  
-						  switch (statoAttuale) {
-						  	case DA_SVOLGERE:
-						  		svolgiCompito(idCompito);
-							break;
-							
-						  	case ANNULLATO:
-								disannullaCompito(idCompito);
-							break;
-			
-							default:
-								throw new IllegalStateException(ErrorMessage.COMPITO_STATE_UNCHANGEABLE);
-						  }
-						  
-					  break;
-					
-					  case ANNULLATO:
-						  annullaCompito(idCompito);
-					  break;
-					  
-					  case CHIUSO:
-						  chiudiCompito(idCompito);
-					  break;
-					  
-					  default:
-						  throw new IllegalStateException(ErrorMessage.COMPITO_STATE_UNCHANGEABLE);
-				  }
-				}else{
-					throw new IllegalStateException(ErrorMessage.REGISTRO_DOCENTE_UNBELONGING);
-				}
-			}else{
-				throw new IllegalStateException(ErrorMessage.COMPITO_NOT_BELONGING_REGISTRO);
-			}
-		}else{
-		throw new IllegalStateException(ErrorMessage.DOCENTE_UNQUALIFIED);
+	}
+
+	public void annullaCompito(int idClasse, int idRegistroDocente, int idCompitoInClasse) {
+
+		CompitoInClasse compito;
+		compito = getCompitoInCLasseByID(idCompitoInClasse);
+				
+		try{
+			checkCompito(idClasse, idRegistroDocente, compito);
+			compito.annulla();
+			updateCompitoDB(compito);
+		}catch(DomainCheckedException e){
+			throw new IllegalStateException(e.getMessage());
 		}
 		
 	}
 	
-	private void svolgiCompito(int idCompitoInClasse){
+	public void chiudiCompito(int idClasse, int idRegistroDocente, int idCompitoInClasse) {
 
 		CompitoInClasse compito;
-
 		compito = getCompitoInCLasseByID(idCompitoInClasse);
-		compito.svolgi();
 		
-		try {
-			PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
-			try {
-				RSPersistentManager.instance().getSession().save(compito);
-				t.commit();
-			}
-			catch (PersistentException e) {
-				t.rollback();
-				throw e;
-			}
-		} catch (PersistentException e) {
-			throw new RuntimeException(ErrorMessage.COMPITO_NON_AGGIORNABILE);
+		try{
+			checkCompito(idClasse, idRegistroDocente, compito);
+			compito.chiudi();
+			updateCompitoDB(compito);
+		}catch(DomainCheckedException e){
+			throw new IllegalStateException(e.getMessage());
 		}
-		
-	}
-
-	private void annullaCompito(int idCompitoInClasse) {
-
-		CompitoInClasse compito;
-		
-		compito = getCompitoInCLasseByID(idCompitoInClasse);
-		compito.annulla();
-		
-		try {
-			PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
-			try {
-				RSPersistentManager.instance().getSession().save(compito);
-				t.commit();
-			}
-			catch (PersistentException e) {
-				t.rollback();
-				throw e;
-			}
-		} catch (PersistentException e) {
-			throw new RuntimeException(ErrorMessage.COMPITO_NON_AGGIORNABILE);
-		}
-		
-	}
 	
-	private void disannullaCompito(int idCompitoInClasse) {
-
-		CompitoInClasse compito;
-
-		compito = getCompitoInCLasseByID(idCompitoInClasse);
-		compito.disannulla();
-		
-		try {
-			PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
-			try {
-				RSPersistentManager.instance().getSession().save(compito);
-				t.commit();
-			}
-			catch (PersistentException e) {
-				t.rollback();
-				throw e;
-			}
-		} catch (PersistentException e) {
-			throw new RuntimeException(ErrorMessage.COMPITO_NON_AGGIORNABILE);
-		}
-		
-	}
-	
-	private void chiudiCompito(int idCompitoInClasse) {
-
-		CompitoInClasse compito;
-
-		compito = getCompitoInCLasseByID(idCompitoInClasse);
-		compito.chiudi();
-		
-		try {
-			PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
-			try {
-				RSPersistentManager.instance().getSession().save(compito);
-				t.commit();
-			}
-			catch (PersistentException e) {
-				t.rollback();
-				throw e;
-			}
-		} catch (PersistentException e) {
-			throw new RuntimeException(ErrorMessage.COMPITO_NON_AGGIORNABILE);
-		}
-		
 	}
 	
 	private Appello getAppello(int idCompito){
@@ -662,6 +483,41 @@ public class CompitoInClasseController {
 		return docente;
 	}
 	
+	private void checkCompito(int idClasse, int idRegistroDocente, CompitoInClasse compito) throws DomainCheckedException{
 
-
+		Docente docente;
+		DocenteController docenteController;
+		RegistroDocente registroDocente;
+		Classe classe;
+		
+		docenteController = new DocenteController();
+		docente = getDocenteById(docenteController.getIdDocenteProva());
+		classe = getClasseById(idClasse);
+		registroDocente = getRegistroDocenteById(idRegistroDocente);
+		
+		if(!docente.haRegistroDocente(registroDocente) ){
+			throw new DomainCheckedException(ErrorMessage.DOCENTE_UNQUALIFIED);
+		}else if (!registroDocente.getCompitiInClasse().contains(compito)){
+			throw new DomainCheckedException(ErrorMessage.COMPITO_NOT_BELONGING_REGISTRO);
+		}else if(!registroDocente.getClasse().equals(classe)){
+			throw new DomainCheckedException(ErrorMessage.REGISTRO_DOCENTE_UNBELONGING);
+		}
+	}
+	
+	private void updateCompitoDB(CompitoInClasse compito){
+		try {
+			PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
+			try {
+				RSPersistentManager.instance().getSession().update(compito);
+				t.commit();
+			}
+			catch (PersistentException e) {
+				t.rollback();
+				throw e;
+			}
+		} catch (PersistentException e) {
+			throw new RuntimeException(ErrorMessage.COMPITO_NON_AGGIORNABILE);
+		}
+	}
+	
 }

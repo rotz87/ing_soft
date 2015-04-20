@@ -27,6 +27,7 @@ import presenter.resourceSupport.compito.StudenteCompitoRS;
 import domain.controller.CompitoInClasseController;
 import domain.controller.DocenteController;
 import domain.controller.FaiAppelloController;
+import domain.error.ErrorMessage;
 import domain.model.Argomento;
 import domain.model.Studente;
 import domain.model.Voto;
@@ -54,7 +55,7 @@ public class CompitoInClassePresenter {
 		  compitoController = new CompitoInClasseController();
 		  docenteController = new DocenteController();
 		  
-		  compito = compitoController.creaCompito(idRegistroDocente, docenteController.getIdDocenteProva());
+		  compito = compitoController.creaCompito(idClasse, idRegistroDocente, docenteController.getIdDocenteProva());
 		  
 		  linkCompito = new CompitoInClasseRS(compito, idClasse, idRegistroDocente).getLink("self");
 		  httpHeaders.setLocation(URI.create(linkCompito.getHref()));
@@ -174,7 +175,24 @@ public class CompitoInClassePresenter {
 		  
 		  compitoInClasseController = new CompitoInClasseController();
 		  
-		  compitoInClasseController.changeState(idClasse, idRegistroDocente, idCompitoInClasse, compitoState.getState());
+//		  compitoInClasseController.changeState(idClasse, idRegistroDocente, idCompitoInClasse, compitoState.getState());
+		  switch ( compitoState.getState()) {
+			
+		  case SVOLTO:
+			  compitoInClasseController.setSvoltoCompito(idClasse, idRegistroDocente, idCompitoInClasse);
+		  break;
+		
+		  case ANNULLATO:
+			  compitoInClasseController.annullaCompito(idClasse, idRegistroDocente, idCompitoInClasse);
+		  break;
+		  
+		  case CHIUSO:
+			  compitoInClasseController.chiudiCompito(idClasse, idRegistroDocente, idCompitoInClasse);
+		  break;
+		  
+		  default:
+			  throw new IllegalStateException(ErrorMessage.COMPITO_STATE_UNCHANGEABLE);
+	  }
 		  
 		  HttpHeaders httpHeaders;
 		  httpHeaders = new HttpHeaders();

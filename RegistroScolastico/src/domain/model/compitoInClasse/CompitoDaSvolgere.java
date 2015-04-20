@@ -6,9 +6,9 @@ import java.util.Collection;
 
 import org.joda.time.LocalDate;
 
+import domain.error.ErrorMessage;
 import domain.model.Argomento;
 import domain.model.Calendario;
-import domain.model.ErrorMessage;
 
 public class CompitoDaSvolgere extends CompitoInClasseStateImp {
 	static private CompitoDaSvolgere instance;
@@ -37,7 +37,7 @@ public class CompitoDaSvolgere extends CompitoInClasseStateImp {
 	}
 	
 	@Override
-	public void svolgi(CompitoInClasse compitoInClasse) {
+	public void setSvolto(CompitoInClasse compitoInClasse) {
 		java.sql.Date data;
 		LocalDate lData;
 		

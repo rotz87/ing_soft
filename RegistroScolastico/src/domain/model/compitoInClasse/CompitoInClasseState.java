@@ -13,11 +13,9 @@ public interface CompitoInClasseState {
 	
 	public abstract void inserisciVoti(domain.model.compitoInClasse.CompitoInClasse compito, java.util.Map<Studente, Voto> mapVoti);
 	
-	public abstract void svolgi(domain.model.compitoInClasse.CompitoInClasse compitoInClasse);
+	public abstract void setSvolto(domain.model.compitoInClasse.CompitoInClasse compitoInClasse);
 	
 	public abstract void annulla(domain.model.compitoInClasse.CompitoInClasse compitoInClasse);
-	
-	public abstract void disannulla(domain.model.compitoInClasse.CompitoInClasse compitoInClasse);
 	
 	public abstract void chiudi(domain.model.compitoInClasse.CompitoInClasse compitoInClasse);
 	

@@ -11,6 +11,7 @@ public class testCreaCompito {
 	public static void main(String[] args) {
 
 		CompitoInClasseController controlloreCompito; 
+		int idClasseProva = 1;
 		int idRegistroDocenteProva = 1;
 		int idDocenteProva = 31;
 		CompitoInClasse compito = null;
@@ -20,7 +21,7 @@ public class testCreaCompito {
 		try {
 			
 			try {
-				compito = controlloreCompito.creaCompito(idRegistroDocenteProva, idDocenteProva);
+				compito = controlloreCompito.creaCompito(idClasseProva, idRegistroDocenteProva, idDocenteProva);
 			}
 			finally {
 				domain.model.RSPersistentManager.instance().disposePersistentManager();
