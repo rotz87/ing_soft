@@ -42,18 +42,18 @@ public class TestCambioStatiCompito {
 				controllerCompito = new CompitoInClasseController();
 				docenteController = new DocenteController();
 				
-				compito = controllerCompito.creaCompito(idRegistroDocente, docenteController.getIdDocenteProva());
+				compito = controllerCompito.creaCompito(idClasse, idRegistroDocente, docenteController.getIdDocenteProva());
 				java.sql.Date sqlDate = new java.sql.Date(dataCompito.toDate().getTime());
 				compito.setInfo(sqlDate, oraInizio, oraFine, argomenti);
 				
 				Stampa.stampaln();
 				
-				controllerCompito.changeState(idClasse, idRegistroDocente, compito.getID(), CompitoInClasseStateEnum.SVOLTO);
+				controllerCompito.setSvoltoCompito(idClasse, idRegistroDocente, compito.getID());
 //				controllerCompito.svolgiCompito(compito.getID());
 				Stampa.stampaln("ID del compito svolto: " + compito.getID());
 				
 				
-				compito = controllerCompito.creaCompito(idRegistroDocente, docenteController.getIdDocenteProva());
+				compito = controllerCompito.creaCompito(idClasse, idRegistroDocente, docenteController.getIdDocenteProva());
 				
 				Stampa.stampaln();
 				
@@ -61,33 +61,33 @@ public class TestCambioStatiCompito {
 				controllerCompito.eliminaCompito(idClasse, idRegistroDocente, compito.getID());
 				Stampa.stampaln("ID del compito eliminato: " + compito.getID());
 				
-				compito2 = controllerCompito.creaCompito(idRegistroDocente, docenteController.getIdDocenteProva());
+				compito2 = controllerCompito.creaCompito(idClasse, idRegistroDocente, docenteController.getIdDocenteProva());
 				
 				Stampa.stampaln();
 				
 				compito2.setInfo(sqlDate, oraInizio, oraFine, argomenti);
-				controllerCompito.changeState(idClasse, idRegistroDocente, compito2.getID(), CompitoInClasseStateEnum.SVOLTO);
+				controllerCompito.setSvoltoCompito(idClasse, idRegistroDocente, compito2.getID());
 				Stampa.stampaln();
-				controllerCompito.changeState(idClasse, idRegistroDocente, compito2.getID(), CompitoInClasseStateEnum.ANNULLATO);
+				controllerCompito.annullaCompito(idClasse, idRegistroDocente, compito2.getID());
 				Stampa.stampaln("ID del compito annullato: " + compito2.getID());
 				
 				Stampa.stampaln();
-				compito3 = controllerCompito.creaCompito(idRegistroDocente, docenteController.getIdDocenteProva());
+				compito3 = controllerCompito.creaCompito(idClasse, idRegistroDocente, docenteController.getIdDocenteProva());
 				compito3.setInfo(sqlDate, oraInizio, oraFine, argomenti);
-				controllerCompito.changeState(idClasse, idRegistroDocente, compito3.getID(), CompitoInClasseStateEnum.SVOLTO);;
+				controllerCompito.setSvoltoCompito(idClasse, idRegistroDocente, compito3.getID());
 				Stampa.stampaln();
-				controllerCompito.changeState(idClasse, idRegistroDocente, compito3.getID(), CompitoInClasseStateEnum.ANNULLATO);
+				controllerCompito.annullaCompito(idClasse, idRegistroDocente, compito3.getID());
 				Stampa.stampaln();
-				controllerCompito.changeState(idClasse, idRegistroDocente, compito3.getID(), CompitoInClasseStateEnum.SVOLTO);
+				controllerCompito.setSvoltoCompito(idClasse, idRegistroDocente, compito3.getID());
 				Stampa.stampaln("ID del compito disannullato: " + compito3.getID());
 				
 				Stampa.stampaln();
-				compito4 = controllerCompito.creaCompito(idRegistroDocente, docenteController.getIdDocenteProva());
+				compito4 = controllerCompito.creaCompito(idClasse, idRegistroDocente, docenteController.getIdDocenteProva());
 				compito4.setInfo(sqlDate, oraInizio, oraFine, argomenti);
-				controllerCompito.changeState(idClasse, idRegistroDocente, compito4.getID(), CompitoInClasseStateEnum.SVOLTO);
+				controllerCompito.setSvoltoCompito(idClasse, idRegistroDocente, compito4.getID());
 				mapVotiGUI.put(10, new Byte((byte) 5));
 				controllerCompito.inserisciVoti(idClasse, idRegistroDocente, compito4.getID(), mapVotiGUI);
-				controllerCompito.changeState(idClasse, idRegistroDocente, compito4.getID(), CompitoInClasseStateEnum.CHIUSO);
+				controllerCompito.chiudiCompito(idClasse, idRegistroDocente, compito4.getID());
 
 				Stampa.stampaln("ID del compito chiuso: " + compito4.getID());
 								

@@ -17,7 +17,7 @@ public class CompitoAnnullato extends CompitoInClasseStateImp {
 	}
 	
 	@Override
-	public void disannulla(CompitoInClasse compitoInClasse) {
+	public void setSvolto(CompitoInClasse compitoInClasse) {
 		compitoInClasse.set_state(CompitoSvolto.getInstance());
 	}
 	

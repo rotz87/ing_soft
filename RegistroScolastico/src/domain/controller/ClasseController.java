@@ -9,13 +9,13 @@ import org.joda.time.LocalDate;
 import org.orm.PersistentException;
 
 import service.Stampa;
+import domain.error.ErrorMessage;
 import domain.model.Appello;
 import domain.model.Calendario;
 import domain.model.Classe;
 import domain.model.ClasseCriteria;
 import domain.model.Docente;
 import domain.model.DocenteCriteria;
-import domain.model.ErrorMessage;
 import domain.model.RegistroDocente;
 import domain.model.RegistroDocenteCriteria;
 import domain.model.Studente;

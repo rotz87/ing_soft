@@ -2,6 +2,7 @@ package domain.model.compitoInClasse;
 
 import org.apache.tomcat.jni.Error;
 
+import domain.error.ErrorMessage;
 import domain.model.*;
 
 public abstract class CompitoInClasseStateImp implements CompitoInClasseState {
@@ -41,14 +42,6 @@ public abstract class CompitoInClasseStateImp implements CompitoInClasseState {
 	 * 
 	 * @param compitoInClasse
 	 */
-	public void disannulla(CompitoInClasse compitoInClasse) {
-		throw new IllegalStateException(ErrorMessage.WRONG_STATE);
-	}
-
-	/**
-	 * 
-	 * @param compitoInClasse
-	 */
 	public void chiudi(CompitoInClasse compitoInClasse) {
 		throw new IllegalStateException(ErrorMessage.WRONG_STATE);
 	}
@@ -65,7 +58,7 @@ public abstract class CompitoInClasseStateImp implements CompitoInClasseState {
 	 * 
 	 * @param compitoInClasse
 	 */
-	public void svolgi(CompitoInClasse compitoInClasse) {
+	public void setSvolto(CompitoInClasse compitoInClasse) {
 		throw new IllegalStateException(ErrorMessage.WRONG_STATE);
 	}
 

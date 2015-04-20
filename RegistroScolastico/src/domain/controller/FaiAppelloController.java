@@ -12,6 +12,7 @@ import org.orm.PersistentException;
 import org.orm.PersistentTransaction;
 
 import service.Stampa;
+import domain.error.ErrorMessage;
 import domain.model.Appello;
 import domain.model.AppelloCriteria;
 import domain.model.Assenza;
@@ -19,7 +20,6 @@ import domain.model.Classe;
 import domain.model.ClasseCriteria;
 import domain.model.Docente;
 import domain.model.DocenteCriteria;
-import domain.model.ErrorMessage;
 import domain.model.LibrettoAssenze;
 import domain.model.LibrettoAssenzeCriteria;
 import domain.model.RSPersistentManager;

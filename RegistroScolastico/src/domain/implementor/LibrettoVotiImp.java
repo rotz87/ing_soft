@@ -1,7 +1,7 @@
 package domain.implementor;
 
 import service.Stampa;
-import domain.model.ErrorMessage;
+import domain.error.ErrorMessage;
 import domain.model.LibrettoVoti;
 import domain.model.LibrettoVotiLineItem;
 import domain.model.compitoInClasse.*;

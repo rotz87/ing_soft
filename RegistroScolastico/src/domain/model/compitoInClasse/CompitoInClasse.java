@@ -124,8 +124,8 @@ public class CompitoInClasse {
 		this._insegnamento = insegnamento;
 	}
 	
-	public void svolgi() {
-		this._state.svolgi(this);
+	public void setSvolto() {
+		this._state.setSvolto(this);
 	}
 	
 	public void annulla() {
@@ -134,10 +134,6 @@ public class CompitoInClasse {
 	
 	public void chiudi() {
 		this._state.chiudi(this);
-	}
-	
-	public void disannulla() {
-		this._state.disannulla(this);
 	}
 	
 	public void elimina() {

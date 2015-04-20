@@ -2,9 +2,9 @@ package domain.controller;
 
 import org.orm.PersistentException;
 
+import domain.error.ErrorMessage;
 import domain.model.Docente;
 import domain.model.DocenteCriteria;
-import domain.model.ErrorMessage;
 
 public class DocenteController {
 	
