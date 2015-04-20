@@ -9,6 +9,9 @@ public class ClasseMenuRS extends ResourceSupport {
 	private int idClasse;
 	private String nome;
 	
+	public ClasseMenuRS(){
+		
+	}
 	
 	public ClasseMenuRS(Classe classe){
 		setIdClasse(classe.getID());

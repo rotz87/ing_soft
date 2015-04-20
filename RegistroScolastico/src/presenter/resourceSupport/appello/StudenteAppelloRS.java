@@ -1,36 +1,21 @@
 package presenter.resourceSupport.appello;
 
-
-import org.springframework.hateoas.ResourceSupport;
-
+import presenter.resourceSupport.StudenteRS;
 import domain.model.Studente;
 
 
-public class StudenteAppelloRS extends ResourceSupport{
+public class StudenteAppelloRS extends StudenteRS{
+	
+	public StudenteAppelloRS(){
+		super();
+	}
 
-	private int idStudente;
-	private String nome;
-	private String cognome;
 	public StudenteAppelloRS(Studente studente) {
 		
-		this.idStudente = studente.getID();
-		this.nome = studente.getNome();
-		this.cognome = studente.getCognome();
+		super(studente);
 		
-		//inserire links
+		// XXX inserire links
 		
-	}
-
-	public int getIdStudente() {
-		return idStudente;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public String getCognome() {
-		return cognome;
 	}
 	
 }
