@@ -49,6 +49,22 @@
 .rs-background-primary {
   background-color:#337ab7;
 }
+
+.rs-color-success {
+  color:#5cb85c;
+}
+.rs-color-danger {
+  color:#d9534f;
+}
+.rs-color-warning {
+  color:#f0ad4e;
+}
+.rs-color-info {
+  color:#5bc0de;
+}
+.rs-color-primary {
+  color:#337ab7;
+}
 .table tbody>tr>td.rs-text-vmiddle{
 	vertical-align:middle;
 }
@@ -132,6 +148,7 @@ body { padding-top: 70px; }
 .margin-bottom-sm {margin-bottom: 0.8em;} 
 .margin-bottom-md {margin-bottom: 1.0em;}
 .margin-bottom-lg {margin-bottom: 1.5em;}  
+
 
 /*
 @brand-primary: darken(#428bca, 6.5%); // #337ab7

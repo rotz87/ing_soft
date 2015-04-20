@@ -9,8 +9,8 @@ CompitoInClasse.prototype.setState = function(cState){
 	this.cState = cState;
 };
 
-CompitoInClasse.prototype.salvaCompito = function(funzioneEsterna){
-	ret = this.cState.salvaCompito(funzioneEsterna);
+CompitoInClasse.prototype.salvaCompito = function(funzioneEsterna,compito,ajax){
+	ret = this.cState.salvaCompito(funzioneEsterna,compito,ajax);
 	return ret;
 };
 
@@ -24,8 +24,9 @@ CompitoInClasse.prototype.inserisciVoti = function(funzioneEsterna){
 	console.log("inserisciVoti")
 	return ret;
 };
-CompitoInClasse.prototype.svolgi = function(funzioneEsterna){
-	ret = this.cState.svolgi(funzioneEsterna);
+CompitoInClasse.prototype.svolgi = function (funzioneEsterna){
+	console.log("la funzione esterna è "+funzioneEsterna)
+	var ret = this.cState.svolgi(funzioneEsterna);
 	console.log("svolgi")
 	return ret;
 };

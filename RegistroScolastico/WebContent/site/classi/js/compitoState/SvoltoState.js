@@ -4,8 +4,8 @@ var SvoltoState = function(cCompitoInClasse){
 	this.label = "svolto"
 };
 
-SvoltoState.prototype.salvaCompito = function(obj){
-	this.inserisciVoti(obj);
+SvoltoState.prototype.salvaCompito = function(obj,compito,ajax){
+	this.inserisciVoti(obj,compito,ajax);
 	console.log("SvoltoState - informazioni salvate")
 	return true;
 };
@@ -14,9 +14,9 @@ SvoltoState.prototype.inserisciInfo = function(){
 	console.log("non puoi cambiare le info ad un compito svolto");
 	return false;
 };
-SvoltoState.prototype.inserisciVoti = function(obj){
+SvoltoState.prototype.inserisciVoti = function(obj,compito,ajax){
 	console.log("i voti sono stati inseriti");
-	obj.salvaVoti()
+	obj.salvaVoti(compito,ajax)
 	return true;
 };
 SvoltoState.prototype.svolgi = function(){
@@ -24,8 +24,9 @@ SvoltoState.prototype.svolgi = function(){
 	var b = "false";
 	return b;
 };
-SvoltoState.prototype.annullaRipristina = function(){
+SvoltoState.prototype.annullaRipristina = function(funzioneEsterna){
 	console.log("il compito è svolto, dunque annullo");
+	this.annulla(funzioneEsterna)
 	return true;
 };
 SvoltoState.prototype.annulla = function(funzioneEsterna){

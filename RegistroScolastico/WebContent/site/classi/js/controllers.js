@@ -32,6 +32,7 @@ registroControllers.controller('templateTitolo', ['$scope','$location','$rootSco
  * Controller utilizzato per visualizzare l'elenco degli appelli in base alla classe selezionata
  */
 registroControllers.controller('riempiElencoAppelli', ['$scope','rsClasse','$location','$http','$rootScope','$q','$routeParams', function($scope, rsClasse, $location, $http, $rootScope, $q, $routeParams) {
+	  
 	  var newUri;
 	  $scope.idClasse = 0;
 	  var nuovoAppello = {};
@@ -81,7 +82,7 @@ registroControllers.controller('riempiElencoAppelli', ['$scope','rsClasse','$loc
 		  {
 			  /*
 			   * l'appello con dataAppelloAvviabile non è presente 
-			   * nell'elenco degi appelli che sono arrivati dal server
+			   * nell'elenco degli appelli che sono arrivati dal server
 			   */
 			  var newAppello = {};
 			  newAppello.data = response.dataAppelloAvviabile;
@@ -128,7 +129,7 @@ registroControllers.controller('riempiElencoAppelli', ['$scope','rsClasse','$loc
 		$scope.elencoClassi = rsClasse.elencoClassi({},
 		function(response,headers){
 			//successo
-			for(i in response)
+			for(var i in response)
 				{
 				if(response[i].idClasse == $scope.idClasse)
 					$scope.nomeClasse = response[i].nome 
@@ -182,7 +183,7 @@ registroControllers.controller('faiAppello', ['$scope','rsClasse','$location','$
 				function(response, header)
 				{
 					//fallimento
-					$scope.erroreSistema.appello = "non sono riuscito a caricare l'appello!!!!"
+					$scope.erroreSistema.appello = "non sono riuscito a caricare l'appello"
 					erroreSistema($rootScope, response.data, true)
 				})
 
@@ -305,7 +306,6 @@ registroControllers.controller('faiAppello', ['$scope','rsClasse','$location','$
 		
 		$scope.controllaAppello = function()
 		{
-
 			for (var key in $scope.studenti)
 			{
 				var assente = ($scope.appello.assenzePrese == false);
@@ -346,8 +346,7 @@ function retrieveObjectFromUrl($http, resourceUrl, destinazione){
 	return remoteObject;
 }
 
-registroControllers.controller('popolamentoNavigazione', ['$scope','rsClasse','$q','$rootScope','$filter','$location', function($scope, rsClasse, $q, $rootScope,$filter,$location){
-
+registroControllers.controller('popolamentoNavigazione', ['$scope', 'rsClasse', '$q', '$rootScope', '$filter', '$location', function($scope, rsClasse, $q, $rootScope, $filter, $location){
 	$scope.$watch("idClasse",
 			function(newValue,oldValue){
 		//c'è un nuovo valore di idClasse
@@ -357,7 +356,7 @@ registroControllers.controller('popolamentoNavigazione', ['$scope','rsClasse','$
 			$scope.elencoClassi = rsClasse.elencoClassi({},function(response,header)
 					{
 						//successo
-						for(classe in response)
+						for(var classe in response)
 							{
 								if (response[classe].idClasse == $scope.selezioneAttuale.idClasse)
 									{
@@ -404,7 +403,7 @@ registroControllers.controller('popolamentoNavigazione', ['$scope','rsClasse','$
 					function(response,headers)
 						{
 						  //successo
-						for(appello in response.appelli)
+						for(var appello in response.appelli)
 						{
 							if (response.appelli[appello].idAppello == $scope.selezioneAttuale.idAppello)
 								{
@@ -458,7 +457,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	$scope.modal = {};
 	$scope.eliminaCompitoModal = function(funzioneDaEseguire){
 		$scope.modal.titolo = "Eliminazione del Compito in corso";
-		tipo = "warning";
+		var tipo = "warning";
 		$scope.modal.messaggio = "confermi di voler eliminare il corrente compito? eliminando il compito tornerai al tuo registro docente"
 		$scope.modal.colore = "modal-header-"+tipo;
 		$scope.modal.bottone = "btn-"+tipo;
@@ -467,11 +466,15 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		}//funzioneDaEseguire();
 		$("#myModal2").modal("show")
 	}
-	$scope.cambioStatoCompito = function (funzioneDaEseguire){
+	$scope.cambioStatoCompito = function (funzioneDaEseguire,daSalvare){
 		
 		$scope.modal.titolo = "Cambio dello stato del compito in corso";
-		tipo = "info";
+		var tipo = "info";
 		$scope.modal.messaggio = "confermi di voler cambiare lo stato del compito?"
+		if(daSalvare)
+			{
+			$scope.modal.messaggio = $scope.modal.messaggio + " Premendo ok tutte le modifiche apportate saranno salvate"
+			}
 		$scope.modal.colore = "modal-header-"+tipo;
 		$scope.modal.bottone = "btn-"+tipo;
 		$scope.modal.bottoneOk = "btn-"+tipo;
@@ -566,10 +569,11 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		$scope.argsChecked = true;
 	}
 	
-	$scope.salvaCompito = function(){
-		mioCompito.salvaCompito($scope)
+	$scope.salvaCompito = function(alProssimoStato){
+		mioCompito.salvaCompito($scope,alProssimoStato)
+		//console.log("$scope.salvaCompito: "+ compito + " ajax: "+ ajax)
 	}
-	$scope.aggiornaDatiCompito = function(){
+	$scope.aggiornaDatiCompito = function(alProssimoStato,ajax){
 		//var CompitoInClasse = Compito.get({idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito});
 		var tmpCompito = {};
 		for (key in $scope.compitoInClasse.toJSON())
@@ -613,6 +617,15 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 			Compito.save({idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito}, tmpCompito,
 					function(response,headers)
 					{
+						
+						if(alProssimoStato != null)
+						{
+							/**
+							 * richiama la funzione che invocherà il cambio di stato al compito,
+							 * se richiesto
+							 **/
+							alProssimoStato()
+						}
 						//successo
 						$scope.vecchioCompitoInClasse = angular.copy($scope.compitoInClasse)
 						
@@ -623,6 +636,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 						$scope.modal.bottone = "btn-success";
 						$rootScope.modal = $scope.modal;
 						$("#myModal").modal("show");
+
 					},
 					function(response,headers){
 						//fallimento
@@ -631,47 +645,6 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 //		}
 	}
 	
-	
-	
-	
-//	$scope.aggiornaCompito = function(){
-//		var CompitoInClasse = Compito.get({idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito});
-//		var tmpCompito = {};
-//		for (key in $scope.compitoInClasse.toJSON())
-//			{
-//			tmpCompito[key] = $scope.compitoInClasse.toJSON()[key];
-//			}
-//		
-//		tmpCompito.data = new Date(tmpCompito.data.split("/").reverse().join("-")).getTime();
-//		
-//		tmpCompito.oraInizio = new Date(tmpCompito.oraInizio).getTime();
-//		tmpCompito.oraFine = new Date(tmpCompito.oraFine).getTime();
-//		mioCompito.info.setInfo(tmpCompito.data,tmpCompito.oraInizio,tmpCompito.oraFine)
-//		
-//		if (tmpCompito.argomentiRS.class = String.class)
-//			{
-//			tmpCompito.argomentiRS = angular.toJSON(temp.argomentiRS);
-//			}
-//		Compito.save({idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito}, tmpCompito,
-//				function(response,headers){
-//					//successo
-//					if ( typeof $scope.studentiCompito != "undefined")
-//					{
-//						$scope.salvaVoti();
-//					}
-//				},
-//				function(response,headers){
-//					//fallimento
-//					erroreSistema($rootScope, response.data, true)
-//				});
-//		$scope.modal = {};
-//		$scope.modal.messaggio = "Il compito è stato registrato correttamente";
-//		$scope.modal.titolo = "Compito registrato";
-//		$scope.modal.colore = "modal-header-success";
-//		$scope.modal.bottone = "btn-success";
-//		$rootScope.modal = $scope.modal;
-//		$("#myModal").modal("show");
-//	}
 	$scope.intervalloVoti = [0,1,2,3,4,5,6,7,8,9,10]
 	
 	$scope.inserisciVoto = function(studente,voto){
@@ -679,28 +652,42 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	}
 
 	$scope.ripristinaCompito = function(){
+		//$scope.salvaCompito(mioCompito.ripristina,$scope.ripristinaCompitoAjax)
 		mioCompito.ripristina($scope.ripristinaCompitoAjax)
 	}
 	$scope.ripristinaCompitoAjax = function(){
 		impostaStato($scope.statiAmmissibili.SVOLTO.stato)
 	}
 	
+	$scope.salvaAnnullaCompito = function(){
+		$scope.salvaCompito($scope.annullaCompito)
+	}
 	$scope.annullaCompito = function(){
+		//$scope.salvaCompito(mioCompito.annulla,$scope.annullaCompitoAjax)
 		mioCompito.annulla($scope.annullaCompitoAjax)
 	}
 	$scope.annullaCompitoAjax = function(){
 		impostaStato($scope.statiAmmissibili.ANNULLATO.stato)
 	}
 	
+	$scope.salvaChiudiCompito = function(){
+		$scope.salvaCompito($scope.chiudiCompito)
+	}
+	
 	$scope.chiudiCompito = function(){
+		//$scope.salvaCompito($scope.chiudiCompitoAjax);
 		mioCompito.chiudi($scope.chiudiCompitoAjax);
 	}
 	$scope.chiudiCompitoAjax = function(){
 		impostaStato($scope.statiAmmissibili.CHIUSO.stato)
 	}
 	
-	$scope.svolgiCompito = function(){
-		var success = mioCompito.svolgi($scope.svolgiCompitoAjax);
+	$scope.salvaSvolgiCompito = function(){
+		$scope.salvaCompito($scope.svolgiCompito);
+		//var success = mioCompito.svolgi($scope.svolgiCompitoAjax);
+	}
+	$scope.svolgiCompito = function svolgiCompito(){
+		mioCompito.svolgi($scope.svolgiCompitoAjax)
 	}
 	$scope.svolgiCompitoAjax = function(){
 		impostaStato($scope.statiAmmissibili.SVOLTO.stato)
@@ -739,16 +726,17 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	}
 	
 	$scope.annullaRipristinaCompito = function(){
+		$scope.salvaCompito();
 		var success = mioCompito.annullaRipristina();
 	}
 	
-	$scope.salvaVoti = function(){
+	$scope.salvaVoti = function(alProssimoStato,ajax){
 		var tmpStudenti = [];
 		for (index in $scope.studentiCompito)
 		{
 			if($scope.studentiCompito[index].assente == false)
 			{
-				stud = {};
+				var stud = {};
 				stud.idStudente = $scope.studentiCompito[index].idStudente
 				stud.voto = $scope.studentiCompito[index].voto
 				tmpStudenti.push(stud);
@@ -758,6 +746,10 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		Compito.inviaVoti({idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito}, tmpStudenti,
 				function (response,headers)
 				{
+			if(alProssimoStato!=null)
+				{
+					alProssimoStato();
+				}
 			//successo
 			$scope.modal = {};
 			$scope.modal.messaggio = "Il compito è stato registrato correttamente";
@@ -774,7 +766,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		});
 		
 	}
-	$scope.absChecked=true;
+	$scope.absChecked = true;
 	$scope.compitiUguali = false;
 	$scope.$watchGroup(["compitoInClasse","vecchioCompitoInClasse"],function(newValues, oldValues, scope){
 		$scope.compitiUguali = angular.equals(newValues[0], newValues[1]);
@@ -819,7 +811,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	rsClasse.dateFestive ({idClasse : $scope.idClasse},
 		function(response,headers){
 			//successo
-			for (index in response.giorniFestivi)
+			for (var index in response.giorniFestivi)
 			{
 				
 				var data = new Date(response.giorniFestivi[index]);
@@ -871,6 +863,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	
 	$scope.$watch("compitoInClasse.data",
 		function(newValue,oldValue){
+		
 		if(typeof newValue == 'undefined')
 			{
 			newValue = null
@@ -879,10 +872,13 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		var dataReg = new RegExp("(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[012])/((19|20)\\d\\d)");
 		if (newValue && newValue.match(dataReg))
 		{
+			
 			//converte la data dal formato dd/mm/yyyy a yyyy-mm-dd
 			newValue = newValue.split('/').reverse().join("-")
-			
 			var nuovaData = new Date(newValue).getTime();
+			
+			$scope.dataFissata = nuovaData;
+			
 			$scope.studentiCompito = Compito.queryStudenti(
 					{idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito, data : nuovaData},
 					function(response,headers)
@@ -923,7 +919,7 @@ registroControllers.controller('riempiElencoCompiti',
 						function(response,headers)
 						{
 							//successo
-							for(key in $scope.registriDisponibili)
+							for(var key in $scope.registriDisponibili)
 							{
 								if($scope.registriDisponibili[key].idRegistroDocente == $routeParams.idRegistroDocente)
 								{
@@ -958,7 +954,7 @@ registroControllers.controller('riempiElencoCompiti',
 						function(response,headers)
 						{
 							//successo
-							idCompito = headers().location.split("/");
+							var idCompito = headers().location.split("/");
 							idCompito = idCompito[idCompito.length-1];
 							$location.path($location.path()+idCompito+"/");
 						},

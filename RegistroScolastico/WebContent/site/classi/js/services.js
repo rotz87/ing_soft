@@ -1,7 +1,7 @@
 var registroServices = angular.module ('registroServices',["ngResource"]);
 
 var host = ''
-//var hostAddr = "10.175.10.100"
+//var hostAddr = "10.170.50.1"
 //var host = "http://"+hostAddr+":8080"
 registroServices.factory('rsClasse',['$resource',
 				function($resource){

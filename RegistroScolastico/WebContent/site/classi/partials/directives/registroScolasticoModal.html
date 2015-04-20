@@ -10,12 +10,14 @@
       <div class="modal-body">
       <p>
         {{modal.messaggio}}
-        </p>
+       </p>
+        <div ng-show="modal.urlRisorsa">
         <p> per la risorsa <br>  {{modal.urlRisorsa}}</p>
         <br>
-        <p ng-if="myInput.status">
-        errore: {{modal.status}} {{modal.statusText}}
+        <p ng-show="modal.status">
+        errore: {{modal.status}} codice: {{modal.statusText}}
         </p>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-md center-block ng-class:modal.bottone;" data-dismiss="modal">Ok</button>

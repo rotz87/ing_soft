@@ -4,15 +4,17 @@ var DaSvolgereState = function(cCompitoInClasse){
 	this.label = "da svolgere"
 };
 
-DaSvolgereState.prototype.salvaCompito = function(obj){
-	this.inserisciInfo(obj)
-	console.log("DaSvolgereState - informazioni salvate")
+DaSvolgereState.prototype.salvaCompito = function(obj,compito,ajax){
+	//console.log("parametri in stato.salvaCompito "+ compito + "ajax" + ajax)
+	this.inserisciInfo(obj,compito,ajax)
+	//console.log("DaSvolgereState - informazioni salvate")
 	return true;
 };
 
-DaSvolgereState.prototype.inserisciInfo = function(obj){
-	obj.aggiornaDatiCompito();
-	console.log("info cambiate");
+DaSvolgereState.prototype.inserisciInfo = function(obj,compito,ajax){
+	//console.log("parametri nello stato: " + compito + " ajax " + ajax)
+	obj.aggiornaDatiCompito(compito,ajax);
+	//console.log("info cambiate");
 	return true;
 };
 DaSvolgereState.prototype.inserisciVoti = function(){
