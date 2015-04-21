@@ -5,8 +5,8 @@ import java.sql.Time;
 import org.joda.time.LocalDate;
 import org.orm.PersistentException;
 
+import controller.CompitoInClasseController;
 import service.Stampa;
-import domain.controller.CompitoInClasseController;
 import domain.model.Argomento;
 import domain.model.compitoInClasse.CompitoInClasse;
 import domain.model.compitoInClasse.CompitoInClasseCriteria;

@@ -1,9 +1,9 @@
 package test.compito;
 
+import controller.CompitoInClasseController;
+import controller.DocenteController;
 import ormsamples.CreateRegistroScolasticoData;
 import service.Stampa;
-import domain.controller.CompitoInClasseController;
-import domain.controller.DocenteController;
 import domain.model.compitoInClasse.CompitoInClasse;
 
 public class testCreaCompito {

@@ -4,7 +4,7 @@ public class CompitoChiuso extends CompitoInClasseStateImp {
 	
 	static private CompitoChiuso instance;
 	
-	private final CompitoInClasseStateEnum stateEnum = CompitoInClasseStateEnum.CHIUSO;
+	private CompitoInClasseStateEnum stateEnum;//final = CompitoInClasseStateEnum.CHIUSO;
 
 	private CompitoChiuso() {
 	}
@@ -19,5 +19,8 @@ public class CompitoChiuso extends CompitoInClasseStateImp {
 	@Override
 	public CompitoInClasseStateEnum getStateEnum() {
 		return this.stateEnum;
+	}
+	public void setStateEnum(CompitoInClasseStateEnum stateEmum){
+		this.stateEnum = stateEmum;
 	}
 }

@@ -6,8 +6,8 @@ import java.util.Map.Entry;
 
 import org.orm.PersistentException;
 
+import controller.CompitoInClasseController;
 import service.Stampa;
-import domain.controller.CompitoInClasseController;
 import domain.error.ErrorMessage;
 import domain.model.compitoInClasse.CompitoInClasse;
 import domain.model.compitoInClasse.CompitoInClasseCriteria;

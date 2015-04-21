@@ -65,4 +65,8 @@ public abstract class CompitoInClasseStateImp implements CompitoInClasseState {
 	public CompitoInClasseStateEnum getStateEnum() {
 		throw new UnsupportedOperationException();
 	}
+	
+	public void setStateEnum(CompitoInClasseStateEnum stateEmum){
+		throw new UnsupportedOperationException();
+	}
 }

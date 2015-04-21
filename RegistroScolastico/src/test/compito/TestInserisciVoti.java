@@ -7,8 +7,8 @@ import java.util.Map;
 import org.joda.time.LocalDate;
 import org.orm.PersistentException;
 
+import controller.CompitoInClasseController;
 import service.Stampa;
-import domain.controller.CompitoInClasseController;
 import domain.model.compitoInClasse.CompitoInClasse;
 import domain.model.compitoInClasse.CompitoInClasseCriteria;
 

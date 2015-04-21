@@ -9,8 +9,8 @@ import java.util.Map;
 import org.orm.PersistentException;
 import org.orm.PersistentTransaction;
 
+import controller.FaiAppelloController;
 import service.Stampa;
-import domain.controller.FaiAppelloController;
 import domain.model.Classe;
 import domain.model.ClasseCriteria;
 import domain.model.Docente;

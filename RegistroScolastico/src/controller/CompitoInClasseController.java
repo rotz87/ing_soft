@@ -1,4 +1,4 @@
-package domain.controller;
+package controller;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -12,6 +12,7 @@ import org.joda.time.LocalDate;
 import org.orm.PersistentException;
 import org.orm.PersistentTransaction;
 
+import controller.compitoCommand.CompitoCommand;
 import service.Stampa;
 import domain.error.DomainCheckedException;
 import domain.error.ErrorMessage;
@@ -320,44 +321,59 @@ public class CompitoInClasseController {
 		
 	}
 	
-	public void setSvoltoCompito(int idClasse, int idRegistroDocente, int idCompitoInClasse){
+//	public void setSvoltoCompito(int idClasse, int idRegistroDocente, int idCompitoInClasse){
+//
+//		CompitoInClasse compito;
+//		compito = getCompitoInCLasseByID(idCompitoInClasse);
+//		
+//		try{
+//			checkCompito(idClasse, idRegistroDocente, compito);
+//			compito.setSvolto();
+//			updateCompitoDB(compito);
+//		}catch(DomainCheckedException e){
+//			throw new IllegalStateException(e.getMessage());
+//		}
+//		
+//	}
 
-		CompitoInClasse compito;
-		compito = getCompitoInCLasseByID(idCompitoInClasse);
-		
-		try{
-			checkCompito(idClasse, idRegistroDocente, compito);
-			compito.setSvolto();
-			updateCompitoDB(compito);
-		}catch(DomainCheckedException e){
-			throw new IllegalStateException(e.getMessage());
-		}
-		
-	}
-
-	public void annullaCompito(int idClasse, int idRegistroDocente, int idCompitoInClasse) {
-
-		CompitoInClasse compito;
-		compito = getCompitoInCLasseByID(idCompitoInClasse);
-				
-		try{
-			checkCompito(idClasse, idRegistroDocente, compito);
-			compito.annulla();
-			updateCompitoDB(compito);
-		}catch(DomainCheckedException e){
-			throw new IllegalStateException(e.getMessage());
-		}
-		
-	}
+//	public void annullaCompito(int idClasse, int idRegistroDocente, int idCompitoInClasse) {
+//
+//		CompitoInClasse compito;
+//		compito = getCompitoInCLasseByID(idCompitoInClasse);
+//				
+//		try{
+//			checkCompito(idClasse, idRegistroDocente, compito);
+//			compito.annulla();
+//			updateCompitoDB(compito);
+//		}catch(DomainCheckedException e){
+//			throw new IllegalStateException(e.getMessage());
+//		}
+//		
+//	}
 	
-	public void chiudiCompito(int idClasse, int idRegistroDocente, int idCompitoInClasse) {
+//	public void chiudiCompito(int idClasse, int idRegistroDocente, int idCompitoInClasse) {
+//
+//		CompitoInClasse compito;
+//		compito = getCompitoInCLasseByID(idCompitoInClasse);
+//		
+//		try{
+//			checkCompito(idClasse, idRegistroDocente, compito);
+//			compito.chiudi();
+//			updateCompitoDB(compito);
+//		}catch(DomainCheckedException e){
+//			throw new IllegalStateException(e.getMessage());
+//		}
+//	
+//	}
+	
+	public void cambiaStatoCompito(int idClasse, int idRegistroDocente, int idCompitoInClasse, CompitoCommand command) {
 
 		CompitoInClasse compito;
 		compito = getCompitoInCLasseByID(idCompitoInClasse);
 		
 		try{
 			checkCompito(idClasse, idRegistroDocente, compito);
-			compito.chiudi();
+			command.execute(compito);
 			updateCompitoDB(compito);
 		}catch(DomainCheckedException e){
 			throw new IllegalStateException(e.getMessage());
@@ -519,5 +535,6 @@ public class CompitoInClasseController {
 			throw new RuntimeException(ErrorMessage.COMPITO_NON_AGGIORNABILE);
 		}
 	}
+
 	
 }

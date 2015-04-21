@@ -5,8 +5,8 @@ import java.util.Map.Entry;
 
 import org.orm.PersistentException;
 
+import controller.FaiAppelloController;
 import service.Stampa;
-import domain.controller.FaiAppelloController;
 import domain.model.Appello;
 import domain.model.Assenza;
 import domain.model.Classe;

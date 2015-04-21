@@ -23,5 +23,7 @@ public interface CompitoInClasseState {
 	
 	public abstract domain.model.compitoInClasse.CompitoInClasseStateEnum getStateEnum();
 	
+	public abstract void setStateEnum(CompitoInClasseStateEnum stateEmum);
+	
 }
 //ORM Hash:b668739f755106798c4b0ecd2dbf889f
