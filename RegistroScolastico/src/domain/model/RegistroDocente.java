@@ -124,6 +124,14 @@ public class RegistroDocente {
 		this.implementor.eliminCompito(this, compitoInClasse);
 	}
 	
+	public boolean contain(domain.model.compitoInClasse.CompitoInClasse compito) {
+		return this.implementor.contain(this, compito);
+	}
+	
+	public boolean haClasse(domain.model.Classe classe) {
+		return this.implementor.haClasse(this, classe);
+	}
+	
 	public String toString() {
 		return String.valueOf(getID());
 	}

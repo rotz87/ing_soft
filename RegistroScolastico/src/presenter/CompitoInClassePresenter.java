@@ -248,8 +248,6 @@ public class CompitoInClassePresenter {
 	  @RequestMapping(value= ApiPath.COMPITO_STUDENTI, method=RequestMethod.GET, params={"data"})
 	  public Collection<StudenteCompitoRS> getStudentiCompito(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse, @RequestParam("data") long data) {
 		  
-		  //FIXME Controllare i parametri che non servono
-		  
 		  CompitoInClasseController compitoInClasseController;
 		  FaiAppelloController faiAppelloController;
 		  Map<Studente, Boolean> assenze;

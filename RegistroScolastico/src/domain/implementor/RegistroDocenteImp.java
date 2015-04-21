@@ -20,9 +20,12 @@ import org.joda.time.LocalDate;
 
 
 
+
+
 import service.Stampa;
 import domain.error.ErrorMessage;
 import domain.model.Argomento;
+import domain.model.Classe;
 import domain.model.RegistroAssenze;
 import domain.model.RegistroDocente;
 import domain.model.Studente;
@@ -78,6 +81,14 @@ public class RegistroDocenteImp {
 
 	public void eliminCompito(RegistroDocente registroDocente, CompitoInClasse compitoInClasse) {
 		registroDocente.getCompitiInClasse().remove(compitoInClasse);		
+	}
+
+	public boolean contain(RegistroDocente registroDocente,	CompitoInClasse compito) {
+		return registroDocente.getCompitiInClasse().contains(compito);
+	}
+
+	public boolean haClasse(RegistroDocente registroDocente, Classe classe) {
+		return registroDocente.getClasse().equals(classe);
 	}
 
 

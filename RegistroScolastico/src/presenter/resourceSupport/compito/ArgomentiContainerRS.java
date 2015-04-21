@@ -1,6 +1,6 @@
 package presenter.resourceSupport.compito;
 /**
- * FIXME probabilmente da eliminare
+ * FIXME probabilmente da eliminare PERCHE'?? viene utilizzata!!!
  */
 import java.util.Collection;
 

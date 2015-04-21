@@ -497,9 +497,9 @@ public class CompitoInClasseController {
 		
 		if(!docente.haRegistroDocente(registroDocente) ){
 			throw new DomainCheckedException(ErrorMessage.DOCENTE_UNQUALIFIED);
-		}else if (!registroDocente.getCompitiInClasse().contains(compito)){
+		}else if (!registroDocente.contain(compito)){
 			throw new DomainCheckedException(ErrorMessage.COMPITO_NOT_BELONGING_REGISTRO);
-		}else if(!registroDocente.getClasse().equals(classe)){
+		}else if(!registroDocente.haClasse(classe)){
 			throw new DomainCheckedException(ErrorMessage.REGISTRO_DOCENTE_UNBELONGING);
 		}
 	}
