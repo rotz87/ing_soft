@@ -1,5 +1,5 @@
 var CompitoInClasseFactory = function(){
-    this.statiAmmissibili = []
+    this.statiAmmissibili = {}
 	this.cState = {}
     this.inizializzaStatiAmmissibili()
 };

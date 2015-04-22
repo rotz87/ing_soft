@@ -453,6 +453,8 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	var mioCompito = {};
 	var stateFactory = new CompitoInClasseFactory();
 	$scope.statiAmmissibili = stateFactory.getStatiAmmissibili();
+	$scope.statiPossibili = enumStatesCompito;
+	console.log($scope.statiPossibili)
 	
 	$scope.modal = {};
 	$scope.eliminaCompitoModal = function(funzioneDaEseguire){

@@ -1,7 +1,7 @@
 var AnnullatoState = function(cCompitoInClasse){
 	this.prototype = new State();
 	this.cCompitoInClasse = cCompitoInClasse;
-	this.stato = "CompitoAnnullato"
+	this.stato = enumStatesCompito.annullato
 	this.label = "annullato"
 };
 

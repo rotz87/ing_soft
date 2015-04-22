@@ -1,7 +1,7 @@
 var ChiusoState = function(cCompitoInClasse){
 	this.prototype = new State();
 	this.cCompitoInClasse = cCompitoInClasse;
-	this.stato = "CompitoChiuso"
+	this.stato = enumStatesCompito.chiuso
 	this.label = "chiuso"
 };
 ChiusoState.prototype.salvaCompito = function(scope){
