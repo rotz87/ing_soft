@@ -1,6 +1,7 @@
 var State = function(cCompitoInClasse){
 	this.cCompitoInClasse = cCompitoInClasse;
 	this.stato = "NESSUNO"
+	this.label = "nessuno"
 };
 
 State.prototype.salvaCompito = function(scope){

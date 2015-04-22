@@ -1,8 +1,8 @@
 var registroServices = angular.module ('registroServices',["ngResource"]);
 
 var host = ''
-//var hostAddr = "10.170.50.1"
-//var host = "http://"+hostAddr+":8080"
+var hostAddr = "10.175.51.88"
+var host = "http://"+hostAddr+":8080"
 registroServices.factory('rsClasse',['$resource',
 				function($resource){
 					return $resource(host+'/RegistroScolastico/api/classi/:idClasse/appelli/:idAppello/', null,
@@ -32,6 +32,7 @@ registroServices.factory('rsClasse',['$resource',
 									method:'GET',
 									isArray:true
 									},
+
 								'prendiCompitoInClasse':{
 									url:host+'/RegistroScolastico/api/classi/:idClasse/registriDocente/:idRegistroDocente/compiti/:idCompito',
 									method:'GET',

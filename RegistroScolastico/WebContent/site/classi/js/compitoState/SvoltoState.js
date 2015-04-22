@@ -1,6 +1,7 @@
 var SvoltoState = function(cCompitoInClasse){
+	this.prototype = new State();
 	this.cCompitoInClasse = cCompitoInClasse;
-	this.stato = "SVOLTO"
+	this.stato = "CompitoSvolto"
 	this.label = "svolto"
 };
 

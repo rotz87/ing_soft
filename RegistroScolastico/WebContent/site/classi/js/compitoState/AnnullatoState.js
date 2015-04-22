@@ -1,8 +1,10 @@
 var AnnullatoState = function(cCompitoInClasse){
+	this.prototype = new State();
 	this.cCompitoInClasse = cCompitoInClasse;
-	this.stato = "ANNULLATO"
+	this.stato = "CompitoAnnullato"
 	this.label = "annullato"
 };
+
 AnnullatoState.prototype.salvaCompito = function(scope){
 	console.log("non è possibile salvare un compito annullato")
 	return false;

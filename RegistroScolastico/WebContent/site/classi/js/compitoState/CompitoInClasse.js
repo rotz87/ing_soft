@@ -1,6 +1,7 @@
 var CompitoInClasse = function(){
-	this.cState = new DaSvolgereState(this);
+	this.cState = new State(this);
 	this.info = {};
+	this.argomentiRS = [];
 };
 // inserisciInfo, inserisciVoti, svolgi, annulla, disannulla, chiudi, elimina
 
