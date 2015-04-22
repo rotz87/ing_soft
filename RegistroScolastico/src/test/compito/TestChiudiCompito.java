@@ -7,10 +7,10 @@ import java.util.LinkedList;
 import org.apache.cassandra.thrift.Cassandra.AsyncProcessor.system_add_column_family;
 import org.joda.time.LocalDate;
 
+import controller.CompitoInClasseController;
+import controller.DocenteController;
 import presenter.CompitoInClassePresenter;
 import service.Stampa;
-import domain.controller.CompitoInClasseController;
-import domain.controller.DocenteController;
 import domain.model.Argomento;
 import domain.model.compitoInClasse.CompitoInClasse;
 import domain.model.compitoInClasse.CompitoInClasseStateEnum;

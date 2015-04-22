@@ -13,7 +13,7 @@ import domain.model.Voto;
 public class CompitoSvolto extends CompitoInClasseStateImp {
 	static private CompitoSvolto instance;
 	
-	private final CompitoInClasseStateEnum stateEnum = CompitoInClasseStateEnum.SVOLTO;
+	private CompitoInClasseStateEnum stateEnum;//final = CompitoInClasseStateEnum.SVOLTO;
 
 	private CompitoSvolto() {
 	}
@@ -59,4 +59,7 @@ public class CompitoSvolto extends CompitoInClasseStateImp {
 		return this.stateEnum;
 	}
 	
+	public void setStateEnum(CompitoInClasseStateEnum stateEmum){
+		this.stateEnum = stateEmum;
+	}
 }

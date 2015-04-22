@@ -2,6 +2,7 @@ package presenter.resourceSupport.compito;
 
 import org.springframework.hateoas.ResourceSupport;
 
+import service.Stampa;
 import domain.model.compitoInClasse.CompitoInClasse;
 import domain.model.compitoInClasse.CompitoInClasseStateEnum;
 
@@ -15,7 +16,13 @@ public class CompitoInClasseStateRS extends ResourceSupport{
 	
 	public CompitoInClasseStateRS(CompitoInClasse compito, int idClasse, int idRegistroDocente){
 		
+//		Stampa.stampaln("compito: "+compito);
+//		Stampa.stampaln("compitogetState(): "+compito.getState());
+//		Stampa.stampaln("compitogetState().getStateEnum():  "+compito.getState().getStateEnum());
+		
 		this.state = compito.getState().getStateEnum();
+		
+		
 		
 		//FIXME bisogna inserire come link filgi: Argomenti e studenti e come padre RegistroDocente
 		

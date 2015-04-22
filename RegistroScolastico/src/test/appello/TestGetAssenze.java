@@ -8,9 +8,9 @@ import java.util.Map.Entry;
 
 import org.orm.PersistentException;
 
+import controller.ClasseController;
+import controller.FaiAppelloController;
 import service.Stampa;
-import domain.controller.ClasseController;
-import domain.controller.FaiAppelloController;
 import domain.model.Assenza;
 import domain.model.Studente;
 

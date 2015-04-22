@@ -1,4 +1,4 @@
-package domain.controller;
+package controller;
 
 import java.util.Collection;
 import java.util.LinkedList;

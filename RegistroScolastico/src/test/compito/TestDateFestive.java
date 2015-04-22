@@ -4,10 +4,10 @@ import java.util.Collection;
 
 import org.joda.time.LocalDate;
 
+import controller.ClasseController;
 import presenter.ClassePresenter;
 import presenter.StartUp;
 import service.Stampa;
-import domain.controller.ClasseController;
 import domain.model.Calendario;
 
 public class TestDateFestive {

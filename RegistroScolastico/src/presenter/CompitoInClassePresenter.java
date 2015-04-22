@@ -19,14 +19,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import controller.CompitoInClasseController;
+import controller.DocenteController;
+import controller.FaiAppelloController;
 import presenter.resourceSupport.compito.ArgomentiContainerRS;
 import presenter.resourceSupport.compito.ArgomentoRS;
 import presenter.resourceSupport.compito.CompitoInClasseRS;
 import presenter.resourceSupport.compito.CompitoInClasseStateRS;
 import presenter.resourceSupport.compito.StudenteCompitoRS;
-import domain.controller.CompitoInClasseController;
-import domain.controller.DocenteController;
-import domain.controller.FaiAppelloController;
 import domain.error.ErrorMessage;
 import domain.model.Argomento;
 import domain.model.Studente;
@@ -176,23 +176,25 @@ public class CompitoInClassePresenter {
 		  compitoInClasseController = new CompitoInClasseController();
 		  
 //		  compitoInClasseController.changeState(idClasse, idRegistroDocente, idCompitoInClasse, compitoState.getState());
-		  switch ( compitoState.getState()) {
-			
-		  case SVOLTO:
-			  compitoInClasseController.setSvoltoCompito(idClasse, idRegistroDocente, idCompitoInClasse);
-		  break;
-		
-		  case ANNULLATO:
-			  compitoInClasseController.annullaCompito(idClasse, idRegistroDocente, idCompitoInClasse);
-		  break;
+//		  switch ( compitoState.getState()) {
+//			
+//		  case SVOLTO:
+//			  compitoInClasseController.setSvoltoCompito(idClasse, idRegistroDocente, idCompitoInClasse);
+//		  break;
+//		
+//		  case ANNULLATO:
+//			  compitoInClasseController.annullaCompito(idClasse, idRegistroDocente, idCompitoInClasse);
+//		  break;
+//		  
+//		  case CHIUSO:
+//			  compitoInClasseController.chiudiCompito(idClasse, idRegistroDocente, idCompitoInClasse);
+//		  break;
+//		  
+//		  default:
+//			  throw new IllegalStateException(ErrorMessage.COMPITO_STATE_UNCHANGEABLE);
+//		  }
 		  
-		  case CHIUSO:
-			  compitoInClasseController.chiudiCompito(idClasse, idRegistroDocente, idCompitoInClasse);
-		  break;
-		  
-		  default:
-			  throw new IllegalStateException(ErrorMessage.COMPITO_STATE_UNCHANGEABLE);
-	  }
+		  compitoInClasseController.cambiaStatoCompito(idClasse, idRegistroDocente, idCompitoInClasse, compitoState.getState().getCompitoCommand());
 		  
 		  HttpHeaders httpHeaders;
 		  httpHeaders = new HttpHeaders();
@@ -247,8 +249,6 @@ public class CompitoInClassePresenter {
 //	  @RequestMapping(value="/{idCompitoInClasse}/studenti", method=RequestMethod.GET, params={"data"})
 	  @RequestMapping(value= ApiPath.COMPITO_STUDENTI, method=RequestMethod.GET, params={"data"})
 	  public Collection<StudenteCompitoRS> getStudentiCompito(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse, @RequestParam("data") long data) {
-		  
-		  //FIXME Controllare i parametri che non servono
 		  
 		  CompitoInClasseController compitoInClasseController;
 		  FaiAppelloController faiAppelloController;

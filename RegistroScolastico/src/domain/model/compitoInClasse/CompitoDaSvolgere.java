@@ -13,7 +13,7 @@ import domain.model.Calendario;
 public class CompitoDaSvolgere extends CompitoInClasseStateImp {
 	static private CompitoDaSvolgere instance;
 
-	private final CompitoInClasseStateEnum stateEnum = CompitoInClasseStateEnum.DA_SVOLGERE;
+	private CompitoInClasseStateEnum stateEnum;//final = CompitoInClasseStateEnum.DA_SVOLGERE;
 	
 	private CompitoDaSvolgere() {
 	}
@@ -62,4 +62,9 @@ public class CompitoDaSvolgere extends CompitoInClasseStateImp {
 	public CompitoInClasseStateEnum getStateEnum() {
 		return this.stateEnum;
 	}
+	
+	public void setStateEnum(CompitoInClasseStateEnum stateEmum){
+		this.stateEnum = stateEmum;
+	}
+	
 }

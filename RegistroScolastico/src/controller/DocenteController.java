@@ -1,4 +1,4 @@
-package domain.controller;
+package controller;
 
 import org.orm.PersistentException;
 

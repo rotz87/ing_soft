@@ -4,7 +4,7 @@ public class CompitoAnnullato extends CompitoInClasseStateImp {
 	
 	static private CompitoAnnullato instance;
 	
-	private final CompitoInClasseStateEnum stateEnum = CompitoInClasseStateEnum.ANNULLATO;
+	private CompitoInClasseStateEnum stateEnum;//final = CompitoInClasseStateEnum.ANNULLATO;
 
 	private CompitoAnnullato() {
 	}
@@ -24,5 +24,9 @@ public class CompitoAnnullato extends CompitoInClasseStateImp {
 	@Override
 	public CompitoInClasseStateEnum getStateEnum() {
 		return this.stateEnum;
+	}
+	
+	public void setStateEnum(CompitoInClasseStateEnum stateEmum){
+		this.stateEnum = stateEmum;
 	}
 }

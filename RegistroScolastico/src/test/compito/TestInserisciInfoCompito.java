@@ -6,10 +6,10 @@ import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 import org.orm.PersistentException;
 
+import controller.CompitoInClasseController;
+import controller.DocenteController;
 import ormsamples.CreateRegistroScolasticoData;
 import service.Stampa;
-import domain.controller.CompitoInClasseController;
-import domain.controller.DocenteController;
 import domain.model.compitoInClasse.CompitoInClasse;
 import domain.model.compitoInClasse.CompitoInClasseCriteria;
 

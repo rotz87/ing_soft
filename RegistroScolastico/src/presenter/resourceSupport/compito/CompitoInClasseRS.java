@@ -66,7 +66,7 @@ public class CompitoInClasseRS extends ResourceSupport{
 		this.oraFine = oraFine;
 		this.argomentiRS = argomentiRS;
 		
-		//FIXME inserire i links
+		//XXX inserire i links
 	}
 
 	public int getIdCompito() {
