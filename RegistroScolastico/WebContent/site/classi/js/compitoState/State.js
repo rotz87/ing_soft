@@ -7,7 +7,6 @@ var State = function(cCompitoInClasse){
 State.prototype.salvaCompito = function(scope){
 	throw new Error("This method must be overwritten!");
 };
-
 State.prototype.inserisciInfo = function(){
 	throw new Error("This method must be overwritten!");
 };

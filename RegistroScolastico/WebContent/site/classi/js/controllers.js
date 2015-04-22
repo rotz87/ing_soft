@@ -454,7 +454,6 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	var stateFactory = new CompitoInClasseFactory();
 	$scope.statiAmmissibili = stateFactory.getStatiAmmissibili();
 	$scope.statiPossibili = enumStatesCompito;
-	console.log($scope.statiPossibili)
 	
 	$scope.modal = {};
 	$scope.eliminaCompitoModal = function(funzioneDaEseguire){
@@ -645,7 +644,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		mioCompito.ripristina($scope.ripristinaCompitoAjax)
 	}
 	$scope.ripristinaCompitoAjax = function(){
-		impostaStato($scope.statiAmmissibili.SVOLTO.stato)
+		impostaStato($scope.statiAmmissibili[$scope.statiPossibili.svolto].stato)
 	}
 	
 	$scope.salvaAnnullaCompito = function(){
@@ -655,7 +654,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		mioCompito.annulla($scope.annullaCompitoAjax)
 	}
 	$scope.annullaCompitoAjax = function(){
-		impostaStato($scope.statiAmmissibili.ANNULLATO.stato)
+		impostaStato($scope.statiAmmissibili[$scope.statiPossibili.annullato].stato)
 	}
 	
 	$scope.salvaChiudiCompito = function(){
@@ -666,7 +665,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		mioCompito.chiudi($scope.chiudiCompitoAjax);
 	}
 	$scope.chiudiCompitoAjax = function(){
-		impostaStato($scope.statiAmmissibili.CHIUSO.stato)
+		impostaStato($scope.statiAmmissibili[$scope.statiPossibili.chiuso].stato)
 	}
 	
 	$scope.salvaSvolgiCompito = function(){
@@ -676,7 +675,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		mioCompito.svolgi($scope.svolgiCompitoAjax)
 	}
 	$scope.svolgiCompitoAjax = function(){
-		impostaStato($scope.statiAmmissibili.SVOLTO.stato)
+		impostaStato($scope.statiAmmissibili[$scope.statiPossibili.svolto].stato)
 	}
 	
 	$scope.eliminaCompito = function(){

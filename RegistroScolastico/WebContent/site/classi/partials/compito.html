@@ -132,7 +132,6 @@
 	<div ng-show="currState == statiPossibili.daSvolgere && dataFissata > calendario.oggi"> <p> <span class="rs-color-warning glyphicon glyphicon-warning-sign"></span> Non si può segnare il compito come svolto se la data fissata è posteriore alla data odierna </p></div>
 	<div ng-show="currState == statiPossibili.daSvolgere || currState == statiPossibili.svolto" > <p> <span class="rs-color-info glyphicon glyphicon-warning-sign"></span> si può chiudere il compito solo se il compito è svolto ed è stato inserito almeno un voto</p></div>
 	<div ng-show="currState == statiPossibili.annullato" > <p> <span class="rs-color-info glyphicon glyphicon-warning-sign"></span> potrai effettuare modifiche una volta ripristinato il compito </p></div>
-	<fieldset>
-	<div>{{statiPossibili.daSvolgere}} mentre {{currState}}</div>
+	</fieldset>
 </div>
 <compito-argomenti-modal></compito-argomenti-modal>
