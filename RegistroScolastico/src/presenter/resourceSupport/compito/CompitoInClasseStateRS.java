@@ -4,11 +4,11 @@ import org.springframework.hateoas.ResourceSupport;
 
 import service.Stampa;
 import domain.model.compitoInClasse.CompitoInClasse;
-import domain.model.compitoInClasse.CompitoInClasseStateEnum;
+import domain.model.compitoInClasse.CompitoInClasseStateFactory;
 
 public class CompitoInClasseStateRS extends ResourceSupport{
 	
-	CompitoInClasseStateEnum state;
+	String state;
 
 	private CompitoInClasseStateRS(){
 		
@@ -20,7 +20,7 @@ public class CompitoInClasseStateRS extends ResourceSupport{
 //		Stampa.stampaln("compitogetState(): "+compito.getState());
 //		Stampa.stampaln("compitogetState().getStateEnum():  "+compito.getState().getStateEnum());
 		
-		this.state = compito.getState().getStateEnum();
+		this.state = CompitoInClasseStateFactory.getInstance().create(compito.getState());
 		
 		
 		
@@ -36,13 +36,15 @@ public class CompitoInClasseStateRS extends ResourceSupport{
 //					getCompitoInClasse(idClasse, idRegistroDocente, this.idCompito)).withSelfRel());
 	}
 
-	public CompitoInClasseStateEnum getState() {
-		return this.state;
+	public String getState() {
+		return state;
 	}
 
-	public void setState(CompitoInClasseStateEnum stateEnum) {
-		this.state = stateEnum;
+	public void setState(String state) {
+		this.state = state;
 	}
+
+
 	
 	
 }

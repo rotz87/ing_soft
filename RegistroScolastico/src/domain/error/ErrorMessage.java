@@ -37,5 +37,6 @@ public class ErrorMessage {
 	public static final String REGISTRO_DOCENTE_UNBELONGING = "Il registro Docente non appartiene alla classe ";
 	public static final String WRONG_STATE = " Lo stato del compito non consente di eseguire l'operazione richiesta ";
 	public static final String DATA_FUTURE = "La data del compito non consente di eseguire l'operazione richiesta ";
+	public static final String STATO_UNISTANZIABLE = "Impossibile istanziare lo stato del compito";
 			
 }

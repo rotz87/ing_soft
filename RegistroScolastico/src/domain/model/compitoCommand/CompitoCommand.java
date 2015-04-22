@@ -1,4 +1,4 @@
-package controller.compitoCommand;
+package domain.model.compitoCommand;
 
 import domain.model.compitoInClasse.*;
 

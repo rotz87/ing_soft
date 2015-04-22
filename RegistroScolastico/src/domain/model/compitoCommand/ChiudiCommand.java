@@ -1,15 +1,15 @@
-package controller.compitoCommand;
+package domain.model.compitoCommand;
 
 import domain.model.compitoInClasse.*;
 
-public class AnnullaCommand implements CompitoCommand {
+public class ChiudiCommand implements CompitoCommand {
 
 	/**
 	 * 
 	 * @param compito
 	 */
 	public void execute(CompitoInClasse compito) {
-		compito.annulla();
+		compito.chiudi();
 	}
 
 }

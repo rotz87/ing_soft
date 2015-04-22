@@ -13,8 +13,10 @@ import controller.CompitoInClasseController;
 import controller.DocenteController;
 import service.Stampa;
 import domain.model.Argomento;
+import domain.model.compitoInClasse.CompitoAnnullato;
+import domain.model.compitoInClasse.CompitoChiuso;
 import domain.model.compitoInClasse.CompitoInClasse;
-import domain.model.compitoInClasse.CompitoInClasseStateEnum;
+import domain.model.compitoInClasse.CompitoSvolto;
 
 public class TestCambioStatiCompito {
 	private static int idRegistroDocente = 1;
@@ -48,7 +50,7 @@ public class TestCambioStatiCompito {
 				
 				Stampa.stampaln();
 				
-				controllerCompito.setSvoltoCompito(idClasse, idRegistroDocente, compito.getID());
+				controllerCompito.cambiaStatoCompito(idClasse, idRegistroDocente, compito.getID(), CompitoSvolto.getInstance());
 //				controllerCompito.svolgiCompito(compito.getID());
 				Stampa.stampaln("ID del compito svolto: " + compito.getID());
 				
@@ -66,28 +68,28 @@ public class TestCambioStatiCompito {
 				Stampa.stampaln();
 				
 				compito2.setInfo(sqlDate, oraInizio, oraFine, argomenti);
-				controllerCompito.setSvoltoCompito(idClasse, idRegistroDocente, compito2.getID());
+				controllerCompito.cambiaStatoCompito(idClasse, idRegistroDocente, compito2.getID(), CompitoSvolto.getInstance());
 				Stampa.stampaln();
-				controllerCompito.annullaCompito(idClasse, idRegistroDocente, compito2.getID());
+				controllerCompito.cambiaStatoCompito(idClasse, idRegistroDocente, compito2.getID(), CompitoAnnullato.getInstance());
 				Stampa.stampaln("ID del compito annullato: " + compito2.getID());
 				
 				Stampa.stampaln();
 				compito3 = controllerCompito.creaCompito(idClasse, idRegistroDocente, docenteController.getIdDocenteProva());
 				compito3.setInfo(sqlDate, oraInizio, oraFine, argomenti);
-				controllerCompito.setSvoltoCompito(idClasse, idRegistroDocente, compito3.getID());
+				controllerCompito.cambiaStatoCompito(idClasse, idRegistroDocente, compito3.getID(), CompitoSvolto.getInstance());
 				Stampa.stampaln();
-				controllerCompito.annullaCompito(idClasse, idRegistroDocente, compito3.getID());
+				controllerCompito.cambiaStatoCompito(idClasse, idRegistroDocente, compito3.getID(), CompitoAnnullato.getInstance());
 				Stampa.stampaln();
-				controllerCompito.setSvoltoCompito(idClasse, idRegistroDocente, compito3.getID());
+				controllerCompito.cambiaStatoCompito(idClasse, idRegistroDocente, compito3.getID(), CompitoSvolto.getInstance());
 				Stampa.stampaln("ID del compito disannullato: " + compito3.getID());
 				
 				Stampa.stampaln();
 				compito4 = controllerCompito.creaCompito(idClasse, idRegistroDocente, docenteController.getIdDocenteProva());
 				compito4.setInfo(sqlDate, oraInizio, oraFine, argomenti);
-				controllerCompito.setSvoltoCompito(idClasse, idRegistroDocente, compito4.getID());
+				controllerCompito.cambiaStatoCompito(idClasse, idRegistroDocente, compito4.getID(), CompitoSvolto.getInstance());
 				mapVotiGUI.put(10, new Byte((byte) 5));
 				controllerCompito.inserisciVoti(idClasse, idRegistroDocente, compito4.getID(), mapVotiGUI);
-				controllerCompito.chiudiCompito(idClasse, idRegistroDocente, compito4.getID());
+				controllerCompito.cambiaStatoCompito(idClasse, idRegistroDocente, compito4.getID(), CompitoChiuso.getInstance());
 
 				Stampa.stampaln("ID del compito chiuso: " + compito4.getID());
 								

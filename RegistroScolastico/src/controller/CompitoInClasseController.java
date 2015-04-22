@@ -12,7 +12,6 @@ import org.joda.time.LocalDate;
 import org.orm.PersistentException;
 import org.orm.PersistentTransaction;
 
-import controller.compitoCommand.CompitoCommand;
 import service.Stampa;
 import domain.error.DomainCheckedException;
 import domain.error.ErrorMessage;
@@ -21,8 +20,10 @@ import domain.model.Argomento;
 import domain.model.ArgomentoCriteria;
 import domain.model.Calendario;
 import domain.model.Classe;
+import domain.model.compitoCommand.CompitoCommand;
 import domain.model.compitoInClasse.CompitoInClasse;
 import domain.model.compitoInClasse.CompitoInClasseCriteria;
+import domain.model.compitoInClasse.CompitoInClasseState;
 import domain.model.ClasseCriteria;
 import domain.model.Docente;
 import domain.model.DocenteCriteria;
@@ -366,13 +367,15 @@ public class CompitoInClasseController {
 //	
 //	}
 	
-	public void cambiaStatoCompito(int idClasse, int idRegistroDocente, int idCompitoInClasse, CompitoCommand command) {
+	public void cambiaStatoCompito(int idClasse, int idRegistroDocente, int idCompitoInClasse, CompitoInClasseState statoFuturo) {
 
 		CompitoInClasse compito;
+		CompitoCommand command;
 		compito = getCompitoInCLasseByID(idCompitoInClasse);
 		
 		try{
 			checkCompito(idClasse, idRegistroDocente, compito);
+			command = statoFuturo.getCompitoCommand();
 			command.execute(compito);
 			updateCompitoDB(compito);
 		}catch(DomainCheckedException e){

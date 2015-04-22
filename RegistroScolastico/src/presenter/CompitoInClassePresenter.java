@@ -27,12 +27,14 @@ import presenter.resourceSupport.compito.ArgomentoRS;
 import presenter.resourceSupport.compito.CompitoInClasseRS;
 import presenter.resourceSupport.compito.CompitoInClasseStateRS;
 import presenter.resourceSupport.compito.StudenteCompitoRS;
+import domain.error.DomainCheckedException;
 import domain.error.ErrorMessage;
 import domain.model.Argomento;
 import domain.model.Studente;
 import domain.model.Voto;
 import domain.model.compitoInClasse.CompitoInClasse;
-import domain.model.compitoInClasse.CompitoInClasseStateEnum;
+import domain.model.compitoInClasse.CompitoInClasseState;
+import domain.model.compitoInClasse.CompitoInClasseStateFactory;
 
 
 @RestController
@@ -172,30 +174,17 @@ public class CompitoInClassePresenter {
 	  public ResponseEntity<?> updateCompitoState(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse, @RequestBody CompitoInClasseStateRS compitoState) {
 		  
 		  CompitoInClasseController compitoInClasseController;
+		  CompitoInClasseState statoFuturo;
 		  
 		  compitoInClasseController = new CompitoInClasseController();
 		  
-//		  compitoInClasseController.changeState(idClasse, idRegistroDocente, idCompitoInClasse, compitoState.getState());
-//		  switch ( compitoState.getState()) {
-//			
-//		  case SVOLTO:
-//			  compitoInClasseController.setSvoltoCompito(idClasse, idRegistroDocente, idCompitoInClasse);
-//		  break;
-//		
-//		  case ANNULLATO:
-//			  compitoInClasseController.annullaCompito(idClasse, idRegistroDocente, idCompitoInClasse);
-//		  break;
-//		  
-//		  case CHIUSO:
-//			  compitoInClasseController.chiudiCompito(idClasse, idRegistroDocente, idCompitoInClasse);
-//		  break;
-//		  
-//		  default:
-//			  throw new IllegalStateException(ErrorMessage.COMPITO_STATE_UNCHANGEABLE);
-//		  }
-		  
-		  compitoInClasseController.cambiaStatoCompito(idClasse, idRegistroDocente, idCompitoInClasse, compitoState.getState().getCompitoCommand());
-		  
+		  try {
+			statoFuturo = CompitoInClasseStateFactory.getInstance().create(compitoState.getState());
+			compitoInClasseController.cambiaStatoCompito(idClasse, idRegistroDocente, idCompitoInClasse, statoFuturo);
+		} catch (DomainCheckedException e) {
+			throw new RuntimeException(e.getMessage());
+		}
+ 
 		  HttpHeaders httpHeaders;
 		  httpHeaders = new HttpHeaders();
 		  HttpStatus httpStatus = HttpStatus.OK;

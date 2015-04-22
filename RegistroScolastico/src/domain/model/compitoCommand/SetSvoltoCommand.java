@@ -1,15 +1,15 @@
-package controller.compitoCommand;
+package domain.model.compitoCommand;
 
 import domain.model.compitoInClasse.*;
 
-public class ChiudiCommand implements CompitoCommand {
+public class SetSvoltoCommand implements CompitoCommand {
 
 	/**
 	 * 
 	 * @param compito
 	 */
 	public void execute(CompitoInClasse compito) {
-		compito.chiudi();
+		compito.setSvolto();
 	}
 
 }

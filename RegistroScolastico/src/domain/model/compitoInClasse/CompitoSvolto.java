@@ -9,13 +9,16 @@ import domain.model.LibrettoVoti;
 import domain.model.LibrettoVotiLineItem;
 import domain.model.Studente;
 import domain.model.Voto;
+import domain.model.compitoCommand.CompitoCommand;
+import domain.model.compitoCommand.SetSvoltoCommand;
 
 public class CompitoSvolto extends CompitoInClasseStateImp {
 	static private CompitoSvolto instance;
 	
-	private CompitoInClasseStateEnum stateEnum;//final = CompitoInClasseStateEnum.SVOLTO;
+//	private CompitoInClasseStateEnum stateEnum;//final = CompitoInClasseStateEnum.SVOLTO;
 
 	private CompitoSvolto() {
+		super.compitoCommand = new SetSvoltoCommand();
 	}
 
 	static public CompitoSvolto getInstance() {
@@ -54,12 +57,14 @@ public class CompitoSvolto extends CompitoInClasseStateImp {
 		}
 	}
 	
-	@Override
-	public CompitoInClasseStateEnum getStateEnum() {
-		return this.stateEnum;
-	}
+//	@Override
+//	public CompitoInClasseStateEnum getStateEnum() {
+//		return this.stateEnum;
+//	}
+//	
+//	public void setStateEnum(CompitoInClasseStateEnum stateEmum){
+//		this.stateEnum = stateEmum;
+//	}
 	
-	public void setStateEnum(CompitoInClasseStateEnum stateEmum){
-		this.stateEnum = stateEmum;
-	}
+
 }

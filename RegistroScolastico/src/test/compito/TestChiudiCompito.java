@@ -12,8 +12,8 @@ import controller.DocenteController;
 import presenter.CompitoInClassePresenter;
 import service.Stampa;
 import domain.model.Argomento;
+import domain.model.compitoInClasse.CompitoChiuso;
 import domain.model.compitoInClasse.CompitoInClasse;
-import domain.model.compitoInClasse.CompitoInClasseStateEnum;
 
 public class TestChiudiCompito {
 	private static int idRegistroDocente = 1;
@@ -44,7 +44,7 @@ public class TestChiudiCompito {
 //				
 //				controllerCompito.changeState(compito.getID(), CompitoInClasseStateEnum.SVOLTO);
 	
-				controllerCompito.chiudiCompito(idClasse, idRegistroDocente, idCompitoProva);
+				controllerCompito.cambiaStatoCompito(idClasse, idRegistroDocente, idCompitoProva, CompitoChiuso.getInstance());
 				
 //				CompitoInClassePresenter presenteCompito = new CompitoInClassePresenter();
 //				

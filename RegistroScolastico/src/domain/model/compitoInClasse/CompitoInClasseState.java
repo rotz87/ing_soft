@@ -7,6 +7,7 @@ package domain.model.compitoInClasse;
 import domain.model.Argomento;
 import domain.model.Studente;
 import domain.model.Voto;
+import domain.model.compitoCommand.CompitoCommand;
 
 public interface CompitoInClasseState {
 	public abstract void setInfo(domain.model.compitoInClasse.CompitoInClasse compitoInClasse, java.sql.Date data, java.sql.Time oraInizio, java.sql.Time oraFine, java.util.Collection<Argomento> argomenti);
@@ -21,9 +22,13 @@ public interface CompitoInClasseState {
 	
 	public abstract void elimina(domain.model.compitoInClasse.CompitoInClasse compitoInClasse);
 	
-	public abstract domain.model.compitoInClasse.CompitoInClasseStateEnum getStateEnum();
+//	public abstract domain.model.compitoInClasse.CompitoInClasseStateEnum getStateEnum();
+//	
+//	public abstract void setStateEnum(CompitoInClasseStateEnum stateEmum);
 	
-	public abstract void setStateEnum(CompitoInClasseStateEnum stateEmum);
+	public abstract CompitoCommand getCompitoCommand();
+	
+	
 	
 }
 //ORM Hash:b668739f755106798c4b0ecd2dbf889f

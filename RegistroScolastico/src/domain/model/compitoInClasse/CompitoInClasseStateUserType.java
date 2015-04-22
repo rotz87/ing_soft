@@ -6,6 +6,9 @@ package domain.model.compitoInClasse;
 
 import org.hibernate.usertype.UserType;
 import org.hibernate.*;
+
+import domain.error.DomainCheckedException;
+
 import java.sql.*;
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
@@ -18,17 +21,19 @@ private static final int[] SQL_TYPES = {Types.VARCHAR};
 	}
 	
 	public Object nullSafeGet(ResultSet aResultSet, String[] aStrings, org.hibernate.engine.spi.SessionImplementor aSessionImplementor, Object aObject) throws HibernateException, SQLException {
-//		String classSimpleName = aResultSet.getString(aStrings[0]);
-//		String packageName = CompitoInClasseState.class.getPackage().getName();
+		
+//		String compitoStateString;
+//		CompitoInClasseStateEnum compitoStateEnum;
 //		Object ret;
+//		
+//		compitoStateString = aResultSet.getString(aStrings[0]);
+//		compitoStateEnum = CompitoInClasseStateEnum.valueOf(compitoStateString);
 //		
 //		ret = null;
 //		if(!aResultSet.wasNull()){
 //			try {
-//				ret  = Class.forName(packageName+"."+classSimpleName).getDeclaredMethod("getInstance").invoke(null);
-//			} catch (IllegalAccessException | IllegalArgumentException
-//					| InvocationTargetException | NoSuchMethodException
-//					| SecurityException | ClassNotFoundException e) {
+//				ret = CompitoInClasseStateFactory.getInstance().create(compitoStateEnum);
+//			} catch (IllegalArgumentException e) {
 //				throw new HibernateException("Impossibile istanziare CompitoState");
 //			}
 //		}
@@ -36,18 +41,17 @@ private static final int[] SQL_TYPES = {Types.VARCHAR};
 //        return ret;
 		
 		String compitoStateString;
-		CompitoInClasseStateEnum compitoStateEnum;
+
 		Object ret;
 		
 		compitoStateString = aResultSet.getString(aStrings[0]);
-		compitoStateEnum = CompitoInClasseStateEnum.valueOf(compitoStateString);
 		
 		ret = null;
 		if(!aResultSet.wasNull()){
 			try {
-				ret = CompitoInClasseStateFactory.getInstance().create(compitoStateEnum);
-			} catch (IllegalArgumentException e) {
-				throw new HibernateException("Impossibile istanziare CompitoState");
+				ret = CompitoInClasseStateFactory.getInstance().create(compitoStateString);
+			} catch (DomainCheckedException e) {
+				throw new HibernateException(e.getMessage());
 			}
 		}
 		
@@ -56,10 +60,15 @@ private static final int[] SQL_TYPES = {Types.VARCHAR};
 	}
 	
 	public void nullSafeSet(PreparedStatement aPreparedStatement, Object aObject, int aint, org.hibernate.engine.spi.SessionImplementor aSessionImplementor) throws HibernateException, SQLException {
+
+		
+//		CompitoInClasseState compitoState;
+//		
 //		if (aObject == null){
 //            aPreparedStatement.setNull(aint, Types.VARCHAR);
 //        }else{
-//            aPreparedStatement.setString(aint, aObject.getClass().getSimpleName());
+//        	compitoState = (CompitoInClasseState) aObject;
+//            aPreparedStatement.setString(aint, compitoState.getStateEnum().toString());
 //        }
 		
 		CompitoInClasseState compitoState;
@@ -68,8 +77,10 @@ private static final int[] SQL_TYPES = {Types.VARCHAR};
             aPreparedStatement.setNull(aint, Types.VARCHAR);
         }else{
         	compitoState = (CompitoInClasseState) aObject;
-            aPreparedStatement.setString(aint, compitoState.getStateEnum().toString());
+            aPreparedStatement.setString(aint, CompitoInClasseStateFactory.getInstance().create(compitoState));
         }
+		
+		
 	}
 	
 	public boolean isMutable() {

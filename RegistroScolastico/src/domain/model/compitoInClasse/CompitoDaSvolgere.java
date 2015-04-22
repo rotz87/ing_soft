@@ -9,13 +9,15 @@ import org.joda.time.LocalDate;
 import domain.error.ErrorMessage;
 import domain.model.Argomento;
 import domain.model.Calendario;
+import domain.model.compitoCommand.CompitoCommand;
 
 public class CompitoDaSvolgere extends CompitoInClasseStateImp {
 	static private CompitoDaSvolgere instance;
 
-	private CompitoInClasseStateEnum stateEnum;//final = CompitoInClasseStateEnum.DA_SVOLGERE;
+//	private CompitoInClasseStateEnum stateEnum;//final = CompitoInClasseStateEnum.DA_SVOLGERE;
 	
 	private CompitoDaSvolgere() {
+		super.compitoCommand = null;
 	}
 
 	static public CompitoDaSvolgere getInstance() {
@@ -58,13 +60,14 @@ public class CompitoDaSvolgere extends CompitoInClasseStateImp {
 		compitoInClasse.set_insegnamento(null);
 	}
 	
-	@Override
-	public CompitoInClasseStateEnum getStateEnum() {
-		return this.stateEnum;
-	}
+//	@Override
+//	public CompitoInClasseStateEnum getStateEnum() {
+//		return this.stateEnum;
+//	}
+//	
+//	public void setStateEnum(CompitoInClasseStateEnum stateEmum){
+//		this.stateEnum = stateEmum;
+//	}
 	
-	public void setStateEnum(CompitoInClasseStateEnum stateEmum){
-		this.stateEnum = stateEmum;
-	}
-	
+
 }

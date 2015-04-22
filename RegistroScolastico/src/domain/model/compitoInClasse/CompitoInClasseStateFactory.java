@@ -1,20 +1,18 @@
 package domain.model.compitoInClasse;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
+import domain.error.DomainCheckedException;
+import domain.error.ErrorMessage;
+
 public class CompitoInClasseStateFactory {
 
-	private final Map<CompitoInClasseStateEnum, CompitoInClasseState> stati = new HashMap<CompitoInClasseStateEnum, CompitoInClasseState>();
-	
+	private final String packageName = CompitoInClasseState.class.getPackage().getName();
 	static private CompitoInClasseStateFactory instance;
 
 	private CompitoInClasseStateFactory() {
-		
-		stati.put(CompitoDaSvolgere.getInstance().getStateEnum(), CompitoDaSvolgere.getInstance());
-		stati.put(CompitoSvolto.getInstance().getStateEnum(), CompitoSvolto.getInstance());
-		stati.put(CompitoAnnullato.getInstance().getStateEnum(), CompitoAnnullato.getInstance());
-		stati.put(CompitoChiuso.getInstance().getStateEnum(), CompitoChiuso.getInstance());
 		
 	}
 
@@ -25,8 +23,17 @@ public class CompitoInClasseStateFactory {
 		return CompitoInClasseStateFactory.instance;
 	}
 
-	public CompitoInClasseState create(CompitoInClasseStateEnum statoEnum) {
-		return stati.get(statoEnum);
+	public CompitoInClasseState create(String statoString) throws DomainCheckedException {
+		Object obj = null;
+		try {
+			obj = Class.forName(this.packageName+"."+statoString).getDeclaredMethod("getInstance").invoke(null);
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException | ClassNotFoundException e) {
+			throw new DomainCheckedException(ErrorMessage.STATO_UNISTANZIABLE);
+		}
+		return (CompitoInClasseState)obj;
 	}
 	
+	public String create(CompitoInClasseState state){
+		return state.getClass().getSimpleName().toString();
+	}
 }
