@@ -99,11 +99,6 @@ public class RegistroDocente {
 		this.implementor.inserisciInfoCompito(this, compito, data, oraInizio, oraFine, argomenti);
 	}
 	
-	public void inserisciStudenti(domain.model.compitoInClasse.CompitoInClasse compito, domain.model.Studente[] studenti) {
-		//TODO: Implement Method
-		throw new UnsupportedOperationException();
-	}
-	
 	public void inserisciVoti(domain.model.compitoInClasse.CompitoInClasse compito, java.util.Map<Studente, Voto> mapVoti) {
 		this.implementor.inserisciVoti(this, compito, mapVoti);
 	}

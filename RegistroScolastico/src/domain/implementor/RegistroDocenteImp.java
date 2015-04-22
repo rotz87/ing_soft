@@ -39,10 +39,8 @@ public class RegistroDocenteImp {
 		Set<CompitoInClasse> compitiInClasse;
 		
 		compito = new CompitoInClasse(registroDocente);
-//		compito.setInsegnamento(registroDocente);
 		
 		compitiInClasse = registroDocente.getCompitiInClasse();
-		
 		compitiInClasse.add(compito);
 		
 		return compito;

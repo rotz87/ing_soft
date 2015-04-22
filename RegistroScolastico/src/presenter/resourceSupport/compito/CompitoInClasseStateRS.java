@@ -16,10 +16,6 @@ public class CompitoInClasseStateRS extends ResourceSupport{
 	
 	public CompitoInClasseStateRS(CompitoInClasse compito, int idClasse, int idRegistroDocente){
 		
-//		Stampa.stampaln("compito: "+compito);
-//		Stampa.stampaln("compitogetState(): "+compito.getState());
-//		Stampa.stampaln("compitogetState().getStateEnum():  "+compito.getState().getStateEnum());
-		
 		this.state = CompitoInClasseStateFactory.getInstance().create(compito.getState());
 		
 		

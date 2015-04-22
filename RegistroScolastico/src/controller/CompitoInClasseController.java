@@ -321,51 +321,7 @@ public class CompitoInClasseController {
 		return rit;
 		
 	}
-	
-//	public void setSvoltoCompito(int idClasse, int idRegistroDocente, int idCompitoInClasse){
-//
-//		CompitoInClasse compito;
-//		compito = getCompitoInCLasseByID(idCompitoInClasse);
-//		
-//		try{
-//			checkCompito(idClasse, idRegistroDocente, compito);
-//			compito.setSvolto();
-//			updateCompitoDB(compito);
-//		}catch(DomainCheckedException e){
-//			throw new IllegalStateException(e.getMessage());
-//		}
-//		
-//	}
 
-//	public void annullaCompito(int idClasse, int idRegistroDocente, int idCompitoInClasse) {
-//
-//		CompitoInClasse compito;
-//		compito = getCompitoInCLasseByID(idCompitoInClasse);
-//				
-//		try{
-//			checkCompito(idClasse, idRegistroDocente, compito);
-//			compito.annulla();
-//			updateCompitoDB(compito);
-//		}catch(DomainCheckedException e){
-//			throw new IllegalStateException(e.getMessage());
-//		}
-//		
-//	}
-	
-//	public void chiudiCompito(int idClasse, int idRegistroDocente, int idCompitoInClasse) {
-//
-//		CompitoInClasse compito;
-//		compito = getCompitoInCLasseByID(idCompitoInClasse);
-//		
-//		try{
-//			checkCompito(idClasse, idRegistroDocente, compito);
-//			compito.chiudi();
-//			updateCompitoDB(compito);
-//		}catch(DomainCheckedException e){
-//			throw new IllegalStateException(e.getMessage());
-//		}
-//	
-//	}
 	
 	public void cambiaStatoCompito(int idClasse, int idRegistroDocente, int idCompitoInClasse, CompitoInClasseState statoFuturo) {
 
@@ -400,9 +356,6 @@ public class CompitoInClasseController {
 			localDate = new LocalDate(sqlDate);
 			rit =  appelloController.getAppello(compito.getInsegnamento().getClasse().getID(), localDate);
 		}
-//		else{ 
-//			throw new IllegalStateException(ErrorMessage.COMPITO_WITHOUT_DATE);
-//		}
 		
 		return rit;
  

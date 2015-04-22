@@ -16,10 +16,7 @@ public class AssenzaImp {
 	 * 
 	 */
 	public AssenzaImp(){
-//		appelli = new LinkedList<AppelloImp>();
-	}
-	public AssenzaImp(Assenza assenza){
-//		appelli = new LinkedList<AppelloImp>();
+
 	}
 	
 	public Appello getUltimoAppelloAssenza(Assenza assenza) {

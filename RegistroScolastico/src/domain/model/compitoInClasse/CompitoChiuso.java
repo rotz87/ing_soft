@@ -6,8 +6,6 @@ import domain.model.compitoCommand.CompitoCommand;
 public class CompitoChiuso extends CompitoInClasseStateImp {
 	
 	static private CompitoChiuso instance;
-	
-//	private CompitoInClasseStateEnum stateEnum;//final = CompitoInClasseStateEnum.CHIUSO;
 
 	private CompitoChiuso() {
 		super.compitoCommand = new ChiudiCommand();
@@ -19,14 +17,5 @@ public class CompitoChiuso extends CompitoInClasseStateImp {
 		}
 		return CompitoChiuso.instance;
 	}
-	
-//	@Override
-//	public CompitoInClasseStateEnum getStateEnum() {
-//		return this.stateEnum;
-//	}
-//	public void setStateEnum(CompitoInClasseStateEnum stateEmum){
-//		this.stateEnum = stateEmum;
-//	}
-	
 
 }

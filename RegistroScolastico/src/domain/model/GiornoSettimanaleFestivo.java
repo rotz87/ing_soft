@@ -56,7 +56,6 @@ public class GiornoSettimanaleFestivo {
 	}
 	
 	public void setGiorno(int giorno) {
-		//this._giorno = giorno;
 		this._giorno = this.implementor.checkGiorno(giorno);
 	}
 	

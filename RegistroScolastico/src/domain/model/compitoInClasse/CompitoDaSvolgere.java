@@ -10,14 +10,13 @@ import domain.error.ErrorMessage;
 import domain.model.Argomento;
 import domain.model.Calendario;
 import domain.model.compitoCommand.CompitoCommand;
+import domain.model.compitoCommand.SetDaSvolgereCommand;
 
 public class CompitoDaSvolgere extends CompitoInClasseStateImp {
 	static private CompitoDaSvolgere instance;
-
-//	private CompitoInClasseStateEnum stateEnum;//final = CompitoInClasseStateEnum.DA_SVOLGERE;
 	
 	private CompitoDaSvolgere() {
-		super.compitoCommand = null;
+		super.compitoCommand = new SetDaSvolgereCommand();
 	}
 
 	static public CompitoDaSvolgere getInstance() {
@@ -59,15 +58,5 @@ public class CompitoDaSvolgere extends CompitoInClasseStateImp {
 		compitoInClasse.getInsegnamento().eliminaCompito(compitoInClasse);
 		compitoInClasse.set_insegnamento(null);
 	}
-	
-//	@Override
-//	public CompitoInClasseStateEnum getStateEnum() {
-//		return this.stateEnum;
-//	}
-//	
-//	public void setStateEnum(CompitoInClasseStateEnum stateEmum){
-//		this.stateEnum = stateEmum;
-//	}
-	
 
 }

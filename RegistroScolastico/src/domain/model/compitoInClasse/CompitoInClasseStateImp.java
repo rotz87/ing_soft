@@ -62,16 +62,7 @@ public abstract class CompitoInClasseStateImp implements CompitoInClasseState {
 	 */
 	public void setSvolto(CompitoInClasse compitoInClasse) {
 		throw new IllegalStateException(ErrorMessage.WRONG_STATE);
-	}
-
-//	public CompitoInClasseStateEnum getStateEnum() {
-//		throw new UnsupportedOperationException();
-//	}
-//	
-//	public void setStateEnum(CompitoInClasseStateEnum stateEmum){
-//		throw new UnsupportedOperationException();
-//	}
-	
+	}	
 	
 	public  CompitoCommand getCompitoCommand(){
 		return this.compitoCommand;

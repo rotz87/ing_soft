@@ -114,13 +114,6 @@ public class ClasseController {
 		
 		registri.retainAll(docente.getRegistriDocente());
 		
-//		for(RegistroDocente regDoc : registri){
-//			if(! (docente.getRegistriDocente().contains(regDoc))){
-//				registri.remove(regDoc);
-//			}
-//		}
-		
-		
 		return registri;
 	}
 }

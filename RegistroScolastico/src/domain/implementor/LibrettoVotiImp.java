@@ -34,9 +34,6 @@ public class LibrettoVotiImp {
 			}
 		}
 		
-//		if(rit == null){
-//			throw new IllegalStateException(ErrorMessage.COMPITO_NOT_BELONGING);
-//		}
 		return rit;
 	}
 	

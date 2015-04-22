@@ -4,10 +4,7 @@ import domain.model.compitoCommand.AnnullaCommand;
 
 public class CompitoAnnullato extends CompitoInClasseStateImp {
 	
-	static private CompitoAnnullato instance;
-	
-//	private CompitoInClasseStateEnum stateEnum;//final = CompitoInClasseStateEnum.ANNULLATO;
-	
+	static private CompitoAnnullato instance;	
 
 	private CompitoAnnullato() {
 		super.compitoCommand = new AnnullaCommand();
@@ -24,15 +21,5 @@ public class CompitoAnnullato extends CompitoInClasseStateImp {
 	public void setSvolto(CompitoInClasse compitoInClasse) {
 		compitoInClasse.set_state(CompitoSvolto.getInstance());
 	}
-	
-//	@Override
-//	public CompitoInClasseStateEnum getStateEnum() {
-//		return this.stateEnum;
-//	}
-//	
-//	public void setStateEnum(CompitoInClasseStateEnum stateEmum){
-//		this.stateEnum = stateEmum;
-//	}
-	
 
 }

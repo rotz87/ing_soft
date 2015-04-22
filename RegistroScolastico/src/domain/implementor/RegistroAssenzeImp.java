@@ -13,9 +13,6 @@ import domain.model.Studente;
 
 
 public class RegistroAssenzeImp {
-
-//	private MapAppelli appelli;
-//	private Map <StudenteImp, LibrettoAssenzeImp> librettiAssenze;
 	
 	/**
 	 * Costrurrore senza parametri.
@@ -23,11 +20,6 @@ public class RegistroAssenzeImp {
 	public RegistroAssenzeImp() {
 
 	}
-	
-	public void inizialize(RegistroAssenze registroAsenze){
-
-	}
-	
 
 	/**Riceve un vettore di studenti per cui segnare le assenze
 	 * 

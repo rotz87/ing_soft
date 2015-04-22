@@ -21,7 +21,6 @@ public class LibrettoAssenzeImp {
 	 */
 	public void segnaAssenza(LibrettoAssenze librettoAssenze, Appello appello) {
 		
-//		Stampa.stampaln("sono in librettoAssenze.segnaAssenza di " + studente.getNome());
 		boolean inseribile = false;
 		Assenza ultimaAssenzaNonGiustificata = null;
 		

@@ -1,7 +1,7 @@
 package domain.error;
 
 public class ErrorMessage {
-	
+
 	public static final String APPELLI_UNLOADED = "Impossibile caricare gli appelli";
 	public static final String APPELLO_CLASSE_INCONSISTENT = "L'appello selezionato non appartiene alla classe selezionata";
 	public static final String APPELLO_INEXISTENT = "Appello inesistente";
@@ -38,5 +38,5 @@ public class ErrorMessage {
 	public static final String WRONG_STATE = " Lo stato del compito non consente di eseguire l'operazione richiesta ";
 	public static final String DATA_FUTURE = "La data del compito non consente di eseguire l'operazione richiesta ";
 	public static final String STATO_UNISTANZIABLE = "Impossibile istanziare lo stato del compito";
-			
+
 }

@@ -22,10 +22,6 @@ public interface CompitoInClasseState {
 	
 	public abstract void elimina(domain.model.compitoInClasse.CompitoInClasse compitoInClasse);
 	
-//	public abstract domain.model.compitoInClasse.CompitoInClasseStateEnum getStateEnum();
-//	
-//	public abstract void setStateEnum(CompitoInClasseStateEnum stateEmum);
-	
 	public abstract CompitoCommand getCompitoCommand();
 	
 	

@@ -14,8 +14,6 @@ import domain.model.compitoCommand.SetSvoltoCommand;
 
 public class CompitoSvolto extends CompitoInClasseStateImp {
 	static private CompitoSvolto instance;
-	
-//	private CompitoInClasseStateEnum stateEnum;//final = CompitoInClasseStateEnum.SVOLTO;
 
 	private CompitoSvolto() {
 		super.compitoCommand = new SetSvoltoCommand();
@@ -44,8 +42,6 @@ public class CompitoSvolto extends CompitoInClasseStateImp {
 		Set<Studente> studenti = compitoInClasse.getInsegnamento().getClasse().getStudenti();
 		Stampa.stampaln();
 		for(Studente studente : studenti){
-//			LibrettoVotiLineItem lvli = studente.getLibrettoVoti().getLibrettoLineItem(compitoInClasse);
-//			Stampa.stampaln("LineItem = "+lvli);
 			if(studente.getLibrettoVoti().esisteLineItem(compitoInClasse)){
 				almenoUnVotoInserito = studente.getLibrettoVoti().esisteLineItem(compitoInClasse);
 			}
@@ -56,15 +52,5 @@ public class CompitoSvolto extends CompitoInClasseStateImp {
 			throw new IllegalStateException(ErrorMessage.COMPITO_UNCLOSABLE);
 		}
 	}
-	
-//	@Override
-//	public CompitoInClasseStateEnum getStateEnum() {
-//		return this.stateEnum;
-//	}
-//	
-//	public void setStateEnum(CompitoInClasseStateEnum stateEmum){
-//		this.stateEnum = stateEmum;
-//	}
-	
 
 }
