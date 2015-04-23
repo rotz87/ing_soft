@@ -19,11 +19,13 @@ import presenter.resourceSupport.appello.AppelloRS;
 import presenter.resourceSupport.compito.ArgomentoRS;
 import presenter.resourceSupport.medie.ParametriMedieRS;
 import presenter.resourceSupport.medie.StudenteMedieRS;
+import domain.error.DomainCheckedException;
 import domain.model.Argomento;
 import domain.model.RegistroDocente;
 import domain.model.Studente;
 import domain.model.Voto;
 import domain.model.mediaStrategy.IMediaStrategy;
+import domain.model.mediaStrategy.MediaAritmeticaStrategy;
 import domain.model.mediaStrategy.MediaStrategyFactory;
 
 
@@ -71,7 +73,14 @@ public class RegistroDocentePresenter {
 		  rit = new LinkedList<StudenteMedieRS>();
 		  
 		  //chiamare la factory e settate la strategia
-		  strategy = MediaStrategyFactory.getInstance().create(strategia);
+		  strategy = null;// FIXME
+		  strategia = "MediaAritmeticaStrategy";// FIXME
+		  try {
+			strategy = MediaStrategyFactory.getInstance().create(strategia);
+		} catch (DomainCheckedException e) {
+			// FIXME Auto-generated catch block
+			e.printStackTrace();
+		}
 		  medieController.setStrategiaRegistro(idRegistroDocente, strategy);
 		  
 		  mapMedieScritto = medieController.getMedieScritto(idRegistroDocente, dataStrart, dataEnd);
