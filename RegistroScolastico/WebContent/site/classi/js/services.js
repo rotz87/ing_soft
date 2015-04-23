@@ -50,11 +50,11 @@ registroServices.factory('rsClasse',['$resource',
 									method:'POST',
 									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente'}
 								},
-								'aggiornaCompitoInClasse':{
-									url:host+'/RegistroScolastico/api/classi/:idClasse/registriDocente/:idRegistroDocente/compiti/:idCompito',
-									method:'PUT',
-									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente', idCompito:'@idCompito'}
-								},
+//								'aggiornaCompitoInClasse':{
+//									url:host+'/RegistroScolastico/api/classi/:idClasse/registriDocente/:idRegistroDocente/compiti/:idCompito',
+//									method:'PUT',
+//									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente', idCompito:'@idCompito'}
+//								},
 								'argomentiSvolti':{
    									url:host+'/RegistroScolastico/api/classi/:idClasse/registriDocente/:idRegistroDocente/argomentiSvolti',
    									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente'},
@@ -136,4 +136,25 @@ registroServices.factory('Compito',['$resource',
                    								}
                    							});
                    				}]);
+registroServices.factory('mediaVoti',['$resource',
+                     				function($resource){
+                     					return $resource(host+'/RegistroScolastico/api/classi/:idClasse/registriDocente/:idRegistroDocente/medie', null,
+                     							{
+                     								'get':{
+                       									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente', idCompito:'@idCompito', strategia:'@strategia', dataInizio:'@dataInizio', dataFine:'@dataFine'},
+                       									method:'GET',
+                       									isArray:true
+                       								},
+			                     					'query':{
+			           									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente', idCompito:'@idCompito', strategia:'@strategia', dataInizio:'@dataInizio', dataFine:'@dataFine'},
+			           									method:'GET',
+			           									isArray:true
+			           								}
+                     							});
+}]);
 
+/**
+ * 
+ *	http://10.175.51.88:8080/RegistroScolastico/api/classi/1/registriDocente/1/medie?strategia=CiaoLorè&dataInizio=1417388400000&dataFine=1419462000000
+ *
+*/

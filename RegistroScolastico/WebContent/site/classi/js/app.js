@@ -44,6 +44,11 @@ registroApp.config(["$locationProvider","$routeProvider",function($locationProvi
 	  redirectTo:function(routeParams){
 		  return "/"+routeParams.idClasse+'/';
 	  }
+  }).when('/:idClasse/registriDocente/:idRegistroDocente/mediaVoti',
+  {
+	  templateUrl:'partials/mediaVoti.html',
+	  controller:'mediaVotiController',
+	  title:'Calcola la media dei voti'
   }).when('/',
   {
 	  templateUrl:'partials/elencoClassi.html',

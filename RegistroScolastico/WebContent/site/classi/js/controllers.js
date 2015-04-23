@@ -503,6 +503,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	$scope.calendario = rsClasse.calendario({}
 	,function(response,headers){
 		//successo
+		console.log(response)
 	},function(response,headers){
 		//fallimento
 		erroreSistema($rootScope, response.data, true)
@@ -517,9 +518,10 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		if(response.data == null && $scope.compitoInClasse.data == null)
 		{
 			//miaData = new Date($scope.calendario.oggi);
+			
 		}
 		else{
-			miaData = new Date(response.data).toLocaleDateString()
+			miaData = new Date(response.data)
 		}
 		
 		$scope.compitoInClasse.data = miaData;
@@ -582,13 +584,17 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 			tmpCompito[key] = $scope.compitoInClasse.toJSON()[key];
 		}
 		
-		if(tmpCompito.data)
-		{
-			tmpCompito.data = new Date(tmpCompito.data.split("/").reverse().join("-")).getTime();
+//		if(tmpCompito.data.split("/").reverse().join("-"))
+//		{
+//			tmpCompito.data = new Date(tmpCompito.data.split("/").reverse().join("-")).getTime();
+//		}
+		if(tmpCompito.data != null){
+			tmpCompito.data = tmpCompito.data.getTime()
 		}
 		else{
 			tmpCompito.data = null
 		}
+		
 		if (tmpCompito.oraInizio)
 		{
 			tmpCompito.oraInizio = new Date(tmpCompito.oraInizio).getTime();
@@ -801,7 +807,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 			{
 				var data = new Date(response.giorniFestivi[index]);
 				//data.setTime( data.getTime() + (-1)*data.getTimezoneOffset()*60*1000 );
-				$scope.dateCalendario.giorniFestivi[index] = data.toLocaleDateString();
+				$scope.dateCalendario.giorniFestivi[index] = data;
 			}
 			$scope.dateCalendario.giorniSettimanaliFestivi = response.giorniSettimanaliFestivi;
 			/**
@@ -811,21 +817,24 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 			 * 
 			 **/
 			
-			var inizioAnno = new Date($scope.calendario.inizioAnno).toLocaleDateString();
-			var fineAnno = new Date($scope.calendario.fineAnno).toLocaleDateString();
-			var dataOdierna = new Date($scope.calendario.oggi).toLocaleDateString();
-			
+			var inizioAnno = new Date($scope.calendario.inizioAnno);
+			var fineAnno = new Date($scope.calendario.fineAnno);
+			var dataOdierna = new Date($scope.calendario.oggi);
 			$("#bootstrapCalendario").datepicker({
 			    todayBtn: false,
 			    todayHighlight: false,
-			    format: "dd/mm/yyyy",
-	//		    dateFormat: "dd/mm/yyyy",
+			    format: "yyyy-mm-dd",
+			    dateFormat: "yyyy-mm-dd",
 			    language:"it",
 			    daysOfWeekDisabled: $scope.dateCalendario.giorniSettimanaliFestivi,
 			    datesDisabled: $scope.dateCalendario.giorniFestivi,
 			    startDate: inizioAnno,
 			    endDate: fineAnno,
-			    defaultViewDate: dataOdierna,
+			    defaultViewDate:{
+			    					year: dataOdierna.getFullYear(), 
+			    					month : dataOdierna.getMonth(), 
+			    					day: dataOdierna.getDate()
+			    				},
 			    gotoCurrent: true,
 			    enableOnReadonly: false,
 			    disableTouchKeyboard: true
@@ -846,44 +855,44 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		$route.updateParams($routeParams)
 	}
 	
-	$scope.$watch("compitoInClasse.data",
-		function(newValue,oldValue){
-		
-		if(typeof newValue == 'undefined')
-			{
-			newValue = null
-			$scope.erroreStudenti = "Il compito non ha ancora una data definita"
-			}
-		var dataReg = new RegExp("(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[012])/((19|20)\\d\\d)");
-		if (newValue && newValue.match(dataReg))
-		{
-			
-			//converte la data dal formato dd/mm/yyyy a yyyy-mm-dd
-			newValue = newValue.split('/').reverse().join("-")
-			var nuovaData = new Date(newValue).getTime();
-			
-			$scope.dataFissata = nuovaData;
-			
-			$scope.studentiCompito = Compito.queryStudenti(
-					{idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito, data : nuovaData},
-					function(response,headers)
-					{	//successo
-						
-						if (response.length == 0)
-						{
-							$scope.erroreStudenti = "L'appello per la data inserita non esiste"
-						}
-						else if (response.length > 0){
-							$scope.erroreStudenti = "";
-						}
-					},
-					function(response,headers)
-					{	//fallimento
-						erroreSistema($rootScope, response.data, true)
-					});
-			
-		}
-	})
+//	$scope.$watch("compitoInClasse.data",
+//		function(newValue,oldValue){
+//		
+//		if(typeof newValue == 'undefined')
+//			{
+//			newValue = null
+//			$scope.erroreStudenti = "Il compito non ha ancora una data definita"
+//			}
+//		var dataReg = new RegExp("(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[012])/((19|20)\\d\\d)");
+//		if (newValue && newValue.match(dataReg))
+//		{
+//			
+//			//converte la data dal formato dd/mm/yyyy a yyyy-mm-dd
+//			newValue = newValue.split('/').reverse().join("-")
+//			var nuovaData = new Date(newValue).getTime();
+//			
+//			$scope.dataFissata = nuovaData;
+//			
+//			$scope.studentiCompito = Compito.queryStudenti(
+//					{idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito, data : nuovaData},
+//					function(response,headers)
+//					{	//successo
+//						
+//						if (response.length == 0)
+//						{
+//							$scope.erroreStudenti = "L'appello per la data inserita non esiste"
+//						}
+//						else if (response.length > 0){
+//							$scope.erroreStudenti = "";
+//						}
+//					},
+//					function(response,headers)
+//					{	//fallimento
+//						erroreSistema($rootScope, response.data, true)
+//					});
+//			
+//		}
+//	})
 	
 	
 	
@@ -895,8 +904,8 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		});
 
 registroControllers.controller('riempiElencoCompiti', 
-		['$scope','rsClasse','$q','$location','$rootScope','$resource','$routeParams',
-		 function($scope,rsClasse,$q,$location,$rootScope,$resource,$routeParams) 
+		['$scope','rsClasse','Compito','$q','$location','$rootScope','$resource','$routeParams',
+		 function($scope,rsClasse,Compito,$q,$location,$rootScope,$resource,$routeParams) 
 		 {	
 			$scope.currRegistro = {};
 			$scope.registriDisponibili = rsClasse.registriDocente({idClasse : $routeParams.idClasse},
@@ -922,7 +931,7 @@ registroControllers.controller('riempiElencoCompiti',
 
 			$rootScope.idClasse = $scope.idClasse;
 			
-			$scope.elencoCompiti = rsClasse.prendiCompitiInClasse(
+			$scope.elencoCompiti = Compito.query(
 					{idClasse : $routeParams.idClasse,idRegistroDocente : $routeParams.idRegistroDocente},
 					function(response,headers){
 						//successo
@@ -932,7 +941,7 @@ registroControllers.controller('riempiElencoCompiti',
 					})
 			
 			$scope.creaCompito = function(){
-				rsClasse.creaCompitoInClasse(
+				Compito.creaCompitoInClasse(
 					{idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente, compito : $scope.compitoInClasse},
 					function(response,headers)
 					{
@@ -1006,10 +1015,89 @@ registroControllers.controller('elencoRegistri',['$scope','rsClasse','$location'
 }]);
 
 
+registroControllers.controller('mediaVotiController',['$scope','rsClasse','mediaVoti','$location','$rootScope','$routeParams',function($scope,rsClasse,mediaVoti,$location,$rootScope,$routeParams){
+	//console.log($scope)
+	$scope.form = {}
+	$scope.form.strategia ;
+	$scope.form.altriParametri;
+	$scope.form.dataInizio;
+	var calendario = rsClasse.calendario({},
+			function(response,headers){
+		
+		var dataOdierna = new Date(calendario.oggi)
+		var giorniFestivi = rsClasse.dateFestive(
+				{idClasse:$routeParams.idClasse},
+				function(){
+					var dateFestive = [];
+					for( var indice in giorniFestivi.giorniFestivi)
+					{
+						var tmpDate = new Date(giorniFestivi.giorniFestivi[indice])
+						dateFestive.push(tmpDate)
+					}
+					$(".bootstrapCalendario").datepicker({
+					    todayBtn: true,
+					    todayHighlight: false,
+					    format: "yyyy-mm-dd",
+						dateFormat: "yyyy-mm-dd",
+					    language:"it",
+					    daysOfWeekDisabled: giorniFestivi.giorniSettimanaliFestivi,
+					    datesDisabled: dateFestive,
+					    startDate: new Date(calendario.inizioAnno),
+					    endDate: new Date(calendario.fineAnno),
+					    defaultViewDate: {year: dataOdierna.getFullYear() , month:dataOdierna.getMonth(),day:dataOdierna.getDate()},
+					    gotoCurrent: true,
+					    enableOnReadonly: false,
+					    disableTouchKeyboard: true
+					})
+				},
+				function(){
+					
+				})
+
+	},
+			function(response,headers){
+		erroreSistema($rootScope, response.data, true)
+	});
+	
+	parametriMediaVoti = angular.copy($routeParams)
+	parametriMediaVoti.strategia = "ciaoPippo"
+	parametriMediaVoti.dataInizio = new Date("2014-12-10").getTime();
+	parametriMediaVoti.dataFine= new Date("2014-12-17").getTime();
+
+	mediaVoti.get(parametriMediaVoti,
+				function(response,headers){
+			$scope.studentiMedieRS = response;
+		},function(response,headers){
+			
+		})
+	$scope.calcolaMedia = function(){
+		parametriMediaVoti.strategia = $scope.form.strategia
+		parametriMediaVoti.dataInizio = $scope.form.dataInizio.getTime();
+		parametriMediaVoti.dataFine = $scope.form.dataFine.getTime();
+		console.log(parametriMediaVoti)
+		mediaVoti.get(parametriMediaVoti,
+				function(response,headers){
+			$scope.studentiMedieRS = response;
+		},function(response,headers){
+			
+		})
+	}
+	$scope.vediVoti = function(){
+		nonSupportato($rootScope)
+	}
+	
+	$scope.impostaStrategia = function (stringaStrategia){
+		$scope.form.strategia = stringaStrategia;
+	}
+	$scope.impostaAltriParametri = function(altriParams)
+	{
+		$scope.form.altriParametri = altriParams;
+	}
+}]);
+
 registroControllers.controller('menuSinistro',['$scope','rsClasse','$location','$rootScope','$routeParams',function($scope,rsClasse,$location,$rootScope,$routeParams){
 	//console.log($scope)
 }]);
-
 
 
 

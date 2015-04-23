@@ -1,0 +1,83 @@
+<meta charset="UTF-8">
+<h3 class="text-center"> Calcolo delle medie della classe {{nomeClasse}}</h3>
+<div class="col-xs-12">
+	<div class="row">
+		<form class="form-horizontal">
+			<div class="form-group" >
+				<label class="control-label col-sm-2"> Strategia: </label>
+			    <div class="input-group col-sm-10" >
+			      <div class="input-group-btn">
+			        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" ng-disabled="currState != statiPossibili.svolto"> strategia {{form.strategia}} <span class="caret"></span></button>
+			        <ul class="dropdown-menu dropdown-menu-left" role="menu">
+			          <li ng-repeat="n in [0,1,2,3]"><a ng-click="impostaStrategia(n)">{{n}}</a></li>
+			        </ul>
+			      </div><!-- /btn-group -->
+			    </div><!-- /input-group -->
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2"> Altri parametri: </label>
+				<div class="input-group col-sm-2">
+					<div class="input-group-btn">
+			        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" >{{form.altriParametri}} <span class="caret"></span></button>
+			        <ul class="dropdown-menu dropdown-menu-left" role="menu">
+			          <li ng-repeat="n in [0,1,2,3]"><a ng-click="impostaAltriParametri(n)">{{n}}</a></li>
+			        </ul>
+			      </div><!-- /btn-group -->
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-4">
+					<label class="control-label col-xs-5"> Da: </label>
+					<div class="input-group col-xs-5 bootstrapCalendario date">
+						<input id ="dataInizio" type="date" 
+						ng-model="form.dataInizio" readonly="readonly"/><span class="input-group-addon">
+									<i class="glyphicon glyphicon-calendar"></i>
+								</span>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<label class="control-label col-sm-5"> a </label>
+					<div class="col-sm-6 input-group date bootstrapCalendario">
+						<input id="dataFine" type="date"
+						ng-model='form.dataFine'
+								readonly="readonly"/>
+								<span class="input-group-addon">
+									<i class="glyphicon glyphicon-calendar"></i>
+								</span>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="row">
+		<table class="table table-responsive table-hover table-striped table-bordered">
+			<thead>
+				<tr>
+					<th class="col-sm-2"> Cognome </th>
+					<th class="col-sm-2"> Nome </th>
+					<th> Media Scritto </th>
+					<th> Media Orale </th>
+					<th> Media Totale </th>
+					<th> Riepilogo voti</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="studente in studentiMedieRS | orderBy:cognome">
+					<td> {{studente.cognome}} </td>
+					<td> {{studente.nome}} </td>
+					<td> {{studente.mediaScritto}}	</td>
+					<td> {{studente.mediaOrale}}	</td>
+					<td> {{studente.mediaTotale}} 	</td>
+					<td> <button type="button" ng-click="vediVoti(studente.idStudente)" class="btn btn-default btn-md btn-block col-xs-12 col-md-12" > Visualizza </button> </td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="row">
+		<button type="button" class="btn btn-default btn-md btn-block col-xs-12 col-md-12" ng-click="calcolaMedia()"> Calcola medie</button>
+	</div>
+	<br>
+	
+	{{pippo}}
+</div>
