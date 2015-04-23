@@ -27,8 +27,8 @@ public class MediaStrategyFactory {
 	public IMediaStrategy create(String className) throws DomainCheckedException {
 		Object obj = null;
 		try {
-			obj = Class.forName(this.packageName+"."+className).getDeclaredMethod("getInstance").invoke(null);
-		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException | ClassNotFoundException e) {
+			obj = Class.forName(this.packageName+"."+className).newInstance();
+		} catch (IllegalAccessException | IllegalArgumentException | SecurityException | ClassNotFoundException | InstantiationException e) {
 			throw new DomainCheckedException(ErrorMessage.STATO_UNISTANZIABLE);//FIXME creare un errore opportuno
 		}
 		return (IMediaStrategy)obj;
