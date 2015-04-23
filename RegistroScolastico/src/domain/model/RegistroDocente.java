@@ -75,6 +75,8 @@ public class RegistroDocente {
 	
 	private domain.implementor.RegistroDocenteImp implementor = new domain.implementor.RegistroDocenteImp();
 	
+	private domain.model.mediaStrategy.IMediaStrategy mediaStrategy;
+	
 	public domain.model.compitoInClasse.CompitoInClasse creaCompito() {
 		return this.implementor.creaCompito(this);
 	}
@@ -97,6 +99,11 @@ public class RegistroDocente {
 	
 	public void inserisciInfoCompito(domain.model.compitoInClasse.CompitoInClasse compito, java.sql.Date data, java.sql.Time oraInizio, java.sql.Time oraFine, java.util.Collection<Argomento> argomenti) {
 		this.implementor.inserisciInfoCompito(this, compito, data, oraInizio, oraFine, argomenti);
+	}
+	
+	public void inserisciStudenti(domain.model.compitoInClasse.CompitoInClasse compito, domain.model.Studente[] studenti) {
+		//TODO: Implement Method
+		throw new UnsupportedOperationException();
 	}
 	
 	public void inserisciVoti(domain.model.compitoInClasse.CompitoInClasse compito, java.util.Map<Studente, Voto> mapVoti) {
@@ -125,6 +132,30 @@ public class RegistroDocente {
 	
 	public boolean haClasse(domain.model.Classe classe) {
 		return this.implementor.haClasse(this, classe);
+	}
+	
+	public domain.model.mediaStrategy.IMediaStrategy getMediaStrategy() {
+		return this.mediaStrategy;
+	}
+	
+	public void setMediaStrategy(domain.model.mediaStrategy.IMediaStrategy mediaStrategy) {
+		this.mediaStrategy = mediaStrategy;
+	}
+	
+//	public java.util.Map<Studente, java.util.Collection<Voto>> getVotiScritti(java.sql.Date dataInizio, java.sql.Date dataFine) {
+//		return this.implementor.calcolaVotiScritti(this, dataInizio, dataFine);
+//	}
+//	
+//	public java.util.Map<Studente, java.util.Collection<Voto>> getVotiOrali(java.sql.Date dataInizio, java.sql.Date dataFine) {
+//		return this.implementor.calcolaVotiOrali(this, dataInizio, dataFine);
+//	}
+//	
+//	public java.util.Map<Studente, java.util.Collection<Voto>> getVotiMisti(java.sql.Date dataInizio, java.sql.Date dataFine) {
+//		return this.implementor.getVotiMisti(this, dataInizio, dataFine);
+//	}
+	
+	public java.util.Map<Studente, Voto> calcolaMediaScritto(java.sql.Date dataInizio, java.sql.Date dataFine) {
+		return this.implementor.calcolaMediaScritto(this, dataInizio, dataFine);
 	}
 	
 	public String toString() {

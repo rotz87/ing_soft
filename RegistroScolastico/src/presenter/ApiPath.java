@@ -16,6 +16,8 @@ public class ApiPath {
 	private static final String _STATE = "/state";
 	private static final String _ARGOMENTI = "/argomenti";
 	private static final String _ARGOMENTI_SVOLTI = "/argomentiSvolti";
+	private static final String _MEDIE = "/medie";
+	
 
 	// DA APPELLOPRESENTER
 	public static final String  CLASSE_APPELLI = _CLASSI+_ID_CLASSE+_APPELLI;
@@ -41,6 +43,8 @@ public class ApiPath {
 	// DA REGISTRO_DOCENTE_PRESENTER
 	public static final String REGISTRO_DOCENTE = _CLASSI+_ID_CLASSE+_REGISTRI_DOCENTE+_ID_REGISTRO_DOCENTE;
 	public static final String ARGOMENTI_SVOLTI = _ARGOMENTI_SVOLTI;
+	
+	public static final String MEDIE = _MEDIE ;
 	
 	
 	
