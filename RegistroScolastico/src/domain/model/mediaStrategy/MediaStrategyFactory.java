@@ -34,8 +34,12 @@ public class MediaStrategyFactory {
 		return (IMediaStrategy)obj;
 	}
 	
-	public String create(IMediaStrategy aClass){
-		return aClass.getClass().getSimpleName().toString();
+	public String create(Class<? extends IMediaStrategy> aClass){
+		return aClass.getSimpleName().toString();
+	}
+	
+	public String create(IMediaStrategy aStrategy){
+		return aStrategy.getClass().getSimpleName().toString();
 	}
 	
 	public Set<Class<? extends IMediaStrategy>> getStrategySubclasses(){

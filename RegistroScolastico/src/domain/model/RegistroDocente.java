@@ -142,18 +142,6 @@ public class RegistroDocente {
 		this.mediaStrategy = mediaStrategy;
 	}
 	
-//	public java.util.Map<Studente, java.util.Collection<Voto>> getVotiScritti(java.sql.Date dataInizio, java.sql.Date dataFine) {
-//		return this.implementor.calcolaVotiScritti(this, dataInizio, dataFine);
-//	}
-//	
-//	public java.util.Map<Studente, java.util.Collection<Voto>> getVotiOrali(java.sql.Date dataInizio, java.sql.Date dataFine) {
-//		return this.implementor.calcolaVotiOrali(this, dataInizio, dataFine);
-//	}
-//	
-//	public java.util.Map<Studente, java.util.Collection<Voto>> getVotiMisti(java.sql.Date dataInizio, java.sql.Date dataFine) {
-//		return this.implementor.getVotiMisti(this, dataInizio, dataFine);
-//	}
-	
 	public java.util.Map<Studente, Voto> calcolaMediaScritto(java.sql.Date dataInizio, java.sql.Date dataFine) {
 		return this.implementor.calcolaMediaScritto(this, dataInizio, dataFine);
 	}

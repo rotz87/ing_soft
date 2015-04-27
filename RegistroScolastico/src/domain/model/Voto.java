@@ -13,7 +13,7 @@
  */
 package domain.model;
 
-public class Voto {
+public class Voto implements java.lang.Comparable<Voto> {
 	public Voto() {
 	}
 	
@@ -41,12 +41,18 @@ public class Voto {
 		return _voto;
 	}
 	
+	private domain.implementor.VotoImp implementor = new domain.implementor.VotoImp();
+	
 	public byte getVoto() {
 		return this._voto;
 	}
 	
 	public void setVoto(byte voto) {
 		this._voto = voto;
+	}
+	
+	public int compareTo(domain.model.Voto voto) {
+		return this.implementor.compareTo(this, voto);
 	}
 	
 	public String toString() {

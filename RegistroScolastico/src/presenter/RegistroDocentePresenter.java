@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +18,7 @@ import controller.MedieController;
 import controller.RegistroDocenteController;
 import presenter.resourceSupport.appello.AppelloRS;
 import presenter.resourceSupport.compito.ArgomentoRS;
+import presenter.resourceSupport.medie.MedieStretegyRS;
 import presenter.resourceSupport.medie.ParametriMedieRS;
 import presenter.resourceSupport.medie.StudenteMedieRS;
 import domain.error.DomainCheckedException;
@@ -74,12 +76,13 @@ public class RegistroDocentePresenter {
 		  
 		  //chiamare la factory e settate la strategia
 		  strategy = null;// FIXME
-		  strategia = "MediaAritmeticaStrategy";// FIXME
+//		  strategia = "MediaAritmeticaStrategy";// FIXME
 		  try {
 			strategy = MediaStrategyFactory.getInstance().create(strategia);
 		} catch (DomainCheckedException e) {
 			// FIXME Auto-generated catch block
-			e.printStackTrace();
+//			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		}
 		  medieController.setStrategiaRegistro(idRegistroDocente, strategy);
 		  
@@ -93,4 +96,18 @@ public class RegistroDocentePresenter {
 		  return rit;
 	  }
 
+	  @RequestMapping(value = ApiPath.STRATEGIE, method = RequestMethod.GET)
+	  public Collection<MedieStretegyRS> getStrategie() {
+		  Collection<MedieStretegyRS> strategie;
+		  Set<Class<? extends IMediaStrategy>> subClassStrategie;
+
+		  strategie = new LinkedList<MedieStretegyRS>();
+		  subClassStrategie = MediaStrategyFactory.getInstance().getStrategySubclasses();
+		  
+		  for (Class<? extends IMediaStrategy> aClass : subClassStrategie){
+			  strategie.add(new MedieStretegyRS(aClass));
+		  }
+
+		  return strategie;
+	  }
 }
