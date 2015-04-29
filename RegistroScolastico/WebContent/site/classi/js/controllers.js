@@ -503,7 +503,6 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	$scope.calendario = rsClasse.calendario({}
 	,function(response,headers){
 		//successo
-		console.log(response)
 	},function(response,headers){
 		//fallimento
 		erroreSistema($rootScope, response.data, true)
@@ -855,9 +854,29 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		$route.updateParams($routeParams)
 	}
 	
-//	$scope.$watch("compitoInClasse.data",
-//		function(newValue,oldValue){
-//		
+	$scope.$watch("compitoInClasse.data",
+		function(newValue,oldValue){
+		if(newValue != null)
+		{
+			$routeParams.data = newValue.getTime();
+			$scope.studentiCompito = Compito.queryStudenti(
+					{idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito, data : $routeParams.data},
+					function(response,headers)
+					{	//successo
+						
+						if (response.length == 0)
+						{
+							$scope.erroreStudenti = "L'appello per la data inserita non esiste"
+						}
+						else if (response.length > 0){
+							$scope.erroreStudenti = "";
+						}
+					},
+					function(response,headers)
+					{	//fallimento
+						erroreSistema($rootScope, response.data, true)
+					});
+		}
 //		if(typeof newValue == 'undefined')
 //			{
 //			newValue = null
@@ -866,8 +885,8 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 //		var dataReg = new RegExp("(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[012])/((19|20)\\d\\d)");
 //		if (newValue && newValue.match(dataReg))
 //		{
-//			
-//			//converte la data dal formato dd/mm/yyyy a yyyy-mm-dd
+			
+			//converte la data dal formato dd/mm/yyyy a yyyy-mm-dd
 //			newValue = newValue.split('/').reverse().join("-")
 //			var nuovaData = new Date(newValue).getTime();
 //			
@@ -890,9 +909,9 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 //					{	//fallimento
 //						erroreSistema($rootScope, response.data, true)
 //					});
-//			
+			
 //		}
-//	})
+	})
 	
 	
 	
@@ -1017,6 +1036,8 @@ registroControllers.controller('elencoRegistri',['$scope','rsClasse','$location'
 
 registroControllers.controller('mediaVotiController',['$scope','rsClasse','mediaVoti','$location','$rootScope','$routeParams',function($scope,rsClasse,mediaVoti,$location,$rootScope,$routeParams){
 	//console.log($scope)
+	$rootScope.idClasse = $routeParams.idClasse;
+	
 	$scope.form = {}
 	$scope.form.strategia ;
 	$scope.form.altriParametri;
@@ -1064,17 +1085,17 @@ registroControllers.controller('mediaVotiController',['$scope','rsClasse','media
 	parametriMediaVoti.dataInizio = new Date("2014-12-10").getTime();
 	parametriMediaVoti.dataFine= new Date("2014-12-17").getTime();
 
-	mediaVoti.get(parametriMediaVoti,
-				function(response,headers){
-			$scope.studentiMedieRS = response;
-		},function(response,headers){
-			
-		})
+//	mediaVoti.get(parametriMediaVoti,
+//				function(response,headers){
+//			$scope.studentiMedieRS = response;
+//		},function(response,headers){
+//			
+//		})
 	$scope.calcolaMedia = function(){
 		parametriMediaVoti.strategia = $scope.form.strategia.className
 		parametriMediaVoti.dataInizio = $scope.form.dataInizio.getTime();
 		parametriMediaVoti.dataFine = $scope.form.dataFine.getTime();
-		console.log(parametriMediaVoti)
+		
 		mediaVoti.get(parametriMediaVoti,
 				function(response,headers){
 			$scope.studentiMedieRS = response;
@@ -1098,6 +1119,17 @@ registroControllers.controller('mediaVotiController',['$scope','rsClasse','media
 			function(response,headers){
 				console.log(response)
 				$scope.form.strategia = response[0];
+				parametriMediaVoti.strategia = $scope.form.strategia.className
+				$scope.form.dataInizio = new Date(calendario.inizioAnno);
+				$scope.form.dataFine = new Date(calendario.oggi);
+				parametriMediaVoti.dataInizio = calendario.inizioAnno;
+				parametriMediaVoti.dataFine = calendario.oggi;
+				mediaVoti.get(parametriMediaVoti,
+				function(response,headers){
+			$scope.studentiMedieRS = response;
+		},function(response,headers){
+			
+		})
 			},
 			function(response,headers){
 				console.log("errore")
