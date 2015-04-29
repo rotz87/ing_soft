@@ -886,10 +886,10 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
-    <Column name="_voto">
+    <Column name="_valore">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>false</ForeignKey>
-      <Type>7</Type>
+      <Type>4</Type>
       <Length>0</Length>
       <Nullable>false</Nullable>
       <IDGenerator>native</IDGenerator>

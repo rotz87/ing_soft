@@ -26,7 +26,7 @@ public class MediaScartaPeggioreStrategy implements IMediaStrategy {
 		float media;
 		
 		for(Voto voto: voti){
-			acc +=voto.getVoto();
+			acc +=voto.getValore();
 			count++;
 		}
 		
@@ -36,7 +36,7 @@ public class MediaScartaPeggioreStrategy implements IMediaStrategy {
 			media = -1;
 		}
 		rit = new Voto();//FIXME 
-		rit.setVoto((byte)media);
+		rit.setValore(media);
 		
 		return rit;
 	}

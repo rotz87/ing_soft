@@ -15,7 +15,7 @@ public class MediaAritmeticaStrategy implements IMediaStrategy{
 		float media;
 		
 		for(Voto voto: voti){
-			acc +=voto.getVoto();
+			acc +=voto.getValore();
 			count++;
 		}
 		
@@ -26,7 +26,7 @@ public class MediaAritmeticaStrategy implements IMediaStrategy{
 		}
 //		Stampa.stampaln("In MediaAritmetica Strategy la media è: " +media);
 		rit = new Voto();//FIXME 
-		rit.setVoto((byte)media);
+		rit.setValore(media);
 		
 		return rit;
 	}

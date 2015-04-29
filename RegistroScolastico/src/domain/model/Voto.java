@@ -19,7 +19,7 @@ public class Voto implements java.lang.Comparable<Voto> {
 	
 	private int ID;
 	
-	private byte _voto;
+	private float _valore;
 	
 	private void setID(int value) {
 		this.ID = value;
@@ -33,26 +33,32 @@ public class Voto implements java.lang.Comparable<Voto> {
 		return getID();
 	}
 	
-	private void set_voto(byte value) {
-		this._voto = value;
+	private void set_valore(float value) {
+		this._valore = value;
+		//commento
 	}
 	
-	private byte get_voto() {
-		return _voto;
+	private float get_valore() {
+		//commento
+		return _valore;
 	}
 	
 	private domain.implementor.VotoImp implementor = new domain.implementor.VotoImp();
 	
-	public byte getVoto() {
-		return this._voto;
+	public float getValore() {
+		return this._valore;
 	}
 	
-	public void setVoto(byte voto) {
-		this._voto = voto;
+	public void setValore(float valore) {
+		this._valore = valore;
 	}
 	
 	public int compareTo(domain.model.Voto voto) {
 		return this.implementor.compareTo(this, voto);
+	}
+	
+	public Voto(float valore) {
+		this.implementor.inizialize(this, valore);
 	}
 	
 	public String toString() {

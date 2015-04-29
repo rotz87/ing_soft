@@ -263,10 +263,10 @@ public class CompitoInClassePresenter {
 	  public ResponseEntity<?> updateStudentiCompito(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse, @RequestBody StudenteCompitoRS[] studentiCompito) {
 		   
 		  CompitoInClasseController compitoInClasseController;
-		  Map<Integer, Byte> mapVoti;
+		  Map<Integer, Float> mapVoti;
 		  
 		  compitoInClasseController = new CompitoInClasseController();
-		  mapVoti = new HashMap<Integer, Byte>();
+		  mapVoti = new HashMap<Integer, Float>();
 		  
 		  for(StudenteCompitoRS studenteConpitoRS : studentiCompito){
 			  mapVoti.put(studenteConpitoRS.getIdStudente(), studenteConpitoRS.getVoto());

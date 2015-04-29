@@ -27,14 +27,14 @@ public class TestInserisciVoti {
 //	int[] idVoti = {10,80,90};
 //	int[] idVoti = {1,8,9};
 	byte[] voti = {1,8,9};
-	Map<Integer, Byte> mapVoti;
+	Map<Integer, Float> mapVoti;
 	
 	controlloreCompito = new CompitoInClasseController();
-	mapVoti = new HashMap<Integer, Byte>();
+	mapVoti = new HashMap<Integer, Float>();
 	
-	mapVoti.put(new Integer(1), new Byte((byte)1));
-	mapVoti.put(new Integer(8), new Byte((byte)8));
-	mapVoti.put(new Integer(9), new Byte((byte)9));
+	mapVoti.put(new Integer(1), 1f);
+	mapVoti.put(new Integer(8), 8f);
+	mapVoti.put(new Integer(9), 9f);
 	
 	try {
 		
