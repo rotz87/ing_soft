@@ -719,7 +719,24 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		$scope.salvaCompito();
 		var success = mioCompito.annullaRipristina();
 	}
-	
+	$scope.controllaVoto = function(studente){
+		console.log(studente.voto);
+		/**
+		 * 
+		 * codice per il controllo del voto valido
+		 * 7+, 8- 8--
+		 * 7 1/2
+		 */
+		var myregp = new RegExp("^[0-9]{1,2}[,.]?[0-9]{0,2}?$")
+		var myregp2 = new RegExp("^[1]{1}[0-1]{1}$")
+		var myregp3 = new RegExp("^[0-9]{1}$")
+		var myregp4 = new RegExp("^[0-9]{1}")
+		
+		//console.log(myregp.exec(studente.voto))
+		console.log("è 10 o 11: " + myregp2.test(studente.voto))
+		console.log("è 0-9: " + myregp3.test(studente.voto))
+		console.log("è 7.[,]5: " + myregp3.test(studente.voto))
+	};
 	$scope.salvaVoti = function(alProssimoStato,ajax)
 	{
 		var tmpStudenti = [];
@@ -733,7 +750,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 				tmpStudenti.push(stud);
 			}
 		}
-		
+		console.log(tmpStudenti)
 		Compito.inviaVoti({idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito}, tmpStudenti,
 				function (response,headers)
 				{
@@ -805,7 +822,11 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 			for (var index in response.giorniFestivi)
 			{
 				var data = new Date(response.giorniFestivi[index]);
-				//data.setTime( data.getTime() + (-1)*data.getTimezoneOffset()*60*1000 );
+				/**
+				 * sfasamento dell'ora poichè il calendario lavora in UTC, 
+				 * cioè toglie un'ora rispetto all'ora italiana
+				 */
+				data.setTime( data.getTime() + (-1)*data.getTimezoneOffset()*60*1000 );
 				$scope.dateCalendario.giorniFestivi[index] = data;
 			}
 			$scope.dateCalendario.giorniSettimanaliFestivi = response.giorniSettimanaliFestivi;
@@ -1053,7 +1074,8 @@ registroControllers.controller('mediaVotiController',['$scope','rsClasse','media
 					for( var indice in giorniFestivi.giorniFestivi)
 					{
 						var tmpDate = new Date(giorniFestivi.giorniFestivi[indice])
-						dateFestive.push(tmpDate)
+						
+						dateFestive.push(new Date(tmpDate.getTime() - tmpDate.getTimezoneOffset()*60*1000))
 					}
 					$(".bootstrapCalendario").datepicker({
 					    todayBtn: true,
