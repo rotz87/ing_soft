@@ -18,13 +18,13 @@ public class StudenteMedieRS extends StudenteRS {
 	public StudenteMedieRS(Studente studente, Voto mediaScritto, Voto mediaOrale, Voto mediaTotale) {
 		super(studente);
 		if (mediaScritto != null){
-			this.mediaScritto = String.valueOf(mediaScritto.getVoto());
+			this.mediaScritto = String.valueOf(mediaScritto.getValore());
 		}
 		if (mediaOrale != null){
-			this.mediaOrale = String.valueOf(mediaOrale.getVoto());
+			this.mediaOrale = String.valueOf(mediaOrale.getValore());
 		}
 		if(mediaTotale != null){
-			this.mediaTotale = String.valueOf(mediaTotale.getVoto());
+			this.mediaTotale = String.valueOf(mediaTotale.getValore());
 		}
 	}
 

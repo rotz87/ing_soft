@@ -82,35 +82,30 @@ public class CompitoInClasseController {
 	 * @param idStudenti
 	 * @param idVoti
 	 */
-	public void inserisciVoti(int idClasse, int idRegistroDocente, int idCompito, Map<Integer, Byte> mapVotiGUI) {
+	public void inserisciVoti(int idClasse, int idRegistroDocente, int idCompito, Map<Integer, Float> mapVotiGUI) {
 
 		StudenteCriteria studenteCriteria;
-		VotoCriteria votoCriteria;
-
 		CompitoInClasse compito;
 		Map<Studente, Voto> mapVoti;
 		Studente studente;
 		Voto voto;
+		Float votoValore;
 				
 		mapVoti = new HashMap<Studente, Voto>();
-
 		compito = getCompitoInCLasseByID(idCompito);
 
 		try{
 			checkCompito(idClasse, idRegistroDocente, compito);
 			try {
-				
 				//trasforma mapVotiGUI in mapVoti
 				for(Integer idS : mapVotiGUI.keySet()){
 					studenteCriteria = new StudenteCriteria();
-					votoCriteria = new VotoCriteria();
-					
 					studenteCriteria.ID.eq(idS);
-					votoCriteria._voto.eq(mapVotiGUI.get(idS));
-					
 					studente = studenteCriteria.uniqueStudente();
-					voto = votoCriteria.uniqueVoto();
-					if(voto != null){//FIXME in questo modo i voti voti che vengono successivamente rimessi a null non vengono considerati e rimane il voto vecchio
+					
+					votoValore = mapVotiGUI.get(idS);
+					if(votoValore != null){//FIXME (in questo modo i voti che vengono successivamente rimessi a null non vengono considerati e rimane il voto vecchio)
+						voto = new Voto(votoValore);
 						mapVoti.put(studente, voto);
 					}
 				}

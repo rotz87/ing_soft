@@ -56,7 +56,7 @@ public class TestGetVotiPerStudente {
 				Stampa.stampa(lvli.getCompitoInClasse().getData());
 				Stampa.stampa("  ");
 				Stampa.stampa(" voto = ");
-				Stampa.stampa(lvli.getVoto().getVoto());
+				Stampa.stampa(lvli.getVoto().getValore());
 				Stampa.stampa("  ");
 				Stampa.stampaln();
 				

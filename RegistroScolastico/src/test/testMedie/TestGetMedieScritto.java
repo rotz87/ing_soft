@@ -33,7 +33,7 @@ public class TestGetMedieScritto {
 		
 		for(Studente studente : mapVoti.keySet()){
 			Stampa.stampaln("Studente: "+ studente.getNome() + " "+ studente.getCognome() +": ");
-			Stampa.stampaln("voto: "+mapVoti.get(studente).getVoto());
+			Stampa.stampaln("voto: "+mapVoti.get(studente).getValore());
 			Stampa.stampaln();
 		}
 		

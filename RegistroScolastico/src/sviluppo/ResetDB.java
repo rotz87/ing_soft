@@ -467,25 +467,25 @@ public class ResetDB {
 
 			registroRossiPrimaAstoria.getCompitiInClasse().add(compitoStoria1A);
 			
-			Voto[] votos = new Voto[11];
-			Voto voto;
-			for (int i = 1; i<11; i++){
-				voto = new Voto();
-				voto.setVoto((byte)i);
-				votos[i] = voto;
-				RSPersistentManager.instance().getSession().save(voto);
-			}
+//			Voto[] votos = new Voto[11];
+//			Voto voto;
+//			for (int i = 1; i<11; i++){
+//				voto = new Voto();
+//				voto.setValore(i);
+//				votos[i] = voto;
+//				RSPersistentManager.instance().getSession().save(voto);
+//			}
 			
 			Map<Studente, Voto> mapVoti;
 			mapVoti = new HashMap<Studente, Voto>();
 			
-			mapVoti.put(pieroRusso, votos[4]);
-			mapVoti.put(marioRomano, votos[8]);
-			mapVoti.put(leonardoRicci, votos[9]);
-			mapVoti.put(valentinoFarina, votos[7]);
-			mapVoti.put(roccoBenedetti, votos[5]);
-			mapVoti.put(antonioGuerra, votos[7]);
-			mapVoti.put(cristinaAngeli, votos[6]);
+			mapVoti.put(pieroRusso, new Voto(4));
+			mapVoti.put(marioRomano, new Voto(8));
+			mapVoti.put(leonardoRicci, new Voto(9));
+			mapVoti.put(valentinoFarina, new Voto(7));
+			mapVoti.put(roccoBenedetti, new Voto(5));
+			mapVoti.put(antonioGuerra, new Voto(10));
+			mapVoti.put(cristinaAngeli, new Voto(6));
 			
 			compitoStoria1A.setSvolto();
 			compitoStoria1A.inserisciVoti(mapVoti);

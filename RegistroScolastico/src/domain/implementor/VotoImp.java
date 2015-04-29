@@ -6,13 +6,18 @@ public class VotoImp {
 
 	public int compareTo(Voto that, Voto voto) {
 
-		Byte thatByte;
-		Byte votoByte;
+		Float thatFloat;
+		Float votoFloat;
 		
-		thatByte = that.getVoto();
-		votoByte = voto.getVoto();
+		thatFloat = that.getValore();
+		votoFloat = voto.getValore();
 
-		return thatByte.compareTo(votoByte);
+		return thatFloat.compareTo(votoFloat);
+	}
+
+	public void inizialize(Voto voto, float valore) {
+		voto.setValore(valore);
+		
 	}
 
 }

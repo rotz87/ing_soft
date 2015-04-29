@@ -8,7 +8,7 @@ import domain.model.Voto;
 
 public class StudenteCompitoRS extends StudenteRS {
 
-	private Byte voto;
+	private Float voto;
 	private boolean assente;
 	
 	public StudenteCompitoRS(){
@@ -20,17 +20,17 @@ public class StudenteCompitoRS extends StudenteRS {
 		this.assente = assente;
 		this.voto = null;
 		if(voto!=null){
-			this.voto = voto.getVoto();
+			this.voto = voto.getValore();
 		}
 		
 		// XXX INSERIRE I LINKS
 	}
 
-	public Byte getVoto() {
+	public Float getVoto() {
 		return voto;
 	}
 
-	public void setVoto(Byte voto) {
+	public void setVoto(Float voto) {
 		this.voto = voto;
 	}
 
