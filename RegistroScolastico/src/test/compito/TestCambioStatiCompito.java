@@ -11,7 +11,7 @@ import org.joda.time.LocalDate;
 
 import controller.CompitoInClasseController;
 import controller.DocenteController;
-import service.Stampa;
+import sviluppo.Stampa;
 import domain.model.Argomento;
 import domain.model.compitoInClasse.CompitoAnnullato;
 import domain.model.compitoInClasse.CompitoChiuso;
@@ -95,7 +95,7 @@ public class TestCambioStatiCompito {
 								
 			}
 			finally {
-				domain.model.RSPersistentManager.instance().disposePersistentManager();
+				service.RSPersistentManager.instance().disposePersistentManager();
 			}
 		}
 		catch (Exception e) {

@@ -16,7 +16,7 @@
     </filter-mapping>
 	<filter>
   	<filter-name>ORMFilter</filter-name>
-		<filter-class>domain.model.RegistroScolasticoFilter</filter-class>
+		<filter-class>service.RegistroScolasticoFilter</filter-class>
 		<init-param>
 		 	<param-name>WrapServletRequest</param-name>
 			<param-value>false</param-value>

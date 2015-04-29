@@ -35,7 +35,7 @@ public class AppelloCriteria extends AbstractORMCriteria {
 	}
 	
 	public AppelloCriteria() throws PersistentException {
-		this(domain.model.RSPersistentManager.instance().getSession());
+		this(service.RSPersistentManager.instance().getSession());
 	}
 	
 	public Appello uniqueAppello() {

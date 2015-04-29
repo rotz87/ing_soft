@@ -27,7 +27,7 @@ public class TestStampaLibretti {
 				}
 			}
 			finally {
-				domain.model.RSPersistentManager.instance().disposePersistentManager();
+				service.RSPersistentManager.instance().disposePersistentManager();
 			}
 		}
 		catch (Exception e) {

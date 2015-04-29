@@ -51,7 +51,7 @@ public class StudenteCriteria extends AbstractORMCriteria {
 	}
 	
 	public StudenteCriteria() throws PersistentException {
-		this(domain.model.RSPersistentManager.instance().getSession());
+		this(service.RSPersistentManager.instance().getSession());
 	}
 	
 	public LibrettoVotiCriteria create_librettoVotiCriteria() {

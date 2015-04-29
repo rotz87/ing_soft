@@ -11,7 +11,8 @@ import org.joda.time.LocalDate;
 import org.orm.PersistentException;
 import org.orm.PersistentTransaction;
 
-import service.Stampa;
+import service.RSPersistentManager;
+import sviluppo.Stampa;
 import domain.error.ErrorMessage;
 import domain.model.Appello;
 import domain.model.AppelloCriteria;
@@ -22,7 +23,6 @@ import domain.model.Docente;
 import domain.model.DocenteCriteria;
 import domain.model.LibrettoAssenze;
 import domain.model.LibrettoAssenzeCriteria;
-import domain.model.RSPersistentManager;
 import domain.model.RegistroAssenze;
 import domain.model.RegistroAssenzeCriteria;
 import domain.model.Studente;
@@ -64,7 +64,7 @@ public class FaiAppelloController {
 			registroAssenzeCorrente.avviaAppello();
 
 			try {
-				PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
+				PersistentTransaction t = service.RSPersistentManager.instance().getSession().beginTransaction();
 				try {
 					RSPersistentManager.instance().getSession().save(registroAssenzeCorrente.getAppelloOdierno());
 					t.commit();
@@ -128,7 +128,7 @@ public class FaiAppelloController {
 			registroAssenzeCorrente.registraAssenze(libretti);
 			
 			try{
-				PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
+				PersistentTransaction t = service.RSPersistentManager.instance().getSession().beginTransaction();
 				try {
 					RSPersistentManager.instance().getSession().save(registroAssenzeCorrente.getAppelloOdierno());
 					for(LibrettoAssenze libAss : libretti){

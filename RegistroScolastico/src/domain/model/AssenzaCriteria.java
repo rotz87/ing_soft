@@ -37,7 +37,7 @@ public class AssenzaCriteria extends AbstractORMCriteria {
 	}
 	
 	public AssenzaCriteria() throws PersistentException {
-		this(domain.model.RSPersistentManager.instance().getSession());
+		this(service.RSPersistentManager.instance().getSession());
 	}
 	
 	public GiustificazioneCriteria create_giustificazioneCriteria() {

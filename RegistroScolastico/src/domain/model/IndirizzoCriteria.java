@@ -33,7 +33,7 @@ public class IndirizzoCriteria extends AbstractORMCriteria {
 	}
 	
 	public IndirizzoCriteria() throws PersistentException {
-		this(domain.model.RSPersistentManager.instance().getSession());
+		this(service.RSPersistentManager.instance().getSession());
 	}
 	
 	public Indirizzo uniqueIndirizzo() {

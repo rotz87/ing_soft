@@ -39,7 +39,7 @@ public class LibrettoAssenzeCriteria extends AbstractORMCriteria {
 	}
 	
 	public LibrettoAssenzeCriteria() throws PersistentException {
-		this(domain.model.RSPersistentManager.instance().getSession());
+		this(service.RSPersistentManager.instance().getSession());
 	}
 	
 	public AssenzaCriteria create_giustificateCriteria() {

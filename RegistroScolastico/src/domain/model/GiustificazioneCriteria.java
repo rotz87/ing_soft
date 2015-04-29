@@ -33,7 +33,7 @@ public class GiustificazioneCriteria extends AbstractORMCriteria {
 	}
 	
 	public GiustificazioneCriteria() throws PersistentException {
-		this(domain.model.RSPersistentManager.instance().getSession());
+		this(service.RSPersistentManager.instance().getSession());
 	}
 	
 	public Giustificazione uniqueGiustificazione() {

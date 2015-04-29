@@ -6,7 +6,7 @@ import org.joda.time.LocalDate;
 import org.orm.PersistentException;
 
 import controller.CompitoInClasseController;
-import service.Stampa;
+import sviluppo.Stampa;
 import domain.model.Argomento;
 import domain.model.compitoInClasse.CompitoInClasse;
 import domain.model.compitoInClasse.CompitoInClasseCriteria;

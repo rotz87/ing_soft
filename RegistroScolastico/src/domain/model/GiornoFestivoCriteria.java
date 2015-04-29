@@ -33,7 +33,7 @@ public class GiornoFestivoCriteria extends AbstractORMCriteria {
 	}
 	
 	public GiornoFestivoCriteria() throws PersistentException {
-		this(domain.model.RSPersistentManager.instance().getSession());
+		this(service.RSPersistentManager.instance().getSession());
 	}
 	
 	public GiornoFestivo uniqueGiornoFestivo() {

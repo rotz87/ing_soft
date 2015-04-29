@@ -10,13 +10,13 @@ import org.orm.PersistentException;
 import org.orm.PersistentTransaction;
 
 import controller.FaiAppelloController;
-import service.Stampa;
+import service.RSPersistentManager;
+import sviluppo.Stampa;
 import domain.model.Classe;
 import domain.model.ClasseCriteria;
 import domain.model.Docente;
 import domain.model.LibrettoAssenze;
 import domain.model.LibrettoAssenzeCriteria;
-import domain.model.RSPersistentManager;
 import domain.model.RegistroAssenze;
 import domain.model.RegistroAssenzeCriteria;
 import domain.model.Studente;

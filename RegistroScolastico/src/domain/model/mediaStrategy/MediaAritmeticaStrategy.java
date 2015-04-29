@@ -2,7 +2,7 @@ package domain.model.mediaStrategy;
 
 import java.util.Collection;
 
-import service.Stampa;
+import sviluppo.Stampa;
 import domain.model.Voto;
 
 public class MediaAritmeticaStrategy implements IMediaStrategy{

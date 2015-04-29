@@ -3,7 +3,7 @@ package test.compito;
 import controller.CompitoInClasseController;
 import controller.DocenteController;
 import ormsamples.CreateRegistroScolasticoData;
-import service.Stampa;
+import sviluppo.Stampa;
 import domain.model.compitoInClasse.CompitoInClasse;
 
 public class testCreaCompito {
@@ -24,7 +24,7 @@ public class testCreaCompito {
 				compito = controlloreCompito.creaCompito(idClasseProva, idRegistroDocenteProva, idDocenteProva);
 			}
 			finally {
-				domain.model.RSPersistentManager.instance().disposePersistentManager();
+				service.RSPersistentManager.instance().disposePersistentManager();
 			}
 		}
 		catch (Exception e) {

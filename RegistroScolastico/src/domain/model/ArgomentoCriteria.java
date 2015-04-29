@@ -37,7 +37,7 @@ public class ArgomentoCriteria extends AbstractORMCriteria {
 	}
 	
 	public ArgomentoCriteria() throws PersistentException {
-		this(domain.model.RSPersistentManager.instance().getSession());
+		this(service.RSPersistentManager.instance().getSession());
 	}
 	
 	public Argomento uniqueArgomento() {

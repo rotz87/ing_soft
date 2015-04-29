@@ -8,7 +8,7 @@ import org.joda.time.LocalDate;
 import org.orm.PersistentException;
 
 import controller.CompitoInClasseController;
-import service.Stampa;
+import sviluppo.Stampa;
 import domain.model.compitoInClasse.CompitoInClasse;
 import domain.model.compitoInClasse.CompitoInClasseCriteria;
 
@@ -43,7 +43,7 @@ public class TestInserisciVoti {
 			controlloreCompito.inserisciVoti(idClasseProva, idRegistroDocenteProva, idCompitoProva, mapVoti);
 		}
 		finally {
-			domain.model.RSPersistentManager.instance().disposePersistentManager();
+			service.RSPersistentManager.instance().disposePersistentManager();
 		}
 	}
 	catch (Exception e) {

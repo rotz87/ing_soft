@@ -29,7 +29,7 @@ public class MediaStrategyFactory {
 		try {
 			obj = Class.forName(this.packageName+"."+className).newInstance();
 		} catch (IllegalAccessException | IllegalArgumentException | SecurityException | ClassNotFoundException | InstantiationException e) {
-			throw new DomainCheckedException(ErrorMessage.STATO_UNISTANZIABLE);//FIXME creare un errore opportuno
+			throw new DomainCheckedException(ErrorMessage.STRATEGIA_UNISTANZIABLE);
 		}
 		return (IMediaStrategy)obj;
 	}

@@ -10,7 +10,7 @@ import org.joda.time.LocalDate;
 import controller.CompitoInClasseController;
 import controller.DocenteController;
 import presenter.CompitoInClassePresenter;
-import service.Stampa;
+import sviluppo.Stampa;
 import domain.model.Argomento;
 import domain.model.compitoInClasse.CompitoChiuso;
 import domain.model.compitoInClasse.CompitoInClasse;
@@ -53,7 +53,7 @@ public class TestChiudiCompito {
 				
 			}
 			finally {
-				domain.model.RSPersistentManager.instance().disposePersistentManager();
+				service.RSPersistentManager.instance().disposePersistentManager();
 			}
 		}
 		catch (Exception e) {

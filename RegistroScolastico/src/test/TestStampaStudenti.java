@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import org.orm.PersistentException;
 
-import service.Stampa;
+import sviluppo.Stampa;
 import domain.model.Classe;
 import domain.model.ClasseCriteria;
 import domain.model.Studente;

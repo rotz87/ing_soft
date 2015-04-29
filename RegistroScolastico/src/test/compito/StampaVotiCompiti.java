@@ -8,7 +8,7 @@ import java.util.Map;
 import org.orm.PersistentException;
 
 import controller.CompitoInClasseController;
-import service.Stampa;
+import sviluppo.Stampa;
 
 import java.util.List;
 import java.util.Map.Entry;

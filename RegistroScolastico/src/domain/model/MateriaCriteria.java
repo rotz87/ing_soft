@@ -33,7 +33,7 @@ public class MateriaCriteria extends AbstractORMCriteria {
 	}
 	
 	public MateriaCriteria() throws PersistentException {
-		this(domain.model.RSPersistentManager.instance().getSession());
+		this(service.RSPersistentManager.instance().getSession());
 	}
 	
 	public Materia uniqueMateria() {

@@ -11,7 +11,7 @@ import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import presenter.AppelloPresenter;
 import presenter.ClassePresenter;
 import presenter.CompitoInClassePresenter;
-import service.Stampa;
+import sviluppo.Stampa;
 import domain.model.Argomento;
 import domain.model.compitoInClasse.CompitoInClasse;
 

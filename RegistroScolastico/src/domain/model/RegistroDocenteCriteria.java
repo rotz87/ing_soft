@@ -43,7 +43,7 @@ public class RegistroDocenteCriteria extends AbstractORMCriteria {
 	}
 	
 	public RegistroDocenteCriteria() throws PersistentException {
-		this(domain.model.RSPersistentManager.instance().getSession());
+		this(service.RSPersistentManager.instance().getSession());
 	}
 	
 	public MateriaCriteria create_materiaCriteria() {

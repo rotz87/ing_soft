@@ -5,7 +5,7 @@ import java.util.Collection;
 import org.joda.time.LocalDate;
 
 import controller.FaiAppelloController;
-import service.Stampa;
+import sviluppo.Stampa;
 import domain.model.Studente;
 import domain.model.StudenteCriteria;
 
@@ -28,7 +28,7 @@ public class TestGetPresenti {
 				}
 			}
 			finally {
-				domain.model.RSPersistentManager.instance().disposePersistentManager();
+				service.RSPersistentManager.instance().disposePersistentManager();
 			}
 		}
 		catch (Exception e) {

@@ -5,7 +5,7 @@ import java.util.Collections;
 
 import org.joda.time.LocalDate;
 
-import service.Stampa;
+import sviluppo.Stampa;
 import domain.model.Appello;
 import domain.model.Assenza;
 

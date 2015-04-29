@@ -39,7 +39,7 @@ public class UscitaAnticipataCriteria extends AbstractORMCriteria {
 	}
 	
 	public UscitaAnticipataCriteria() throws PersistentException {
-		this(domain.model.RSPersistentManager.instance().getSession());
+		this(service.RSPersistentManager.instance().getSession());
 	}
 	
 	public AppelloCriteria create_appelloCriteria() {

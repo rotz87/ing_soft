@@ -32,11 +32,9 @@ import domain.model.mediaStrategy.MediaStrategyFactory;
 
 
 @RestController
-//@RequestMapping("/classi/{idClasse}/registriDocente/{idRegistroDocente}")
 @RequestMapping(ApiPath.REGISTRO_DOCENTE)
 public class RegistroDocentePresenter {
 	
-//	@RequestMapping(value = "/argomentiSvolti",  method = RequestMethod.GET)
 	@RequestMapping(value = ApiPath.ARGOMENTI_SVOLTI,  method = RequestMethod.GET)
 	public Collection<ArgomentoRS> getArgomentiSvolti(@PathVariable int idClasse, @PathVariable int idRegistroDocente) {
 		
@@ -54,9 +52,6 @@ public class RegistroDocentePresenter {
 		
 		return argomentiRS;
 	}
-	
-//	@RequestMapping(method = RequestMethod.GET, params = {"data"})
-//	public AppelloRS getAppello(@PathVariable int idClasse, @RequestParam(value="data") long data)
 	
 	  @RequestMapping(value = ApiPath.MEDIE, method = RequestMethod.GET, params = {"dataInizio","dataFine","strategia"})
 	  public Collection<StudenteMedieRS> getMedie(@PathVariable int idRegistroDocente, @RequestParam(value="dataInizio") long dataInizio,  @RequestParam(value="dataFine") long dataFine,  @RequestParam(value="strategia") String strategia) {

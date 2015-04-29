@@ -9,7 +9,7 @@ import controller.ClasseController;
 import controller.CompitoInClasseController;
 import controller.DocenteController;
 import presenter.ClassePresenter;
-import service.Stampa;
+import sviluppo.Stampa;
 import domain.model.RegistroDocente;
 import domain.model.Studente;
 import domain.model.Voto;
@@ -39,7 +39,7 @@ public class TestGetRegistriDocente {
 				
 			}
 			finally {
-				domain.model.RSPersistentManager.instance().disposePersistentManager();
+				service.RSPersistentManager.instance().disposePersistentManager();
 			}
 		}
 		catch (Exception e) {

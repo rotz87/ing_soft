@@ -8,8 +8,8 @@ import org.orm.*;
 public class CreateRegistroScolasticoDatabaseSchema {
 	public static void main(String[] args) {
 		try {
-			ORMDatabaseInitiator.createSchema(domain.model.RSPersistentManager.instance());
-			domain.model.RSPersistentManager.instance().disposePersistentManager();
+			ORMDatabaseInitiator.createSchema(service.RSPersistentManager.instance());
+			service.RSPersistentManager.instance().disposePersistentManager();
 		}
 		catch (Exception e) {
 			e.printStackTrace();

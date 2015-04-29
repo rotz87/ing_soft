@@ -12,7 +12,7 @@ import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 import org.orm.PersistentException;
 
-import service.Stampa;
+import sviluppo.Stampa;
 import domain.model.RegistroAssenze;
 import domain.model.RegistroAssenzeCriteria;
 import domain.model.Studente;

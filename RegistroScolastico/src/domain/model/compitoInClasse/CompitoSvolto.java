@@ -3,7 +3,7 @@ package domain.model.compitoInClasse;
 import java.util.Map;
 import java.util.Set;
 
-import service.Stampa;
+import sviluppo.Stampa;
 import domain.error.ErrorMessage;
 import domain.model.LibrettoVoti;
 import domain.model.LibrettoVotiLineItem;

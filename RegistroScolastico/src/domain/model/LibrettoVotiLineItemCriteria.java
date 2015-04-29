@@ -39,7 +39,7 @@ public class LibrettoVotiLineItemCriteria extends AbstractORMCriteria {
 	}
 	
 	public LibrettoVotiLineItemCriteria() throws PersistentException {
-		this(domain.model.RSPersistentManager.instance().getSession());
+		this(service.RSPersistentManager.instance().getSession());
 	}
 	
 	public VotoCriteria create_votoCriteria() {

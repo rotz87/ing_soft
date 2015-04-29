@@ -9,7 +9,7 @@ import org.orm.PersistentException;
 
 import controller.CompitoInClasseController;
 import controller.MedieController;
-import service.Stampa;
+import sviluppo.Stampa;
 import domain.error.ErrorMessage;
 import domain.model.compitoInClasse.CompitoInClasse;
 import domain.model.compitoInClasse.CompitoInClasseCriteria;

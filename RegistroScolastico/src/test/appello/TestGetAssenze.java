@@ -10,7 +10,7 @@ import org.orm.PersistentException;
 
 import controller.ClasseController;
 import controller.FaiAppelloController;
-import service.Stampa;
+import sviluppo.Stampa;
 import domain.model.Assenza;
 import domain.model.Studente;
 

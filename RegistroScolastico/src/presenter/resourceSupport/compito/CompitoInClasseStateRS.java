@@ -2,7 +2,7 @@ package presenter.resourceSupport.compito;
 
 import org.springframework.hateoas.ResourceSupport;
 
-import service.Stampa;
+import sviluppo.Stampa;
 import domain.model.compitoInClasse.CompitoInClasse;
 import domain.model.compitoInClasse.CompitoInClasseStateFactory;
 

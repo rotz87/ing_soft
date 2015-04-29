@@ -37,7 +37,7 @@ public class ScuolaCriteria extends AbstractORMCriteria {
 	}
 	
 	public ScuolaCriteria() throws PersistentException {
-		this(domain.model.RSPersistentManager.instance().getSession());
+		this(service.RSPersistentManager.instance().getSession());
 	}
 	
 	public ClasseCriteria create_classiCriteria() {

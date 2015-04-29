@@ -9,7 +9,7 @@ import org.orm.PersistentException;
 import controller.CompitoInClasseController;
 import controller.DocenteController;
 import ormsamples.CreateRegistroScolasticoData;
-import service.Stampa;
+import sviluppo.Stampa;
 import domain.model.compitoInClasse.CompitoInClasse;
 import domain.model.compitoInClasse.CompitoInClasseCriteria;
 
@@ -40,7 +40,7 @@ public class TestInserisciInfoCompito {
 				controlloreCompito.inserisciInfoCompito(idClasseProva, idRegistroDocenteProva, idCompitoProva, sqlDate, oraInizio, oraFine, idArgomenti);
 			}
 			finally {
-				domain.model.RSPersistentManager.instance().disposePersistentManager();
+				service.RSPersistentManager.instance().disposePersistentManager();
 			}
 		}
 		catch (Exception e) {

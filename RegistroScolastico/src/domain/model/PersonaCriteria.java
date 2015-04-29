@@ -43,7 +43,7 @@ public class PersonaCriteria extends AbstractORMCriteria {
 	}
 	
 	public PersonaCriteria() throws PersistentException {
-		this(domain.model.RSPersistentManager.instance().getSession());
+		this(service.RSPersistentManager.instance().getSession());
 	}
 	
 	public IndirizzoCriteria create_indirizzoCriteria() {

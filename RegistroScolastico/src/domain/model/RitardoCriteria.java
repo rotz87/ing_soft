@@ -39,7 +39,7 @@ public class RitardoCriteria extends AbstractORMCriteria {
 	}
 	
 	public RitardoCriteria() throws PersistentException {
-		this(domain.model.RSPersistentManager.instance().getSession());
+		this(service.RSPersistentManager.instance().getSession());
 	}
 	
 	public PermessoEntrataCriteria create_permessoCriteria() {

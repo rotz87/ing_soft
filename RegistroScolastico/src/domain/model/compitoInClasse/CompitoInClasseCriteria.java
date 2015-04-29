@@ -43,7 +43,7 @@ public class CompitoInClasseCriteria extends AbstractORMCriteria {
 	}
 	
 	public CompitoInClasseCriteria() throws PersistentException {
-		this(domain.model.RSPersistentManager.instance().getSession());
+		this(service.RSPersistentManager.instance().getSession());
 	}
 	
 	public domain.model.RegistroDocenteCriteria create_insegnamentoCriteria() {

@@ -33,7 +33,7 @@ public class VotoCriteria extends AbstractORMCriteria {
 	}
 	
 	public VotoCriteria() throws PersistentException {
-		this(domain.model.RSPersistentManager.instance().getSession());
+		this(service.RSPersistentManager.instance().getSession());
 	}
 	
 	public Voto uniqueVoto() {

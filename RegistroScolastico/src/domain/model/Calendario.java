@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
 
-import service.Stampa;
+import sviluppo.Stampa;
 
 public class Calendario {
 

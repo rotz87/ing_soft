@@ -12,7 +12,8 @@ import org.joda.time.LocalDate;
 import org.orm.PersistentException;
 import org.orm.PersistentTransaction;
 
-import service.Stampa;
+import service.RSPersistentManager;
+import sviluppo.Stampa;
 import domain.error.DomainCheckedException;
 import domain.error.ErrorMessage;
 import domain.model.Appello;
@@ -27,7 +28,6 @@ import domain.model.compitoInClasse.CompitoInClasseState;
 import domain.model.ClasseCriteria;
 import domain.model.Docente;
 import domain.model.DocenteCriteria;
-import domain.model.RSPersistentManager;
 import domain.model.RegistroDocente;
 import domain.model.RegistroDocenteCriteria;
 import domain.model.Studente;
@@ -53,7 +53,7 @@ public class CompitoInClasseController {
 			if(registroDocente.getClasse().equals(classe)){
 				compito = registroDocente.creaCompito();
 				try {
-					PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
+					PersistentTransaction t = service.RSPersistentManager.instance().getSession().beginTransaction();
 					try {
 						RSPersistentManager.instance().getSession().save(compito);
 						t.commit();
@@ -121,7 +121,7 @@ public class CompitoInClasseController {
 			compito.inserisciVoti(mapVoti);
 			
 			try {
-				PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
+				PersistentTransaction t = service.RSPersistentManager.instance().getSession().beginTransaction();
 				try {
 					for(Studente s: mapVoti.keySet()){
 						RSPersistentManager.instance().getSession().save(s.getLibrettoVoti());
@@ -215,7 +215,7 @@ public class CompitoInClasseController {
 			compito.elimina();
 			
 			try {
-				PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
+				PersistentTransaction t = service.RSPersistentManager.instance().getSession().beginTransaction();
 				try {
 					RSPersistentManager.instance().getSession().delete(compito);
 					t.commit();
@@ -478,7 +478,7 @@ public class CompitoInClasseController {
 	
 	private void updateCompitoDB(CompitoInClasse compito){
 		try {
-			PersistentTransaction t = domain.model.RSPersistentManager.instance().getSession().beginTransaction();
+			PersistentTransaction t = service.RSPersistentManager.instance().getSession().beginTransaction();
 			try {
 				RSPersistentManager.instance().getSession().update(compito);
 				t.commit();

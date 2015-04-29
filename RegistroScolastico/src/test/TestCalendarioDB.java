@@ -4,7 +4,7 @@ package test;
 import org.joda.time.LocalDate;
 import org.orm.PersistentException;
 
-import service.Stampa;
+import sviluppo.Stampa;
 import domain.model.Calendario;
 import domain.model.GiornoFestivoCriteria;
 import domain.model.GiornoSettimanaleFestivo;

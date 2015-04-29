@@ -7,7 +7,7 @@ import java.util.Map.Entry;
 import org.orm.PersistentException;
 
 import controller.CompitoInClasseController;
-import service.Stampa;
+import sviluppo.Stampa;
 import domain.error.ErrorMessage;
 import domain.model.compitoInClasse.CompitoInClasse;
 import domain.model.compitoInClasse.CompitoInClasseCriteria;
@@ -55,7 +55,7 @@ public class TestGetVotiCompito {
 				Stampa.stampaln();
 			}
 			finally {
-				domain.model.RSPersistentManager.instance().disposePersistentManager();
+				service.RSPersistentManager.instance().disposePersistentManager();
 			}
 		}
 		catch (Exception e) {

@@ -3,7 +3,7 @@ package test.appello;
 import org.orm.PersistentException;
 
 import controller.FaiAppelloController;
-import service.Stampa;
+import sviluppo.Stampa;
 import domain.model.Classe;
 import domain.model.ClasseCriteria;
 import domain.model.RegistroAssenze;
@@ -24,7 +24,7 @@ public class TestFaiLAppelloController2 {
 				ret = ldomainmodelClasseCriteria.uniqueClasse().getRegistroAssenze();
 			}
 			finally {
-				domain.model.RSPersistentManager.instance().disposePersistentManager();
+				service.RSPersistentManager.instance().disposePersistentManager();
 			}
 		}
 		catch (Exception e) {

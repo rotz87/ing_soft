@@ -8,7 +8,7 @@ import org.hibernate.exception.DataException;
 import org.joda.time.LocalDate;
 import org.orm.PersistentException;
 
-import service.Stampa;
+import sviluppo.Stampa;
 import domain.error.ErrorMessage;
 import domain.model.Appello;
 import domain.model.Calendario;

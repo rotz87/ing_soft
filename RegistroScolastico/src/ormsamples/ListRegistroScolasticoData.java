@@ -10,7 +10,7 @@ public class ListRegistroScolasticoData {
 	
 	public void listTestData() throws PersistentException {
 		System.out.println("Listing Studente...");
-		java.util.List lStudenteList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Studente").setMaxResults(ROW_COUNT).list();
+		java.util.List lStudenteList = service.RSPersistentManager.instance().getSession().createQuery("From domain.model.Studente").setMaxResults(ROW_COUNT).list();
 		domain.model.Studente[] ldomainmodelStudentes = (domain.model.Studente[]) lStudenteList.toArray(new domain.model.Studente[lStudenteList.size()]);
 		int length = Math.min(ldomainmodelStudentes.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
@@ -19,7 +19,7 @@ public class ListRegistroScolasticoData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Appello...");
-		java.util.List lAppelloList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Appello").setMaxResults(ROW_COUNT).list();
+		java.util.List lAppelloList = service.RSPersistentManager.instance().getSession().createQuery("From domain.model.Appello").setMaxResults(ROW_COUNT).list();
 		domain.model.Appello[] ldomainmodelAppellos = (domain.model.Appello[]) lAppelloList.toArray(new domain.model.Appello[lAppelloList.size()]);
 		length = Math.min(ldomainmodelAppellos.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
@@ -28,7 +28,7 @@ public class ListRegistroScolasticoData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Assenza...");
-		java.util.List lAssenzaList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Assenza").setMaxResults(ROW_COUNT).list();
+		java.util.List lAssenzaList = service.RSPersistentManager.instance().getSession().createQuery("From domain.model.Assenza").setMaxResults(ROW_COUNT).list();
 		domain.model.Assenza[] ldomainmodelAssenzas = (domain.model.Assenza[]) lAssenzaList.toArray(new domain.model.Assenza[lAssenzaList.size()]);
 		length = Math.min(ldomainmodelAssenzas.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
@@ -37,7 +37,7 @@ public class ListRegistroScolasticoData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Giustificazione...");
-		java.util.List lGiustificazioneList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Giustificazione").setMaxResults(ROW_COUNT).list();
+		java.util.List lGiustificazioneList = service.RSPersistentManager.instance().getSession().createQuery("From domain.model.Giustificazione").setMaxResults(ROW_COUNT).list();
 		domain.model.Giustificazione[] ldomainmodelGiustificaziones = (domain.model.Giustificazione[]) lGiustificazioneList.toArray(new domain.model.Giustificazione[lGiustificazioneList.size()]);
 		length = Math.min(ldomainmodelGiustificaziones.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
@@ -46,7 +46,7 @@ public class ListRegistroScolasticoData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Ritardo...");
-		java.util.List lRitardoList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Ritardo").setMaxResults(ROW_COUNT).list();
+		java.util.List lRitardoList = service.RSPersistentManager.instance().getSession().createQuery("From domain.model.Ritardo").setMaxResults(ROW_COUNT).list();
 		domain.model.Ritardo[] ldomainmodelRitardos = (domain.model.Ritardo[]) lRitardoList.toArray(new domain.model.Ritardo[lRitardoList.size()]);
 		length = Math.min(ldomainmodelRitardos.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
@@ -55,7 +55,7 @@ public class ListRegistroScolasticoData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing PermessoEntrata...");
-		java.util.List lPermessoEntrataList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.PermessoEntrata").setMaxResults(ROW_COUNT).list();
+		java.util.List lPermessoEntrataList = service.RSPersistentManager.instance().getSession().createQuery("From domain.model.PermessoEntrata").setMaxResults(ROW_COUNT).list();
 		domain.model.PermessoEntrata[] ldomainmodelPermessoEntratas = (domain.model.PermessoEntrata[]) lPermessoEntrataList.toArray(new domain.model.PermessoEntrata[lPermessoEntrataList.size()]);
 		length = Math.min(ldomainmodelPermessoEntratas.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
@@ -64,7 +64,7 @@ public class ListRegistroScolasticoData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing UscitaAnticipata...");
-		java.util.List lUscitaAnticipataList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.UscitaAnticipata").setMaxResults(ROW_COUNT).list();
+		java.util.List lUscitaAnticipataList = service.RSPersistentManager.instance().getSession().createQuery("From domain.model.UscitaAnticipata").setMaxResults(ROW_COUNT).list();
 		domain.model.UscitaAnticipata[] ldomainmodelUscitaAnticipatas = (domain.model.UscitaAnticipata[]) lUscitaAnticipataList.toArray(new domain.model.UscitaAnticipata[lUscitaAnticipataList.size()]);
 		length = Math.min(ldomainmodelUscitaAnticipatas.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
@@ -73,7 +73,7 @@ public class ListRegistroScolasticoData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing PermessoUscita...");
-		java.util.List lPermessoUscitaList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.PermessoUscita").setMaxResults(ROW_COUNT).list();
+		java.util.List lPermessoUscitaList = service.RSPersistentManager.instance().getSession().createQuery("From domain.model.PermessoUscita").setMaxResults(ROW_COUNT).list();
 		domain.model.PermessoUscita[] ldomainmodelPermessoUscitas = (domain.model.PermessoUscita[]) lPermessoUscitaList.toArray(new domain.model.PermessoUscita[lPermessoUscitaList.size()]);
 		length = Math.min(ldomainmodelPermessoUscitas.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
@@ -82,7 +82,7 @@ public class ListRegistroScolasticoData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing LibrettoAssenze...");
-		java.util.List lLibrettoAssenzeList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.LibrettoAssenze").setMaxResults(ROW_COUNT).list();
+		java.util.List lLibrettoAssenzeList = service.RSPersistentManager.instance().getSession().createQuery("From domain.model.LibrettoAssenze").setMaxResults(ROW_COUNT).list();
 		domain.model.LibrettoAssenze[] ldomainmodelLibrettoAssenzes = (domain.model.LibrettoAssenze[]) lLibrettoAssenzeList.toArray(new domain.model.LibrettoAssenze[lLibrettoAssenzeList.size()]);
 		length = Math.min(ldomainmodelLibrettoAssenzes.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
@@ -91,7 +91,7 @@ public class ListRegistroScolasticoData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Indirizzo...");
-		java.util.List lIndirizzoList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Indirizzo").setMaxResults(ROW_COUNT).list();
+		java.util.List lIndirizzoList = service.RSPersistentManager.instance().getSession().createQuery("From domain.model.Indirizzo").setMaxResults(ROW_COUNT).list();
 		domain.model.Indirizzo[] ldomainmodelIndirizzos = (domain.model.Indirizzo[]) lIndirizzoList.toArray(new domain.model.Indirizzo[lIndirizzoList.size()]);
 		length = Math.min(ldomainmodelIndirizzos.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
@@ -100,7 +100,7 @@ public class ListRegistroScolasticoData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing RegistroAssenze...");
-		java.util.List lRegistroAssenzeList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.RegistroAssenze").setMaxResults(ROW_COUNT).list();
+		java.util.List lRegistroAssenzeList = service.RSPersistentManager.instance().getSession().createQuery("From domain.model.RegistroAssenze").setMaxResults(ROW_COUNT).list();
 		domain.model.RegistroAssenze[] ldomainmodelRegistroAssenzes = (domain.model.RegistroAssenze[]) lRegistroAssenzeList.toArray(new domain.model.RegistroAssenze[lRegistroAssenzeList.size()]);
 		length = Math.min(ldomainmodelRegistroAssenzes.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
@@ -109,7 +109,7 @@ public class ListRegistroScolasticoData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Scuola...");
-		java.util.List lScuolaList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Scuola").setMaxResults(ROW_COUNT).list();
+		java.util.List lScuolaList = service.RSPersistentManager.instance().getSession().createQuery("From domain.model.Scuola").setMaxResults(ROW_COUNT).list();
 		domain.model.Scuola[] ldomainmodelScuolas = (domain.model.Scuola[]) lScuolaList.toArray(new domain.model.Scuola[lScuolaList.size()]);
 		length = Math.min(ldomainmodelScuolas.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
@@ -118,7 +118,7 @@ public class ListRegistroScolasticoData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Classe...");
-		java.util.List lClasseList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Classe").setMaxResults(ROW_COUNT).list();
+		java.util.List lClasseList = service.RSPersistentManager.instance().getSession().createQuery("From domain.model.Classe").setMaxResults(ROW_COUNT).list();
 		domain.model.Classe[] ldomainmodelClasses = (domain.model.Classe[]) lClasseList.toArray(new domain.model.Classe[lClasseList.size()]);
 		length = Math.min(ldomainmodelClasses.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
@@ -127,7 +127,7 @@ public class ListRegistroScolasticoData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Docente...");
-		java.util.List lDocenteList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Docente").setMaxResults(ROW_COUNT).list();
+		java.util.List lDocenteList = service.RSPersistentManager.instance().getSession().createQuery("From domain.model.Docente").setMaxResults(ROW_COUNT).list();
 		domain.model.Docente[] ldomainmodelDocentes = (domain.model.Docente[]) lDocenteList.toArray(new domain.model.Docente[lDocenteList.size()]);
 		length = Math.min(ldomainmodelDocentes.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
@@ -136,7 +136,7 @@ public class ListRegistroScolasticoData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing GiornoFestivo...");
-		java.util.List lGiornoFestivoList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.GiornoFestivo").setMaxResults(ROW_COUNT).list();
+		java.util.List lGiornoFestivoList = service.RSPersistentManager.instance().getSession().createQuery("From domain.model.GiornoFestivo").setMaxResults(ROW_COUNT).list();
 		domain.model.GiornoFestivo[] ldomainmodelGiornoFestivos = (domain.model.GiornoFestivo[]) lGiornoFestivoList.toArray(new domain.model.GiornoFestivo[lGiornoFestivoList.size()]);
 		length = Math.min(ldomainmodelGiornoFestivos.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
@@ -145,7 +145,7 @@ public class ListRegistroScolasticoData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing GiornoSettimanaleFestivo...");
-		java.util.List lGiornoSettimanaleFestivoList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.GiornoSettimanaleFestivo").setMaxResults(ROW_COUNT).list();
+		java.util.List lGiornoSettimanaleFestivoList = service.RSPersistentManager.instance().getSession().createQuery("From domain.model.GiornoSettimanaleFestivo").setMaxResults(ROW_COUNT).list();
 		domain.model.GiornoSettimanaleFestivo[] ldomainmodelGiornoSettimanaleFestivos = (domain.model.GiornoSettimanaleFestivo[]) lGiornoSettimanaleFestivoList.toArray(new domain.model.GiornoSettimanaleFestivo[lGiornoSettimanaleFestivoList.size()]);
 		length = Math.min(ldomainmodelGiornoSettimanaleFestivos.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
@@ -154,7 +154,7 @@ public class ListRegistroScolasticoData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing RegistroDocente...");
-		java.util.List lRegistroDocenteList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.RegistroDocente").setMaxResults(ROW_COUNT).list();
+		java.util.List lRegistroDocenteList = service.RSPersistentManager.instance().getSession().createQuery("From domain.model.RegistroDocente").setMaxResults(ROW_COUNT).list();
 		domain.model.RegistroDocente[] ldomainmodelRegistroDocentes = (domain.model.RegistroDocente[]) lRegistroDocenteList.toArray(new domain.model.RegistroDocente[lRegistroDocenteList.size()]);
 		length = Math.min(ldomainmodelRegistroDocentes.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
@@ -163,7 +163,7 @@ public class ListRegistroScolasticoData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Materia...");
-		java.util.List lMateriaList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Materia").setMaxResults(ROW_COUNT).list();
+		java.util.List lMateriaList = service.RSPersistentManager.instance().getSession().createQuery("From domain.model.Materia").setMaxResults(ROW_COUNT).list();
 		domain.model.Materia[] ldomainmodelMaterias = (domain.model.Materia[]) lMateriaList.toArray(new domain.model.Materia[lMateriaList.size()]);
 		length = Math.min(ldomainmodelMaterias.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
@@ -172,7 +172,7 @@ public class ListRegistroScolasticoData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing LibrettoVoti...");
-		java.util.List lLibrettoVotiList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.LibrettoVoti").setMaxResults(ROW_COUNT).list();
+		java.util.List lLibrettoVotiList = service.RSPersistentManager.instance().getSession().createQuery("From domain.model.LibrettoVoti").setMaxResults(ROW_COUNT).list();
 		domain.model.LibrettoVoti[] ldomainmodelLibrettoVotis = (domain.model.LibrettoVoti[]) lLibrettoVotiList.toArray(new domain.model.LibrettoVoti[lLibrettoVotiList.size()]);
 		length = Math.min(ldomainmodelLibrettoVotis.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
@@ -181,7 +181,7 @@ public class ListRegistroScolasticoData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing LibrettoVotiLineItem...");
-		java.util.List lLibrettoVotiLineItemList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.LibrettoVotiLineItem").setMaxResults(ROW_COUNT).list();
+		java.util.List lLibrettoVotiLineItemList = service.RSPersistentManager.instance().getSession().createQuery("From domain.model.LibrettoVotiLineItem").setMaxResults(ROW_COUNT).list();
 		domain.model.LibrettoVotiLineItem[] ldomainmodelLibrettoVotiLineItems = (domain.model.LibrettoVotiLineItem[]) lLibrettoVotiLineItemList.toArray(new domain.model.LibrettoVotiLineItem[lLibrettoVotiLineItemList.size()]);
 		length = Math.min(ldomainmodelLibrettoVotiLineItems.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
@@ -190,7 +190,7 @@ public class ListRegistroScolasticoData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing CompitoInClasse...");
-		java.util.List lCompitoInClasseList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.compitoInClasse.CompitoInClasse").setMaxResults(ROW_COUNT).list();
+		java.util.List lCompitoInClasseList = service.RSPersistentManager.instance().getSession().createQuery("From domain.model.compitoInClasse.CompitoInClasse").setMaxResults(ROW_COUNT).list();
 		domain.model.compitoInClasse.CompitoInClasse[] ldomainmodelcompitoInClasseCompitoInClasses = (domain.model.compitoInClasse.CompitoInClasse[]) lCompitoInClasseList.toArray(new domain.model.compitoInClasse.CompitoInClasse[lCompitoInClasseList.size()]);
 		length = Math.min(ldomainmodelcompitoInClasseCompitoInClasses.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
@@ -199,7 +199,7 @@ public class ListRegistroScolasticoData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Voto...");
-		java.util.List lVotoList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Voto").setMaxResults(ROW_COUNT).list();
+		java.util.List lVotoList = service.RSPersistentManager.instance().getSession().createQuery("From domain.model.Voto").setMaxResults(ROW_COUNT).list();
 		domain.model.Voto[] ldomainmodelVotos = (domain.model.Voto[]) lVotoList.toArray(new domain.model.Voto[lVotoList.size()]);
 		length = Math.min(ldomainmodelVotos.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
@@ -208,7 +208,7 @@ public class ListRegistroScolasticoData {
 		System.out.println(length + " record(s) retrieved.");
 		
 		System.out.println("Listing Argomento...");
-		java.util.List lArgomentoList = domain.model.RSPersistentManager.instance().getSession().createQuery("From domain.model.Argomento").setMaxResults(ROW_COUNT).list();
+		java.util.List lArgomentoList = service.RSPersistentManager.instance().getSession().createQuery("From domain.model.Argomento").setMaxResults(ROW_COUNT).list();
 		domain.model.Argomento[] ldomainmodelArgomentos = (domain.model.Argomento[]) lArgomentoList.toArray(new domain.model.Argomento[lArgomentoList.size()]);
 		length = Math.min(ldomainmodelArgomentos.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
@@ -505,7 +505,7 @@ public class ListRegistroScolasticoData {
 				//listRegistroScolasticoData.listByCriteria();
 			}
 			finally {
-				domain.model.RSPersistentManager.instance().disposePersistentManager();
+				service.RSPersistentManager.instance().disposePersistentManager();
 			}
 		}
 		catch (Exception e) {

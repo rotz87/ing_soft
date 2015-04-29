@@ -31,7 +31,7 @@ public class PermessoEntrataCriteria extends AbstractORMCriteria {
 	}
 	
 	public PermessoEntrataCriteria() throws PersistentException {
-		this(domain.model.RSPersistentManager.instance().getSession());
+		this(service.RSPersistentManager.instance().getSession());
 	}
 	
 	public PermessoEntrata uniquePermessoEntrata() {
