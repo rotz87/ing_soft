@@ -61,6 +61,10 @@ public class Voto implements java.lang.Comparable<Voto> {
 		this.implementor.inizialize(this, valore);
 	}
 	
+	public void setVoto(domain.model.Voto voto) {
+		this.implementor.setVoto(this, voto);
+	}
+	
 	public String toString() {
 		return String.valueOf(getID());
 	}

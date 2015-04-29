@@ -20,4 +20,9 @@ public class VotoImp {
 		
 	}
 
+	public void setVoto(Voto that, Voto voto) {
+		that.setValore(voto.getValore());
+		
+	}
+
 }

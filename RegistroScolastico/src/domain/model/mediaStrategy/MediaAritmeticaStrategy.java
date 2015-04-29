@@ -25,7 +25,7 @@ public class MediaAritmeticaStrategy implements IMediaStrategy{
 			media = -1;
 		}
 //		Stampa.stampaln("In MediaAritmetica Strategy la media è: " +media);
-		rit = new Voto();//FIXME 
+		rit = new Voto(); 
 		rit.setValore(media);
 		
 		return rit;

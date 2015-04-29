@@ -27,7 +27,6 @@ import presenter.resourceSupport.compito.ArgomentoRS;
 import presenter.resourceSupport.compito.CompitoInClasseRS;
 import presenter.resourceSupport.compito.CompitoInClasseStateRS;
 import presenter.resourceSupport.compito.StudenteCompitoRS;
-import sviluppo.Stampa;
 import domain.error.DomainCheckedException;
 import domain.error.ErrorMessage;
 import domain.model.Argomento;
@@ -230,7 +229,6 @@ public class CompitoInClassePresenter {
 	  @RequestMapping(value= ApiPath.COMPITO_STUDENTI, method=RequestMethod.GET, params={"data"})
 	  public Collection<StudenteCompitoRS> getStudentiCompito(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse, @RequestParam("data") long data) {
 		  
-		  Stampa.stampa(" getStudentiCompito");
 		  CompitoInClasseController compitoInClasseController;
 		  FaiAppelloController faiAppelloController;
 		  Map<Studente, Boolean> assenze;

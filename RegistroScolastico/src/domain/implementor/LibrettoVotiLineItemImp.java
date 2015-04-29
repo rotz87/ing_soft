@@ -34,8 +34,17 @@ public class LibrettoVotiLineItemImp {
 	 * @param voto
 	 */
 	public void aggiungiVoto(LibrettoVotiLineItem lineItem, Voto voto) {
-		lineItem.setVoto(voto);
+		Voto votoAttuale;
 		
+		votoAttuale = lineItem.getVoto();
+		if(votoAttuale == null){
+			votoAttuale = new Voto();
+			votoAttuale.setVoto(voto);
+			lineItem.setVoto(votoAttuale);
+		}else{
+			votoAttuale.setVoto(voto);
+		}
+
 	}
 
 
