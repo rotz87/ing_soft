@@ -1071,7 +1071,7 @@ registroControllers.controller('mediaVotiController',['$scope','rsClasse','media
 			
 		})
 	$scope.calcolaMedia = function(){
-		parametriMediaVoti.strategia = $scope.form.strategia
+		parametriMediaVoti.strategia = $scope.form.strategia.className
 		parametriMediaVoti.dataInizio = $scope.form.dataInizio.getTime();
 		parametriMediaVoti.dataFine = $scope.form.dataFine.getTime();
 		console.log(parametriMediaVoti)
@@ -1084,15 +1084,27 @@ registroControllers.controller('mediaVotiController',['$scope','rsClasse','media
 	}
 	$scope.vediVoti = function(){
 		nonSupportato($rootScope)
-	}
+	};
 	
 	$scope.impostaStrategia = function (stringaStrategia){
 		$scope.form.strategia = stringaStrategia;
-	}
+	};
 	$scope.impostaAltriParametri = function(altriParams)
 	{
 		$scope.form.altriParametri = altriParams;
-	}
+	};
+	$scope.tipiMedia = mediaVoti.elencoStrategie(
+			$routeParams,
+			function(response,headers){
+				console.log(response)
+				$scope.form.strategia = response[0];
+			},
+			function(response,headers){
+				console.log("errore")
+				erroreSistema($rootScope, response.data, true)
+			}
+	);
+	
 }]);
 
 registroControllers.controller('menuSinistro',['$scope','rsClasse','$location','$rootScope','$routeParams',function($scope,rsClasse,$location,$rootScope,$routeParams){

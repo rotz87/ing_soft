@@ -138,14 +138,15 @@ registroServices.factory('Compito',['$resource',
                    				}]);
 registroServices.factory('mediaVoti',['$resource',
                      				function($resource){
-                     					return $resource(host+'/RegistroScolastico/api/classi/:idClasse/registriDocente/:idRegistroDocente/medie', null,
+                     					return $resource(host+'/RegistroScolastico/api/classi/:idClasse/registriDocente/:idRegistroDocente/medie/', null,
                      							{
                      								'get':{
                        									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente', idCompito:'@idCompito', strategia:'@strategia', dataInizio:'@dataInizio', dataFine:'@dataFine'},
                        									method:'GET',
                        									isArray:true
                        								},
-			                     					'query':{
+			                     					'elencoStrategie':{
+			                     						url: host+'/RegistroScolastico/api/classi/:idClasse/registriDocente/:idRegistroDocente/medie/strategie/',
 			           									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente', idCompito:'@idCompito', strategia:'@strategia', dataInizio:'@dataInizio', dataFine:'@dataFine'},
 			           									method:'GET',
 			           									isArray:true
