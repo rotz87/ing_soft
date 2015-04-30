@@ -2,12 +2,12 @@ package presenter.resourceSupport.voto;
 
 import java.lang.reflect.InvocationTargetException;
 
-import controller.ErrorMessage;
+import domain.error.ErrorMessage;
 import domain.error.DomainCheckedException;
 
 public class VotoConverterFactory {
 	static private VotoConverterFactory instance;
-	private Class converterClass = VotoDecimalConveter.class;
+	private Class converterClass = VotoLettereConverter.class;
 
 	private VotoConverterFactory() {
 	}
