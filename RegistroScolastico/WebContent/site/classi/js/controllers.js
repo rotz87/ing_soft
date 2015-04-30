@@ -640,9 +640,35 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	}
 	
 	$scope.intervalloVoti = [0,1,2,3,4,5,6,7,8,9,10]
-	
+	var votiAusiliari = {"1":["A","B","C","D","E"],"2":["+","++","-","--","1/2"]};
+	$scope.votiPossibili = {};
+	for (var key in votiAusiliari)
+	{
+		$scope.votiPossibili[key] = votiAusiliari[key];
+		$scope.votiPossibili[key] = votiAusiliari[key];
+	}
+	$scope.insiemeVotiStringa = {}
 	$scope.inserisciVoto = function(studente,voto){
 		studente.voto = voto;
+	}
+	$scope.inserisciVotoIndex = function(studente,votoIndex,votoValue){
+		// assumo che studente.voto sia un oggetto
+		// da togliere quando mi arriveranno i voti come oggetti
+		if (typeof studente.voto != typeof {})
+			{
+				var tmpVoto = studente.voto
+				studente.voto = {}
+				studente.voto[1] = tmpVoto; 
+			}
+		studente.voto[votoIndex] = votoValue
+		var votoStringa = "";
+		for (var i in studente.voto)
+		{
+			votoStringa = votoStringa.concat(studente.voto[i])
+		}
+		$scope.insiemeVotiStringa[studente.idStudente] = votoStringa;
+		console.log(studente)
+		console.log($scope.insiemeVotiStringa)
 	}
 
 	$scope.ripristinaCompito = function(){
@@ -898,40 +924,6 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 						erroreSistema($rootScope, response.data, true)
 					});
 		}
-//		if(typeof newValue == 'undefined')
-//			{
-//			newValue = null
-//			$scope.erroreStudenti = "Il compito non ha ancora una data definita"
-//			}
-//		var dataReg = new RegExp("(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[012])/((19|20)\\d\\d)");
-//		if (newValue && newValue.match(dataReg))
-//		{
-			
-			//converte la data dal formato dd/mm/yyyy a yyyy-mm-dd
-//			newValue = newValue.split('/').reverse().join("-")
-//			var nuovaData = new Date(newValue).getTime();
-//			
-//			$scope.dataFissata = nuovaData;
-//			
-//			$scope.studentiCompito = Compito.queryStudenti(
-//					{idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito, data : nuovaData},
-//					function(response,headers)
-//					{	//successo
-//						
-//						if (response.length == 0)
-//						{
-//							$scope.erroreStudenti = "L'appello per la data inserita non esiste"
-//						}
-//						else if (response.length > 0){
-//							$scope.erroreStudenti = "";
-//						}
-//					},
-//					function(response,headers)
-//					{	//fallimento
-//						erroreSistema($rootScope, response.data, true)
-//					});
-			
-//		}
 	})
 	
 	
@@ -1159,6 +1151,43 @@ registroControllers.controller('mediaVotiController',['$scope','rsClasse','media
 			}
 	);
 	
+}]);
+
+registroControllers.controller('funzioniRegistroDocente',['$scope','rsClasse','$location','$rootScope','$routeParams',function($scope,rsClasse,$location,$rootScope,$routeParams){
+	console.log($scope)
+	$scope.vaiAlCalcoloMedie = function(){
+		$location.path($location.path()+"mediaVoti/")
+	};
+	$scope.vaiAllaListaCompiti = function(){
+		$location.path($location.path()+"compiti/")
+	};
+	rsClasse.registriDocente($routeParams,
+			function(response,headers){
+		console.log(response)
+		for (var i in response){
+			if (response[i].idRegistroDocente == $routeParams.idRegistroDocente)
+				{
+					$scope.registroSelezionato = response[i];
+				}
+		} 
+			},function(response,headers){
+				erroreSistema($rootScope, response.data, true)
+			})
+	rsClasse.elencoClassi($routeParams,
+			function(response)
+			{
+				console.log(response)
+				for(var i in response){
+					if (response[i].idClasse == $routeParams.idClasse)
+					{
+						$scope.classeRegistro = response[i];
+						$rootScope.idClasse = $scope.classeRegistro.idClasse
+					}
+				}
+			},
+			function(response,headers){
+				erroreSistema($rootScope, response.data, true)
+				})
 }]);
 
 registroControllers.controller('menuSinistro',['$scope','rsClasse','$location','$rootScope','$routeParams',function($scope,rsClasse,$location,$rootScope,$routeParams){

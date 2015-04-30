@@ -73,13 +73,25 @@
 										<td class="rs-text-vmiddle">{{studente.nome}}</td>
 										<td class="rs-text-vmiddle">
 										    <div class="input-group " ng-hide="studente.assente" >
-										      <input type="text" ng-change="controllaVoto(studente)" class="form-control input-sm" ng-model="studente.voto" aria-label="..." ng-disabled="currState != statiPossibili.svolto"></input>
-										      <div class="input-group-btn">
-										        <button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false" ng-disabled="currState != statiPossibili.svolto">Voto <span class="caret"></span></button>
+ 										      <input type="text" ng-change="controllaVoto(studente)" class="form-control input-sm" ng-model="insiemeVotiStringa[studente.idStudente]" aria-label="..." ng-disabled="currState != statiPossibili.svolto" readonly="readonly"></input>
+										      
+										      <!-- ciclo sui voti ammissibili -->
+										      <div class="input-group-btn" ng-repeat="(votoCifra,votoArray) in votiPossibili ">
+										        <button type="button" class="btn btn-default dropdown-toggle btn-sm bottoneVoti" data-toggle="dropdown" aria-expanded="false" ng-disabled="currState != statiPossibili.svolto">
+											        {{studente.voto[votoCifra]}} 
+											        <span class="caret text-right" style="right:5px;">
+											        
+											        </span>
+										       	</button>
 										        <ul class="dropdown-menu dropdown-menu-right" role="menu">
-										          <li ng-repeat="n in intervalloVoti"><a ng-click="inserisciVoto(studente,n)">{{n}}</a></li>
+										          <li ng-repeat="n in votoArray">
+										          	<a ng-click="inserisciVotoIndex(studente,votoCifra,n)" type="button">
+										          		{{n}}
+										          	</a>
+										          </li>
 										        </ul>
 										      </div><!-- /btn-group -->
+										      <!-- fine ciclo sui voti ammissibili -->
 										    </div><!-- /input-group -->
 										    <div style="height: 30px; line-height: 30px" ng-show="studente.assente"> <em style="vertical-align:middle;">Lo studente risulta assente</em></div>
 										</td>
