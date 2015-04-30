@@ -13,6 +13,7 @@ import controller.CompitoInClasseController;
 import controller.DocenteController;
 import sviluppo.Stampa;
 import domain.model.Argomento;
+import domain.model.Voto;
 import domain.model.compitoInClasse.CompitoAnnullato;
 import domain.model.compitoInClasse.CompitoChiuso;
 import domain.model.compitoInClasse.CompitoInClasse;
@@ -36,7 +37,7 @@ public class TestCambioStatiCompito {
 		Time oraInizio = Time.valueOf("10:0:0");
 		Time oraFine = Time.valueOf("12:0:0");	
 		Collection<Argomento> argomenti = new LinkedList<Argomento>();
-		Map<Integer, Float> mapVotiGUI = new HashMap<Integer, Float>();
+		Map<Integer, Voto> mapVotiGUI = new HashMap<Integer, Voto>();
 		
 	try {
 			
@@ -87,7 +88,7 @@ public class TestCambioStatiCompito {
 				compito4 = controllerCompito.creaCompito(idClasse, idRegistroDocente, docenteController.getIdDocenteProva());
 				compito4.setInfo(sqlDate, oraInizio, oraFine, argomenti);
 				controllerCompito.cambiaStatoCompito(idClasse, idRegistroDocente, compito4.getID(), CompitoSvolto.getInstance());
-				mapVotiGUI.put(10, 5f);
+				mapVotiGUI.put(10, new Voto(5f));
 				controllerCompito.inserisciVoti(idClasse, idRegistroDocente, compito4.getID(), mapVotiGUI);
 				controllerCompito.cambiaStatoCompito(idClasse, idRegistroDocente, compito4.getID(), CompitoChiuso.getInstance());
 

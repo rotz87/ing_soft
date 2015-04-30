@@ -45,11 +45,19 @@ public class Voto implements java.lang.Comparable<Voto> {
 	
 	private domain.implementor.VotoImp implementor = new domain.implementor.VotoImp();
 	
+	/**
+	 *  
+	 */
+	public static final float MIN_VAL = 0f;
+	
+	public static final float MAX_VAL = 10.2f;
+	
 	public float getValore() {
 		return this._valore;
 	}
 	
 	public void setValore(float valore) {
+		valore = this.implementor.checkValore(valore);
 		this._valore = valore;
 	}
 	

@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
+import javax.management.RuntimeErrorException;
+
 import org.jgroups.protocols.DELAY;
 import org.joda.time.LocalDate;
 import org.springframework.hateoas.Link;
@@ -27,6 +29,7 @@ import presenter.resourceSupport.compito.ArgomentoRS;
 import presenter.resourceSupport.compito.CompitoInClasseRS;
 import presenter.resourceSupport.compito.CompitoInClasseStateRS;
 import presenter.resourceSupport.compito.StudenteCompitoRS;
+import presenter.resourceSupport.voto.VotoConverterFactory;
 import domain.error.DomainCheckedException;
 import domain.error.ErrorMessage;
 import domain.model.Argomento;
@@ -250,7 +253,11 @@ public class CompitoInClassePresenter {
 		   * 
 		   */
 		  for (Studente studente : assenze.keySet()) {
-			studentiCompito.add(new StudenteCompitoRS(studente, voti.get(studente), assenze.get(studente)));
+			try {
+				studentiCompito.add(new StudenteCompitoRS(studente, voti.get(studente), assenze.get(studente)));
+			} catch (DomainCheckedException e) {
+				throw new RuntimeException(ErrorMessage.VOTI_IRRECUPERABILI);
+			}
 		  }
 		  
 		  return studentiCompito;
@@ -261,13 +268,17 @@ public class CompitoInClassePresenter {
 	  public ResponseEntity<?> updateStudentiCompito(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse, @RequestBody StudenteCompitoRS[] studentiCompito) {
 		   
 		  CompitoInClasseController compitoInClasseController;
-		  Map<Integer, Float> mapVoti;
+		  Map<Integer, Voto> mapVoti;
 		  
 		  compitoInClasseController = new CompitoInClasseController();
-		  mapVoti = new HashMap<Integer, Float>();
+		  mapVoti = new HashMap<Integer, Voto>();
 		  
 		  for(StudenteCompitoRS studenteConpitoRS : studentiCompito){
-			  mapVoti.put(studenteConpitoRS.getIdStudente(), studenteConpitoRS.getVoto());
+			  try {
+				mapVoti.put(studenteConpitoRS.getIdStudente(), studenteConpitoRS.getVoto().takeVoto());
+			} catch (DomainCheckedException e) {
+				throw new RuntimeException(ErrorMessage.VOTI_NON_INSERIBILI);
+			}
 		  }
 		  
 		  compitoInClasseController.inserisciVoti(idClasse, idRegistroDocente, idCompitoInClasse, mapVoti);
@@ -278,4 +289,5 @@ public class CompitoInClassePresenter {
 		  
 		  return new ResponseEntity<>(null, httpHeaders, httpStatus);
 	  }
+	  
 }

@@ -29,5 +29,6 @@ public class ErrorMessage {
 	public static final String VOTI_UNLOADED = "Impossibile caricare i voti";
 	public static final String DATA_WRONG = "La data non è corretta";
 	public static final String COMPITO_NON_ELIMINABILE = "Impossibile eliminare il compito";
+	public static final String CONVERTER_UNISTANZIABLE = "Impossibile instanziare il converter";
 
 }

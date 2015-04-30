@@ -21,7 +21,9 @@ import presenter.resourceSupport.compito.ArgomentoRS;
 import presenter.resourceSupport.medie.MedieStretegyRS;
 import presenter.resourceSupport.medie.ParametriMedieRS;
 import presenter.resourceSupport.medie.StudenteMedieRS;
+import presenter.resourceSupport.voto.VotoConverterFactory;
 import domain.error.DomainCheckedException;
+import domain.error.ErrorMessage;
 import domain.model.Argomento;
 import domain.model.RegistroDocente;
 import domain.model.Studente;
@@ -105,4 +107,5 @@ public class RegistroDocentePresenter {
 
 		  return strategie;
 	  }
+
 }

@@ -9,6 +9,7 @@ import org.orm.PersistentException;
 
 import controller.CompitoInClasseController;
 import sviluppo.Stampa;
+import domain.model.Voto;
 import domain.model.compitoInClasse.CompitoInClasse;
 import domain.model.compitoInClasse.CompitoInClasseCriteria;
 
@@ -27,14 +28,14 @@ public class TestInserisciVoti {
 //	int[] idVoti = {10,80,90};
 //	int[] idVoti = {1,8,9};
 	byte[] voti = {1,8,9};
-	Map<Integer, Float> mapVoti;
+	Map<Integer, Voto> mapVoti;
 	
 	controlloreCompito = new CompitoInClasseController();
-	mapVoti = new HashMap<Integer, Float>();
+	mapVoti = new HashMap<Integer, Voto>();
 	
-	mapVoti.put(new Integer(1), 1f);
-	mapVoti.put(new Integer(8), 8f);
-	mapVoti.put(new Integer(9), 9f);
+	mapVoti.put(new Integer(1), new Voto(5.55f));
+	mapVoti.put(new Integer(8), new Voto(8.88f));
+	mapVoti.put(new Integer(9), new Voto(9.99f));
 	
 	try {
 		

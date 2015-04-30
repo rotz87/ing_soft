@@ -18,6 +18,8 @@ public class ApiPath {
 	private static final String _ARGOMENTI_SVOLTI = "/argomentiSvolti";
 	private static final String _MEDIE = "/medie";
 	private static final String _STRATEGIE = "/strategie";
+	private static final String _FORMATO_VOTI = "/formatoVoti";
+	private static final String _VOTI = "/voti";
 	
 
 	// DA APPELLOPRESENTER
@@ -47,6 +49,9 @@ public class ApiPath {
 	
 	public static final String MEDIE = _MEDIE ;
 	public static final String STRATEGIE = _MEDIE+_STRATEGIE;
+	public static final String FORMATO_VOTI = _FORMATO_VOTI;
+	public static final String VOTI = _VOTI;
+	
 	
 	
 	

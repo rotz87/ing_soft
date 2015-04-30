@@ -82,14 +82,14 @@ public class CompitoInClasseController {
 	 * @param idStudenti
 	 * @param idVoti
 	 */
-	public void inserisciVoti(int idClasse, int idRegistroDocente, int idCompito, Map<Integer, Float> mapVotiGUI) {
+	public void inserisciVoti(int idClasse, int idRegistroDocente, int idCompito, Map<Integer, Voto> mapVotiGUI) {
 
 		StudenteCriteria studenteCriteria;
 		CompitoInClasse compito;
 		Map<Studente, Voto> mapVoti;
 		Studente studente;
 		Voto voto;
-		Float votoValore;
+//		Float votoValore;
 				
 		mapVoti = new HashMap<Studente, Voto>();
 		compito = getCompitoInCLasseByID(idCompito);
@@ -103,11 +103,17 @@ public class CompitoInClasseController {
 					studenteCriteria.ID.eq(idS);
 					studente = studenteCriteria.uniqueStudente();
 					
-					votoValore = mapVotiGUI.get(idS);
-					if(votoValore != null){//FIXME (in questo modo i voti che vengono successivamente rimessi a null non vengono considerati e rimane il voto vecchio)
-						voto = new Voto(votoValore);
+					voto = mapVotiGUI.get(idS);
+					if(voto != null){//FIXME (in questo modo i voti che vengono successivamente rimessi a null non vengono considerati e rimane il voto vecchio)
 						mapVoti.put(studente, voto);
 					}
+					
+					
+//					votoValore = mapVotiGUI.get(idS);
+//					if(votoValore != null){//FIXME (in questo modo i voti che vengono successivamente rimessi a null non vengono considerati e rimane il voto vecchio)
+//						voto = new Voto(votoValore);
+//						mapVoti.put(studente, voto);
+//					}
 				}
 				
 			} catch (PersistentException e) {

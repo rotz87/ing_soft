@@ -39,5 +39,8 @@ public class ErrorMessage {
 	public static final String DATA_FUTURE = "La data del compito non consente di eseguire l'operazione richiesta ";
 	public static final String STATO_UNISTANZIABLE = "Impossibile istanziare lo stato del compito";
 	public static final String STRATEGIA_UNISTANZIABLE = "Impossibile istanziare la strategia per la media";
+	public static final String VOTI_IRRECUPERABILI = "Impossibile recuperare i voti";
+	public static final String WRONG_FORMAT_VOTO = "Formato del voto errato";
+	public static final String FORMATO_IRRECUPERABILE = "Impossibile recuperare il formato dei voti";
 
 }
