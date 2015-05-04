@@ -3,7 +3,6 @@ package presenter.resourceSupport.voto;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
 
 import domain.error.ErrorMessage;
 import domain.model.Voto;
