@@ -5,14 +5,12 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
-import sviluppo.Stampa;
 import domain.error.ErrorMessage;
 import domain.model.Voto;
 
-public class VotoNumeroEIncrementiConverter implements VotoConverter {
+public class VotoNumeroEIncrementiConverter extends VotoConverter {
 	
 	static private VotoNumeroEIncrementiConverter instance;
-	private Map<Integer, Collection<String>> formato;
 
 	private VotoNumeroEIncrementiConverter() {
 		initializeFormato();
@@ -26,16 +24,14 @@ public class VotoNumeroEIncrementiConverter implements VotoConverter {
 	}
 
 	@Override
-	public Map<Integer, Collection<String>> getFormato() {
-		return formato;
-	}
-
-	@Override
 	public Voto getVoto(VotoRS votoRS) {
+
 		Voto voto;
 		float valoreVoto;
 		String cifra1;
 		String cifra2;
+		
+		super.checkFormatoCorretto(votoRS);
 		
 		cifra1 = votoRS.getLabel().get(1);
 		cifra2 = votoRS.getLabel().get(2);
@@ -101,8 +97,7 @@ public class VotoNumeroEIncrementiConverter implements VotoConverter {
 		point = valoreString.indexOf('.');
 		cifra1 = valoreString.substring(0, point);
 		
-		if(valoreVoto<0){
-			Stampa.stampaln("NumeroEIncrementiConverter passo per valoreVoto < 0");
+		if(valoreVoto<0f){
 			cifra1 = "NC";
 		}
 		
@@ -115,7 +110,7 @@ public class VotoNumeroEIncrementiConverter implements VotoConverter {
 	
 	
 	private void initializeFormato(){
-		this.formato = new HashMap<Integer, Collection<String>>();
+		super.formato = new HashMap<Integer, Collection<String>>();
 		Collection<String> primaCifra = new LinkedList<String>();
 		Collection<String> secondaCifra = new LinkedList<String>();
 
@@ -129,8 +124,8 @@ public class VotoNumeroEIncrementiConverter implements VotoConverter {
 		secondaCifra.add("+");
 		secondaCifra.add("++");
 		
-		this.formato.put(1, primaCifra);
-		this.formato.put(2, secondaCifra);
+		super.formato.put(1, primaCifra);
+		super.formato.put(2, secondaCifra);
 	}
 	
 }

@@ -48,7 +48,7 @@ public class Voto implements java.lang.Comparable<Voto> {
 	/**
 	 *  
 	 */
-	public static final float MIN_VAL = 0f;
+	public static final float MIN_VAL = -1f;
 	
 	public static final float MAX_VAL = 10.2f;
 	

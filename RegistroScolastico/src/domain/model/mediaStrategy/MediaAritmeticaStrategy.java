@@ -2,7 +2,6 @@ package domain.model.mediaStrategy;
 
 import java.util.Collection;
 
-import sviluppo.Stampa;
 import domain.model.Voto;
 
 public class MediaAritmeticaStrategy implements IMediaStrategy{
@@ -22,10 +21,8 @@ public class MediaAritmeticaStrategy implements IMediaStrategy{
 		if(count != 0){
 			media = acc / count;
 		}else{
-			Stampa.stampaln("passo dove c'è: media = -1");
 			media = -1;
 		}
-		Stampa.stampaln("In MediaAritmetica Strategy la media è: " +media);
 		rit = new Voto(); 
 		rit.setValore(media);
 		

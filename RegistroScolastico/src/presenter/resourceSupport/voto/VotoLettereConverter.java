@@ -8,10 +8,9 @@ import java.util.Map;
 import domain.error.ErrorMessage;
 import domain.model.Voto;
 
-public class VotoLettereConverter  implements VotoConverter {
+public class VotoLettereConverter  extends VotoConverter {
 	
 	static private VotoLettereConverter instance;
-	private Map<Integer, Collection<String>> formato;
 
 	private VotoLettereConverter() {
 		initializeFormato();
@@ -24,17 +23,16 @@ public class VotoLettereConverter  implements VotoConverter {
 		return VotoLettereConverter.instance;
 	}
 
-	@Override
-	public Map<Integer, Collection<String>> getFormato() {
-		return formato;
-	}
 
 	@Override
 	public Voto getVoto(VotoRS votoRS) {
+		Map<Integer, String> label;
 		Voto voto;
 		float valoreVoto;
 		String cifra1;
 		String cifra2;
+
+		super.checkFormatoCorretto(votoRS);
 		
 		cifra1 = votoRS.getLabel().get(1);
 		cifra2 = votoRS.getLabel().get(2);
@@ -96,8 +94,9 @@ public class VotoLettereConverter  implements VotoConverter {
 		
 		valoreVoto = voto.getValore();
 		
-		if(valoreVoto<0){
+		if(valoreVoto<0f){
 			cifra1 = "NC";
+			cifra2 = " ";
 		}
 		
 		if(valoreVoto>= 0 && valoreVoto <=4.5f){
@@ -158,7 +157,7 @@ public class VotoLettereConverter  implements VotoConverter {
 	}
 	
 	private void initializeFormato(){
-		this.formato = new HashMap<Integer, Collection<String>>();
+		super.formato = new HashMap<Integer, Collection<String>>();
 		Collection<String> primaCifra = new LinkedList<String>();
 		Collection<String> secondaCifra = new LinkedList<String>();
 
@@ -171,8 +170,8 @@ public class VotoLettereConverter  implements VotoConverter {
 		secondaCifra.add("+");
 		secondaCifra.add("++");
 		
-		this.formato.put(1, primaCifra);
-		this.formato.put(2, secondaCifra);
+		super.formato.put(1, primaCifra);
+		super.formato.put(2, secondaCifra);
 	}
 
 }

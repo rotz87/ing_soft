@@ -8,10 +8,10 @@ import java.util.Map;
 import domain.error.ErrorMessage;
 import domain.model.Voto;
 
-public class VotoDecimalConveter implements VotoConverter{
+public class VotoDecimalConveter extends VotoConverter{
 
 	static private VotoDecimalConveter instance;
-	private Map<Integer, Collection<String>> formato;
+	private String separatore = ".";
 	
 	private VotoDecimalConveter() {
 		initializeFormato();
@@ -23,33 +23,29 @@ public class VotoDecimalConveter implements VotoConverter{
 		}
 		return VotoDecimalConveter.instance;
 	}
-	
-	@Override
-	public Map<Integer, Collection<String>> getFormato() {
-
-		return formato;
-	}
 
 	@Override
 	public Voto getVoto(VotoRS votoRS) {
 		Map<Integer, String> label;
 		Float valore;
+		String cifra1;
+		String cifra2;
+		String sepECifra2;
 		float iPart;
 		float fPart;
+		int point; 
 		
-		boolean erroreFormato = false;
+		super.checkFormatoCorretto(votoRS);
+		
 		label = votoRS.getLabel();
-		for(Integer i : formato.keySet()){
-			if (!formato.get(i).contains(label.get(i))){
-				erroreFormato = true;
-			}
-		}
-		if(erroreFormato){
-			throw new RuntimeException(ErrorMessage.WRONG_FORMAT_VOTO);
-		}
 		
-		iPart = Float.valueOf(label.get(1));
-		fPart = Float.valueOf(label.get(2));
+		cifra1 = label.get(1);
+		sepECifra2 = label.get(2);
+		point = sepECifra2.indexOf('.');
+		cifra2 = sepECifra2.substring(point+1, point+2);
+		
+		iPart = Float.valueOf(cifra1);		
+		fPart = Float.valueOf(cifra2);
 		
 		valore = iPart + fPart/10;
 		
@@ -71,27 +67,34 @@ public class VotoDecimalConveter implements VotoConverter{
 		
 		cifra1 = valoreString.substring(0, point);
 		cifra2 = valoreString.substring(point+1, point+2);
+		if(valoreVoto<0f){
+			cifra1 = "NC";
+			cifra2 = " ";
+		}
 		
 		label = new HashMap<Integer, String>();
 		label.put(1, cifra1);
-		label.put(2, cifra2);
+		label.put(2, this.separatore+cifra2);
 		
 		votoRS.setLabel(label);
 		
 	}
 	
 	private void initializeFormato(){
-		this.formato = new HashMap<Integer, Collection<String>>();
+		super.formato = new HashMap<Integer, Collection<String>>();
 		Collection<String> primaCifra = new LinkedList<String>();
 		Collection<String> secondaCifra = new LinkedList<String>();
 		for(int i = 0; i<=10; i++){
 			primaCifra.add(String.valueOf(i));
 		}
 		for(int i = 0; i<=9; i++){
-			secondaCifra.add(String.valueOf(i));
+			secondaCifra.add(this.separatore+String.valueOf(i));
 		}
-		this.formato.put(1, primaCifra);
-		this.formato.put(2, secondaCifra);
+//		Collection<String> separatore = new LinkedList<String>();
+//		separatore.add(".");
+		super.formato.put(1, primaCifra);
+//		this.formato.put(2, separatore);
+		super.formato.put(2, secondaCifra);
 	}
 
 }
