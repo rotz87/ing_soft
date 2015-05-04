@@ -7,7 +7,9 @@ import domain.error.DomainCheckedException;
 
 public class VotoConverterFactory {
 	static private VotoConverterFactory instance;
-	private Class converterClass = VotoLettereConverter.class;
+	private Class converterClass = VotoNumeroEIncrementiConverter.class;
+//	private Class converterClass = VotoLettereConverter.class;
+//	private Class converterClass = VotoDecimalConveter.class;
 
 	private VotoConverterFactory() {
 	}

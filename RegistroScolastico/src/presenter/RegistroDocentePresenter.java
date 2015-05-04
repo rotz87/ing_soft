@@ -86,7 +86,11 @@ public class RegistroDocentePresenter {
 		  mapMedieScritto = medieController.getMedieScritto(idRegistroDocente, dataStrart, dataEnd);
 		  
 		  for(Studente studente : mapMedieScritto.keySet()){
-			  studenteMedieRS = new StudenteMedieRS(studente, mapMedieScritto.get(studente), null, null);
+			  try {
+				studenteMedieRS = new StudenteMedieRS(studente, mapMedieScritto.get(studente), null, null);
+			} catch (DomainCheckedException e) {
+				throw new RuntimeException(ErrorMessage.VOTI_IRRECUPERABILI);
+			}
 			  rit.add(studenteMedieRS);
 		  }
 

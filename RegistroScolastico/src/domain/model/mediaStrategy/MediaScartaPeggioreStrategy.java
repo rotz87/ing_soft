@@ -12,18 +12,18 @@ public class MediaScartaPeggioreStrategy implements IMediaStrategy {
 	@Override
 	public Voto calcolaMedia(Collection<Voto> voti) {
 		
-		Stampa.stampaln("sono in scarta il peggiore! ");
+//		Stampa.stampaln("sono in scarta il peggiore! ");
 		Voto min;
 		Collection<Voto> votos = new LinkedList<Voto>();
 		
-		Stampa.stampaln("size voti "+voti.size());
+//		Stampa.stampaln("size voti "+voti.size());
 		votos.addAll(voti);
 		if(votos.size()>1){
 			min = Collections.min(votos);
 			votos.remove(min);
 		}
 		
-		Stampa.stampaln("size votos "+votos.size());
+//		Stampa.stampaln("size votos "+votos.size());
 		
 		Voto rit;
 		float acc = 0;

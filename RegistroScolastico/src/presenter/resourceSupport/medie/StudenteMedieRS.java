@@ -1,13 +1,15 @@
 package presenter.resourceSupport.medie;
 
+import domain.error.DomainCheckedException;
 import domain.model.Studente;
 import domain.model.Voto;
 import presenter.resourceSupport.StudenteRS;
+import presenter.resourceSupport.voto.VotoRS;
 
 public class StudenteMedieRS extends StudenteRS {
-	private String mediaScritto = null;
-	private String mediaOrale = null;
-	private String mediaTotale = null;
+	private VotoRS mediaScritto = null;
+	private VotoRS mediaOrale = null;
+	private VotoRS mediaTotale = null;
 	
 	public StudenteMedieRS() {
 		super();
@@ -15,42 +17,42 @@ public class StudenteMedieRS extends StudenteRS {
 	
 	
 
-	public StudenteMedieRS(Studente studente, Voto mediaScritto, Voto mediaOrale, Voto mediaTotale) {
+	public StudenteMedieRS(Studente studente, Voto mediaScritto, Voto mediaOrale, Voto mediaTotale) throws DomainCheckedException {
 		super(studente);
 		if (mediaScritto != null){
-			this.mediaScritto = String.valueOf(mediaScritto.getValore());
+			this.mediaScritto = new VotoRS(mediaScritto);
 		}
 		if (mediaOrale != null){
-			this.mediaOrale = String.valueOf(mediaOrale.getValore());
+			this.mediaOrale = new VotoRS(mediaOrale);
 		}
 		if(mediaTotale != null){
-			this.mediaTotale = String.valueOf(mediaTotale.getValore());
+			this.mediaTotale = new VotoRS(mediaTotale);
 		}
 	}
 
 
 
-	public String getMediaScritto() {
+	public VotoRS getMediaScritto() {
 		return mediaScritto;
 	}
 
-	public void setMediaScritto(String mediaScritto) {
+	public void setMediaScritto(VotoRS mediaScritto) {
 		this.mediaScritto = mediaScritto;
 	}
 
-	public String getMediaOrale() {
+	public VotoRS getMediaOrale() {
 		return mediaOrale;
 	}
 
-	public void setMediaOrale(String mediaOrale) {
+	public void setMediaOrale(VotoRS mediaOrale) {
 		this.mediaOrale = mediaOrale;
 	}
 
-	public String getMediaTotale() {
+	public VotoRS getMediaTotale() {
 		return mediaTotale;
 	}
 
-	public void setMediaTotale(String mediaTotale) {
+	public void setMediaTotale(VotoRS mediaTotale) {
 		this.mediaTotale = mediaTotale;
 	}
 	

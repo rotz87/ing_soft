@@ -39,7 +39,7 @@ public class VotoLettereConverter  implements VotoConverter {
 		cifra1 = votoRS.getLabel().get(1);
 		cifra2 = votoRS.getLabel().get(2);
 		
-		switch (cifra1) {
+		switch (cifra1) {//FIXME sostituire lo switch con qualcosaltro
 		case "A":
 			valoreVoto = 10f;
 			break;
@@ -96,7 +96,11 @@ public class VotoLettereConverter  implements VotoConverter {
 		
 		valoreVoto = voto.getValore();
 		
-		if(valoreVoto <=4.5f){
+		if(valoreVoto<0){
+			cifra1 = "NC";
+		}
+		
+		if(valoreVoto>= 0 && valoreVoto <=4.5f){
 			cifra1 = "F";
 			if(valoreVoto<=3.6) cifra2 = "--";
 			if(valoreVoto>3.6 && valoreVoto<=3.8) cifra2 = "-";
