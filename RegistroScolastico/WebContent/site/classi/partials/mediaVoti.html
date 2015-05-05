@@ -1,5 +1,5 @@
 <meta charset="UTF-8">
-<h3 class="text-center"> Calcolo delle medie della classe {{nomeClasse}}</h3>
+<h3 class="text-center"> Calcolo delle medie di {{registroSelezionato.materia}} della classe {{nomeClasse}}</h3>
 <div class="col-xs-12">
 	<div class="row">
 		<form class="form-horizontal">
@@ -63,10 +63,10 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="studente in studentiMedieRS | orderBy:cognome">
+				<tr ng-repeat="studente in studentiMedieRS | orderBy : 'cognome' : false">
 					<td> {{studente.cognome}} </td>
 					<td> {{studente.nome}} </td>
-					<td> {{studente.mediaScritto}}	</td>
+					<td> {{studente.mediaScritto.stringa}}	</td>
 					<td> {{studente.mediaOrale}}	</td>
 					<td> {{studente.mediaTotale}} 	</td>
 					<td> <button type="button" ng-click="vediVoti(studente.idStudente)" class="btn btn-default btn-md btn-block col-xs-12 col-md-12" > Visualizza </button> </td>

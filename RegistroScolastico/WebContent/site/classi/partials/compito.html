@@ -53,7 +53,7 @@
 				<fieldset class="animaScomparsa" ng-show="stdChecked">
 				<div ng-show="erroreStudenti"> {{erroreStudenti}}</div>
 				<div ng-hide="erroreStudenti">
-					<div >mostra assenti <input class="" type="checkbox" ng-model="absChecked"></div>
+					<div> mostra assenti <input class="" type="checkbox" ng-model="absChecked"></div>
 						<table class="table table-hover table-striped">
 								<thead>
 									<tr>
@@ -72,18 +72,18 @@
 										<td class="rs-text-vmiddle">{{studente.cognome}}</td>
 										<td class="rs-text-vmiddle">{{studente.nome}}</td>
 										<td class="rs-text-vmiddle">
-										    <div class="input-group " ng-hide="studente.assente" >
- 										      <input type="text" ng-change="controllaVoto(studente)" class="form-control input-sm" ng-model="insiemeVotiStringa[studente.idStudente]" aria-label="..." ng-disabled="currState != statiPossibili.svolto" readonly="readonly"></input>
-										      
-										      <!-- ciclo sui voti ammissibili -->
-										      <div class="input-group-btn" ng-repeat="(votoCifra,votoArray) in votiPossibili ">
-										        <button type="button" class="btn btn-default dropdown-toggle btn-sm bottoneVoti" data-toggle="dropdown" aria-expanded="false" ng-disabled="currState != statiPossibili.svolto">
-											        {{studente.voto[votoCifra]}} 
+										<!-- input più bottoni per la selezione dei voti -->
+										    <div class="input-group " ng-hide="studente.assente" role="group" aria-label="...">
+ 										      <div class="input-group-btn">
+ 										      
+ 										      <div class="input-group-btn" ng-repeat="(votoCifra,votoArray) in votiPossibili" >
+										        <button type="button" id="dropdownMenu{{$index}}" class="btn btn-default dropdown-toggle btn-sm bottoneVoti" data-toggle="dropdown" aria-expanded="false" ng-disabled="currState != statiPossibili.svolto">
+											        {{studente.voto.label[votoCifra]}} 
 											        <span class="caret text-right" style="right:5px;">
 											        
 											        </span>
 										       	</button>
-										        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+										        <ul class="dropdown-menu " role="menu" aria-labelledby="dropdownMenu{{$index}}">
 										          <li ng-repeat="n in votoArray">
 										          	<a ng-click="inserisciVotoIndex(studente,votoCifra,n)" type="button">
 										          		{{n}}
@@ -91,8 +91,14 @@
 										          </li>
 										        </ul>
 										      </div><!-- /btn-group -->
+										      </div>
+ 										      <input type="text" ng-change="controllaVoto(studente)" class="form-control input-sm" ng-model="insiemeVotiStringa[studente.idStudente]" aria-label="..." ng-disabled="currState != statiPossibili.svolto" readonly="readonly"/>
+										      
+										      <!-- ciclo sui voti ammissibili -->
+										      
 										      <!-- fine ciclo sui voti ammissibili -->
 										    </div><!-- /input-group -->
+										    
 										    <div style="height: 30px; line-height: 30px" ng-show="studente.assente"> <em style="vertical-align:middle;">Lo studente risulta assente</em></div>
 										</td>
 										<td class="rs-text-vmiddle">

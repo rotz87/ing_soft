@@ -133,6 +133,12 @@ registroServices.factory('Compito',['$resource',
                    									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente', idCompito:'@idCompito'},
                    									method:'DELETE',
                    									isArray:false
+                   								},
+                   								'formatoVoti':{
+                   									url:host+'/RegistroScolastico/api/voti/formatoVoti',
+                   									params:{},
+                   									method:'GET',
+                   									isArray:false
                    								}
                    							});
                    				}]);

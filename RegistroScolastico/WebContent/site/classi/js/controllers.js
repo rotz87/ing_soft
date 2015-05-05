@@ -640,35 +640,27 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	}
 	
 	$scope.intervalloVoti = [0,1,2,3,4,5,6,7,8,9,10]
-	var votiAusiliari = {"1":["A","B","C","D","E"],"2":["+","++","-","--","1/2"]};
+//	var votiAusiliari = {"1":["A","B","C","D","E"],"2":["+","++","-","--","1/2"]};
+	
 	$scope.votiPossibili = {};
-	for (var key in votiAusiliari)
-	{
-		$scope.votiPossibili[key] = votiAusiliari[key];
-		$scope.votiPossibili[key] = votiAusiliari[key];
-	}
+	$scope.votiPossibili = Compito.formatoVoti();
+//	for (var key in votiAusiliari)
+//	{
+//		$scope.votiPossibili[key] = votiAusiliari[key];
+//		$scope.votiPossibili[key] = votiAusiliari[key];
+//	}
 	$scope.insiemeVotiStringa = {}
 	$scope.inserisciVoto = function(studente,voto){
 		studente.voto = voto;
 	}
 	$scope.inserisciVotoIndex = function(studente,votoIndex,votoValue){
-		// assumo che studente.voto sia un oggetto
-		// da togliere quando mi arriveranno i voti come oggetti
-		if (typeof studente.voto != typeof {})
-			{
-				var tmpVoto = studente.voto
-				studente.voto = {}
-				studente.voto[1] = tmpVoto; 
-			}
-		studente.voto[votoIndex] = votoValue
-		var votoStringa = "";
-		for (var i in studente.voto)
-		{
-			votoStringa = votoStringa.concat(studente.voto[i])
-		}
-		$scope.insiemeVotiStringa[studente.idStudente] = votoStringa;
-		console.log(studente)
-		console.log($scope.insiemeVotiStringa)
+		
+		/** assumo che studente.voto sia un oggetto 
+		 * voto = {label:{1:"A",2:"++"};
+		 */
+		studente.voto.label[votoIndex] = votoValue
+		
+		$scope.insiemeVotiStringa[studente.idStudente] = convertiVotoStringa(studente.voto.label)
 	}
 
 	$scope.ripristinaCompito = function(){
@@ -910,13 +902,22 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 					{idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito, data : $routeParams.data},
 					function(response,headers)
 					{	//successo
-						
 						if (response.length == 0)
 						{
-							$scope.erroreStudenti = "L'appello per la data inserita non esiste"
+							$scope.erroreStudenti = "L'appello per la data inserita non esiste," +
+													" oppure le presenze non sono atate prese"
 						}
 						else if (response.length > 0){
 							$scope.erroreStudenti = "";
+							
+							for(var index in response)
+							{
+								var studente = response[index];
+								if(response[index].voto){
+									$scope.insiemeVotiStringa[studente.idStudente] = convertiVotoStringa(studente.voto.label)
+								}
+								//$scope.insiemeVotiStringa[studente.idStudente] = aggiornaArrayVoti(voto.label)
+							}
 						}
 					},
 					function(response,headers)
@@ -1041,7 +1042,7 @@ registroControllers.controller('elencoRegistri',['$scope','rsClasse','$location'
 					$rootScope.registro.materia = $scope.registriDisponibili[key].materia
 				}
 			}
-			$location.path($location.path()+"registriDocente/"+idRegistro+"/compiti/");
+			$location.path($location.path()+"registriDocente/"+idRegistro+"/");
 		}
 	}
 }]);
@@ -1094,17 +1095,11 @@ registroControllers.controller('mediaVotiController',['$scope','rsClasse','media
 		erroreSistema($rootScope, response.data, true)
 	});
 	
-	parametriMediaVoti = angular.copy($routeParams)
-	parametriMediaVoti.strategia = "ciaoPippo"
+	var parametriMediaVoti = angular.copy($routeParams)
+	parametriMediaVoti.strategia = ""
 	parametriMediaVoti.dataInizio = new Date("2014-12-10").getTime();
 	parametriMediaVoti.dataFine= new Date("2014-12-17").getTime();
-
-//	mediaVoti.get(parametriMediaVoti,
-//				function(response,headers){
-//			$scope.studentiMedieRS = response;
-//		},function(response,headers){
-//			
-//		})
+	
 	$scope.calcolaMedia = function(){
 		parametriMediaVoti.strategia = $scope.form.strategia.className
 		parametriMediaVoti.dataInizio = $scope.form.dataInizio.getTime();
@@ -1113,8 +1108,15 @@ registroControllers.controller('mediaVotiController',['$scope','rsClasse','media
 		mediaVoti.get(parametriMediaVoti,
 				function(response,headers){
 			$scope.studentiMedieRS = response;
+			for (var index in $scope.studentiMedieRS){
+				var studente = $scope.studentiMedieRS[index]
+				if(studente.idStudente)
+				{
+					studente.mediaScritto.stringa = convertiVotoStringa(studente.mediaScritto.label)
+				}
+			}
 		},function(response,headers){
-			
+			erroreSistema($rootScope, response.data, true)
 		})
 	}
 	$scope.vediVoti = function(){
@@ -1141,6 +1143,12 @@ registroControllers.controller('mediaVotiController',['$scope','rsClasse','media
 				mediaVoti.get(parametriMediaVoti,
 				function(response,headers){
 			$scope.studentiMedieRS = response;
+			for (var index in $scope.studentiMedieRS){
+				var studente = $scope.studentiMedieRS[index]
+				if(studente.idStudente)
+				{
+					studente.mediaScritto.stringa = convertiVotoStringa(studente.mediaScritto.label)
+				}}
 		},function(response,headers){
 			
 		})
@@ -1150,7 +1158,17 @@ registroControllers.controller('mediaVotiController',['$scope','rsClasse','media
 				erroreSistema($rootScope, response.data, true)
 			}
 	);
-	
+	rsClasse.registriDocente($routeParams,
+			function(response,headers){
+		for (var i in response){
+			if (response[i].idRegistroDocente == $routeParams.idRegistroDocente)
+				{
+					$scope.registroSelezionato = response[i];
+				}
+		} 
+			},function(response,headers){
+				erroreSistema($rootScope, response.data, true)
+			})
 }]);
 
 registroControllers.controller('funzioniRegistroDocente',['$scope','rsClasse','$location','$rootScope','$routeParams',function($scope,rsClasse,$location,$rootScope,$routeParams){
@@ -1163,7 +1181,6 @@ registroControllers.controller('funzioniRegistroDocente',['$scope','rsClasse','$
 	};
 	rsClasse.registriDocente($routeParams,
 			function(response,headers){
-		console.log(response)
 		for (var i in response){
 			if (response[i].idRegistroDocente == $routeParams.idRegistroDocente)
 				{
@@ -1234,9 +1251,34 @@ function nonSupportato(mioScope,dati,attivaModal)
 function argomentiModal(mioScope){
 	mioScope.modal = {};
 	mioScope.modal.titolo = "Seleziona gli argomenti";
-	tipo = "primary";
+	var tipo = "primary";
 	mioScope.modal.colore = "modal-header-"+tipo;
 	mioScope.modal.bottone = "btn-"+tipo;
 	mioScope.modal.okButtonModal = function(){mioScope.confermaArgomenti()};
 	$("#myModal2").modal("show")
+}
+
+function convertiVotoStringa(label){
+	/**
+	 * la funzione viene richiamata ogni qual volta si deve visualizzare
+	 * un voto in formato stringa
+	 */
+	var votoStringa = "";
+	var j = 1;
+	for (var i in label)
+	{
+		votoStringa = votoStringa.concat(label[i]);
+		/**
+		 * inserisce uno spazio tra la prima e la seconda "cifra"
+		 * dei voti:
+		 * nel caso in cui il voto è espresso in decimali (0.00) allora 
+		 * lo spazio non viene inserito, lo stesso per le cifre successive
+		 */
+		if(label[j+1] && !(label[j+1].match(/./)) && ((j+1)==2))
+		{
+			votoStringa = votoStringa.concat(" ");
+		}
+		j++
+	}
+	return votoStringa;
 }
