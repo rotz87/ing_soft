@@ -59,9 +59,9 @@
 									<tr>
 										<th>#</th>
 										<th class="">
-											<a href="" ng-click="predicate = 'cognome'; reverse=!reverse">Cognome</a>
+											<a href="javascript:void(0);" ng-click="predicate = 'cognome'; reverse=!reverse">Cognome</a>
 										</th>
-										<th class=""><a href="" ng-click="predicate = 'nome'; reverse=!reverse">Nome</a></th>
+										<th class=""><a href="javascript:void(0);" ng-click="predicate = 'nome'; reverse=!reverse">Nome</a></th>
 										<th class="col-md-4 text-center">Voto</th>
 										<th class="text-center">Assente</th>
 									</tr>
@@ -85,7 +85,7 @@
 										       	</button>
 										        <ul class="dropdown-menu " role="menu" aria-labelledby="dropdownMenu{{$index}}">
 										          <li ng-repeat="n in votoArray">
-										          	<a ng-click="inserisciVotoIndex(studente,votoCifra,n)" type="button">
+										          	<a href="javascript:void(0);" ng-click="inserisciVotoIndex(studente,votoCifra,n)" type="button">
 										          		{{n}}
 										          	</a>
 										          </li>
