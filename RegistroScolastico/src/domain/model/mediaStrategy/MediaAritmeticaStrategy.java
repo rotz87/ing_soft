@@ -11,7 +11,7 @@ public class MediaAritmeticaStrategy implements IMediaStrategy{
 		Voto rit;
 		float acc = 0;
 		int count = 0;
-		float media;
+		Float media;
 		
 		for(Voto voto: voti){
 			acc +=voto.getValore();
@@ -21,7 +21,8 @@ public class MediaAritmeticaStrategy implements IMediaStrategy{
 		if(count != 0){
 			media = acc / count;
 		}else{
-			media = -1;
+//			media = null;
+			media = null;
 		}
 		rit = new Voto(); 
 		rit.setValore(media);

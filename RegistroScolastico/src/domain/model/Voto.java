@@ -19,7 +19,7 @@ public class Voto implements java.lang.Comparable<Voto> {
 	
 	private int ID;
 	
-	private float _valore;
+	private Float _valore;
 	
 	private void setID(int value) {
 		this.ID = value;
@@ -33,12 +33,12 @@ public class Voto implements java.lang.Comparable<Voto> {
 		return getID();
 	}
 	
-	private void set_valore(float value) {
+	private void set_valore(Float value) {
 		this._valore = value;
 		//commento
 	}
 	
-	private float get_valore() {
+	private Float get_valore() {
 		//commento
 		return _valore;
 	}
@@ -52,11 +52,11 @@ public class Voto implements java.lang.Comparable<Voto> {
 	
 	public static final float MAX_VAL = 10.2f;
 	
-	public float getValore() {
+	public Float getValore() {
 		return this._valore;
 	}
 	
-	public void setValore(float valore) {
+	public void setValore(Float valore) {
 		valore = this.implementor.checkValore(valore);
 		this._valore = valore;
 	}

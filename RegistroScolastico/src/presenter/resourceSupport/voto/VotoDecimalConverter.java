@@ -8,20 +8,20 @@ import java.util.Map;
 import domain.error.ErrorMessage;
 import domain.model.Voto;
 
-public class VotoDecimalConveter extends VotoConverter{
+public class VotoDecimalConverter extends VotoConverter{
 
-	static private VotoDecimalConveter instance;
+	static private VotoDecimalConverter instance;
 	private String separatore = ".";
 	
-	private VotoDecimalConveter() {
+	private VotoDecimalConverter() {
 		initializeFormato();
 	}
 	
-	static public VotoDecimalConveter getInstance() {
-		if (VotoDecimalConveter.instance == null) {
-			VotoDecimalConveter.instance = new VotoDecimalConveter();
+	static public VotoDecimalConverter getInstance() {
+		if (VotoDecimalConverter.instance == null) {
+			VotoDecimalConverter.instance = new VotoDecimalConverter();
 		}
-		return VotoDecimalConveter.instance;
+		return VotoDecimalConverter.instance;
 	}
 
 	@Override

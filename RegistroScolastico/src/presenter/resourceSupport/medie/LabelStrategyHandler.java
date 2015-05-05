@@ -1,7 +1,11 @@
-package domain.model.mediaStrategy;
+package presenter.resourceSupport.medie;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import domain.model.mediaStrategy.MediaAritmeticaStrategy;
+import domain.model.mediaStrategy.MediaScartaPeggioreStrategy;
+import domain.model.mediaStrategy.MediaStrategyFactory;
 
 public class LabelStrategyHandler {	
 	static private LabelStrategyHandler instance;

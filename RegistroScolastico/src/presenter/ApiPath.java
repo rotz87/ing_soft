@@ -20,6 +20,8 @@ public class ApiPath {
 	private static final String _STRATEGIE = "/strategie";
 	private static final String _FORMATO_VOTI = "/formatoVoti";
 	private static final String _VOTI = "/voti";
+	private static final String _VOTI_CONVERTERS = "/votiConverters";
+	private static final String _VOTI_CONVERTER_ATTUALE = "/attuale";
 	
 
 	// DA APPELLOPRESENTER
@@ -51,6 +53,9 @@ public class ApiPath {
 	public static final String STRATEGIE = _MEDIE+_STRATEGIE;
 	public static final String FORMATO_VOTI = _FORMATO_VOTI;
 	public static final String VOTI = _VOTI;
+	public static final String VOTI_CONVERTERS = _VOTI_CONVERTERS;
+	public static final  String VOTI_CONVERTER_ATTUALE = _VOTI_CONVERTERS + _VOTI_CONVERTER_ATTUALE;
+	
 	
 	
 	

@@ -1,17 +1,23 @@
 package presenter.resourceSupport.voto;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Set;
+
+import org.reflections.Configuration;
+import org.reflections.Reflections;
 
 import domain.error.ErrorMessage;
 import domain.error.DomainCheckedException;
+import domain.model.mediaStrategy.IMediaStrategy;
 
 public class VotoConverterFactory {
 	static private VotoConverterFactory instance;
 	
-//	private Class converterClass = VotoDecimalConveter.class;
-//	private Class converterClass = VotoLettereConverter.class;
-	private Class converterClass = VotoNumeroEIncrementiConverter.class;
+	private VotoConverter votoConverter = VotoDecimalConverter.getInstance();
 	
+
+	private final String packageName = VotoConverter.class.getPackage().getName();
+
 	private VotoConverterFactory() {
 	}
 
@@ -22,15 +28,38 @@ public class VotoConverterFactory {
 		return VotoConverterFactory.instance;
 	}
 	
-	public VotoConverter create() throws DomainCheckedException{
-		VotoConverter votoConverter;
-		votoConverter = null;
-		try {
-			votoConverter = (VotoConverter) converterClass.getDeclaredMethod("getInstance").invoke(null);
-		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
-			throw new DomainCheckedException(ErrorMessage.CONVERTER_UNISTANZIABLE);
-		}
-	return votoConverter;
+	public VotoConverter create(){
+		return votoConverter;
 	}
 
+	public Set<Class<? extends VotoConverter>> getVotoConverterSubclasses(){
+		
+	      Reflections reflections;
+	      Set<Class<? extends VotoConverter>> subTypes;
+	      
+	      reflections = new Reflections(this.packageName);
+	      subTypes = reflections.getSubTypesOf(VotoConverter.class);
+	      
+	      return subTypes;
+	      
+	}
+	
+	public void setConverterSubclass(String nomeConverter) throws DomainCheckedException{
+		Object obj = null;
+
+			try {
+				obj = Class.forName(this.packageName+"."+nomeConverter).getDeclaredMethod("getInstance").invoke(null);
+			} catch (IllegalAccessException | IllegalArgumentException
+					| InvocationTargetException | NoSuchMethodException
+					| SecurityException | ClassNotFoundException e) {
+				throw new DomainCheckedException(ErrorMessage.CONVERTER_UNISTANZIABLE); 
+			}
+
+		this.votoConverter = (VotoConverter)obj;
+	}
+	
+	public String classToString(Class<? extends VotoConverter> aClass){
+		return aClass.getSimpleName();
+	}
+	
 }

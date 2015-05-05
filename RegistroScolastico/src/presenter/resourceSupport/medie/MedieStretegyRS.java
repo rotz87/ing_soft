@@ -7,7 +7,6 @@ import org.springframework.hateoas.ResourceSupport;
 
 import domain.model.mediaStrategy.IMediaStrategy;
 import domain.model.mediaStrategy.MediaStrategyFactory;
-import domain.model.mediaStrategy.LabelStrategyHandler;
 
 public class MedieStretegyRS extends ResourceSupport {
 

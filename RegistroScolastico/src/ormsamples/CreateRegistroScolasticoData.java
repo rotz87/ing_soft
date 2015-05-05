@@ -72,7 +72,7 @@ public class CreateRegistroScolasticoData {
 			domain.model.compitoInClasse.CompitoInClasse ldomainmodelcompitoInClasseCompitoInClasse = new domain.model.compitoInClasse.CompitoInClasse();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : _argomentiEsaminati, _state
 			service.RSPersistentManager.instance().getSession().save(ldomainmodelcompitoInClasseCompitoInClasse);
 			
-			domain.model.Voto ldomainmodelVoto = new domain.model.Voto();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : _valore
+			domain.model.Voto ldomainmodelVoto = new domain.model.Voto();			// Initialize the properties of the persistent object here
 			service.RSPersistentManager.instance().getSession().save(ldomainmodelVoto);
 			
 			domain.model.Argomento ldomainmodelArgomento = new domain.model.Argomento();			// Initialize the properties of the persistent object here

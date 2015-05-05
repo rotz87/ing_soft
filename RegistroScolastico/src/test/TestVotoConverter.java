@@ -5,7 +5,7 @@ import java.util.Map;
 
 import domain.error.DomainCheckedException;
 import domain.model.Voto;
-import presenter.resourceSupport.voto.VotoDecimalConveter;
+import presenter.resourceSupport.voto.VotoDecimalConverter;
 import presenter.resourceSupport.voto.VotoLettereConverter;
 import presenter.resourceSupport.voto.VotoNumeroEIncrementiConverter;
 import presenter.resourceSupport.voto.VotoRS;
@@ -22,7 +22,7 @@ public class TestVotoConverter {
 //		
 //		Stampa.stampaln("parte decimale: " + parteDecimale);
 
-		Stampa.stampaln("Formato decimal: "+ VotoDecimalConveter.getInstance().getFormato());
+		Stampa.stampaln("Formato decimal: "+ VotoDecimalConverter.getInstance().getFormato());
 		Map<Integer, String> labelDecimal = new HashMap<Integer, String>();
 		labelDecimal.put(1, "8");
 		labelDecimal.put(2, ".5");
@@ -30,7 +30,7 @@ public class TestVotoConverter {
 		VotoRS votoRSDecimal = new VotoRS();
 		votoRSDecimal.setLabel(labelDecimal);
 		
-		Voto votoDecimal = VotoDecimalConveter.getInstance().getVoto(votoRSDecimal);
+		Voto votoDecimal = VotoDecimalConverter.getInstance().getVoto(votoRSDecimal);
 		Stampa.stampaln("VotoRS decimal: " + votoRSDecimal.getLabel().get(1) + votoRSDecimal.getLabel().get(2));
 		Stampa.stampaln("valore: " + votoDecimal.getValore());
 		Stampa.stampaln();
