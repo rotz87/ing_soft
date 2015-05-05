@@ -9,7 +9,12 @@ var registroApp = angular.module('registroApp',[
 registroApp.config(["$locationProvider","$routeProvider",function($locationProvider,$routeProvider) 
 {
   $routeProvider
-  .when('/:idClasse/registroDiClasse/appelli/:idAppello/',{
+  .when('/impostazioni/',
+  {
+	  templateUrl:'partials/impostazioni.html',
+	  controller:'impostazioniController',
+	  title:'impostazioni'
+  }).when('/:idClasse/registroDiClasse/appelli/:idAppello/',{
 	  templateUrl: 'partials/appelloParziale.html',
 	  controller: 'faiAppello',
 	  title:'Fai l\'appello'

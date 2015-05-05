@@ -418,6 +418,7 @@ registroControllers.controller('popolamentoNavigazione', ['$scope', 'rsClasse', 
 		})
 		
 	})
+	
 	$scope.home = function(){
 		$location.path("/");
 		if ($rootScope.idClasse)
@@ -425,6 +426,11 @@ registroControllers.controller('popolamentoNavigazione', ['$scope', 'rsClasse', 
 		if ($rootScope.idAppello)
 			delete $rootScope.idAppello;
 	};
+	
+	$scope.vaiAImpostazioni = function(){
+		$location.path("/impostazioni")
+	}
+	
 }]).directive('registroScolasticoModal', function() {
 	  return {
 			transclude:true,
@@ -658,6 +664,11 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		/** assumo che studente.voto sia un oggetto 
 		 * voto = {label:{1:"A",2:"++"};
 		 */
+		if(!studente.voto)
+		{
+			studente.voto = {}
+			studente.voto.label = {}
+		}
 		studente.voto.label[votoIndex] = votoValue
 		
 		$scope.insiemeVotiStringa[studente.idStudente] = convertiVotoStringa(studente.voto.label)
@@ -889,8 +900,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	}
 	
 	$scope.tornaAlRegistro = function(){
-		$routeParams.idCompito = null;
-		$route.updateParams($routeParams)
+		$location.path("/"+$routeParams.idClasse+"/registriDocente/"+$routeParams.idRegistroDocente+"/compiti/")
 	}
 	
 	$scope.$watch("compitoInClasse.data",
@@ -1210,7 +1220,26 @@ registroControllers.controller('funzioniRegistroDocente',['$scope','rsClasse','$
 registroControllers.controller('menuSinistro',['$scope','rsClasse','$location','$rootScope','$routeParams',function($scope,rsClasse,$location,$rootScope,$routeParams){
 	//console.log($scope)
 }]);
-
+registroControllers.controller('impostazioniController',['$scope','votiConverters','$location','$rootScope','$routeParams',function($scope,votiConverters,$location,$rootScope,$routeParams){
+	console.log("eccomi - impostazioniController")
+	$scope.tipVoti = votiConverters.query()
+	$scope.currTip = votiConverters.get({},
+		function(response){
+		$scope.currTip = []
+		$scope.currTip[0] = response[0]
+		},
+		function(response,headers){
+			
+		}
+	)
+	$scope.aggiornaTipologiaVoti = function(){
+		console.log("invio di 'currTip' in corso "+ $scope.currTip)
+		votiConverters.aggiorna({},$scope.currTip)
+	}
+	$scope.selezionaTipologia = function(tipVoto){
+		$scope.currTip[0] = tipVoto
+	}
+}]);
 
 
 function gestisciMessaggio(mioScope,tipo,attivaModal)
@@ -1274,8 +1303,11 @@ function convertiVotoStringa(label){
 		 * nel caso in cui il voto è espresso in decimali (0.00) allora 
 		 * lo spazio non viene inserito, lo stesso per le cifre successive
 		 */
-		if(label[j+1] && !(label[j+1].match(/./)) && ((j+1)==2))
+		var myregp = new RegExp("^[.]{1}")
+		
+		if(label[j+1] && (!myregp.test(label[j+1])))
 		{
+			console.log(j+1)
 			votoStringa = votoStringa.concat(" ");
 		}
 		j++

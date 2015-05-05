@@ -159,7 +159,24 @@ registroServices.factory('mediaVoti',['$resource',
 			           								}
                      							});
 }]);
-
+registroServices.factory('votiConverters',['$resource',function($resource){
+	return $resource(host+'/RegistroScolastico/api/voti/votiConverters',null,{
+		'get':{
+			url: host+'/RegistroScolastico/api/voti/votiConverters/attuale/',
+			method:'GET',
+			isArray:true
+		},
+		'aggiorna':{
+			url: host+'/RegistroScolastico/api/voti/votiConverters/attuale/',
+			method:'PUT',
+			isArray:false
+		},
+		'query':{
+			method:'GET',
+			isArray:true
+		}
+	})
+}])
 /**
  * 
  *	http://10.175.51.88:8080/RegistroScolastico/api/classi/1/registriDocente/1/medie?strategia=CiaoLorè&dataInizio=1417388400000&dataFine=1419462000000

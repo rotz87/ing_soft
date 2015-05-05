@@ -5,15 +5,16 @@
 		<form class="form-horizontal">
 			<div class="form-group" >
 				<label class="control-label col-sm-2"> Strategia: </label>
-			    <div class="input-group col-sm-10" >
+				<div class="col-sm-4">
 			      <div class="input-group-btn">
-			        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" > {{form.strategia.label}} <span class="caret"></span></button>
+			        <button type="button" class="btn btn-default dropdown-toggle dropdown" data-toggle="dropdown" aria-expanded="false" > {{form.strategia.label}} <span class="caret"></span></button>
 			        <ul class="dropdown-menu dropdown-menu-left" role="menu">
-			          <li ng-repeat="strategiaMedia in tipiMedia"><a ng-click="impostaStrategia(strategiaMedia)">{{strategiaMedia.label}}</a></li>
+			          <li ng-repeat="strategiaMedia in tipiMedia"><a ng-click="impostaStrategia(strategiaMedia)" href="javascript:void(0)">{{strategiaMedia.label}}</a></li>
 			        </ul>
-			      </div><!-- /btn-group -->
 			    </div><!-- /input-group -->
+			    </div>
 			</div>
+<!-- 			
 			<div class="form-group">
 				<label class="control-label col-sm-2"> Altri parametri: </label>
 				<div class="input-group col-sm-2">
@@ -22,33 +23,46 @@
 			        <ul class="dropdown-menu dropdown-menu-left" role="menu">
 			          <li ng-repeat="n in [0,1,2,3]"><a ng-click="impostaAltriParametri(n)">{{n}}</a></li>
 			        </ul>
-			      </div><!-- /btn-group -->
+			      </div>	/btn-group
 				</div>
 			</div>
+			 -->
 			<div class="form-group">
-				<div class="col-sm-4">
+				<div class="col-sm-5">
 					<label class="control-label col-xs-5"> Da: </label>
 					<div class="input-group col-xs-5 bootstrapCalendario date">
-						<input id ="dataInizio" type="date" 
-						ng-model="form.dataInizio" readonly="readonly"/><span class="input-group-addon">
+						<input id ="dataInizio" type="date" class="form-control puntatoreSoloLettura"
+						ng-model="form.dataInizio" readonly 
+						title="clicca per cambiare la data"/>
+						<span class="input-group-addon" title="cambia data di inizio">
 									<i class="glyphicon glyphicon-calendar"></i>
 								</span>
 					</div>
 				</div>
-				<div class="col-sm-4">
-					<label class="control-label col-sm-5"> a </label>
+				<div class="col-sm-5">
+					<label class="control-label col-sm-2"> a: </label>
 					<div class="col-sm-6 input-group date bootstrapCalendario">
 						<input id="dataFine" type="date"
+						class="form-control puntatoreSoloLettura"
 						ng-model='form.dataFine'
-								readonly="readonly"/>
-								<span class="input-group-addon">
+								readonly
+								title="clicca per cambiare la data"
+								/>
+								<span class="input-group-addon" title="cambia data di fine">
 									<i class="glyphicon glyphicon-calendar"></i>
 								</span>
 					</div>
 				</div>
 			</div>
 		</form>
+		
 	</div>
+	<div class="row margin-bottom-lg">
+	<div class="col-sm-5 col-sm-offset-2">
+		<button type="button" class="btn btn-primary btn-md btn-block " ng-click="calcolaMedia()"> Calcola medie</button>
+	</div>
+	</div>
+	
 	<div class="row">
 		<table class="table table-responsive table-hover table-striped table-bordered">
 			<thead>
@@ -75,9 +89,7 @@
 		</table>
 	</div>
 	<div class="row">
-		<button type="button" class="btn btn-default btn-md btn-block col-xs-12 col-md-12" ng-click="calcolaMedia()"> Calcola medie</button>
+		
 	</div>
 	<br>
-	
-	{{pippo}}
 </div>

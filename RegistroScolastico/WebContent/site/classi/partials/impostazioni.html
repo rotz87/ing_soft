@@ -1,0 +1,21 @@
+<meta charset="UTF-8">
+<h3 class="text-center"> Impostazioni </h3>
+<div class="col-xs-12">
+	<div class="row">
+		<form class="form-inline">
+			<div class="form-group">
+				<label for="exampleInputName2">Tipo di voto: </label>
+				<div class="btn-group">
+    				<button class="btn btn-default dropdown-toggle" type="button" id="exampleInputName2" data-toggle="dropdown" aria-expanded="true">
+				    {{currTip[0]}}
+				    <span class="caret"></span>
+				  </button>
+				  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" >
+				    <li ng-repeat="tipVoto in tipVoti" role="presentation"><a role="menuitem" tabindex="-1" ng-href="javascript:void(0)" ng-click="selezionaTipologia(tipVoto)">{{tipVoto}}</a></li>
+				  </ul>
+				 </div>
+				 <button type="submit" class="btn btn-primary" ng-click="aggiornaTipologiaVoti()"> Cambia tipologia voto</button>
+			</div>
+		</form>
+	</div>
+</div>
