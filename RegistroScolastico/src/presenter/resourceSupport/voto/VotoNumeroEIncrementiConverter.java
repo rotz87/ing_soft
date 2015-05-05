@@ -26,7 +26,7 @@ public class VotoNumeroEIncrementiConverter extends VotoConverter {
 	public Voto getVoto(VotoRS votoRS) {
 
 		Voto voto;
-		float valoreVoto;
+		Float valoreVoto;
 		String cifra1;
 		String cifra2;
 		
@@ -35,7 +35,7 @@ public class VotoNumeroEIncrementiConverter extends VotoConverter {
 		cifra1 = votoRS.getLabel().get(1);
 		cifra2 = votoRS.getLabel().get(2);
 		
-		valoreVoto = Integer.valueOf(cifra1);
+		valoreVoto = (float)((int)Integer.valueOf(cifra1));
 		
 		switch (cifra2) {
 		case "++":
@@ -67,8 +67,8 @@ public class VotoNumeroEIncrementiConverter extends VotoConverter {
 
 	@Override
 	public void setLabel(VotoRS votoRS, Voto voto) {
-		float valoreVoto;
-		float parteDecimale;
+		Float valoreVoto;
+		Float parteDecimale;
 		String cifra1 = null;
 		String cifra2 = null;
 		String valoreString;
@@ -76,28 +76,31 @@ public class VotoNumeroEIncrementiConverter extends VotoConverter {
 		HashMap<Integer, String> label;
 		
 		valoreVoto = voto.getValore();
-		int votoInt = (int)valoreVoto;
-		parteDecimale = (10 * valoreVoto - 10 * votoInt)/10;
 		
-//		parteDecimale = valoreVoto - Float.valueOf(cifra1);
-		
-		if(parteDecimale <= 0.15f) cifra2 = " ";
-		if(parteDecimale > 0.15f && parteDecimale <=0.3f) cifra2 = "+";
-		if(parteDecimale > 0.3f && parteDecimale <=0.45f) cifra2 = "++";
-		if(parteDecimale > 0.45f && parteDecimale <=0.55f) cifra2 = "1/2";
-		if(parteDecimale > 0.55f){
-			valoreVoto += 1;
-			if(parteDecimale <=0.7f) cifra2 = "--";
-			if(parteDecimale >0.7 && parteDecimale <=0.85f) cifra2 = "-";
-			if(parteDecimale >0.85) cifra2 = " ";
+		if(valoreVoto != null){
+			int votoInt = (int)valoreVoto.floatValue();
+			parteDecimale = (10 * valoreVoto - 10 * votoInt)/10;
+			
+	//		parteDecimale = valoreVoto - Float.valueOf(cifra1);
+			
+			if(parteDecimale <= 0.15f) cifra2 = " ";
+			if(parteDecimale > 0.15f && parteDecimale <=0.3f) cifra2 = "+";
+			if(parteDecimale > 0.3f && parteDecimale <=0.45f) cifra2 = "++";
+			if(parteDecimale > 0.45f && parteDecimale <=0.55f) cifra2 = "1/2";
+			if(parteDecimale > 0.55f){
+				valoreVoto += 1;
+				if(parteDecimale <=0.7f) cifra2 = "--";
+				if(parteDecimale >0.7 && parteDecimale <=0.85f) cifra2 = "-";
+				if(parteDecimale >0.85) cifra2 = " ";
+			}
+			
+			valoreString = String.valueOf(valoreVoto);
+			point = valoreString.indexOf('.');
+			cifra1 = valoreString.substring(0, point);
 		}
-		
-		valoreString = String.valueOf(valoreVoto);
-		point = valoreString.indexOf('.');
-		cifra1 = valoreString.substring(0, point);
-		
-		if(valoreVoto<0f){
+		else{
 			cifra1 = "NC";
+			cifra2 = "";
 		}
 		
 		label = new HashMap<Integer, String>();

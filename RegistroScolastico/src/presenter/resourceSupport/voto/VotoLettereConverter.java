@@ -28,7 +28,7 @@ public class VotoLettereConverter  extends VotoConverter {
 	public Voto getVoto(VotoRS votoRS) {
 		Map<Integer, String> label;
 		Voto voto;
-		float valoreVoto;
+		Float valoreVoto;
 		String cifra1;
 		String cifra2;
 
@@ -87,65 +87,65 @@ public class VotoLettereConverter  extends VotoConverter {
 
 	@Override
 	public void setLabel(VotoRS votoRS, Voto voto) {
-		float valoreVoto;
+		Float valoreVoto;
 		String cifra1 = null;
 		String cifra2 = null;
 		HashMap<Integer, String> label;
 		
 		valoreVoto = voto.getValore();
 		
-		if(valoreVoto<0f){
+		if(valoreVoto == null){
 			cifra1 = "NC";
 			cifra2 = " ";
-		}
-		
-		if(valoreVoto>= 0 && valoreVoto <=4.5f){
-			cifra1 = "F";
-			if(valoreVoto<=3.6) cifra2 = "--";
-			if(valoreVoto>3.6 && valoreVoto<=3.8) cifra2 = "-";
-			if(valoreVoto>3.8 && valoreVoto<4.2) cifra2 = " ";
-			if(valoreVoto>=4.2 && valoreVoto<4.4) cifra2 = "+";
-			if(valoreVoto>=4.4 && valoreVoto<=4.5) cifra2 = "++";
-			
-		}
-		if(valoreVoto>4.5 && valoreVoto <=5.5){
-			cifra1 = "E";
-			if(valoreVoto<=4.6) cifra2 = "--";
-			if(valoreVoto>4.6 && valoreVoto<=4.8) cifra2 = "-";
-			if(valoreVoto>4.8 && valoreVoto<5.2) cifra2 = " ";
-			if(valoreVoto>=5.2 && valoreVoto<5.4) cifra2 = "+";
-			if(valoreVoto>=5.4 && valoreVoto<=5.5) cifra2 = "++";
-		}
-		if(valoreVoto>5.5 && valoreVoto <=6.6){
-			cifra1 = "D";
-			if(valoreVoto<=5.6) cifra2 = "--";
-			if(valoreVoto>5.6 && valoreVoto<=5.8) cifra2 = "-";
-			if(valoreVoto>5.8 && valoreVoto<6.2) cifra2 = " ";
-			if(valoreVoto>=6.2 && valoreVoto<6.4) cifra2 = "+";
-			if(valoreVoto>=6.4 && valoreVoto<=6.6) cifra2 = "++";
-		}
-		if(valoreVoto>6.7 && valoreVoto <=7.85){
-			cifra1 = "C";
-			if(valoreVoto<=6.8) cifra2 = "--";
-			if(valoreVoto>6.8 && valoreVoto<=7.1) cifra2 = "-";
-			if(valoreVoto>7.1 && valoreVoto<7.45) cifra2 = " ";
-			if(valoreVoto>=7.45 && valoreVoto<7.65) cifra2 = "+";
-			if(valoreVoto>=7.65 && valoreVoto<=7.85) cifra2 = "++";
-		}
-		if(valoreVoto>7.85 && valoreVoto <=9.33){
-			cifra1 = "B";
-			if(valoreVoto<=8.1) cifra2 = "--";
-			if(valoreVoto>8.1 && valoreVoto<=8.4) cifra2 = "-";
-			if(valoreVoto>8.4 && valoreVoto<8.85) cifra2 = " ";
-			if(valoreVoto>=8.85 && valoreVoto<9.05) cifra2 = "+";
-			if(valoreVoto>=9.05 && valoreVoto<=9.33) cifra2 = "++";
-		}
-		if(valoreVoto>9.33){
-			cifra1 = "A";
-			if(valoreVoto<=9.6) cifra2 = "--";
-			if(valoreVoto>9.6 && valoreVoto<=9.9) cifra2 = "-";
-			if(valoreVoto>9.9 && valoreVoto<10.1) cifra2 = " ";
-			if(valoreVoto>=10.1) cifra2 = "+";
+		}else{
+			if(valoreVoto>= 0 && valoreVoto <=4.5f){
+				cifra1 = "F";
+				if(valoreVoto<=3.6) cifra2 = "--";
+				if(valoreVoto>3.6 && valoreVoto<=3.8) cifra2 = "-";
+				if(valoreVoto>3.8 && valoreVoto<4.2) cifra2 = " ";
+				if(valoreVoto>=4.2 && valoreVoto<4.4) cifra2 = "+";
+				if(valoreVoto>=4.4 && valoreVoto<=4.5) cifra2 = "++";
+				
+			}
+			if(valoreVoto>4.5 && valoreVoto <=5.5){
+				cifra1 = "E";
+				if(valoreVoto<=4.6) cifra2 = "--";
+				if(valoreVoto>4.6 && valoreVoto<=4.8) cifra2 = "-";
+				if(valoreVoto>4.8 && valoreVoto<5.2) cifra2 = " ";
+				if(valoreVoto>=5.2 && valoreVoto<5.4) cifra2 = "+";
+				if(valoreVoto>=5.4 && valoreVoto<=5.5) cifra2 = "++";
+			}
+			if(valoreVoto>5.5 && valoreVoto <=6.6){
+				cifra1 = "D";
+				if(valoreVoto<=5.6) cifra2 = "--";
+				if(valoreVoto>5.6 && valoreVoto<=5.8) cifra2 = "-";
+				if(valoreVoto>5.8 && valoreVoto<6.2) cifra2 = " ";
+				if(valoreVoto>=6.2 && valoreVoto<6.4) cifra2 = "+";
+				if(valoreVoto>=6.4 && valoreVoto<=6.6) cifra2 = "++";
+			}
+			if(valoreVoto>6.7 && valoreVoto <=7.85){
+				cifra1 = "C";
+				if(valoreVoto<=6.8) cifra2 = "--";
+				if(valoreVoto>6.8 && valoreVoto<=7.1) cifra2 = "-";
+				if(valoreVoto>7.1 && valoreVoto<7.45) cifra2 = " ";
+				if(valoreVoto>=7.45 && valoreVoto<7.65) cifra2 = "+";
+				if(valoreVoto>=7.65 && valoreVoto<=7.85) cifra2 = "++";
+			}
+			if(valoreVoto>7.85 && valoreVoto <=9.33){
+				cifra1 = "B";
+				if(valoreVoto<=8.1) cifra2 = "--";
+				if(valoreVoto>8.1 && valoreVoto<=8.4) cifra2 = "-";
+				if(valoreVoto>8.4 && valoreVoto<8.85) cifra2 = " ";
+				if(valoreVoto>=8.85 && valoreVoto<9.05) cifra2 = "+";
+				if(valoreVoto>=9.05 && valoreVoto<=9.33) cifra2 = "++";
+			}
+			if(valoreVoto>9.33){
+				cifra1 = "A";
+				if(valoreVoto<=9.6) cifra2 = "--";
+				if(valoreVoto>9.6 && valoreVoto<=9.9) cifra2 = "-";
+				if(valoreVoto>9.9 && valoreVoto<10.1) cifra2 = " ";
+				if(valoreVoto>=10.1) cifra2 = "+";
+			}
 		}
 		
 		label = new HashMap<Integer, String>();

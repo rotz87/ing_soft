@@ -58,19 +58,23 @@ public class VotoDecimalConverter extends VotoConverter{
 		String cifra1;
 		String cifra2;
 		String valoreString;
-		float valoreVoto;
+		Float valoreVoto;
 		int point;
 		
 		valoreVoto = voto.getValore();
-		valoreString = String.valueOf(valoreVoto);
-		point = valoreString.indexOf('.');
 		
-		cifra1 = valoreString.substring(0, point);
-		cifra2 = valoreString.substring(point+1, point+2);
-		if(valoreVoto<0f){
+		if(valoreVoto != null){
+			valoreString = String.valueOf(valoreVoto);
+			point = valoreString.indexOf('.');
+			
+			cifra1 = valoreString.substring(0, point);
+			cifra2 = valoreString.substring(point+1, point+2);
+		}else{
 			cifra1 = "NC";
 			cifra2 = " ";
 		}
+
+
 		
 		label = new HashMap<Integer, String>();
 		label.put(1, cifra1);
