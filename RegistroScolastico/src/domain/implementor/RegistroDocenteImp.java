@@ -117,7 +117,7 @@ public class RegistroDocenteImp {
 			for(CompitoInClasse compito : registroDocente.getCompitiInClasse()){
 				lDataCompito = new LocalDate(compito.getData());
 				libVotiLI = studente.getLibrettoVoti().getLibrettoLineItem(compito);
-				if(libVotiLI != null && lDataCompito.isAfter(lDataInizio) && lDataCompito.isBefore(lDataFine)){
+				if(libVotiLI != null && (lDataCompito.isAfter(lDataInizio) || lDataCompito.isEqual(lDataInizio)) && (lDataCompito.isBefore(lDataFine) || lDataCompito.isEqual(lDataFine))){
 					collectionVoti.add(libVotiLI.getVoto());
 				}
 			}
@@ -142,6 +142,7 @@ public class RegistroDocenteImp {
 		 IMediaStrategy strategia = registroDocente.getMediaStrategy();
 		 Voto mediaScritto;
 		 Map<Studente, Voto> rit;
+
 		 
 		 rit = new HashMap<Studente, Voto>();
 		 mapVotiScritto = getVotiScritto(registroDocente, dataInizio, dataFine);

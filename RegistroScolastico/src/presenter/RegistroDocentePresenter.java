@@ -22,6 +22,7 @@ import presenter.resourceSupport.medie.MedieStretegyRS;
 import presenter.resourceSupport.medie.ParametriMedieRS;
 import presenter.resourceSupport.medie.StudenteMedieRS;
 import presenter.resourceSupport.voto.VotoConverterFactory;
+import sviluppo.Stampa;
 import domain.error.DomainCheckedException;
 import domain.error.ErrorMessage;
 import domain.model.Argomento;
@@ -62,11 +63,14 @@ public class RegistroDocentePresenter {
 		  StudenteMedieRS studenteMedieRS;
 		  MedieController medieController;
 		  IMediaStrategy strategy;
-		  Date dataStrart;
+		  Date dataStart;
 		  Date dataEnd;
 		  
-		  dataStrart = new Date(dataInizio);
+		  dataStart = new Date(dataInizio);
 		  dataEnd = new Date(dataFine);
+		  
+//		  Stampa.stampaln("dataStart: " + dataStart);
+//		  Stampa.stampaln("dataEnd: " + dataEnd);
 		  
 		  medieController = new MedieController();
 		  rit = new LinkedList<StudenteMedieRS>();
@@ -83,7 +87,7 @@ public class RegistroDocentePresenter {
 		}
 		  medieController.setStrategiaRegistro(idRegistroDocente, strategy);
 		  
-		  mapMedieScritto = medieController.getMedieScritto(idRegistroDocente, dataStrart, dataEnd);
+		  mapMedieScritto = medieController.getMedieScritto(idRegistroDocente, dataStart, dataEnd);
 		  
 		  for(Studente studente : mapMedieScritto.keySet()){
 			  try {

@@ -467,15 +467,6 @@ public class ResetDB {
 
 			registroRossiPrimaAstoria.getCompitiInClasse().add(compitoStoria1A);
 			
-//			Voto[] votos = new Voto[11];
-//			Voto voto;
-//			for (int i = 1; i<11; i++){
-//				voto = new Voto();
-//				voto.setValore(i);
-//				votos[i] = voto;
-//				RSPersistentManager.instance().getSession().save(voto);
-//			}
-			
 			Map<Studente, Voto> mapVoti;
 			mapVoti = new HashMap<Studente, Voto>();
 			
@@ -494,15 +485,44 @@ public class ResetDB {
 			argomenti.clear();
 			compitoStoria1A = new CompitoInClasse(registroRossiPrimaAstoria);
 			compitoStoria1A.setInfo(java.sql.Date.valueOf("2014-12-15"), java.sql.Time.valueOf("10:00:00"), java.sql.Time.valueOf("11:30:00"), argomenti);
-			
 
 			registroRossiPrimaAstoria.getCompitiInClasse().add(compitoStoria1A);
+			
+//			CREAZIONE DEL TERZO COMPITO IN CLASSE ED APPELLO RELATIVO
+			LocalDate data02_12_14 = new LocalDate(2014,12,2);
+			Appello appello_1A_02_12_14 = new Appello(data02_12_14);
+			regAssPrimaA.getAppelli().put( Calendario.getInstance().getDaysFromZero(appello_1A_02_12_14.getData()) , appello_1A_02_12_14);
+			appello_1A_02_12_14.setAssenzePrese(true);
+
+			Collection<Argomento> argomenti_3 = new LinkedList<Argomento>();
+			argomenti_3.clear();
+			argomenti_3.add(colonialismo);
+			argomenti_3.add(secondoDopoGuerra);
+			CompitoInClasse compitoStoria1A_3 = new CompitoInClasse(registroRossiPrimaAstoria);
+			compitoStoria1A_3.setInfo(java.sql.Date.valueOf("2014-12-02"), java.sql.Time.valueOf("9:00:00"), java.sql.Time.valueOf("11:00:00"), argomenti_3);
+			registroRossiPrimaAstoria.getCompitiInClasse().add(compitoStoria1A_3);
+			Map<Studente, Voto> mapVoti_3;
+			mapVoti_3 = new HashMap<Studente, Voto>();
+			mapVoti_3.put(pieroRusso, new Voto(4.4f));
+			mapVoti_3.put(marinoEsposito, new Voto(5.7f));
+			mapVoti_3.put(marioRomano, new Voto(6.5f));
+			mapVoti_3.put(davideDiSalvo, new Voto(8.2f));
+			mapVoti_3.put(ivoMarino, new Voto(7.5f));
+			mapVoti_3.put(leonardoRicci, new Voto(8.8f));
+			mapVoti_3.put(valentinoFarina, new Voto(6.2f));
+			mapVoti_3.put(roccoBenedetti, new Voto(2f));
+			mapVoti_3.put(antonioGuerra, new Voto(9.3f));
+			mapVoti_3.put(cristinaAngeli, new Voto(8.7f));
+						
+			
+			compitoStoria1A_3.setSvolto();
+			compitoStoria1A_3.inserisciVoti(mapVoti_3);
 			
 //			SALVATAGGIO DELLA SCUOLA SUL DATABASE -------------------------------------------------------------
 			RSPersistentManager.instance().getSession().save(scuola1);
 //          ---------------------------------------------------------------------------------------------------
 			
-//  		CREAZIONE ESALVATAGGIO DEI GIORNI FESTIVI
+//  		CREAZIONE E SALVATAGGIO DEI GIORNI FESTIVI
 			GiornoSettimanaleFestivo sabato = new GiornoSettimanaleFestivo(6);
 			GiornoSettimanaleFestivo domenica = new GiornoSettimanaleFestivo(7);
 			
