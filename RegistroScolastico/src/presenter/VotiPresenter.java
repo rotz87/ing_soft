@@ -45,9 +45,9 @@ public class VotiPresenter {
 	  }
 	  
 	  @RequestMapping(value = ApiPath.VOTI_CONVERTER_ATTUALE, method = RequestMethod.PUT)
-	  public ResponseEntity<?> setVotiConverterSubclass(@RequestBody String nomeConverter){
+	  public ResponseEntity<?> setVotiConverterSubclass(@RequestBody String[] nomeConverter){
 		  try {
-			VotoConverterFactory.getInstance().setConverterSubclass(nomeConverter);
+			VotoConverterFactory.getInstance().setConverterSubclass(nomeConverter[0]);
 		} catch (DomainCheckedException e) {
 			throw new RuntimeException(ErrorMessage.CONVERTER_UNISTANZIABLE);
 		}
@@ -59,8 +59,12 @@ public class VotiPresenter {
 	  }
 	  
 	  @RequestMapping(value = ApiPath.VOTI_CONVERTER_ATTUALE, method = RequestMethod.GET)
-	  public String getVotiConverterAttuale(){
-		  return VotoConverterFactory.getInstance().create().getClass().getSimpleName();
+	  public String[] getVotiConverterAttuale(){
+		  String[] array = new String[1];
+		  
+		  array[0] = VotoConverterFactory.getInstance().create().getClass().getSimpleName();
+		  
+		  return array;
 	  }
 	  
 }
