@@ -672,8 +672,6 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		 * voto = {label:{1:"A",2:"++"};
 		 */
 		var votoVuoto = $scope.votiPossibili[1][0]
-		console.log("il voto è una stringa vuota? ")
-		console.log(votoVuoto[1][0])
 
 		if(!studente.voto)
 		{
