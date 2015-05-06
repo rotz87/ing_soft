@@ -46,8 +46,14 @@
 			<nav  class="navbar navbar-default navbar-fixed-top ">
 			  <div class="container-fluid">
 			    <!-- Brand and toggle get grouped for better mobile display -->
-			    <div class="navbar-header" title="Torna all'elenco delle classi">
-			      <a class="navbar-brand" href="javascript:void(0);" ng-click="home()"> Logo</a>
+			    <div class="navbar-header" >
+			      <button type="button" title="Espandi menù" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+			        <span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			      </button>
+			      <a href="javascript:void(0);" title="Torna all'elenco delle classi" class="navbar-brand" ng-click="home()"> Logo</a>
 			    </div>
 			
 			    <!-- Collect the nav links, forms, and other content for toggling -->
@@ -63,19 +69,19 @@
 			          <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Appello {{selezioneAttuale.appello.data | date:"EEEE dd MMMM yyyy"}}<span class="caret"></span></a>
 			          <ul class="dropdown-menu" role="menu">
 			            <li ng-repeat="appello in elencoAppelli.appelli | orderBy:'data'" role="presentation" >
-			            	 <a href="#/{{idClasse}}/appelli/{{appello.idAppello}}/"> Appello {{appello.data | date:"EEEE dd MMMM yyyy"}}</a>
+			            	 <a href="javascript:void(0);" ng-click="vaiAllAppello(appello.idAppello)" title="cambia impostazioni"> Appello {{appello.data | date:"EEEE dd MMMM yyyy"}}</a>
 			            </li>
 			          </ul>
 			          
 			        </li>
 			      </ul>
 			      
-			  	<ul class="nav navbar-nav navbar-right cols-sm-2">
-			  	<li>
-				  	<a href="javascript:void(0);" ng-click="vaiAImpostazioni()" class="btn btn-lg" >
-				  		<span class="glyphicon glyphicon-cog"></span>
-				  	</a>
-			  	</li>
+			  	<ul class="nav navbar-nav navbar-right cols-xs-2">
+				  	<li>
+					  	<a href="javascript:void(0);" ng-click="vaiAImpostazioni()" class="btn btn-lg" >
+					  		<span class="glyphicon glyphicon-cog"></span>
+					  	</a>
+				  	</li>
 			  	</ul>
 			    </div><!-- /.navbar-collapse -->
 			  </div><!-- /.container-fluid -->

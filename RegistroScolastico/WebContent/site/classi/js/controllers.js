@@ -346,7 +346,7 @@ function retrieveObjectFromUrl($http, resourceUrl, destinazione){
 	return remoteObject;
 }
 
-registroControllers.controller('popolamentoNavigazione', ['$scope', 'rsClasse', '$q', '$rootScope', '$filter', '$location', function($scope, rsClasse, $q, $rootScope, $filter, $location){
+registroControllers.controller('popolamentoNavigazione', ['$scope', 'rsClasse', '$q', '$rootScope', '$filter', '$location','$routeParams', '$route', function($scope, rsClasse, $q, $rootScope, $filter, $location, $routeParams, $route){
 	$scope.$watch("idClasse",
 			function(newValue,oldValue){
 		//c'è un nuovo valore di idClasse
@@ -430,7 +430,14 @@ registroControllers.controller('popolamentoNavigazione', ['$scope', 'rsClasse', 
 	$scope.vaiAImpostazioni = function(){
 		$location.path("/impostazioni")
 	}
-	
+	$scope.vaiAllAppello = function(idAppello){
+		// funziona manipolando direttamente i parametri 
+		// della rotta "$route"
+		$routeParams.idAppello = idAppello
+		$route.updateParams($routeParams)
+		$route.reload()
+		
+	}
 }]).directive('registroScolasticoModal', function() {
 	  return {
 			transclude:true,
@@ -664,14 +671,31 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		/** assumo che studente.voto sia un oggetto 
 		 * voto = {label:{1:"A",2:"++"};
 		 */
+		var votoVuoto = $scope.votiPossibili
+		console.log("il voto è una stringa vuota? ")
+		console.log(votoVuoto[1][0])
+
 		if(!studente.voto)
 		{
 			studente.voto = {}
 			studente.voto.label = {}
 		}
-		studente.voto.label[votoIndex] = votoValue
-		
-		$scope.insiemeVotiStringa[studente.idStudente] = convertiVotoStringa(studente.voto.label)
+		if (votoValue == "")
+		{
+			console.log("voto nullo")
+			studente.voto.label[1] = "";
+			studente.voto.label[2] = "";
+			console.log(studente.voto.label)
+		}
+		else
+		{
+			studente.voto.label[votoIndex] = votoValue
+		}
+		if(votoValue)
+		{
+			console.log(studente.voto.label)
+			$scope.insiemeVotiStringa[studente.idStudente] = convertiVotoStringa(studente.voto.label)
+		}
 	}
 
 	$scope.ripristinaCompito = function(){
@@ -1129,8 +1153,9 @@ registroControllers.controller('mediaVotiController',['$scope','rsClasse','media
 			erroreSistema($rootScope, response.data, true)
 		})
 	}
-	$scope.vediVoti = function(){
-		nonSupportato($rootScope)
+	$scope.vediVoti = function(idStudente){
+		console.log("vediVoti")
+		nonSupportato($rootScope,null,true)
 	};
 	
 	$scope.impostaStrategia = function (stringaStrategia){
@@ -1296,6 +1321,10 @@ function convertiVotoStringa(label){
 	var j = 1;
 	for (var i in label)
 	{
+		if (label[1] != "" || label[i] != "" && label[j+1] != "")
+		{
+			
+		
 		votoStringa = votoStringa.concat(label[i]);
 		/**
 		 * inserisce uno spazio tra la prima e la seconda "cifra"
@@ -1310,7 +1339,9 @@ function convertiVotoStringa(label){
 			console.log(j+1)
 			votoStringa = votoStringa.concat(" ");
 		}
+		}
 		j++
+		
 	}
 	return votoStringa;
 }

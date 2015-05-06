@@ -100,7 +100,6 @@
 	display:inline-block;
 }
 
-
 .mostraNascondi_true{
     height:10px;
     border:1px solid #555;
@@ -158,6 +157,12 @@ body { padding-top: 70px; }
 	background-color:#fff !important;
 	cursor:pointer !important;
 }
+
+
+.opzioneVuota{
+	min-height:26px;
+}
+
 /*
 @brand-primary: darken(#428bca, 6.5%); // #337ab7
 @brand-success: #5cb85c;
