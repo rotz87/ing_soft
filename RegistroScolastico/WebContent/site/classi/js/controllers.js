@@ -671,7 +671,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		/** assumo che studente.voto sia un oggetto 
 		 * voto = {label:{1:"A",2:"++"};
 		 */
-		var votoVuoto = $scope.votiPossibili
+		var votoVuoto = $scope.votiPossibili[1][0]
 		console.log("il voto è una stringa vuota? ")
 		console.log(votoVuoto[1][0])
 
@@ -680,20 +680,20 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 			studente.voto = {}
 			studente.voto.label = {}
 		}
-		if (votoValue == "")
+		
+		// assumendo che votoVuoto[1][0] == ""
+		if ((votoValue == votoVuoto[1][0]) && (votoIndex == 1))
 		{
 			console.log("voto nullo")
 			studente.voto.label[1] = "";
 			studente.voto.label[2] = "";
-			console.log(studente.voto.label)
 		}
-		else
-		{
+		else{
 			studente.voto.label[votoIndex] = votoValue
 		}
+		
 		if(votoValue)
 		{
-			console.log(studente.voto.label)
 			$scope.insiemeVotiStringa[studente.idStudente] = convertiVotoStringa(studente.voto.label)
 		}
 	}
