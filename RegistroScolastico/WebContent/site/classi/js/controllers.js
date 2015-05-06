@@ -682,7 +682,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		// assumendo che votoVuoto[1][0] == ""
 		if ((votoValue == votoVuoto[1][0]) && (votoIndex == 1))
 		{
-			console.log("voto nullo")
+			console.log("voto nullo" + votoVuoto[1][0])
 			studente.voto.label[1] = "";
 			studente.voto.label[2] = "";
 		}
@@ -690,10 +690,8 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 			studente.voto.label[votoIndex] = votoValue
 		}
 		
-		if(votoValue)
-		{
 			$scope.insiemeVotiStringa[studente.idStudente] = convertiVotoStringa(studente.voto.label)
-		}
+			console.log("asd {"+ convertiVotoStringa(studente.voto.label) +"} bcc")
 	}
 
 	$scope.ripristinaCompito = function(){
@@ -1317,12 +1315,9 @@ function convertiVotoStringa(label){
 	 */
 	var votoStringa = "";
 	var j = 1;
+	console.log(label)
 	for (var i in label)
 	{
-		if (label[1] != "" || label[i] != "" && label[j+1] != "")
-		{
-			
-		
 		votoStringa = votoStringa.concat(label[i]);
 		/**
 		 * inserisce uno spazio tra la prima e la seconda "cifra"
@@ -1334,9 +1329,7 @@ function convertiVotoStringa(label){
 		
 		if(label[j+1] && (!myregp.test(label[j+1])))
 		{
-			console.log(j+1)
 			votoStringa = votoStringa.concat(" ");
-		}
 		}
 		j++
 		
