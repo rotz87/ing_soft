@@ -48,9 +48,9 @@ public class Voto implements java.lang.Comparable<Voto> {
 	/**
 	 *  
 	 */
-	public static final float MIN_VAL = -1f;
+	public static final Float MIN_VAL = 0f;
 	
-	public static final float MAX_VAL = 10.2f;
+	public static final Float MAX_VAL = 10.2f;
 	
 	public Float getValore() {
 		return this._valore;
@@ -65,7 +65,7 @@ public class Voto implements java.lang.Comparable<Voto> {
 		return this.implementor.compareTo(this, voto);
 	}
 	
-	public Voto(float valore) {
+	public Voto(Float valore) {
 		this.implementor.inizialize(this, valore);
 	}
 	

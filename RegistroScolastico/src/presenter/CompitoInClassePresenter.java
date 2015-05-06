@@ -30,6 +30,7 @@ import presenter.resourceSupport.compito.CompitoInClasseRS;
 import presenter.resourceSupport.compito.CompitoInClasseStateRS;
 import presenter.resourceSupport.compito.StudenteCompitoRS;
 import presenter.resourceSupport.voto.VotoConverterFactory;
+import sviluppo.Stampa;
 import domain.error.DomainCheckedException;
 import domain.error.ErrorMessage;
 import domain.model.Argomento;
@@ -272,12 +273,15 @@ public class CompitoInClassePresenter {
 		  
 		  compitoInClasseController = new CompitoInClasseController();
 		  mapVoti = new HashMap<Integer, Voto>();
-		  
 		  for(StudenteCompitoRS studenteConpitoRS : studentiCompito){
 			  try {
 				mapVoti.put(studenteConpitoRS.getIdStudente(), studenteConpitoRS.getVoto().takeVoto());
 			} catch (DomainCheckedException e) {
 				throw new RuntimeException(ErrorMessage.VOTI_NON_INSERIBILI);
+//			} catch (NullPointerException npe){
+//				Stampa.stampaln("null pointer exception");
+//				Stampa.stampaln("studenteConpitoRS.getVoto() " + studenteConpitoRS.getVoto());
+//				npe.printStackTrace();
 			}
 		  }
 		  

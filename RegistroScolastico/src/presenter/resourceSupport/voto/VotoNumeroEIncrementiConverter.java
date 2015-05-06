@@ -35,32 +35,36 @@ public class VotoNumeroEIncrementiConverter extends VotoConverter {
 		cifra1 = votoRS.getLabel().get(1);
 		cifra2 = votoRS.getLabel().get(2);
 		
-		valoreVoto = (float)((int)Integer.valueOf(cifra1));
+		if(cifra1 == super.cifraNulla){
+			valoreVoto = null;
+		}else{
 		
-		switch (cifra2) {
-		case "++":
-			valoreVoto += 0.4f;
-			break;
-		case "+":
-			valoreVoto += 0.2f;
-			break;
-		case " ":
-			
-			break;
-		case "1/2":
-			valoreVoto += 0.5f;
-			break;
-		case "-":
-			valoreVoto -= 0.2f;
-			break;
-		case "--":
-			valoreVoto -= 0.4f;
-			break;
-
-		default:
-			throw new RuntimeException(ErrorMessage.FORMAT_VOTI_WRONG);
+			valoreVoto = (float)((int)Integer.valueOf(cifra1));
+		
+			switch (cifra2) {
+			case "++":
+				valoreVoto += 0.4f;
+				break;
+			case "+":
+				valoreVoto += 0.2f;
+				break;
+			case cifraNulla:
+				
+				break;
+			case "1/2":
+				valoreVoto += 0.5f;
+				break;
+			case "-":
+				valoreVoto -= 0.2f;
+				break;
+			case "--":
+				valoreVoto -= 0.4f;
+				break;
+	
+			default:
+				throw new RuntimeException(ErrorMessage.FORMAT_VOTI_WRONG);
+			}
 		}
-		
 		voto = new Voto(valoreVoto);
 		return voto;
 	}
@@ -75,15 +79,19 @@ public class VotoNumeroEIncrementiConverter extends VotoConverter {
 		int point;
 		HashMap<Integer, String> label;
 		
-		valoreVoto = voto.getValore();
 		
-		if(valoreVoto != null){
+		
+		if(voto == null || voto.getValore() == null){
+				cifra1 = super.cifraNulla;
+				cifra2 = super.cifraNulla;	
+		}else{
+			valoreVoto = voto.getValore();
 			int votoInt = (int)valoreVoto.floatValue();
 			parteDecimale = (10 * valoreVoto - 10 * votoInt)/10;
 			
 	//		parteDecimale = valoreVoto - Float.valueOf(cifra1);
 			
-			if(parteDecimale <= 0.15f) cifra2 = " ";
+			if(parteDecimale <= 0.15f) cifra2 = super.cifraNulla;
 			if(parteDecimale > 0.15f && parteDecimale <=0.3f) cifra2 = "+";
 			if(parteDecimale > 0.3f && parteDecimale <=0.45f) cifra2 = "++";
 			if(parteDecimale > 0.45f && parteDecimale <=0.55f) cifra2 = "1/2";
@@ -91,17 +99,14 @@ public class VotoNumeroEIncrementiConverter extends VotoConverter {
 				valoreVoto += 1;
 				if(parteDecimale <=0.7f) cifra2 = "--";
 				if(parteDecimale >0.7 && parteDecimale <=0.85f) cifra2 = "-";
-				if(parteDecimale >0.85) cifra2 = " ";
+				if(parteDecimale >0.85) cifra2 = cifraNulla;
 			}
 			
 			valoreString = String.valueOf(valoreVoto);
 			point = valoreString.indexOf('.');
 			cifra1 = valoreString.substring(0, point);
 		}
-		else{
-			cifra1 = "NC";
-			cifra2 = "";
-		}
+		
 		
 		label = new HashMap<Integer, String>();
 		label.put(1, cifra1);
@@ -115,13 +120,14 @@ public class VotoNumeroEIncrementiConverter extends VotoConverter {
 		super.formato = new HashMap<Integer, Collection<String>>();
 		Collection<String> primaCifra = new LinkedList<String>();
 		Collection<String> secondaCifra = new LinkedList<String>();
-
+		
+		primaCifra.add(super.cifraNulla);
 		for(int i = 0; i<=10; i++){
 			primaCifra.add(String.valueOf(i));
 		}
 		secondaCifra.add("--");
 		secondaCifra.add("-");
-		secondaCifra.add(" ");
+		secondaCifra.add(super.cifraNulla);
 		secondaCifra.add("1/2");
 		secondaCifra.add("+");
 		secondaCifra.add("++");
