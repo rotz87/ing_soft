@@ -428,7 +428,12 @@ registroControllers.controller('popolamentoNavigazione', ['$scope', 'rsClasse', 
 	};
 	
 	$scope.vaiAImpostazioni = function(){
-		$location.path("/impostazioni")
+		// eliminazione parametri che vengono usati dalla navigation bar
+		delete $routeParams;
+		delete $rootScope.idClasse;
+		delete $rootScope.idAppello;
+		$location.path("/impostazioni/")
+		
 	}
 	$scope.vaiAllAppello = function(idAppello){
 		// funziona manipolando direttamente i parametri 
@@ -682,16 +687,13 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		// assumendo che votoVuoto[1][0] == ""
 		if ((votoValue == votoVuoto[1][0]) && (votoIndex == 1))
 		{
-			console.log("voto nullo" + votoVuoto[1][0])
 			studente.voto.label[1] = "";
 			studente.voto.label[2] = "";
 		}
 		else{
 			studente.voto.label[votoIndex] = votoValue
 		}
-		
-			$scope.insiemeVotiStringa[studente.idStudente] = convertiVotoStringa(studente.voto.label)
-			console.log("asd {"+ convertiVotoStringa(studente.voto.label) +"} bcc")
+		$scope.insiemeVotiStringa[studente.idStudente] = convertiVotoStringa(studente.voto.label)
 	}
 
 	$scope.ripristinaCompito = function(){
@@ -736,10 +738,15 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		var success = mioCompito.elimina($scope.eliminaCompitoAjax)
 	}
 	$scope.eliminaCompitoAjax = function(){
+		console.log($routeParams)
 		Compito.eliminaCompito($routeParams,
-				function(response,headers){
+				function(response,headers)
+				{
 					//successo
+					$('#myModal2').modal('hide');
+					$('.modal-backdrop').remove();
 					$scope.tornaAlRegistro()
+					
 				},function(response,headers){
 					//fallimento
 					erroreSistema($rootScope, response.data, true)
@@ -769,22 +776,21 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		var success = mioCompito.annullaRipristina();
 	}
 	$scope.controllaVoto = function(studente){
-		console.log(studente.voto);
 		/**
 		 * 
 		 * codice per il controllo del voto valido
 		 * 7+, 8- 8--
 		 * 7 1/2
 		 */
-		var myregp = new RegExp("^[0-9]{1,2}[,.]?[0-9]{0,2}?$")
-		var myregp2 = new RegExp("^[1]{1}[0-1]{1}$")
-		var myregp3 = new RegExp("^[0-9]{1}$")
-		var myregp4 = new RegExp("^[0-9]{1}")
-		
-		//console.log(myregp.exec(studente.voto))
-		console.log("è 10 o 11: " + myregp2.test(studente.voto))
-		console.log("è 0-9: " + myregp3.test(studente.voto))
-		console.log("è 7.[,]5: " + myregp3.test(studente.voto))
+//		var myregp = new RegExp("^[0-9]{1,2}[,.]?[0-9]{0,2}?$")
+//		var myregp2 = new RegExp("^[1]{1}[0-1]{1}$")
+//		var myregp3 = new RegExp("^[0-9]{1}$")
+//		var myregp4 = new RegExp("^[0-9]{1}")
+//		
+//		//console.log(myregp.exec(studente.voto))
+//		console.log("è 10 o 11: " + myregp2.test(studente.voto))
+//		console.log("è 0-9: " + myregp3.test(studente.voto))
+//		console.log("è 7.[,]5: " + myregp3.test(studente.voto))
 	};
 	$scope.salvaVoti = function(alProssimoStato,ajax)
 	{
@@ -799,7 +805,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 				tmpStudenti.push(stud);
 			}
 		}
-		console.log(tmpStudenti)
+		
 		Compito.inviaVoti({idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito}, tmpStudenti,
 				function (response,headers)
 				{
@@ -1150,7 +1156,7 @@ registroControllers.controller('mediaVotiController',['$scope','rsClasse','media
 		})
 	}
 	$scope.vediVoti = function(idStudente){
-		console.log("vediVoti")
+		
 		nonSupportato($rootScope,null,true)
 	};
 	
@@ -1164,7 +1170,7 @@ registroControllers.controller('mediaVotiController',['$scope','rsClasse','media
 	$scope.tipiMedia = mediaVoti.elencoStrategie(
 			$routeParams,
 			function(response,headers){
-				console.log(response)
+				
 				$scope.form.strategia = response[0];
 				parametriMediaVoti.strategia = $scope.form.strategia.className
 				$scope.form.dataInizio = new Date(calendario.inizioAnno);
@@ -1185,7 +1191,7 @@ registroControllers.controller('mediaVotiController',['$scope','rsClasse','media
 		})
 			},
 			function(response,headers){
-				console.log("errore")
+				//fallimento
 				erroreSistema($rootScope, response.data, true)
 			}
 	);
@@ -1203,7 +1209,7 @@ registroControllers.controller('mediaVotiController',['$scope','rsClasse','media
 }]);
 
 registroControllers.controller('funzioniRegistroDocente',['$scope','rsClasse','$location','$rootScope','$routeParams',function($scope,rsClasse,$location,$rootScope,$routeParams){
-	console.log($scope)
+	
 	$scope.vaiAlCalcoloMedie = function(){
 		$location.path($location.path()+"mediaVoti/")
 	};
@@ -1224,7 +1230,7 @@ registroControllers.controller('funzioniRegistroDocente',['$scope','rsClasse','$
 	rsClasse.elencoClassi($routeParams,
 			function(response)
 			{
-				console.log(response)
+				
 				for(var i in response){
 					if (response[i].idClasse == $routeParams.idClasse)
 					{
@@ -1234,6 +1240,7 @@ registroControllers.controller('funzioniRegistroDocente',['$scope','rsClasse','$
 				}
 			},
 			function(response,headers){
+				//fallimento
 				erroreSistema($rootScope, response.data, true)
 				})
 }]);
@@ -1242,7 +1249,7 @@ registroControllers.controller('menuSinistro',['$scope','rsClasse','$location','
 	//console.log($scope)
 }]);
 registroControllers.controller('impostazioniController',['$scope','votiConverters','$location','$rootScope','$routeParams',function($scope,votiConverters,$location,$rootScope,$routeParams){
-	console.log("eccomi - impostazioniController")
+	
 	$scope.tipVoti = votiConverters.query()
 	$scope.currTip = votiConverters.get({},
 		function(response){
@@ -1250,7 +1257,7 @@ registroControllers.controller('impostazioniController',['$scope','votiConverter
 		$scope.currTip[0] = response[0]
 		},
 		function(response,headers){
-			
+			erroreSistema($rootscope, response.data, attivaModal)
 		}
 	)
 	$scope.aggiornaTipologiaVoti = function(){
@@ -1315,7 +1322,6 @@ function convertiVotoStringa(label){
 	 */
 	var votoStringa = "";
 	var j = 1;
-	console.log(label)
 	for (var i in label)
 	{
 		votoStringa = votoStringa.concat(label[i]);
