@@ -470,13 +470,13 @@ public class ResetDB {
 			Map<Studente, Voto> mapVoti;
 			mapVoti = new HashMap<Studente, Voto>();
 			
-			mapVoti.put(pieroRusso, new Voto(4));
-			mapVoti.put(marioRomano, new Voto(8));
-			mapVoti.put(leonardoRicci, new Voto(9));
-			mapVoti.put(valentinoFarina, new Voto(7));
-			mapVoti.put(roccoBenedetti, new Voto(5));
-			mapVoti.put(antonioGuerra, new Voto(10));
-			mapVoti.put(cristinaAngeli, new Voto(6));
+			mapVoti.put(pieroRusso, new Voto(4f));
+			mapVoti.put(marioRomano, new Voto(8f));
+			mapVoti.put(leonardoRicci, new Voto(9f));
+			mapVoti.put(valentinoFarina, new Voto(7f));
+			mapVoti.put(roccoBenedetti, new Voto(5f));
+			mapVoti.put(antonioGuerra, new Voto(10f));
+			mapVoti.put(cristinaAngeli, new Voto(6f));
 			
 			compitoStoria1A.setSvolto();
 			compitoStoria1A.inserisciVoti(mapVoti);

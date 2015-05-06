@@ -8,7 +8,7 @@ import domain.model.Voto;
 
 public abstract class VotoConverter {
 	protected Map<Integer, Collection<String>> formato;
-
+	protected final String cifraNulla = "";
 	
 	
 	public abstract Voto getVoto(VotoRS votoRS);

@@ -104,16 +104,10 @@ public class CompitoInClasseController {
 					studente = studenteCriteria.uniqueStudente();
 					
 					voto = mapVotiGUI.get(idS);
-					if(voto != null){//FIXME (in questo modo i voti che vengono successivamente rimessi a null non vengono considerati e rimane il voto vecchio)
-						mapVoti.put(studente, voto);
-					}
-					
-					
-//					votoValore = mapVotiGUI.get(idS);
-//					if(votoValore != null){//FIXME (in questo modo i voti che vengono successivamente rimessi a null non vengono considerati e rimane il voto vecchio)
-//						voto = new Voto(votoValore);
-//						mapVoti.put(studente, voto);
+//					if(voto != null){//FIXME (in questo modo i voti che vengono successivamente rimessi a null non vengono considerati e rimane il voto vecchio)
+					mapVoti.put(studente, voto);
 //					}
+
 				}
 				
 			} catch (PersistentException e) {
@@ -134,9 +128,6 @@ public class CompitoInClasseController {
 					throw e;
 				}
 			} catch (PersistentException e) {
-				Stampa.stampaln("getCause: "+e.getCause());
-				Stampa.stampaln();
-	
 				throw new RuntimeException(ErrorMessage.VOTI_NON_INSERIBILI);
 			}
 					

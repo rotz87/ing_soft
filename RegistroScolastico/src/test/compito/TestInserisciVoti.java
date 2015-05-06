@@ -36,6 +36,7 @@ public class TestInserisciVoti {
 	mapVoti.put(new Integer(1), new Voto(5.55f));
 	mapVoti.put(new Integer(8), new Voto(8.88f));
 	mapVoti.put(new Integer(9), new Voto(9.99f));
+	mapVoti.put(new Integer(10), null);
 	
 	try {
 		

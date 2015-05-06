@@ -21,9 +21,9 @@ public class StudenteCompitoRS extends StudenteRS {
 		super(studente);
 		this.assente = assente;
 		this.voto = null;
-		if(voto!=null){
+//		if(voto!=null){
 			this.voto = new VotoRS(voto);
-		}
+//		}
 		
 		// XXX INSERIRE I LINKS
 	}

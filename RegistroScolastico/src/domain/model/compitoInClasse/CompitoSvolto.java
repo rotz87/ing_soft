@@ -40,12 +40,15 @@ public class CompitoSvolto extends CompitoInClasseStateImp {
 	public void chiudi(CompitoInClasse compitoInClasse) {
 		boolean almenoUnVotoInserito = false;
 		Set<Studente> studenti = compitoInClasse.getInsegnamento().getClasse().getStudenti();
-		Stampa.stampaln();
+		Voto voto;
 		for(Studente studente : studenti){
 			if(studente.getLibrettoVoti().esisteLineItem(compitoInClasse)){
-				almenoUnVotoInserito = studente.getLibrettoVoti().esisteLineItem(compitoInClasse);
+				voto = studente.getLibrettoVoti().getLibrettoLineItem(compitoInClasse).getVoto();
+				if(!(voto == null || voto.getValore() == null)){
+					almenoUnVotoInserito = studente.getLibrettoVoti().esisteLineItem(compitoInClasse);
+				}
 			}
-		}Stampa.stampaln();
+		}
 		if(almenoUnVotoInserito){
 			compitoInClasse.set_state(CompitoChiuso.getInstance());
 		}else{

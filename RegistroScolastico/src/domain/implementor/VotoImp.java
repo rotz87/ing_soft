@@ -15,14 +15,17 @@ public class VotoImp {
 		return thatFloat.compareTo(votoFloat);
 	}
 
-	public void inizialize(Voto voto, float valore) {
+	public void inizialize(Voto voto, Float valore) {
 		voto.setValore(valore);
 		
 	}
 
 	public void setVoto(Voto that, Voto voto) {
-		that.setValore(voto.getValore());
-		
+		if(voto == null){
+			that.setValore(null);
+		}else{
+			that.setValore(voto.getValore());
+		}
 	}
 
 	public Float checkValore(Float valore) {
