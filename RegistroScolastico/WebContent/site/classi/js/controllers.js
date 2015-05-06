@@ -671,7 +671,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		/** assumo che studente.voto sia un oggetto 
 		 * voto = {label:{1:"A",2:"++"};
 		 */
-		var votoVuoto = $scope.votiPossibili[1][0]
+		var votoVuoto = $scope.votiPossibili
 
 		if(!studente.voto)
 		{
