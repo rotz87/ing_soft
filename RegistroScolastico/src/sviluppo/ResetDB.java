@@ -530,6 +530,10 @@ public class ResetDB {
 			java.sql.Date d8Dic = new java.sql.Date(l8Dic.toDate().getTime());
 			GiornoFestivo ottoDic = new GiornoFestivo(d8Dic);
 			
+			LocalDate lVigilia = new LocalDate(2014,12,24);
+			java.sql.Date dataVigilia = new java.sql.Date(lVigilia.toDate().getTime());
+			GiornoFestivo vigilia = new GiornoFestivo(dataVigilia);
+			
 			LocalDate lDataNatale = new LocalDate(2014,12,25);
 			java.sql.Date dataNatale = new java.sql.Date(lDataNatale.toDate().getTime());
 			GiornoFestivo natale = new GiornoFestivo(dataNatale);
@@ -545,6 +549,7 @@ public class ResetDB {
 			RSPersistentManager.instance().getSession().save(sabato);
 			RSPersistentManager.instance().getSession().save(domenica);
 			RSPersistentManager.instance().getSession().save(ottoDic);
+			RSPersistentManager.instance().getSession().save(vigilia);
 			RSPersistentManager.instance().getSession().save(natale);
 			RSPersistentManager.instance().getSession().save(sStefano);
 			RSPersistentManager.instance().getSession().save(capodanno);
