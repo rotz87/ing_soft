@@ -1,12 +1,11 @@
 package presenter.resourceSupport.voto;
 
+import java.util.Map;
+
 import org.springframework.hateoas.ResourceSupport;
 
 import domain.error.DomainCheckedException;
 import domain.model.Voto;
-
-import java.util.Collection;
-import java.util.Map;
 
 public class VotoRS extends ResourceSupport {
 	private  Map<Integer, String> label;

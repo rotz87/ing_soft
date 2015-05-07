@@ -57,7 +57,7 @@ public class Voto implements java.lang.Comparable<Voto> {
 	}
 	
 	public void setValore(Float valore) {
-		valore = this.implementor.checkValore(valore);
+		valore = this.implementor.normalizzaValore(valore);
 		this._valore = valore;
 	}
 	

@@ -3,12 +3,10 @@ package presenter.resourceSupport.voto;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Set;
 
-import org.reflections.Configuration;
 import org.reflections.Reflections;
 
-import domain.error.ErrorMessage;
 import domain.error.DomainCheckedException;
-import domain.model.mediaStrategy.IMediaStrategy;
+import domain.error.ErrorMessage;
 
 public class VotoConverterFactory {
 	static private VotoConverterFactory instance;

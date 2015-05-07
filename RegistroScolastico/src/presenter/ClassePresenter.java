@@ -4,17 +4,6 @@ package presenter;
 import java.util.Collection;
 import java.util.LinkedList;
 
-
-
-
-
-
-
-
-
-
-
-import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 //import org.orm.PersistentException;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import controller.ClasseController;
-import controller.DocenteController;
 import presenter.resourceSupport.ClasseMenuRS;
 import presenter.resourceSupport.DateFestiveRS;
 import presenter.resourceSupport.RegistroDocenteRS;
 import presenter.resourceSupport.appello.StudenteAppelloRS;
+import controller.ClasseController;
+import controller.DocenteController;
 import domain.model.Calendario;
 import domain.model.Classe;
 import domain.model.Docente;
@@ -67,11 +56,7 @@ public class ClassePresenter {
 		
 		return classiMenu;
 	}
-	
-	/*FIXME Con il path /{idClasse}/studenti si intendono studenti generici (con tutti i dati), mentre
-	 * esso ritorna StudenteAppelloRS
-	*/
-//	@RequestMapping(value = "/{idClasse}/studenti", method = RequestMethod.GET)
+
 	@RequestMapping(value = ApiPath.CLASSE_STUDENTI, method = RequestMethod.GET)
 	public Collection<StudenteAppelloRS> getStudentiAppello(@PathVariable int idClasse) {
 		
@@ -91,35 +76,6 @@ public class ClassePresenter {
 		return studentiRS;
 	}
 	
-//	@RequestMapping(value = "/{idClasse}/dateFestive", method = RequestMethod.GET)
-//	@RequestMapping(value = ApiPath.CLASSE_FESTIVI, method = RequestMethod.GET)
-//	public Collection<Long> getDateFestive(@PathVariable int idClasse) {
-//		
-//		ClasseController classeController;
-//		Collection<LocalDate> date;
-//		Collection<Long> dateLong;
-//		
-//		date = null;
-//		classeController = new ClasseController();
-//		dateLong = new LinkedList<Long>();
-//		
-//		date = classeController.getDateFestive(idClasse);
-//		
-//		
-//		for (LocalDate data : date) {
-////			java.sql.Date sqlData = new java.sql.Date(data.toDate().getTime());
-////			dateLong.add(sqlData.getTime());
-//			
-////			DateTime dt = data.toDateTimeAtStartOfDay().plusHours(12);
-////			dateLong.add(dt.getMillis());
-//			
-//			dateLong.add(data.toDate().getTime());
-//			
-//		}
-//		
-//		return dateLong;
-//	}
-	
 	@RequestMapping(value = ApiPath.CLASSE_FESTIVI, method = RequestMethod.GET)
 	public DateFestiveRS getDateFestive(@PathVariable int idClasse) {
 		
@@ -138,7 +94,6 @@ public class ClassePresenter {
 		return dateFestiveRS;
 	}
 	
-//	@RequestMapping(value = "/{idClasse}/registriDocente", method = RequestMethod.GET)
 	@RequestMapping(value = ApiPath.CLASSE_REGISTRI_DOCENTE, method = RequestMethod.GET)
 	public Collection<RegistroDocenteRS> getRegistriDocente(@PathVariable int idClasse) {
 		ClasseController classeController;

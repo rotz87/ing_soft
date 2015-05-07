@@ -42,7 +42,7 @@ public class VotoLettereConverter  extends VotoConverter {
 			valoreVoto = null;
 		}else{
 		
-			switch (cifra1) {//FIXME sostituire lo switch con qualcosaltro
+			switch (cifra1) {
 			case "A":
 				valoreVoto = 10f;
 				break;

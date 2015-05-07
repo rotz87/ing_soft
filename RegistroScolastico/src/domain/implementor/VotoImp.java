@@ -28,7 +28,7 @@ public class VotoImp {
 		}
 	}
 
-	public Float checkValore(Float valore) {
+	public Float normalizzaValore(Float valore) {
 		if(valore != null){
 			if(valore > Voto.MAX_VAL){
 				valore = Voto.MAX_VAL;

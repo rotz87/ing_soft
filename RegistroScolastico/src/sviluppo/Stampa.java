@@ -1,7 +1,5 @@
 package sviluppo;
 
-import presenter.resourceSupport.compito.ArgomentoRS;
-import presenter.resourceSupport.compito.CompitoInClasseRS;
 import domain.model.Argomento;
 import domain.model.compitoInClasse.CompitoInClasse;
 

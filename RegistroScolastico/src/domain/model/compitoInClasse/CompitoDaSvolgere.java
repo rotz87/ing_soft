@@ -9,7 +9,6 @@ import org.joda.time.LocalDate;
 import domain.error.ErrorMessage;
 import domain.model.Argomento;
 import domain.model.Calendario;
-import domain.model.compitoCommand.CompitoCommand;
 import domain.model.compitoCommand.SetDaSvolgereCommand;
 
 public class CompitoDaSvolgere extends CompitoInClasseStateImp {
@@ -45,7 +44,6 @@ public class CompitoDaSvolgere extends CompitoInClasseStateImp {
 		data = compitoInClasse.getData();
 		lData = new LocalDate(data);
 		
-		// FIXME aggiungere altri controlli!!
 		if(lData.equals(Calendario.getInstance().getDataOdierna()) || lData.isBefore(Calendario.getInstance().getDataOdierna())){
 			compitoInClasse.set_state(CompitoSvolto.getInstance());
 		}else{

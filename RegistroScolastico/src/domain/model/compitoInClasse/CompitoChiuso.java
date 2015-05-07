@@ -1,7 +1,6 @@
 package domain.model.compitoInClasse;
 
 import domain.model.compitoCommand.ChiudiCommand;
-import domain.model.compitoCommand.CompitoCommand;
 
 public class CompitoChiuso extends CompitoInClasseStateImp {
 	

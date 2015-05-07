@@ -1,17 +1,12 @@
 package test.compito;
 
-import java.sql.Time;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.joda.time.LocalDate;
-import org.orm.PersistentException;
-
-import controller.CompitoInClasseController;
 import sviluppo.Stampa;
+import controller.CompitoInClasseController;
 import domain.model.Voto;
 import domain.model.compitoInClasse.CompitoInClasse;
-import domain.model.compitoInClasse.CompitoInClasseCriteria;
 
 public class TestInserisciVoti {
 

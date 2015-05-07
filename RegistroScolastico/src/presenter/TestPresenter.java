@@ -22,7 +22,7 @@ import domain.model.Voto;
 public class TestPresenter {
 	
 	@RequestMapping(value = "/provaMap", method = RequestMethod.GET)
-	public Map<Integer, Collection<String>> getMap(){// FIXME DA TOGLIERE
+	public Map<Integer, Collection<String>> getMap(){
 		Map<Integer, Collection<String>> rit = new HashMap<Integer, Collection<String>>();
 		Collection<String> collPippo = new LinkedList<String>();
 		collPippo.add("s1");
@@ -36,7 +36,7 @@ public class TestPresenter {
 	}
 	
 	@RequestMapping(value = "/provaMap", method = RequestMethod.POST)
-	public void putMap( @RequestBody Map<Integer, LinkedList<String>> collPippo){// FIXME DA TOGLIERE
+	public void putMap( @RequestBody Map<Integer, LinkedList<String>> collPippo){
 		Stampa.stampaln("colPippo: "+ collPippo);
 		
 		for (Integer i : collPippo.keySet())
@@ -50,7 +50,7 @@ public class TestPresenter {
 	}
 	
 	@RequestMapping(value = "/votoRS", method = RequestMethod.GET)
-	public VotoRS getVotoRS(){// FIXME DA TOGLIERE
+	public VotoRS getVotoRS(){
 		Voto voto = new Voto(10.7f);
 		VotoRS votoRS = null;
 		try {

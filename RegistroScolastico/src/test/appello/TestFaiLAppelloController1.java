@@ -1,20 +1,14 @@
 package test.appello;
 
-import java.util.Iterator;
-import java.util.Map.Entry;
-
 import org.orm.PersistentException;
 
-import controller.FaiAppelloController;
 import service.RSPersistentManager;
 import sviluppo.Stampa;
+import controller.FaiAppelloController;
 import domain.model.Appello;
 import domain.model.Assenza;
 import domain.model.Classe;
-import domain.model.ClasseCriteria;
 import domain.model.LibrettoAssenze;
-import domain.model.RegistroAssenze;
-import domain.model.RegistroAssenzeCriteria;
 import domain.model.Studente;
 
 public class TestFaiLAppelloController1 {

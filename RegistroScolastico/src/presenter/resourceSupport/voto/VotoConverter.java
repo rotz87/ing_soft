@@ -1,6 +1,5 @@
 package presenter.resourceSupport.voto;
 
-import java.util.Collection;
 import java.util.Map;
 
 import domain.error.ErrorMessage;

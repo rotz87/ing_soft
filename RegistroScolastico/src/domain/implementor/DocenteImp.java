@@ -5,9 +5,7 @@ import java.util.Set;
 
 import domain.model.Classe;
 import domain.model.Docente;
-import domain.model.LibrettoAssenze;
 import domain.model.RegistroDocente;
-import domain.model.Studente;
 
 public class DocenteImp {
 	private Set<Classe> classi = new HashSet<Classe>();

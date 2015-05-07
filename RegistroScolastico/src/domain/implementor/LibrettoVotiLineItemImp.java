@@ -2,7 +2,7 @@ package domain.implementor;
 
 import domain.model.LibrettoVotiLineItem;
 import domain.model.Voto;
-import domain.model.compitoInClasse.*;
+import domain.model.compitoInClasse.CompitoInClasse;
 
 public class LibrettoVotiLineItemImp {
 

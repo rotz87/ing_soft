@@ -1,10 +1,8 @@
 package domain.implementor;
 
-import sviluppo.Stampa;
-import domain.error.ErrorMessage;
 import domain.model.LibrettoVoti;
 import domain.model.LibrettoVotiLineItem;
-import domain.model.compitoInClasse.*;
+import domain.model.compitoInClasse.CompitoInClasse;
 
 public class LibrettoVotiImp {
 

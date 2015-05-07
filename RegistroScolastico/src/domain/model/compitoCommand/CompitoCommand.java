@@ -1,6 +1,6 @@
 package domain.model.compitoCommand;
 
-import domain.model.compitoInClasse.*;
+import domain.model.compitoInClasse.CompitoInClasse;
 
 public interface CompitoCommand {
 

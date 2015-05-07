@@ -1,22 +1,13 @@
 package test.testMedie;
 
 import java.sql.Date;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
 
-import org.orm.PersistentException;
-
-import controller.CompitoInClasseController;
-import controller.MedieController;
 import sviluppo.Stampa;
-import domain.error.ErrorMessage;
-import domain.model.compitoInClasse.CompitoInClasse;
-import domain.model.compitoInClasse.CompitoInClasseCriteria;
-import domain.model.mediaStrategy.MediaAritmeticaStrategy;
-import domain.model.RegistroDocente;
+import controller.MedieController;
 import domain.model.Studente;
 import domain.model.Voto;
+import domain.model.mediaStrategy.MediaAritmeticaStrategy;
 
 public class TestGetMedieScritto {
 	

@@ -1,8 +1,5 @@
 package presenter.resourceSupport.medie;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.hateoas.ResourceSupport;
 
 import domain.model.mediaStrategy.IMediaStrategy;

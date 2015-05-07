@@ -2,8 +2,8 @@ package test.appello;
 
 import org.orm.PersistentException;
 
-import controller.FaiAppelloController;
 import sviluppo.Stampa;
+import controller.FaiAppelloController;
 import domain.model.Classe;
 import domain.model.ClasseCriteria;
 import domain.model.RegistroAssenze;

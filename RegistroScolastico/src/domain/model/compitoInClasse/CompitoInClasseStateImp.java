@@ -1,9 +1,9 @@
 package domain.model.compitoInClasse;
 
-import org.apache.tomcat.jni.Error;
-
 import domain.error.ErrorMessage;
-import domain.model.*;
+import domain.model.Argomento;
+import domain.model.Studente;
+import domain.model.Voto;
 import domain.model.compitoCommand.CompitoCommand;
 
 public abstract class CompitoInClasseStateImp implements CompitoInClasseState {

@@ -1,6 +1,5 @@
 package domain.model.mediaStrategy;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Set;
 
 import org.reflections.Reflections;

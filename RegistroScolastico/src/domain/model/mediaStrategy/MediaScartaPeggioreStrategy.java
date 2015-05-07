@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 
-import sviluppo.Stampa;
 import domain.model.Voto;
 
 public class MediaScartaPeggioreStrategy implements IMediaStrategy {

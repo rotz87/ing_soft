@@ -1,8 +1,6 @@
 package domain.model.compitoInClasse;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
-import java.util.Map;
 
 import domain.error.DomainCheckedException;
 import domain.error.ErrorMessage;

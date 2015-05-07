@@ -3,13 +3,13 @@ package test;
 import java.util.HashMap;
 import java.util.Map;
 
-import domain.error.DomainCheckedException;
-import domain.model.Voto;
 import presenter.resourceSupport.voto.VotoDecimalConverter;
 import presenter.resourceSupport.voto.VotoLettereConverter;
 import presenter.resourceSupport.voto.VotoNumeroEIncrementiConverter;
 import presenter.resourceSupport.voto.VotoRS;
 import sviluppo.Stampa;
+import domain.error.DomainCheckedException;
+import domain.model.Voto;
 
 public class TestVotoConverter {
 

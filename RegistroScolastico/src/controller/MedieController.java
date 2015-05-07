@@ -3,11 +3,7 @@ package controller;
 import java.sql.Date;
 import java.util.Map;
 
-import org.orm.PersistentException;
-
-import domain.error.ErrorMessage;
 import domain.model.RegistroDocente;
-import domain.model.RegistroDocenteCriteria;
 import domain.model.Studente;
 import domain.model.Voto;
 import domain.model.mediaStrategy.IMediaStrategy;
@@ -29,22 +25,10 @@ public class MedieController {
 		registroDocente.setMediaStrategy(strategia);
 	}
 	
-	private RegistroDocente getRegistroDocenteById(int idRegistroDocente){// FIXME duplicato dello stesso metodo in CompitoInClasseController
-		RegistroDocenteCriteria regDocCriteria;
-
-		RegistroDocente registroDocente;
-
-		try{
-			regDocCriteria = new RegistroDocenteCriteria();
-
-		}catch (PersistentException e){
-			throw new  RuntimeException(ErrorMessage.REGISTRO_DOCENTE_UNLOADED);
-		}
-		
-		regDocCriteria.ID.eq(idRegistroDocente);
-		registroDocente = regDocCriteria.uniqueRegistroDocente();
-		
-		return registroDocente;
+	private RegistroDocente getRegistroDocenteById(int idRegistroDocente){
+		RegistroDocenteController registroDocenteController;
+		registroDocenteController = new RegistroDocenteController();
+		return registroDocenteController.getRegistroDocente(idRegistroDocente);
 	}
 	
 }

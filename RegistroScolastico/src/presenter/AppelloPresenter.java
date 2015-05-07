@@ -2,8 +2,8 @@ package presenter;
 
 
 import java.net.URI;
-import java.util.Collection;
 import java.sql.Date;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -19,11 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import controller.DocenteController;
-import controller.FaiAppelloController;
 import presenter.resourceSupport.appello.AppelliContainerRS;
 import presenter.resourceSupport.appello.AppelloRS;
 import presenter.resourceSupport.appello.AssentiContainerRS;
+import controller.DocenteController;
+import controller.FaiAppelloController;
 import domain.model.Appello;
 import domain.model.Assenza;
 import domain.model.Calendario;

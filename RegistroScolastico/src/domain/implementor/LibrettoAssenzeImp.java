@@ -6,7 +6,6 @@ import java.util.ListIterator;
 import domain.model.Appello;
 import domain.model.Assenza;
 import domain.model.LibrettoAssenze;
-import domain.model.Studente;
 
 public class LibrettoAssenzeImp {
 

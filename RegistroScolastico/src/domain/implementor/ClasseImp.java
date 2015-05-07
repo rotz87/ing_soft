@@ -1,12 +1,7 @@
 package domain.implementor;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import domain.model.Classe;
-import domain.model.LibrettoAssenze;
 import domain.model.RegistroAssenze;
-import domain.model.Studente;
 
 /**
  * Contiene il registro delle assenze.

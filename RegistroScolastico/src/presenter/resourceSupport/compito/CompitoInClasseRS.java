@@ -1,17 +1,12 @@
 package presenter.resourceSupport.compito;
 
 import java.util.Collection;
-import java.util.LinkedHashSet;
 import java.util.LinkedList;
 
-import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 
-import presenter.AppelloPresenter;
-import presenter.ClassePresenter;
 import presenter.CompitoInClassePresenter;
-import sviluppo.Stampa;
 import domain.model.Argomento;
 import domain.model.compitoInClasse.CompitoInClasse;
 

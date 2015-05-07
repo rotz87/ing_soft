@@ -2,7 +2,7 @@ package domain.model.mediaStrategy;
 
 import java.util.Collection;
 
-import domain.model.*;
+import domain.model.Voto;
 
 public interface IMediaStrategy {
 

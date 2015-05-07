@@ -8,21 +8,16 @@ import java.util.Map;
 import java.util.Set;
 
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import controller.MedieController;
-import controller.RegistroDocenteController;
-import presenter.resourceSupport.appello.AppelloRS;
 import presenter.resourceSupport.compito.ArgomentoRS;
 import presenter.resourceSupport.medie.MedieStretegyRS;
-import presenter.resourceSupport.medie.ParametriMedieRS;
 import presenter.resourceSupport.medie.StudenteMedieRS;
-import presenter.resourceSupport.voto.VotoConverterFactory;
-import sviluppo.Stampa;
+import controller.MedieController;
+import controller.RegistroDocenteController;
 import domain.error.DomainCheckedException;
 import domain.error.ErrorMessage;
 import domain.model.Argomento;
@@ -30,7 +25,6 @@ import domain.model.RegistroDocente;
 import domain.model.Studente;
 import domain.model.Voto;
 import domain.model.mediaStrategy.IMediaStrategy;
-import domain.model.mediaStrategy.MediaAritmeticaStrategy;
 import domain.model.mediaStrategy.MediaStrategyFactory;
 
 
@@ -68,23 +62,16 @@ public class RegistroDocentePresenter {
 		  
 		  dataStart = new Date(dataInizio);
 		  dataEnd = new Date(dataFine);
-		  
-//		  Stampa.stampaln("dataStart: " + dataStart);
-//		  Stampa.stampaln("dataEnd: " + dataEnd);
-		  
 		  medieController = new MedieController();
 		  rit = new LinkedList<StudenteMedieRS>();
 		  
-		  //chiamare la factory e settate la strategia
-		  strategy = null;// FIXME
-//		  strategia = "MediaAritmeticaStrategy";// FIXME
+		  strategy = null;
+
 		  try {
 			strategy = MediaStrategyFactory.getInstance().create(strategia);
-		} catch (DomainCheckedException e) {
-			// FIXME Auto-generated catch block
-//			e.printStackTrace();
+		  } catch (DomainCheckedException e) {
 			throw new RuntimeException(e.getMessage());
-		}
+		  }
 		  medieController.setStrategiaRegistro(idRegistroDocente, strategy);
 		  
 		  mapMedieScritto = medieController.getMedieScritto(idRegistroDocente, dataStart, dataEnd);

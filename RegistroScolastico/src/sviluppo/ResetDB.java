@@ -11,9 +11,23 @@ import org.orm.PersistentException;
 import org.orm.PersistentTransaction;
 
 import service.RSPersistentManager;
-import test.compito.TestCambioStatiCompito;
-import domain.model.*;
-import domain.model.compitoInClasse.*;
+import domain.model.Appello;
+import domain.model.Argomento;
+import domain.model.Assenza;
+import domain.model.Calendario;
+import domain.model.Classe;
+import domain.model.Docente;
+import domain.model.GiornoFestivo;
+import domain.model.GiornoSettimanaleFestivo;
+import domain.model.LibrettoAssenze;
+import domain.model.LibrettoVoti;
+import domain.model.Materia;
+import domain.model.RegistroAssenze;
+import domain.model.RegistroDocente;
+import domain.model.Scuola;
+import domain.model.Studente;
+import domain.model.Voto;
+import domain.model.compitoInClasse.CompitoInClasse;
 
 public class ResetDB {
 

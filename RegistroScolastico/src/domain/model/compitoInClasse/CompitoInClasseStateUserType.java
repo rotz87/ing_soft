@@ -4,14 +4,16 @@
  */
 package domain.model.compitoInClasse;
 
+import java.io.Serializable;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
+
+import org.hibernate.HibernateException;
 import org.hibernate.usertype.UserType;
-import org.hibernate.*;
 
 import domain.error.DomainCheckedException;
-
-import java.sql.*;
-import java.io.*;
-import java.lang.reflect.InvocationTargetException;
 
 public class CompitoInClasseStateUserType implements UserType {
 private static final int[] SQL_TYPES = {Types.VARCHAR};

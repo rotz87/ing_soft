@@ -6,9 +6,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
-import javax.management.RuntimeErrorException;
-
-import org.jgroups.protocols.DELAY;
 import org.joda.time.LocalDate;
 import org.springframework.hateoas.Link;
 import org.springframework.http.HttpHeaders;
@@ -21,16 +18,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import controller.CompitoInClasseController;
-import controller.DocenteController;
-import controller.FaiAppelloController;
 import presenter.resourceSupport.compito.ArgomentiContainerRS;
 import presenter.resourceSupport.compito.ArgomentoRS;
 import presenter.resourceSupport.compito.CompitoInClasseRS;
 import presenter.resourceSupport.compito.CompitoInClasseStateRS;
 import presenter.resourceSupport.compito.StudenteCompitoRS;
-import presenter.resourceSupport.voto.VotoConverterFactory;
-import sviluppo.Stampa;
+import controller.CompitoInClasseController;
+import controller.DocenteController;
+import controller.FaiAppelloController;
 import domain.error.DomainCheckedException;
 import domain.error.ErrorMessage;
 import domain.model.Argomento;
@@ -219,6 +214,7 @@ public class CompitoInClassePresenter {
 		  
 		  
 		  return new ArgomentiContainerRS(argomentiRS);
+
 		  
 	  }
 	  

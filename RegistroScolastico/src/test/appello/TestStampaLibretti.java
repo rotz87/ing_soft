@@ -1,12 +1,9 @@
 package test.appello;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import domain.model.Classe;
 import domain.model.ClasseCriteria;
-import domain.model.RegistroAssenze;
-import domain.model.RegistroAssenzeCriteria;
 
 public class TestStampaLibretti {
 

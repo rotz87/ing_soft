@@ -6,8 +6,6 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.apache.solr.common.util.Hash;
-
 import sviluppo.Stampa;
 
 public class TestContainVotoRS {

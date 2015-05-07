@@ -3,14 +3,10 @@ package controller;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import org.apache.cassandra.thrift.cassandraConstants;
-import org.hibernate.exception.DataException;
 import org.joda.time.LocalDate;
 import org.orm.PersistentException;
 
-import sviluppo.Stampa;
 import domain.error.ErrorMessage;
-import domain.model.Appello;
 import domain.model.Calendario;
 import domain.model.Classe;
 import domain.model.ClasseCriteria;

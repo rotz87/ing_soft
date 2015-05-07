@@ -1,18 +1,11 @@
 package test.compito;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
 
-import controller.ClasseController;
-import controller.CompitoInClasseController;
-import controller.DocenteController;
-import presenter.ClassePresenter;
 import sviluppo.Stampa;
+import controller.ClasseController;
+import controller.DocenteController;
 import domain.model.RegistroDocente;
-import domain.model.Studente;
-import domain.model.Voto;
 
 public class TestGetRegistriDocente {
 

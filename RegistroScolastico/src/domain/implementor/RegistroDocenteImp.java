@@ -4,34 +4,12 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
-
-
-
-
 import java.util.Map;
 import java.util.Set;
 
 import org.joda.time.LocalDate;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import sviluppo.Stampa;
 import domain.error.ErrorMessage;
 import domain.model.Argomento;
 import domain.model.Classe;
@@ -40,7 +18,7 @@ import domain.model.RegistroAssenze;
 import domain.model.RegistroDocente;
 import domain.model.Studente;
 import domain.model.Voto;
-import domain.model.compitoInClasse.*;
+import domain.model.compitoInClasse.CompitoInClasse;
 import domain.model.mediaStrategy.IMediaStrategy;
 
 public class RegistroDocenteImp {

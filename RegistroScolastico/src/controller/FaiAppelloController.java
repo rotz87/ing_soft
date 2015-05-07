@@ -6,13 +6,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.hibernate.criterion.Restrictions;
 import org.joda.time.LocalDate;
 import org.orm.PersistentException;
 import org.orm.PersistentTransaction;
 
 import service.RSPersistentManager;
-import sviluppo.Stampa;
 import domain.error.ErrorMessage;
 import domain.model.Appello;
 import domain.model.AppelloCriteria;
@@ -22,9 +20,7 @@ import domain.model.ClasseCriteria;
 import domain.model.Docente;
 import domain.model.DocenteCriteria;
 import domain.model.LibrettoAssenze;
-import domain.model.LibrettoAssenzeCriteria;
 import domain.model.RegistroAssenze;
-import domain.model.RegistroAssenzeCriteria;
 import domain.model.Studente;
 import domain.model.StudenteCriteria;
 

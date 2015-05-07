@@ -3,13 +3,10 @@ package test.compito;
 import java.sql.Time;
 
 import org.joda.time.LocalDate;
-import org.joda.time.LocalTime;
 import org.orm.PersistentException;
 
-import controller.CompitoInClasseController;
-import controller.DocenteController;
-import ormsamples.CreateRegistroScolasticoData;
 import sviluppo.Stampa;
+import controller.CompitoInClasseController;
 import domain.model.compitoInClasse.CompitoInClasse;
 import domain.model.compitoInClasse.CompitoInClasseCriteria;
 

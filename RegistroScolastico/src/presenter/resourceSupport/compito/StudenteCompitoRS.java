@@ -1,7 +1,5 @@
 package presenter.resourceSupport.compito;
 
-import org.springframework.hateoas.ResourceSupport;
-
 import presenter.resourceSupport.StudenteRS;
 import presenter.resourceSupport.voto.VotoRS;
 import domain.error.DomainCheckedException;

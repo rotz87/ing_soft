@@ -1,15 +1,9 @@
 package test.compito;
 
-import java.sql.Time;
-
-import org.joda.time.LocalDate;
-import org.orm.PersistentException;
-
-import controller.CompitoInClasseController;
 import sviluppo.Stampa;
+import controller.CompitoInClasseController;
 import domain.model.Argomento;
 import domain.model.compitoInClasse.CompitoInClasse;
-import domain.model.compitoInClasse.CompitoInClasseCriteria;
 
 public class TestCompitoArgomenti {
 

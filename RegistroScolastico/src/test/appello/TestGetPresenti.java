@@ -4,10 +4,9 @@ import java.util.Collection;
 
 import org.joda.time.LocalDate;
 
-import controller.FaiAppelloController;
 import sviluppo.Stampa;
+import controller.FaiAppelloController;
 import domain.model.Studente;
-import domain.model.StudenteCriteria;
 
 public class TestGetPresenti {
 

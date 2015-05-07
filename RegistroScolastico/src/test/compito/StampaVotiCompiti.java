@@ -1,22 +1,13 @@
 package test.compito;
 
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Map;
+import java.util.List;
 
 import org.orm.PersistentException;
 
-import controller.CompitoInClasseController;
 import sviluppo.Stampa;
-
-import java.util.List;
-import java.util.Map.Entry;
-
-import domain.model.compitoInClasse.CompitoInClasseCriteria;
 import domain.model.compitoInClasse.CompitoInClasse;
-import domain.model.Studente;
-import domain.model.Voto;
+import domain.model.compitoInClasse.CompitoInClasseCriteria;
 
 public class StampaVotiCompiti {
 

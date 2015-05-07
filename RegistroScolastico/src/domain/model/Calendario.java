@@ -7,8 +7,6 @@ import java.util.LinkedList;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
 
-import sviluppo.Stampa;
-
 public class Calendario {
 
 	private Collection<GiornoFestivo> giorniFestivi = new LinkedList<GiornoFestivo>();

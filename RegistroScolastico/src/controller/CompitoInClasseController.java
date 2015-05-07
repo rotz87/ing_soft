@@ -13,7 +13,6 @@ import org.orm.PersistentException;
 import org.orm.PersistentTransaction;
 
 import service.RSPersistentManager;
-import sviluppo.Stampa;
 import domain.error.DomainCheckedException;
 import domain.error.ErrorMessage;
 import domain.model.Appello;
@@ -21,19 +20,17 @@ import domain.model.Argomento;
 import domain.model.ArgomentoCriteria;
 import domain.model.Calendario;
 import domain.model.Classe;
-import domain.model.compitoCommand.CompitoCommand;
-import domain.model.compitoInClasse.CompitoInClasse;
-import domain.model.compitoInClasse.CompitoInClasseCriteria;
-import domain.model.compitoInClasse.CompitoInClasseState;
 import domain.model.ClasseCriteria;
 import domain.model.Docente;
 import domain.model.DocenteCriteria;
 import domain.model.RegistroDocente;
-import domain.model.RegistroDocenteCriteria;
 import domain.model.Studente;
 import domain.model.StudenteCriteria;
 import domain.model.Voto;
-import domain.model.VotoCriteria;
+import domain.model.compitoCommand.CompitoCommand;
+import domain.model.compitoInClasse.CompitoInClasse;
+import domain.model.compitoInClasse.CompitoInClasseCriteria;
+import domain.model.compitoInClasse.CompitoInClasseState;
 
 public class CompitoInClasseController {
 
@@ -102,12 +99,9 @@ public class CompitoInClasseController {
 					studenteCriteria = new StudenteCriteria();
 					studenteCriteria.ID.eq(idS);
 					studente = studenteCriteria.uniqueStudente();
-					
+		
 					voto = mapVotiGUI.get(idS);
-//					if(voto != null){//FIXME (in questo modo i voti che vengono successivamente rimessi a null non vengono considerati e rimane il voto vecchio)
 					mapVoti.put(studente, voto);
-//					}
-
 				}
 				
 			} catch (PersistentException e) {
@@ -411,21 +405,9 @@ public class CompitoInClasseController {
 	}
 	
 	private RegistroDocente getRegistroDocenteById(int idRegistroDocente){
-		RegistroDocenteCriteria regDocCriteria;
-
-		RegistroDocente registroDocente;
-
-		try{
-			regDocCriteria = new RegistroDocenteCriteria();
-
-		}catch (PersistentException e){
-			throw new  RuntimeException(ErrorMessage.REGISTRO_DOCENTE_UNLOADED);
-		}
-		
-		regDocCriteria.ID.eq(idRegistroDocente);
-		registroDocente = regDocCriteria.uniqueRegistroDocente();
-		
-		return registroDocente;
+		RegistroDocenteController registroDocenteController;
+		registroDocenteController = new RegistroDocenteController();
+		return registroDocenteController.getRegistroDocente(idRegistroDocente);
 	}
 	
 	private Docente getDocenteById(int idDocente){
