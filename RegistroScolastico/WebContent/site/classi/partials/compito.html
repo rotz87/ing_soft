@@ -4,16 +4,15 @@
 	
 	<form class="css-form form-horizontal" name="form" novalidate="true">
 		<fieldset>
-			<fieldset>
+			<fieldset class="margin-bottom-lg">
 			<legend> Dati compito 
 					<input class="mostraNascondi_{{datiChecked}} " type="checkbox" id="visibile" ng-model="datiChecked">
 			</legend>
 			<div class="animaScomparsa" ng-show="datiChecked">
 			<div class="form-group">
 				<label for="dataCompito" class="col-sm-2 control-label" >Data</label>
-				<div id="bootstrapCalendario" class="col-sm-8 input-group date">
-					<input id="dataCompito" type="date" 
-							ng-model="compitoInClasse.data" class="form-control pointer-cursor" 
+				<div id="bootstrapCalendario" class="col-sm-8 input-group date" ng-show="currState == statiPossibili.daSvolgere">
+					<input id="dataCompito" type="date" ng-model="compitoInClasse.data" class="form-control pointer-cursor" 
 							placeholder="gg/mm/aaaa" title="seleziona per modificare"
 							ng-disabled="currState != statiPossibili.daSvolgere" 
 							readonly="readonly"/>
@@ -21,6 +20,14 @@
 								<i class="glyphicon glyphicon-calendar"></i>
 							</span>
 				</div>
+				<div class="col-sm-8 date" ng-hide="currState == statiPossibili.daSvolgere">
+						<input id="dataCompito" type="date" ng-show="currState != statiPossibili.daSvolgere"
+							ng-model="compitoInClasse.data" class="form-control pointer-cursor" 
+							placeholder="gg/mm/aaaa" title="seleziona per modificare"
+							ng-disabled="currState != statiPossibili.daSvolgere" 
+							/>
+				</div>
+
 			</div>
 			<div class="form-group" ng-class="{'':form.oraInizioCompito.$untouched, 'has-error': form.oraInizioCompito.$invalid && !form.oraInizioCompito.$untouched, 'has-success': !form.oraInizioCompito.$invalid && !form.oraInizioCompito.$untouched}">
 				<label for="oraInizioCompito" class="col-sm-2 control-label" required> <span class="glyphicon glyphicon-warning-sign" ng-show="form.oraInizioCompito.$invalid && !form.oraInizioCompito.$untouched"> </span> Ora inizio </label>
@@ -37,7 +44,7 @@
 			</div>
 	
 			</fieldset>
-			<fieldset>
+			<fieldset class="margin-bottom-lg">
 				<legend> Argomenti <input class="mostraNascondi_{{argsChecked}} " type="checkbox" id="visibile" ng-model="argsChecked"></legend>
 				<fieldset class="animaScomparsa" ng-repeat="argomento in compitoInClasse.argomentiRS | orderBy:args_predicate" ng-show="argsChecked">
 					<div class="form-group">
@@ -48,7 +55,7 @@
 						<button class="btn btn-info" type="button" ng-click="selezionaArgomenti()" ng-disabled="currState != statiPossibili.daSvolgere"> Seleziona Argomenti</button><br>
 					</div>
 			</fieldset>
-			<fieldset>
+			<fieldset class="margin-bottom-lg" >
 				<legend> Voti <input class="mostraNascondi_{{stdChecked}}" type="checkbox" ng-model="stdChecked"></legend>
 				<fieldset class="animaScomparsa" ng-show="stdChecked">
 				<div ng-show="erroreStudenti"> {{erroreStudenti}}</div>
@@ -92,13 +99,13 @@
 										        </ul>
 										      </div><!-- /btn-group -->
 										      </div>
- 										      <input type="text" ng-change="controllaVoto(studente)" class="form-control input-sm" ng-model="insiemeVotiStringa[studente.idStudente]" aria-label="..." ng-disabled="currState != statiPossibili.svolto" readonly="readonly"/>
+ 										      <input type="text" class="form-control input-sm" ng-model="insiemeVotiStringa[studente.idStudente]" aria-label="..." ng-disabled="currState != statiPossibili.svolto" readonly="readonly"/>
 										      
 										      <!-- ciclo sui voti ammissibili -->
 										      
 										      <!-- fine ciclo sui voti ammissibili -->
 										    </div><!-- /input-group -->
-										    
+										    <span class="rs-color-danger" ng-show="erroreVoto[studente.idStudente]"> il voto inserito non è ammesso </span>
 										    <div style="height: 30px; line-height: 30px" ng-show="studente.assente"> <em style="vertical-align:middle;">Lo studente risulta assente</em></div>
 										</td>
 										<td class="rs-text-vmiddle">
@@ -121,18 +128,19 @@
 				<button class="btn btn-info" ng-click="salvaVoti()"> salva Voti</button><br>
 			</div>
 			 -->
-			</fieldset>
+			</fieldset >
 
-			<fieldset>
+			<fieldset class="margin-bottom-lg">
 			<legend >Azioni sullo stato corrente </legend>
+			<span ng-show="erroriVoto"> salvataggio disattivo: c'è almeno un errore nell'inserimento dei voti</span>
 			<div class="text-center">
 				<button class="btn btn-default" ng-click="annullaModificheCompito()" 	title="annulla le modifiche effettuate sui dati ed argomenti del compito" 			ng-disabled="compitiUguali" > Annulla modifiche</button>
-				<button class="btn btn-primary" ng-click="salvaCompito()" 				title="salva il compito con i dati inseriti" 										ng-disabled="compitiUguali && currState != statiPossibili.svolto" > Salva modifiche <span class="glyphicon glyphicon-save"></span></button>
-				<button class="btn btn-default" ng-click="tornaAlRegistro()" 			title="torna all'elenco dei compiti in classe senza salvare"								>Torna al registro</button>
+				<button class="btn btn-primary" ng-click="salvaCompito()" 				title="salva il compito con i dati inseriti" 										ng-disabled="compitiUguali && currState != statiPossibili.svolto || currState == statiPossibili.svolto && erroriVoto" > Salva modifiche <span class="glyphicon glyphicon-save"></span></button>
+				<button class="btn btn-default" ng-click="tornaAiCompiti()" 			title="torna all'elenco dei compiti in classe senza salvare"								>Torna ai compiti in classe</button>
 			</div>
 			</fieldset>
 			
-			<fieldset class="margin-bottom-sm">
+			<fieldset class="margin-bottom-lg">
 			<legend >Stato attuale compito: {{ statiAmmissibili[currState].label}}</legend>
 			<div class="text-center">
 				<button id="svolgiButton" 		name="svolgiButton"		class="btn btn-default" ng-click="cambioStatoCompito(salvaSvolgiCompito,true)" 		title="il compito verrà segnato come svolto, sarà quindi possibile inserire i voti ma non modificare gli altri dati"  	ng-disabled="currState != statiPossibili.daSvolgere || dataFissata > calendario.oggi"> 	Svolgi </button>
