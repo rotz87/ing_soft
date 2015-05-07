@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import presenter.resourceSupport.voto.FormatoVoti;
 import presenter.resourceSupport.voto.VotoConverter;
 import presenter.resourceSupport.voto.VotoConverterFactory;
 import domain.error.DomainCheckedException;
@@ -25,7 +26,7 @@ import domain.model.mediaStrategy.IMediaStrategy;
 public class VotiPresenter {
 
 	  @RequestMapping(value = ApiPath.FORMATO_VOTI, method = RequestMethod.GET)
-	  public Map<Integer, Collection<String>> getFormatoVoti () {
+	  public FormatoVoti getFormatoVoti () {
 		 
 			return VotoConverterFactory.getInstance().create().getFormato();
 

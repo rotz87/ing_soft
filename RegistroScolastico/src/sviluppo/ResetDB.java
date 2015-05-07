@@ -152,7 +152,7 @@ public class ResetDB {
 			Studente[]studenti  = {pieroRusso, marinoEsposito, marioRomano, davideDiSalvo, ivoMarino, leonardoRicci, valentinoFarina, roccoBenedetti, antonioGuerra, cristinaAngeli, mariannaDonati, elenaSarti, mariaPiaAlfredi, giorgioGatti, lorenzoNegri, mattiaVitali, emanueleDelMonte, 	luigiBernardi, vittorioPellegrini, alexVilla, marcoBattaglia, alfredoMorelli, pieraDellaValle, ignazioBoschi, jacopoValli, gianniConte, lucaBarone, giacomoSiciliano, fabrizioToscani, arturoAncona};
 
 //			CREAZIONE DEI LIBRETTI ASSENZA E ASSEGNAZIONE AGLI STUDENTI
-//				LibrettoAssenze libretto =  new LibrettoAssenze();
+
 			LibrettoAssenze librettoMarioRomano = new LibrettoAssenze();
 			marioRomano.setLibrettoAssenze(librettoMarioRomano);
 			LibrettoAssenze librettoDavideDiSalvo =  new LibrettoAssenze();
@@ -274,22 +274,42 @@ public class ResetDB {
 			
 			
 //			CREAZIONE DELLE DATE
-			LocalDate data8_12_14 = new LocalDate(2014,12,8);
+			LocalDate data01_12_14 = new LocalDate(2014,12,1);
+			LocalDate data02_12_14 = new LocalDate(2014,12,2);
+			LocalDate data03_12_14 = new LocalDate(2014,12,3);
+			LocalDate data04_12_14 = new LocalDate(2014,12,4);
+			LocalDate data05_12_14 = new LocalDate(2014,12,5);
+			LocalDate data09_12_14 = new LocalDate(2014,12,9);
 			LocalDate data10_12_14 = new LocalDate(2014,12,10);
 			LocalDate data11_12_14 = new LocalDate(2014,12,11);
 			LocalDate data12_12_14 = new LocalDate(2014,12,12);
-			LocalDate data13_12_14 = new LocalDate(2014,12,13);
-			LocalDate data14_12_14 = new LocalDate(2014,12,14);
 			LocalDate data15_12_14 = new LocalDate(2014,12,15);
 			LocalDate data16_12_14 = new LocalDate(2014,12,16);
-			LocalDate data17_12_14 = new LocalDate(2014,12,17);
 			
+			LocalDate data17_12_14 = new LocalDate(2014,12,17);
+
+			LinkedList<LocalDate> datePerAppelli = new LinkedList<LocalDate>();
+			datePerAppelli.add(data01_12_14);
+			datePerAppelli.add(data02_12_14);
+			datePerAppelli.add(data03_12_14);
+			datePerAppelli.add(data04_12_14);
+			datePerAppelli.add(data05_12_14);
+			datePerAppelli.add(data09_12_14);
+			datePerAppelli.add(data10_12_14);
+			datePerAppelli.add(data11_12_14);
+			datePerAppelli.add(data12_12_14);
+			datePerAppelli.add(data15_12_14);
 			
 //			CREAZIONE DEGLI APPELLI
+			Appello appello_1A_01_12_14 = new Appello(data01_12_14);
+			Appello appello_1A_02_12_14 = new Appello(data02_12_14);
+			Appello appello_1A_03_12_14 = new Appello(data03_12_14);
+			Appello appello_1A_04_12_14 = new Appello(data04_12_14);
+			Appello appello_1A_05_12_14 = new Appello(data05_12_14);
+			Appello appello_1A_09_12_14 = new Appello(data09_12_14);
 			Appello appello_1A_10_12_14 = new Appello(data10_12_14);
 			Appello appello_1A_11_12_14 = new Appello(data11_12_14);
 			Appello appello_1A_12_12_14 = new Appello(data12_12_14);
-			Appello appello_1A_13_12_14 = new Appello(data13_12_14);
 			Appello appello_1A_15_12_14 = new Appello(data15_12_14);
 			Appello appello_1A_16_12_14 = new Appello(data16_12_14);
 			
@@ -298,11 +318,15 @@ public class ResetDB {
 			Appello appello_2B_16_12_14 = new Appello(data16_12_14);
 			
 //			ASSEGNAZIONE DEGLI APPELLI AI REGISTRI
+			regAssPrimaA.getAppelli().put( Calendario.getInstance().getDaysFromZero(appello_1A_01_12_14.getData()) , appello_1A_01_12_14);
+			regAssPrimaA.getAppelli().put( Calendario.getInstance().getDaysFromZero(appello_1A_02_12_14.getData()) , appello_1A_02_12_14);
+			regAssPrimaA.getAppelli().put( Calendario.getInstance().getDaysFromZero(appello_1A_03_12_14.getData()) , appello_1A_03_12_14);
+			regAssPrimaA.getAppelli().put( Calendario.getInstance().getDaysFromZero(appello_1A_04_12_14.getData()) , appello_1A_04_12_14);
+			regAssPrimaA.getAppelli().put( Calendario.getInstance().getDaysFromZero(appello_1A_05_12_14.getData()) , appello_1A_05_12_14);
+			regAssPrimaA.getAppelli().put( Calendario.getInstance().getDaysFromZero(appello_1A_09_12_14.getData()) , appello_1A_09_12_14);
 			regAssPrimaA.getAppelli().put( Calendario.getInstance().getDaysFromZero(appello_1A_10_12_14.getData()) , appello_1A_10_12_14);
 			regAssPrimaA.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_1A_11_12_14.getData()), appello_1A_11_12_14);
 			regAssPrimaA.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_1A_12_12_14.getData()), appello_1A_12_12_14);
-			regAssPrimaA.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_1A_13_12_14.getData()), appello_1A_13_12_14);
-//			regAssPrimaA.getAppelli().put(appello14_12_14.getData(), appello14_12_14);
 			regAssPrimaA.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_1A_15_12_14.getData()), appello_1A_15_12_14);
 			regAssPrimaA.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_1A_16_12_14.getData()), appello_1A_16_12_14);
 			
@@ -323,27 +347,18 @@ public class ResetDB {
 			Assenza assLorenzoNegri1 =  new Assenza();
 			
 // 			ASSEGNAZIONE DEGLI APPELLI ALLE ASSENZE
+			
 			assMarioRomano1.getAppelli().add(appello_1A_10_12_14);
 			assMarioRomano1.getAppelli().add(appello_1A_11_12_14);
-			 
 			assPieroRusso1.getAppelli().add(appello_1A_10_12_14);
 			assPieroRusso1.getAppelli().add(appello_1A_11_12_14);
 			assPieroRusso1.getAppelli().add(appello_1A_12_12_14);
-//			assPieroRusso1.getAppelliAssenza().add(appello16_12_14);
-
-//			assIvoMarini1.getAppelliAssenza().add(appello14_12_14);
 			assIvoMarini1.getAppelli().add(appello_1A_15_12_14);
 			assIvoMarini1.getAppelli().add(appello_1A_16_12_14);
-			
 			assIvoMarini2.getAppelli().add(appello_1A_10_12_14);
 			assIvoMarini2.getAppelli().add(appello_1A_11_12_14);
-			
-//			assIvoMarini3.getAppelliAssenza().add(appello8_12_14);
-			
 			assMarinoEsposito1.getAppelli().add(appello_1A_16_12_14);
-			
 			assDavideDiSalvo1.getAppelli().add(appello_1A_16_12_14);
-			
 			assMariannaDonati1.getAppelli().add(appello_2A_16_12_14);
 			assLorenzoNegri1.getAppelli().add(appello_2A_16_12_14);
 			
@@ -356,11 +371,17 @@ public class ResetDB {
 			librettoMariannaDonati.getNonGiustificate().add(assMariannaDonati1);
 			librettoLorenzoNegri.getNonGiustificate().add(assLorenzoNegri1);	
 			
-//			-----------------------------------------			
+//			-----------------------------------------	
+			appello_1A_01_12_14.setAssenzePrese(true);
+			appello_1A_02_12_14.setAssenzePrese(true);
+			appello_1A_03_12_14.setAssenzePrese(true);
+			appello_1A_04_12_14.setAssenzePrese(true);
+			appello_1A_05_12_14.setAssenzePrese(true);
+			appello_1A_09_12_14.setAssenzePrese(true);
 			appello_1A_10_12_14.setAssenzePrese(true);
 			appello_1A_11_12_14.setAssenzePrese(true);
 			appello_1A_12_12_14.setAssenzePrese(true);
-			appello_1A_13_12_14.setAssenzePrese(true);
+//			appello_1A_13_12_14.setAssenzePrese(true);
 			appello_1A_15_12_14.setAssenzePrese(true);
 			appello_1A_16_12_14.setAssenzePrese(true);
 			
@@ -368,7 +389,27 @@ public class ResetDB {
 			appello_1B_16_12_14.setAssenzePrese(true);
 			appello_2B_16_12_14.setAssenzePrese(true);
 			
-
+//			Ulteriori appelli per la seconda A
+			Appello appello;
+			for(LocalDate data : datePerAppelli){
+				appello = new Appello(data);
+				regAssSecondaA.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello.getData()), appello);
+				appello.setAssenzePrese(true);
+			}
+			
+//			Ulteriori appelli per la prima B
+			for(LocalDate data : datePerAppelli){
+				appello = new Appello(data);
+				regAssPrimaB.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello.getData()), appello);
+				appello.setAssenzePrese(true);
+			}
+			
+//			Ulteriori appelli per la seconda B
+			for(LocalDate data : datePerAppelli){
+				appello = new Appello(data);
+				regAssSecondaB.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello.getData()), appello);
+				appello.setAssenzePrese(true);
+			}
 			
 //			CREAZIONE DELLE MATERIE
 			Materia storia = new Materia();
@@ -488,11 +529,7 @@ public class ResetDB {
 
 			registroRossiPrimaAstoria.getCompitiInClasse().add(compitoStoria1A);
 			
-//			CREAZIONE DEL TERZO COMPITO IN CLASSE ED APPELLO RELATIVO
-			LocalDate data02_12_14 = new LocalDate(2014,12,2);
-			Appello appello_1A_02_12_14 = new Appello(data02_12_14);
-			regAssPrimaA.getAppelli().put( Calendario.getInstance().getDaysFromZero(appello_1A_02_12_14.getData()) , appello_1A_02_12_14);
-			appello_1A_02_12_14.setAssenzePrese(true);
+//			CREAZIONE DEL TERZO COMPITO IN CLASSE 
 
 			Collection<Argomento> argomenti_3 = new LinkedList<Argomento>();
 			argomenti_3.clear();
@@ -553,54 +590,6 @@ public class ResetDB {
 			RSPersistentManager.instance().getSession().save(natale);
 			RSPersistentManager.instance().getSession().save(sStefano);
 			RSPersistentManager.instance().getSession().save(capodanno);
-			
-//			domain.model.Studente ldomainmodelStudente = new domain.model.Studente();			// Initialize the properties of the persistent object here
-//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelStudente);
-			
-//			domain.model.Appello ldomainmodelAppello = new domain.model.Appello();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : assenzePrese
-//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelAppello);
-//			
-//			domain.model.Assenza ldomainmodelAssenza = new domain.model.Assenza();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : appelliAssenza
-//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelAssenza);
-//			
-//			domain.model.Giustificazione ldomainmodelGiustificazione = new domain.model.Giustificazione();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : confermata
-//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelGiustificazione);
-//			
-//			domain.model.Ritardo ldomainmodelRitardo = new domain.model.Ritardo();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : appello
-//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelRitardo);
-//			
-//			domain.model.PermessoEntrata ldomainmodelPermessoEntrata = new domain.model.PermessoEntrata();			// Initialize the properties of the persistent object here
-//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelPermessoEntrata);
-//			
-//			domain.model.UscitaAnticipata ldomainmodelUscitaAnticipata = new domain.model.UscitaAnticipata();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : permesso, appello
-//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelUscitaAnticipata);
-//			
-//			domain.model.PermessoUscita ldomainmodelPermessoUscita = new domain.model.PermessoUscita();			// Initialize the properties of the persistent object here
-//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelPermessoUscita);
-//			
-//			domain.model.LibrettoAssenze ldomainmodelLibrettoAssenze = new domain.model.LibrettoAssenze();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : uscite, ritardi, nonGiustificate, giustificate, studente
-//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelLibrettoAssenze);
-//			
-//			domain.model.RegistroAssenze ldomainmodelRegistroAssenze = new domain.model.RegistroAssenze();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : appelliRegistro, librettiAssenze, appelloOdierno
-//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelRegistroAssenze);
-//			
-//			domain.model.Scuola ldomainmodelScuola = new domain.model.Scuola();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : docenti, classi
-//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelScuola);
-//			
-//			domain.model.Classe ldomainmodelClasse = new domain.model.Classe();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : studenti, registroAssenze
-//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelClasse);
-//			
-//			domain.model.Docente ldomainmodelDocente = new domain.model.Docente();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : classi
-//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelDocente);
-//			
-//			domain.model.Calendario ldomainmodelCalendario = new domain.model.Calendario();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : giorniSettimanaliFestivi, giorniFestivi
-//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelCalendario);
-//			
-//			domain.model.Giorno ldomainmodelGiorno = new domain.model.Giorno();			// Initialize the properties of the persistent object here
-//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelGiorno);
-//			
-//			domain.model.GiornoSettimanale ldomainmodelGiornoSettimanale = new domain.model.GiornoSettimanale();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : giorno
-//			domain.model.RSPersistentManager.instance().getSession().save(ldomainmodelGiornoSettimanale);
 			
 			t.commit();
 

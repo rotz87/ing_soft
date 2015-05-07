@@ -3,6 +3,7 @@ package presenter.resourceSupport.voto;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 import domain.error.ErrorMessage;
 import domain.model.Voto;
@@ -117,9 +118,10 @@ public class VotoNumeroEIncrementiConverter extends VotoConverter {
 	
 	
 	private void initializeFormato(){
-		super.formato = new HashMap<Integer, Collection<String>>();
+		super.formato = new FormatoVoti();
 		Collection<String> primaCifra = new LinkedList<String>();
 		Collection<String> secondaCifra = new LinkedList<String>();
+		Map<Integer, String> labelNonAmmessa;
 		
 		primaCifra.add(super.cifraNulla);
 		for(int i = 0; i<=10; i++){
@@ -132,8 +134,28 @@ public class VotoNumeroEIncrementiConverter extends VotoConverter {
 		secondaCifra.add("+");
 		secondaCifra.add("++");
 		
-		super.formato.put(1, primaCifra);
-		super.formato.put(2, secondaCifra);
+		super.formato.cifre.put(1, primaCifra);
+		super.formato.cifre.put(2, secondaCifra);
+		
+		labelNonAmmessa = new HashMap<Integer, String>();
+		labelNonAmmessa.put(1, "0");
+		labelNonAmmessa.put(2, "--");
+		super.formato.votiNonAmmessi.add(labelNonAmmessa);
+		
+		labelNonAmmessa = new HashMap<Integer, String>();
+		labelNonAmmessa.put(1, "0");
+		labelNonAmmessa.put(2, "-");
+		super.formato.votiNonAmmessi.add(labelNonAmmessa);
+		
+		labelNonAmmessa = new HashMap<Integer, String>();
+		labelNonAmmessa.put(1, "10");
+		labelNonAmmessa.put(2, "++");
+		super.formato.votiNonAmmessi.add(labelNonAmmessa);
+		
+		labelNonAmmessa = new HashMap<Integer, String>();
+		labelNonAmmessa.put(1, "10");
+		labelNonAmmessa.put(2, "1/2");
+		super.formato.votiNonAmmessi.add(labelNonAmmessa);
 	}
 	
 }

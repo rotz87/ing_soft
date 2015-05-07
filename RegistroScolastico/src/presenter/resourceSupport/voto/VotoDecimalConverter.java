@@ -64,39 +64,26 @@ public class VotoDecimalConverter extends VotoConverter{
 		Map<Integer, String> label;
 		String cifra1;
 		String cifra2;
-		String valoreString;
-		Float valoreVoto;
-		int point;
-		
-		
 		
 		if(voto == null || voto.getValore() == null){
+			label = new HashMap<Integer, String>();
 			cifra1 = super.cifraNulla;
 			cifra2 = super.cifraNulla;
+			label.put(1, cifra1);
+			label.put(2, cifra2);
 		}else{
-			valoreVoto = voto.getValore();
-			valoreString = String.valueOf(valoreVoto);
-			point = valoreString.indexOf('.');
-			
-			cifra1 = valoreString.substring(0, point);
-			cifra2 = valoreString.substring(point+1, point+2);
-			cifra2 = this.separatore + cifra2;
+			label = getLabel(voto.getValore());
 		}
 
-
-		
-		label = new HashMap<Integer, String>();
-		label.put(1, cifra1);
-		label.put(2, cifra2);
-		
 		votoRS.setLabel(label);
 		
 	}
 	
 	private void initializeFormato(){
-		super.formato = new HashMap<Integer, Collection<String>>();
+		super.formato = new FormatoVoti();
 		Collection<String> primaCifra = new LinkedList<String>();
 		Collection<String> secondaCifra = new LinkedList<String>();
+		
 		primaCifra.add(super.cifraNulla);
 		for(int i = 0; i<=10; i++){
 			primaCifra.add(String.valueOf(i));
@@ -105,8 +92,33 @@ public class VotoDecimalConverter extends VotoConverter{
 		for(int i = 0; i<=9; i++){
 			secondaCifra.add(this.separatore+String.valueOf(i));
 		}
-		super.formato.put(1, primaCifra);
-		super.formato.put(2, secondaCifra);
+		super.formato.cifre.put(1, primaCifra);
+		super.formato.cifre.put(2, secondaCifra);
+
+		for(float valoreVoto = 10.3f; valoreVoto < 10.91f; valoreVoto += 0.1){
+			super.formato.votiNonAmmessi.add(getLabel(valoreVoto));
+		}
+	}
+	
+	private Map<Integer, String> getLabel(float valoreVoto){
+		String valoreString;
+		int point;
+		String cifra1;
+		String cifra2;
+		Map<Integer, String> rit;
+		
+		valoreString = String.valueOf(valoreVoto);
+		point = valoreString.indexOf('.');
+		
+		cifra1 = valoreString.substring(0, point);
+		cifra2 = valoreString.substring(point+1, point+2);
+		cifra2 = this.separatore + cifra2;
+		
+		rit = new HashMap<Integer, String>();
+		rit.put(1,cifra1);
+		rit.put(2,cifra2);
+		
+		return rit;
 	}
 
 }

@@ -163,9 +163,11 @@ public class VotoLettereConverter  extends VotoConverter {
 	}
 	
 	private void initializeFormato(){
-		super.formato = new HashMap<Integer, Collection<String>>();
+		super.formato = new FormatoVoti();
 		Collection<String> primaCifra = new LinkedList<String>();
 		Collection<String> secondaCifra = new LinkedList<String>();
+		Map<Integer, String> labelNonAmmessa;
+		
 		primaCifra.add(super.cifraNulla);
 		for(char c = 'A'; c<'G'; c++){
 			primaCifra.add(String.valueOf(c));
@@ -176,8 +178,13 @@ public class VotoLettereConverter  extends VotoConverter {
 		secondaCifra.add("+");
 		secondaCifra.add("++");
 		
-		super.formato.put(1, primaCifra);
-		super.formato.put(2, secondaCifra);
+		super.formato.cifre.put(1, primaCifra);
+		super.formato.cifre.put(2, secondaCifra);
+		
+		labelNonAmmessa = new HashMap<Integer, String>();
+		labelNonAmmessa.put(1, "A");
+		labelNonAmmessa.put(2, "++");
+		super.formato.votiNonAmmessi.add(labelNonAmmessa);
 	}
 
 }

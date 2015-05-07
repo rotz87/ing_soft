@@ -7,7 +7,7 @@ import domain.error.ErrorMessage;
 import domain.model.Voto;
 
 public abstract class VotoConverter {
-	protected Map<Integer, Collection<String>> formato;
+	protected FormatoVoti formato;
 	protected final String cifraNulla = "";
 	
 	
@@ -15,7 +15,7 @@ public abstract class VotoConverter {
 	
 	public abstract void setLabel(VotoRS votoRS, Voto voto);
 	
-	public Map<Integer, Collection<String>> getFormato(){
+	public FormatoVoti getFormato(){
 		return formato;
 	}
 	
@@ -23,15 +23,18 @@ public abstract class VotoConverter {
 		Map<Integer, String> label;
 		boolean erroreFormato = false;
 		label = votoRS.getLabel();
-		for(Integer i : formato.keySet()){
-			if (!formato.get(i).contains(label.get(i))){
+		for(Integer i : formato.cifre.keySet()){
+			if (!formato.cifre.get(i).contains(label.get(i))){
 				erroreFormato = true;
 			}
 		}
 		if(erroreFormato){
 			throw new RuntimeException(ErrorMessage.WRONG_FORMAT_VOTO);
 		}
+		
+		if(formato.votiNonAmmessi.contains(votoRS.getLabel())){
+			throw new RuntimeException(ErrorMessage.VOTO_NON_AMMESSO);
+		}
 	}
-	
 	
 }

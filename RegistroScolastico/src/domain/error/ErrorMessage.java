@@ -44,5 +44,6 @@ public class ErrorMessage {
 	public static final String FORMATO_IRRECUPERABILE = "Impossibile recuperare il formato dei voti";
 	public static final String CONVERTER_UNISTANZIABLE = "Impossibile instanziare il converter";
 	public static final String FORMAT_VOTI_WRONG = "Formato voti errato";
+	public static final String VOTO_NON_AMMESSO = "Almeno un voto non è ammesso";
 
 }
