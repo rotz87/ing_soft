@@ -14,8 +14,6 @@ public class StudenteAppelloRS extends StudenteRS{
 		
 		super(studente);
 		
-		// XXX inserire links
-		
 	}
 	
 }

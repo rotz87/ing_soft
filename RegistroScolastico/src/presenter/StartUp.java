@@ -3,6 +3,7 @@ package presenter;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 
+import org.joda.time.LocalDate;
 import org.orm.PersistentException;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
@@ -25,18 +26,18 @@ public class StartUp implements ApplicationListener{
 	@PostConstruct
     public void start() {
 		//ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("RegistroScolastico.cfg.xml");
-//		DBFake.getInstance();
-		
 		
 		try {
 			GiornoFestivoCriteria giornoFC = new GiornoFestivoCriteria();
 			GiornoSettimanaleFestivoCriteria giornoSFC = new GiornoSettimanaleFestivoCriteria();
 			Calendario.getInstance().getGiorniFestivi().addAll(giornoFC.list());
 			Calendario.getInstance().getGiorniSettimanaliFestivi().addAll(giornoSFC.list());
+			Calendario.getInstance().setInizioLezioni(new LocalDate(2014,12,01));
+			Calendario.getInstance().setFineLezioni(new  LocalDate(2015,6,12));
 
 			
 		} catch (PersistentException e) {
-			// XXX sarebbe da mettere un log Auto-generated catch block
+			// si potrebbe mettere un log 
 			e.printStackTrace();
 		}
 		

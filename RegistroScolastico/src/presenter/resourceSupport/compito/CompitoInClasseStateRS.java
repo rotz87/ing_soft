@@ -19,7 +19,7 @@ public class CompitoInClasseStateRS extends ResourceSupport{
 		
 		
 		
-		//FIXME bisogna inserire come link filgi: Argomenti e studenti e come padre RegistroDocente
+		//bisogna inserire come link filgi: Argomenti e studenti e come padre RegistroDocente
 		
 //		this.add(ControllerLinkBuilder.linkTo(
 //				ControllerLinkBuilder.methodOn(ClassePresenter.class, idClasse).

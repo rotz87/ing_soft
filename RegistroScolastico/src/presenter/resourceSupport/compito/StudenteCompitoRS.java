@@ -16,14 +16,12 @@ public class StudenteCompitoRS extends StudenteRS {
 	}
 	
 	public StudenteCompitoRS(Studente studente, Voto voto, boolean assente) throws DomainCheckedException{
+		
 		super(studente);
 		this.assente = assente;
-		this.voto = null;
-//		if(voto!=null){
-			this.voto = new VotoRS(voto);
-//		}
+		this.voto = new VotoRS(voto);
+
 		
-		// XXX INSERIRE I LINKS
 	}
 
 	public VotoRS getVoto() {

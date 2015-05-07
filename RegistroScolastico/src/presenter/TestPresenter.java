@@ -56,7 +56,6 @@ public class TestPresenter {
 		try {
 			votoRS = new VotoRS(voto);
 		} catch (DomainCheckedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

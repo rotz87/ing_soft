@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import presenter.resourceSupport.compito.ArgomentiContainerRS;
 import presenter.resourceSupport.compito.ArgomentoRS;
 import presenter.resourceSupport.compito.CompitoInClasseRS;
 import presenter.resourceSupport.compito.CompitoInClasseStateRS;
@@ -199,25 +198,7 @@ public class CompitoInClassePresenter {
 		  
 		  return new ResponseEntity<>(null, httpHeaders, httpStatus);
 	  }
-	  
-	  @RequestMapping(value = ApiPath.COMPITO_ARGOMENTI, method = RequestMethod.GET)
-	  public ArgomentiContainerRS getArgomentiCompito(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse) {
-		  CompitoInClasseController compitoController;
-		  CompitoInClasse compito;
-		  LinkedList<ArgomentoRS> argomentiRS = new LinkedList<ArgomentoRS>();
 
-		  compitoController = new CompitoInClasseController();
-		  compito = compitoController.getCompitoInCLasse(idClasse, idRegistroDocente, idCompitoInClasse);
-		  for(Argomento argomento : compito.getArgomentiEsaminati()){
-			  argomentiRS.add(new ArgomentoRS(argomento));
-		  }
-		  
-		  
-		  return new ArgomentiContainerRS(argomentiRS);
-
-		  
-	  }
-	  
 /**
 	 * 
 	 * @param idClasse

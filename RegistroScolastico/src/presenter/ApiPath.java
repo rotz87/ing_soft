@@ -14,7 +14,6 @@ public class ApiPath {
 	private static final String _COMPITI = "/compiti";
 	private static final String _ID_COMPITO_IN_CLASSE = "/{idCompitoInClasse}";
 	private static final String _STATE = "/state";
-	private static final String _ARGOMENTI = "/argomenti";
 	private static final String _ARGOMENTI_SVOLTI = "/argomentiSvolti";
 	private static final String _MEDIE = "/medie";
 	private static final String _STRATEGIE = "/strategie";
@@ -24,31 +23,20 @@ public class ApiPath {
 	private static final String _VOTI_CONVERTER_ATTUALE = "/attuale";
 	
 
-	// DA APPELLOPRESENTER
 	public static final String  CLASSE_APPELLI = _CLASSI+_ID_CLASSE+_APPELLI;
 	public static final String  ID_APPELLO = _ID_APPELLO;
 	public static final String  APPELLO_ASSENTI =_ID_APPELLO+_ASSENTI;
-	
-	// DA CALENDARIO PRESENTER
 	public static final String  CALENDARIO = _CALENDARIO;
-	
-	// DA CLASSEPRESENTER
 	public static final String CLASSI = _CLASSI;
 	public static final String CLASSE_STUDENTI = _ID_CLASSE+_STUDENTI;
 	public static final String CLASSE_FESTIVI = _ID_CLASSE+_DATE_FESTIVE;
 	public static final String CLASSE_REGISTRI_DOCENTE = _ID_CLASSE+_REGISTRI_DOCENTE;
-	
-	//DA COMPITO_IN_CLASSE_PRESENTER
 	public static final String REGISTRO_DOCENTE_COMPITI = _CLASSI+_ID_CLASSE+_REGISTRI_DOCENTE+_ID_REGISTRO_DOCENTE+_COMPITI;
 	public static final String ID_COMPITO = _ID_COMPITO_IN_CLASSE;
 	public static final String COMPITO_STATE = _ID_COMPITO_IN_CLASSE+_STATE;
-	public static final String COMPITO_ARGOMENTI = _ID_COMPITO_IN_CLASSE+_ARGOMENTI;
 	public static final String COMPITO_STUDENTI = _ID_COMPITO_IN_CLASSE+_STUDENTI;
-	
-	// DA REGISTRO_DOCENTE_PRESENTER
 	public static final String REGISTRO_DOCENTE = _CLASSI+_ID_CLASSE+_REGISTRI_DOCENTE+_ID_REGISTRO_DOCENTE;
 	public static final String ARGOMENTI_SVOLTI = _ARGOMENTI_SVOLTI;
-	
 	public static final String MEDIE = _MEDIE ;
 	public static final String STRATEGIE = _MEDIE+_STRATEGIE;
 	public static final String FORMATO_VOTI = _FORMATO_VOTI;
