@@ -4,7 +4,7 @@
 	<div class="row">
 		<form class="form-horizontal">
 			<div class="form-group" >
-				<label class="control-label col-sm-2"> Strategia: </label>
+				<label class="control-label col-sm-2"> Metodo: </label>
 				<div class="col-sm-4">
 			      <div class="input-group-btn">
 			        <button type="button" class="btn btn-default dropdown-toggle dropdown" data-toggle="dropdown" aria-expanded="false" > {{form.strategia.label}} <span class="caret"></span></button>
@@ -77,7 +77,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="studente in studentiMedieRS | orderBy : 'cognome' : false">
+				<tr ng-repeat="studente in studentiMedieRS | orderBy : 'cognome' : false" class="repeat-animation">
 					<td> {{studente.cognome}} </td>
 					<td> {{studente.nome}} </td>
 					<td> {{studente.mediaScritto.stringa}}	</td>

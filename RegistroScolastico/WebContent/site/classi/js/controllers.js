@@ -660,10 +660,9 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 						 * se richiesto
 						 **/
 						alProssimoStato()
-						$scope.registratoCompitoModal()
 					}
 					$scope.vecchioCompitoInClasse = angular.copy($scope.compitoInClasse)
-
+					$scope.registratoCompitoModal()
 				},
 				function(response,headers){
 					//fallimento
@@ -671,6 +670,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 				});
 	}
 	$scope.registratoCompitoModal = function(){
+		
 		$scope.modal = {};
 		$scope.modal.messaggio = "Il compito è stato registrato correttamente";
 		$scope.modal.titolo = "Compito registrato";
@@ -1195,7 +1195,7 @@ registroControllers.controller('mediaVotiController',['$scope','rsClasse','media
 		parametriMediaVoti.dataInizio = $scope.form.dataInizio.getTime();
 		parametriMediaVoti.dataFine = $scope.form.dataFine.getTime();
 		
-		mediaVoti.get(parametriMediaVoti,
+		var resMediavoti = mediaVoti.get(parametriMediaVoti,
 				function(response,headers){
 			$scope.studentiMedieRS = response;
 			for (var index in $scope.studentiMedieRS){
@@ -1205,9 +1205,13 @@ registroControllers.controller('mediaVotiController',['$scope','rsClasse','media
 					studente.mediaScritto.stringa = convertiVotoStringa(studente.mediaScritto.label)
 				}
 			}
+			console.log("caricamento OK")
 		},function(response,headers){
 			erroreSistema($rootScope, response.data, true)
+			console.log("caricamento FALLITO")
 		})
+		console.log("caricamento")
+		
 	}
 	$scope.vediVoti = function(idStudente){
 		
@@ -1320,8 +1324,18 @@ registroControllers.controller('impostazioniController',['$scope','votiConverter
 			}
 		)
 	$scope.aggiornaTipologiaVoti = function(){
-		console.log("invio di 'currTip' in corso "+ $scope.currTip)
-		votiConverters.aggiorna({},$scope.currTip)
+		$scope.feedbackAggiornamento = {}
+		$scope.feedbackAggiornamento.msg = "invio in corso"
+		votiConverters.aggiorna({},$scope.currTip,
+				function(){
+			$scope.feedbackAggiornamento.status = true
+			$scope.feedbackAggiornamento.msg = "cambio della tipologia di voto riuscito: "+ $scope.currTip;
+		},
+				function(){
+			erroreSistema($rootScope, response.data, true)
+			$scope.feedbackAggiornamento.status = false
+			$scope.feedbackAggiornamento.msg = "cambio della tipologia di voto fallito: "+ $scope.currTip;
+		})
 	}
 	$scope.selezionaTipologia = function(tipVoto){
 		$scope.currTip[0] = tipVoto

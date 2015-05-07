@@ -18,4 +18,8 @@
 			</div>
 		</form>
 	</div>
+	<div class="row" ng-show="feedbackAggiornamento">
+		<h4>Risposta dal server:</h4>
+		<p ><span ng-show="feedbackAggiornamento.status" class="glyphicon glyphicon-ok rs-color-success"></span><span ng-hide="feedbackAggiornamento.status" class="glyphicon glyphicon-remove rs-color-danger"></span>{{feedbackAggiornamento.msg}}</p>
+	</div>
 </div>
