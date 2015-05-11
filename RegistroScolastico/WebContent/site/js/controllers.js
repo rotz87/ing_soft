@@ -467,10 +467,7 @@ registroControllers.controller('popolamentoNavigazione', ['$scope', 'rsClasse', 
 		//$location.path("classi/"+$routeParams.idClasse+"/appelli/"+idAppello)
 	}
 	$scope.vaiAllaClasse = function(idClasse){
-		if(idClasse != $routeParams.idClasse)
-		{
 			$location.path("classi/"+idClasse)
-		}
 	}
 }]).directive('registroScolasticoModal', function() {
 	  return {
