@@ -1,9 +1,12 @@
-package presenter.resourceSupport.voto;
+package presenter.resourceSupport;
 
 import java.util.Map;
 
 import org.springframework.hateoas.ResourceSupport;
 
+import controller.votoConverter.FormatoVoti;
+import controller.votoConverter.VotoConverter;
+import controller.votoConverter.VotoConverterFactory;
 import domain.error.DomainCheckedException;
 import domain.model.Voto;
 
@@ -24,7 +27,7 @@ public class VotoRS extends ResourceSupport {
 		
 		votoConverter = VotoConverterFactory.getInstance().create();
 
-		return votoConverter.getVoto(this);
+		return votoConverter.labelToVoto(this.getLabel());
 	}
 
 	public void putVoto(Voto voto) throws DomainCheckedException{
@@ -32,7 +35,7 @@ public class VotoRS extends ResourceSupport {
 		
 		votoConverter = VotoConverterFactory.getInstance().create();
 		
-		votoConverter.setLabel(this, voto);
+		this.setLabel(votoConverter.votoToLabel(voto));
 	}
 	
 	public FormatoVoti takeFormato() throws DomainCheckedException{

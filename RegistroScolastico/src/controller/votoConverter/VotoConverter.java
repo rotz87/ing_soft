@@ -1,4 +1,4 @@
-package presenter.resourceSupport.voto;
+package controller.votoConverter;
 
 import java.util.Map;
 
@@ -10,18 +10,18 @@ public abstract class VotoConverter {
 	protected final String cifraNulla = "";
 	
 	
-	public abstract Voto getVoto(VotoRS votoRS);
+	public abstract Voto labelToVoto(Map<Integer, String> label);
 	
-	public abstract void setLabel(VotoRS votoRS, Voto voto);
+	public abstract Map<Integer, String> votoToLabel(Voto voto);
 	
 	public FormatoVoti getFormato(){
 		return formato;
 	}
 	
-	protected void checkFormatoCorretto(VotoRS votoRS){
-		Map<Integer, String> label;
+	protected void checkFormatoCorretto(Map<Integer, String> label){
+//		Map<Integer, String> label;
 		boolean erroreFormato = false;
-		label = votoRS.getLabel();
+//		label = votoRS.getLabel();
 		for(Integer i : formato.cifre.keySet()){
 			if (!formato.cifre.get(i).contains(label.get(i))){
 				erroreFormato = true;
@@ -31,7 +31,7 @@ public abstract class VotoConverter {
 			throw new RuntimeException(ErrorMessage.WRONG_FORMAT_VOTO);
 		}
 		
-		if(formato.votiNonAmmessi.contains(votoRS.getLabel())){
+		if(formato.votiNonAmmessi.contains(label)){
 			throw new RuntimeException(ErrorMessage.VOTO_NON_AMMESSO);
 		}
 	}

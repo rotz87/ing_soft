@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import presenter.resourceSupport.voto.VotoRS;
+import presenter.resourceSupport.VotoRS;
 import sviluppo.Stampa;
 import domain.error.DomainCheckedException;
 import domain.model.Voto;

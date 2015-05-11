@@ -1,4 +1,4 @@
-package presenter.resourceSupport.voto;
+package controller.votoConverter;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Set;

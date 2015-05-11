@@ -1,4 +1,4 @@
-package presenter.resourceSupport.voto;
+package controller.votoConverter;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -24,8 +24,8 @@ public class VotoDecimalConverter extends VotoConverter{
 	}
 
 	@Override
-	public Voto getVoto(VotoRS votoRS) {
-		Map<Integer, String> label;
+	public Voto labelToVoto(Map<Integer, String> label) {
+//		Map<Integer, String> label;
 		Float valore;
 		String cifra1;
 		String cifra2;
@@ -34,9 +34,9 @@ public class VotoDecimalConverter extends VotoConverter{
 		float fPart;
 		int point; 
 		
-		super.checkFormatoCorretto(votoRS);
+		super.checkFormatoCorretto(label);
 		
-		label = votoRS.getLabel();
+//		label = votoRS.getLabel();
 		
 		cifra1 = label.get(1);
 		
@@ -59,7 +59,7 @@ public class VotoDecimalConverter extends VotoConverter{
 	}
 
 	@Override
-	public void setLabel(VotoRS votoRS, Voto voto) {
+	public Map<Integer, String> votoToLabel(Voto voto) {
 		Map<Integer, String> label;
 		String cifra1;
 		String cifra2;
@@ -74,7 +74,7 @@ public class VotoDecimalConverter extends VotoConverter{
 			label = getLabel(voto.getValore());
 		}
 
-		votoRS.setLabel(label);
+		return label;
 		
 	}
 	
