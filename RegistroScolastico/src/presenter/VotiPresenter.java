@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import presenter.resourceSupport.voto.FormatoVoti;
-import presenter.resourceSupport.voto.VotoConverter;
-import presenter.resourceSupport.voto.VotoConverterFactory;
+import controller.votoConverter.FormatoVoti;
+import controller.votoConverter.VotoConverter;
+import controller.votoConverter.VotoConverterFactory;
 import domain.error.DomainCheckedException;
 import domain.error.ErrorMessage;
 

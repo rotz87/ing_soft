@@ -3,10 +3,10 @@ package test;
 import java.util.HashMap;
 import java.util.Map;
 
-import presenter.resourceSupport.voto.VotoDecimalConverter;
-import presenter.resourceSupport.voto.VotoLettereConverter;
-import presenter.resourceSupport.voto.VotoNumeroEIncrementiConverter;
-import presenter.resourceSupport.voto.VotoRS;
+import controller.votoConverter.VotoDecimalConverter;
+import controller.votoConverter.VotoLettereConverter;
+import controller.votoConverter.VotoNumeroEIncrementiConverter;
+import presenter.resourceSupport.VotoRS;
 import sviluppo.Stampa;
 import domain.error.DomainCheckedException;
 import domain.model.Voto;
@@ -30,7 +30,7 @@ public class TestVotoConverter {
 		VotoRS votoRSDecimal = new VotoRS();
 		votoRSDecimal.setLabel(labelDecimal);
 		
-		Voto votoDecimal = VotoDecimalConverter.getInstance().getVoto(votoRSDecimal);
+		Voto votoDecimal = VotoDecimalConverter.getInstance().labelToVoto(votoRSDecimal.getLabel());
 		Stampa.stampaln("VotoRS decimal: " + votoRSDecimal.getLabel().get(1) + votoRSDecimal.getLabel().get(2));
 		Stampa.stampaln("valore: " + votoDecimal.getValore());
 		Stampa.stampaln();
@@ -43,7 +43,7 @@ public class TestVotoConverter {
 		VotoRS votoRSLettere = new VotoRS();
 		votoRSLettere.setLabel(labelLettere);
 		
-		Voto votoLettere = VotoLettereConverter.getInstance().getVoto(votoRSLettere);
+		Voto votoLettere = VotoLettereConverter.getInstance().labelToVoto(votoRSLettere.getLabel());
 		Stampa.stampaln("VotoRS lettere: " + votoRSLettere.getLabel().get(1) + votoRSLettere.getLabel().get(2));
 		Stampa.stampaln("valore: " + votoLettere.getValore());
 		Stampa.stampaln();
@@ -56,7 +56,7 @@ public class TestVotoConverter {
 		VotoRS votoRSIncrementi = new VotoRS();
 		votoRSIncrementi.setLabel(labelIncrementi);
 		
-		Voto votoIncrementi = VotoNumeroEIncrementiConverter.getInstance().getVoto(votoRSIncrementi);
+		Voto votoIncrementi = VotoNumeroEIncrementiConverter.getInstance().labelToVoto(votoRSIncrementi.getLabel());
 		Stampa.stampaln("VotoRS numero e incremento: " + votoRSIncrementi.getLabel().get(1) + votoRSIncrementi.getLabel().get(2));
 		Stampa.stampaln("valore: " + votoIncrementi.getValore());
 		Stampa.stampaln();

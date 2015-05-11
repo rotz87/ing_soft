@@ -1,4 +1,4 @@
-package presenter.resourceSupport.voto;
+package controller.votoConverter;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -11,7 +11,6 @@ import domain.model.Voto;
 public class VotoLettereConverter  extends VotoConverter {
 	
 	static private VotoLettereConverter instance;
-	protected final String a = "a";
 
 	private VotoLettereConverter() {
 		initializeFormato();
@@ -26,17 +25,17 @@ public class VotoLettereConverter  extends VotoConverter {
 
 
 	@Override
-	public Voto getVoto(VotoRS votoRS) {
-		Map<Integer, String> label;
+	public Voto labelToVoto(Map<Integer, String> label) {
+
 		Voto voto;
 		Float valoreVoto;
 		String cifra1;
 		String cifra2;
 
-		super.checkFormatoCorretto(votoRS);
+		super.checkFormatoCorretto(label);
 		
-		cifra1 = votoRS.getLabel().get(1);
-		cifra2 = votoRS.getLabel().get(2);
+		cifra1 = label.get(1);
+		cifra2 = label.get(2);
 		
 		if(cifra1 == super.cifraNulla){
 			valoreVoto = null;
@@ -91,7 +90,7 @@ public class VotoLettereConverter  extends VotoConverter {
 	}
 
 	@Override
-	public void setLabel(VotoRS votoRS, Voto voto) {
+	public Map<Integer, String> votoToLabel(Voto voto) {
 		Float valoreVoto;
 		String cifra1 = null;
 		String cifra2 = null;
@@ -158,7 +157,7 @@ public class VotoLettereConverter  extends VotoConverter {
 		label.put(1, cifra1);
 		label.put(2, cifra2);
 		
-		votoRS.setLabel(label);
+		return label;
 		
 	}
 	

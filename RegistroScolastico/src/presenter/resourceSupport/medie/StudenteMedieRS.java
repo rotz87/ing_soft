@@ -1,7 +1,7 @@
 package presenter.resourceSupport.medie;
 
 import presenter.resourceSupport.StudenteRS;
-import presenter.resourceSupport.voto.VotoRS;
+import presenter.resourceSupport.VotoRS;
 import domain.error.DomainCheckedException;
 import domain.model.Studente;
 import domain.model.Voto;
