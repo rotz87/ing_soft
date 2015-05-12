@@ -33,18 +33,18 @@ registroServices.factory('rsClasse',['$resource',
 									isArray:true
 									},
 
-								'prendiCompitoInClasse':{
-									url:host+'/RegistroScolastico/api/classi/:idClasse/registriDocente/:idRegistroDocente/compiti/:idCompito',
-									method:'GET',
-									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente', idCompito:'@idCompito'},
-									isArray:false
-								},
-								'prendiCompitiInClasse':{
-									url:host+'/RegistroScolastico/api/classi/:idClasse/registriDocente/:idRegistroDocente/compiti/',
-									method:'GET',
-									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente'},
-									isArray:true,
-								},
+//								'prendiCompitoInClasse':{
+//									url:host+'/RegistroScolastico/api/classi/:idClasse/registriDocente/:idRegistroDocente/compiti/:idCompito',
+//									method:'GET',
+//									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente', idCompito:'@idCompito'},
+//									isArray:false
+//								},
+//								'prendiCompitiInClasse':{
+//									url:host+'/RegistroScolastico/api/classi/:idClasse/registriDocente/:idRegistroDocente/compiti/',
+//									method:'GET',
+//									params:{idClasse : '@idClasse', idRegistroDocente:'@idRegistroDocente'},
+//									isArray:true,
+//								},
 								'creaCompitoInClasse':{
 									url:host+'/RegistroScolastico/api/classi/:idClasse/registriDocente/:idRegistroDocente/compiti/',
 									method:'POST',

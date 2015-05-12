@@ -72,7 +72,20 @@
 			            	 <a href="javascript:void(0);" ng-click="vaiAllAppello(appello.idAppello)" title="vai all'appello del {{appello.data | date:'EEEE dd MMMM yyyy'}}"> Appello {{appello.data | date:"EEEE dd MMMM yyyy"}}</a>
 			            </li>
 			          </ul>
-			          
+			        </li>
+			        
+			        <li class="dropdown" ng-if="idRegistroDocente">
+			          <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" ng-hide="idRegistroDocente == 0">Registro {{currRegistro.materia}}<span class="caret"></span></a>
+			          <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" ng-show="idRegistroDocente == 0">Registro di classe<span class="caret"></span></a>
+			          <ul class="dropdown-menu" role="menu">
+   			            <li role="presentation" >
+			            	 <a href="javascript:void(0);" ng-click="vaiAlRegistro(0)" title="vai al registro di classe"> Registro di classe</a>
+			            </li>
+			            <li class="divider"></li>
+			            <li ng-repeat="registroDoc in elencoRegistri | orderBy:'materia'" role="presentation" >
+			            	 <a href="javascript:void(0);" ng-click="vaiAlRegistro(registroDoc.idRegistroDocente)" title="vai al registro di {{registro.materia }}"> Registro {{registroDoc.materia}}</a>
+			            </li>
+			          </ul>
 			        </li>
 			      </ul>
 			      
@@ -85,6 +98,7 @@
 			  	</ul>
 			    </div><!-- /.navbar-collapse -->
 			  </div><!-- /.container-fluid -->
+			  {{params22}}
 			</nav>
 			
 			<registro-scolastico-modal></registro-scolastico-modal>
@@ -92,7 +106,7 @@
 			<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-2">
-				<div ng-controller="menuSinistro">
+				<div class ="row" ng-controller="colonnaSinistra">
 					
 				</div>
 			</div>

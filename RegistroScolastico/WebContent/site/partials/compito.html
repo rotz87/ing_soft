@@ -84,7 +84,7 @@
  										      <div class="input-group-btn">
  										      
  										      <div class="input-group-btn" ng-repeat="(votoCifra,votoArray) in votiPossibili" >
-										        <button type="button" id="dropdownMenu{{$index}}" class="btn btn-default dropdown-toggle btn-sm bottoneVoti" data-toggle="dropdown" aria-expanded="false" ng-disabled="currState != statiPossibili.svolto">
+										        <button type="button" id="dropdownMenu{{$index}}" class="btn btn-default dropdown-toggle btn-sm bottoneVoti" data-toggle="dropdown" aria-expanded="false" ng-disabled="currState != statiPossibili.svolto || (currState == statiPossibili.svolto && !studente.voto.label[1] && votoCifra == 2)">
 											        {{studente.voto.label[votoCifra]}} 
 											        <span class="caret text-right" style="right:5px;">
 											        

@@ -40,7 +40,7 @@ registroControllers.controller('riempiElencoAppelli', ['$scope','rsClasse','$loc
 	  nuovoAppello = $location.path().split("/");
 	  
 	  $scope.idClasse = $routeParams.idClasse;
-	  
+	  $rootScope.idRegistroDocente = "0"
 	  $scope.mioController = "avviaAppello";
 	  $scope.predicate="data";
 	  $scope.reverse = true;
@@ -347,10 +347,11 @@ function retrieveObjectFromUrl($http, resourceUrl, destinazione){
 }
 
 registroControllers.controller('popolamentoNavigazione', ['$scope', 'rsClasse', '$q', '$rootScope', '$filter', '$location','$routeParams', '$route', function($scope, rsClasse, $q, $rootScope, $filter, $location, $routeParams, $route){
+	
 	$scope.$watch("idClasse",
 			function(newValue,oldValue){
 		//c'è un nuovo valore di idClasse
-		
+		console.log($routeParams)
 
 		if (newValue != oldValue && newValue != null)
 		{
@@ -435,26 +436,47 @@ registroControllers.controller('popolamentoNavigazione', ['$scope', 'rsClasse', 
 					});
 		}
 	})
-	
+	var eliminaParametri = function(){
+		for (var param in $routeParams)
+		{
+			delete $rootScope[param]
+		}
+		if ($rootScope.idRegistroDocente)
+		{
+			delete $rootScope.idRegistroDocente
+		}
+	}
 	$scope.home = function(){
 		$location.path("/");
-		if ($rootScope.idClasse)
-			delete $rootScope.idClasse;
-		if ($rootScope.idAppello)
-			delete $rootScope.idAppello;
+		eliminaParametri();
 	};
 	
 	$scope.vaiAImpostazioni = function(){
 		// eliminazione parametri che vengono usati dalla navigation bar
 		if ($location.path != "/impostazioni")
 		{
+			eliminaParametri();
 			delete $routeParams;
-			delete $rootScope.idClasse;
-			delete $rootScope.idAppello;
 			$location.path("/impostazioni/")
 		}
-		
 	}
+	
+	$scope.vaiAlRegistro = function(idRegistroDocente)
+	{
+		var url = ""
+		if (idRegistroDocente == 0)
+		{
+			url = "/classi/"+$routeParams.idClasse+"/registroDiClasse/"
+		}
+		else
+		{
+			url = "/classi/"+$routeParams.idClasse+"/registriDocente/"+idRegistroDocente+"/"
+		}
+		$rootScope.idRegistroDocente = idRegistroDocente
+		$location.path(url)
+	}
+	
+	
 	$scope.vaiAllAppello = function(idAppello){
 		// funziona manipolando direttamente i parametri 
 		// della rotta "$route"
@@ -467,8 +489,39 @@ registroControllers.controller('popolamentoNavigazione', ['$scope', 'rsClasse', 
 		//$location.path("classi/"+$routeParams.idClasse+"/appelli/"+idAppello)
 	}
 	$scope.vaiAllaClasse = function(idClasse){
+			eliminaParametri()
 			$location.path("classi/"+idClasse)
 	}
+	$scope.currRegistro = {};
+	$scope.elencoRegistri = []
+	$scope.$watch("idRegistroDocente",function (newValue,oldValue){
+		if(newValue != null)
+		{
+			if (newValue != oldValue)
+			{
+				rsClasse.registriDocente({idClasse : $routeParams.idClasse},
+					function(response,headers){
+					$scope.elencoRegistri = []
+					for (var i in response)
+					{
+						if (response[i].idRegistroDocente == newValue)
+							{
+							$scope.currRegistro = response[i]
+							}
+						if(response[i].idRegistroDocente)
+							$scope.elencoRegistri.push(response[i]);
+					}
+				},function(response,headers){
+					erroreSistema($rootScope, response.data, true)
+				});
+
+			}
+		}
+		else
+		{
+			//delete $scope.idRegistroDocente
+		}
+	})
 }]).directive('registroScolasticoModal', function() {
 	  return {
 			transclude:true,
@@ -541,8 +594,10 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	$scope.idClasse = $routeParams.idClasse;
 	$rootScope.idClasse = $routeParams.idClasse;
 	
+	$rootScope.idRegistroDocente = $routeParams.idRegistroDocente;
+	
 	$scope.vecchioCompitoInClasse = {};
-	$scope.compitoInClasse = new rsClasse();
+	$scope.compitoInClasse = new Compito();
 	$scope.compitoInClasse.idClasse = $routeParams.idClasse
 	$scope.compitoInClasse.idRegistroDocente = $routeParams.idRegistroDocente;
 	$scope.compitoInClasse.idCompito = $routeParams.idCompito;
@@ -554,7 +609,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		erroreSistema($rootScope, response.data, true)
 	})
 	
-	$scope.compitoInClasse.$prendiCompitoInClasse({},
+	$scope.compitoInClasse.$get({},
 		function(response,headers){
 		//successo
 		var miaData;
@@ -712,7 +767,8 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	}
 	$scope.inserisciVotoIndex = function(studente,votoIndex,votoValue){
 		
-		/** assumo che studente.voto sia un oggetto 
+		/** 
+		 * assumo che studente.voto sia un oggetto 
 		 * voto = {label:{1:"A",2:"++"};
 		 */
 		
@@ -724,7 +780,11 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 			studente.voto.label = {}
 		}
 		
-		// assumendo che votoVuoto[1][0] == ""
+		/**
+		 * assumendo che votoVuoto[1][0] == ""
+		 * cioè che il server invii anche il voto vuoto e che sia al primo
+		 * posto nella map
+		 * */ 
 		if ((votoValue == votoVuoto[1][0]) && (votoIndex == 1))
 		{
 			studente.voto.label[1] = "";
@@ -779,12 +839,10 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		var success = mioCompito.elimina($scope.eliminaCompitoAjax)
 	}
 	$scope.eliminaCompitoAjax = function(){
-		console.log($routeParams)
 		Compito.eliminaCompito($routeParams,
 				function(response,headers)
 				{
 					//successo
-					
 					$('.modal-backdrop').remove();
 					$scope.tornaAiCompiti()
 					
@@ -914,7 +972,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 			$scope.modal.okButtonModal = function(){
 				$scope.confermaArgomenti();
 			}
-			//fa una compia degli argomenti del compito in classe
+			//fa una copia degli argomenti del compito in classe
 			//per permettere l'aggiornamento in un secondo tempo
 			$scope.modal.argomenti = angular.copy($scope.compitoInClasse.argomentiRS);
 			$("#myModal2").modal("show")
@@ -993,15 +1051,15 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		function(newValue,oldValue){
 		if(newValue != null)
 		{
-			$routeParams.data = newValue.getTime();
+			var tmpData = newValue.getTime();
 			$scope.studentiCompito = Compito.queryStudenti(
-					{idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito, data : $routeParams.data},
+					{idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito, data : tmpData},
 					function(response,headers)
 					{	//successo
 						if (response.length == 0)
 						{
 							$scope.erroreStudenti = "L'appello per la data inserita non esiste," +
-													" oppure le presenze non sono atate prese"
+													" oppure le presenze non sono state prese"
 						}
 						else if (response.length > 0){
 							$scope.erroreStudenti = "";
@@ -1062,6 +1120,7 @@ registroControllers.controller('riempiElencoCompiti',
 			$scope.idClasse = $routeParams.idClasse;
 
 			$rootScope.idClasse = $scope.idClasse;
+			$rootScope.idRegistroDocente = $routeParams.idRegistroDocente;
 			
 			$scope.elencoCompiti = Compito.query(
 					{idClasse : $routeParams.idClasse,idRegistroDocente : $routeParams.idRegistroDocente},
@@ -1096,13 +1155,17 @@ registroControllers.controller('colonnaSinistra',
 		['$scope','rsClasse','$rootScope','$routeParams',
 		 function($scope,rsClasse,$rootScope,$routeParams)
 		 {
-			
+			//non viene utilizzato
+			$scope.parametri = $routeParams
 }])
 registroControllers.controller('elencoRegistri',['$scope','rsClasse','$location','$rootScope','$routeParams',function($scope,rsClasse,$location,$rootScope,$routeParams){
 	
 	
 	$scope.idClasse = $routeParams.idClasse;
 	$rootScope.idClasse = $scope.idClasse;
+	
+	$rootScope.idRegistroDocente = $routeParams.idRegistroDocente;
+	
 	$scope.registriDisponibili = [1,2,3,4];
 	$scope.vaiRegistroDiClasse = function(){
 		$location.path($location.path()+"registroDiClasse/");
@@ -1150,6 +1213,8 @@ registroControllers.controller('elencoRegistri',['$scope','rsClasse','$location'
 registroControllers.controller('mediaVotiController',['$scope','rsClasse','mediaVoti','$location','$rootScope','$routeParams',function($scope,rsClasse,mediaVoti,$location,$rootScope,$routeParams){
 	//console.log($scope)
 	$rootScope.idClasse = $routeParams.idClasse;
+	
+	$rootScope.idRegistroDocente = $routeParams.idRegistroDocente;
 	
 	$scope.form = {}
 	$scope.form.strategia ;
@@ -1214,12 +1279,12 @@ registroControllers.controller('mediaVotiController',['$scope','rsClasse','media
 					studente.mediaScritto.stringa = convertiVotoStringa(studente.mediaScritto.label)
 				}
 			}
-			console.log("caricamento OK")
+			//console.log("caricamento OK")
 		},function(response,headers){
 			erroreSistema($rootScope, response.data, true)
-			console.log("caricamento FALLITO")
+			//console.log("caricamento FALLITO")
 		})
-		console.log("caricamento")
+		//console.log("caricamento")
 		
 	}
 	$scope.vediVoti = function(idStudente){
@@ -1277,13 +1342,16 @@ registroControllers.controller('mediaVotiController',['$scope','rsClasse','media
 
 registroControllers.controller('funzioniRegistroDocente',['$scope','rsClasse','$location','$rootScope','$routeParams',function($scope,rsClasse,$location,$rootScope,$routeParams){
 	
+	
+	$rootScope.idRegistroDocente = $routeParams.idRegistroDocente
+	
 	$scope.vaiAlCalcoloMedie = function(){
 		$location.path($location.path()+"mediaVoti/")
 	};
 	$scope.vaiAllaListaCompiti = function(){
 		$location.path($location.path()+"compiti/")
 	};
-	rsClasse.registriDocente($routeParams,
+	rsClasse.registriDocente({idClasse : $routeParams.idClasse},
 			function(response,headers){
 		for (var i in response){
 			if (response[i].idRegistroDocente == $routeParams.idRegistroDocente)
@@ -1294,7 +1362,7 @@ registroControllers.controller('funzioniRegistroDocente',['$scope','rsClasse','$
 			},function(response,headers){
 				erroreSistema($rootScope, response.data, true)
 			})
-	rsClasse.elencoClassi($routeParams,
+	rsClasse.elencoClassi({},
 			function(response)
 			{
 				
@@ -1373,9 +1441,10 @@ function erroreSistema(mioScope,dati,attivaModal)
 		mioScope.modal.messaggio = mioScope.modal.messaggio
 		mioScope.modal.urlRisorsa = dati.url;
 	}
-	console.log("============= Eccezione: =========================")
+	console.group("=================== Eccezione: ===================")
 	console.log(dati)
 	console.log("==================================================");
+	console.groupEnd();
 	gestisciMessaggio(mioScope,"danger",attivaModal)
 }
 
