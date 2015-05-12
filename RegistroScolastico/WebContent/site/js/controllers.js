@@ -351,7 +351,7 @@ registroControllers.controller('popolamentoNavigazione', ['$scope', 'rsClasse', 
 	$scope.$watch("idClasse",
 			function(newValue,oldValue){
 		//c'è un nuovo valore di idClasse
-		console.log($routeParams)
+		
 
 		if (newValue != oldValue && newValue != null)
 		{
