@@ -90,8 +90,6 @@ public class VotoNumeroEIncrementiConverter extends VotoConverter {
 			int votoInt = (int)valoreVoto.floatValue();
 			parteDecimale = (10 * valoreVoto - 10 * votoInt)/10;
 			
-	//		parteDecimale = valoreVoto - Float.valueOf(cifra1);
-			
 			if(parteDecimale <= 0.15f) cifra2 = super.cifraNulla;
 			if(parteDecimale > 0.15f && parteDecimale <=0.3f) cifra2 = "+";
 			if(parteDecimale > 0.3f && parteDecimale <=0.45f) cifra2 = "++";

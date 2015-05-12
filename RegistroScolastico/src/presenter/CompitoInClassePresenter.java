@@ -255,10 +255,6 @@ public class CompitoInClassePresenter {
 				mapVoti.put(studenteConpitoRS.getIdStudente(), studenteConpitoRS.getVoto().takeVoto());
 			} catch (DomainCheckedException e) {
 				throw new RuntimeException(ErrorMessage.VOTI_NON_INSERIBILI);
-//			} catch (NullPointerException npe){
-//				Stampa.stampaln("null pointer exception");
-//				Stampa.stampaln("studenteConpitoRS.getVoto() " + studenteConpitoRS.getVoto());
-//				npe.printStackTrace();
 			}
 		  }
 		  

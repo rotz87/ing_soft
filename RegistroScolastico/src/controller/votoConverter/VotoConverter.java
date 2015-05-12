@@ -19,9 +19,8 @@ public abstract class VotoConverter {
 	}
 	
 	protected void checkFormatoCorretto(Map<Integer, String> label){
-//		Map<Integer, String> label;
+
 		boolean erroreFormato = false;
-//		label = votoRS.getLabel();
 		for(Integer i : formato.cifre.keySet()){
 			if (!formato.cifre.get(i).contains(label.get(i))){
 				erroreFormato = true;

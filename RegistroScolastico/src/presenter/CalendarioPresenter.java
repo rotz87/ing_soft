@@ -10,7 +10,6 @@ import domain.model.Calendario;
 
 
 @RestController
-//@RequestMapping("/calendario")
 @RequestMapping(ApiPath.CALENDARIO)
 public class CalendarioPresenter {
 	

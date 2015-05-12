@@ -35,11 +35,9 @@ public class Voto implements java.lang.Comparable<Voto> {
 	
 	private void set_valore(Float value) {
 		this._valore = value;
-		//commento
 	}
 	
 	private Float get_valore() {
-		//commento
 		return _valore;
 	}
 	

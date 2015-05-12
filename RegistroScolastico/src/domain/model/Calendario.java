@@ -12,8 +12,8 @@ public class Calendario {
 	private Collection<GiornoFestivo> giorniFestivi = new LinkedList<GiornoFestivo>();
 	private Collection<GiornoSettimanaleFestivo> giorniSettimanaliFestivi = new LinkedList<GiornoSettimanaleFestivo>();
 	private LocalDate dataOdierna;
-	private LocalDate inizioLezioni;// = new LocalDate(2014,12,01);
-	private LocalDate fineLezioni;// = new LocalDate(2015,6,12);
+	private LocalDate inizioLezioni;
+	private LocalDate fineLezioni;
 
 	final private LocalDate dataZero = new LocalDate(0L);
 	private static Calendario instance;

@@ -27,12 +27,5 @@ public class Stampa {
 		}
 		stampaln();
 	}
-//	public static void stampaArgomenti(CompitoInClasseRS compitoRS){
-//		stampaln();
-//		stampaln("Argomenti compito");
-//		for(ArgomentoRS arg : compitoRS.getArgomentiRS()){
-//			Stampa.stampaln("Argomento: "+ arg.getIdArgomento() + ", nome: " + arg.getNome() + ", descrizione: "+arg.getDescrizione()+".");
-//		}
-//		stampaln();
-//	}
+
 }

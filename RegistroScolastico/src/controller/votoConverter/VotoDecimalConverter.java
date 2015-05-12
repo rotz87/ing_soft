@@ -25,7 +25,7 @@ public class VotoDecimalConverter extends VotoConverter{
 
 	@Override
 	public Voto labelToVoto(Map<Integer, String> label) {
-//		Map<Integer, String> label;
+
 		Float valore;
 		String cifra1;
 		String cifra2;
@@ -35,8 +35,6 @@ public class VotoDecimalConverter extends VotoConverter{
 		int point; 
 		
 		super.checkFormatoCorretto(label);
-		
-//		label = votoRS.getLabel();
 		
 		cifra1 = label.get(1);
 		

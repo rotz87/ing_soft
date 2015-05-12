@@ -86,7 +86,6 @@ public class CompitoInClasseController {
 		Map<Studente, Voto> mapVoti;
 		Studente studente;
 		Voto voto;
-//		Float votoValore;
 				
 		mapVoti = new HashMap<Studente, Voto>();
 		compito = getCompitoInCLasseByID(idCompito);

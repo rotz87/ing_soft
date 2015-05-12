@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import org.joda.time.LocalDate;
-//import org.orm.PersistentException;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,11 +21,9 @@ import domain.model.Classe;
 import domain.model.Docente;
 import domain.model.GiornoSettimanaleFestivo;
 import domain.model.RegistroDocente;
-//import domain.model.DocenteCriteria;
 import domain.model.Studente;
 
 @RestController
-//@RequestMapping("/classi")
 @RequestMapping(ApiPath.CLASSI)
 public class ClassePresenter {
 	

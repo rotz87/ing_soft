@@ -31,7 +31,6 @@ import domain.model.Studente;
 
 
 @RestController
-//@RequestMapping("/classi/{idClasse}/appelli")
 @RequestMapping(ApiPath.CLASSE_APPELLI)
 public class AppelloPresenter {
 	  
@@ -61,7 +60,6 @@ public class AppelloPresenter {
 	  }
 		
 	  
-//		@RequestMapping(value = "/{idAppello}", method = RequestMethod.GET)
 		@RequestMapping(value = ApiPath.ID_APPELLO, method = RequestMethod.GET)
 		public AppelloRS getAppello(@PathVariable int idAppello, @PathVariable int idClasse) {
 			
@@ -117,14 +115,11 @@ public class AppelloPresenter {
 			
 			appelloAvviabile = fAController.isAppelloOdiernoAvviabile(idClasse);
 			dataAppelloOdierno = new java.sql.Date( Calendario.getInstance().getDataOdierna().toDate().getTime());
-//			dataAppelloOdierno = Calendario.getInstance().getDataOdierna().toDate();
 			
 			return new AppelliContainerRS(appelloAvviabile, dataAppelloOdierno, appelliRS);
 
 		}
 		
-	
-//		@RequestMapping(value = "/{idAppello}/assenti", method = RequestMethod.POST)
 		@RequestMapping(value = ApiPath.APPELLO_ASSENTI, method = RequestMethod.POST)
 		public ResponseEntity<?> inserisciAssenze(@PathVariable int idAppello, @PathVariable int idClasse, @RequestBody AssentiContainerRS assenti){
 			FaiAppelloController fAController;
@@ -160,7 +155,7 @@ public class AppelloPresenter {
 		 * @param idClasse
 		 * @return Collection<idStudentiAssenti>
 		 */
-//		@RequestMapping(value = "/{idAppello}/assenti", method = RequestMethod.GET)
+
 		@RequestMapping(value = ApiPath.APPELLO_ASSENTI, method = RequestMethod.GET)
 		public AssentiContainerRS getAssenti(@PathVariable int idAppello, @PathVariable int idClasse) {
 			
