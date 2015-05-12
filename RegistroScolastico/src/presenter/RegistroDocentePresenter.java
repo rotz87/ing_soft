@@ -72,9 +72,9 @@ public class RegistroDocentePresenter {
 		  } catch (DomainCheckedException e) {
 			throw new RuntimeException(e.getMessage());
 		  }
-		  medieController.setStrategiaRegistro(idRegistroDocente, strategy);
+//		  medieController.setStrategiaRegistro(idRegistroDocente, strategy);
 		  
-		  mapMedieScritto = medieController.getMedieScritto(idRegistroDocente, dataStart, dataEnd);
+		  mapMedieScritto = medieController.getMedieScritto(idRegistroDocente, dataStart, dataEnd, strategy);
 		  
 		  for(Studente studente : mapMedieScritto.keySet()){
 			  try {

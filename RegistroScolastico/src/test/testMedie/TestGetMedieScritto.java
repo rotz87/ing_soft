@@ -19,8 +19,8 @@ public class TestGetMedieScritto {
 		
 		MedieController medieController = new MedieController();
 		
-		medieController.setStrategiaRegistro(idRegistroProva, new MediaAritmeticaStrategy());
-		mapVoti = medieController.getMedieScritto(idRegistroProva, dataInizio, dataFine);
+//		medieController.setStrategiaRegistro(idRegistroProva, new MediaAritmeticaStrategy());
+		mapVoti = medieController.getMedieScritto(idRegistroProva, dataInizio, dataFine,  new MediaAritmeticaStrategy());
 		
 		for(Studente studente : mapVoti.keySet()){
 			Stampa.stampaln("Studente: "+ studente.getNome() + " "+ studente.getCognome() +": ");
