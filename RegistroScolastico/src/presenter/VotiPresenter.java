@@ -41,6 +41,10 @@ public class VotiPresenter {
 		  return rit;
 	  }
 	  
+	  
+	  /*
+	   *  gli array servono per questioni di compatibilità deglli oggetti json con AngularJS
+	   */
 	  @RequestMapping(value = ApiPath.VOTI_CONVERTER_ATTUALE, method = RequestMethod.PUT)
 	  public ResponseEntity<?> setVotiConverterSubclass(@RequestBody String[] nomeConverter){
 		  try {
@@ -55,6 +59,9 @@ public class VotiPresenter {
 		  return new ResponseEntity<>(null, httpHeaders, httpStatus);
 	  }
 	  
+	  /*
+	   *  gli array servono per questioni di compatibilità deglli oggetti json con AngularJS
+	   */
 	  @RequestMapping(value = ApiPath.VOTI_CONVERTER_ATTUALE, method = RequestMethod.GET)
 	  public String[] getVotiConverterAttuale(){
 		  String[] array = new String[1];

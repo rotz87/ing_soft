@@ -11,15 +11,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import controller.RegistroDocenteController;
 import presenter.resourceSupport.VotoRS;
 import sviluppo.Stampa;
 import domain.error.DomainCheckedException;
+import domain.model.RegistroDocente;
 import domain.model.Voto;
 
 
 @RestController
 @RequestMapping("/test")
 public class TestPresenter {
+	
+	
+	@RequestMapping(value = "/session", method = RequestMethod.GET)
+	public String getStrategy(){
+		String strategyStr;
+		
+		RegistroDocenteController registroDocenteController = new RegistroDocenteController();
+		
+		RegistroDocente registroDocente = registroDocenteController.getRegistroDocente(1);
+		
+		strategyStr = registroDocente.getMediaStrategy().getClass().getSimpleName();
+		
+		return strategyStr;
+		
+	}
 	
 	@RequestMapping(value = "/provaMap", method = RequestMethod.GET)
 	public Map<Integer, Collection<String>> getMap(){

@@ -37,14 +37,6 @@ public class VotoRS extends ResourceSupport {
 		
 		this.setLabel(votoConverter.votoToLabel(voto));
 	}
-	
-	public FormatoVoti takeFormato() throws DomainCheckedException{
-		VotoConverter votoConverter;
-		
-		votoConverter = VotoConverterFactory.getInstance().create();
-		
-		return votoConverter.getFormato();
-	}
 
 	public Map<Integer, String> getLabel() {
 		return label;
