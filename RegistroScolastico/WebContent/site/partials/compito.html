@@ -143,7 +143,7 @@
 			<fieldset class="margin-bottom-lg">
 			<legend >Stato attuale compito: {{ statiAmmissibili[currState].label}}</legend>
 			<div class="text-center">
-				<button id="svolgiButton" 		name="svolgiButton"		class="btn btn-default" ng-click="cambioStatoCompito(salvaSvolgiCompito,true)" 		title="il compito verrà segnato come svolto, sarà quindi possibile inserire i voti ma non modificare gli altri dati"  	ng-disabled="currState != statiPossibili.daSvolgere || dataFissata > calendario.oggi"> 	Svolgi </button>
+				<button id="svolgiButton" 		name="svolgiButton"		class="btn btn-default" ng-click="cambioStatoCompito(salvaSvolgiCompito,true)" 		title="il compito verrà segnato come svolto, sarà quindi possibile inserire i voti ma non modificare gli altri dati"  	ng-disabled="currState != statiPossibili.daSvolgere || disabilitaSvolgi"> 	Svolgi </button>
 				<button id="chiudiButton" 		name="chiudiButton"		class="btn btn-default" ng-click="cambioStatoCompito(salvaChiudiCompito,true)" 		title="chiudendo il compito non sarà più possibile modificare i voti inserit" 											ng-disabled="currState != statiPossibili.svolto || currState == statiPossibili.svolto && erroriVoto"> 		Chiudi </button>
 				<button id="eliminaButton" 		name="eliminaButton"	class="btn btn-default" ng-click="eliminaCompitoModal(eliminaCompito)" 				title="il compito verrà eliminato" 																						ng-disabled="currState != statiPossibili.daSvolgere"> 	Elimina </button>
 				<button id="annullaButton"		name="annullaButton"	class="btn btn-default" ng-click="cambioStatoCompito(salvaAnnullaCompito,true)" 	title="il compito verrà annullato e i voti non saranno considerati" 													ng-disabled="currState != statiPossibili.svolto"> 		Annulla </button>

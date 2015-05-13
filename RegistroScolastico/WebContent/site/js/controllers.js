@@ -34,10 +34,7 @@ registroControllers.controller('templateTitolo', ['$scope','$location','$rootSco
 registroControllers.controller('riempiElencoAppelli', ['$scope','rsClasse','$location','$http','$rootScope','$q','$routeParams', function($scope, rsClasse, $location, $http, $rootScope, $q, $routeParams) {
 	  
 	  var newUri;
-	  $scope.idClasse = 0;
-	  var nuovoAppello = [];
 	  // parsing del path dell'appello selezionato
-	  nuovoAppello = $location.path().split("/");
 	  
 	  $scope.idClasse = $routeParams.idClasse;
 	  $rootScope.idRegistroDocente = "0"
@@ -108,13 +105,8 @@ registroControllers.controller('riempiElencoAppelli', ['$scope','rsClasse','$loc
 			rsClasse.creaAppello({idClasse:$scope.idClasse},function(response,header){
 				//successo
 				$scope.appelloUri = header("location");
-				nuovoUri = $scope.appelloUri.split("/");
-				
-				newUri = $scope.appelloUri;
-				$scope.myUrl=newUri;
-				$rootScope.mioDato = {};
-				$rootScope.nuovoAppello = {};
-			    $rootScope.nuovoAppello = PostsCtrlAjax($scope, $http, $scope.myUrl, $rootScope.mioDato, $location)
+				var idAppello = $scope.appelloUri.split("/").slice(-1)[0]
+				$location.path($location.path()+"appelli/"+idAppello+"/")
 			},function (response,headers){
 				//fallimento
 				erroreSistema($rootScope, response.data, true)
@@ -148,18 +140,16 @@ registroControllers.controller('riempiElencoAppelli', ['$scope','rsClasse','$loc
 	});
 
 registroControllers.controller('faiAppello', ['$scope','rsClasse','$location','$http','$rootScope','$filter','$q','$routeParams', function($scope, rsClasse, $location, $http, $rootScope, $filter, $q,$routeParams){
-		$scope.appelloSelezionato = {};
 		
 		$scope.idClasse = $routeParams.idClasse;
 		$scope.idAppello = $routeParams.idAppello;
+		$rootScope.idRegistroDocente = "0"
 		/*
 		 * codice di esempio di un appello:
 		 * 
 		 */
 		$scope.predicate = 'cognome';
 		
-		var appelloStudenti = new rsClasse();
-		appelloStudenti.idClasse = $scope.idClasse;
 		$scope.studenti = rsClasse.listaStudenti(
 				{idClasse:$scope.idClasse}, 
 				function(response, header){
@@ -171,9 +161,6 @@ registroControllers.controller('faiAppello', ['$scope','rsClasse','$location','$
 					erroreSistema($rootScope, response.data, true)
 				});
 
-		var appelloCorrente = new rsClasse();
-		appelloCorrente.idClasse = $scope.idClasse;
-		appelloCorrente.idAppello = $scope.idAppello;
 		$scope.appello = rsClasse.getAppelliClasse(
 				{idClasse:$scope.idClasse,idAppello:$scope.idAppello},
 				function (response,header)
@@ -300,9 +287,6 @@ registroControllers.controller('faiAppello', ['$scope','rsClasse','$location','$
 		$scope.nonSupportato = function(){
 			nonSupportato($rootScope,null)
 		}
-		$scope.disabilitaRitardo = true; 
-		$scope.disabilitaUscita = true;
-		$scope.disabilitaGiustificazione = true;
 		
 		$scope.controllaAppello = function()
 		{
@@ -327,10 +311,11 @@ registroControllers.controller('faiAppello', ['$scope','rsClasse','$location','$
 }]);
 
 function PostsCtrlAjax($scope, $http, myUri, destinazione, $location) {
+	// utilizzato per il reindirizzamento dopo la creazione dell'appello
+	// rimpiazzato da $location.path($location.path()+"appelli/"+idAppello)
     var risorsa = {};
     $http({method: 'GET', url: myUri }).success(function(data,header) {
         destinazione.data = data;
-        
         destinazione.url = $scope.idClasse+"/registroDiClasse/appelli/"+data.idAppello;
         risorsa = destinazione;
         $location.path("classi/"+destinazione.url);
@@ -338,6 +323,7 @@ function PostsCtrlAjax($scope, $http, myUri, destinazione, $location) {
     return risorsa;
 }
 function retrieveObjectFromUrl($http, resourceUrl, destinazione){
+	// utilizzabile nel caso in cui sia disponibile un url come link di una risorsa
 	var remoteObject = {};
 	$http({method:'GET', url: resourceUrl}).success(function(data){
 		remoteObject = data;
@@ -347,70 +333,31 @@ function retrieveObjectFromUrl($http, resourceUrl, destinazione){
 }
 
 registroControllers.controller('popolamentoNavigazione', ['$scope', 'rsClasse', '$q', '$rootScope', '$filter', '$location','$routeParams', '$route', function($scope, rsClasse, $q, $rootScope, $filter, $location, $routeParams, $route){
-	
+
+	$scope.currRegistro = {};
+	$scope.elencoRegistri = []
 	$scope.$watch("idClasse",
 			function(newValue,oldValue){
-		//c'è un nuovo valore di idClasse
-		
-
-		if (newValue != oldValue && newValue != null)
+		if(newValue != null)
 		{
-			$scope.elencoClassi = rsClasse.elencoClassi({},
-					function(response,headers)
-					{
-						//successo
+		// se cambio classe ricarico l'elenco delle classi disponibili
+		$scope.elencoClassi = rsClasse.elencoClassi({},function(response,header)
+				{
+					//successo
 					for(var classe in response)
-					{
-						if (response[classe].idClasse == $scope.selezioneAttuale.idClasse)
-							{
-								$scope.selezioneAttuale.classe = response[classe];
-								$rootScope.nomeClasse = $scope.selezioneAttuale.classe.nome
-							}
-						}
-					},
-					function(response,headers){
-						//fallimento
-						erroreSistema($rootScope, response.data, true)
-					})
-			$scope.elencoAppelli = rsClasse.getAppelliClasse({idClasse:newValue},
-				function(response,headers){
-					var appelloTrovato = false;
-					var appelli = response.appelli
-					for (var appelloIndex in appelli)
 						{
-							if(appelli[appelloIndex].idAppello == $scope.idAppello)
-							{
-								appelloTrovato = true
-							}
-						}
-					if(appelloTrovato == false)
-					{
-						$rootScope.idAppello = null;
-					}
-				  //successo
-			  },function(response,headers){
-				  //fallimento
-				  erroreSistema($rootScope, response.data, true)
-			  })
-		} else if(newValue != null)
-			{
-			$scope.elencoClassi = rsClasse.elencoClassi({},function(response,header)
-					{
-						//successo
-						for(var classe in response)
-							{
-								if (response[classe].idClasse == $scope.selezioneAttuale.idClasse)
-									{
-										$scope.selezioneAttuale.classe = response[classe];
-										$rootScope.nomeClasse = $scope.selezioneAttuale.classe.nome
-									}
+							if (response[classe].idClasse == $scope.selezioneAttuale.idClasse)
+								{
+									$scope.selezioneAttuale.classe = response[classe];
+									$rootScope.nomeClasse = $scope.selezioneAttuale.classe.nome
 								}
-							},
-					function(response,header){
-						//fallimento
-						erroreSistema($rootScope, response.data, true)
-					});
-			}
+							}
+						},
+				function(response,header){
+					//fallimento
+					erroreSistema($rootScope, response.data, true)
+				});
+		}
 		$scope.selezioneAttuale = {};
 		$scope.selezioneAttuale.idClasse = $scope.idClasse;
 	})
@@ -437,7 +384,13 @@ registroControllers.controller('popolamentoNavigazione', ['$scope', 'rsClasse', 
 		}
 	})
 	var eliminaParametri = function(){
+		/**
+		 * consente di eliminare gli attributi del rootScope 
+		 * che prendono i valori dal routeParams
+		 * 
+		 */
 		for (var param in $routeParams)
+		
 		{
 			delete $rootScope[param]
 		}
@@ -452,9 +405,11 @@ registroControllers.controller('popolamentoNavigazione', ['$scope', 'rsClasse', 
 	};
 	
 	$scope.vaiAImpostazioni = function(){
-		// eliminazione parametri che vengono usati dalla navigation bar
+	
 		if ($location.path != "/impostazioni")
 		{
+			// eliminazione parametri che vengono usati dalla
+			// barra di navigazione
 			eliminaParametri();
 			delete $routeParams;
 			$location.path("/impostazioni/")
@@ -464,8 +419,11 @@ registroControllers.controller('popolamentoNavigazione', ['$scope', 'rsClasse', 
 	$scope.vaiAlRegistro = function(idRegistroDocente)
 	{
 		var url = ""
+		eliminaParametri()
 		if (idRegistroDocente == 0)
 		{
+			//reindirizzo verso il registro di classe:
+			//Hp: gli id dei registri dei docenti partono da 1
 			url = "/classi/"+$routeParams.idClasse+"/registroDiClasse/"
 		}
 		else
@@ -492,8 +450,6 @@ registroControllers.controller('popolamentoNavigazione', ['$scope', 'rsClasse', 
 			eliminaParametri()
 			$location.path("classi/"+idClasse)
 	}
-	$scope.currRegistro = {};
-	$scope.elencoRegistri = []
 	$scope.$watch("idRegistroDocente",function (newValue,oldValue){
 		if(newValue != null)
 		{
@@ -505,16 +461,17 @@ registroControllers.controller('popolamentoNavigazione', ['$scope', 'rsClasse', 
 					for (var i in response)
 					{
 						if (response[i].idRegistroDocente == newValue)
-							{
+						{
 							$scope.currRegistro = response[i]
-							}
+						}
 						if(response[i].idRegistroDocente)
+						{
 							$scope.elencoRegistri.push(response[i]);
+						}
 					}
 				},function(response,headers){
 					erroreSistema($rootScope, response.data, true)
 				});
-
 			}
 		}
 		else
@@ -531,7 +488,8 @@ registroControllers.controller('popolamentoNavigazione', ['$scope', 'rsClasse', 
 
 registroControllers.controller('riempiElencoClassi', ['$scope','rsClasse','$q','$location','$rootScope', function($scope,rsClasse,$q,$location,$rootScope) {
 	
-	$scope.elencoClassi = rsClasse.elencoClassi({},function(response,header)
+	$scope.elencoClassi = rsClasse.elencoClassi({},
+			function(response,header)
 			{
 				//successo
 			},
@@ -547,8 +505,8 @@ registroControllers.controller('riempiElencoClassi', ['$scope','rsClasse','$q','
 registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','Compito','$q','$location','$rootScope','$routeParams','$route',
     function($scope,rsClasse,Compito,$q,$location,$rootScope,$routeParams,$route) {
 	
-	var mioCompito = {};
-	var stateFactory = new CompitoInClasseFactory();
+	var mioCompito = new CompitoInClasse();
+	var stateFactory = new CompitoInClasseStateFactory();
 	$scope.statiAmmissibili = stateFactory.getStatiAmmissibili();
 	$scope.statiPossibili = enumStatesCompito;
 	$scope.erroreVoto = []
@@ -648,7 +606,9 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 				function(response,headers)
 				{
 					//successo
-					mioCompito = stateFactory.creaCompitoState(response.state)
+					// imposto lo stato del compito in classe 
+					// in base a quello ricevuto dal server
+					mioCompito.setState(stateFactory.creaCompitoState(response.state))
 					mioCompito.setInfo($scope.compitoInClasse.data, $scope.compitoInClasse.oraInizio,$scope.compitoInClasse.oraFine);
 					$scope.currState = mioCompito.getStato()
 					$scope.vecchioCompitoInClasse = angular.copy($scope.compitoInClasse)
@@ -658,14 +618,15 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 					//fallimento
 					erroreSistema($rootScope, response.data, true)
 				})
-
 	},function(response,headers){
 		//fallimento
 		erroreSistema($rootScope, response.data, true)
 	});
 	
+	//valori dell'ordinamento predefinito delle liste
 	$scope.stud_predicate = "cognome"
 	$scope.args_predicate = "-data" //ordina data in ordine decrescente
+	
 	$scope.aggiungiArgomento = function(){
 		var auxArgomento = {idArgomento : null};
 		$scope.compitoInClasse.argomentiRS.push(auxArgomento);
@@ -674,20 +635,15 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	
 	$scope.salvaCompito = function(alProssimoStato){
 		mioCompito.salvaCompito($scope,alProssimoStato)
-		//console.log("$scope.salvaCompito: "+ compito + " ajax: "+ ajax)
 	}
 	$scope.aggiornaDatiCompito = function(alProssimoStato,ajax){
-		//var CompitoInClasse = Compito.get({idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente,idCompito : $routeParams.idCompito});
+		
 		var tmpCompito = {};
 		for (key in $scope.compitoInClasse.toJSON())
 		{
 			tmpCompito[key] = $scope.compitoInClasse.toJSON()[key];
 		}
 		
-//		if(tmpCompito.data.split("/").reverse().join("-"))
-//		{
-//			tmpCompito.data = new Date(tmpCompito.data.split("/").reverse().join("-")).getTime();
-//		}
 		if(tmpCompito.data != null){
 			tmpCompito.data = tmpCompito.data.getTime()
 		}
@@ -733,8 +689,9 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 					erroreSistema($rootScope, response.data, true)
 				});
 	}
+	
+	
 	$scope.registratoCompitoModal = function(){
-		
 		$scope.modal = {};
 		$scope.modal.messaggio = "Il compito è stato registrato correttamente";
 		$scope.modal.titolo = "Compito registrato";
@@ -743,6 +700,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		$rootScope.modal = $scope.modal;
 		$("#myModal").modal("show");
 	}
+	
 	$scope.intervalloVoti = [0,1,2,3,4,5,6,7,8,9,10]
 //	var votiAusiliari = {"1":["A","B","C","D","E"],"2":["+","++","-","--","1/2"]};
 	
@@ -750,17 +708,13 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	var formatoVoti = Compito.formatoVoti(
 			{},
 			function(response,headers){
+				//caricamento dei voti ammessi (non delle combinazioni di essi)
 				$scope.votiPossibili = response.cifre;
 				
 				},
 			function(response,headers){
 					erroreSistema($rootScope, response.data, true)
 				});
-//	for (var key in votiAusiliari)
-//	{
-//		$scope.votiPossibili[key] = votiAusiliari[key];
-//		$scope.votiPossibili[key] = votiAusiliari[key];
-//	}
 	$scope.insiemeVotiStringa = {}
 	$scope.inserisciVoto = function(studente,voto){
 		studente.voto = voto;
@@ -843,6 +797,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 				function(response,headers)
 				{
 					//successo
+					//rimozione del div dovuto al modal
 					$('.modal-backdrop').remove();
 					$scope.tornaAiCompiti()
 					
@@ -959,18 +914,18 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		$scope.argomentiSvolti = rsClasse.argomentiSvolti({idClasse : $routeParams.idClasse, idRegistroDocente : $routeParams.idRegistroDocente},
 			function(response,headers)
 			{
-			//successo
-			//idArgomento e nome
-			argomentiModal($scope)
-//			$scope.modal={}
-			$scope.modal.titolo = "Seleziona gli argomenti";
-			$scope.modal.colore = "modal-header-info";
-			$scope.modal.coloreOk = "modal-header-info";
-			$scope.modal.bottoneOk = "btn-info";
-			$scope.modal.coloreAnnulla = "modal-header-default";
-			$scope.modal.bottoneAnnulla = "btn-default";
-			$scope.modal.okButtonModal = function(){
-				$scope.confermaArgomenti();
+				//successo
+				//idArgomento e nome
+				argomentiModal($scope)
+	//			$scope.modal={}
+				$scope.modal.titolo = "Seleziona gli argomenti";
+				$scope.modal.colore = "modal-header-info";
+				$scope.modal.coloreOk = "modal-header-info";
+				$scope.modal.bottoneOk = "btn-info";
+				$scope.modal.coloreAnnulla = "modal-header-default";
+				$scope.modal.bottoneAnnulla = "btn-default";
+				$scope.modal.okButtonModal = function(){
+					$scope.confermaArgomenti();
 			}
 			//fa una copia degli argomenti del compito in classe
 			//per permettere l'aggiornamento in un secondo tempo
@@ -1003,6 +958,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 				$scope.dateCalendario.giorniFestivi[index] = data;
 			}
 			$scope.dateCalendario.giorniSettimanaliFestivi = response.giorniSettimanaliFestivi;
+			
 			/**
 			 * 
 			 * inizializzare il calendario dopo che le date sono state caricate!!!
@@ -1013,25 +969,10 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 			var inizioAnno = new Date($scope.calendario.inizioAnno);
 			var fineAnno = new Date($scope.calendario.fineAnno);
 			var dataOdierna = new Date($scope.calendario.oggi);
-			$("#bootstrapCalendario").datepicker({
-			    todayBtn: false,
-			    todayHighlight: false,
-			    format: "yyyy-mm-dd",
-			    dateFormat: "yyyy-mm-dd",
-			    language:"it",
-			    daysOfWeekDisabled: $scope.dateCalendario.giorniSettimanaliFestivi,
-			    datesDisabled: $scope.dateCalendario.giorniFestivi,
-			    startDate: inizioAnno,
-			    endDate: fineAnno,
-			    defaultViewDate:{
-			    					year: dataOdierna.getFullYear(), 
-			    					month : dataOdierna.getMonth(), 
-			    					day: dataOdierna.getDate()
-			    				},
-			    gotoCurrent: true,
-			    enableOnReadonly: false,
-			    disableTouchKeyboard: true
-			})
+			
+			impostaCalendario("#bootstrapCalendario",$scope.calendario,$scope.dateCalendario)
+
+			
 		
 	},function(response,headers){
 		//fallimento
@@ -1078,10 +1019,16 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 					{	//fallimento
 						erroreSistema($rootScope, response.data, true)
 					});
+			$scope.dataFissata = new Date(newValue).getTime();
 		}
 		else{
 			$scope.erroreStudenti = "Data non impostata"
 		}
+		
+		//abilito lo svolgimento se la data non è nulla e se la data fissata è antecedente il giorno odierno
+		//in realtà è un disabilitaSvolgi
+		$scope.disabilitaSvolgi = !(($scope.dataFissata != null) && ($scope.dataFissata <= $scope.calendario.oggi))
+		
 	})
 	
 	
@@ -1222,11 +1169,13 @@ registroControllers.controller('mediaVotiController',['$scope','rsClasse','media
 	$scope.form.dataInizio;
 	var calendario = rsClasse.calendario({},
 			function(response,headers){
-		
+		var dateCalendario = {};
+			dateCalendario.giorniFestivi = [];
+			dateCalendario.giorniSettimanaliFestivi = []
 		var dataOdierna = new Date(calendario.oggi)
 		var giorniFestivi = rsClasse.dateFestive(
 				{idClasse:$routeParams.idClasse},
-				function(){
+				function(response,headers){
 					var dateFestive = [];
 					for( var indice in giorniFestivi.giorniFestivi)
 					{
@@ -1234,31 +1183,19 @@ registroControllers.controller('mediaVotiController',['$scope','rsClasse','media
 						
 						dateFestive.push(new Date(tmpDate.getTime() - tmpDate.getTimezoneOffset()*60*1000))
 					}
-					$(".bootstrapCalendario").datepicker({
-					    todayBtn: true,
-					    todayHighlight: false,
-					    format: "yyyy-mm-dd",
-						dateFormat: "yyyy-mm-dd",
-					    language:"it",
-					    daysOfWeekDisabled: giorniFestivi.giorniSettimanaliFestivi,
-					    datesDisabled: dateFestive,
-					    startDate: new Date(calendario.inizioAnno),
-					    endDate: new Date(calendario.fineAnno),
-					    defaultViewDate: {year: dataOdierna.getFullYear() , month:dataOdierna.getMonth(),day:dataOdierna.getDate()},
-					    gotoCurrent: true,
-					    enableOnReadonly: false,
-					    disableTouchKeyboard: true
-					})
+					dateCalendario.giorniFestivi = dateFestive;
+					dateCalendario.giorniSettimanaliFestivi = giorniFestivi.giorniSettimanaliFestivi;
+					impostaCalendario(".bootstrapCalendario", calendario, dateCalendario)
 				},
-				function(){
-					
+				function(response,headers){
+					//fallimento
+					erroreSistema($rootScope, response.data, true)
 				})
-
 	},
 			function(response,headers){
 		erroreSistema($rootScope, response.data, true)
 	});
-	
+	//inizializzazione ad un valore predefinito delle date
 	var parametriMediaVoti = angular.copy($routeParams)
 	parametriMediaVoti.strategia = ""
 	parametriMediaVoti.dataInizio = new Date("2014-12-10").getTime();
@@ -1304,23 +1241,29 @@ registroControllers.controller('mediaVotiController',['$scope','rsClasse','media
 			function(response,headers){
 				
 				$scope.form.strategia = response[0];
-				parametriMediaVoti.strategia = $scope.form.strategia.className
+				
 				$scope.form.dataInizio = new Date(calendario.inizioAnno);
 				$scope.form.dataFine = new Date(calendario.oggi);
+				
+				parametriMediaVoti.strategia = $scope.form.strategia.className
 				parametriMediaVoti.dataInizio = calendario.inizioAnno;
 				parametriMediaVoti.dataFine = calendario.oggi;
+				
 				mediaVoti.get(parametriMediaVoti,
-				function(response,headers){
-			$scope.studentiMedieRS = response;
-			for (var index in $scope.studentiMedieRS){
-				var studente = $scope.studentiMedieRS[index]
-				if(studente.idStudente)
+				function(response,headers)
 				{
-					studente.mediaScritto.stringa = convertiVotoStringa(studente.mediaScritto.label)
-				}}
-		},function(response,headers){
-			
-		})
+					$scope.studentiMedieRS = response;
+					for (var index in $scope.studentiMedieRS){
+						var studente = $scope.studentiMedieRS[index]
+						if(studente.idStudente)
+						{
+							studente.mediaScritto.stringa = convertiVotoStringa(studente.mediaScritto.label)
+						}
+					}
+				},
+				function(response,headers){
+					erroreSistema($rootScope, response.data, true)
+					})
 			},
 			function(response,headers){
 				//fallimento
@@ -1328,13 +1271,14 @@ registroControllers.controller('mediaVotiController',['$scope','rsClasse','media
 			}
 	);
 	rsClasse.registriDocente($routeParams,
-			function(response,headers){
-		for (var i in response){
-			if (response[i].idRegistroDocente == $routeParams.idRegistroDocente)
-				{
-					$scope.registroSelezionato = response[i];
-				}
-		} 
+			function(response,headers)
+			{
+				for (var i in response){
+					if (response[i].idRegistroDocente == $routeParams.idRegistroDocente)
+						{
+							$scope.registroSelezionato = response[i];
+						}
+				} 
 			},function(response,headers){
 				erroreSistema($rootScope, response.data, true)
 			})
@@ -1353,17 +1297,17 @@ registroControllers.controller('funzioniRegistroDocente',['$scope','rsClasse','$
 	};
 	rsClasse.registriDocente({idClasse : $routeParams.idClasse},
 			function(response,headers){
-		for (var i in response){
-			if (response[i].idRegistroDocente == $routeParams.idRegistroDocente)
-				{
-					$scope.registroSelezionato = response[i];
-				}
-		} 
+				for (var i in response){
+					if (response[i].idRegistroDocente == $routeParams.idRegistroDocente)
+						{
+							$scope.registroSelezionato = response[i];
+						}
+				} 
 			},function(response,headers){
 				erroreSistema($rootScope, response.data, true)
 			})
 	rsClasse.elencoClassi({},
-			function(response)
+			function(response,headers)
 			{
 				
 				for(var i in response){
@@ -1483,7 +1427,6 @@ function convertiVotoStringa(label){
 		 * lo spazio non viene inserito, lo stesso per le cifre successive
 		 */
 		var myregp = new RegExp("^[.]{1}")
-		
 		if(label[j+1] && (!myregp.test(label[j+1])))
 		{
 			votoStringa = votoStringa.concat(" ");
@@ -1492,4 +1435,27 @@ function convertiVotoStringa(label){
 		
 	}
 	return votoStringa;
+}
+
+var impostaCalendario = function(containerCalendario,calendario,dateCalendario){
+	var dataOdierna = new Date(calendario.oggi);
+	$(containerCalendario).datepicker({
+	    todayBtn: false,
+	    todayHighlight: false,
+	    format: "yyyy-mm-dd",
+	    dateFormat: "yyyy-mm-dd",
+	    language:"it",
+	    daysOfWeekDisabled: dateCalendario.giorniSettimanaliFestivi,
+	    datesDisabled: dateCalendario.giorniFestivi,
+	    startDate: new Date(calendario.inizioAnno),
+	    endDate: new Date(calendario.fineAnno),
+	    defaultViewDate:{
+	    					year: dataOdierna.getFullYear(), 
+	    					month : dataOdierna.getMonth(), 
+	    					day: dataOdierna.getDate()
+	    				},
+	    gotoCurrent: true,
+	    enableOnReadonly: false,
+	    disableTouchKeyboard: true
+	})
 }

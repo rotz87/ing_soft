@@ -1,5 +1,6 @@
 <div class="container-fluid">
 	<div class="row">
+		<p>Attualmente le classi assegnate sono le seguenti:</p>
 		<div class="col-md-3"
 			ng-repeat="classe in elencoClassi | orderBy : 'nome'">
 			<div class="btn btn-default" ng-click="scegliClasse(classe.idClasse)">
