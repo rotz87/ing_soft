@@ -144,6 +144,10 @@ public class CompitoInClasse {
 		return this._state;
 	}
 	
+	public boolean isChiuso() {
+		return this._state.isChiuso();
+	}
+	
 	public String toString() {
 		return String.valueOf(getID());
 	}

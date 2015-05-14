@@ -17,4 +17,7 @@ public class CompitoChiuso extends CompitoInClasseStateImp {
 		return CompitoChiuso.instance;
 	}
 
+	public boolean isChiuso(){
+		return true;
+	}
 }

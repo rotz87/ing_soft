@@ -4,18 +4,24 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 
+import domain.model.LibrettoVotiLineItem;
 import domain.model.Voto;
 
 public class MediaScartaPeggioreStrategy implements IMediaStrategy {
 
 	@Override
-	public Voto calcolaMedia(Collection<Voto> voti) {
+	public Voto calcolaMedia(Collection<LibrettoVotiLineItem> libVotiLineItems) {
 		
 		Voto min;
 		Collection<Voto> votos = new LinkedList<Voto>();
 		Collection<Voto> votosNull = new LinkedList<Voto>();
 		
-		votos.addAll(voti);
+		for(LibrettoVotiLineItem libVotiLI: libVotiLineItems){
+			if(libVotiLI.getCompitoInClasse().isChiuso()){
+				votos.add(libVotiLI.getVoto());
+			}
+		}
+//		votos.addAll(voti);
 		for (Voto voto : votos){
 			if(voto.getValore() == null){
 				votosNull.add(voto);
@@ -49,6 +55,5 @@ public class MediaScartaPeggioreStrategy implements IMediaStrategy {
 		
 		return rit;
 	}
-	
 
 }

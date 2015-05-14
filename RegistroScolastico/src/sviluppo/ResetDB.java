@@ -511,8 +511,10 @@ public class ResetDB {
 			registroBianchiPrimaB.getArgomentiSvolti().add(usa);
 			registroBianchiPrimaB.getArgomentiSvolti().add(canada);
 			registroBianchiPrimaB.getArgomentiSvolti().add(messico);
-
-//			CREAZIONE DEL PRIMO COMPITO IN CLASSE
+			
+//			COMPITI IN CLASSE DI STRORIA
+			
+//			CREAZIONE DEL PRIMO COMPITO IN CLASSE -sto
 			Collection<Argomento> argomenti = new LinkedList<Argomento>();
 			argomenti.clear();
 			argomenti.add(worldWar1);
@@ -535,15 +537,16 @@ public class ResetDB {
 			
 			compitoStoria1A.setSvolto();
 			compitoStoria1A.inserisciVoti(mapVoti);
+			compitoStoria1A.chiudi();
 			
-//			CREAZIONE DEL SECONDO COMPITO IN CLASSE
+//			CREAZIONE DEL SECONDO COMPITO IN CLASSE -sto
 			argomenti.clear();
 			compitoStoria1A = new CompitoInClasse(registroRossiPrimaAstoria);
 			compitoStoria1A.setInfo(java.sql.Date.valueOf("2014-12-15"), java.sql.Time.valueOf("10:00:00"), java.sql.Time.valueOf("11:30:00"), argomenti);
 
 			registroRossiPrimaAstoria.getCompitiInClasse().add(compitoStoria1A);
 			
-//			CREAZIONE DEL TERZO COMPITO IN CLASSE 
+//			CREAZIONE DEL TERZO COMPITO IN CLASSE -sto
 
 			Collection<Argomento> argomenti_3 = new LinkedList<Argomento>();
 			argomenti_3.clear();
@@ -568,6 +571,59 @@ public class ResetDB {
 			
 			compitoStoria1A_3.setSvolto();
 			compitoStoria1A_3.inserisciVoti(mapVoti_3);
+			compitoStoria1A_3.chiudi();
+			
+//			COMPITI IN CLASSE DI MATEMATICA
+//			CREAZIONE DEL PRIMO COMPITO IN CLASSE -mat
+			Collection<Argomento> argomentiMat1 = new LinkedList<Argomento>();
+			argomentiMat1.clear();
+			argomentiMat1.add(disequazioni);
+			CompitoInClasse compitoMat1A_1 = new CompitoInClasse(registroRossiPrimaAmat);
+			compitoMat1A_1.setInfo(java.sql.Date.valueOf("2014-12-16"), java.sql.Time.valueOf("10:30:00"), java.sql.Time.valueOf("12:30:00"), argomentiMat1);
+
+			registroRossiPrimaAmat.getCompitiInClasse().add(compitoMat1A_1);
+			
+			Map<Studente, Voto> mapVoti_mat;
+			mapVoti_mat = new HashMap<Studente, Voto>();
+			
+			mapVoti_mat.put(pieroRusso, new Voto(4.4f));
+			mapVoti_mat.put(marioRomano, new Voto(7f));
+			mapVoti_mat.put(leonardoRicci, new Voto(8f));
+			mapVoti_mat.put(valentinoFarina, new Voto(9f));
+			mapVoti_mat.put(roccoBenedetti, new Voto(6.5f));
+			mapVoti_mat.put(antonioGuerra, new Voto(10.2f));
+			mapVoti_mat.put(cristinaAngeli, new Voto(6.4f));
+			
+			compitoMat1A_1.setSvolto();
+			compitoMat1A_1.inserisciVoti(mapVoti_mat);
+//			compitoMat1A_1.chiudi();
+			
+//			CREAZIONE DEL SECONDO COMPITO IN CLASSE -mat
+
+			Collection<Argomento> argomentiMat2 = new LinkedList<Argomento>();
+			argomentiMat2.clear();
+			argomentiMat2.add(equazioni);
+
+			CompitoInClasse compitoMat1A_2 = new CompitoInClasse(registroRossiPrimaAmat);
+			compitoMat1A_2.setInfo(java.sql.Date.valueOf("2014-12-02"), java.sql.Time.valueOf("9:30:00"), java.sql.Time.valueOf("11:30:00"), argomenti_3);
+			registroRossiPrimaAmat.getCompitiInClasse().add(compitoMat1A_2);
+			Map<Studente, Voto> mapVoti_mat2;
+			mapVoti_mat2 = new HashMap<Studente, Voto>();
+			mapVoti_mat2.put(pieroRusso, new Voto(4.4f));
+			mapVoti_mat2.put(marinoEsposito, new Voto(5.7f));
+			mapVoti_mat2.put(marioRomano, new Voto(6.5f));
+			mapVoti_mat2.put(davideDiSalvo, new Voto(8.2f));
+			mapVoti_mat2.put(ivoMarino, new Voto(7.5f));
+			mapVoti_mat2.put(leonardoRicci, new Voto(8.8f));
+			mapVoti_mat2.put(valentinoFarina, new Voto(6.2f));
+			mapVoti_mat2.put(roccoBenedetti, new Voto(2f));
+			mapVoti_mat2.put(antonioGuerra, new Voto(9.3f));
+			mapVoti_mat2.put(cristinaAngeli, new Voto(8.7f));
+						
+			
+			compitoMat1A_2.setSvolto();
+			compitoMat1A_2.inserisciVoti(mapVoti_mat2);
+//			compitoMat1A_2.chiudi();
 			
 //			SALVATAGGIO DELLA SCUOLA SUL DATABASE -------------------------------------------------------------
 			RSPersistentManager.instance().getSession().save(scuola1);

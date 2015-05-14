@@ -67,4 +67,8 @@ public abstract class CompitoInClasseStateImp implements CompitoInClasseState {
 	public  CompitoCommand getCompitoCommand(){
 		return this.compitoCommand;
 	}
+	
+	public boolean isChiuso(){
+		return false;
+	}
 }

@@ -78,8 +78,8 @@ public class RegistroDocenteImp {
 		return registroDocente.getClasse().equals(classe);
 	}
 	
-	private java.util.Map<Studente, java.util.Collection<Voto>> getVotiScritto(RegistroDocente registroDocente, java.sql.Date dataInizio, java.sql.Date dataFine) {
-		 Map<Studente, Collection<Voto>> rit = new HashMap<Studente, Collection<Voto>>();
+	private java.util.Map<Studente, java.util.Collection<LibrettoVotiLineItem>> getLibrettoVotiLineItemsScritto(RegistroDocente registroDocente, java.sql.Date dataInizio, java.sql.Date dataFine) {
+		 Map<Studente, Collection<LibrettoVotiLineItem>> rit = new HashMap<Studente, Collection<LibrettoVotiLineItem>>();
 		 Classe classe;
 		 LocalDate lDataInizio;
 		 LocalDate lDataFine;
@@ -91,12 +91,12 @@ public class RegistroDocenteImp {
 		 lDataFine = new LocalDate(dataFine);
 		
 		for(Studente studente: classe.getStudenti()){
-			Collection<Voto> collectionVoti = new LinkedList<Voto>();
+			Collection<LibrettoVotiLineItem> collectionVoti = new LinkedList<LibrettoVotiLineItem>();
 			for(CompitoInClasse compito : registroDocente.getCompitiInClasse()){
 				lDataCompito = new LocalDate(compito.getData());
 				libVotiLI = studente.getLibrettoVoti().getLibrettoLineItem(compito);
 				if(libVotiLI != null && (lDataCompito.isAfter(lDataInizio) || lDataCompito.isEqual(lDataInizio)) && (lDataCompito.isBefore(lDataFine) || lDataCompito.isEqual(lDataFine))){
-					collectionVoti.add(libVotiLI.getVoto());
+					collectionVoti.add(libVotiLI);
 				}
 			}
 			rit.put(studente, collectionVoti);
@@ -105,25 +105,25 @@ public class RegistroDocenteImp {
 		return rit;
 	}
 
-	private java.util.Map<Studente, java.util.Collection<Voto>> getVotiOrali(java.sql.Date dataInizio, java.sql.Date dataFine) {
+	private java.util.Map<Studente, java.util.Collection<Voto>> getLibrettoVotiLineItemsOrali(java.sql.Date dataInizio, java.sql.Date dataFine) {
 		//TODO: Implement Method
 		throw new UnsupportedOperationException();
 	}
 
-	private java.util.Map<Studente, java.util.Collection<Voto>> getVotiMisti(java.sql.Date dataInizio, java.sql.Date dataFine) {
+	private java.util.Map<Studente, java.util.Collection<Voto>> getLibrettoVotiLineItemsMisti(java.sql.Date dataInizio, java.sql.Date dataFine) {
 		//TODO: Implement Method
 		throw new UnsupportedOperationException();
 	}
 
 	public Map<Studente, Voto> calcolaMediaScritto(RegistroDocente registroDocente, Date dataInizio, Date dataFine) {
-		 Map<Studente, Collection<Voto>> mapVotiScritto;
+		 Map<Studente, Collection<LibrettoVotiLineItem>> mapVotiScritto;
 		 IMediaStrategy strategia = registroDocente.getMediaStrategy();
 		 Voto mediaScritto;
 		 Map<Studente, Voto> rit;
 
 		 
 		 rit = new HashMap<Studente, Voto>();
-		 mapVotiScritto = getVotiScritto(registroDocente, dataInizio, dataFine);
+		 mapVotiScritto = getLibrettoVotiLineItemsScritto(registroDocente, dataInizio, dataFine);
 		
 		 for(Studente studente : mapVotiScritto.keySet()){
 			 mediaScritto = strategia.calcolaMedia(mapVotiScritto.get(studente));

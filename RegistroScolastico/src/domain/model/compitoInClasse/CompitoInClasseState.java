@@ -24,7 +24,7 @@ public interface CompitoInClasseState {
 	
 	public abstract CompitoCommand getCompitoCommand();
 	
-	
+	public abstract boolean isChiuso();
 	
 }
 //ORM Hash:b668739f755106798c4b0ecd2dbf889f
