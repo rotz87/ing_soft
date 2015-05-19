@@ -83,7 +83,7 @@ public class ClassePresenter {
 		
 		classeController = new ClasseController();
 
-		date = classeController.getDateFestive(idClasse);
+		date = classeController.getDateFestiveESenzaAppello(idClasse);
 		giorniSettimanali = Calendario.getInstance().getGiorniSettimanaliFestivi();
 		
 		dateFestiveRS = new DateFestiveRS(date, giorniSettimanali);

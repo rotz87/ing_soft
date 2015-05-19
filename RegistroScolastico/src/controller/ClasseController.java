@@ -12,6 +12,8 @@ import domain.model.Classe;
 import domain.model.ClasseCriteria;
 import domain.model.Docente;
 import domain.model.DocenteCriteria;
+import domain.model.GiornoFestivo;
+import domain.model.RegistroAssenze;
 import domain.model.RegistroDocente;
 import domain.model.RegistroDocenteCriteria;
 import domain.model.Studente;
@@ -60,46 +62,48 @@ public class ClasseController {
 		
 	}
 
+	/**
+	 * Restituisce una collection di date che è data dall'unione delle date festive del calendario
+	 *  e delle date passate non festive che non hanno un appello (un compito in classe non può essere 
+	 *  fissato in una data passata per la quale non esiste un appello)
+	 * 
+	 * @param idClasse
+	 * @return
+	 */
 	
-	public Collection<LocalDate> getDateFestive(int idClasse){
-		Collection<LocalDate> dateFestive;
+	public Collection<LocalDate> getDateFestiveESenzaAppello(int idClasse){
 		Collection<LocalDate> rit;
-		FaiAppelloController appelloController;
+		Classe classe;
+		RegistroAssenze registroAssenze;
 		
-		dateFestive = Calendario.getInstance().getDateFestiveFuture();
-		appelloController = new FaiAppelloController();
+		rit = new LinkedList<LocalDate>();
 		
-		for(LocalDate data = Calendario.getInstance().getInizioLezioni(); data.isBefore(Calendario.getInstance().getDataOdierna()); data = data.plusDays(1) ){
-			if(!Calendario.getInstance().isSettimanaleFestivo(data) && appelloController.getAppello(idClasse, data) == null){
-				dateFestive.add(data);
-			}
+		classe = getClasseById(idClasse);
+		registroAssenze = classe.getRegistroAssenze();
+		rit.addAll(registroAssenze.getDateNonFestivePassateSenzaAppello());
+		for(GiornoFestivo ggf : Calendario.getInstance().getGiorniFestivi()){
+			rit.add(new LocalDate(ggf.getData()));
 		}
-		rit = dateFestive;
 		
 		return rit;
 	}
 
 	public Collection<RegistroDocente> getRegistriDocente(int idClasse, int idDocente) {
-		Classe classe;
 		Docente docente;
-		ClasseCriteria classeCriteria;
 		DocenteCriteria docenteCriteria;
 		RegistroDocenteCriteria registroDocenteCriteria;
 		Collection<RegistroDocente> registri;
 		
-		classeCriteria = null;
 		docenteCriteria = null;
 		registri = new LinkedList<RegistroDocente>();
 		
 		try {
-			classeCriteria = new ClasseCriteria();
 			docenteCriteria = new DocenteCriteria();
 			registroDocenteCriteria = new RegistroDocenteCriteria();
 		} catch (PersistentException e) {
 			throw new RuntimeException(ErrorMessage.REGISTRO_DOCENTE_UNLOADED);
 		}
-		classeCriteria.ID.eq(idClasse);
-		classe = classeCriteria.uniqueClasse();
+
 		docenteCriteria.ID.eq(idDocente);
 
 		docente = docenteCriteria.uniqueDocente();
@@ -111,5 +115,21 @@ public class ClasseController {
 		registri.retainAll(docente.getRegistriDocente());
 		
 		return registri;
+	}
+	
+	public Classe getClasseById(int idClasse){
+		Classe classe;
+		ClasseCriteria classeCriteria;
+
+		classeCriteria = null;
+
+		try {
+			classeCriteria = new ClasseCriteria();
+		} catch (PersistentException e) {
+			throw new RuntimeException(ErrorMessage.CLASSE_UNLOADED);
+		}
+		classeCriteria.ID.eq(idClasse);
+		classe = classeCriteria.uniqueClasse();
+		return classe;
 	}
 }

@@ -88,7 +88,7 @@ public class Calendario {
 		
 	}
 	
-	public Collection<LocalDate> getDateFestiveFuture(){
+	public Collection<LocalDate> getDateFestiveSempliciFuture(){
 		Collection<LocalDate> rit = new LinkedList<LocalDate>();
 		
 		for(LocalDate data = calcolaDataOdierna(); data.isBefore(this.fineLezioni); data = data.plusDays(1) ){
@@ -97,8 +97,8 @@ public class Calendario {
 			}
 		}
 
-		
 		return rit;
+		
 	}
 	
 	public boolean isInAnnoCorrente(java.sql.Date data){

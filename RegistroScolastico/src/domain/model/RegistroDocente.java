@@ -77,8 +77,20 @@ public class RegistroDocente {
 	
 	private domain.model.mediaStrategy.IMediaStrategy mediaStrategy;
 	
+	public java.util.Map<Studente, Voto> calcolaMediaScritto(java.sql.Date dataInizio, java.sql.Date dataFine) {
+		return this.implementor.calcolaMediaScritto(this, dataInizio, dataFine);
+	}
+	
+	public boolean contain(domain.model.compitoInClasse.CompitoInClasse compito) {
+		return this.implementor.contain(this, compito);
+	}
+	
 	public domain.model.compitoInClasse.CompitoInClasse creaCompito() {
 		return this.implementor.creaCompito(this);
+	}
+	
+	public void eliminaCompito(domain.model.compitoInClasse.CompitoInClasse compitoInClasse) {
+		this.implementor.eliminCompito(this, compitoInClasse);
 	}
 	
 	public java.util.Set<Argomento> getArgomentiSvolti() {
@@ -95,6 +107,14 @@ public class RegistroDocente {
 	
 	public domain.model.Materia getMateria() {
 		return this._materia;
+	}
+	
+	public domain.model.mediaStrategy.IMediaStrategy getMediaStrategy() {
+		return this.mediaStrategy;
+	}
+	
+	public boolean haClasse(domain.model.Classe classe) {
+		return this.implementor.haClasse(this, classe);
 	}
 	
 	public void inserisciInfoCompito(domain.model.compitoInClasse.CompitoInClasse compito, java.sql.Date data, java.sql.Time oraInizio, java.sql.Time oraFine, java.util.Collection<Argomento> argomenti) {
@@ -117,28 +137,8 @@ public class RegistroDocente {
 		this._materia = materia;
 	}
 	
-	public void eliminaCompito(domain.model.compitoInClasse.CompitoInClasse compitoInClasse) {
-		this.implementor.eliminCompito(this, compitoInClasse);
-	}
-	
-	public boolean contain(domain.model.compitoInClasse.CompitoInClasse compito) {
-		return this.implementor.contain(this, compito);
-	}
-	
-	public boolean haClasse(domain.model.Classe classe) {
-		return this.implementor.haClasse(this, classe);
-	}
-	
-	public domain.model.mediaStrategy.IMediaStrategy getMediaStrategy() {
-		return this.mediaStrategy;
-	}
-	
 	public void setMediaStrategy(domain.model.mediaStrategy.IMediaStrategy mediaStrategy) {
 		this.mediaStrategy = mediaStrategy;
-	}
-	
-	public java.util.Map<Studente, Voto> calcolaMediaScritto(java.sql.Date dataInizio, java.sql.Date dataFine) {
-		return this.implementor.calcolaMediaScritto(this, dataInizio, dataFine);
 	}
 	
 	public String toString() {

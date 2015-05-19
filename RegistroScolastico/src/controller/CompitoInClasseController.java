@@ -23,6 +23,7 @@ import domain.model.Classe;
 import domain.model.ClasseCriteria;
 import domain.model.Docente;
 import domain.model.DocenteCriteria;
+import domain.model.GiornoSettimanaleFestivo;
 import domain.model.RegistroDocente;
 import domain.model.Studente;
 import domain.model.StudenteCriteria;
@@ -350,6 +351,7 @@ public class CompitoInClasseController {
 		
 		ClasseController classeController;
 		Collection<LocalDate> dateFestive;
+		Collection<GiornoSettimanaleFestivo> giorniSettimanaliFestivi;
 		LocalDate localDate;
 		boolean rit;
 		
@@ -357,9 +359,11 @@ public class CompitoInClasseController {
 		classeController = new ClasseController();
 		localDate = new LocalDate(data);
 		
-		dateFestive = classeController.getDateFestive(classe.getID());
+		dateFestive = classeController.getDateFestiveESenzaAppello(classe.getID());
+		giorniSettimanaliFestivi = Calendario.getInstance().getGiorniSettimanaliFestivi();
 		
-		if(dateFestive.contains(localDate) || !Calendario.getInstance().isInAnnoCorrente(data)){
+		
+		if(dateFestive.contains(localDate)|| giorniSettimanaliFestivi.contains(new GiornoSettimanaleFestivo(localDate.getDayOfWeek())) || !Calendario.getInstance().isInAnnoCorrente(data)){
 			rit = false;
 		}
 
@@ -386,21 +390,9 @@ public class CompitoInClasseController {
 	}
 	
 	private Classe getClasseById(int idClasse){
-		ClasseCriteria classeCriteria;
-
-		Classe classe;
-
-		try{
-
-			classeCriteria = new ClasseCriteria();
-		}catch (PersistentException e){
-			throw new  RuntimeException(ErrorMessage.CLASSE_UNLOADED);
-		}
-		
-		classeCriteria.ID.eq(idClasse);
-		classe = classeCriteria.uniqueClasse();
-		
-		return classe;
+		ClasseController classeController;
+		classeController = new ClasseController();
+		return classeController.getClasseById(idClasse);
 	}
 	
 	private RegistroDocente getRegistroDocenteById(int idRegistroDocente){

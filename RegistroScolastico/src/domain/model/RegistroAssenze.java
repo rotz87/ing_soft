@@ -88,6 +88,10 @@ public class RegistroAssenze {
 		this.implementor.registraAssenze(this, libretti);
 	}
 	
+	public java.util.Collection<org.joda.time.LocalDate> getDateNonFestivePassateSenzaAppello() {
+		return this.implementor.getDateNonFestivePassateSenzaAppello(this);
+	}
+	
 	public String toString() {
 		return String.valueOf(getID());
 	}

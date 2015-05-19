@@ -1,6 +1,7 @@
 package domain.implementor;
 
 import java.util.Collection;
+import java.util.LinkedList;
 
 import org.joda.time.LocalDate;
 
@@ -121,6 +122,19 @@ public class RegistroAssenzeImp {
 		for(Studente studente : studenti ){
 			rit = rit && (!studente.getLibrettoAssenze().esisteAssenza(appello));
 		}
+		return rit;
+	}
+
+	public Collection<LocalDate>getDateNonFestivePassateSenzaAppello(RegistroAssenze registro) {
+		Collection<LocalDate> rit = new LinkedList<LocalDate>();
+		Calendario cal = Calendario.getInstance();
+		
+		for(LocalDate data = cal.getInizioLezioni(); data.isBefore(cal.getDataOdierna()); data = data.plusDays(1)){
+			if(!cal.isFestivo(data) && !registro.esisteAppello(data)){
+				rit.add(data);
+			}
+		}
+		
 		return rit;
 	}
 

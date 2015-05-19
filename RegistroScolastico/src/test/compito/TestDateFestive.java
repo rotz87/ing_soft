@@ -22,7 +22,7 @@ public class TestDateFestive {
 		new StartUp().start();
 		classeController = new ClasseController();
 //		dateFestive = Calendario.getInstance().getDateFestive();
-		dateFestive = classeController.getDateFestive(1);
+		dateFestive = classeController.getDateFestiveESenzaAppello(1);
 		
 		for (LocalDate data : dateFestive) {
 			Stampa.stampaln(data);
