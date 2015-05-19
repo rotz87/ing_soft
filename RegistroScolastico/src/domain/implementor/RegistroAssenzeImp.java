@@ -5,9 +5,12 @@ import java.util.LinkedList;
 
 import org.joda.time.LocalDate;
 
+import sviluppo.Stampa;
 import domain.error.ErrorMessage;
 import domain.model.Appello;
 import domain.model.Calendario;
+import domain.model.Classe;
+import domain.model.GiornoFestivo;
 import domain.model.LibrettoAssenze;
 import domain.model.RegistroAssenze;
 import domain.model.Studente;
@@ -133,6 +136,20 @@ public class RegistroAssenzeImp {
 			if(!cal.isFestivo(data) && !registro.esisteAppello(data)){
 				rit.add(data);
 			}
+		}
+		
+		return rit;
+	}
+
+	public Collection<LocalDate> getDateFestiveOSenzaAppello(RegistroAssenze registroAssenze) {
+		
+		Collection<LocalDate> rit;
+
+		rit = new LinkedList<LocalDate>();
+		
+		rit.addAll(registroAssenze.getDateNonFestivePassateSenzaAppello());
+		for(GiornoFestivo ggf : Calendario.getInstance().getGiorniFestivi()){
+			rit.add(new LocalDate(ggf.getData()));
 		}
 		
 		return rit;

@@ -71,21 +71,30 @@ public class ClasseController {
 	 * @return
 	 */
 	
-	public Collection<LocalDate> getDateFestiveESenzaAppello(int idClasse){
-		Collection<LocalDate> rit;
+	public Collection<LocalDate> getDateFestiveOSenzaAppello(int idClasse){
+//		Collection<LocalDate> rit;
+//		Classe classe;
+//		RegistroAssenze registroAssenze;
+//		
+//		rit = new LinkedList<LocalDate>();
+//		
+//		classe = getClasseById(idClasse);
+//		registroAssenze = classe.getRegistroAssenze();
+//		rit.addAll(registroAssenze.getDateNonFestivePassateSenzaAppello());
+//		for(GiornoFestivo ggf : Calendario.getInstance().getGiorniFestivi()){
+//			rit.add(new LocalDate(ggf.getData()));
+//		}
+//		
+//		return rit;
+		
+
 		Classe classe;
 		RegistroAssenze registroAssenze;
-		
-		rit = new LinkedList<LocalDate>();
-		
+				
 		classe = getClasseById(idClasse);
 		registroAssenze = classe.getRegistroAssenze();
-		rit.addAll(registroAssenze.getDateNonFestivePassateSenzaAppello());
-		for(GiornoFestivo ggf : Calendario.getInstance().getGiorniFestivi()){
-			rit.add(new LocalDate(ggf.getData()));
-		}
-		
-		return rit;
+
+		return registroAssenze.getDateFestiveOSenzaAppello();
 	}
 
 	public Collection<RegistroDocente> getRegistriDocente(int idClasse, int idDocente) {

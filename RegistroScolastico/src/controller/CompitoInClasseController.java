@@ -142,15 +142,10 @@ public class CompitoInClasseController {
 	public void inserisciInfoCompito(int idClasse, int idRegistroDocente, int idCompito, java.sql.Date data, Time oraInizio, Time oraFine, int[] idArgomenti) {
 
 		CompitoInClasse compito;
-		RegistroDocente registroDocente;
 		ArgomentoCriteria argomentoCriteria;
 		Collection<Argomento> argomenti;
-		Classe classeReg;
-		java.sql.Date dataCorretta;
-		boolean isDataCorretta;
 		
 		argomenti = new LinkedHashSet<Argomento>();
-		registroDocente = getRegistroDocenteById(idRegistroDocente);
 		
 		try{
 
@@ -163,34 +158,21 @@ public class CompitoInClasseController {
 		
 		try{
 			checkCompito(idClasse, idRegistroDocente, compito);
-			registroDocente = getRegistroDocenteById(idRegistroDocente);
 			
 			if(idArgomenti.length > 0){
 				argomentoCriteria.ID.in(idArgomenti);
 				argomenti.addAll(argomentoCriteria.list());
 			}
 	
-			//Controllo correttezza data
-			classeReg = registroDocente.getClasse();
-			isDataCorretta = isDataCompitoCorretta(data, classeReg);
-			dataCorretta = data;
-			if(!isDataCorretta){
-				dataCorretta = compito.getData();
-			}
-			compito.setInfo(dataCorretta, oraInizio, oraFine, argomenti);
+			compito.setInfo(data, oraInizio, oraFine, argomenti);
 			
 			updateCompitoDB(compito);
-			
-			if(!isDataCorretta){
-				throw new IllegalStateException(ErrorMessage.DATA_WRONG);
-			}
+
 		}catch(DomainCheckedException e){
 			throw new IllegalStateException(e.getMessage());
 		}			
 	}
-	
 
-	
 	public void eliminaCompito(int idClasse, int idRegistroDocente, int idCompitoInClasse){
 
 		CompitoInClasse compito;		
@@ -259,8 +241,7 @@ public class CompitoInClasseController {
 		Classe classeCompito;
 		Classe classe;
 		RegistroDocente registroDocente;
-		
-		
+
 		compito = getCompitoInCLasseByID(idCompito);
 		classe = getClasseById(idClasse);
 		registroDocente = getRegistroDocenteById(idRegistroDocente);
@@ -284,9 +265,7 @@ public class CompitoInClasseController {
 		
 		return rit;
 	}
-	
 
-	
 	public Map<Studente, Boolean>  getAssenzeCompito(int idCompito) {
 		Appello appello;
 		CompitoInClasse compito;
@@ -345,31 +324,7 @@ public class CompitoInClasseController {
 		
 		return rit;
  
-	}
-	
-	private boolean isDataCompitoCorretta(java.sql.Date data, Classe classe){
-		
-		ClasseController classeController;
-		Collection<LocalDate> dateFestive;
-		Collection<GiornoSettimanaleFestivo> giorniSettimanaliFestivi;
-		LocalDate localDate;
-		boolean rit;
-		
-		rit = true;
-		classeController = new ClasseController();
-		localDate = new LocalDate(data);
-		
-		dateFestive = classeController.getDateFestiveESenzaAppello(classe.getID());
-		giorniSettimanaliFestivi = Calendario.getInstance().getGiorniSettimanaliFestivi();
-		
-		
-		if(dateFestive.contains(localDate)|| giorniSettimanaliFestivi.contains(new GiornoSettimanaleFestivo(localDate.getDayOfWeek())) || !Calendario.getInstance().isInAnnoCorrente(data)){
-			rit = false;
-		}
-
-		return rit;
-	}
-	
+	}	
 
 	private CompitoInClasse getCompitoInCLasseByID(int idCompitoInClasse) {
 		CompitoInClasseCriteria compitoCriteria;
