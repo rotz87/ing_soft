@@ -569,7 +569,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		erroreSistema($rootScope, response.data, true)
 	})
 	
-	$scope.compitoInClasse.$get({},
+	$scope.compitoInClasse = Compito.get($routeParams,
 		function(response,headers){
 		//successo
 		var miaData;
@@ -614,6 +614,7 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 					mioCompito.setInfo($scope.compitoInClasse.data, $scope.compitoInClasse.oraInizio,$scope.compitoInClasse.oraFine);
 					$scope.currState = mioCompito.getStato()
 					$scope.vecchioCompitoInClasse = angular.copy($scope.compitoInClasse)
+					impostaCalendario("#bootstrapCalendario",$scope.calendario,$scope.dateCalendario,$scope.compitoInClasse.data)
 				},
 				function(response,headers)
 				{
@@ -972,14 +973,15 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 			var fineAnno = new Date($scope.calendario.fineAnno);
 			var dataOdierna = new Date($scope.calendario.oggi);
 			
-			impostaCalendario("#bootstrapCalendario",$scope.calendario,$scope.dateCalendario)
-
+			
+			impostaCalendario("#bootstrapCalendario",$scope.calendario,$scope.dateCalendario,$scope.compitoInClasse.data)
+			
 			
 		
 	},function(response,headers){
 		//fallimento
 		//recupero della risorsa fallito
-		erroreSistema($rootScope, response.data, true)
+		erroreSistema($rootScope, response.data, true);
 	})
 	
 	$scope.annullaModificheCompito = function (){
@@ -1192,7 +1194,12 @@ registroControllers.controller('mediaVotiController',['$scope','rsClasse','media
 					}
 					dateCalendario.giorniFestivi = dateFestive;
 					dateCalendario.giorniSettimanaliFestivi = giorniFestivi.giorniSettimanaliFestivi;
-					impostaCalendario(".bootstrapCalendario", calendario, dateCalendario)
+					while(!$scope.form){
+						
+					}
+					console.log(calendario)
+					impostaCalendario("#bootstrapCalendarioInizioMedia", calendario, dateCalendario,new Date(calendario.inizioAnno))
+					impostaCalendario("#bootstrapCalendarioFineMedia", calendario, dateCalendario,dataOdierna)
 				},
 				function(response,headers){
 					//fallimento
@@ -1457,7 +1464,7 @@ function convertiVotoStringa(label){
 	return votoStringa;
 }
 
-var impostaCalendario = function(containerCalendario,calendario,dateCalendario){
+var impostaCalendario = function(containerCalendario,calendario,dateCalendario,dataSelezionata){
 	var dataOdierna = new Date(calendario.oggi);
 	$(containerCalendario).datepicker({
 	    todayBtn: false,
@@ -1477,5 +1484,5 @@ var impostaCalendario = function(containerCalendario,calendario,dateCalendario){
 	    gotoCurrent: true,
 	    enableOnReadonly: false,
 	    disableTouchKeyboard: true
-	})
+	}).datepicker('update',dataSelezionata)
 }

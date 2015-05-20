@@ -30,7 +30,7 @@
 			<div class="form-group">
 				<div class="col-sm-5">
 					<label class="control-label col-xs-5"> Da: </label>
-					<div class="input-group col-xs-5 bootstrapCalendario date">
+					<div id="bootstrapCalendarioInizioMedia" class="input-group col-xs-5 date ">
 						<input id ="dataInizio" type="date" class="form-control puntatoreSoloLettura"
 						ng-model="form.dataInizio" readonly 
 						title="clicca per cambiare la data"/>
@@ -41,7 +41,7 @@
 				</div>
 				<div class="col-sm-5">
 					<label class="control-label col-sm-2"> a: </label>
-					<div class="col-sm-6 input-group date bootstrapCalendario">
+					<div id="bootstrapCalendarioFineMedia" class="col-sm-6 input-group date ">
 						<input id="dataFine" type="date"
 						class="form-control puntatoreSoloLettura"
 						ng-model='form.dataFine'
