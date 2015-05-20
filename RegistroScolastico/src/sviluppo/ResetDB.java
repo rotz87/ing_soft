@@ -10,6 +10,7 @@ import org.orm.ORMDatabaseInitiator;
 import org.orm.PersistentException;
 import org.orm.PersistentTransaction;
 
+import presenter.StartUp;
 import service.RSPersistentManager;
 import domain.model.Appello;
 import domain.model.Argomento;
@@ -67,6 +68,56 @@ public class ResetDB {
 	private static void createTestData() throws PersistentException {
 		PersistentTransaction t = service.RSPersistentManager.instance().getSession().beginTransaction();
 		try {
+			
+//			INIZIALIZZAZIONE DEL CALENDARIO
+			Calendario.getInstance().setInizioLezioni(new LocalDate(2014,12,01));
+			Calendario.getInstance().setFineLezioni(new  LocalDate(2015,6,12));
+//  			CREAZIONE E SALVATAGGIO DEI GIORNI FESTIVI
+			GiornoSettimanaleFestivo sabato = new GiornoSettimanaleFestivo(6);
+			GiornoSettimanaleFestivo domenica = new GiornoSettimanaleFestivo(7);
+			Calendario.getInstance().getGiorniSettimanaliFestivi().add(sabato);
+			Calendario.getInstance().getGiorniSettimanaliFestivi().add(domenica);
+			for(GiornoSettimanaleFestivo gf : Calendario.getInstance().getGiorniSettimanaliFestivi()){
+				RSPersistentManager.instance().getSession().save(gf);
+			}
+			
+			LocalDate l8Dic = new LocalDate(2014,12,8);
+			java.sql.Date d8Dic = new java.sql.Date(l8Dic.toDate().getTime());
+			GiornoFestivo ottoDic = new GiornoFestivo(d8Dic);
+			Calendario.getInstance().getGiorniFestivi().add(ottoDic);
+			
+			LocalDate lVigilia = new LocalDate(2014,12,24);
+			java.sql.Date dataVigilia = new java.sql.Date(lVigilia.toDate().getTime());
+			GiornoFestivo vigilia = new GiornoFestivo(dataVigilia);
+			Calendario.getInstance().getGiorniFestivi().add(vigilia);
+			
+			LocalDate lDataNatale = new LocalDate(2014,12,25);
+			java.sql.Date dataNatale = new java.sql.Date(lDataNatale.toDate().getTime());
+			GiornoFestivo natale = new GiornoFestivo(dataNatale);
+			Calendario.getInstance().getGiorniFestivi().add(natale);
+			
+			LocalDate lDataSStefano = new LocalDate(2014,12,26);
+			java.sql.Date dataSStefano = new java.sql.Date(lDataSStefano.toDate().getTime());
+			GiornoFestivo sStefano = new GiornoFestivo(dataSStefano);
+			Calendario.getInstance().getGiorniFestivi().add(sStefano);
+			
+			LocalDate lDataCapodanno = new LocalDate(2015,1,1);
+			java.sql.Date dataCapodanno = new java.sql.Date(lDataCapodanno.toDate().getTime());
+			GiornoFestivo capodanno = new GiornoFestivo(dataCapodanno);
+			Calendario.getInstance().getGiorniFestivi().add(capodanno);
+			
+			for(GiornoFestivo g : Calendario.getInstance().getGiorniFestivi()){
+				RSPersistentManager.instance().getSession().save(g);
+			}
+
+//			RSPersistentManager.instance().getSession().save(sabato);
+//			RSPersistentManager.instance().getSession().save(domenica);
+//			RSPersistentManager.instance().getSession().save(ottoDic);
+//			RSPersistentManager.instance().getSession().save(vigilia);
+//			RSPersistentManager.instance().getSession().save(natale);
+//			RSPersistentManager.instance().getSession().save(sStefano);
+//			RSPersistentManager.instance().getSession().save(capodanno);
+			
 //			CREAZIONE DELLA SCUOLA
 			Scuola scuola1 = new Scuola();
 			
@@ -628,38 +679,7 @@ public class ResetDB {
 //			SALVATAGGIO DELLA SCUOLA SUL DATABASE -------------------------------------------------------------
 			RSPersistentManager.instance().getSession().save(scuola1);
 //          ---------------------------------------------------------------------------------------------------
-			
-//  		CREAZIONE E SALVATAGGIO DEI GIORNI FESTIVI
-			GiornoSettimanaleFestivo sabato = new GiornoSettimanaleFestivo(6);
-			GiornoSettimanaleFestivo domenica = new GiornoSettimanaleFestivo(7);
-			
-			LocalDate l8Dic = new LocalDate(2014,12,8);
-			java.sql.Date d8Dic = new java.sql.Date(l8Dic.toDate().getTime());
-			GiornoFestivo ottoDic = new GiornoFestivo(d8Dic);
-			
-			LocalDate lVigilia = new LocalDate(2014,12,24);
-			java.sql.Date dataVigilia = new java.sql.Date(lVigilia.toDate().getTime());
-			GiornoFestivo vigilia = new GiornoFestivo(dataVigilia);
-			
-			LocalDate lDataNatale = new LocalDate(2014,12,25);
-			java.sql.Date dataNatale = new java.sql.Date(lDataNatale.toDate().getTime());
-			GiornoFestivo natale = new GiornoFestivo(dataNatale);
-			
-			LocalDate lDataSStefano = new LocalDate(2014,12,26);
-			java.sql.Date dataSStefano = new java.sql.Date(lDataSStefano.toDate().getTime());
-			GiornoFestivo sStefano = new GiornoFestivo(dataSStefano);
-			
-			LocalDate lDataCapodanno = new LocalDate(2015,1,1);
-			java.sql.Date dataCapodanno = new java.sql.Date(lDataCapodanno.toDate().getTime());
-			GiornoFestivo capodanno = new GiornoFestivo(dataCapodanno);
-			
-			RSPersistentManager.instance().getSession().save(sabato);
-			RSPersistentManager.instance().getSession().save(domenica);
-			RSPersistentManager.instance().getSession().save(ottoDic);
-			RSPersistentManager.instance().getSession().save(vigilia);
-			RSPersistentManager.instance().getSession().save(natale);
-			RSPersistentManager.instance().getSession().save(sStefano);
-			RSPersistentManager.instance().getSession().save(capodanno);
+
 			
 			t.commit();
 
