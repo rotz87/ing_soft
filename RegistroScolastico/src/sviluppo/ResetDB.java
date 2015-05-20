@@ -117,7 +117,7 @@ public class ResetDB {
 //			RSPersistentManager.instance().getSession().save(natale);
 //			RSPersistentManager.instance().getSession().save(sStefano);
 //			RSPersistentManager.instance().getSession().save(capodanno);
-			
+			 
 //			CREAZIONE DELLA SCUOLA
 			Scuola scuola1 = new Scuola();
 			
