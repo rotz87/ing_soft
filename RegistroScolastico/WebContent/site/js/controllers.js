@@ -547,6 +547,8 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 		
 	}
 	
+
+	
 	$scope.mioCompito = {};
 	$scope.currState = {};
 	$scope.idClasse = $routeParams.idClasse;
@@ -990,6 +992,11 @@ registroControllers.controller('recuperaCompitoInClasse', ['$scope','rsClasse','
 	
 	$scope.$watch("compitoInClasse.data",
 		function(newValue,oldValue){
+		if (oldValue != null && newValue == null)
+		{
+			$scope.compitoInClasse.data = oldValue
+		}
+		
 		if(newValue != null)
 		{
 			var tmpData = newValue.getTime();
@@ -1200,7 +1207,20 @@ registroControllers.controller('mediaVotiController',['$scope','rsClasse','media
 	parametriMediaVoti.strategia = ""
 	parametriMediaVoti.dataInizio = new Date("2014-12-10").getTime();
 	parametriMediaVoti.dataFine= new Date("2014-12-17").getTime();
-	
+	$scope.$watch("form.dataInizio",function(newValue,oldValue){
+
+		if (oldValue != null && newValue == null)
+		{
+			$scope.form.dataInizio = oldValue
+		}
+	})
+	$scope.$watch("form.dataFine",function(newValue,oldValue){
+
+		if (oldValue != null && newValue == null)
+		{
+			$scope.form.dataFine = oldValue
+		}
+	})
 	$scope.calcolaMedia = function(){
 		parametriMediaVoti.strategia = $scope.form.strategia.className
 		parametriMediaVoti.dataInizio = $scope.form.dataInizio.getTime();
