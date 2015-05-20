@@ -13,7 +13,7 @@ public class LibrettoVotiImp {
 	 */
 	public void makeLineItem(LibrettoVoti librettoVoti, CompitoInClasse compito) {
 		LibrettoVotiLineItem lineItem;
-		if(librettoVoti.getLibrettoLineItem(compito) ==  null){
+		if(librettoVoti.getLibrettoLineItem(compito) == null){
 			lineItem = new LibrettoVotiLineItem(compito);
 			librettoVoti.getLibVotiLineItems().add(lineItem);
 		}

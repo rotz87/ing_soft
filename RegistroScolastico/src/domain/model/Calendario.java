@@ -17,7 +17,6 @@ public class Calendario {
 
 	final private LocalDate dataZero = new LocalDate(0L);
 	private static Calendario instance;
-	private Calendario attribute2;
 
 	private Calendario(){
 		this.dataOdierna = calcolaDataOdierna();
@@ -46,10 +45,7 @@ public class Calendario {
 	}
 	
 	/**
-	 * public LocalDate prendiDataOdierna(){
 	 * 
-	 * return implementor.prendiDataOdierna(this);
-	 * }
 	 * @param data
 	 */
 	public boolean isFestivo(LocalDate data){

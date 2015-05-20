@@ -50,7 +50,7 @@ public class LibrettoAssenzeImp {
 	public boolean esisteAssenza(LibrettoAssenze librettoAssenze, Appello appello){
 		boolean rit;
 		
-		///e appello == null non ha senso vedere se esiste un'assenza in appello
+		// appello == null non ha senso vedere se esiste un'assenza in appello
 		if(appello == null){
 			throw new NullPointerException();
 		}

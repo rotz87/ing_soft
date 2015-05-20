@@ -19,14 +19,7 @@ public class MedieController {
 		
 		return registroDocente.calcolaMediaScritto(dataInizio, dataFine);
 	}
-	
-//	public void setStrategiaRegistro(int idRegistroDocente, IMediaStrategy strategia){
-//		RegistroDocente registroDocente;
-//		registroDocente = getRegistroDocenteById(idRegistroDocente);
-//		
-//		registroDocente.setMediaStrategy(strategia);
-//	}
-	
+
 	private RegistroDocente getRegistroDocenteById(int idRegistroDocente){
 		RegistroDocenteController registroDocenteController;
 		registroDocenteController = new RegistroDocenteController();

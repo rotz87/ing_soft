@@ -21,7 +21,7 @@ public class MediaScartaPeggioreStrategy implements IMediaStrategy {
 				votos.add(libVotiLI.getVoto());
 			}
 		}
-//		votos.addAll(voti);
+
 		for (Voto voto : votos){
 			if(voto.getValore() == null){
 				votosNull.add(voto);
