@@ -45,5 +45,7 @@ public class ErrorMessage {
 	public static final String CONVERTER_UNISTANZIABLE = "Impossibile instanziare il converter";
 	public static final String FORMAT_VOTI_WRONG = "Formato voti errato";
 	public static final String VOTO_NON_AMMESSO = "Almeno un voto non è ammesso";
+	public static final String ASSENZE_PRESE = "Assenze già prese!";
+	public static final String APPELLO_ODIERNO_INEXISTENT = "APPELLO ODIERNO INESISTENTE!";
 
 }

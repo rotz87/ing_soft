@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: Universita degli Studi dell'Aquila
+License Type: Academic
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="domain.model.RegistroAppelli" table="RegistroAppelli" lazy="false">
+		<id name="ID" column="ID" type="integer" unsaved-value="0">
+			<generator class="native">
+			</generator>
+		</id>
+		<map name="_appelli" lazy="true" cascade="save-update,lock" inverse="false" order-by="_data">
+			<key column="RegistroAppelliID" not-null="true"/>
+			<index column="RegistroAppelliIndex" type="integer"/>
+			<one-to-many class="domain.model.Appello"/>
+		</map>
+	</class>
+</hibernate-mapping>

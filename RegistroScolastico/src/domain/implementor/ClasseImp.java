@@ -1,7 +1,7 @@
 package domain.implementor;
 
 import domain.model.Classe;
-import domain.model.RegistroAssenze;
+import domain.model.RegistroAppelli;
 
 /**
  * Contiene il registro delle assenze.
@@ -18,9 +18,9 @@ public class ClasseImp {
 		classe.setNome(nome);
 	}
 	
-	public void inizialize(Classe classe, String nome, RegistroAssenze registroAssenze){
+	public void inizialize(Classe classe, String nome, RegistroAppelli registroAppelli){
 		inizialize(classe, nome);
-		classe.setRegistroAssenze(registroAssenze);
+		classe.setRegistroAppelli(registroAppelli);
 	}
 	
 }

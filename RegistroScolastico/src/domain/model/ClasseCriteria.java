@@ -20,16 +20,16 @@ import org.orm.criteria.*;
 
 public class ClasseCriteria extends AbstractORMCriteria {
 	public final IntegerExpression ID;
-	public final IntegerExpression _registroAssenzeId;
-	public final AssociationExpression _registroAssenze;
+	public final IntegerExpression _registroAppelliId;
+	public final AssociationExpression _registroAppelli;
 	public final StringExpression _nome;
 	public final CollectionExpression _studenti;
 	
 	public ClasseCriteria(Criteria criteria) {
 		super(criteria);
 		ID = new IntegerExpression("ID", this);
-		_registroAssenzeId = new IntegerExpression("_registroAssenze.ID", this);
-		_registroAssenze = new AssociationExpression("_registroAssenze", this);
+		_registroAppelliId = new IntegerExpression("_registroAppelli.ID", this);
+		_registroAppelli = new AssociationExpression("_registroAppelli", this);
 		_nome = new StringExpression("_nome", this);
 		_studenti = new CollectionExpression("_studenti", this);
 	}
@@ -42,8 +42,8 @@ public class ClasseCriteria extends AbstractORMCriteria {
 		this(service.RSPersistentManager.instance().getSession());
 	}
 	
-	public RegistroAssenzeCriteria create_registroAssenzeCriteria() {
-		return new RegistroAssenzeCriteria(createCriteria("_registroAssenze"));
+	public RegistroAppelliCriteria create_registroAppelliCriteria() {
+		return new RegistroAppelliCriteria(createCriteria("_registroAppelli"));
 	}
 	
 	public StudenteCriteria create_studentiCriteria() {

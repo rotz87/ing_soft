@@ -23,7 +23,7 @@ import domain.model.GiornoSettimanaleFestivo;
 import domain.model.LibrettoAssenze;
 import domain.model.LibrettoVoti;
 import domain.model.Materia;
-import domain.model.RegistroAssenze;
+import domain.model.RegistroAppelli;
 import domain.model.RegistroDocente;
 import domain.model.Scuola;
 import domain.model.Studente;
@@ -290,10 +290,10 @@ public class ResetDB {
 			}
 			
 //			CREAZIONE DEI REGISTRI ASSENZA
-			RegistroAssenze regAssPrimaA = new RegistroAssenze();
-			RegistroAssenze regAssSecondaA = new RegistroAssenze();
-			RegistroAssenze regAssPrimaB = new RegistroAssenze();
-			RegistroAssenze regAssSecondaB = new RegistroAssenze();
+			RegistroAppelli regAppPrimaA = new RegistroAppelli();
+			RegistroAppelli regAppSecondaA = new RegistroAppelli();
+			RegistroAppelli regAppPrimaB = new RegistroAppelli();
+			RegistroAppelli regAppSecondaB = new RegistroAppelli();
 			
 
 //			ASSEGNAZIONE DEGLI STUDENTI ALLE CLASSI
@@ -332,10 +332,10 @@ public class ResetDB {
 			secondaB.getStudenti().add(arturoAncona);
 			
 //			ASSEGNAZIONE DEI REGISTRI ASSENZA ALLE CLASSI
-			primaA.setRegistroAssenze(regAssPrimaA);
-			secondaA.setRegistroAssenze(regAssSecondaA);
-			primaB.setRegistroAssenze(regAssPrimaB);
-			secondaB.setRegistroAssenze(regAssSecondaB);
+			primaA.setRegistroAppelli(regAppPrimaA);
+			secondaA.setRegistroAppelli(regAppSecondaA);
+			primaB.setRegistroAppelli(regAppPrimaB);
+			secondaB.setRegistroAppelli(regAppSecondaB);
 			
 			
 //			CREAZIONE DELLE DATE
@@ -383,21 +383,21 @@ public class ResetDB {
 			Appello appello_2B_16_12_14 = new Appello(data16_12_14);
 			
 //			ASSEGNAZIONE DEGLI APPELLI AI REGISTRI
-			regAssPrimaA.getAppelli().put( Calendario.getInstance().getDaysFromZero(appello_1A_01_12_14.getData()) , appello_1A_01_12_14);
-			regAssPrimaA.getAppelli().put( Calendario.getInstance().getDaysFromZero(appello_1A_02_12_14.getData()) , appello_1A_02_12_14);
-			regAssPrimaA.getAppelli().put( Calendario.getInstance().getDaysFromZero(appello_1A_03_12_14.getData()) , appello_1A_03_12_14);
-			regAssPrimaA.getAppelli().put( Calendario.getInstance().getDaysFromZero(appello_1A_04_12_14.getData()) , appello_1A_04_12_14);
-			regAssPrimaA.getAppelli().put( Calendario.getInstance().getDaysFromZero(appello_1A_05_12_14.getData()) , appello_1A_05_12_14);
-			regAssPrimaA.getAppelli().put( Calendario.getInstance().getDaysFromZero(appello_1A_09_12_14.getData()) , appello_1A_09_12_14);
-			regAssPrimaA.getAppelli().put( Calendario.getInstance().getDaysFromZero(appello_1A_10_12_14.getData()) , appello_1A_10_12_14);
-			regAssPrimaA.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_1A_11_12_14.getData()), appello_1A_11_12_14);
-			regAssPrimaA.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_1A_12_12_14.getData()), appello_1A_12_12_14);
-			regAssPrimaA.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_1A_15_12_14.getData()), appello_1A_15_12_14);
-			regAssPrimaA.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_1A_16_12_14.getData()), appello_1A_16_12_14);
+			regAppPrimaA.getAppelli().put( Calendario.getInstance().getDaysFromZero(appello_1A_01_12_14.getData()) , appello_1A_01_12_14);
+			regAppPrimaA.getAppelli().put( Calendario.getInstance().getDaysFromZero(appello_1A_02_12_14.getData()) , appello_1A_02_12_14);
+			regAppPrimaA.getAppelli().put( Calendario.getInstance().getDaysFromZero(appello_1A_03_12_14.getData()) , appello_1A_03_12_14);
+			regAppPrimaA.getAppelli().put( Calendario.getInstance().getDaysFromZero(appello_1A_04_12_14.getData()) , appello_1A_04_12_14);
+			regAppPrimaA.getAppelli().put( Calendario.getInstance().getDaysFromZero(appello_1A_05_12_14.getData()) , appello_1A_05_12_14);
+			regAppPrimaA.getAppelli().put( Calendario.getInstance().getDaysFromZero(appello_1A_09_12_14.getData()) , appello_1A_09_12_14);
+			regAppPrimaA.getAppelli().put( Calendario.getInstance().getDaysFromZero(appello_1A_10_12_14.getData()) , appello_1A_10_12_14);
+			regAppPrimaA.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_1A_11_12_14.getData()), appello_1A_11_12_14);
+			regAppPrimaA.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_1A_12_12_14.getData()), appello_1A_12_12_14);
+			regAppPrimaA.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_1A_15_12_14.getData()), appello_1A_15_12_14);
+			regAppPrimaA.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_1A_16_12_14.getData()), appello_1A_16_12_14);
 			
-			regAssSecondaA.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_2A_16_12_14.getData()), appello_2A_16_12_14);
-			regAssPrimaB.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_1B_16_12_14.getData()), appello_1B_16_12_14);
-			regAssSecondaB.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_2B_16_12_14.getData()), appello_2B_16_12_14);
+			regAppSecondaA.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_2A_16_12_14.getData()), appello_2A_16_12_14);
+			regAppPrimaB.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_1B_16_12_14.getData()), appello_1B_16_12_14);
+			regAppSecondaB.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello_2B_16_12_14.getData()), appello_2B_16_12_14);
 			
 //			CREAZIONE DELLE ASSENZE
 			Assenza assMarioRomano1 = new Assenza();
@@ -458,21 +458,21 @@ public class ResetDB {
 			Appello appello;
 			for(LocalDate data : datePerAppelli){
 				appello = new Appello(data);
-				regAssSecondaA.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello.getData()), appello);
+				regAppSecondaA.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello.getData()), appello);
 				appello.setAssenzePrese(true);
 			}
 			
 //			Ulteriori appelli per la prima B
 			for(LocalDate data : datePerAppelli){
 				appello = new Appello(data);
-				regAssPrimaB.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello.getData()), appello);
+				regAppPrimaB.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello.getData()), appello);
 				appello.setAssenzePrese(true);
 			}
 			
 //			Ulteriori appelli per la seconda B
 			for(LocalDate data : datePerAppelli){
 				appello = new Appello(data);
-				regAssSecondaB.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello.getData()), appello);
+				regAppSecondaB.getAppelli().put(Calendario.getInstance().getDaysFromZero(appello.getData()), appello);
 				appello.setAssenzePrese(true);
 			}
 			

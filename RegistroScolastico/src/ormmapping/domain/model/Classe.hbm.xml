@@ -15,7 +15,7 @@ License Type: Academic
 			<generator class="native">
 			</generator>
 		</id>
-		<many-to-one name="_registroAssenze" column="RegistroAssenzeID" class="domain.model.RegistroAssenze" cascade="save-update,lock" unique="true" not-null="true" lazy="no-proxy">
+		<many-to-one name="_registroAppelli" column="RegistroAppelliID" class="domain.model.RegistroAppelli" cascade="save-update,lock" unique="true" not-null="true" lazy="no-proxy">
 		</many-to-one>
 		<property name="_nome" column="_nome" type="string" length="255" not-null="false" lazy="false"/>
 		<set name="_studenti" lazy="true" cascade="save-update,lock" inverse="false">

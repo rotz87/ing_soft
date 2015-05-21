@@ -20,7 +20,7 @@ import domain.model.ClasseCriteria;
 import domain.model.Docente;
 import domain.model.DocenteCriteria;
 import domain.model.LibrettoAssenze;
-import domain.model.RegistroAssenze;
+import domain.model.RegistroAppelli;
 import domain.model.Studente;
 import domain.model.StudenteCriteria;
 
@@ -56,13 +56,13 @@ public class FaiAppelloController {
 		docenteCorrente = docenteCriteria.uniqueDocente();
 		
 		if(docenteCorrente.isInsegnante(classeCorrente)){
-			RegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();
-			registroAssenzeCorrente.avviaAppello();
+			RegistroAppelli registroAppelliCorrente = classeCorrente.getRegistroAppelli();
+			registroAppelliCorrente.avviaAppello();
 
 			try {
 				PersistentTransaction t = service.RSPersistentManager.instance().getSession().beginTransaction();
 				try {
-					RSPersistentManager.instance().getSession().save(registroAssenzeCorrente.getAppelloOdierno());
+					RSPersistentManager.instance().getSession().save(registroAppelliCorrente.getAppelloOdierno());
 					t.commit();
 				} 
 				catch (PersistentException e) {
@@ -110,7 +110,7 @@ public class FaiAppelloController {
 		docenteCorrente = docenteCriteria.uniqueDocente();
 		
 		if(docenteCorrente.isInsegnante(classeCorrente)){
-			RegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();
+			RegistroAppelli registroAppelliCorrente = classeCorrente.getRegistroAppelli();
 			
 			if(idStudenti.length >0){
 				studenteCriteria.ID.in(idStudenti);
@@ -121,12 +121,12 @@ public class FaiAppelloController {
 				libretti.add(studente.getLibrettoAssenze());
 			}
 			
-			registroAssenzeCorrente.registraAssenze(libretti);
+			registroAppelliCorrente.registraAssenze(libretti);
 			
 			try{
 				PersistentTransaction t = service.RSPersistentManager.instance().getSession().beginTransaction();
 				try {
-					RSPersistentManager.instance().getSession().save(registroAssenzeCorrente.getAppelloOdierno());
+					RSPersistentManager.instance().getSession().save(registroAppelliCorrente.getAppelloOdierno());
 					for(LibrettoAssenze libAss : libretti){
 						RSPersistentManager.instance().getSession().save(libAss.getUltimaAssenzaNonGiustificata());
 					}
@@ -161,7 +161,7 @@ public class FaiAppelloController {
 		classeCriteria.ID.eq(idClasse);
 		Classe classeCorrente = classeCriteria.uniqueClasse();
 		
-		return classeCorrente.getRegistroAssenze().getAppelloOdierno();
+		return classeCorrente.getRegistroAppelli().getAppelloOdierno();
 
 	}
 	
@@ -180,7 +180,7 @@ public class FaiAppelloController {
 		
 		classeCriteria.ID.eq(idClasse);
 		Classe classeCorrente = classeCriteria.uniqueClasse();
-		return classeCorrente.getRegistroAssenze().getAppelloByData(data);
+		return classeCorrente.getRegistroAppelli().getAppelloByData(data);
 		
 	}
 	
@@ -206,7 +206,7 @@ public class FaiAppelloController {
 		appelloCriteria.ID.eq(idAppello);
 		Appello appelloCorrente = appelloCriteria.uniqueAppello();
 		
-		if ( classeCorrente.getRegistroAssenze().esisteAppello(appelloCorrente)){		
+		if ( classeCorrente.getRegistroAppelli().esisteAppello(appelloCorrente)){		
 			return appelloCorrente;
 		}else{
 			throw new IllegalStateException(ErrorMessage.APPELLO_CLASSE_INCONSISTENT);
@@ -230,9 +230,9 @@ public class FaiAppelloController {
 		classeCriteria.ID.eq(idClasse);
 		Classe classeCorrente = classeCriteria.uniqueClasse();
 		
-		RegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();
+		RegistroAppelli registroAppelliCorrente = classeCorrente.getRegistroAppelli();
 		
-		return registroAssenzeCorrente.getAppelli().values();
+		return registroAppelliCorrente.getAppelli().values();
 		
 	}
 
@@ -252,8 +252,8 @@ public class FaiAppelloController {
 		classeCriteria.ID.eq(idClasse);
 		Classe classeCorrente = classeCriteria.uniqueClasse();
 		
-		RegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();
-		return registroAssenzeCorrente.isAppelloOdiernoAvviabile();
+		RegistroAppelli registroAppelliCorrente = classeCorrente.getRegistroAppelli();
+		return registroAppelliCorrente.isAppelloOdiernoAvviabile();
 	}
 	
 	public HashMap<Studente, Boolean> getAssenzeCompito(int idClasse, int idAppello) {
@@ -284,7 +284,7 @@ public class FaiAppelloController {
 
 		ClasseCriteria classeCriteria;
 		Classe classe;
-		RegistroAssenze registroAssenze;
+		RegistroAppelli registroAppelli;
 		Appello appello;
 		HashMap<Studente, Boolean> assenzePrese;
 		
@@ -296,8 +296,8 @@ public class FaiAppelloController {
 		
 		classeCriteria.ID.eq(idClasse);
 		classe = classeCriteria.uniqueClasse();
-		registroAssenze = classe.getRegistroAssenze();
-		appello = registroAssenze.getAppelloByData(data);
+		registroAppelli = classe.getRegistroAppelli();
+		appello = registroAppelli.getAppelloByData(data);
 		
 		if(appello != null){
 			assenzePrese = getAssenzeCompito(idClasse, appello.getID());
@@ -334,7 +334,7 @@ public class FaiAppelloController {
 		Collection<Studente> studentiPresenti = new LinkedList<Studente>();
 		ClasseCriteria classeCriteria;
 		Classe classe;
-		RegistroAssenze registroAssenze;
+		RegistroAppelli registroAppelli;
 		Appello appello;
 		Map<Studente, Boolean> boolAssenze;
 		
@@ -346,8 +346,8 @@ public class FaiAppelloController {
 		
 		classeCriteria.ID.eq(idClasse);
 		classe = classeCriteria.uniqueClasse();
-		registroAssenze = classe.getRegistroAssenze();
-		appello = registroAssenze.getAppelloByData(data);
+		registroAppelli = classe.getRegistroAppelli();
+		appello = registroAppelli.getAppelloByData(data);
 		
 		if(appello.getAssenzePrese()){
 

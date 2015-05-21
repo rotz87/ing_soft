@@ -13,7 +13,7 @@ import domain.model.ClasseCriteria;
 import domain.model.Docente;
 import domain.model.DocenteCriteria;
 import domain.model.GiornoFestivo;
-import domain.model.RegistroAssenze;
+import domain.model.RegistroAppelli;
 import domain.model.RegistroDocente;
 import domain.model.RegistroDocenteCriteria;
 import domain.model.Studente;
@@ -73,12 +73,12 @@ public class ClasseController {
 	
 	public Collection<LocalDate> getDateFestiveOSenzaAppello(int idClasse){
 		Classe classe;
-		RegistroAssenze registroAssenze;
+		RegistroAppelli registroAppelli;
 				
 		classe = getClasseById(idClasse);
-		registroAssenze = classe.getRegistroAssenze();
+		registroAppelli = classe.getRegistroAppelli();
 
-		return registroAssenze.getDateFestiveOSenzaAppello();
+		return registroAppelli.getDateFestiveOSenzaAppello();
 	}
 
 	public Collection<RegistroDocente> getRegistriDocente(int idClasse, int idDocente) {

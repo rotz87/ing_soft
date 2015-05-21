@@ -13,8 +13,8 @@ import org.joda.time.LocalTime;
 import org.orm.PersistentException;
 
 import sviluppo.Stampa;
-import domain.model.RegistroAssenze;
-import domain.model.RegistroAssenzeCriteria;
+import domain.model.RegistroAppelli;
+import domain.model.RegistroAppelliCriteria;
 import domain.model.Studente;
 import domain.model.StudenteCriteria;
 
@@ -151,9 +151,9 @@ public class TestDate {
 				studenti.addAll(criteria.list());
 
 				
-				RegistroAssenzeCriteria regAssC = new RegistroAssenzeCriteria();
+				RegistroAppelliCriteria regAssC = new RegistroAppelliCriteria();
 				regAssC.ID.eq(1);
-				RegistroAssenze registro = regAssC.uniqueRegistroAssenze();
+				RegistroAppelli registro = regAssC.uniqueRegistroAppelli();
 				
 				boolean check = registro.checkPresenti(dataaa, studenti);
 				

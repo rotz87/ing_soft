@@ -6,22 +6,22 @@ import sviluppo.Stampa;
 import controller.FaiAppelloController;
 import domain.model.Classe;
 import domain.model.ClasseCriteria;
-import domain.model.RegistroAssenze;
-import domain.model.RegistroAssenzeCriteria;
+import domain.model.RegistroAppelli;
+import domain.model.RegistroAppelliCriteria;
 
 public class TestFaiLAppelloController2 {
 	
-	private static RegistroAssenze getRegistroAssenzeByIdClasse(int idClasse){
-		RegistroAssenze ret;
+	private static RegistroAppelli getRegistroAssenzeByIdClasse(int idClasse){
+		RegistroAppelli ret;
 		
 		ret = null;
 		try {
 			try {
-				RegistroAssenzeCriteria registroAssenzeCriteria;
+				RegistroAppelliCriteria registroAssenzeCriteria;
 				
 				domain.model.ClasseCriteria ldomainmodelClasseCriteria = new domain.model.ClasseCriteria();
 				ldomainmodelClasseCriteria.ID.eq(idClasse);
-				ret = ldomainmodelClasseCriteria.uniqueClasse().getRegistroAssenze();
+				ret = ldomainmodelClasseCriteria.uniqueClasse().getRegistroAppelli();
 			}
 			finally {
 				service.RSPersistentManager.instance().disposePersistentManager();

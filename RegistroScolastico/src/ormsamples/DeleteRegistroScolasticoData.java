@@ -39,8 +39,8 @@ public class DeleteRegistroScolasticoData {
 			domain.model.Indirizzo ldomainmodelIndirizzo= (domain.model.Indirizzo)service.RSPersistentManager.instance().getSession().createQuery("From domain.model.Indirizzo").setMaxResults(1).uniqueResult();
 			service.RSPersistentManager.instance().getSession().delete(ldomainmodelIndirizzo);
 			
-			domain.model.RegistroAssenze ldomainmodelRegistroAssenze= (domain.model.RegistroAssenze)service.RSPersistentManager.instance().getSession().createQuery("From domain.model.RegistroAssenze").setMaxResults(1).uniqueResult();
-			service.RSPersistentManager.instance().getSession().delete(ldomainmodelRegistroAssenze);
+			domain.model.RegistroAppelli ldomainmodelRegistroAppelli= (domain.model.RegistroAppelli)service.RSPersistentManager.instance().getSession().createQuery("From domain.model.RegistroAppelli").setMaxResults(1).uniqueResult();
+			service.RSPersistentManager.instance().getSession().delete(ldomainmodelRegistroAppelli);
 			
 			domain.model.Scuola ldomainmodelScuola= (domain.model.Scuola)service.RSPersistentManager.instance().getSession().createQuery("From domain.model.Scuola").setMaxResults(1).uniqueResult();
 			service.RSPersistentManager.instance().getSession().delete(ldomainmodelScuola);

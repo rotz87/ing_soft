@@ -9,7 +9,7 @@ import controller.FaiAppelloController;
 import controller.RegistroDocenteController;
 import domain.model.Calendario;
 import domain.model.GiornoSettimanaleFestivo;
-import domain.model.RegistroAssenze;
+import domain.model.RegistroAppelli;
 
 public class TestDateFestive {
 
@@ -34,7 +34,7 @@ public class TestDateFestive {
 //		}
 		
 		RegistroDocenteController registroDocenteController = new RegistroDocenteController();
-		RegistroAssenze registroAssenze = registroDocenteController.getRegistroDocente(1).getClasse().getRegistroAssenze();
+		RegistroAppelli registroAssenze = registroDocenteController.getRegistroDocente(1).getClasse().getRegistroAppelli();
 		
 		for(LocalDate data : registroAssenze.getDateNonFestivePassateSenzaAppello()){
 			Stampa.stampaln(data);

@@ -99,12 +99,12 @@ public class ListRegistroScolasticoData {
 		}
 		System.out.println(length + " record(s) retrieved.");
 		
-		System.out.println("Listing RegistroAssenze...");
-		java.util.List lRegistroAssenzeList = service.RSPersistentManager.instance().getSession().createQuery("From domain.model.RegistroAssenze").setMaxResults(ROW_COUNT).list();
-		domain.model.RegistroAssenze[] ldomainmodelRegistroAssenzes = (domain.model.RegistroAssenze[]) lRegistroAssenzeList.toArray(new domain.model.RegistroAssenze[lRegistroAssenzeList.size()]);
-		length = Math.min(ldomainmodelRegistroAssenzes.length, ROW_COUNT);
+		System.out.println("Listing RegistroAppelli...");
+		java.util.List lRegistroAppelliList = service.RSPersistentManager.instance().getSession().createQuery("From domain.model.RegistroAppelli").setMaxResults(ROW_COUNT).list();
+		domain.model.RegistroAppelli[] ldomainmodelRegistroAppellis = (domain.model.RegistroAppelli[]) lRegistroAppelliList.toArray(new domain.model.RegistroAppelli[lRegistroAppelliList.size()]);
+		length = Math.min(ldomainmodelRegistroAppellis.length, ROW_COUNT);
 		for (int i = 0; i < length; i++) {
-			System.out.println(ldomainmodelRegistroAssenzes[i]);
+			System.out.println(ldomainmodelRegistroAppellis[i]);
 		}
 		System.out.println(length + " record(s) retrieved.");
 		
@@ -339,17 +339,17 @@ public class ListRegistroScolasticoData {
 		}
 		System.out.println(length + " Indirizzo record(s) retrieved."); 
 		
-		System.out.println("Listing RegistroAssenze by Criteria...");
-		domain.model.RegistroAssenzeCriteria ldomainmodelRegistroAssenzeCriteria = new domain.model.RegistroAssenzeCriteria();
+		System.out.println("Listing RegistroAppelli by Criteria...");
+		domain.model.RegistroAppelliCriteria ldomainmodelRegistroAppelliCriteria = new domain.model.RegistroAppelliCriteria();
 		// Please uncomment the follow line and fill in parameter(s) 
-		//ldomainmodelRegistroAssenzeCriteria.ID.eq();
-		ldomainmodelRegistroAssenzeCriteria.setMaxResults(ROW_COUNT);
-		domain.model.RegistroAssenze[] domainmodelRegistroAssenzes = ldomainmodelRegistroAssenzeCriteria.listRegistroAssenze();
-		length =domainmodelRegistroAssenzes== null ? 0 : Math.min(domainmodelRegistroAssenzes.length, ROW_COUNT); 
+		//ldomainmodelRegistroAppelliCriteria.ID.eq();
+		ldomainmodelRegistroAppelliCriteria.setMaxResults(ROW_COUNT);
+		domain.model.RegistroAppelli[] domainmodelRegistroAppellis = ldomainmodelRegistroAppelliCriteria.listRegistroAppelli();
+		length =domainmodelRegistroAppellis== null ? 0 : Math.min(domainmodelRegistroAppellis.length, ROW_COUNT); 
 		for (int i = 0; i < length; i++) {
-			 System.out.println(domainmodelRegistroAssenzes[i]);
+			 System.out.println(domainmodelRegistroAppellis[i]);
 		}
-		System.out.println(length + " RegistroAssenze record(s) retrieved."); 
+		System.out.println(length + " RegistroAppelli record(s) retrieved."); 
 		
 		System.out.println("Listing Scuola by Criteria...");
 		domain.model.ScuolaCriteria ldomainmodelScuolaCriteria = new domain.model.ScuolaCriteria();

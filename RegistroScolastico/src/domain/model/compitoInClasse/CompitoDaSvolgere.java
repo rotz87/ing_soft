@@ -12,7 +12,7 @@ import domain.model.Argomento;
 import domain.model.Calendario;
 import domain.model.Classe;
 import domain.model.GiornoSettimanaleFestivo;
-import domain.model.RegistroAssenze;
+import domain.model.RegistroAppelli;
 import domain.model.compitoCommand.SetDaSvolgereCommand;
 
 public class CompitoDaSvolgere extends CompitoInClasseStateImp {
@@ -75,7 +75,7 @@ public class CompitoDaSvolgere extends CompitoInClasseStateImp {
 	}
 
 	private boolean isDataCorretta(CompitoInClasse compitoInClasse, Date data){
-		RegistroAssenze registroAssenze;
+		RegistroAppelli registroAppelli;
 		Classe classe;
 		Collection<LocalDate> dateFestive;
 		Collection<GiornoSettimanaleFestivo> giorniSettimanaliFestivi;
@@ -83,11 +83,11 @@ public class CompitoDaSvolgere extends CompitoInClasseStateImp {
 		boolean rit;
 		
 		classe = compitoInClasse.getInsegnamento().getClasse();
-		registroAssenze = classe.getRegistroAssenze();
+		registroAppelli = classe.getRegistroAppelli();
 		rit = true;
 		localDate = new LocalDate(data);
 		
-		dateFestive = registroAssenze.getDateFestiveOSenzaAppello();
+		dateFestive = registroAppelli.getDateFestiveOSenzaAppello();
 		giorniSettimanaliFestivi = Calendario.getInstance().getGiorniSettimanaliFestivi();
 		
 		if(dateFestive.contains(localDate)|| giorniSettimanaliFestivi.contains(new GiornoSettimanaleFestivo(localDate.getDayOfWeek())) || !Calendario.getInstance().isInAnnoCorrente(data)){

@@ -38,7 +38,7 @@ License Type: Academic
 		<mapping resource="ormmapping/domain/model/PermessoEntrata.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/PermessoUscita.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/Persona.hbm.xml" />
-		<mapping resource="ormmapping/domain/model/RegistroAssenze.hbm.xml" />
+		<mapping resource="ormmapping/domain/model/RegistroAppelli.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/RegistroDocente.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/Ritardo.hbm.xml" />
 		<mapping resource="ormmapping/domain/model/Scuola.hbm.xml" />

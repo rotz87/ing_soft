@@ -24,7 +24,7 @@ public class Classe {
 	
 	private int ID;
 	
-	private domain.model.RegistroAssenze _registroAssenze;
+	private domain.model.RegistroAppelli _registroAppelli;
 	
 	private String _nome;
 	
@@ -50,12 +50,12 @@ public class Classe {
 		return getID();
 	}
 	
-	private void set_registroAssenze(domain.model.RegistroAssenze value) {
-		this._registroAssenze = value;
+	private void set_registroAppelli(domain.model.RegistroAppelli value) {
+		this._registroAppelli = value;
 	}
 	
-	private domain.model.RegistroAssenze get_registroAssenze() {
-		return _registroAssenze;
+	private domain.model.RegistroAppelli get_registroAppelli() {
+		return _registroAppelli;
 	}
 	
 	public void set_studenti(java.util.Set<domain.model.Studente> value) {
@@ -73,8 +73,8 @@ public class Classe {
 		this.implementor.inizialize(this, nome);
 	}
 	
-	public Classe(String nome, domain.model.RegistroAssenze registroAssenze) {
-		this.implementor.inizialize(this, nome, registroAssenze);
+	public Classe(String nome, domain.model.RegistroAppelli registroAppelli) {
+		this.implementor.inizialize(this, nome, registroAppelli);
 	}
 	
 	public String getNome() {
@@ -85,12 +85,12 @@ public class Classe {
 		this._nome = nome;
 	}
 	
-	public domain.model.RegistroAssenze getRegistroAssenze() {
-		return this._registroAssenze;
+	public domain.model.RegistroAppelli getRegistroAppelli() {
+		return this._registroAppelli;
 	}
 	
-	public void setRegistroAssenze(domain.model.RegistroAssenze registroAssenze) {
-		this._registroAssenze = registroAssenze;
+	public void setRegistroAppelli(domain.model.RegistroAppelli registroAppelli) {
+		this._registroAppelli = registroAppelli;
 	}
 	
 	public java.util.Set<Studente> getStudenti() {

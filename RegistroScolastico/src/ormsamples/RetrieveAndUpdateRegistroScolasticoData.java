@@ -49,9 +49,9 @@ public class RetrieveAndUpdateRegistroScolasticoData {
 			// Update the properties of the persistent object
 			service.RSPersistentManager.instance().getSession().update(ldomainmodelIndirizzo);
 			
-			domain.model.RegistroAssenze ldomainmodelRegistroAssenze= (domain.model.RegistroAssenze)service.RSPersistentManager.instance().getSession().createQuery("From domain.model.RegistroAssenze").setMaxResults(1).uniqueResult();
+			domain.model.RegistroAppelli ldomainmodelRegistroAppelli= (domain.model.RegistroAppelli)service.RSPersistentManager.instance().getSession().createQuery("From domain.model.RegistroAppelli").setMaxResults(1).uniqueResult();
 			// Update the properties of the persistent object
-			service.RSPersistentManager.instance().getSession().update(ldomainmodelRegistroAssenze);
+			service.RSPersistentManager.instance().getSession().update(ldomainmodelRegistroAppelli);
 			
 			domain.model.Scuola ldomainmodelScuola= (domain.model.Scuola)service.RSPersistentManager.instance().getSession().createQuery("From domain.model.Scuola").setMaxResults(1).uniqueResult();
 			// Update the properties of the persistent object
@@ -169,11 +169,11 @@ public class RetrieveAndUpdateRegistroScolasticoData {
 		//ldomainmodelIndirizzoCriteria.ID.eq();
 		System.out.println(ldomainmodelIndirizzoCriteria.uniqueIndirizzo());
 		
-		System.out.println("Retrieving RegistroAssenze by RegistroAssenzeCriteria");
-		domain.model.RegistroAssenzeCriteria ldomainmodelRegistroAssenzeCriteria = new domain.model.RegistroAssenzeCriteria();
+		System.out.println("Retrieving RegistroAppelli by RegistroAppelliCriteria");
+		domain.model.RegistroAppelliCriteria ldomainmodelRegistroAppelliCriteria = new domain.model.RegistroAppelliCriteria();
 		// Please uncomment the follow line and fill in parameter(s)
-		//ldomainmodelRegistroAssenzeCriteria.ID.eq();
-		System.out.println(ldomainmodelRegistroAssenzeCriteria.uniqueRegistroAssenze());
+		//ldomainmodelRegistroAppelliCriteria.ID.eq();
+		System.out.println(ldomainmodelRegistroAppelliCriteria.uniqueRegistroAppelli());
 		
 		System.out.println("Retrieving Scuola by ScuolaCriteria");
 		domain.model.ScuolaCriteria ldomainmodelScuolaCriteria = new domain.model.ScuolaCriteria();

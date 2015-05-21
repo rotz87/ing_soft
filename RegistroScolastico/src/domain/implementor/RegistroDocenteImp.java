@@ -14,7 +14,7 @@ import domain.error.ErrorMessage;
 import domain.model.Argomento;
 import domain.model.Classe;
 import domain.model.LibrettoVotiLineItem;
-import domain.model.RegistroAssenze;
+import domain.model.RegistroAppelli;
 import domain.model.RegistroDocente;
 import domain.model.Studente;
 import domain.model.Voto;
@@ -53,7 +53,7 @@ public class RegistroDocenteImp {
 	}
 
 	public void inserisciVoti(RegistroDocente registroDocente, CompitoInClasse compito, Map<Studente, Voto> mapVoti ) {
-		RegistroAssenze registroAssezne = registroDocente.getClasse().getRegistroAssenze();
+		RegistroAppelli registroAssezne = registroDocente.getClasse().getRegistroAppelli();
 		LocalDate data = new LocalDate(compito.getData());
 		if(registroAssezne.checkPresenti(data, mapVoti.keySet())){
 			for (Studente studente : mapVoti.keySet()) {

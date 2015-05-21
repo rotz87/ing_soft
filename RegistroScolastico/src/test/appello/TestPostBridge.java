@@ -17,8 +17,8 @@ import domain.model.ClasseCriteria;
 import domain.model.Docente;
 import domain.model.LibrettoAssenze;
 import domain.model.LibrettoAssenzeCriteria;
-import domain.model.RegistroAssenze;
-import domain.model.RegistroAssenzeCriteria;
+import domain.model.RegistroAppelli;
+import domain.model.RegistroAppelliCriteria;
 import domain.model.Studente;
 import domain.model.StudenteCriteria;
 
@@ -37,8 +37,8 @@ public class TestPostBridge {
 		Docente docenteCorrente = new Docente("mario","rossi");
 		docenteCorrente.getClassi().add(classeCorrente);
 		
-		RegistroAssenze regAss = new RegistroAssenze();
-		classeCorrente.setRegistroAssenze(regAss);
+		RegistroAppelli regAss = new RegistroAppelli();
+		classeCorrente.setRegistroAppelli(regAss);
 		
 		Studente pieroRusso = new Studente("Piero", "Russo");
 		Studente marinoEsposito = new Studente("Marino", "Esposito");
@@ -77,7 +77,7 @@ public class TestPostBridge {
 //		Stempa.stampaln("lista classi: " + docenteCorrente.getClassi().toString());
 		
 		if(docenteCorrente.isInsegnante(classeCorrente)){
-			RegistroAssenze registroAssenzeCorrente = classeCorrente.getRegistroAssenze();
+			RegistroAppelli registroAssenzeCorrente = classeCorrente.getRegistroAppelli();
 			registroAssenzeCorrente.avviaAppello();
 			registroAssenzeCorrente.registraAssenze(libretti);
 //			DBFake.getInstance().storeAppello(registroAssenzeCorrente.getAppelloOdierno());
@@ -128,7 +128,7 @@ public class TestPostBridge {
 			classeC.ID.eq(idClasse);
 			Classe classeCorrente = classeC.uniqueClasse();
 			
-			RegistroAssenze regAss = classeCorrente.getRegistroAssenze();
+			RegistroAppelli regAss = classeCorrente.getRegistroAppelli();
 			
 			regAss.avviaAppello();
 			
@@ -207,11 +207,11 @@ public class TestPostBridge {
 			libAssC.ID.eq(idLib);
 			libAss = libAssC.uniqueLibrettoAssenze();
 			
-			RegistroAssenzeCriteria regAssC = new RegistroAssenzeCriteria();
+			RegistroAppelliCriteria regAssC = new RegistroAppelliCriteria();
 			regAssC.ID.eq(1);
 			
-			RegistroAssenze registroAssenze;
-			registroAssenze = regAssC.uniqueRegistroAssenze();
+			RegistroAppelli registroAssenze;
+			registroAssenze = regAssC.uniqueRegistroAppelli();
 
 			
 			PersistentTransaction t =RSPersistentManager.instance().getSession().beginTransaction();

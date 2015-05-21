@@ -13,10 +13,10 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
-    <Column name="RegistroAssenzeID">
+    <Column name="RegistroAppelliID">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>RegistroAssenze.ID</ReferencedColumn>
+      <ReferencedColumn>RegistroAppelli.ID</ReferencedColumn>
       <Type>9</Type>
       <Length>11</Length>
       <Nullable>false</Nullable>
@@ -47,7 +47,7 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
-    <Column name="RegistroAssenzeIndex">
+    <Column name="RegistroAppelliIndex">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>false</ForeignKey>
       <Type>9</Type>
@@ -337,7 +337,7 @@
       <UserTypes/>
     </Column>
   </Entity>
-  <Entity name="RegistroAssenze">
+  <Entity name="RegistroAppelli">
     <Column name="ID">
       <PrimaryKey>true</PrimaryKey>
       <ForeignKey>false</ForeignKey>
@@ -386,10 +386,10 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
-    <Column name="RegistroAssenzeID">
+    <Column name="RegistroAppelliID">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>RegistroAssenze.ID</ReferencedColumn>
+      <ReferencedColumn>RegistroAppelli.ID</ReferencedColumn>
       <Type>9</Type>
       <Length>11</Length>
       <Nullable>false</Nullable>
@@ -493,18 +493,6 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
-    <Column name="LibrettoVotiID">
-      <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>LibrettoVoti.ID</ReferencedColumn>
-      <Type>9</Type>
-      <Length>11</Length>
-      <Nullable>true</Nullable>
-      <IDGenerator>native</IDGenerator>
-      <Unique>false</Unique>
-      <Index>false</Index>
-      <UserTypes/>
-    </Column>
     <Column name="ClasseID">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
@@ -517,10 +505,34 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
+    <Column name="LibrettoVotiID">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>LibrettoVoti.ID</ReferencedColumn>
+      <Type>9</Type>
+      <Length>11</Length>
+      <Nullable>true</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
     <Column name="IndirizzoID">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
       <ReferencedColumn>Indirizzo.ID</ReferencedColumn>
+      <Type>9</Type>
+      <Length>11</Length>
+      <Nullable>true</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="LibrettoAssenzeID">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>LibrettoAssenze.ID</ReferencedColumn>
       <Type>9</Type>
       <Length>11</Length>
       <Nullable>true</Nullable>
@@ -603,68 +615,6 @@
       <Length>11</Length>
       <Nullable>true</Nullable>
       <IDGenerator>native</IDGenerator>
-      <Unique>false</Unique>
-      <Index>false</Index>
-      <UserTypes/>
-    </Column>
-    <Column name="LibrettoAssenzeID">
-      <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>LibrettoAssenze.ID</ReferencedColumn>
-      <Type>9</Type>
-      <Length>11</Length>
-      <Nullable>true</Nullable>
-      <IDGenerator>native</IDGenerator>
-      <Unique>false</Unique>
-      <Index>false</Index>
-      <UserTypes/>
-    </Column>
-  </Entity>
-  <Entity name="Persona_Classe">
-    <Column name="PersonaID">
-      <PrimaryKey>true</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
-      <Type>9</Type>
-      <Length>11</Length>
-      <Nullable>false</Nullable>
-      <IDGenerator>assigned</IDGenerator>
-      <Unique>false</Unique>
-      <Index>false</Index>
-      <UserTypes/>
-    </Column>
-    <Column name="ClasseID">
-      <PrimaryKey>true</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
-      <Type>9</Type>
-      <Length>11</Length>
-      <Nullable>false</Nullable>
-      <IDGenerator>assigned</IDGenerator>
-      <Unique>false</Unique>
-      <Index>false</Index>
-      <UserTypes/>
-    </Column>
-  </Entity>
-  <Entity name="Assenza_Appello">
-    <Column name="AssenzaID">
-      <PrimaryKey>true</PrimaryKey>
-      <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>Assenza.ID</ReferencedColumn>
-      <Type>9</Type>
-      <Length>11</Length>
-      <Nullable>false</Nullable>
-      <IDGenerator>assigned</IDGenerator>
-      <Unique>false</Unique>
-      <Index>false</Index>
-      <UserTypes/>
-    </Column>
-    <Column name="AppelloID">
-      <PrimaryKey>true</PrimaryKey>
-      <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>Appello.ID</ReferencedColumn>
-      <Type>9</Type>
-      <Length>11</Length>
-      <Nullable>false</Nullable>
-      <IDGenerator>assigned</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
       <UserTypes/>
@@ -768,18 +718,6 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
-    <Column name="LibrettoVotiID">
-      <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>LibrettoVoti.ID</ReferencedColumn>
-      <Type>9</Type>
-      <Length>11</Length>
-      <Nullable>false</Nullable>
-      <IDGenerator>assigned</IDGenerator>
-      <Unique>false</Unique>
-      <Index>false</Index>
-      <UserTypes/>
-    </Column>
     <Column name="VotoID">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
@@ -796,6 +734,18 @@
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
       <ReferencedColumn>CompitoInClasse.ID</ReferencedColumn>
+      <Type>9</Type>
+      <Length>11</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="LibrettoVotiID">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>LibrettoVoti.ID</ReferencedColumn>
       <Type>9</Type>
       <Length>11</Length>
       <Nullable>false</Nullable>
@@ -956,6 +906,32 @@
       <UserTypes/>
     </Column>
   </Entity>
+  <Entity name="Assenza_Appello">
+    <Column name="AssenzaID">
+      <PrimaryKey>true</PrimaryKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>Assenza.ID</ReferencedColumn>
+      <Type>9</Type>
+      <Length>11</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>assigned</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="AppelloID">
+      <PrimaryKey>true</PrimaryKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>Appello.ID</ReferencedColumn>
+      <Type>9</Type>
+      <Length>11</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>assigned</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+  </Entity>
   <Entity name="Argomento_CompitoInClasse">
     <Column name="ArgomentoID">
       <PrimaryKey>true</PrimaryKey>
@@ -1062,11 +1038,11 @@
       <Column>ID</Column>
     </RefColumns>
   </ForeignKey>
-  <ForeignKey name="FKClasse792535">
+  <ForeignKey name="FKClasse720023">
     <ReferenceTable>Classe</ReferenceTable>
-    <ReferencedTable>RegistroAssenze</ReferencedTable>
+    <ReferencedTable>RegistroAppelli</ReferencedTable>
     <Columns>
-      <Column>RegistroAssenzeID</Column>
+      <Column>RegistroAppelliID</Column>
     </Columns>
     <RefColumns>
       <Column>ID</Column>
@@ -1112,11 +1088,11 @@
       <Column>ID</Column>
     </RefColumns>
   </ForeignKey>
-  <ForeignKey name="FKAppello493135">
+  <ForeignKey name="FKAppello565647">
     <ReferenceTable>Appello</ReferenceTable>
-    <ReferencedTable>RegistroAssenze</ReferencedTable>
+    <ReferencedTable>RegistroAppelli</ReferencedTable>
     <Columns>
-      <Column>RegistroAssenzeID</Column>
+      <Column>RegistroAppelliID</Column>
     </Columns>
     <RefColumns>
       <Column>ID</Column>
@@ -1172,16 +1148,6 @@
       <Column>ID</Column>
     </RefColumns>
   </ForeignKey>
-  <ForeignKey name="FKPersona772854">
-    <ReferenceTable>Persona</ReferenceTable>
-    <ReferencedTable>Classe</ReferencedTable>
-    <Columns>
-      <Column>ClasseID</Column>
-    </Columns>
-    <RefColumns>
-      <Column>ID</Column>
-    </RefColumns>
-  </ForeignKey>
   <ForeignKey name="FKRegistroDo397087">
     <ReferenceTable>RegistroDocente</ReferenceTable>
     <ReferencedTable>Materia</ReferencedTable>
@@ -1194,6 +1160,16 @@
   </ForeignKey>
   <ForeignKey name="FKPersona940728">
     <ReferenceTable>Persona</ReferenceTable>
+    <ReferencedTable>LibrettoVoti</ReferencedTable>
+    <Columns>
+      <Column>LibrettoVotiID</Column>
+    </Columns>
+    <RefColumns>
+      <Column>ID</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKLibrettoVo788402">
+    <ReferenceTable>LibrettoVotiLineItem</ReferenceTable>
     <ReferencedTable>LibrettoVoti</ReferencedTable>
     <Columns>
       <Column>LibrettoVotiID</Column>
@@ -1262,11 +1238,11 @@
       <Column>ID</Column>
     </RefColumns>
   </ForeignKey>
-  <ForeignKey name="FKLibrettoVo788402">
-    <ReferenceTable>LibrettoVotiLineItem</ReferenceTable>
-    <ReferencedTable>LibrettoVoti</ReferencedTable>
+  <ForeignKey name="FKPersona772854">
+    <ReferenceTable>Persona</ReferenceTable>
+    <ReferencedTable>Classe</ReferencedTable>
     <Columns>
-      <Column>LibrettoVotiID</Column>
+      <Column>ClasseID</Column>
     </Columns>
     <RefColumns>
       <Column>ID</Column>

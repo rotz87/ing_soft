@@ -39,13 +39,13 @@ public class CreateRegistroScolasticoData {
 			domain.model.Indirizzo ldomainmodelIndirizzo = new domain.model.Indirizzo();			// Initialize the properties of the persistent object here
 			service.RSPersistentManager.instance().getSession().save(ldomainmodelIndirizzo);
 			
-			domain.model.RegistroAssenze ldomainmodelRegistroAssenze = new domain.model.RegistroAssenze();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : _appelli
-			service.RSPersistentManager.instance().getSession().save(ldomainmodelRegistroAssenze);
+			domain.model.RegistroAppelli ldomainmodelRegistroAppelli = new domain.model.RegistroAppelli();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : _appelli
+			service.RSPersistentManager.instance().getSession().save(ldomainmodelRegistroAppelli);
 			
 			domain.model.Scuola ldomainmodelScuola = new domain.model.Scuola();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : _classi
 			service.RSPersistentManager.instance().getSession().save(ldomainmodelScuola);
 			
-			domain.model.Classe ldomainmodelClasse = new domain.model.Classe();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : _registroAssenze
+			domain.model.Classe ldomainmodelClasse = new domain.model.Classe();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : _registroAppelli
 			service.RSPersistentManager.instance().getSession().save(ldomainmodelClasse);
 			
 			domain.model.Docente ldomainmodelDocente = new domain.model.Docente();			// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : _registriDocente
