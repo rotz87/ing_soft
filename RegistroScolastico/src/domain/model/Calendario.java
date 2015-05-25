@@ -11,16 +11,13 @@ public class Calendario {
 
 	private Collection<GiornoFestivo> giorniFestivi = new LinkedList<GiornoFestivo>();
 	private Collection<GiornoSettimanaleFestivo> giorniSettimanaliFestivi = new LinkedList<GiornoSettimanaleFestivo>();
-	private LocalDate dataOdierna;
 	private LocalDate inizioLezioni;
 	private LocalDate fineLezioni;
 
 	final private LocalDate dataZero = new LocalDate(0L);
 	private static Calendario instance;
 
-	private Calendario(){
-		this.dataOdierna = calcolaDataOdierna();
-	}
+	private Calendario(){}
 	
 	public static synchronized Calendario getInstance() {
 		if(instance == null){
@@ -30,17 +27,6 @@ public class Calendario {
 	}
 
 	public org.joda.time.LocalDate getDataOdierna() {
-		LocalDate data =  this.calcolaDataOdierna();
-		if(!(this.dataOdierna.isEqual(data))){
-			this.dataOdierna = data;
-		}
-		return this.dataOdierna;	
-	}
-
-	/**
-	 * Per la prove lasciamo la date 17/12/2014 a regime bisogna fargli prendere la data odierna
-	 */
-	private LocalDate calcolaDataOdierna(){
 		return new LocalDate(2014,12,17);//a regime deve prendere la data odierna affettiva per ora per i test prende la data de 17 12 2014
 	}
 	
@@ -87,7 +73,7 @@ public class Calendario {
 	public Collection<LocalDate> getDateFestiveSempliciFuture(){
 		Collection<LocalDate> rit = new LinkedList<LocalDate>();
 		
-		for(LocalDate data = calcolaDataOdierna(); data.isBefore(this.fineLezioni); data = data.plusDays(1) ){
+		for(LocalDate data = getDataOdierna(); data.isBefore(this.fineLezioni); data = data.plusDays(1) ){
 			if(isFestivoSemplice(data)){
 				rit.add(data);
 			}
