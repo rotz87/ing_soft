@@ -30,6 +30,6 @@ public class StartUp /*implements ApplicationListener*/{
 		
 		StartUpController startUpController = new StartUpController();
 		startUpController.start();
-		Stampa.stampaln("StartUp.start");
+
     }
 }

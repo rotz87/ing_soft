@@ -26,14 +26,13 @@ public class AppelloRS extends ResourceSupport{
 		this.idAppello = appello.getID();
 		this.data = appello.getData().getTime();
 		this.assenzePrese = appello.getAssenzePrese();
-//da togliere
-//		this.add(ControllerLinkBuilder.linkTo(
-//				ControllerLinkBuilder.methodOn(AppelloController.class, idClasse).
-//					getStudenti(idClasse, idAppello)).withRel("studenti"));
+
+		//links
+		
 		this.add(ControllerLinkBuilder.linkTo(
-		ControllerLinkBuilder.methodOn(ClassePresenter.class, idClasse).
-			getStudentiAppello(idClasse)).withRel("studenti"));
-		this.add(ControllerLinkBuilder.linkTo(AppelloPresenter.class, idClasse).withRel(Link.REL_PREVIOUS));
+		ControllerLinkBuilder.methodOn(AppelloPresenter.class, idClasse).
+			getAssenti(this.idAppello, idClasse)).withRel("assenti"));
+		
 		this.add(ControllerLinkBuilder.linkTo(
 				ControllerLinkBuilder.methodOn(AppelloPresenter.class, idClasse).
 					getAppello(this.idAppello, idClasse)).withSelfRel());

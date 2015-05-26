@@ -42,7 +42,8 @@ public class ApiPath {
 	public static final String FORMATO_VOTI = _FORMATO_VOTI;
 	public static final String VOTI = _VOTI;
 	public static final String VOTI_CONVERTERS = _VOTI_CONVERTERS;
-	public static final  String VOTI_CONVERTER_ATTUALE = _VOTI_CONVERTERS + _VOTI_CONVERTER_ATTUALE;
+	public static final String VOTI_CONVERTER_ATTUALE = _VOTI_CONVERTERS + _VOTI_CONVERTER_ATTUALE;
+	public static final String ID_CLASSE = _ID_CLASSE;
 	
 	
 	

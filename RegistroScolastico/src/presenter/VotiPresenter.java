@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import presenter.resourceSupport.VotiEntryPointRS;
 import controller.votoConverter.FormatoVoti;
 import controller.votoConverter.VotoConverter;
 import controller.votoConverter.VotoConverterFactory;
@@ -21,6 +22,19 @@ import domain.error.ErrorMessage;
 @RequestMapping(ApiPath.VOTI)
 public class VotiPresenter {
 
+	
+	  @RequestMapping(method = RequestMethod.GET)
+	  public VotiEntryPointRS getContent () {
+		  	
+		  VotiEntryPointRS rs;
+		  
+		  rs = new VotiEntryPointRS();
+		  
+		  return rs;
+
+	  }
+	
+	
 	  @RequestMapping(value = ApiPath.FORMATO_VOTI, method = RequestMethod.GET)
 	  public FormatoVoti getFormatoVoti () {
 		 

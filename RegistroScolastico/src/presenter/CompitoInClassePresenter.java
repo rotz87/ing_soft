@@ -101,28 +101,24 @@ public class CompitoInClassePresenter {
 	  
 	  
 	  @RequestMapping( method = RequestMethod.GET)
-	  public CompitoInClasseRS[] getCompitiInClasse(@PathVariable int idClasse, @PathVariable int idRegistroDocente) {
+	  public Collection<CompitoInClasseRS> getCompitiInClasse(@PathVariable int idClasse, @PathVariable int idRegistroDocente) {
 			
 		Collection<CompitoInClasse> compitiCollection;
+		Collection<CompitoInClasseRS> compitiRSCollection;
 		CompitoInClasseController compitoController;
+		
+		compitiRSCollection = new LinkedList<CompitoInClasseRS>();
 		compitoController = new CompitoInClasseController();
 		
 		compitiCollection = compitoController.getCompitiInCLasse(idClasse, idRegistroDocente);
-		int size = compitiCollection.size();
 		
-		CompitoInClasseRS[] compitiRS = new CompitoInClasseRS[size];
-		
-		  
-		  int i = 0;
-		  for(CompitoInClasse compito : compitiCollection){
-			  compitiRS[i] = new CompitoInClasseRS(compito, idClasse, idRegistroDocente);
-			  i++;
-		  }
-		  
-		  
-		  return compitiRS;
-			
+		for(CompitoInClasse compito : compitiCollection){
+			compitiRSCollection.add(new CompitoInClasseRS(compito, idClasse, idRegistroDocente));
 		}
+		  
+		return compitiRSCollection;
+			
+	  }
 	  
 	  @RequestMapping(value = ApiPath.ID_COMPITO, method = RequestMethod.PUT)
 	  public ResponseEntity<?> inserisciInfoCompito(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse,  @RequestBody CompitoInClasseRS compitoRS ){

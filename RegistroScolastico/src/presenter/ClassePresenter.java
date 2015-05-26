@@ -53,6 +53,23 @@ public class ClassePresenter {
 		
 		return classiMenu;
 	}
+	
+	@RequestMapping(value = ApiPath.ID_CLASSE, method = RequestMethod.GET)
+	public ClasseMenuRS getClasse(@PathVariable int idClasse) {
+		
+		Classe classe;
+		ClasseMenuRS classeMenu;
+		ClasseController classeController;
+		
+		classeController= new controller.ClasseController();
+		
+		classe = classeController.getClasseById(idClasse);
+		classeMenu = new ClasseMenuRS(classe);
+		
+		return classeMenu;
+		
+	}
+	
 
 	@RequestMapping(value = ApiPath.CLASSE_STUDENTI, method = RequestMethod.GET)
 	public Collection<StudenteAppelloRS> getStudentiAppello(@PathVariable int idClasse) {
@@ -105,7 +122,7 @@ public class ClassePresenter {
 		registri = classeController.getRegistriDocente(idClasse, docenteController.getIdDocenteProva());
 		
 		for(RegistroDocente registro : registri){
-			registriRS.add(new RegistroDocenteRS(registro));
+			registriRS.add(new RegistroDocenteRS(registro, idClasse));
 		}
 		return registriRS;
 	}

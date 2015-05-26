@@ -25,7 +25,6 @@ public class SimpleCORSFilter implements Filter {
 		response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
 		
 		chain.doFilter(req, res);
-		Stampa.stampaln("Cors filter doFilter");
 		
 	}
 

@@ -7,15 +7,19 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.thrift.scheme.IScheme;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import presenter.resourceSupport.RegistroDocenteRS;
 import presenter.resourceSupport.compito.ArgomentoRS;
 import presenter.resourceSupport.medie.MedieStretegyRS;
 import presenter.resourceSupport.medie.StudenteMedieRS;
+import controller.ClasseController;
+import controller.DocenteController;
 import controller.MedieController;
 import controller.RegistroDocenteController;
 import domain.error.DomainCheckedException;
@@ -31,6 +35,20 @@ import domain.model.mediaStrategy.MediaStrategyFactory;
 @RestController
 @RequestMapping(ApiPath.REGISTRO_DOCENTE)
 public class RegistroDocentePresenter {
+	
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public RegistroDocenteRS getRegistroDocente(@PathVariable int idClasse, @PathVariable int idRegistroDocente) {
+		
+		RegistroDocenteController registroDocenteController;
+		RegistroDocente registroDocente;
+		
+		registroDocenteController = new RegistroDocenteController();
+		
+		registroDocente = registroDocenteController.getRegistroDocente(idRegistroDocente);
+		
+		return new RegistroDocenteRS(registroDocente, idClasse);
+	}
 	
 	@RequestMapping(value = ApiPath.ARGOMENTI_SVOLTI,  method = RequestMethod.GET)
 	public Collection<ArgomentoRS> getArgomentiSvolti(@PathVariable int idClasse, @PathVariable int idRegistroDocente) {
