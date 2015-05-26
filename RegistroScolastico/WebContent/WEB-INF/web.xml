@@ -8,7 +8,7 @@
   </welcome-file-list>
     <filter>
         <filter-name>cors</filter-name>
-        <filter-class>presenter.SimpleCORSFilter</filter-class>
+        <filter-class>service.SimpleCORSFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>cors</filter-name>

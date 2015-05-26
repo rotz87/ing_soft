@@ -10,6 +10,8 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import sviluppo.Stampa;
+import controller.StartUpController;
 import domain.model.Calendario;
 import domain.model.GiornoFestivoCriteria;
 import domain.model.GiornoSettimanaleFestivoCriteria;
@@ -21,36 +23,13 @@ import domain.model.GiornoSettimanaleFestivoCriteria;
  */
 @Singleton 
 @Component
-public class StartUp implements ApplicationListener{
+public class StartUp /*implements ApplicationListener*/{
 	
 	@PostConstruct
     public void start() {
-		//ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("RegistroScolastico.cfg.xml");
 		
-		try {
-			GiornoFestivoCriteria giornoFC = new GiornoFestivoCriteria();
-			GiornoSettimanaleFestivoCriteria giornoSFC = new GiornoSettimanaleFestivoCriteria();
-			Calendario.getInstance().getGiorniFestivi().addAll(giornoFC.list());
-			Calendario.getInstance().getGiorniSettimanaliFestivi().addAll(giornoSFC.list());
-			Calendario.getInstance().setInizioLezioni(new LocalDate(2014,12,01));
-			Calendario.getInstance().setFineLezioni(new  LocalDate(2015,6,12));
-
-			
-		} catch (PersistentException e) {
-			// si potrebbe mettere un log 
-			e.printStackTrace();
-		}
-		
-		
+		StartUpController startUpController = new StartUpController();
+		startUpController.start();
+		Stampa.stampaln("StartUp.start");
     }
-
-	@Override
-	public void onApplicationEvent(ApplicationEvent event) {
-		if (event instanceof ContextRefreshedEvent) {
-			//Stempa.stampaln("EVENTO");
-			
-        }
-		
-	}
-
 }

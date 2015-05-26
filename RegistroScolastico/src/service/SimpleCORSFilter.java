@@ -1,4 +1,4 @@
-package presenter;
+package service;
 import java.io.IOException;
 
 import javax.servlet.Filter;
@@ -10,6 +10,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
+
+import sviluppo.Stampa;
 
 @Component
 public class SimpleCORSFilter implements Filter {
@@ -23,6 +25,7 @@ public class SimpleCORSFilter implements Filter {
 		response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
 		
 		chain.doFilter(req, res);
+		Stampa.stampaln("Cors filter doFilter");
 		
 	}
 
