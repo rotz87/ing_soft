@@ -4,7 +4,7 @@ var registroApp = angular.module('registroApp',[
                                               'registroFilters',
                                               'ngRoute',
                                               'ngAnimate',
-                                              'checklist-model'
+                                              'hateoas'
                                               ]);
 registroApp.config(["$locationProvider","$routeProvider",function($locationProvider,$routeProvider) 
 {
@@ -20,7 +20,7 @@ registroApp.config(["$locationProvider","$routeProvider",function($locationProvi
 	  title:'Fai l\'appello'
   }).when('/classi/:idClasse/registroDiClasse/',{
 	  templateUrl: 'partials/elencoAppelli.html',
-	  controller: 'riempiElencoAppelli',
+	  controller: 'elencoAppelli',
 	  title:'Seleziona l\'appello'
   }).when('/classi/:idClasse/',{
 	  templateUrl: 'partials/elencoRegistri.html',
@@ -48,21 +48,21 @@ registroApp.config(["$locationProvider","$routeProvider",function($locationProvi
 	  title:'Registro Docente'
   }).when('/classi/:idClasse/registriDocente/:idRegistroDocente/compiti/',{
 	  templateUrl: 'partials/elencoCompiti.html',
-	  controller: 'riempiElencoCompiti',
+	  controller: 'elencoCompiti',
 	  title:'Elenco dei compiti'
   }).when('/classi/:idClasse/registriDocente/:idRegistroDocente/compiti/:idCompito/',{
 	  templateUrl: 'partials/compito.html',
-	  controller: 'recuperaCompitoInClasse',
+	  controller: 'compitoInClasse',
 	  title:'Imposta il compito'
   }).when('/classi/:idClasse/registriDocente/:idRegistroDocente/mediaVoti/',
   {
 	  templateUrl:'partials/mediaVoti.html',
-	  controller:'mediaVotiController',
+	  controller:'mediaVoti',
 	  title:'Calcola la media dei voti'
   }).when('/classi',
   {
 	  templateUrl:'partials/elencoClassi.html',
-	  controller:'riempiElencoClassi',
+	  controller:'elencoClassi',
 	  title:'seleziona la classe'
   }).when('/',{
 	  /*
@@ -75,3 +75,6 @@ registroApp.config(["$locationProvider","$routeProvider",function($locationProvi
   })
   //$locationProvider.html5Mode({enabled:true,requireBase:true});
 }]);
+registroApp.config(function (HateoasInterceptorProvider) {
+    HateoasInterceptorProvider.transformAllResponses();
+});

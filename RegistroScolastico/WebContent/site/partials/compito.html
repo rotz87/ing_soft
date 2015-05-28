@@ -6,7 +6,7 @@
 		<fieldset>
 			<fieldset class="margin-bottom-lg">
 			<legend> Dati compito 
-					<input class="mostraNascondi_{{datiChecked}} " type="checkbox" id="visibile" ng-model="datiChecked">
+					<span class="mostraNascondi_{{datiChecked}} " type="checkbox" id="visibile" ng-model="datiChecked" ng-click="datiChecked=!datiChecked"></span>
 			</legend>
 			<div class="animaScomparsa" ng-show="datiChecked">
 			<div class="form-group">
@@ -45,7 +45,7 @@
 	
 			</fieldset>
 			<fieldset class="margin-bottom-lg">
-				<legend> Argomenti <input class="mostraNascondi_{{argsChecked}} " type="checkbox" id="visibile" ng-model="argsChecked"></legend>
+				<legend> Argomenti <span class="mostraNascondi_{{argsChecked}} " type="checkbox" id="visibile" ng-model="argsChecked" ng-click="argsChecked=!argsChecked"></span></legend>
 				<fieldset class="animaScomparsa" ng-repeat="argomento in compitoInClasse.argomentiRS | orderBy:args_predicate" ng-show="argsChecked">
 					<div class="form-group">
 						<p class="col-sm-8 col-md-8 col-lg-8 ">{{$index+1}}.{{argomento.nome}}</label>
@@ -56,7 +56,7 @@
 					</div>
 			</fieldset>
 			<fieldset class="margin-bottom-lg" >
-				<legend> Voti <input class="mostraNascondi_{{stdChecked}}" type="checkbox" ng-model="stdChecked"></legend>
+				<legend> Voti <span class="mostraNascondi_{{stdChecked}}" type="checkbox" ng-model="stdChecked" ng-click="stdChecked=!stdChecked"></span></legend>
 				<fieldset class="animaScomparsa" ng-show="stdChecked">
 				<div ng-show="erroreStudenti"> {{erroreStudenti}}</div>
 				<div ng-hide="erroreStudenti">
