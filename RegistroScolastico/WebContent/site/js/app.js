@@ -4,7 +4,9 @@ var registroApp = angular.module('registroApp',[
                                               'registroFilters',
                                               'ngRoute',
                                               'ngAnimate',
-                                              'hateoas'
+                                              'checklist-model'
+//                                              ,
+//                                              'hateoas'
                                               ]);
 registroApp.config(["$locationProvider","$routeProvider",function($locationProvider,$routeProvider) 
 {
@@ -75,6 +77,17 @@ registroApp.config(["$locationProvider","$routeProvider",function($locationProvi
   })
   //$locationProvider.html5Mode({enabled:true,requireBase:true});
 }]);
-registroApp.config(function (HateoasInterceptorProvider) {
-    HateoasInterceptorProvider.transformAllResponses();
-});
+
+/**
+ * aggiungendo il modulo hateoas, i link che vengono passati dal server nel formato
+ * links : [{
+ * 				href : http://...,
+ * 				rel:self}]
+ * diventano
+ * links : {self : http://...}
+ * provocando un errore di parsing su Spring nel momento in cui si 
+ * invia l'oggetto al server che utilizza Spring
+ * */
+//registroApp.config(function (HateoasInterceptorProvider) {
+//    HateoasInterceptorProvider.transformAllResponses();
+//});

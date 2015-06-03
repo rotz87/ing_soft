@@ -950,6 +950,7 @@ registroControllers.controller('compitoInClasse', ['$scope','rsClasse','Compito'
 	};
 	$scope.confermaArgomenti = function(){
 		//salva gli argomenti nel compito in classe mantenendo il disaccoppiamento con il modal
+		console.log($scope.modal.argomenti)
 		$scope.compitoInClasse.argomentiRS = angular.copy($scope.modal.argomenti);
 	}
 	//array di date in millisecondi
