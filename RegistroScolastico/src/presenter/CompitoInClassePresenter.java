@@ -179,7 +179,7 @@ public class CompitoInClassePresenter {
 		  return new ResponseEntity<>(null, httpHeaders, httpStatus);
 	  }
 	  
-	  @RequestMapping(value = ApiPath.COMPITO_STATE, method = RequestMethod.DELETE)
+	  @RequestMapping(value = ApiPath.ID_COMPITO, method = RequestMethod.DELETE)
 	  public ResponseEntity<?> eliminaCompito(@PathVariable int idClasse, @PathVariable int idRegistroDocente, @PathVariable int idCompitoInClasse) {
 		   
 		  CompitoInClasseController compitoInClasseController;

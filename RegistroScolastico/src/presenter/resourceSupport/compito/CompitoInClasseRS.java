@@ -47,6 +47,7 @@ public class CompitoInClasseRS extends ResourceSupport{
 //				ControllerLinkBuilder.methodOn(ClassePresenter.class, idClasse).
 //					getStudentiAppello(idClasse)).withRel("studenti"));
 //		this.add(ControllerLinkBuilder.linkTo(AppelloPresenter.class, idClasse).withRel(Link.REL_PREVIOUS));
+		
 		this.add(ControllerLinkBuilder.linkTo(
 				ControllerLinkBuilder.methodOn(CompitoInClassePresenter.class, idClasse, idRegistroDocente).
 					getCompitoInClasse(idClasse, idRegistroDocente, this.idCompito)).withSelfRel());
