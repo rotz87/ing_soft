@@ -521,7 +521,7 @@ public class ResetDB {
 			Argomento provincePiemonte = new Argomento("Province del Piemonte", "", java.sql.Date.valueOf("2014-11-15"));
 			Argomento provinceLombardia = new Argomento("Province della Lombardia", "", java.sql.Date.valueOf("2014-11-16"));
 			
-			Argomento provinceAbruzzo = new Argomento("Province del Abruzzo", "", java.sql.Date.valueOf("2014-11-11"));
+			Argomento provinceAbruzzo = new Argomento("Province dell'Abruzzo", "", java.sql.Date.valueOf("2014-11-11"));
 			Argomento provincePuglia = new Argomento("Province della Puglia", "", java.sql.Date.valueOf("2014-11-15"));
 			Argomento provinceSardegna = new Argomento("Province della Sardegna", "", java.sql.Date.valueOf("2014-11-16"));
 			
