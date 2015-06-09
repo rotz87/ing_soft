@@ -1,5 +1,7 @@
 package presenter;
 
+import java.io.IOException;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 
@@ -10,6 +12,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import sviluppo.ResetDB;
 import sviluppo.Stampa;
 import controller.StartUpController;
 import domain.model.Calendario;

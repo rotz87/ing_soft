@@ -38,7 +38,11 @@ public class VotiPresenter {
 	  @RequestMapping(value = ApiPath.FORMATO_VOTI, method = RequestMethod.GET)
 	  public FormatoVoti getFormatoVoti () {
 		 
-			return VotoConverterFactory.getInstance().create().getFormato();
+			try {
+				return VotoConverterFactory.getInstance().create().getFormato();
+			} catch (DomainCheckedException e) {
+				throw new RuntimeException(e.getMessage());
+			}
 
 	  }
 	  
@@ -80,7 +84,11 @@ public class VotiPresenter {
 	  public String[] getVotiConverterAttuale(){
 		  String[] array = new String[1];
 		  
-		  array[0] = VotoConverterFactory.getInstance().create().getClass().getSimpleName();
+		  try {
+			array[0] = VotoConverterFactory.getInstance().create().getClass().getSimpleName();
+		} catch (DomainCheckedException e) {
+			throw new RuntimeException(e.getMessage());
+		}
 		  
 		  return array;
 	  }

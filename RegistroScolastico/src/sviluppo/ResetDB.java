@@ -1,17 +1,25 @@
 package sviluppo;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Properties;
 
 import org.joda.time.LocalDate;
 import org.orm.ORMDatabaseInitiator;
 import org.orm.PersistentException;
 import org.orm.PersistentTransaction;
 
+import controller.votoConverter.VotoConverterFactory;
+import controller.votoConverter.VotoDecimalConverter;
 import presenter.StartUp;
 import service.RSPersistentManager;
+import service.SystemPropertiesHandler;
 import domain.model.Appello;
 import domain.model.Argomento;
 import domain.model.Assenza;
