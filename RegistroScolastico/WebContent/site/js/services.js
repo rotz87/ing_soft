@@ -1,8 +1,8 @@
 var registroServices = angular.module ('registroServices',["ngResource"]);
 
-//var host = ''
-var hostAddr = "10.175.51.88"
-var host = "http://"+hostAddr+":8080"
+var host = ''
+//var hostAddr = "localhost" // solo per sviluppo
+//var host = "http://"+hostAddr+":8080"
 registroServices.factory('rsClasse',['$resource',
 				function($resource){
 					return $resource(host+'/RegistroScolastico/api/classi/:idClasse/appelli/:idAppello/', null,
