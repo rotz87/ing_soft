@@ -128,7 +128,7 @@ public class VotoLettereConverter  extends VotoConverter {
 				if(valoreVoto>=6.2 && valoreVoto<6.4) cifra2 = "+";
 				if(valoreVoto>=6.4 && valoreVoto<=6.6) cifra2 = "++";
 			}
-			if(valoreVoto>6.7 && valoreVoto <=7.85){
+			if(valoreVoto>6.6 && valoreVoto <=7.85){
 				cifra1 = "C";
 				if(valoreVoto<=6.8) cifra2 = "--";
 				if(valoreVoto>6.8 && valoreVoto<=7.1) cifra2 = "-";
