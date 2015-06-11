@@ -2,6 +2,7 @@ package domain.implementor;
 
 import domain.model.LibrettoVoti;
 import domain.model.LibrettoVotiLineItem;
+import domain.model.Voto;
 import domain.model.compitoInClasse.CompitoInClasse;
 
 public class LibrettoVotiImp {
@@ -11,12 +12,14 @@ public class LibrettoVotiImp {
 	 * @param librettoVoti
 	 * @param compito
 	 */
-	public void makeLineItem(LibrettoVoti librettoVoti, CompitoInClasse compito) {
+	public void makeLineItem(LibrettoVoti librettoVoti, CompitoInClasse compito, Voto voto) {
 		LibrettoVotiLineItem lineItem;
-		if(librettoVoti.getLibrettoLineItem(compito) == null){
+		lineItem = librettoVoti.getLibrettoLineItem(compito);
+		if(lineItem == null){
 			lineItem = new LibrettoVotiLineItem(compito);
 			librettoVoti.getLibVotiLineItems().add(lineItem);
 		}
+		lineItem.aggiungiVoto(voto);
 	}
 
 	/**

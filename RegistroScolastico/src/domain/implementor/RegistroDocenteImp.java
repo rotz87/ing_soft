@@ -57,8 +57,8 @@ public class RegistroDocenteImp {
 		LocalDate data = new LocalDate(compito.getData());
 		if(registroAssezne.checkPresenti(data, mapVoti.keySet())){
 			for (Studente studente : mapVoti.keySet()) {
-			    studente.getLibrettoVoti().makeLineItem(compito);
-			    studente.getLibrettoVoti().getLibrettoLineItem(compito).aggiungiVoto(mapVoti.get(studente));
+			    studente.getLibrettoVoti().makeLineItem(compito, mapVoti.get(studente));
+//			    studente.getLibrettoVoti().getLibrettoLineItem(compito).aggiungiVoto(mapVoti.get(studente));
 			}
 		}else{
 			throw new IllegalStateException(ErrorMessage.LISTA_STUDENTI_WRONG);

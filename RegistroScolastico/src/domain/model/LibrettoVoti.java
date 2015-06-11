@@ -44,8 +44,8 @@ public class LibrettoVoti {
 	
 	private domain.implementor.LibrettoVotiImp implementor = new domain.implementor.LibrettoVotiImp();
 	
-	public void makeLineItem(domain.model.compitoInClasse.CompitoInClasse compito) {
-		this.implementor.makeLineItem(this, compito);
+	public void makeLineItem(domain.model.compitoInClasse.CompitoInClasse compito, Voto voto) {
+		this.implementor.makeLineItem(this, compito, voto);
 	}
 	
 	public domain.model.LibrettoVotiLineItem getLibrettoLineItem(domain.model.compitoInClasse.CompitoInClasse compito) {
