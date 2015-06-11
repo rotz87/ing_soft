@@ -1,11 +1,8 @@
 package presenter.resourceSupport;
 
-import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
-import org.springframework.hateoas.UriTemplate;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 
-import presenter.AppelloPresenter;
 import presenter.CompitoInClassePresenter;
 import presenter.RegistroDocentePresenter;
 import domain.model.RegistroDocente;

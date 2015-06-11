@@ -4,7 +4,6 @@ import java.util.Map;
 
 import org.springframework.hateoas.ResourceSupport;
 
-import controller.votoConverter.FormatoVoti;
 import controller.votoConverter.VotoConverter;
 import controller.votoConverter.VotoConverterFactory;
 import domain.error.DomainCheckedException;

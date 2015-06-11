@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
 
-import sviluppo.Stampa;
-
 @Component
 public class SimpleCORSFilter implements Filter {
 

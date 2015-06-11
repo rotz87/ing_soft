@@ -5,11 +5,9 @@ import java.util.LinkedList;
 
 import org.joda.time.LocalDate;
 
-import sviluppo.Stampa;
 import domain.error.ErrorMessage;
 import domain.model.Appello;
 import domain.model.Calendario;
-import domain.model.Classe;
 import domain.model.GiornoFestivo;
 import domain.model.LibrettoAssenze;
 import domain.model.RegistroAppelli;

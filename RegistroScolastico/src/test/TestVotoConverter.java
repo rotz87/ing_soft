@@ -3,11 +3,11 @@ package test;
 import java.util.HashMap;
 import java.util.Map;
 
+import presenter.resourceSupport.VotoRS;
+import sviluppo.Stampa;
 import controller.votoConverter.VotoDecimalConverter;
 import controller.votoConverter.VotoLettereConverter;
 import controller.votoConverter.VotoNumeroEIncrementiConverter;
-import presenter.resourceSupport.VotoRS;
-import sviluppo.Stampa;
 import domain.error.DomainCheckedException;
 import domain.model.Voto;
 

@@ -4,8 +4,6 @@ import org.joda.time.LocalDate;
 
 import presenter.StartUp;
 import sviluppo.Stampa;
-import controller.ClasseController;
-import controller.FaiAppelloController;
 import controller.RegistroDocenteController;
 import domain.model.Calendario;
 import domain.model.GiornoSettimanaleFestivo;

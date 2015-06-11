@@ -7,7 +7,6 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.thrift.scheme.IScheme;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,8 +17,6 @@ import presenter.resourceSupport.RegistroDocenteRS;
 import presenter.resourceSupport.compito.ArgomentoRS;
 import presenter.resourceSupport.medie.MedieStretegyRS;
 import presenter.resourceSupport.medie.StudenteMedieRS;
-import controller.ClasseController;
-import controller.DocenteController;
 import controller.MedieController;
 import controller.RegistroDocenteController;
 import domain.error.DomainCheckedException;

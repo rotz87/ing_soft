@@ -6,7 +6,6 @@ import java.util.Collection;
 
 import org.joda.time.LocalDate;
 
-import controller.ClasseController;
 import domain.error.ErrorMessage;
 import domain.model.Argomento;
 import domain.model.Calendario;

@@ -27,7 +27,6 @@ import controller.DocenteController;
 import controller.FaiAppelloController;
 import domain.error.DomainCheckedException;
 import domain.error.ErrorMessage;
-import domain.model.Argomento;
 import domain.model.Studente;
 import domain.model.Voto;
 import domain.model.compitoInClasse.CompitoInClasse;

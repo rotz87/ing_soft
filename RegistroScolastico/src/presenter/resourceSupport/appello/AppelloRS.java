@@ -1,11 +1,9 @@
 package presenter.resourceSupport.appello;
 
-import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 
 import presenter.AppelloPresenter;
-import presenter.ClassePresenter;
 import domain.model.Appello;
 
 /**

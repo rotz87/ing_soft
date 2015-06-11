@@ -9,9 +9,9 @@ import java.util.Properties;
 import org.joda.time.LocalDate;
 import org.orm.PersistentException;
 
+import service.SystemPropertiesHandler;
 import controller.votoConverter.VotoConverterFactory;
 import controller.votoConverter.VotoDecimalConverter;
-import service.SystemPropertiesHandler;
 import domain.model.Calendario;
 import domain.model.GiornoFestivoCriteria;
 import domain.model.GiornoSettimanaleFestivoCriteria;
