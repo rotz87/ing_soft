@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Con la configurazione presente in questo file è possibile togliere
+	parecchi output di log dalla console: Il problema è che se la console 
+	 è piena di scritte è inutilizzabile per stampare altri output utili per il debug.
+-->
 <configuration>
 
 
